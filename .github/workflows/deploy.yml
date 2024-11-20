@@ -66,3 +66,4 @@ jobs:
             # Now copy the contents from the source dist folder to the target dist folder
             scp -r ${{ env.DEPLOY_PATH }}/dist/. ${{ env.DEPLOYBUILD_PATH }}/dist/
           "
+          
