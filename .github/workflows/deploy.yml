@@ -64,6 +64,9 @@ jobs:
             fi
             
             # Now copy the contents from the source dist folder to the target dist folder
-            scp -r ${{ env.DEPLOY_PATH }}/dist/. ${{ env.DEPLOYBUILD_PATH }}/dist/
+            scp -r ${{ env.DEPLOY_PATH }}/dist/. ${{ env.DEPLOYBUILD_PATH }}/dist/  &&
+
+            # Restart the PM2 process with ID 17 
+            pm2 resstart 17
           "
           
