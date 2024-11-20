@@ -1,0 +1,59 @@
+<div class="detail-container row align-items-baseline">
+    <p class="col-2 pe-0">Filters</p>
+    <div  class="book-btn col-3 text-center">
+        <button class="btn filter_btn w-100 text-white p-2" (click)="filters()">Apply</button>
+    </div>
+    <div class="book-btn col-3 text-center">
+        <button class="btn filter_btn w-100 text-white p-2" (click)="clearFilters()">Clear</button>
+    </div>
+    <i  class="col-4 text-right cross material-icons" style="cursor: pointer;" (click)="closeDialog(null)">
+        close
+    </i>
+</div>
+<hr>
+
+<div class="form-container">
+    <div>
+        <p class="text-head">Price</p>
+        <ngx-slider step="500" [(value)]="value" [(highValue)]="highValue" (valueChange)="getPriceRange($event)"
+            [options]="options"></ngx-slider>
+    </div>
+    <hr>
+    <div>
+        <p class="text-head">Distance</p>
+        <ngx-slider [(value)]="Distvalue" (valueChange)="getDistanceVal($event)" [options]="option"></ngx-slider>
+    </div>
+    <hr>
+    <h4 class="mb-3">Sort By:</h4>
+    <div>
+        <mat-radio-group aria-label="Select an option" (change)="radioChange($event)" [(ngModel)]="priceRange">
+            <mat-radio-button value="review">Rating High to Low </mat-radio-button> &nbsp;
+            <mat-radio-button value="high_to_low">Price High to Low</mat-radio-button> &nbsp;
+            <mat-radio-button value="low_to_high">Price Low to High</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <hr>
+    <div>
+        <p class="text-head">Amenities</p>
+        <br>
+        <ul style="column-count: 3;">
+            <li *ngFor="let facility of amenities">
+                <mat-checkbox (change)="setAmenity(facility.id, $event)"
+                    [checked]="filter.amenities.includes(facility.id)" color="accent">
+                    {{facility.amenities}}
+                </mat-checkbox>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- <button type="submit" class="btn v1 mar-top-10 self-center" (click)="filters()">Apply</button> -->
+<!-- <div *ngIf="isMobile" class="bottom-fixed-container">
+        <div class="book-btn text-center bottom-fixed-button1">
+            <a (click)="filters()">Apply</a>
+        </div>
+    </div> -->
+
+<!-- <div class="book-btn text-center">
+        <button (click)="filters()">Apply</button>
+    </div> -->

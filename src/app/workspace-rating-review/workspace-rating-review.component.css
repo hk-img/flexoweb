@@ -1,0 +1,57 @@
+/* Proper CSS Changes */
+.workspace-rating-review-wrapper .mb-20p {
+    margin-bottom: 20px;
+}
+  
+.workspace-rating-review-wrapper .mr-5p {
+    margin-right: 5px
+}
+
+.workspace-rating-review-wrapper .mt-20p {
+    margin-top: 20px
+}
+
+.workspace-rating-review-wrapper .login-option {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(207, 207, 207);
+    padding: 10px;
+    border-radius: 0.6rem;
+    justify-content: center
+}
+
+.header-div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.form-field-div{
+    padding: 10px;display: flex;align-items: center;
+}
+.form-field-label {
+    font-weight: bolder; padding-right: 20px;
+}
+
+.workspace-rating-review-wrapper .form-field-div textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+.form-btn-submit {
+    padding: 10px;
+    background-color: #F76900;
+    color: #FFF;
+}
+.form-btn-submit:hover {
+    background-color: #001740;
+}

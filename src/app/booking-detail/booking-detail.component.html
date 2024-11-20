@@ -1,0 +1,257 @@
+<div class="booking-details">
+    <div class="container">
+        <div class="booking-details-cont">
+            <div class="booking-details-info">
+                <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'confirmed'">
+                    <div class="booking-details-confirmation-img">
+                        <img src="assets/images/tick-white.png" alt="" class="">
+                    </div>
+                    <div class="booking-details-confirmation-cont">
+                        <h4>Booking {{bookingDetail?.bookingStatus}} !</h4>
+                        <p>You will receive details about the space via email and whatsapp. </p>
+                    </div>
+                </div>
+                <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'rejected'">
+                    <div class="mr-2">
+                        <img src="assets/images/bc-c.png" alt="" class="" style="border-radius: 50%;height: 43px;">
+                    </div>
+                    <div class="booking-details-confirmation-cont">
+                        <h4 style="color:red !important">Booking {{bookingDetail?.bookingStatus}} !</h4>
+                        <p>Your request to update booking has been declined.</p>
+                    </div>
+                </div>
+                <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'pending'">
+                    <div class="col">
+                    <span class="booking-details-confirmation-img" style="padding: 0 !important; background: #fff !important;">
+                        <img src="assets/images/pending-icon.webp" alt="" class="">
+                    </span>
+                    </div>
+                    <div class="booking-details-confirmation-cont">
+                        <h4 class="text-dark">Request Sent. Pending Host Confirmation!</h4>
+                        <p style="text-align:justify;line-height:1.2">Your booking request has been sent to the host. Once the host accepts your booking request, you will receive a payment link via email. If your requested date and time cannot be accommodated, you will be promptly notified.</p>
+                    </div>
+                </div>
+
+                <div class="booking-all-list-single">
+                    <div class="booking-all-list-single-img-cont" style="width: 80%;">
+                        <div class="booking-all-list-single-img">
+                            <img style="min-width: 165px;" src="{{bookingDetail?.images[0] ?? 'assets/images/details_placeholder_image.jpg'}}" alt="">
+                        </div>
+                        <div class="booking-all-list-single-cont">
+                            <div class="booking-all-list-single-cont-od">
+                                <h2>{{bookingDetail?.spaceName}}</h2>
+                                <p class="booking-id"> Booking ID : <span> {{bookingDetail?.bookingId}} </span></p>
+                                <p class="booking-all-list-single-cont-location">
+                                    <img src="assets/images/location-icon-orng.png" alt="">
+                                    <span>{{bookingDetail?.location_name}} </span>
+                                </p>
+                                <div class="booking-list-single-info  booking-list-single-about-info ">
+                                    <div class=" booking-list-single-info-single">
+                                        <img src="assets/images/user-icon-orng.png" alt="">
+                                        <p>{{bookingDetail?.howManyPeopleInYourSpace || 0}} people</p>
+                                    </div>
+                                    <div class=" booking-list-single-info-single" *ngIf="bookingDetail?.spaceType !='Coworking Space'">
+                                        <img src="assets/images/clock-icon-orng.png" alt="">
+                                        <p>{{(bookingDetail.minimum_hours == 0 || bookingDetail.minimum_hours == null) ? 2 : bookingDetail.minimum_hours/60}} hrs min</p>
+                                    </div>
+                                    <div class="booking-list-single-info-single">
+                                        <img src="assets/images/scale-orng.png" alt="" class="sq-ft-icon">
+                                        <p>{{bookingDetail?.spacesqft}} sqft</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="booking-all-list-single-btn" *ngIf="bookingDetail?.bookingStatus == 'confirmed'">
+                        <button type="button" (click)="openAddReviewDialog(bookingDetail?.spaceId)" class="custum-btn outline-orng-btn"> Leave
+                            a Review </button>
+                        <button *ngIf="bookingDetail?.bookingStatus == 'confirmed'" (click)="getUserInvoiceByBookingId(bookingDetail?.id)" type="button" class="custum-btn blu-btn "> <i
+                                class="fa fa-cloud-download" aria-hidden="true"></i> Invoice </button>
+
+                    </div>
+                </div>
+
+                <div class="booking-details-booking">
+                    <h4>Booking Details</h4>
+                    <p class="booking-details-booking-cat">Space Category : <span> {{bookingDetail?.spaceType}} </span>
+                    </p>
+                </div>
+                <div class=" booking-details-booking-information-single" *ngIf="bookingDetail?.spaceType == 'Coworking Space'">
+                      <div class="d-flex align-items-center">
+                        <p>No of Days:</p>
+                        <div class="ml-2 col-3">
+                            <p style="font-weight: 600; color: #000000;">{{bookingDetail?.ofDays}}</p>
+                        </div>
+                      </div>
+                </div>
+                <div class="booking-details-booking-information mt-3 align-items-center" *ngIf="bookingDetail?.spaceType == 'Coworking Space' && formattedDates.length > 0">
+                    <p>Date:</p>
+                    <div class="ml-2" *ngFor="let bookings of formattedDates">
+                    <div class="booking-details-booking-information-single">
+                        <div class="booking-details-booking-information-single-cont">
+                            <p>{{bookings}}</p>
+                        </div>
+                    </div>
+                    <!-- <div class="booking-details-booking-information-single">
+                        <p>Arrival Time</p>
+                        <div class="booking-details-booking-information-single-cont">
+                            <p>{{(bookingDetail?.estimateArrivalTime).includes(':') ?
+                                (bookingDetail?.estimateArrivalTime) : (bookingDetail?.estimateArrivalTime) + ':00'}}
+                            </p>
+                        </div>
+                    </div> -->
+                    <!-- <div class="booking-details-booking-information-single">
+                        <p>No of Days</p>
+                        <div class="booking-details-booking-information-single-cont">
+                            <p>{{bookingDetail?.ofDays}}</p>
+                        </div>
+                    </div> -->
+                    <!-- <div class="booking-details-booking-information-single">
+                        <p>No of Guest</p>
+                        <div class="booking-details-booking-information-single-cont">
+                            <p>{{bookingDetail?.noOfGuest || 1}}</p>
+                        </div>
+                    </div> -->
+                    <!-- <div class="booking-details-booking-information-single">
+                        <p>Quantity</p>
+                        <div class="booking-details-booking-information-single-cont">
+                            <p>1</p>
+                        </div>
+                    </div> -->
+                </div>
+                </div>
+                <div class="booking-details-booking-information" style="display:block" *ngIf="bookingDetail?.spaceType !== 'Coworking Space' && bookingPeriod && bookingPeriod.length > 0">
+                    <div class="d-flex py-2" *ngFor="let bookings of bookingPeriod">
+                        <div class="booking-details-booking-information-single">
+                            <p>Date</p>
+                            <div class="booking-details-booking-information-single-cont">
+                                <p>{{ bookings.startDate | date : 'dd-MM-YYYY' }}</p>
+                            </div>
+                        </div>
+                        <div class="booking-details-booking-information-single">
+                            <p>Start Time</p>
+                            <div class="booking-details-booking-information-single-cont">
+                                <p>{{ formatTime(bookings.startTime) }}</p>
+                            </div>
+                        </div>
+                        <div class="booking-details-booking-information-single">
+                            <p>End Time</p>
+                            <div class="booking-details-booking-information-single-cont">
+                                <p>{{ formatTime(bookings.endTime)}}</p>
+                            </div>
+                        </div>
+                        <div class="booking-details-booking-information-single">
+                            <p>No of Hours</p>
+                            <div class="booking-details-booking-information-single-cont">
+                                <p>{{calculateHourDifference(bookings.startTime, bookings.endTime)}}</p>
+                            </div>
+                        </div>
+                        <!-- Add other details here if needed -->
+                    </div>
+                </div>
+
+                <div class="booking-details-booking-msg" *ngIf="bookingDetail?.message">
+                    <p>Custom Message</p>
+                    <div class="booking-details-booking-information-single-cont">
+                        <p>{{bookingDetail?.message}}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="booking-details-payment">
+
+                <div class="booking-details-payment-cont">
+                    <h4>Payment Summary</h4>
+
+                    <div class="booking-details-payment-info">
+                        <div class="booking-details-payment-info-single">
+                            <div class="booking-details-payment-info-label">
+                                <p>Base Price</p>
+                            </div>
+                            <div class="booking-details-payment-info-amount">
+                                <p>{{bookingDetail?.subtotal}} INR</p>
+                            </div>
+                        </div>
+                        <div class="booking-details-payment-info-single">
+                            <div class="booking-details-payment-info-label">
+                                <p>GST ( 18%)</p>
+                            </div>
+                            <div class="booking-details-payment-info-amount ">
+                                <p>{{bookingDetail?.gst}} INR</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="booking-details-payment-info-single booking-details-payment-total">
+                        <div class="booking-details-payment-info-label">
+                            <p>Total</p>
+                        </div>
+                        <div class="booking-details-payment-info-amount">
+                            <p>{{bookingDetail?.bookingPrice}} INR</p>
+                        </div>
+                    </div>
+
+                    <div class="booking-details-payment-info" *ngIf="paymentDetail">
+                        <div class="booking-details-payment-info-single">
+                            <div class="booking-details-payment-info-label">
+                                <p>Payment Method</p>
+                            </div>
+                            <div class="booking-details-payment-info-amount">
+                                <p style="text-transform: capitalize;">{{paymentDetail?.method}}</p>
+                            </div>
+                        </div>
+                        <div class="booking-details-payment-info-single">
+                            <div class="booking-details-payment-info-label">
+                                <p>Payment Id</p>
+                            </div>
+                            <div class="booking-details-payment-info-amount ">
+                                <p>{{paymentDetail?.id}}</p>
+                            </div>
+                        </div>
+                        <div class="booking-details-payment-info-single" *ngIf="paymentDetail?.transaction_id">
+                            <div class="booking-details-payment-info-label">
+                                <p>Bank Transaction ID:</p>
+                            </div>
+                            <div class="booking-details-payment-info-amount ">
+                                <p>{{paymentDetail?.transaction_id}}</p>
+                            </div>
+                        </div>
+
+                        <div class="booking-details-payment-info-single">
+                            <div class="booking-details-payment-info-label">
+                                <p>Txn Date & Time</p>
+                            </div>
+                            <div class="booking-details-payment-info-amount ">
+                                <p>{{formatTimestamp(paymentDetail?.created_at,'date')}}</p>
+                                <p class="booking-details-payment-info-amount-time">{{formatTimestamp(paymentDetail?.created_at,'time')}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a  *ngIf="bookingDetail?.bookingStatus === 'confirmed' " class="w-100 d-flex justify-content-center mt-3 text-danger pointer" (click)="cancelConfirmation(bookingDetail)" > Cancel Booking </a>
+                </div>
+
+
+                <div class="assistance">
+                    <p>Need assistance with your booking? Contact us Monday through Saturday, 10 AM to 6:30 PM.</p>
+                    <div class="assistance-contact">
+                        <div class="assistance-contact-single">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <p>+91-9513392400</p>
+                        </div>
+                        <div class="assistance-contact-single">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <p>support&#64;flexospaces.com </p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

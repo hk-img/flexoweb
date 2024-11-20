@@ -1,0 +1,124 @@
+<!-- <br />
+<div class="workspace-rating-review-container-list">
+  <h2>Workspace Review & Rating</h2>
+  <div class="item-wrapper" style="margin-left: 20px; margin-right: 20px">
+    <div class="tab-content">
+      <div id="grid-view" class="tab-pane active product-grid">
+        <div class="row">
+          <div
+            class="col-lg-12 col-xl-4"
+            *ngFor="let spaceDetails of reviewRatingList"
+          >
+            <div class="trending-place-item">
+              <div class="trending-img">
+                <a
+                  [href]="
+                    webDomain + 'details/' + spaceDetails.link_name
+                  "
+                  target="_blank"
+                  ><img
+                    [src]=" spaceDetails?.spaceimages[0] ? aws_base_url + spaceDetails?.spaceId + '/' + spaceDetails?.spaceimages[0] : 'assets/images/details_placeholder_image.jpg'"
+                    alt="..."
+                /></a>
+              </div>
+
+              <div class="trending-title-box">
+                <div class="customer-review" style="margin-bottom: 0px">
+                  <h2 class="h-cursor" style="font-size: 18px">
+                    {{ spaceDetails.spacename }}&nbsp;{{ spaceDetails.spaceLocationName}}
+                  </h2>
+                </div>
+                <div class="description">
+                  <div class="rating-summary" style="display: flex"> 
+                    <div class="rating-result">
+                      <ul class="product-rating">
+                        <li *ngFor="let era of rating_array; index as erai" [innerHTML]="showStarIcon(era, spaceDetails.rating)"></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3 class="less-content" style="font-size: 12px">
+                    {{ spaceDetails?.Review }}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="work-space-review" >
+  <div class="container">
+    <div class="work-space-review-heading">
+      <h2>Reviews <span *ngIf="reviewRatingList.length > 0">({{reviewRatingList.length}})</span></h2>
+      <h3 *ngIf="reviewRatingList.length == 0">No review found</h3>
+    </div>
+    <div class="review-section">
+  
+      <div class="review-section-single" *ngFor="let item of spaceRatingReviewList">
+          <div class="review-section-single-img">
+            <a target="_blank"  [href]=" webDomain + 'details/' + item?.linkName ">
+              <img (error)="handleImageError($event)" [src]="(item?.base_url+'/'+item?.images[0]) || 'assets/images/details_placeholder_image.jpg'" alt="">
+            </a>
+            <div class="booking-all-list-single-img-tag">
+              <p>{{item?.spaceType}}</p>
+            </div>
+          </div>
+          <div class="review-section-single-cont">
+             <h4>{{item?.spacename}}</h4>
+             <div class="book-again-star">
+              
+                <div class="rating-star-number">
+                  <ul class="product-rating-c">
+                    <li class>
+                      <i style="cursor: context-menu;" [ngClass]="{'fa': true, 'fa-star': item?.rating >= 1, 'fa-star-half-o': item?.rating > 0 && item?.rating < 1, 'fa-star-o': item?.rating <= 0}" aria-hidden="true"></i>
+                    </li>
+                    <li class>
+                      <i style="cursor: context-menu;" [ngClass]="{'fa': true, 'fa-star': item?.rating >= 2, 'fa-star-half-o': item?.rating > 1 && item?.rating < 2, 'fa-star-o': item?.rating <= 1}" aria-hidden="true"></i>
+                    </li>
+                    <li class>
+                      <i style="cursor: context-menu;" [ngClass]="{'fa': true, 'fa-star': item?.rating >= 3, 'fa-star-half-o': item?.rating > 2 && item?.rating < 3, 'fa-star-o': item?.rating <= 2}" aria-hidden="true"></i>
+                    </li>
+                    <li class>
+                      <i style="cursor: context-menu;" [ngClass]="{'fa': true, 'fa-star': item?.rating >= 4, 'fa-star-half-o': item?.rating > 3 && item?.rating < 4, 'fa-star-o': item?.rating <= 3}" aria-hidden="true"></i>
+                    </li>
+                    <li class>
+                      <i style="cursor: context-menu;" [ngClass]="{'fa': true, 'fa-star': item?.rating >= 5, 'fa-star-half-o': item?.rating > 4 && item?.rating < 5, 'fa-star-o': item?.rating <= 4}" aria-hidden="true"></i>
+                    </li>
+                  </ul>
+                  <div class="start-count">
+                    <span> {{item?.ratingsAvg}}</span>              
+                  </div>
+                </div>
+
+
+                <ul class="book-again">
+                  <li>
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </li>
+                  <li>
+                    Yes I would book again
+                  </li>
+                </ul>
+             </div>                     
+              <p>{{item?.Review}}</p>
+              <p class="review-section-single-cont-date">{{item?.createdAt | date:'MMMM dd,yyyy'}}</p>
+          </div>
+  
+      </div>
+      <!-- <div class="text-center" *ngIf="spaceRatingReviewList?.length == 0">
+        <p>Workspace Reviews not found..</p>
+      </div> -->
+      <div *ngIf="reviewRatingList.length > spaceRatingReviewList.length"
+        style="text-align: center; margin-top: 40px; margin-bottom: 20px; cursor: pointer;">
+        <a (click)="nextReviewList()" class="link-hov style2 text-dark"
+          style="border: 1px solid #ccc7c7; padding: 15px 20px; font-weight: 600;">See more reviews </a>
+      </div>
+  
+  </div>
+  </div>
+</div>

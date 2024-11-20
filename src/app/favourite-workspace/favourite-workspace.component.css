@@ -1,0 +1,160 @@
+/* .favourite-workspace-container {
+  align-items: center;
+  min-height: 750px;
+}
+
+.favourite-workspace-container h2 {
+  padding: 20px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 25px;
+  padding-left: 20px;
+}
+
+@media only screen and (max-width: 900px) {
+  .favourite-workspace-container {
+    font-size: 25px 0;
+  }
+  .favourite-workspace-container h2 {
+    font-size: 25px;
+  }
+}
+
+.fav-icon {
+  cursor: pointer!important;
+  color: #F76900 !important;
+  border-radius: 29px;
+  font-size: 16px;
+  background: #ece8e8;
+  margin-right: 5px;
+}
+
+.fav-icon:active, .fav-icon:hover {
+  color: #F76900;
+  background-color: #001740;
+  border-color: #001740;
+  border-radius: 29px;
+  font-size: 16px;
+}
+.eye-icon {
+  cursor: pointer!important;
+  color: #F76900 !important;
+  border-radius: 29px;
+  font-size: 16px;
+  background: #ece8e8;
+  margin-right: 5px;
+}
+
+.eye-icon:active, .eye-icon:hover {
+  color: #F76900;
+  background-color: #001740;
+  border-color: #001740;
+  border-radius: 29px;
+  font-size: 16px;
+}
+
+
+
+
+.inventory-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.inventory-label i {
+  position: relative;
+  top: 5px;
+  font-size: 18px;
+}
+
+.slide img {
+  height: 320px;
+}
+
+@media only screen and (max-width: 700px) {
+  .slide img {
+    height: 285px;
+  }
+}
+
+.icon-color {
+  font-size: 15px;
+  color: #888 !important;
+}
+
+.available-resources {
+  margin: 12px 0px 6px 0px;
+  height: 39px;
+  overflow: hidden;
+}
+
+.available-resources span {
+  font-size: 12px;
+  color: gray;
+}
+
+.cursor-pointer {
+  font-weight: bold;
+  color: #f76900;
+  cursor: pointer;
+}
+
+.price-value {
+  color: black;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.shortlist-share-container {
+  position: absolute;
+  top: 3px;
+  z-index: 3;
+  right: 2px;
+  display: flex;
+  padding: 10px;
+}
+
+.shortlist-share-container .btn i {
+  font-size: 18px;
+  position: relative;
+  right: 3px;
+  bottom: 3px;
+}
+
+.description {
+  margin-top: 11px;
+}
+
+.description p {
+  line-height: 21px;
+  font-size: 14px;
+}
+
+.less-content {
+  height: 2.8rem;
+  overflow: hidden;
+} */
+
+
+
+.favourite-workspace-c .booking-all-list-single-cont {
+  width: calc(100% - 215px);
+}
+
+.description-single p {
+
+  font-weight: 400;
+    line-height: 1.5;
+    font-size: 14px;
+    color: #808080;
+}
+
+
+.favourite-workspace-c .booking-all-list-single-cont-od {
+  margin-bottom: 10px;
+}
+
+.favourite-workspace-c .booking-all-list-single-img-cont {
+  width: 100%;
+}

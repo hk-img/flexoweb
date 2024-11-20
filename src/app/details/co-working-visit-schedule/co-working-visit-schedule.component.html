@@ -1,0 +1,52 @@
+
+  <div [ngClass]="{'open': isOpen}" class="modal co-vs-mod vs-modal">
+   
+    <div class="modal-content">
+      <div class="modal-custom-header">
+        <h4> Schedule Visit </h4>
+        <button type="button" class="btn-close" (click)="closeModal()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="multi-step-header">
+        <p> Schedule a personalised tour with one of our experts </p>
+      </div>
+      <div class="step step-1 co-work-vs-s1 pb-0">
+        <h2>When would you like to visit?</h2>
+        <form [formGroup]="coWorkingSchduleVisitForm">
+          <div class="form-field-div">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Preferred view Date </mat-label>
+                <input (dateChange)="onDateChange($event)" matInput [min]="minDate" (click)="picker.open()" [matDatepicker]="picker" formControlName="visitDate" style="font-size: large;">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-error *ngIf="coWorkingSchduleVisitForm['controls']['visitDate']?.errors?.required">Visit Date Time
+                    is required.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-field-div">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Preferred view Time</mat-label>
+                <mat-select formControlName="visitTime">
+                    <mat-option *ngFor="let startTime of startTimes" [value]="startTime.value" [disabled]="isTimeDisabled(startTime.value)">
+                        {{startTime.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="coWorkingSchduleVisitForm['controls']['visitTime']?.errors?.required">visitTime is
+                    required.</mat-error>
+            </mat-form-field>
+        </div>
+        </form>
+        <div class="custom-btn-grp">
+          <button type="button" class="custum-btn next-step w-100" (click)="submit()">Continue</button>
+        </div>
+      </div>
+      <div class="step-term-condition" style="padding: 20px; padding-top: 0px;">
+        <!-- <p>By submitting your application and subscribing to our services, you agree to our <a href="">Global Terms of Use.</a></p> -->
+        <hr>
+        <p style="font-size: 11px;">After you submit a workspace enquiry to us, we may share your details with workspace providers, who may contact you to follow up on your enquiry." Please read our <a href="" style="font-size: 11px;"> Privacy Policy </a> for details of how we process the information.</p>
+      </div>
+    </div>
+  </div>
+  <app-co-working-visit-schedule-two #modal1></app-co-working-visit-schedule-two>

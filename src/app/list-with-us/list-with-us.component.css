@@ -1,0 +1,35 @@
+li {
+  width: 100%;
+  list-style-type: circle;
+  font-size: 16px;
+  text-align: start;
+  justify-content: start;
+}
+
+.list-with-us-list {
+  text-align: center;
+}
+
+.list-with-us-list ul {
+  display: inline-block;
+  text-align: initial;
+}
+
+.large-btn {
+  position: absolute;
+  top: 57%;
+  bottom: unset;
+  left: 59%;
+  width: 21%;
+  text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .large-btn {
+    bottom: 25%;
+    left: 10%;
+    width: 15%;
+    top: unset;
+    text-align: center;
+  }
+}

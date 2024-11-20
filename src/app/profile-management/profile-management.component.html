@@ -1,0 +1,744 @@
+<div class="booking-list profile-management-c">
+	<div class="container">
+		<div class="booking-list-cont">
+			<div class="booking-list-hrader-filters">
+				<h2>Profile Management</h2>
+			</div>
+
+			<div class="pm-all-inputs">
+				<form id="changePasswordForm" name="profileDetailForm" [formGroup]="profileDetailForm">
+					<div class="profile-pic">
+						<div>
+							<div class="profile-pic-img position-relative">
+								<img [src]="profileImage ? profileImage : 'assets/images/user_image.png' "
+									alt="profile_image">
+								<span class="loader position-absolute" *ngIf="loader"></span>
+								<div class="profile-pic-change-icon">
+									<div *ngIf="isLoading">
+										<input id="fileInput" type="file" (change)="onFileSelected($event)"
+											formControlName="image" accept="image/jpeg, image/png"
+											style="display: none;">
+										<label for="fileInput" accept="image/jpeg, image/png" class="fa fa-camera"
+											aria-hidden="true"> </label>
+									</div>
+								</div>
+							</div>
+
+							<div *ngIf="fileTypeError" class="error-message">
+								<p class="text-danger">Please select a valid image file.</p>
+							</div>
+							<div *ngIf="fileSizeError" class="error-message">
+								<p class="text-danger">File size exceeds 1 MB. Please select a smaller file.</p>
+							</div>
+							<div class="error-message">
+								<p class="text-danger">Please upload image in JPG or PNG format, up to 1 MB.</p>
+							</div>
+
+						</div>
+
+
+
+						<!-- <div class="row">
+							<div class="col-12 img-col text-center mb-4">
+								<div class="image-container">
+									<div class="upload-overlay">
+										<label for="fileInput" class="upload-icon">
+											<i class="fa-solid fa-camera" style="color:rgb(234, 141, 48);"></i>
+											<span>Choose File</span>
+										</label>
+										<input id="fileInput" type="file" (change)="onFileSelected($event)"
+											formControlName="image" accept="image/jpeg, image/png"
+											style="display: none;">
+									</div>
+								</div>
+						</div> -->
+						<!-- </div> -->
+
+					</div>
+					<div class="basic-info">
+						<div class="info-head">
+							<h4> Basic Information </h4>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="pm-single">
+									<p>First name<span class="text-danger">*</span></p>
+									<mat-form-field appearance="outline" class="w-100">
+										<input type="text" matInput formControlName="firstName"
+											placeholder="Enter First Name" />
+										<mat-error
+											*ngIf="profileDetailForm['controls']['firstName']?.errors?.required">First
+											Name is required.</mat-error>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="pm-single">
+									<p>Last name<span class="text-danger">*</span></p>
+									<mat-form-field appearance="outline" class="w-100">
+										<input type="text" matInput formControlName="lastName"
+											placeholder="Enter Last Name" />
+										<mat-error
+											*ngIf="profileDetailForm['controls']['lastName']?.errors?.required">Last
+											Name is required.</mat-error>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<!-- <div class="col-md-6">
+								<div class="pm-single">
+									<p>Mobile</p>
+								<div class="form-group" [ngClass]="{email : (regType=='mobile')}">
+									<input [readonly]="((regType=='mobile'))" formControlName="mobile" required onkeypress="return /[0-9 ]/i.test(event.key)" type="text" id="tel" placeholder="Enter mobile number" class="form-control intli_input w-100">
+								</div>
+							</div>
+							</div>
+						<div class="col-md-6">
+							</div>  -->
+
+							<div class="col-md-6">
+								<div class="pm-single">
+									<div class="form-group">
+										<p style="margin-bottom: 4px;">Mobile<span class="text-danger">*</span></p>
+								<div class="input-group input-group-lg">
+									<span class="input-group-text form-control" style="flex-grow: .5;" id="basic-addon3">
+										<ng-select #select (change)="onCountryCodeChange($event)"  formControlName="phone_code" [searchable]="false">
+											<ng-template ng-header-tmp>
+												<input style="width: 100%; line-height: 24px" type="text" (input)="select.filter($event.target.value)" />
+											</ng-template>
+											<ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}" alt="" width="20px"> {{list.dialcode}} &nbsp; {{list.name}} </ng-option>
+										</ng-select>
+									</span>
+									<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" formControlName="mobile">
+								  </div>
+								</div>
+								</div>
+							</div>
+
+
+<!-- 
+							<div class="col-md-6">
+								<div class="pm-single">
+									<div class="form-group">
+										<p>Mobile<span class="text-danger">*</span></p>
+										<ngx-intl-tel-input style="cursor: pointer;" [enableAutoCountrySelect]="false"
+											[enablePlaceholder]="true" [searchCountryFlag]="true"
+											[selectFirstCountry]="false" [selectedCountryISO]="val"
+											[separateDialCode]="true" [phoneValidation]="true" [maxLength]="15"
+											name="phone" formControlName="mobile"
+											allowDropdown="true"></ngx-intl-tel-input>
+
+										<mat-error *ngIf="profileDetailForm['controls']['mobile']?.errors?.required">
+											Please enter valid mobile number.
+										</mat-error>
+									</div>
+								</div>
+							</div> -->
+							<div class="col-md-6">
+								<div class="pm-single">
+									<p>Company Name</p>
+									<mat-form-field appearance="outline" class="w-100">
+
+										<input type="text" matInput formControlName="companyName"
+											placeholder="Enter Company Name" />
+
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="pm-single">
+									<p>Email</p>
+									<mat-form-field appearance="outline" class="w-100 position-relative me-3"
+										[ngClass]="{email : (regType=='email' || regType=='social')}">
+										<input [readonly]="(regType=='email' || regType=='social')" type="text" matInput
+											formControlName="email" placeholder="Enter Email" class="" />
+										<mat-error
+											*ngIf="profileDetailForm['controls']['email']?.errors?.required">Email is
+											required.</mat-error>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="pm-single">
+									<p>Gender</p>
+									<mat-form-field appearance="outline" class="w-100">
+										<mat-select placeholder="Select Gender" formControlName="gender">
+											<mat-option value="">Select Gender</mat-option>
+											<mat-option value="male">Male</mat-option>
+											<mat-option value="female">Female</mat-option>
+											<mat-option value="Prefer not to say">Prefer not to say</mat-option>
+										</mat-select>
+
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="pm-single">
+									<p>Date of birth</p>
+									<mat-form-field appearance="outline" class="w-100">
+										<input placeholder="DD/MM/YYYY" matInput [matDatepicker]="picker"
+											formControlName="dateOfBirth" (click)="picker.open()"
+											(blur)="onDateInputed($event)">
+										<mat-datepicker-toggle matSuffix (click)="clearDate()"></mat-datepicker-toggle>
+										<mat-datepicker #picker></mat-datepicker>
+									</mat-form-field>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="add-info">
+						<div class="info-head">
+							<h4> Billing Details </h4>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-12">
+								<div class="form-group">
+									<div class="pm-single">
+										<p>Country</p>
+										<div class="dropdown-border">
+											<ng-select (change)="onCountryChange($event)" formControlName="country_id"
+											class="drop_down">
+											<ng-option *ngFor="let count of countryList" [value]="count.id">{{count.country_name}} </ng-option>
+										</ng-select>
+									</div>
+
+										<!-- <div *ngIf="profileForm.get('country_id')?.invalid && (profileForm.get('country_id')?.dirty || profileForm.get('country_id')?.touched)"
+									class="text-danger">
+									<div *ngIf="profileForm.get('country_id')?.errors">
+									  Country field is required.
+									</div>
+								  </div> -->
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="pm-single">
+										<p>State</p>
+										<div class="dropdown-border">
+										<ng-select (change)="onStateChange($event)" class="drop_down"
+											formControlName="state_id" >
+											<ng-option *ngFor="let state of stateList" [value]="state.id">{{state.name}} </ng-option>
+										</ng-select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-12">
+								<div class="form-group">
+									<div class="pm-single">
+										<p>City</p>
+										<div class="dropdown-border">
+										<ng-select formControlName="city_id" (change)="onCityChange($event)"
+											 class="drop_down">
+											<ng-option *ngFor="let city of cityList" [value]="city.id">{{city.name}} </ng-option>
+										</ng-select>
+</div>
+										<!-- <div *ngIf="profileForm.get('city_id')?.invalid && (profileForm.get('city_id')?.dirty || profileForm.get('city_id')?.touched)"
+									class="text-danger">
+									<div *ngIf="profileForm.get('city_id')?.errors">
+									  City field is required.
+									</div>
+								  </div> -->
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="pm-single">
+									<p>Pin code</p>
+									<mat-form-field appearance="outline" class="w-100">
+										<input type="text" matInput formControlName="pincode"
+											placeholder="Enter Pincode" />
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="pm-single">
+									<p>GST No.</p>
+									<mat-form-field appearance="outline" class="w-100">
+										<input type="text" matInput formControlName="gstNumber"
+											placeholder="Enter GST No." oninput="this.value = this.value.toUpperCase()"
+											pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$"
+											maxlength="15" />
+
+										<mat-error *ngIf="profileDetailForm.get('gstNumber').errors?.pattern">
+											GST No. must follow the format XXABCDE1234F1Z9.
+										</mat-error>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="pm-single">
+									<p>PAN No.</p>
+									<mat-form-field appearance="outline" class="w-100">
+										<input type="text" matInput formControlName="panNumber"
+											placeholder="Enter PAN No." oninput="this.value = this.value.toUpperCase()"
+											pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" maxlength="10" />
+
+										<mat-error *ngIf="profileDetailForm.get('panNumber').errors?.pattern">
+											PAN No. must follow the format ABCDE1234F.
+										</mat-error>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="pm-single">
+									<p>Billing address 1<span class="text-danger">*</span></p>
+									<mat-form-field appearance="outline" class="w-100">
+										<input type="text" matInput formControlName="billingAddress"
+											placeholder="Enter Billing address" />
+										<mat-error
+											*ngIf="profileDetailForm['controls']['billingAddress']?.errors?.required">billing
+											address 1 field is required.</mat-error>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="pm-single">
+									<p>Billing address 2</p>
+									<mat-form-field appearance="outline" class="w-100">
+										<input type="text" matInput formControlName="billingAddress2"
+											placeholder="Enter Billing address 2" />
+									</mat-form-field>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<a *ngIf="regType == 'email'" data-toggle="modal" data-target="#staticBackdrop"
+						class="w-100 d-flex justify-content-end mb-3" style="cursor: pointer;"> Change Password </a>
+
+					<div class="form-group btn-grp">
+						<button class="custum-btn btnSubmit"
+							(click)="onProfileDetailsSubmit(profileDetailForm)">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+	aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">Change password</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="changePasswordForm" name="changePasswordForm" [formGroup]="changePasswordFrom">
+					<mat-form-field appearance="outline" class="w-100">
+						<mat-label>Current Password</mat-label>
+						<input type="text" matInput formControlName="currentPassword"
+							placeholder="Enter Current Password" />
+						<mat-error *ngIf="changePasswordFrom['controls']['currentPassword']?.errors?.required">Current
+							Password is required.</mat-error>
+					</mat-form-field>
+					<mat-form-field appearance="outline" class="w-100">
+						<mat-label>New Password</mat-label>
+						<input type="text" matInput formControlName="newPassword" placeholder="Enter New Password" />
+						<mat-error *ngIf="changePasswordFrom['controls']['newPassword']?.errors?.required">New Password
+							is required.</mat-error>
+					</mat-form-field>
+					<mat-form-field appearance="outline" class="w-100">
+						<mat-label>Confirm Password</mat-label>
+						<input type="text" matInput formControlName="confirmPassword"
+							placeholder="Enter Confirm Password" />
+						<mat-error *ngIf="changePasswordFrom['controls']['confirmPassword']?.errors?.required">Confirm
+							Password is required.</mat-error>
+					</mat-form-field>
+					<div class="form-group change-pass-btn">
+						<button class="btn custum-btn btnSubmit" [disabled]="!changePasswordFrom.valid"
+							(click)="onSubmitChangePassword(changePasswordFrom)">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="content">
+			<div class="tab-content">
+				<div class="tab-pane  active" id="profileDetail">
+					<form id="changePasswordForm" name="profileDetailForm" [formGroup]="profileDetailForm">
+						<div class="col-12 img-col text-center mb-4">
+							<div class="image-container">
+								<div class="upload-overlay">
+									<label for="fileInput" class="upload-icon">
+										<i class="fa-solid fa-camera" style="color:rgb(234, 141, 48);"></i>
+										<span>Choose File</span>
+									</label>
+									<input id="fileInput" type="file" (change)="onFileSelected($event)"
+										formControlName="image" accept="image/jpeg, image/png"
+										style="display: none;">
+								</div>
+							</div>
+						</div>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>First name</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="firstName"
+							  placeholder="Enter First Name"
+							/>
+							<mat-error *ngIf="profileDetailForm['controls']['firstName']?.errors?.required"
+							  >First Name is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Last name</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="lastName"
+							  placeholder="Enter Last Name"
+							/>
+							<mat-error *ngIf="profileDetailForm['controls']['lastName']?.errors?.required"
+							  >Last Name is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Email</mat-label>
+							<input readonly
+							  type="text"
+							  matInput
+							  formControlName="email"
+							  placeholder="Enter Email"
+							/>
+							<mat-error *ngIf="profileDetailForm['controls']['email']?.errors?.required"
+							  >Email is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Mobile</mat-label>
+							<input readonly
+							  type="text"
+							  matInput
+							  formControlName="mobile"
+							  placeholder="Enter Mobile"
+							/>
+							<mat-error *ngIf="profileDetailForm['controls']['mobile']?.errors?.required"
+							  >Mobile is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Company Name</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="companyName"
+							  placeholder="Enter Company Name"
+							/>
+						
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>GST No.</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="gstNumber"
+							  placeholder="Enter GST No."
+							  oninput="this.value = this.value.toUpperCase()"
+							  pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$"
+							  maxlength="15"
+							/>
+						
+							<mat-error *ngIf="profileDetailForm.get('gstNumber').errors?.pattern">
+								GST No. must follow the format XXABCDE1234F1Z9.
+							</mat-error>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>PAN No.</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="panNumber"
+							  placeholder="Enter PAN No."
+							  oninput="this.value = this.value.toUpperCase()"
+							  pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+							  maxlength="10"
+							/>
+						
+							<mat-error *ngIf="profileDetailForm.get('panNumber').errors?.pattern">
+								PAN No. must follow the format ABCDE1234F.
+							</mat-error>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Gender</mat-label>
+							<mat-select formControlName="gender">
+								<mat-option value="male">Male</mat-option>
+								<mat-option value="female">Female</mat-option>
+							</mat-select>
+							
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Billing address</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="billingAddress"
+							  placeholder="Enter Billing address"
+							/>
+						
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Date of birth</mat-label>
+							<input matInput [matDatepicker]="picker" formControlName="dateOfBirth" (click)="picker.open()" (blur)="onDateInputed($event)">
+							<mat-hint>MM/DD/YYYY</mat-hint>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+						<div class="form-group">
+							<button class="btn btnSubmit" (click)="onProfileDetailsSubmit(profileDetailForm)">Submit</button>
+						</div>
+					</form>
+				</div>
+				<div class="tab-pane" id="changePassword">
+					<form id="changePasswordForm" name="changePasswordForm" [formGroup]="changePasswordFrom">
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Current Password</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="currentPassword"
+							  placeholder="Enter Current Password"
+							/>
+							<mat-error *ngIf="changePasswordFrom['controls']['currentPassword']?.errors?.required"
+							  >Current Password is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>New Password</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="newPassword"
+							  placeholder="Enter New Password"
+							/>
+							<mat-error *ngIf="changePasswordFrom['controls']['newPassword']?.errors?.required"
+							  >New Password is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Confirm Password</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="confirmPassword"
+							  placeholder="Enter Confirm Password"
+							/>
+							<mat-error *ngIf="changePasswordFrom['controls']['confirmPassword']?.errors?.required"
+							  >Confirm Password is required.</mat-error
+							>
+						</mat-form-field>
+						<div class="form-group">
+							<button class="btn btnSubmit" [disabled]="!changePasswordFrom.valid" (click)="onSubmitChangePassword(changePasswordFrom)">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>	 -->
+
+<!-- <div class="profile-management-container">
+	<h2>Profile Management</h2>
+
+	<div class="os-tabs-w mx-4">
+		<div class="os-tabs-controls">
+	  		<ul class="nav nav-tabs upper">
+				<li>
+		  			<a data-toggle="tab" aria-expanded="true" class="nav-link tablinks active" id="profileTab" aria-expanded="true"  (click)="changeTab($event, 'profileDetail')">Profile</a>
+				</li>
+				<li>
+		  			<a data-toggle="tab" aria-expanded="true" class="nav-link tablinks" id="changePasswordTab" aria-expanded="true"  (click)="changeTab($event, 'changePassword')">Change Password </a>
+				</li>
+	  		</ul>
+		</div>
+	</div>
+
+	<div class="wrapper">
+		<section class="content">
+			<div class="tab-content">
+				<div class="tab-pane col-md-6 active" id="profileDetail" style="margin-left: 30px;">
+					<form id="changePasswordForm" name="profileDetailForm" [formGroup]="profileDetailForm">
+						<div class="col-12 img-col text-center mb-4">
+							<div class="image-container">
+								<div class="upload-overlay">
+									<label for="fileInput" class="upload-icon">
+										<i class="fa-solid fa-camera" style="color:rgb(234, 141, 48);"></i>
+										<span>Choose File</span>
+									</label>
+									<input id="fileInput" type="file" (change)="onFileSelected($event)"
+										formControlName="image" accept="image/jpeg, image/png"
+										style="display: none;">
+								</div>
+							</div>
+						</div>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>First name</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="firstName"
+							  placeholder="Enter First Name"
+							/>
+							<mat-error *ngIf="profileDetailForm['controls']['firstName']?.errors?.required"
+							  >First Name is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Last name</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="lastName"
+							  placeholder="Enter Last Name"
+							/>
+							<mat-error *ngIf="profileDetailForm['controls']['lastName']?.errors?.required"
+							  >Last Name is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Email</mat-label>
+							<input readonly
+							  type="text"
+							  matInput
+							  formControlName="email"
+							  placeholder="Enter Email"
+							/>
+							<mat-error *ngIf="profileDetailForm['controls']['email']?.errors?.required"
+							  >Email is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Mobile</mat-label>
+							<input readonly
+							  type="text"
+							  matInput
+							  formControlName="mobile"
+							  placeholder="Enter Mobile"
+							/>
+							<mat-error *ngIf="profileDetailForm['controls']['mobile']?.errors?.required"
+							  >Mobile is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Company Name</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="companyName"
+							  placeholder="Enter Company Name"
+							/>
+						
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>GST No.</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="gstNumber"
+							  placeholder="Enter GST No."
+							  oninput="this.value = this.value.toUpperCase()"
+							  pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$"
+							  maxlength="15"
+							/>
+							
+							<mat-error *ngIf="profileDetailForm.get('gstNumber').errors?.pattern">
+								GST No. must follow the format XXABCDE1234F1Z9.
+							</mat-error>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>PAN No.</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="panNumber"
+							  placeholder="Enter PAN No."
+							  oninput="this.value = this.value.toUpperCase()"
+							  pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+							  maxlength="10"
+							/>
+						
+							<mat-error *ngIf="profileDetailForm.get('panNumber').errors?.pattern">
+								PAN No. must follow the format ABCDE1234F.
+							</mat-error>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Gender</mat-label>
+							<mat-select formControlName="gender">
+								<mat-option value="male">Male</mat-option>
+								<mat-option value="female">Female</mat-option>
+							</mat-select>
+							
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Billing address</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="billingAddress"
+							  placeholder="Enter Billing address"
+							/>
+							
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Date of birth</mat-label>
+							<input matInput [matDatepicker]="picker" formControlName="dateOfBirth" (click)="picker.open()" (blur)="onDateInputed($event)">
+							<mat-hint>MM/DD/YYYY</mat-hint>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+						<div class="form-group">
+							<button class="btn btnSubmit" (click)="onProfileDetailsSubmit(profileDetailForm)">Submit</button>
+						</div>
+					</form>
+				</div>
+				<div class="tab-pane col-md-6" id="changePassword" style="margin-left: 30px;">
+					<form id="changePasswordForm" name="changePasswordForm" [formGroup]="changePasswordFrom">
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Current Password</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="currentPassword"
+							  placeholder="Enter Current Password"
+							/>
+							<mat-error *ngIf="changePasswordFrom['controls']['currentPassword']?.errors?.required"
+							  >Current Password is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>New Password</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="newPassword"
+							  placeholder="Enter New Password"
+							/>
+							<mat-error *ngIf="changePasswordFrom['controls']['newPassword']?.errors?.required"
+							  >New Password is required.</mat-error
+							>
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="w-100">
+							<mat-label>Confirm Password</mat-label>
+							<input
+							  type="text"
+							  matInput
+							  formControlName="confirmPassword"
+							  placeholder="Enter Confirm Password"
+							/>
+							<mat-error *ngIf="changePasswordFrom['controls']['confirmPassword']?.errors?.required"
+							  >Confirm Password is required.</mat-error
+							>
+						</mat-form-field>
+						<div class="form-group">
+							<button class="btn btnSubmit" [disabled]="!changePasswordFrom.valid" (click)="onSubmitChangePassword(changePasswordFrom)">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>	
+	</div>
+</div> -->

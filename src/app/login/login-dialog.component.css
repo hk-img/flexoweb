@@ -1,0 +1,784 @@
+.drop_down .ng-dropdown-panel .scroll-host{
+  background-color: white;
+}
+.drop_down .ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+  min-height: 3em;
+  
+  padding: 0 16px;
+  text-decoration: none;
+  position: relative;
+  color: rgba(0, 0, 0, 0.87);
+  text-align: left;
+  line-height: 3em;
+  }
+  .drop_down .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+      background-color: var(--primary-bg-color);
+      color: #fff;
+  }
+  .drop_down .ng-dropdown-panel{
+      left: 0px;
+}
+
+.number_label {
+  color: #666;
+  font-size: 10px;
+  font-weight: 400;
+  position: absolute;
+  top: 95px;
+  left: 10px;
+  background: white;
+  z-index: 1;
+  padding: 0 7px;
+}
+
+.login-register .login-register-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #DBDBDB;
+}
+
+.login-register .login-register-header h2 {
+  margin: 0;
+}
+
+.login-register .login-register-header h2 span {
+  color: #F76900;
+}
+
+.login-register .login-register-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 80%;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 50px 0;
+  position: relative;
+}
+
+/* .login-register .login-register-input input[type="input"], .login-register .login-register-input input[type=date], .login-register .login-register-input select, .login-register .login-register-input textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+} */
+.login-register .login-register-input .custum-btn {
+  width: 100%;
+}
+
+.login-register .login-register-input .login-register-input-single {
+  width: 100%;
+  /* margin-bottom: 20px; */
+}
+
+.login-register .login-register-input .login-register-input-single label {
+  color: #000;
+}
+
+.login-register .login-register-input .login-register-input-single label span {
+  font-size: 16px;
+  color: #F30000;
+  font-weight: 600;
+}
+
+.login-register .login-register-input .login-register-inutp-other {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.login-register .login-register-input .login-register-inutp-other .login-register-inutp-other-heading {
+  text-align: center;
+  position: relative;
+}
+
+.login-register .login-register-input .login-register-inutp-other .login-register-inutp-other-heading:after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translate(0%, -50%);
+  transform: translate(0%, -50%);
+  background: #ddd;
+  z-index: 0;
+}
+
+.login-register .login-register-input .login-register-inutp-other .login-register-inutp-other-heading p {
+  background: #FFF;
+  padding: 10px;
+  position: relative;
+  z-index: 1;
+  display: table;
+  margin: 0 auto;
+}
+
+.login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp .outline-btn {
+  border-color: #DBDBDB;
+  /* margin-right: 20px; */
+  width: calc(50% - 10px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 20px;
+  padding: 5px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp .outline-btn img {
+  width: 20px;
+  height: 20px;
+  -o-object-fit: contain;
+  object-fit: contain;
+  margin-right: 5px;
+}
+
+.login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp .outline-btn span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp .outline-btn:last-child {
+  margin-right: 0;
+}
+
+.login-register .login-register-input .login-register-inutp-other-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.login-register .login-register-input .login-register-inutp-other-btn p {
+  color: #000;
+}
+
+.login-register .login-register-input .login-register-inutp-other-btn .custum-btn {
+  padding: 10px 20px;
+  width: auto;
+  border-radius: 50px;
+  margin-left: 20px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.login-register .login-register-input .otp-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-register .login-register-input .otp-heading h4 {
+  margin: 0 0 5px 0;
+}
+
+.login-register .login-register-input .otp-heading p span {
+  font-weight: 600;
+  color: #000;
+}
+
+.login-register .login-register-input .otp-inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login-register .login-register-input .otp-inputs input[type="text"] {
+  border: none;
+  border-bottom: 2px solid #000;
+  margin-right: 20px;
+  text-align: center;
+  font-size: 18px;
+  padding: 20px;
+  width: calc(25% - 10px);
+}
+
+.login-register .login-register-input .otp-inputs input[type="text"]:last-child {
+  margin-right: 0px;
+}
+
+.login-register .login-register-input .otp-resend {
+  margin-bottom: 40px;
+}
+
+.login-register .login-register-input .otp-resend .otp-resend-btn {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: #F76900;
+}
+
+.login-register .login-register-input .login-register-all-input-group {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.login-register .login-register-input .login-register-all-input-group .login-register-input-single {
+  width: calc(50% - 10px);
+  margin-right: 20px;
+}
+
+.login-register .login-register-input .login-register-all-input-group .login-register-input-single:last-child {
+  margin-right: 0;
+}
+
+.login-register .login-register-input .forgot-passwpord {
+  margin: 0px 0 30px 0;
+  display: table;
+}
+
+.login-register .otp-success {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 15px 20px;
+  background: #E9F2EC;
+  margin: 0 auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  border: 1px solid #05AC34;
+  border-radius: 10px;
+  -webkit-box-shadow: 5px 5px 10px #00000025;
+  box-shadow: 5px 5px 10px #00000025;
+  margin-bottom: 40px;
+}
+
+.login-register .otp-success h5 {
+  margin: 0;
+}
+
+.login-register .otp-success img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+::ng-deep .mat-form-field-infix {
+  display: flex;
+}
+
+@media only screen and (max-width: 1799px) {
+  .login-register .login-register-input {
+    padding: 35px 0;
+  }
+
+  .login-register .login-register-input .login-register-inutp-other {
+    margin-top: 15px;
+  }
+
+  .login-register .login-register-input .login-register-inutp-other {
+    margin-top: 15px;
+  }
+
+  .login-register .login-register-input .login-register-inutp-other-btn {
+    margin-top: 30px;
+  }
+
+  .login-register .login-register-input .forgot-passwpord {
+    margin: 0px 0 20px 0;
+  }
+
+  .login-register .login-register-input .otp-resend {
+    margin-bottom: 30px;
+  }
+
+}
+
+@media only screen and (max-width: 1500px) {
+  .login-register .login-register-header h2 {
+    font-size: 22px;
+  }
+
+  .login-register .login-register-header {
+    padding: 15px 20px;
+  }
+
+  .login-register .login-register-input {
+    padding: 25px 0;
+  }
+
+  .custum-btn,
+  .outline-btn {
+    padding: 15px 25px;
+    font-size: 16px;
+  }
+
+  .login-register .login-register-input .otp-resend .otp-resend-btn {
+    font-size: 14px;
+    letter-spacing: 0px;
+  }
+
+  .login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp .outline-btn img {
+    width: 20px;
+    height: 20px;
+  }
+
+
+
+  /* .login-register .login-register-input .login-register-inutp-other-btn {
+    margin: 20px 0 0 0;
+  }
+  .login-register .login-register-input .forgot-passwpord {
+    margin: 0px 0 20px 0;
+  }
+  .login-register .login-register-input .login-register-inutp-other-btn {    
+    margin: 25px 0;
+  } */
+}
+
+@media only screen and (max-width: 1400px) {
+
+  .login-register .login-register-header h2 {
+    font-size: 20px;
+  }
+
+  .custum-btn,
+  .outline-btn {
+    font-size: 14px;
+  }
+
+  .login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp .outline-btn span {
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp {
+    margin-top: 10px;
+  }
+
+  /* .login-register .login-register-input {
+    width: 90%;
+  } */
+
+  .login-register .otp-success {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+  }
+
+  .login-register .otp-success h5 {
+    font-size: 16px;
+  }
+
+  .login-register .login-register-input .login-register-inutp-other-btn {
+    margin-top: 20px;
+  }
+
+  .login-register .login-register-input .forgot-passwpord {
+    margin: 0px 0 20px 0;
+  }
+
+  .login-register .login-register-input .otp-resend {
+    margin-bottom: 20px;
+  }
+
+
+}
+
+@media only screen and (max-width: 1199px) {
+  .login-register .login-register-input .login-register-all-input-group {
+    flex-direction: column;
+  }
+
+  .login-register .login-register-input .login-register-all-input-group .login-register-input-single {
+    width: 100%;
+    margin-right: 0;
+  }
+
+}
+
+@media only screen and (max-width: 991px) {
+
+  .login-register .login-register-input {
+    padding: 20px;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .login-register .login-register-header h2 {
+    font-size: 18px;
+  }
+
+  .login-register .login-register-input .login-register-inutp-other .login-register-input-other-grp .outline-btn {
+    margin-right: 10px;
+  }
+
+  .login-register .login-register-header {
+    padding: 10px 10px;
+  }
+
+  .login-register .login-register-input {
+    padding: 20px 10px;
+  }
+
+  .login-register .login-register-input .login-register-input-single {
+    margin-bottom: 10px;
+  }
+
+  .login-register .login-register-input .otp-inputs input[type="text"] {
+    font-size: 16px;
+    padding: 15px;
+  }
+
+
+
+  .login-register .login-register-input .login-register-inutp-other-btn .custum-btn {
+    padding: 10px 20px;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+span.timer {
+  color: black;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.like-1 {
+  color: #d6d6d6 !important;
+}
+
+.mb-3{
+  margin-bottom: 0;
+}
+
+/* ::ng-deep {
+  .haAclf {
+      &:last-child {
+          margin-bottom: 0;
+      }
+  }
+} */
+
+/* :host::ng-deep.haAclf {
+  padding: 0px !important;
+} */
+
+.hidden {
+  display: none !important;
+}
+
+.fa_eye_input {
+  color: #868383;
+  font-size: 17px;
+  right: 13px;
+  position: absolute;
+  top: 9px;
+}
+
+
+::ng-deep .iti {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+
+.intli_input{
+  border-radius: 6px;
+  border: 1px solid #e1e1e1;
+  height: 50px;
+}
+
+.intli_input::placeholder{
+  font-size: 14px;
+}
+
+::ng-deep .mat-dialog-container{
+  overflow: unset !important;
+}
+
+::ng-deep .cdk-overlay-pane {
+    width: 700px !important;
+}
+
+::ng-deep .drop_down .ng-dropdown-panel .scroll-host {
+  background-color: white;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep .drop_down .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  min-height: 3em;
+  padding: 0 16px;
+  text-decoration: none;
+  position: relative;
+  color: rgba(0, 0, 0, 0.87);
+  text-align: left;
+  line-height: 3em;
+}
+
+::ng-deep .drop_down .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: rgb(13, 13, 221);
+  color: #fff;
+}
+
+::ng-deep .drop_down .ng-dropdown-panel {
+  left: 0px;
+}
+
+::ng-deep .ng-select .ng-select-container {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  min-height: 49px;
+  height: 49px;
+  align-items: center;
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container .ng-value-container,
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container .ng-value-container,
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  margin-top: -1px !important;
+}
+
+::ng-deep .ng-select .ng-select-container .ng-value-container {
+  display: flex;
+  flex: 1;
+}
+
+::ng-deep .ng-select .ng-select-container .ng-value-container {
+  padding: 0;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+::ng-deep .ng-scrollbar-track {
+  z-index: 0 !important;
+}
+
+
+::ng-deep .ng-select .ng-select-container .ng-value-container {
+  padding: 0;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+::ng-deep .form-group {
+  margin-bottom: 1rem;
+}
+
+/* .intli_input {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  min-height: 49px;
+  height: 49px;
+  align-items: center;
+} */
+
+::ng-deep .iti{
+  width: 100%;
+}
+
+
+.input-group-text {
+  padding: 0;
+  background-color: transparent;
+}
+
+.ng-select{
+  width: 100%;
+  height:100%
+}
+
+.ng-select:hover{
+background-color: #f2f2f2;
+}
+
+
+::ng-deep .ng-select-container:hover{
+  background: #f2f2f2 !important;
+}
+
+
+.ng-select .ng-select-container:hover {
+  box-shadow: none !important;
+}
+
+::ng-deep .ng-option{
+  font-size: 12px;
+}
+
+
+::ng-deep .ng-select-container{
+  border: 0 !important;
+  cursor: pointer !important;
+}
+::ng-deep .ng-value{
+  font-size: 12px;
+}
+::ng-deep .ng-dropdown-panel{
+  text-align: left;
+  width:33rem !important;
+}
+
+.input-group-lg>.form-control, .input-group-lg>.input-group-append>.btn, .input-group-lg>.input-group-append>.input-group-text, .input-group-lg>.input-group-prepend>.btn, .input-group-lg>.input-group-prepend>.input-group-text {
+  height: 2.8rem !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius:0 .4rem .4rem 0 !important;
+}
+
+#basic-addon3{
+  border-radius: .4rem 0 0 .4rem !important;
+  flex-grow: .4 !important;
+}
+
+::ng-deep .ng-select-container{
+  height: 100% !important;
+}
+
+
+::ng-deep .ng-value-container{
+  padding-right: 0 !important;
+}
+
+::ng-deep .ng-arrow-wrapper{
+  padding-right: 0 !important;
+}
+
+::ng-deep .ng-clear-wrapper{
+  display: none;
+}
+
+input {
+ font-size: inherit !important;
+}
+
+
+.dropdown-border{
+  border: 1px solid #f32b2b !important;
+    border-radius: .3rem;
+    height: 45px;
+    margin-top: 4px;
+}
+
+::ng-deep .inputt{
+  height: 45px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  padding: 0 7px;
+  width: 165px;
+}
+
+label {
+  color: #9990 !important;
+  font-size: 14px;
+  font-weight: 100;
+  position: absolute;
+  pointer-events: none;
+  left: 112px;
+  top: 12px;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.inputt:focus ~ label,
+.inputt:valid ~ label {
+  top: -11px;
+  left: 5px;
+  font-size: 10px;
+  background-color: white;
+  padding: 0 6px;
+  color: #3f51b5 !important;
+}
+
+
+.inputt:focus ~ .ng-select {
+  border: 2px solid #3f51b5 !important;
+  border-radius: 4px !important;
+}
+
+.flag-border{
+  border: 2px solid #3f51b5 !important;
+  border-radius: 4px !important;
+}
+
+.bar {
+  position: relative;
+  display:block;
+  width:315px;
+}
+
+.bar:before,
+.bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #4285f4;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}

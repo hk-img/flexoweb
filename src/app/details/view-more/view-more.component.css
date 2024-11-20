@@ -1,0 +1,34 @@
+.bottom {
+  min-height: 800px;
+}
+
+.slide:focus {
+  outline: none;
+}
+
+.author-image:focus {
+  outline: none;
+}
+
+.carousel {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.prev-slide.slick-disabled, .next-slide.slick-disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.prev-slide:hover {
+  background-position: 0px -53px;
+}
+
+.next-slide:hover {
+  background-position: -24px -53px;
+}
+
+.image-container {
+  width: 760px;
+  overflow: hidden;
+}

@@ -1,0 +1,154 @@
+<div class="booking-list">
+    <div class="container">
+        <div class="row booking-list-hrader-filters">
+            <div class="col-lg-5 col-md-12 col-12 ">
+                <div class="booking-list-tabs">
+                    <a (click)="getBookings('allBooking')" class="booking-list-tabs-single"
+                        [ngClass]="bookingType=='allBooking'?'active-tabs':''">
+                        All Booking
+                    </a>
+                    <a (click)="getBookings('pastBooking')" class="booking-list-tabs-single"
+                        [ngClass]="bookingType=='pastBooking'?'active-tabs':''">
+                        Past Booking
+                    </a>
+                    <a (click)="getBookings('upcomingBooking')" class="booking-list-tabs-single"
+                        [ngClass]="bookingType=='upcomingBooking'?'active-tabs':''">
+                        Upcoming Booking
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12 col-12">
+                <div class="booking-list-filter">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <!-- <mat-label>Enter a date</mat-label>   -->
+                        <mat-date-range-input [rangePicker]="picker" class="align-items-center">
+                            <input [(ngModel)]="startDate" (dateChange)="dateRangeChange();" (click)="picker.open()"
+                                matStartDate placeholder="Start date">
+                            <input [(ngModel)]="endDate" (click)="picker.open()" (dateChange)="dateRangeChange();"
+                                matEndDate placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                    <select placeholder="Space Type" [(ngModel)]="spaceType" (ngModelChange)="getBookingList();"
+                        class="booking-list-filter-single w-100">
+                        <option value="" selected> Select Space Type </option>
+                        <option value="{{data?.workSpaceName}}" *ngFor="let data of workSpace">{{data?.workSpaceName}}
+                        </option>
+                    </select>
+                    <select [(ngModel)]="bookingStatus" (ngModelChange)="getBookingList();" placeholder="Space Status" class="booking-list-filter-single w-100 mt-md-0 mt-3 " >
+                        <option value="" selected> Select Booking Status </option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="pending_Host_Confirmation">Pending Host Confirmation</option>
+                        <option value="pending_payment"> Pending payment</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="booking-all-list">
+            <div class="booking-all-list-single" *ngFor="let data of bookingList">
+                <div class="booking-all-list-single-img-cont">
+                    <div class="booking-all-list-single-img">
+                        <h5>{{linkName}}</h5>
+                        <a target="_blank" [href]=" webDomain + 'details/' + data?.linkName ">
+                            <img src="{{data?.images[0] ?? 'assets/images/details_placeholder_image.jpg' }} " alt="">
+                        </a>
+                        <div class="booking-all-list-single-img-tag">
+                            <p>{{data?.spaceType}}</p>
+                        </div>
+                    </div>
+                    <div class="booking-all-list-single-cont">
+                        <div class="booking-all-list-single-cont-od">
+                            <h4>{{data?.spaceName}}</h4>
+                            <p class="booking-all-list-single-cont-location">
+                                <img src="assets/images/location-icon-orng.png" alt="">
+                                <span>{{data?.location_name}} </span>
+                            </p>
+                            <div class="booking-list-single-info  booking-list-single-about-info ">
+                                <!-- <div class=" booking-list-single-info-single">
+                                   <img src="assets/images/user-icon-orng.png" alt="">
+                                    <p>{{data?.howManyPeopleInYourSpace || 1}} people</p>
+                                </div> -->
+                                <div *ngIf="data?.spaceType != 'Coworking Space'"
+                                    class=" booking-list-single-info-single">
+                                    <img src="assets/images/clock-icon-orng.png" alt="">
+                                    <p>{{(data.minimum_hours == 0 || data.minimum_hours == null) ? 2 : data.minimum_hours/60}} hrs min</p>
+                                </div>
+                                <div class="booking-list-single-info-single">
+                                    <img src="assets/images/scale-orng.png" alt="" class="sq-ft-icon">
+                                    <p>{{data?.spacesqft}} sqft</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="booking-all-list-single-cont-bd">
+                            <div class="booking-list-single-info booking-list-single-date-info ">
+                                <div class="booking-list-single-info-single">
+                                    <img src="assets/images/date-icon-o.png" alt="" class="date-icon">
+                                    <p>{{data?.startDate | date : 'dd-MM-YYYY'}}</p>
+                                </div>
+                                <div class="watch-time booking-list-single-info-single">
+                                    <p> <span> {{data?.ofDays|| data?.dayCount}}</span> Days</p>
+                                </div>
+                                <div class="sq-ft booking-list-single-info-single">
+                                    <p> <span> {{data?.spaceType == 'Coworking Space' ? data?.noOfGuest || 1 :
+                                            data?.totalHours || 2}} </span> {{ data?.spaceType == 'Coworking Space' ?
+                                        'Guest' : 'hrs'}}</p>
+                                </div>
+                            </div>
+                            <div class="booking-list-single-info booking-list-single-confirm-info">
+                                <div class=" booking-list-single-info-single">
+                                    <p>Booking Status : </p>
+                                </div>
+                                <div class="booking-list-single-info-single booking-confirm"
+                                    *ngIf="(data?.bookingStatus=='confirmed' || data?.bookingStatus=='confirm') && data?.paymentSuccess==1">
+                                    <img src="assets/images/bc-con.png" alt="" class="bc-icon">
+                                    <p>Confirmed</p>
+                                </div>
+                                <div class="booking-list-single-info-single booking-cancel"
+                                    *ngIf="data?.bookingStatus=='cancelled'">
+                                    <img src="assets/images/bc-c.png" alt="" class="bc-icon">
+                                    <p>Canceled</p>
+                                </div>
+                                <div class="booking-list-single-info-single booking-cancel"
+                                    *ngIf="data?.bookingStatus=='rejected'">
+                                    <img src="assets/images/bc-c.png" alt="" class="bc-icon">
+                                    <p>Rejected</p>
+                                </div>
+                                <div class="booking-list-single-info-single booking-waiting"
+                                    *ngIf="(data?.bookingStatus=='pending' || (data?.bookingStatus=='confirmed' && data?.paymentSuccess==0))">
+                                    <img src="assets/images/bc-w.png" alt="" class="bc-icon">
+                                    <p *ngIf="data?.bookingStatus=='confirmed' && data?.paymentSuccess==0">Pending
+                                        Payment</p>
+                                    <p *ngIf="data?.bookingStatus=='pending' && data?.isInstant=='0'">Pending Host
+                                        Confirmation</p>
+                                    <p *ngIf="data?.bookingStatus=='pending' && data?.isInstant=='1'">Waiting</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="booking-all-list-single-btn">
+                    <button *ngIf="data?.bookingStatus == 'confirmed'" (click)="openAddReviewDialog(data?.spaceId)"
+                        type="button" class="custum-btn outline-orng-btn"> Leave a Review </button>
+                    <button style="background: #fff  !important; color: #000e54 !important;"
+                        *ngIf="data?.bookingStatus == 'confirmed'" (click)="getUserInvoiceByBookingId(data?.id)"
+                        type="button" class="custum-btn blu-btn "> <i class="fa fa-cloud-download"
+                            aria-hidden="true"></i> Invoice </button>
+                    <button style="background: #2c864f; border: none !important;" type="button"
+                        routerLink="/booking-Detail/{{data?.id}}" class="custum-btn boking_btn">Booking Details <i
+                            class="fa fa-chevron-right" aria-hidden="true"></i> </button>
+                </div>
+            </div>
+            <div class="work-space-review-heading">
+                <h3 *ngIf="bookingList.length == 0">Booking not found..</h3>
+            </div>
+        </div>
+    </div>
+</div>

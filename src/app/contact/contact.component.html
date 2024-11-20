@@ -1,0 +1,159 @@
+<div class="privacy-content">
+  <section class="parallax-section" data-scrollax-parent="true">
+    <div
+      class="bg1 par-elem"
+      data-scrollax="properties: { translateY: '30%' }"
+      style="
+        background-color: gray;
+        transform: translateZ(0px) translateY(-4.22535%);
+      "
+    ></div>
+    <!-- <img class="bg1 par-elem " src="assets/images/Contact.jpg" alt=""
+      style="transform: translateZ(0px) translateY(-4.22535%);"> -->
+    <div class="privacy-container">
+      <div class="col-md-8 offset-md-2 text-center">
+        <h2
+          class="section-title v1"
+          style="
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+          "
+        >
+          CONTACT US
+        </h2>
+      </div>
+    </div>
+  </section>
+  <section id="sec1">
+    <div class="privacy-container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="list-single-main-item fl-wrap">
+            <div
+              style="
+                font-size: 40px;
+                font-weight: 600;
+                text-align: left;
+                color: #000e54;
+              "
+            >
+              Stop by and say hi. Or drop us a note if you need support
+            </div>
+            <div class="list-author-widget-contacts">
+              <ul>
+                <li>
+                  <span><i class="fa fa-envelope-o"></i> Mail :</span>
+                  <a href="#">hello@flexospaces.com</a>
+                </li>
+              </ul>
+            </div>
+            <div class="list-widget-social">
+              <ul>
+                <li>
+                  <a
+                    href="https://www.facebook.com/flexospaces/ "
+                    target="_blank"
+                    ><i class="fa fa-facebook"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/flexospaces" target="_blank"
+                    ><i class="fa fa-twitter"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/company/flexospaces/"
+                    target="_blank"
+                    ><i class="fa fa-linkedin"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/flexospaces/ "
+                    target="_blank"
+                    ><i class="fa fa-instagram"></i
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="list-single-main-wrapper fl-wrap">
+            <!--<div class="list-single-main-item-title fl-wrap">
+                          <h3>Our Location</h3>
+                      </div>
+                      <div class="map-container">
+                          <div id="singleMap" data-latitude="40.7427837" data-longitude="-73.11445617675781"></div>
+                          </div>-->
+            <div class="list-single-main-item-title-1 fl-wrap">
+              <h3>Get In Touch</h3>
+            </div>
+            <div id="contact-form">
+              <div id="message" style="color: green; font-size: 14px"></div>
+              <form class="custom-form" name="contactform" id="contactform">
+                <fieldset>
+                  <label><i class="fa fa-user-o"></i></label>
+                  <input
+                    type="text"
+                    [(ngModel)]="name"
+                    name="name"
+                    id="name"
+                    placeholder="Your Name *"
+                    value=""
+                  />
+                  <div class="clearfix"></div>
+                  <label><i class="fa fa-envelope-o"></i> </label>
+                  <input
+                    type="text"
+                    [(ngModel)]="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email Address*"
+                    value=""
+                  />
+                  <label><i class="fa fa-mobile"></i> </label>
+                  <input
+                    type="text"
+                    [(ngModel)]="mobile"
+                    id="mobile"
+                    name="mobile"
+                    placeholder="Mobile*"
+                    value=""
+                  />
+                  <textarea
+                    name="message"
+                    id="comments"
+                    [(ngModel)]="message"
+                    cols="40"
+                    rows="3"
+                    placeholder="Your Message:"
+                  ></textarea>
+                </fieldset>
+                <div
+                  style="margin-top: 30px"
+                  class="g-recaptcha"
+                  data-sitekey="6LdLZPYUAAAAAGtV5MJGckeEK8bas61UpzlO7hRp"
+                ></div>
+                <!-- <button class="flat-btn" id="submit">Send&nbsp;<i class="fa fa-angle-right"></i></button> -->
+                <button
+                  class="large-btn"
+                  (click)="submit()"
+                  style="border-radius: 5px"
+                  id="submit"
+                >
+                  Send&nbsp;<i class="fa fa-angle-right"></i>
+                </button>
+              </form>
+            </div>
+            <!-- contact form  end-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,82 @@
+.mobile-nav-icons span {
+  font-size: 18px;
+}
+
+.subscribe-widget p {
+  color: black;
+  text-align: left;
+}
+
+.subscribe-widget {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.21);
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-widget #subscribe {
+  float: left;
+  width: 100%;
+}
+
+
+
+.footer-widget #subscribe .enteremail {
+  float: left;
+  width: 100%;
+  background: #fff;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.21);
+  margin-top: 20px;
+}
+
+.footer-widget #subscribe-button {
+  float: right;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  margin-top: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.footer-widget #subscribe-button:hover {
+  color: rgba(255, 255, 255, 0.71);
+}
+
+.footer-widget #subscribe-button:hover i {
+  color: rgba(255, 255, 255, 1.0);
+}
+
+.subscribe-message {
+  color: black;
+  float: left;
+  margin-top: 10px;
+  text-align: left;
+  font-weight: 500;
+  line-height: 19px;
+}
+
+.subscribe-message i {
+  padding-right: 6px;
+}
+
+.subscribe-message.valid i {
+  color: #02b367;
+}
+
+.subscribe-message.error i {
+  color: #F00;
+}
+
+.site-mobile-menu-body li {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.show { display: block; }

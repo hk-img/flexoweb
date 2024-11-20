@@ -1,0 +1,184 @@
+<!-- <div class="list-details-section" style="padding-left: 16%; padding-right: 16%;">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-10 row">
+            <h2 style="margin-left: 7px; margin-top: 7px;">Visit Schedule</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="row schedule-visit-main-div">
+          <div class="col-md-3"><img src="https://s3.ap-south-1.amazonaws.com/worker-app/details_images/18/18_248627.jpeg"/></div>
+          <div class="col-md-9">
+            <h6>Dextrus Lower Parel</h6>
+            <span>11/01/2024 11:20 AM</span> <br>
+            <span>Private Office</span> <br>
+            <span>I will come to the space and view the space physically.</span> <br><br>
+            <span class="btn btn-icn btn-icn-edit" title="Edit Schedule"><i class="ion-android-create"></i></span>&nbsp;
+            <span class="btn btn-icn btn-icn-delete" title="Cancel Schedule"><i class="ion-android-delete"></i></span>
+          </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="booking-list scheduled-visits-c">
+  <div class="container">
+    <div class="booking-list-hrader-filters">
+      <h2>Scheduled Visits</h2>
+    </div>
+    <div class="booking-all-list">
+      <div class="booking-all-list-single" *ngFor="let spaceDetails of scheduleVisitList">  
+        <div class="booking-all-list-single-img-cont">
+          <a class="booking-all-list-single-img" target="_blank"  [href]=" webDomain + 'coworking-space/' + spaceDetails.contact_city_name">            
+              <img (error)="handleImageError($event)" src="{{spaceDetails?.images[0] || 'assets/images/details_placeholder_image.jpg'}} "alt="">
+              <div class="booking-all-list-single-img-tag">
+                  <p>{{spaceDetails?.spaceType}}</p>
+              </div>
+          </a>
+          <div class="booking-all-list-single-cont">
+              <div class="booking-all-list-single-cont-od">
+                  <h4> {{ spaceDetails.spaceNameLocation }}</h4>
+                  <p class="booking-all-list-single-cont-location" > 
+                      <img src="assets/images/location-icon-orng.png" alt="">
+                      <span>{{spaceDetails?.spaceLocationName}} </span> 
+                  </p>
+                  <div class="booking-list-single-info  booking-list-single-about-info ">                           
+                      <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.visitSpaceType != 'longTerm'">
+                        <img src="assets/images/user-icon-orng.png" alt="">
+                          <p>{{spaceDetails?.howManyPeopleInYourSpace || 1}}  people</p>
+                      </div>
+                      <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.visitSpaceType == 'longTerm'">
+                        <img src="assets/images/user-icon-orng.png" alt="">
+                          <p>{{spaceDetails?.spaceStatus || 'N/A'}}</p>
+                      </div>
+                      <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.visitSpaceType == 'shortTerm'">
+                          <img src="assets/images/clock-icon-orng.png" alt="">
+                          <p>2 hr min</p>
+                      </div>
+                      <div class="booking-list-single-info-single">
+                        <img src="assets/images/scale-orng.png" alt="" class="sq-ft-icon">
+                          <p>{{spaceDetails?.spaceSquareFt}}   sqft</p>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- <div *ngIf="spaceDetails?.spaceType == 'Coworking Space'" class="booking-list-single-info booking-list-single-date-info">
+                <div class="booking-list-single-info-single"><label for="" class="mb-0" style="font-size: 14px; ">Type of Space: &nbsp;</label> {{spaceDetails?.coworkingSpaceType}}</div>
+                <div class="booking-list-single-info-single"><label for="" class="mb-0" style="font-size: 14px; ">No. Of People: &nbsp;</label> {{spaceDetails?.howManyPeople }}</div>
+              </div> -->
+              <div class="booking-all-list-single-cont-bd">
+                  <div class="booking-list-single-info booking-list-single-date-info ">                           
+                      <div class="booking-list-single-info-single">
+                          <img src="assets/images/date-icon-o.png" alt="" class="date-icon">
+                          <p> {{ spaceDetails.visitDateTime | date : "dd-MM-yyyy"}}  </p>
+                      </div>
+                      <div class="booking-list-single-info-single">
+                        <img src="assets/images/clock-icon-orng.png" alt="" class="date-icon">
+                        <p> {{ spaceDetails.visitDateTime | date : "hh:mm a" | lowercase }} </p>
+                    </div>
+                    <div *ngIf="spaceDetails?.visitSpaceType == 'coworking'" class="booking-list-single-info-single" style="color: #000;"><label for="" class="mb-0" style="font-size: 14px; font-weight: 500;">Type of Space: &nbsp;</label> {{spaceDetails?.coworkingSpaceType}}</div>
+                    <div *ngIf="spaceDetails?.visitSpaceType == 'coworking'" class="booking-list-single-info-single" style="color: #000;"><label for="" class="mb-0" style="font-size: 14px; font-weight: 500;">No. Of People: &nbsp;</label> {{spaceDetails?.howManyPeople }}</div>
+                  </div>                 
+              </div> 
+          </div>
+        </div>  
+      </div> 
+      <div *ngIf="scheduleVisitList.length < scheduleVisitListComplete.length"
+            style="text-align: center; margin-top: 40px; margin-bottom: 20px; cursor: pointer;">
+            <a (click)="nextReviewList()" class="link-hov style2 text-dark"
+              style="border: 1px solid #ccc7c7; padding: 15px 20px; font-weight: 600;">See more visit schedule </a>
+          </div>
+      <div class="work-space-review-heading">
+        <h3 *ngIf="scheduleVisitList.length == 0">Visits not found..</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 
+<div class="schedule-visit-list-container">
+  <h2>Visit Schedule</h2>
+  <div class="item-wrapper">
+    <div class="tab-content">
+      <div id="grid-view" class="tab-pane active product-grid">
+        <div class="row">
+          <div
+            class="col-lg-12 col-xl-4"
+            *ngFor="let spaceDetails of scheduleVisitList"
+          >
+            <div class="trending-place-item">
+              <div class="trending-img">
+                <a
+                  target="_blank"
+                  [href]="
+                    webDomain + 'coworking-space/' + spaceDetails.linkName
+                  "
+                  ><img
+                    [src]="
+                      spaceDetails.spaceImages.length > 0 &&
+                      spaceDetails?.spaceImages[0]
+                        ? aws_base_url +
+                          spaceDetails?.spaceId +
+                          '/' +
+                          spaceDetails?.spaceImages[0]
+                        : 'assets/images/details_placeholder_image.jpg'
+                    "
+                    alt="..."
+                /></a>
+              </div>
+              <div class="trending-title-box">
+                <div
+                  class="customer-review row"
+                  style="margin-bottom: 0px; align-items: baseline"
+                >
+                  <h2 class="h-cursor" style="font-size: 18px">
+                    {{ spaceDetails.spaceNameLocation }}
+                  </h2>
+                  
+                    </div>
+                    <div class="row">
+                      <i class="ion-ios-location"></i>
+                      <p>{{spaceDetails?.spaceLocationName}}</p>
+                    </div>
+                    <div class="booking-list-single-info  booking-list-single-about-info ">                           
+                      <div class=" booking-list-single-info-single">
+                        
+                          <p>{{spaceDetails?.howManyPeopleInYourSpace || 1}} people</p>
+                      </div>
+                      <div *ngIf="spaceDetails?.spaceType == 'shortTerm'" class=" booking-list-single-info-single">
+                         
+                          <p>2 hr min</p>
+                      </div>
+                      <div class="booking-list-single-info-single">
+                        
+                          <p>{{spaceDetails?.spaceSquareFt}} sqft</p>
+                      </div>
+                  </div>
+                <div class="description">
+                  <h3 class="less-content" style="font-size: 14px">
+                    {{
+                      spaceDetails.visitDateTime | date : "dd-MM-yyyy hh:mm a"
+                    }}
+                  </h3>
+                  <h3 class="less-content" style="font-size: 14px">
+                    {{ spaceDetails.visitSpaceTypeName }}
+                  </h3>
+                  <h3 class="less-content" style="font-size: 14px">
+                    {{ spaceDetails.visitDescription }}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="scheduleVisitList.length < scheduleVisitListComplete.length"
+            style="text-align: center; margin-top: 40px; margin-bottom: 20px; cursor: pointer;">
+            <a (click)="nextReviewList()" class="link-hov style2 text-dark"
+              style="border: 1px solid #ccc7c7; padding: 15px 20px; font-weight: 600;">See more visit schedule </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

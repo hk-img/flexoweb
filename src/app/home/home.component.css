@@ -1,0 +1,123 @@
+.slide {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.slide:focus {
+  outline: none;
+}
+
+.author-image:focus {
+  outline: none;
+}
+
+.carousel {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.prev-slide.slick-disabled,
+.next-slide.slick-disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.prev-slide:hover {
+  background-position: 0px -53px;
+}
+
+.next-slide:hover {
+  background-position: -24px -53px;
+}
+
+/* ::-webkit-input-placeholder {
+  text-align: center;
+} */
+
+.search-icon {
+  position: absolute;
+  margin: auto;
+  zoom: 2;
+  padding-left: 3px;
+}
+
+mark {
+  background-color: yellow; /* or any color you prefer */
+  color: black;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 900px) {
+  .search-icon {
+    position: absolute;
+    right: 5px;
+    top: 4px;
+  }
+}
+
+.cursor-pointer {
+  margin: 1% auto;
+  font-weight: bold;
+  color: #f76900 !important;
+  cursor: pointer;
+  border-left: 2px solid darkgray;
+}
+
+.how-can-help-img {
+  margin: auto;
+}
+
+.web {
+  display: block;
+}
+
+.mobile {
+  display: none;
+}
+
+::ng-deep .mat-select-panel{
+  position: absolute !important;
+  top: 50px !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline{
+  display: none;
+}
+
+::ng-deep .cdk-overlay-pane{
+  width: 399px !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.2em 0 !important;
+}
+
+::ng-deep .mat-form-field-infix{
+  border-top: 0.4em solid transparent !important;
+}
+
+@media only screen and (max-width: 900px) {
+  .cursor-pointer {
+    border: 1px solid darkgray;
+    width: fit-content;
+    padding: 8px 11px;
+    font-size: 12px;
+    background-color: white;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .web {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+}
+
+::ng-deep .ng-select-container{
+  border:0 !important
+}

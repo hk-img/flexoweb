@@ -1,0 +1,26 @@
+<div class="filter-wrapper style1 mar-top-100 flex-container">
+  <h2 style="text-align: center;" *ngIf="!shortlist_spaces || !shortlist_spaces.length">We are adding more spaces. <a
+      routerLink="/contact-us" style="color: #007bff;">Join
+      our mailing list</a> to get an update as we add spaces to your location.</h2>
+  <div *ngIf="shortlist_spaces && shortlist_spaces.length">
+    <h3 style="text-align: center;">Shortlisted Spaces</h3>
+    <div class="container-fluid margin-class">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="item-wrapper">
+            <div class="tab-content">
+              <div id="grid-view" class="tab-pane active  product-grid">
+                <div class="row">
+                  <div class="col-xl-6 col-lg-12" *ngFor="let element of shortlist_spaces">
+                    <app-list-item [spaceDetails]="element" (shortlistItemEvent)="shortList($event)">
+                    </app-list-item>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

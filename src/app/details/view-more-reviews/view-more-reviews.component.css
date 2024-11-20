@@ -1,0 +1,40 @@
+.btn-back {
+    background-color: #f76900;
+    color: #fff;
+    font-size: 25px;
+}
+
+.reviewed-main-div {
+    background: #f9f9f9;
+    border-radius: 5px;
+    padding: 15px 20px;
+    min-height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.overall-rating-spn-star {
+    font-size: 30px;
+    color: #ffc600;
+    font-weight: bolder;
+}
+
+.btn-prev {
+    background-color: #F76900;
+    color: #fff;
+    border-radius: 50%
+}
+
+.btn-prev:hover {
+    background-color: #001740;
+}
+
+.btn-next {
+    background-color: #F76900;
+    color: #fff;
+    border-radius: 50%
+}
+
+.btn-next:hover {
+    background-color: #001740;
+}

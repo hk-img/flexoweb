@@ -1,0 +1,1314 @@
+<div class="listing-details-slider swiper-container">
+  <div class="swiper-wrapper" *ngIf="isMobile">
+    <div class="col-lg-12" style="padding: 0px">
+      <ngx-slick-carousel *ngIf="space_details !== undefined" class="carousel" #slickMainCarousel="slick-carousel"
+        [config]="mainSliderConfig">
+        <div ngxSlickItem *ngIf="space_details?.youtube_url !== undefined && space_details?.youtube_url !== ''">
+          <div *ngIf="space_details?.youtube_url !== '' && space_details?.youtube_url !== null"
+            class="responsive-container">
+            <iframe class="responsive-iframe" [src]="space_details?.youtube_url" title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+        <div ngxSlickItem class="swiper-slide single-listing-slider slide"
+          *ngFor="let element of space_details?.images">
+          <img  [src]="element" [alt]="space_details?.name" />
+        </div>
+      </ngx-slick-carousel>
+      <a class="carousel-control-prev" style="top: 18%" (click)="prev()" role="button" data-slide="prev">
+        <span class="icon ion-chevron-left icon-color"></span>
+        <!-- <span class="sr-only">Previous</span> -->
+      </a>
+      <a class="carousel-control-next" style="top: 18%" (click)="next()" role="button" data-slide="next">
+        <span class="icon ion-chevron-right icon-color"></span>
+        <!-- <span class="sr-only">Next</span> -->
+      </a>
+    </div>
+  </div>
+  <div class="gallery" *ngIf="!isMobile">
+    <button class="btn btn-white-view-more" (click)="openImagesDialog()" type="button">
+      View More
+    </button>
+    <div class="gallery-half position-relative" (click)="openImagesDialog()">
+        <div *ngIf="space_details !== undefined">
+          <div class="gallery-banner">
+            <div *ngIf="ribbon" class="ribbon-label-details" [style.backgroundColor]="ribbon_color">
+              {{ribbon}}
+            </div>
+          <div *ngIf="space_details?.youtube_url !== undefined ">
+            <div *ngIf="space_details?.youtube_url !== '' && space_details?.youtube_url !== null"
+              class="responsive-container">
+              <iframe class="responsive-iframe" [src]="space_details?.youtube_url" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <img (error)="onImageError($event)" *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined"  [src]="
+          space_details?.images[0]
+          ? 
+          space_details?.images[0]
+          : 'assets/images/details_placeholder_image.jpg'
+          " [alt]="space_details?.actual_name + '' + space_details?.location_name" />
+        </div>
+      </div>
+    </div>
+    <div class="gallery-one-third" (click)="openImagesDialog()">
+      <div class="gallery-banner">
+        <img (error)="onImageError($event)" [src]="
+            space_details?.images[space_details?.youtube_url ? 0 : 1]
+              ? 
+                space_details?.images[space_details?.youtube_url ? 0 : 1]
+              : 'assets/images/details_placeholder_image.jpg'
+          " [alt]="space_details?.actual_name + ' ' + space_details?.location_name" />
+      </div>
+      <div class="gallery-banner">
+        <img (error)="onImageError($event)" [src]="
+            space_details?.images[space_details?.youtube_url ? 2 : 3]
+              ? 
+                space_details?.images[space_details?.youtube_url ? 2 : 3]
+              : 'assets/images/details_placeholder_image.jpg'
+          " [alt]="space_details?.actual_name + ' ' + space_details?.location_name" />
+      </div>
+    </div>
+    <div class="gallery-one-third" (click)="openImagesDialog()">
+      <div class="gallery-banner">
+        <img (error)="onImageError($event)" [src]="
+            space_details?.images[space_details?.youtube_url ? 1 : 2]
+              ? 
+                space_details?.images[space_details?.youtube_url ? 1 : 2]
+              : 'assets/images/details_placeholder_image.jpg'
+          " [alt]="space_details?.actual_name + ' ' + space_details?.location_name" />
+      </div>
+      <div class="gallery-banner">
+        <img (error)="onImageError($event)" [src]="
+            space_details?.images[space_details?.youtube_url ? 3 : 4]
+              ? 
+                space_details?.images[space_details?.youtube_url ? 3 : 4] : 'assets/images/details_placeholder_image.jpg'
+          " [alt]="space_details?.actual_name + ' ' + space_details?.location_name" />
+      </div>
+    </div>
+  </div>
+  <div class="shortlist-share-container">
+    <div class="save-btn" style="margin-right: 10px">
+      <!-- <span class="btn v3"
+     (click)="shortList(); is_shortlisted = (is_shortlisted == false) ? true : false"><i class="icofont-heart"></i></span> -->
+      <a (click)="updateShortList()" class="btn" [style.color]="is_shortlisted ? '#F76900' : '#F76900'">
+        <!-- <i class="ion-favorite on-image-icon"></i> -->
+        <i [ngClass]="is_shortlisted ? 'fa fa-heart color-on-heart' : 'fa fa-heart-o'" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="share-btn">
+      <a class="btn"><i class="ion-android-share-alt" style="bottom: 3px"></i></a>
+      <ul class="social-share">
+        <li class="bg-fb" (click)="openFacebook()">
+          <a class="share-button"><i class="ion-social-facebook"></i></a>
+        </li>
+        <li class="bg-tt" (click)="openLinkedIn()">
+          <a class="share-button"><i class="ion-social-linkedin"></i></a>
+        </li>
+        <li class="bg-ig" (click)="openWhatsapp()">
+          <a class="share-button"><i class="ion-social-whatsapp"></i></a>
+        </li>
+        <li
+          style=" background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);"
+          (click)="openInstagram()">
+          <a class="share-button"><i class="ion-social-instagram"></i></a>
+        </li>
+        <li style="background: white;" (click)="copyLink()">
+          <a class="share-button"><i class="ion-ios-copy"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- <div class="listing-details-next slider-btn v4" (click)="next()"><i class="ion-arrow-right-c"></i></div>
+  <div class="listing-details-prev slider-btn v4" (click)="prev()"><i class="ion-arrow-left-c"></i></div> -->
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="list-details-title v2">
+        <div class="row">
+          <div class="col-lg-8 col-md-12 col-sm-12">
+            <div class="single-listing-title">
+              <!-- is_go_back_visible -->
+              <p *ngIf="false" style=" 
+                  display: flex;
+                  color: gray;
+                  cursor: pointer;
+                  align-items: center;
+                  margin-bottom: 13px;
+                " (click)="goBack()">
+                <i class="material-icons" style="
+                    color: gray !important;
+                    font-size: 17px;
+                    position: relative;
+                    right: 2px;
+                  ">keyboard_arrow_left</i><span style="text-decoration: underline">Go back</span>
+              </p>
+
+              <div class="bredcrumb_sec">
+                <nav>
+                  <ol class="breadcrumb bg-white p-0 mb-0">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li style="text-transform: capitalize;" class="breadcrumb-item"><a
+                        href="#">{{space_details?.spaceType}}</a></li>
+                    <li style="text-transform: capitalize;" class="breadcrumb-item " aria-current="page"><a
+                        routerLink="/in/spaces/{{space_details?.contact_city_name}}">{{
+                        space_details?.contact_city_name}}</a></li>
+                    <li style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a href="#">{{
+                        space_details?.location_name}}</a>
+                    </li>
+                    <li style="text-transform: capitalize;" *ngIf="isLongterm || isShortterm" class="breadcrumb-item"
+                      aria-current="page">{{
+                      space_details?.spaceTitle}}</li>
+                    <li style="text-transform: capitalize;" *ngIf="isCoworking" class="breadcrumb-item"
+                      aria-current="page">{{space_details?.actual_name}}
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+
+              <h1 *ngIf="isLongterm || isShortterm">
+                {{ space_details?.spaceTitle }}
+              </h1>
+
+              <h1 *ngIf="isCoworking" style="text-transform: capitalize;">
+                {{ space_details?.actual_name }} {{ space_details?.location_name }}
+              </h1>
+
+              <p style="text-transform: capitalize;">
+                <i class="ion-ios-location"></i>
+                {{ space_details?.location_name }}
+                <!-- mumbai -->
+              </p>
+              <!-- <div class="rating-summary" style="display: flex">
+                <p style="
+                    margin-right: 10px;
+                    font-size: 11px;
+                    align-self: center;
+                  ">
+                  Space Category
+                </p>
+                <div class="rating-result" title="60%" *ngIf="space_details?.rating">
+                  <ul class="product-rating">
+                    <li *ngFor="let element of rating_array; index as erai" [innerHTML]="showStarIcon(erai, space_details?.rating)"></li>
+                   
+                  </ul>
+                </div>
+                <div class="rating-result" title="60%" *ngIf="!space_details?.rating">
+                  <ul class="product-rating">
+                    <li><i class="ion-android-star-outline"></i></li>
+                    <li>&nbsp;</li>
+                    <li>
+                      <p>Unrated</p>
+                    </li>
+                  </ul>
+                </div>
+              </div> -->
+              <!-- <div class="single-listing-title"> -->
+              <div class="rating-summary">
+                <div class="rating-like">
+                  <div class="rating-info">
+                    <div class="rateing-c rating-info-single"
+                      *ngIf="!isLongterm && reviews.length > 0 && space_details?.ratingsAvg > 0">
+                      <ul class="product-rating-c">
+                        <li class>
+                          <i style="cursor: context-menu;"
+                            [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 1, 'fa-star-half-o': space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1, 'fa-star-o': space_details?.ratingsAvg <= 0}"
+                            aria-hidden="true"></i>
+                        </li>
+                        <li class>
+                          <i style="cursor: context-menu;"
+                            [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 2, 'fa-star-half-o': space_details?.ratingsAvg > 1 && space_details?.ratingsAvg < 2, 'fa-star-o': space_details?.ratingsAvg <= 1}"
+                            aria-hidden="true"></i>
+                        </li>
+                        <li class>
+                          <i style="cursor: context-menu;"
+                            [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 3, 'fa-star-half-o': space_details?.ratingsAvg > 2 && space_details?.ratingsAvg < 3, 'fa-star-o': space_details?.ratingsAvg <= 2}"
+                            aria-hidden="true"></i>
+                        </li>
+                        <li class>
+                          <i style="cursor: context-menu;"
+                            [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 4, 'fa-star-half-o': space_details?.ratingsAvg > 3 && space_details?.ratingsAvg < 4, 'fa-star-o': space_details?.ratingsAvg <= 3}"
+                            aria-hidden="true"></i>
+                        </li>
+                        <li class>
+                          <i style="cursor: context-menu;"
+                            [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 5, 'fa-star-half-o': space_details?.ratingsAvg > 4 && space_details?.ratingsAvg < 5, 'fa-star-o': space_details?.ratingsAvg <= 4}"
+                            aria-hidden="true"></i>
+                        </li>
+                      </ul>
+
+                      <div class="rating-number">
+                        <p> {{space_details?.ratingsAvg || 0}} </p>
+                      </div>
+
+                      <div class="rating-info-single">
+                        <a style="color: #646464 !important;" class="client-review rating-info-single ml-0">
+                          {{reviews?.length || 0}} reviews </a>
+                      </div>
+                    </div>
+                    <div *ngIf="space_details?.ratingsAvg == 0 && !isLongterm" class="total-viewer">
+                      <!-- <div class="review-heading h3 text-dark">Reviews</div> -->
+                      <p style="margin:0;color:#646464">No review yet</p>
+                    </div>
+                    <div class="total-viewer rating-info-single" *ngIf="!isLongterm">
+                      <i class="fa fa-user-o" aria-hidden="true"></i>
+                      <p>{{space_details?.howManyPeopleInYourSpace}} people</p>
+                    </div>
+                    <div class="total-viewer rating-info-single" *ngIf="isLongterm">
+                      <i class="fa fa-building-o" aria-hidden="true"></i>
+                      <p>{{space_details?.spaceStatus || 'N/A'}}</p>
+                    </div>
+                    <div class="watch-time rating-info-single" *ngIf="isShortterm">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <p>{{space_details?.minimum_hours/60}} hrs min</p>
+                    </div>
+                    <div class="sq-ft rating-info-single">
+                      <img src="assets/images/scale.svg" alt class="sq-ft-icon">
+                      <p>{{space_details?.spacesqft}} sqft</p>
+                    </div>
+                  </div>
+                  <div class="like-dislike-c" *ngIf="!isLongterm">
+                    <a class="product-like-c">
+                      <i (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('upvote');" class="fa"
+                        [ngClass]="{'fa-thumbs-up orange-color': existingUpVote == 1, 'fa-thumbs-o-up black-color': existingUpVote != 1 }"
+                        [class.disabled]="isLoading" aria-hidden="true"></i>
+                      <span *ngIf="space_details?.upvote > 0">{{space_details?.upvote}}</span>
+                      <span *ngIf="space_details?.upvote <= 0">0</span>
+                    </a>
+
+                    <a class="product-dis-like-c">
+                      <i class="fa fa-thumbs-o-down" [class.disabled]="isLoading"
+                        (click)="!isLoading && $event.stopPropagation();voteDevoteSite('downvote')"
+                        [ngClass]="existingDownVote == 1 ? 'fa fa-thumbs-down orange-color':'fa fa-thumbs-o-down'"
+                        [ariaDisabled]="isLoading" aria-hidden="true">
+                      </i>
+                      <!-- <span>{{space_details?.downvote}}</span> -->
+                    </a>
+                  </div>
+                  <!-- <a href="" class="fav-icon-c">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </a> -->
+                </div>
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-5 col-sm-12"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Listing Details Hero ends-->
+<!--Listing Details Info starts-->
+<div class="section-padding" style="padding-top: 0px">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-12">
+        <div id="list-menu" class="list_menu">
+          <ul class="list-details-tab fixed-nav list-details-tab-item">
+            <li class="nav-item" [ngClass]="{ active: list_tab == 1 }">
+              <a (click)="scrollToSection('overview')" [ngClass]="{ active: list_tab == 1 }">About the Space</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ active: list_tab == 2 }" *ngIf="isCoworking || isLongterm">
+              <a (click)="scrollToSection('price')" [ngClass]="{ active: list_tab == 2 }">Pricing</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ active: list_tab == 3 }">
+              <a (click)="scrollToSection('location')" [ngClass]="{ active: list_tab == 3 }">Location</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ active: list_tab == 5 }" *ngIf="!isLongterm">
+              <a (click)="scrollToSection('Business')" [ngClass]="{ active: list_tab == 3 }">Business Hours</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ active: list_tab == 6 }" *ngIf="!isLongterm && !isCoworking">
+              <a (click)="scrollToSection('Cancellation_Policy')" [ngClass]="{ active: list_tab == 3 }">Cancellation
+                Policy</a>
+            </li>
+            <li class="nav-item" [ngClass]="{ active: list_tab == 4 }">
+              <a (click)="scrollToSection('review_rating')" [ngClass]="{ active: list_tab == 4 }">Reviews</a>
+            </li>
+          </ul>
+        </div>
+        <!--Listing Details starts-->
+        <div class="list-details-wrap">
+          <div id="overview" class="list-details-section">
+            <h4>About the Space</h4>
+            <div class="overview-content">
+              <p class="mar-bot-10">
+                {{ space_details?.about }}
+              </p>
+
+            </div>
+            <div class="over-view-drop">
+              <mat-accordion>
+                <mat-expansion-panel *ngIf="space_details?.parkingDescription">
+                  <mat-expansion-panel-header>
+                    <!-- <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Type your name and age
+                  </mat-panel-description> -->
+                    <div class="over-view-drop-heading">
+                      <div class="over-view-drop-heading-logo-grp">
+                        <img src="assets/images/parking-icon.png" alt class="over-view-drop-heading-icon">
+                        <h5> Parking</h5>
+                      </div>
+                    </div>
+                  </mat-expansion-panel-header>
+                  <div class="over-view-drop-content">
+                    <div class="pb-4">
+                      <div class="font-weight-bold pb-1" style="font-size: 17px;">Parking options</div>
+                      <p style="text-transform: capitalize;">
+                        {{parkingOptionsString}}
+                      </p>
+                    </div>
+                    <div class="pb-4">
+                      <div class="font-weight-bold pb-1" style="font-size: 17px;">Parking description</div>
+                      <p>
+                        {{space_details?.parkingDescription}}
+                      </p>
+                    </div>
+                  </div>
+                  <!-- <mat-form-field>
+                  <input matInput placeholder="First name">
+                </mat-form-field>
+            
+                <mat-form-field>
+                  <input matInput placeholder="Age">
+                </mat-form-field> -->
+                </mat-expansion-panel>
+                <mat-expansion-panel *ngIf="space_details?.lightingDescription && !isCoworking">
+                  <mat-expansion-panel-header>
+
+                    <div class="over-view-drop-heading">
+                      <div class="over-view-drop-heading-logo-grp">
+                        <img src="assets/images/lighting-icon.png" alt class="over-view-drop-heading-icon">
+                        <h5> Lighting</h5>
+                      </div>
+                    </div>
+                  </mat-expansion-panel-header>
+                  <div class="over-view-drop-content">
+                    <p>
+                      {{space_details?.lightingDescription}}
+                    </p>
+                  </div>
+
+                </mat-expansion-panel>
+
+                <mat-expansion-panel *ngIf="space_details?.soundDescription && !isCoworking">
+                  <mat-expansion-panel-header>
+
+                    <div class="over-view-drop-heading">
+                      <div class="over-view-drop-heading-logo-grp">
+                        <img src="assets/images/sound-icon.png" alt class="over-view-drop-heading-icon">
+                        <h5> Sound</h5>
+                      </div>
+                    </div>
+                  </mat-expansion-panel-header>
+                  <div class="over-view-drop-content">
+                    <p>
+                      {{space_details?.soundDescription}}
+                    </p>
+                  </div>
+
+                </mat-expansion-panel>
+
+                <mat-expansion-panel *ngIf="space_details?.hostRulesDescription">
+                  <mat-expansion-panel-header>
+
+                    <div class="over-view-drop-heading">
+                      <div class="over-view-drop-heading-logo-grp">
+                        <img src="assets/images/host-rule-icon.png" alt class="over-view-drop-heading-icon">
+                        <h5> Host rules</h5>
+                      </div>
+                    </div>
+                  </mat-expansion-panel-header>
+                  <div class="over-view-drop-content">
+                    <p>
+                      {{space_details?.hostRulesDescription}}
+                    </p>
+                  </div>
+
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+                  <!-- <p>I'm visible because I am open</p> -->
+                </mat-expansion-panel>
+              </mat-accordion>
+
+            </div>
+            <div class="mar-top-20" *ngIf="space_details?.facilities.length > 0">
+              <h2 style="font-size: 20px">Amenities</h2>
+              <ul class="listing-features" *ngIf="!isMobile">
+                <li *ngFor="let element of space_details?.facilities">
+                  <span class="d-inline-block mr-1 font-size-md">
+                    <i class="material-icons" style="font-size: 16px">{{
+                      facilities[element.id]
+                      }}</i>
+                    <h3 style="font-size: 15px">{{ element.name }}</h3>
+                  </span>
+                  <!-- <span class="text-dark mr-5">
+                  </span> -->
+                </li>
+              </ul>
+              <div *ngIf="isMobile">
+                <ul class="listing-features" *ngIf="space_details?.facilities.length <= 3">
+                  <li *ngFor="let element of space_details?.facilities">
+                    <span class="d-inline-block mr-1 font-size-md">
+                      <i class="material-icons" style="font-size: 16px">{{
+                        facilities[element.id]
+                        }}</i>
+                    </span>
+                    <span class="text-dark mr-5">
+                      {{ element.name }}
+                    </span>
+                  </li>
+                </ul>
+                <ul class="listing-features" *ngIf="space_details?.facilities.length > 3">
+                  <li *ngFor="let element of show_less_facilities">
+                    <span class="d-inline-block mr-1 font-size-md">
+                      <i class="material-icons" style="font-size: 16px">{{
+                        facilities[element.id]
+                        }}</i>
+                    </span>
+                    <span class="text-dark mr-5">
+                      {{ element.name }}
+                    </span>
+                  </li>
+                </ul>
+                <br />
+                <a class="read-more" (click)="alterDescriptionText()" *ngIf="space_details?.facilities.length > 3">
+                  <div style="color: #3e80d8">
+                    <b>{{ showShortDesciption ? "Show more" : "Show less" }}</b>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div id="price" class="list-details-section" *ngIf="isCoworking">
+            <h2 style="font-size: 20px">Pricing</h2>
+            <ul class="plan-list" *ngIf="space_details">
+              <div *ngFor="let resource of resources_list">
+                <li
+                  *ngIf="space_details[resource.column_name] != null && space_details[resource.column_name] >0 && resource?.id != 8">
+                  <div>
+                    <h4 class="text-capitalize">{{ resource.name }}</h4>
+                    <p>{{ resource.desc }}</p>
+                    <span>
+                      <a class="custum-btn blu-btn" (click)="openInquiryPopUp2(resource.name)">
+                        Enquire Now
+                      </a>
+                    </span>
+                  </div>
+                  <div class="action-box col-4">
+                    <div class="price" *ngIf="space_details[resource.column_name]">
+                      <span>from</span>
+                      <div style="
+                          display: flex;
+                        ">
+                        <i class="icon-rupee"></i>
+                        <h2 style="font-size: 18px">
+                          <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
+                          space_details[resource.column_name]|| '' }}
+                        </h2>
+                        <small><span *ngIf="resource?.id !== 5">/seat</span>/{{
+                          resource?.id == 6 || resource?.id == 7
+                          ? "hour"
+                          : "month"
+                          }}</small>
+                      </div>
+                    </div>
+
+                  </div>
+                </li>
+                <li *ngIf="resource?.id == 8 && space_details?.originalPrice > 0">
+                  <div>
+                    <h4 class="text-capitalize">{{ resource.name }}</h4>
+                    <p>{{ resource.desc }}</p>
+                    <span>
+                      <a (click)="openRequetBuyPassPopup()" class="custum-btn" style="border-color: #4b975f;
+                      background: #4b975f;">
+                        Buy pass
+                      </a>
+                    </span>
+                  </div>
+                  <div class="action-box col-4 d-flex">
+                    <div class="price" *ngIf="space_details[resource.column_name]">
+                      <span>from</span>
+                      <div style="
+                          display: flex;
+                          /* gap: 2px; */
+                          align-items: baseline;
+                        ">
+                        <i class="icon-rupee"></i>
+                        <h2 style="font-size: 18px">
+                          <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
+                          space_details[resource.column_name]|| '' }}
+                        </h2>
+                        <small>/seat/{{
+                          resource?.id == 6 || resource?.id == 7
+                          ? "hour"
+                          : "day"
+                          }}</small>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </div>
+            </ul>
+          </div>
+
+          <div id="location" class="list-details-section">
+            <h2 class="location-section" style="font-size: 20px">Location</h2>
+            <google-map height="400px" width="100%" [zoom]="15" [center]="marker?.position">
+              <!-- <map-circle [center]="marker?.position" [radius]="circleRadius1" [options]="circleOptions1"></map-circle> -->
+              <map-circle [center]="marker?.position" [radius]="circleRadius2" [options]="circleOptions2"></map-circle>
+            </google-map><br />
+            <div class="commute-details" style="justify-content: flex-end">
+              <div class="commute-details-item">
+                <div class="commute-label">
+                  <i class="material-icons">subway</i>
+                  <p>Metro</p>
+                </div>
+                <div class="commute-value">
+                  <p>{{ space_details?.near_by_metro || "NA" }}</p>
+                  <p>
+                    {{
+                    space_details?.metro_distance
+                    ? space_details?.metro_distance + " kms"
+                    : "NA"
+                    }}
+                  </p>
+                </div>
+              </div>
+              <div class="commute-details-item">
+                <div class="commute-label">
+                  <i class="material-icons">train</i>
+                  <p>Railway</p>
+                </div>
+                <div class="commute-value">
+                  <p>{{ space_details?.near_by_railway_name || "NA" }}</p>
+                  <p>
+                    {{
+                    space_details?.railway_distance
+                    ? space_details?.railway_distance + " kms"
+                    : "NA"
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!--/.Carousel Wrapper-->
+          </div>
+
+          <div id="timings" class="list-details-section" id="Business" *ngIf="!isLongterm">
+            <h4>Business Hours</h4>
+            <div class="business-hour-subtitle" *ngIf="space_details?.has_247_access">
+              <img src="assets/images/business-hour-subtitle-icon.png" alt class="business-hour-subtitle-icon">
+              <p>This space is operational <span> 24x7 </span></p>
+            </div>
+            <ul class="business-hours">
+              <li class="business-open">
+                <span class="day">Monday</span>
+                <div class="atbd_open_close_time">
+                  <span
+                    *ngIf="workingTime?.length && !workingTime[0]?.isClosed && mon_opening_time && mon_closing_time">
+                    <span class="time">{{mon_opening_time}}</span>
+                    -
+                    <span class="time">{{mon_closing_time}}</span>
+                  </span>
+                  <span *ngIf="workingTime?.length && workingTime[0]?.isClosed" class="trend-closed">
+                    <span class="time">Closed</span>
+                  </span>
+                </div>
+              </li>
+              <li class="business-open">
+                <span class="day">Tuesday</span>
+                <div class="atbd_open_close_time">
+                  <span
+                    *ngIf="workingTime?.length && !workingTime[1]?.isClosed && tue_opening_time && tue_closing_time">
+                    <span class="time">{{tue_opening_time}}</span>
+                    -
+                    <span class="time">{{tue_closing_time}}</span>
+                  </span>
+                  <span *ngIf="workingTime?.length && workingTime[1]?.isClosed" class="trend-closed">
+                    <span class="time">Closed</span>
+                  </span>
+                </div>
+              </li>
+              <li class="business-open">
+                <span class="day">Wednesday</span>
+                <div class="atbd_open_close_time">
+                  <span
+                    *ngIf="workingTime?.length && !workingTime[2]?.isClosed && wed_opening_time && wed_closing_time">
+                    <span class="time">{{wed_opening_time}}</span>
+                    -
+                    <span class="time">{{wed_closing_time}}</span>
+                  </span>
+                  <span *ngIf="workingTime?.length && workingTime[2]?.isClosed" class="trend-closed">
+                    <span class="time">Closed</span>
+                  </span>
+                </div>
+              </li>
+              <li class="business-open">
+                <span class="day">Thursday</span>
+                <div class="atbd_open_close_time">
+                  <span
+                    *ngIf=" workingTime?.length && !workingTime[3]?.isClosed && thu_opening_time && thu_closing_time">
+                    <span class="time">{{thu_opening_time}}</span>
+                    -
+                    <span class="time">{{thu_closing_time}}</span>
+                  </span>
+                  <span *ngIf="workingTime?.length && workingTime[3]?.isClosed" class="trend-closed">
+                    <span class="time">Closed</span>
+                  </span>
+                </div>
+              </li>
+              <li class="business-open">
+                <span class="day">Friday</span>
+                <div class="atbd_open_close_time">
+                  <span
+                    *ngIf="workingTime?.length && !workingTime[4]?.isClosed && fri_opening_time && fri_closing_time">
+                    <span class="time">{{fri_opening_time}}</span>
+                    -
+                    <span class="time">{{fri_closing_time}}</span>
+                  </span>
+                  <span *ngIf="workingTime?.length && workingTime[4]?.isClosed" class="trend-closed">
+                    <span class="time">Closed</span>
+                  </span>
+                </div>
+              </li>
+              <li class="business-open">
+                <span class="day">Saturday</span>
+                <div class="atbd_open_close_time">
+                  <span
+                    *ngIf="workingTime?.length && !workingTime[5]?.isClosed && sat_opening_time && sat_closing_time">
+                    <span class="time">{{sat_opening_time}}</span>
+                    -
+                    <span class="time">{{sat_closing_time}}</span>
+                  </span>
+                  <span *ngIf="workingTime?.length && workingTime[5]?.isClosed" class="trend-closed">
+                    <span class="time">Closed</span>
+                  </span>
+                </div>
+              </li>
+              <li class="business-open">
+                <span class="day">Sunday</span>
+                <div class="atbd_open_close_time">
+                  <span
+                    *ngIf="workingTime?.length && !workingTime[6]?.isClosed && sun_opening_time && sun_closing_time">
+                    <span class="time">{{sun_opening_time}}</span>
+                    -
+                    <span class="time">{{sun_closing_time}}</span>
+                  </span>
+                  <span *ngIf="workingTime?.length && workingTime[6]?.isClosed" class="trend-closed">
+                    <span class="time">Closed</span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="list-details-section" *ngIf="serviceArray?.length > 0 && !isLongterm && !isCoworking">
+            <div class="add-ons">
+              <div class="add-ons-heading">
+                <h4 class>Add-ons from the host</h4>
+                <p>Host provided services, items or options. Available at
+                  checkout.</p>
+              </div>
+
+              <div class="add-ons-all list-details-section-content-c">
+                <div class="add-ons-single" *ngFor="let item of serviceArray">
+                  <!-- <div class="add-ons-single-img" *ngIf="item?.serviceName == 'Professional Photographer'">
+                    <img src="assets/images/add-on-img-1.jpg" alt>
+                  </div>
+                  <div class="add-ons-single-img" *ngIf="item?.serviceName == 'Photography Equipment'">
+                    <img src="assets/images/camera.png" alt>
+                  </div>
+                  <div class="add-ons-single-img" *ngIf="item?.serviceName == 'Speaker'">
+                    <img src="assets/images/speaker.png" alt>
+                  </div> -->
+                  <div class="add-ons-single-text">
+                    <h6 class="add-ons-single-text-heading">
+                      {{item?.serviceName}}</h6>
+                    <p> <img src="assets/images/rupee-icon.png" alt class="rupee-icon"> <span>
+                        {{item?.servicePrice}}/{{item?.servicePriceType}} </span></p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="list-details-section" id="Cancellation_Policy" *ngIf="!isLongterm && !isCoworking">
+            <div class="cancel-policy-c">
+              <div class="cancel-policy-heading">
+                <h4 class>Cancellation Policy</h4>
+              </div>
+              <div class="cancel-policy-content list-details-section-content-c">
+                <h5>{{space_details?.cancellationPolicy}}</h5>
+                <!-- <p>{{space_details?.cancellationPolicyDescription}}</p> -->
+                <p [innerHtml]="space_details?.cancellationPolicyDescription"></p>
+                <!-- <a href class="read-more-btn"> Read More </a>
+                <p>All Bookings are subject to Peerspace’s Grace Period policy
+                  which provides a full refund for Bookings cancelled within 24
+                  hours from receipt of a Booking Confirmation but no later than
+                  48 hours prior to the Event start time.</p> -->
+              </div>
+
+            </div>
+
+          </div>
+
+          <div id="review_rating" class="list-details-section">
+            <div class="review-section">
+
+              <div class="review-section-heading">
+                <h4 class>Reviews & Ratings <span *ngIf="reviews?.length > 0">({{reviews?.length}})</span> </h4>
+                <a (click)="openAddReviewDialog()" class="custum-btn outline-orng-btn"> <i class="fa fa-pencil"
+                    aria-hidden="true"></i> Leave a Review</a>
+              </div>
+              <div class="row align-items-center mx-0" *ngIf="space_details?.ratingsAvg?.length > 0">
+                <ul class="product-rating-c d-flex">
+                  <li class style="color: #F76900; margin-right: 5px;">
+                    <i style="cursor: context-menu;"
+                      [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 1, 'fa-star-half-o': space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1, 'fa-star-o': space_details?.ratingsAvg <= 0}"
+                      aria-hidden="true"></i>
+                  </li>
+                  <li class style="color: #F76900; margin-right: 5px;">
+                    <i style="cursor: context-menu;"
+                      [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 2, 'fa-star-half-o': space_details?.ratingsAvg > 1 && space_details?.ratingsAvg < 2, 'fa-star-o': space_details?.ratingsAvg <= 1}"
+                      aria-hidden="true"></i>
+                  </li>
+                  <li class style="color: #F76900; margin-right: 5px;">
+                    <i style="cursor: context-menu;"
+                      [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 3, 'fa-star-half-o': space_details?.ratingsAvg > 2 && space_details?.ratingsAvg < 3, 'fa-star-o': space_details?.ratingsAvg <= 2}"
+                      aria-hidden="true"></i>
+                  </li>
+                  <li class style="color: #F76900; margin-right: 5px;">
+                    <i style="cursor: context-menu;"
+                      [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 4, 'fa-star-half-o': space_details?.ratingsAvg > 3 && space_details?.ratingsAvg < 4, 'fa-star-o': space_details?.ratingsAvg <= 3}"
+                      aria-hidden="true"></i>
+                  </li>
+                  <li class style="color: #F76900; margin-right: 5px;">
+                    <i style="cursor: context-menu;"
+                      [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 5, 'fa-star-half-o': space_details?.ratingsAvg > 4 && space_details?.ratingsAvg < 5, 'fa-star-o': space_details?.ratingsAvg <= 4}"
+                      aria-hidden="true"></i>
+                  </li>
+                </ul>
+
+                <div class="rating-number">
+                  <p> {{space_details?.ratingsAvg}} </p>
+                </div>
+              </div>
+
+              <div class="review-section-single" *ngFor="let srrl of spaceRatingReviewList">
+                <div class="review-section-single-img">
+                  <img [src]="srrl?.profile_image ? srrl?.profile_image : 'assets/images/user_image.png'" alt>
+                </div>
+                <div class="review-section-single-cont">
+                  <h5 style="text-transform: capitalize;">{{srrl?.userName}}</h5>
+                  <div class="book-again-star">
+                    <ul class="product-rating-c">
+                      <li class>
+                        <i [ngClass]="srrl?.rating>=1?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                      </li>
+                      <li class>
+                        <i [ngClass]="srrl?.rating>=2?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                      </li>
+                      <li class>
+                        <i [ngClass]="srrl?.rating>=3?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                      </li>
+                      <li class>
+                        <i [ngClass]="srrl?.rating>=4?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                      </li>
+                      <li class>
+                        <i [ngClass]="srrl?.rating>=5?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                      </li>
+                    </ul>
+                    <ul class="book-again" *ngIf="srrl?.book_again == 1">
+                      <li>
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      </li>
+                      <li>
+                        Yes I would book again
+                      </li>
+                    </ul>
+                  </div>
+                  <p>{{srrl?.Review}}</p>
+                  <p class="review-section-single-cont-date">{{ srrl.createdAt | date: 'MMMM d, y' }}</p>
+
+
+
+                </div>
+                <!-- <div class="review-section-single" >
+                    <div class="review-section-single-img">
+                        <img src="assets/images/add-on-img-1.jpg" alt="">
+                    </div>
+                    <div class="review-section-single-cont">
+                       <h5>Madison G.</h5>
+                       <div class="book-again-star">
+                        <ul class="product-rating-c">
+                          <li class="">
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                          </li>
+                          <li class="">
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                          </li>
+                          <li class="">
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                          </li>
+                          <li class="">
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                          </li>
+                          <li class="">
+                              <i class="fa fa-star-o" aria-hidden="true"></i>
+                          </li>
+                        </ul>
+                        <ul class="book-again">
+                          <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                          </li>
+                          <li>
+                            Yes I would book again
+                          </li>
+                        </ul>
+                     </div>  
+                        <p>It's the details that make Dummy such a winner. By way of comparison, consider last summer's "My Big Fat Greek Wedding," in which each actor put a heartfelt spin on his or her one-joke character.</p>
+                        <p class="review-section-single-cont-date">December 31, 2023</p>
+                    </div>
+            
+                </div>
+                <div class="review-section-single" >
+                    <div class="review-section-single-img">
+                        <img src="assets/images/add-on-img-1.jpg" alt="">
+                    </div>
+                    <div class="review-section-single-cont">
+                       <h5>Madison G.</h5>
+                       <div class="book-again-star">
+                        <ul class="product-rating-c">
+                          <li class="">
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                          </li>
+                          <li class="">
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                          </li>
+                          <li class="">
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                          </li>
+                          <li class="">
+                              <i class="fa fa-star" aria-hidden="true"></i>
+                          </li>
+                          <li class="">
+                              <i class="fa fa-star-o" aria-hidden="true"></i>
+                          </li>
+                        </ul>
+                        <ul class="book-again">
+                          <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                          </li>
+                          <li>
+                            Yes I would book again
+                          </li>
+                        </ul>
+                     </div>  
+                        <p>It's the details that make Dummy such a winner. By way of comparison, consider last summer's "My Big Fat Greek Wedding," in which each actor put a heartfelt spin on his or her one-joke character.</p>
+                        <p class="review-section-single-cont-date">December 31, 2023</p>
+                    </div>
+            
+                </div> -->
+
+              </div>
+
+              <div *ngIf="reviews.length > spaceRatingReviewList.length"
+                style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+                <a (click)="nextReviewList()" class="link-hov style2 text-dark"
+                  style="border: 1px solid #ccc7c7; padding: 15px 20px; font-weight: 600;cursor: pointer;">See more reviews </a>
+              </div>
+
+              <div *ngIf="spaceRatingReviewList.length == 0">
+                <!-- <div class="review-heading h3 text-dark">Reviews</div> -->
+                <div class="cnts text-dark mt-lg-5 mt-4" style="font-size: 18px;">No review yet</div>
+              </div>
+
+            </div>
+
+            <!--Listing Details ends-->
+            <!--Similar Listing starts-->
+
+            <!--Similar Listing ends-->
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <div class="listing-sidebar" style="position: sticky; top:90px;">
+          <div class="sidebar-widget info enquire-container-desktop" *ngIf="!isMobile">
+            <!-- <h3><i class="ion-android-calendar"></i>Booking</h3>
+            <div class="book-btn text-center">
+              <a routerLink="/contact-form" [queryParams]="{space_id: space_details?.id}"> Enquire Now</a>
+            </div> -->
+
+            <div class="bookinng-sec-c">
+              <div class="booking-container hour-rate" *ngIf="isShortterm">
+                <!-- <p>Prices starting from</p> -->
+                <h2>
+                  <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="45px" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <g id="SVGRepo_iconCarrier"> <path d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z" fill="#fed42d"></path> </g></svg> <img src="assets/images/rs-icon.png" alt=""> {{space_details?.originalPrice}} <span> / hr</span></h2>
+                <p class=""> {{space_details?.minimum_hours/60}} hrs minimum</p>
+              </div>
+              <div class="booking-container hour-rate" *ngIf="isLongterm">
+                <p>Monthly rental</p>
+                <h2><img src="assets/images/rs-icon.png" alt="">{{space_details?.originalPrice}}</h2>
+                <span
+                    class="font-weight-normal pl-1" style="font-size: 12px;"> <img src="assets/images/rs-icon.png" style="width: 8px;" alt=""> {{ space_details?.originalPrice / space_details?.spacesqft | number:'1.0-0' }}/Sqft
+                    <span class="font-weight-bold text-gray mb-1 mt-1" style="font-size: 11px;" *ngIf="space_details?.negociable_price">(Negotiable)</span>
+                  </span>
+                <p class="" style="font-size: 13px !important;"><b>Carpet Area:</b> {{ space_details?.originalPrice / space_details?.spacesqft | number:'1.0-0' }} sq. ft. | <b>{{space_details?.spaceStatus}}</b></p>
+              </div>
+              <div class="booking-container">
+                <p class="booking-heading text-center" *ngIf="!isShortterm">Interested in this space?</p>
+                <!-- <br /> -->
+                <ul *ngIf="isCoworking" class="row">
+                <li class="col-md-6">
+                  <span class="booking-icon">
+                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                  <p class="booking-text">
+                      Zero Brokerage
+                  </p>
+                </li>
+                <li class="col-md-6">
+                  <span class="booking-icon">
+                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="#000000"
+                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
+                    </svg> -->
+                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                  <p class="booking-text">
+                    Best Deals 
+                  </p>
+                </li>
+                <li class="col-md-6">
+                  <span class="booking-icon">
+                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="#000000"
+                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
+                    </svg> -->
+                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                  <p class="booking-text">
+                    1000+ Clients Served
+                  </p>
+                </li>
+                <li class="col-md-6">
+                  <span class="booking-icon">
+                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="#000000"
+                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
+                    </svg> -->
+                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <p class="booking-text">
+                      Expert Advisors
+                    </p>
+                  </li>
+                </ul>
+
+              <ul *ngIf="isLongterm" class="row">
+                <li class="col-md-6">
+                  <span class="booking-icon">
+                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                  <p class="booking-text">
+                    1000+ Clients Served
+                  </p>
+                </li>
+                <li class="col-md-6">
+                  <span class="booking-icon">
+                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="#000000"
+                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
+                    </svg> -->
+                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                  <p class="booking-text">
+                    Expert Advisors 
+                  </p>
+                </li>
+                <li class="col-md-6">
+                  <span class="booking-icon">
+                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="#000000"
+                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
+                    </svg> -->
+                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                  <p class="booking-text">
+                    End-to-End Support
+                  </p>
+                </li>
+                <li class="col-md-6">
+                  <span class="booking-icon">
+                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="#000000"
+                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
+                    </svg> -->
+                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                  <p class="booking-text">
+                    Best Deals
+                  </p>
+                </li>
+              </ul>
+
+                <div class="btn-grp-c mt-0">
+                  <!-- <div class="book-btn text-center" style="margin-top: 30px">
+                          <a routerLink="/contact-form" [queryParams]="{ space_id: space_details?.id }">
+                            GET A QUOTE</a>
+                        </div> -->
+                  <div *ngIf="isShortterm">
+                    <a *ngIf="space_details?.isInstant == 0" (click)="openRequestBookPopup()" class="custum-btn">
+                      REQUEST TO BOOK</a>
+                    <a *ngIf="space_details?.isInstant == 1" (click)="openRequestBookPopup()" class="custum-btn">
+                      BOOK NOW</a>
+                      <div class="mt-4" *ngIf="space_details?.isInstant == 1">                                                                        
+                        <div>
+                          <span class="mb-2">
+                            <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="35px" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g id="SVGRepo_iconCarrier"> <path d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z" fill="#fed42d"></path> </g></svg>
+                              <span class>Instant Book</span>
+                            </span>
+                         
+                          <p class="text-gray-dark text-small pl-3">
+                            <span>After payment, your booking will be instantly confirmed.</span>
+                          </p>
+                        </div>
+                        
+                      </div>
+                  </div>
+
+                  <div class="mt-3" *ngIf="isCoworking">
+                    <a  (click)="openInquiryPopUp()"
+                      class=" custum-btn">
+                      Get Quote</a>
+                  </div>
+                  <div *ngIf="isLongterm">
+                    <a (click)="openInquiryPopUp()" class=" custum-btn">
+                      Request A Call Back</a>
+                  </div>
+                  <div *ngIf="isLongterm">
+                    <a style="background: #fff  !important; color: #F76900 !important;"
+                      (click)="openScheduleVisitPopup()" class="custum-btn  blu-btn">
+                      Schedule a visit</a>
+                  </div>
+                  <div *ngIf="isCoworking">
+                    <a style="background: #fff  !important; color: #000e54 !important;"
+                      (click)="openScheduleVisitIsCoworkingPopup()" class="custum-btn  blu-btn">
+                      Schedule a visit</a>
+                  </div>
+                  <div *ngIf="isCoworking && space_details?.originalPrice > 0">
+                    <a (click)="openRequetBuyPassPopup()"
+                      style="background: #2c864f; color: #fff !important; border: none !important;"
+                      class="custum-btn outline-blk-btn boking_btn">
+                      BUY PASS</a>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="booking-container" *ngIf="!isShortterm" sty>
+                <p class="booking-text2 text-center">Speak to our office space experts.</p>
+                <a hrf="tel:+919513392400" class="booking-call text-center" style="display: block;">Call +91 95133 92400</a>
+              </div>
+            </div>
+            <!-- <div class="booking-container">
+              <p class="booking-heading">Interested in scheduling a visit to this space?</p>
+              <br />
+              <div>
+                <span class="booking-icon" style="color: #F76900; font-size: x-large;">
+                  <i class="ion-android-calendar"></i> </span>&nbsp;
+                <p class="booking-text">
+                  Schedule an offline visit to this space
+                </p>
+              </div>
+              <div class="book-btn text-center" style="margin-top: 30px">
+                <a (click)="openScheduleVisitPopup()">
+                  REQUEST TO BOOK</a>
+              </div>
+              <div class="book-btn text-center" style="margin-top: 10px">
+                <a (click)="openScheduleVisitPopup()">
+                  Schedule a visit</a>
+              </div>
+            </div> -->
+            <!-- <div class="booking-container">
+              <p class="booking-heading">Review this workspace</p>
+              <br />
+              <div>
+                <span class="booking-icon" style="color: #F76900; font-size: x-large;">
+                  <i class="ion-android-star"></i> </span>&nbsp;
+                <p class="booking-text">
+                  Share your thoughts with other user
+                </p>
+              </div>
+              <div class="book-btn text-center" style="margin-top: 30px">
+                <a (click)="onRatingReview()">
+                  Write a review</a>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 60px">
+      <div class="col-lg-12">
+        <div class="similar-listing-title" id="similar-listing-title">
+          <h3>Nearby Office Spaces</h3>
+        </div>
+        <!-- <div class="swiper-container similar-list-wrap">
+        <div class="swiper-wrapper"> -->
+        <ngx-slick-carousel class="carousel" #slickSimilarSpacesCarousel="slick-carousel" [config]="similarSpacesConfig"
+          responsive="breakpoints">
+          <div ngxSlickItem class="similar-item-slide slide" *ngFor="let element of space_details?.similar_spaces">
+            <app-list-item [spaceDetails]="element" [is_similar_listing]="true">
+            </app-list-item>
+            <!-- <img [src]="aws_base_url + space_details?.id + '/' + element.images[0]" class="img-fluid" alt="...">
+            <div class="similar-title-box">
+              <h5><a routerLink="coworking-space/{{element.link_name}}">{{element.name}}</a></h5>
+              <p><span class="price-amt">$89</span>/Avg</p>
+            </div>
+            <div class="customer-review">
+              <div class="rating-summary">
+                <div class="rating-result" title="60%">
+                  <ul class="product-rating">
+                    <li><i class="ion-android-star"></i></li>
+                    <li><i class="ion-android-star"></i></li>
+                    <li><i class="ion-android-star"></i></li>
+                    <li><i class="ion-android-star-half"></i></li>
+                    <li><i class="ion-android-star-half"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <p><i class="ion-ios-location"></i>{{element.address}}</p>
+            </div> -->
+          </div>
+        </ngx-slick-carousel>
+
+        <!-- </div>
+      </div> -->
+        <div class="slider-btn v3 similar-next" (click)="next1()">
+          <i class="ion-arrow-right-c"></i>
+        </div>
+        <div class="slider-btn v3 similar-prev" (click)="prev1()">
+          <i class="ion-arrow-left-c"></i>
+        </div>
+      </div>
+    </div>
+    <!-- <div id="review_rating" class="row"
+      style="margin-top: 60px; background-color: #fff;">
+      <div class="col-md-12">
+        <div class="list-details-section">
+          <h4>Review & Rating</h4>
+          <div class="row">
+            <div class="col-md-3 overall-rating-div-main">
+              <h5> <i class="ion-ios-circle-filled"
+                  style="color: #0095ff;"></i> Overall Rating</h5>
+              <div style="text-align: center;">
+                <span class="overall-rating-spn-rated">{{space_details?.rating
+                  || 0}}</span> <span
+                  class="overall-rating-spn-rate">/5</span> <br>
+                <span class="overall-rating-spn-star"
+                  *ngFor="let element of rating_array; index as erai"
+                  [innerHTML]="showStarIcon(erai, space_details?.rating)"></span>
+                <br>
+                <span
+                  style="font-weight: 500;">{{spaceRatingReviewList.length}}
+                  reviews</span>
+              </div>
+            </div>
+
+            <div class="col-md-3 rating-breakdown-div-main">
+              <h5> <i class="ion-ios-circle-filled"
+                  style="color: #2ac7a3;"></i> Rating Breakdown</h5>
+              <div *ngFor="let rbd of ratingBreakDown"
+                class="row rating-breakdown-div-star">
+                <span
+                  [ngStyle]="{'padding-left': rbd.star === 1 ? '5px' : '', 'padding-right': '5px'}">{{rbd.star}}</span>
+                <span class="rating-breakdown-spn-star"><i
+                    class="ion-android-star"></i></span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar"
+                    aria-valuemin="0" aria-valuemax="100"
+                    [ngStyle]="{ 'width': rbd.value + '%', 'background-color': rbd.backgroundColor }"></div>
+                </div>
+                <span class="rating-breakdown-spn-rated">{{rbd.value}}</span>
+              </div> <br>
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="spaceRatingReviewList.length > 0">
+            <div class="row reviewed-main-div"
+              *ngFor="let srrl of spaceRatingReviewList"
+              [ngStyle]="{'background-color': srrl.currentUser === true ? '#fdf5e6' : ''}">
+              <div class="col-md-1"><img src="assets/images/user.png"
+                  style="width: 100% !important;" /></div>
+              <div class="col-md-2">
+                <h6>{{srrl.userName}}</h6>
+                <span>{{ srrl.createdAt | date: 'MMMM d, y' }}</span> <br>
+                <span>{{ calculateDateDifference(srrl.createdAt,
+                  currentDateTime) }}</span> <br>
+              </div>
+              <div class="col-md-9">
+                <div style="display: flex;">
+                  <div class="col-md-8" style="padding-left: 0px;">
+                    <span class="overall-rating-spn-star"
+                      *ngFor="let element of rating_array; index as erai"
+                      [innerHTML]="showStarIcon(erai, srrl.rating)"></span>
+                    <br>
+                  </div>
+                  <div class="col-md-4" style="text-align: end;">
+                    <span *ngIf="srrl.currentUser === true"
+                      class="reviewed-icon-update" (click)="onRatingReview()"
+                      title="Update Review"><i class="ion-compose"></i></span>
+                    <span class="reviewed-icon-thumb thumbsup"> <i class="ion-thumbsup"></i></span>
+                    <span class="reviewed-icon-thumb thumbsdown"> <i class="ion-thumbsdown"></i></span>
+                  </div>
+                </div>
+                <div>
+                  <p>{{ srrl.Review }}</p>
+                  <p class="less-content" id="see-more-h-{{srrl.ratingId}}">{{ srrl.Review }}</p>
+                  <p *ngIf="!is_see_more_visible" id="see-more-p-{{srrl.ratingId}}">{{ srrl.Review }}</p>
+                </div>
+                <a *ngIf="is_see_more_visible" id="see-more-{{srrl.ratingId}}" style="font-size: 12px; font-weight: 600; cursor: pointer" (click)="toggleSeeMore($event, 0, srrl.ratingId)">See more</a>
+                <a *ngIf="!is_see_more_visible" id="see-less-{{srrl.ratingId}}" style="font-size: 12px; font-weight: 600; cursor: pointer;" (click)="toggleSeeMore($event, 1, srrl.ratingId)">See less</a>
+              </div>
+            </div>
+            <div style="margin-left: -15px !important;">
+              <a routerLink="/coworking-space/view-more-review/{{space_name}}"
+                class="link-hov style2">See more reviews <i
+                  class="icon ion-arrow-right-c"></i></a>
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="spaceRatingReviewList.length == 0">
+            <div class="row reviewed-main-div" style="align-items: center;">
+              <h6>No records found Reviews & Ratings for this workspace.</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <app-faqs></app-faqs>
+</div>
+<div *ngIf="isMobile" class="bottom-fixed-container" style="width: 98%">
+  <div class="find-office-container">
+    <p class="booking-text"><span>Interested in this office space?</span></p>
+  </div>
+  <div class="book-btn text-center bottom-fixed-button" style="margin-top: 3px">
+    <a routerLink="/contact-form" [queryParams]="{ space_id: space_details?.id }" style="font-size: 17px">GET A
+      QUOTE</a>
+  </div>
+</div>
+
+<!--Listing Details Info ends-->
+<!-- Scroll to top starts-->
+<!-- Scroll to top ends-->
+<ngx-json-ld [json]="schema"></ngx-json-ld>
+<app-co-working-visit-schedule #modal></app-co-working-visit-schedule>

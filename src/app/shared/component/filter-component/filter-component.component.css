@@ -1,0 +1,91 @@
+/* mat-slider {
+    width: 60%;
+  } */
+
+  :host ::ng-deep .min .mat-slider-thumb {
+    background-color: #f76900;
+  }
+
+  :host ::ng-deep .min .mat-slider-thumb-label {
+    background-color: #f76900;
+  }
+
+  :host ::ng-deep .min .mat-slider-track-fill {
+    background-color: #f76900;
+  }
+  .type {
+      display: none;
+      color: #8d8d8d;
+  }
+
+  .detail-container {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .overflow-fixed{
+    overflow: hidden;
+  }
+
+  .content{
+    overflow: auto;
+  }
+
+  .text-head {
+    font-size: 16.5px;
+    font-weight: normal;
+    margin-top: 2px;
+  }
+
+  .item-details {
+    font-size: 20px;
+    color: #5a5555;
+  }
+  .cross {
+    float: right;
+    cursor: pointer;
+  }
+
+.listing-bottom-button {
+  background:#f76900;
+  padding: 15px 10px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 7px;
+  z-index: 4;
+  text-align: center;
+}
+
+.filter_btn{
+background: #f76900;
+}
+.heading{
+  font-size: 16.5px;
+  font-weight: normal;
+  margin-top: 2px;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+
+::ng-deep .ngx-slider .ngx-slider-pointer{
+  background-color: #f76900 !important;
+}
+
+::ng-deep .ngx-slider .ngx-slider-selection{
+  background-color: #f76900 !important;
+}
+
+::ng-deep .ngx-slider-floor{
+  visibility: hidden !important;
+}
+::ng-deep .ngx-slider-ceil{
+  visibility: hidden !important;
+}

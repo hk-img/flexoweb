@@ -1,0 +1,32 @@
+<div class="workspace-rating-review-wrapper">
+    <div class="header-div">
+        <h2 class="login-text">
+          Workspace Rating Review
+        </h2>
+        <mat-icon style="cursor: pointer;" class="cross material-icons" (click)="closeDialog(null)">
+          close
+        </mat-icon>
+    </div>
+
+    <ng-container>
+        <div class="mobile-number">
+            <form [formGroup]="workspaceRatingReviewForm">
+                <div class="form-field-div">
+                    <label class="form-field-label">Rating</label>
+                    <span style="cursor: pointer;color: #FFC600;border: none;background: none;" mat-icon-button *ngFor="let ratingId of ratingArr; index as i" [id]="'star_'+i" (click)="onReviewRating(i+1)" [title]="ratingId+1" matTooltipPosition="above">
+                        <mat-icon>
+                          {{showIcon(i)}}
+                        </mat-icon>
+                    </span>
+                </div>
+                <div class="form-field-div">
+                    <label class="form-field-label">Review</label>
+                    <textarea title="Enter review here..." placeholder="Enter review here..." formControlName="review"></textarea>
+                </div>
+            </form>
+        </div>
+        <button class="w-25 btn form-btn-submit" (click)="onSubmitRatingReview()">
+            Submit
+        </button>
+    </ng-container>
+</div>

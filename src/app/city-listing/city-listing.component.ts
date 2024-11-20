@@ -1,0 +1,832 @@
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  NgZone,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
+import {
+  MatLegacyDialog as MatDialog,
+  MatLegacyDialogRef as MatDialogRef,
+} from '@angular/material/legacy-dialog';
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { MemberService } from '../services/member.service';
+import { SpaceService } from '../services/space.service';
+// import { LoaderService } from '../services/loader.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { isPlatformBrowser, TitleCasePipe } from '@angular/common';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import * as _ from 'lodash';
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { BehaviorSubject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { InquiryComponent } from '../details/inquiry/inquiry.component';
+import { FavouriteWorkSpaceService } from '../favourite-workspace/favourite-workspace.service';
+import { GlobalVariables } from '../global/global-variables';
+import { LoginDialog } from '../login/login-dialog.component';
+import { AppGlobals } from '../services/app-globals';
+declare var geolocation: any;
+declare var google: any;
+
+@Component({
+  selector: 'app-city-listing',
+  templateUrl: './city-listing.component.html',
+  styleUrls: ['./city-listing.component.css'],
+  providers: [TitleCasePipe],
+
+  animations: [
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({ height: 0, opacity: 0 }),
+        animate('0.1s ease-out', style({ height: 300, opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ height: 300, opacity: 1 }),
+        animate('0.1s ease-in', style({ height: 0, opacity: 0 })),
+      ]),
+    ]),
+  ],
+})
+export class CityListingComponent implements OnInit, AfterViewInit {
+  @ViewChild('faqsChild', { static: false })
+  private faqsChild: ElementRef<HTMLDivElement>;
+  isTestDivScrolledIntoView: boolean;
+  _showMap: boolean = false;
+  nearBySpaces = new BehaviorSubject<any>([]);
+  faqs = new BehaviorSubject([]);
+  isFaqsVisible: any;
+  spaceType: string;
+  @Input() spaceDetails: any;
+  public space_id;
+  isCoworking: any;
+  staticValue: string;
+  type: string;
+  areaName: string;
+  nearByLocationsList: any;
+  areaLat: any;
+  areaLong: any;
+  currentArea: any;
+  areaLocation: any;
+  isloader: boolean = false;
+
+  @ViewChild('slickMainCarousel', { static: false })
+  slickMainCarousel: SlickCarouselComponent;
+  public mainSliderConfig = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    centerMode: true,
+    dots: false,
+    centerPadding: '0',
+    variableHeight: false,
+    autoplay: false,
+    swipeToSlide: true,
+    infinite: true,
+    // responsive: [
+    //   {
+    //     breakpoint: 900,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       variableHeight: false,
+    //     },
+    //   },
+    // ],
+  };
+  mapType: string;
+  cityForMetaTag: any;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private spaceService: SpaceService,
+    private titleService: Title,
+    private titleCasePipe: TitleCasePipe,
+    public login_dialogRef: MatDialogRef<any>,
+    // private loaderService: LoaderService,
+    public login_viewContainerRef: ViewContainerRef,
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    public viewContainerRef: ViewContainerRef,
+    private _memberService: MemberService,
+    public login_dialog: MatDialog,
+    private metaService: Meta,
+    private ngZone: NgZone,
+    private cdRef: ChangeDetectorRef,
+    private _appGlobals: AppGlobals,
+    @Inject(PLATFORM_ID) private platformId: any,
+    private favouriteWorkSpaceService: FavouriteWorkSpaceService,
+    public inquiryVisit_viewContainerRef: ViewContainerRef,
+    public inquiryVisit_dialogRef: MatDialogRef<any>,
+    public inquiryVisit_dialog: MatDialog,
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
+    this._appGlobals.userDetails.subscribe((user_details) => {
+      console.log(user_details)
+      this.logged_in = user_details.is_logged_in;
+      this.shortlists = user_details.shortlists;
+    });
+  }
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
+  @ViewChild('mapMarker') mapMarker: MapMarker;
+  // @ViewChild('autocomplete', { static: false }) autocompleteElement: ElementRef;
+  // public autocomplete: google.maps.places.Autocomplete;
+  public selected_marker_window;
+  public center;
+  public city_param;
+  // public distance = 10;
+  // public capacity = null;
+  // public geocoder = new google.maps.Geocoder();
+  public city_lat;
+  public city_long;
+  public shortlists = [];
+  public space_count;
+  public page = 1;
+  // public min_price = null;
+  // public max_price = null;
+  public isMobile = false;
+  public zoom = 12;
+  // public type = null;
+  public pages = [];
+  public page_start = 1;
+  public page_size = 24;
+  // public amenities = [];
+  public page_end;
+  public spaces_list: any[] = [];
+  public spaces_list_length;
+  public recommended_spaces: any[] = [];
+  public recommended_spaces_length;
+  public total_pages;
+  public logged_in;
+  public active_page = 1;
+  public shimming: boolean = false;
+  public resource_types = GlobalVariables.resource_types;
+  userId: any;
+  public filter = {
+    capacity: null,
+    // distance: 20,
+    // type: null,
+    min_price: null,
+    max_price: null,
+    amenities: [],
+  };
+  public options: google.maps.MapOptions = {
+    scrollwheel: false,
+    maxZoom: 0,
+    mapTypeControl: false,
+    minZoom: 2,
+    clickableIcons: true,
+  };
+  public markersData = [];
+  public aws_base_url =
+    'https://s3.ap-south-1.amazonaws.com/' +
+    environment.s3_bucket_path +
+    '/details_images/';
+
+  // @HostListener('window:scroll', ['$event'])
+  // isScrolledIntoView() {
+  //   if (this.faqsChild) {
+  //     const rect = this.faqsChild.nativeElement.getBoundingClientRect();
+  //     const topShown = rect.top >= 0;
+  //     const bottomShown = rect.bottom <= window.innerHeight;
+  //     this.isTestDivScrolledIntoView = topShown && bottomShown;
+  //     console.log(this.isTestDivScrolledIntoView);
+  //   }
+  // }
+
+
+  next(evt: any) {
+    evt.stopPropagation()
+    this.slickMainCarousel.slickNext();
+  }
+
+  prev(evt: any) {
+    evt.stopPropagation()
+    this.slickMainCarousel.slickPrev();
+  }
+
+
+  getOriginalUrlParam(value: string): string {
+    return value?.replace(/-/g, ' ').replace(/\b\w/g, char => char?.toLowerCase());
+  }
+
+  hoveredSpaceId: string | null = null;
+
+  onHoverSpace(name: string) {
+    this.hoveredSpaceId = name;
+    this.updateMarkerPriceColor(name,'black');
+  }
+
+  onLeaveSpace(name: string) {
+    this.hoveredSpaceId = null;
+    this.updateMarkerPriceColor(name,'white');
+  }
+
+  ngOnInit(): void {
+    this.removeLoaction()
+    this.route.params.subscribe((params: ParamMap) => {
+      this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
+      this.city_param = this.getOriginalUrlParam(params['city']);
+      this.areaName = this.getOriginalUrlParam(params['area'])
+
+      // const titleCase = (str) => str.replace(/\b\S/g, (t) => t.toUpperCase());
+
+      // const fullPath = this.route.snapshot.url.map(segment => segment.path).join('/');
+      // const segments = fullPath.split('/');
+      // this.spaceType = segments[segments.indexOf('coworking') + 1];
+
+
+
+
+
+      const url = window.location.href;  // Get the full URL
+      const segments2 = url.split('/');
+
+      // Find 'in' in the URL and extract the next static segment ('longTerm')
+      const inIndex = segments2.indexOf('in');
+      if (inIndex !== -1 && segments2.length > inIndex + 1) {
+        this.staticValue = segments2[inIndex + 1];  // Extracts 'longTerm'
+        localStorage.setItem('staticValue', this.staticValue);
+      }
+      if (this.getOriginalUrlParam(params['spaceType']) == 'coworking') {
+        this.titleService.setTitle(`Best Coworking Space in ${this.cityForMetaTag} (${new Date().getFullYear()}) | Compare & Book`);
+        this.metaService.updateTag({ name: "description", content: `Book coworking spaces in ${this.cityForMetaTag} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.` });
+      } else if (this.getOriginalUrlParam(params['spaceType']) == 'coworking-cafe/restaurant' || 'shoot-studio' || 'recording-studio' || 'podcast-studio' ||
+        'activity-space' || 'sports-turf' || 'sports-venue' || 'party-space' || 'banquet-hall' ||
+        'gallery' || 'classroom' || 'private-cabin' || 'meeting-room' || 'training-room' || 'event-space') {
+        this.titleService.setTitle(`Book ${this.getOriginalUrlParam(params['spaceType'])} in ${this.cityForMetaTag} from Rs.20000 /hour`);
+        this.metaService.updateTag({ name: "description", content: `Book ${this.getOriginalUrlParam(params['spaceType'])} spaces in ${this.cityForMetaTag} from Rs.20000 /hour. Find your shared office fast and FREE with Flexo.` });
+      } else if (this.getOriginalUrlParam(params['spaceType']) == 'managed-office' || 'private-office' || 'shared-office' || 'virtual-office') {
+        this.titleService.setTitle(`Office Space for Rent in ${this.cityForMetaTag} | Managed Offices`);
+        this.metaService.updateTag({ name: "description", content: `Explore offices for rent in ${this.cityForMetaTag}. Choose from a wide range of furnished, unfurnished, built-to-suit and managed office options.` });
+      }
+     
+    
+    });
+
+
+    this.zoom = 12;
+    if (window.innerWidth < 700) {
+      this.isMobile = true;
+    }
+    this.getSpacesByCity();
+    // this.geocode();
+    this.spaceService.filteredSpaces$.subscribe(
+      (message) => {
+        this.recommended_spaces = []
+        this.spaces_list = []
+        this.recommended_spaces = message
+      }
+    );
+
+    if(localStorage.getItem('userDetails')){
+      this.isCoworking = sessionStorage.getItem('isCoworking')
+      const userDetail = localStorage.getItem('userDetails');
+      const userDetailObj = JSON.parse(userDetail);
+      this.userId = userDetailObj.id
+    }else{
+      this.userId = 0
+    }
+  }
+
+  openInquiryPopUp() {
+    this.isCoworking = sessionStorage.getItem('isCoworking');
+    let config = new MatDialogConfig();
+    config.viewContainerRef = this.inquiryVisit_viewContainerRef;
+    config.panelClass = 'enq-mod-c';
+    // config.width = '550px';
+    config.data = {
+      spaceId: this.space_id,
+      value: 'listing'
+    };
+
+    this.inquiryVisit_dialogRef = this.inquiryVisit_dialog.open(
+      InquiryComponent,
+      config
+    );
+    this.inquiryVisit_dialogRef.componentInstance.ref = this.inquiryVisit_dialogRef;
+    this.inquiryVisit_dialogRef.componentInstance.flag = 1;
+    this.inquiryVisit_dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.success) {
+        window.location.reload();
+      }
+      this.inquiryVisit_dialogRef = null;
+    });
+  }
+
+  onIntersection(e) {
+    this.isFaqsVisible = e.visible;
+  }
+
+  getArray(length: number): number[] {
+    if (length === 0) {
+      length = 5
+    }
+    return Array(length).fill(0);
+  }
+  openMapInfoWindow(marker: MapMarker, info: any) {
+    this.mapType = this.getType(this.router.url.split("/")[2])
+    this.selected_marker_window = this.spaces_list.find((arr) => arr.name === info.name);
+    console.log(this.markersData);
+    this.infoWindow.open(marker);
+  }
+
+
+  handleImageError(event: any) {
+    const imgElement = event.target as HTMLImageElement
+    imgElement.src = 'assets/images/details_placeholder_image.jpg';
+    imgElement.alt = 'Failed to Load Image';
+  }
+
+
+  ngAfterViewInit(): void {
+    // this.initAutocomplete();
+    if (isPlatformBrowser(this.platformId)) {
+      // this.geocoder = new google.maps.Geocoder();
+      // this.geocode();
+    }
+  }
+
+  showHideMap(e) {
+    this._showMap = e;
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
+
+  // geocode() {
+  //   this.spaceService.getLatlong(this.city_param).then((res) => {
+  //     if (res.results) {
+  //       let location = res.results[0]?.geometry?.location;
+  //       this.city_lat = location?.lat;
+  //       this.city_long = location?.lng;
+  //       this.center = {
+  //         lat: this.city_lat,
+  //         lng: this.city_long,
+  //       };
+  //       this.getSpacesByCity();
+  //       console.log(this.center, "center");
+
+  //     }
+  //   });
+  // };
+
+  openFiltersDialog(obj) {
+    this.filter = obj.filter;
+    this.getSpacesByCity();
+  }
+
+  formatLabel(value: number) {
+    return value;
+  }
+
+
+  calculateCenter(markers) {
+    let totalLat = 0;
+    let totalLng = 0;
+    let numMarkers = markers.length;
+
+    markers.forEach(marker => {
+      totalLat += marker.position.lat;
+      totalLng += marker.position.lng;
+    });
+
+    const centerLat = totalLat / numMarkers;
+    const centerLng = totalLng / numMarkers;
+
+    return { lat: centerLat, lng: centerLng };
+  }
+
+  getSpacesByCity() {
+
+    this.isloader = true;
+
+    if (this.spaceType?.toLowerCase() == 'coworking space') {
+      this.type = "coworking";
+
+    } else if ((this.spaceType?.toLowerCase() == 'coworking cafe/restaurant') || (this.spaceType?.toLowerCase() == 'shoot studio') || (this.spaceType?.toLowerCase() == 'recording studio') || (this.spaceType?.toLowerCase() == 'podcast studio') || (this.spaceType?.toLowerCase() == 'activity space') || (this.spaceType?.toLowerCase() == 'sports turf') || (this.spaceType?.toLowerCase() == 'sports venue') || (this.spaceType?.toLowerCase() == 'party space') || (this.spaceType?.toLowerCase() == 'banquet hall') || (this.spaceType?.toLowerCase() == 'gallery') || (this.spaceType?.toLowerCase() == 'classroom') || (this.spaceType?.toLowerCase() == 'private cabin') || (this.spaceType?.toLowerCase() == 'meeting room') || (this.spaceType?.toLowerCase() == 'training room') || (this.spaceType?.toLowerCase() == 'event space')) {
+      this.type = "shortterm";
+
+    } else if ((this.spaceType?.toLowerCase() == 'managed office' || this.spaceType?.toLowerCase() == 'private office' || this.spaceType?.toLowerCase() == 'shared office' || this.spaceType?.toLowerCase() == 'virtual office')) {
+      this.type = "longTerm";
+
+    } else {
+      this.type = "coworking";
+    }
+
+
+    let city_name = this.city_param;
+    let api_params: any = {
+      city_name,
+      spaceType: this.spaceType === 'none' ? [] : [this.spaceType],
+      type: this.type,
+      userId: this.userId
+    };
+    _.extend(api_params, this.filter);
+
+    if (this.areaName) {
+      api_params.location_name = this.areaName
+      const details = {
+        cityId: this.city_param,
+        spaceType: this.spaceType
+      }
+      this.spaceService.getNearBySpaces(details).pipe(finalize(() => { this.isloader = false })).subscribe(
+        (response) => {
+          if (this.areaName && response.length) {
+            let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
+            if (!isExist) {
+              this.router.navigate(['/error'])
+            }
+            const currentArea = response.find(val => val.location_name.toLowerCase() === this.areaName)
+            //  api_params.city_lat = String(currentArea?.lat)
+            //  api_params.city_long = String(currentArea?.longi)
+            api_params.city_lat = 0
+            api_params.city_long = 0
+          }
+
+
+          this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
+            this.nearBySpaces.next(res.faqs);
+            this.spaces_list = Object.assign([], res.data);
+
+
+            this.recommended_spaces = Object.assign([], res.recommended_spaces);
+            this.space_count = res.space_count;
+            if (this.spaces_list.length) {
+              this.page_end =
+                this.space_count < this.page_size * this.page
+                  ? this.space_count
+                  : this.page_size * this.page;
+              this.total_pages =
+                this.space_count % 2 == 0
+                  ? this.space_count / this.page_size
+                  : Math.floor(this.space_count / this.page_size) + 1;
+              this.pages.splice(0, this.pages.length);
+              for (let i = 1; i <= this.total_pages; i++) {
+                this.pages.push(i);
+              }
+              this.markersData = [];
+              this.spaces_list.forEach((element) => {
+                element.rating_array = [];
+                element.empty_star_array = [];
+                element.rating_floor = Math.floor(element.rating);
+                element.empty_rating_stars = 5 - element.rating;
+                for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+                  element.empty_star_array.push(k);
+                }
+                for (let r = 0; r < Math.floor(element.rating); r++) {
+                  element.rating_array.push(r);
+                }
+                let price;
+                
+            if (this.type === 'coworking') {
+              if (element.flexible_desk_price === null) {
+                price = element.privatecabin_price
+              } else{
+                price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price 
+              }
+            } else {
+              price = this.formatCurrency(element.originalPrice) 
+            }
+                // let duration = this.type === 'longterm' ? 'month' : this.type === 'shortterm' ? 'hour' : this.type === 'coworking' && element?.originalPrice > 0 ? 'day': 'seat'
+            let obj = {
+              position: {
+                lat: element.lat,
+                lng: element.longi,
+              },
+              title: element.name,
+              options: {
+                price:price,
+                // duration:duration,
+                draggable: false,
+                icon: {
+                  url: this.createPriceTagIcon(`₹${price}`,'white'),
+                  scaledSize: {
+                    width: `₹${price}`.length * 10 + 20,
+                    height: 30, 
+                  }
+                }
+              },
+              info: {
+                map_image_url:
+                  this.aws_base_url + element.id + '/' + element.images[0],
+                name: element.name,
+                url: '/details/' + element.link_name,
+              },
+            };
+            this.markersData.push(obj);
+              });
+              console.log(this.markersData);
+              this.center = this.calculateCenter(this.markersData)
+            } else {
+              this.recommended_spaces_length = this.recommended_spaces.length;
+              this.recommended_spaces.forEach((element) => {
+                element.rating_array = [];
+                element.empty_star_array = [];
+                element.rating_floor = Math.floor(element.rating);
+                element.empty_rating_stars = 5 - element.rating;
+                for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+                  element.empty_star_array.push(k);
+                }
+                for (let r = 0; r < Math.floor(element.rating); r++) {
+                  element.rating_array.push(r);
+                }
+              });
+            }
+            if (this.shortlists && this.shortlists.length) {
+              this.spaces_list.forEach((element) => {
+                element.is_shortlisted = false;
+                if (this.shortlists && this.shortlists.length > 0) {
+                  for (let j = 1; j <= this.shortlists.length; j++) {
+                    if (this.shortlists[j] == element.id) {
+                      element.is_shortlisted = true;
+                    }
+                  }
+                }
+              });
+            }
+            this.ngZone.run(() => this.cdRef.detectChanges());
+            this.shimming = false;
+          });
+        })
+
+
+    } else {
+      // api_params.city_lat = localStorage.getItem("lat")
+      // api_params.city_long= localStorage.getItem("long")
+      api_params.city_lat = localStorage.getItem("locationLat") ?? 0
+      api_params.city_long = localStorage.getItem("locationLong") ?? 0
+
+      this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
+        this.nearBySpaces.next(res.faqs);
+        this.spaces_list = Object.assign([], res.data);
+
+
+        this.recommended_spaces = Object.assign([], res.recommended_spaces);
+        this.space_count = res.space_count;
+        if (this.spaces_list.length) {
+          this.page_end =
+            this.space_count < this.page_size * this.page
+              ? this.space_count
+              : this.page_size * this.page;
+          this.total_pages =
+            this.space_count % 2 == 0
+              ? this.space_count / this.page_size
+              : Math.floor(this.space_count / this.page_size) + 1;
+          this.pages.splice(0, this.pages.length);
+          for (let i = 1; i <= this.total_pages; i++) {
+            this.pages.push(i);
+          }
+          this.markersData = [];
+          this.spaces_list.forEach((element) => {
+            element.rating_array = [];
+            element.empty_star_array = [];
+            element.rating_floor = Math.floor(element.rating);
+            element.empty_rating_stars = 5 - element.rating;
+            for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+              element.empty_star_array.push(k);
+            }
+            for (let r = 0; r < Math.floor(element.rating); r++) {
+              element.rating_array.push(r);
+            }
+            let price;
+            
+            if (this.type === 'coworking') {
+              if (element.flexible_desk_price === null) {
+                price = element.privatecabin_price
+              } else{
+                price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price 
+              }
+            } else {
+              price = this.formatCurrency(element.originalPrice)
+            }
+            // let duration = this.type === 'longterm' ? 'month' : this.type === 'shortterm' ? 'hour' : this.type === 'coworking' && element?.originalPrice > 0 ? 'day' : 'seat' 
+            let obj = {
+              position: {
+                lat: element.lat,
+                lng: element.longi,
+              },
+              title: element.name,
+              options: {
+                price:price,
+                // duration:duration,
+                draggable: false,
+                icon: {
+                  url: this.createPriceTagIcon(`₹${price}`,'white'),
+                  scaledSize: {
+                    width: `₹${price}`.length * 10 + 20,
+                    height: 30, 
+                  }
+                }
+              },
+              info: {
+                map_image_url:
+                  this.aws_base_url + element.id + '/' + element.images[0],
+                name: element.name,
+                url: '/details/' + element.link_name,
+              },
+            };
+            this.markersData.push(obj);
+          });
+          console.log(this.markersData);
+          this.center = this.calculateCenter(this.markersData)
+        } else {
+          this.recommended_spaces_length = this.recommended_spaces.length;
+          this.recommended_spaces.forEach((element) => {
+            element.rating_array = [];
+            element.empty_star_array = [];
+            element.rating_floor = Math.floor(element.rating);
+            element.empty_rating_stars = 5 - element.rating;
+            for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+              element.empty_star_array.push(k);
+            }
+            for (let r = 0; r < Math.floor(element.rating); r++) {
+              element.rating_array.push(r);
+            }
+          });
+        }
+        if (this.shortlists && this.shortlists.length) {
+          this.spaces_list.forEach((element) => {
+            element.is_shortlisted = false;
+            if (this.shortlists && this.shortlists.length > 0) {
+              for (let j = 1; j <= this.shortlists.length; j++) {
+                if (this.shortlists[j] == element.id) {
+                  element.is_shortlisted = true;
+                }
+              }
+            }
+          });                                                                                                                                                                                                                                                                                                   
+        }
+        this.ngZone.run(() => this.cdRef.detectChanges());
+        this.shimming = false;
+      });
+    }
+
+  }
+  
+  updateMarkerPriceColor(name: string, color: string) {
+    const markerIndex = this.markersData.findIndex(marker => marker.title === name);
+    
+    if (markerIndex !== -1) {
+        const newIconUrl = this.createPriceTagIcon(`₹${this.markersData[markerIndex].options.price}`, color);
+
+        this.markersData[markerIndex] = {
+            ...this.markersData[markerIndex],
+            options: {
+                ...this.markersData[markerIndex].options,
+                icon: {
+                    url: newIconUrl,
+                    scaledSize: {
+                      width: `₹${this.markersData[markerIndex].options.price}`.length * 10 + 20,
+                      height: 30, 
+                    }
+                }
+            }
+        };
+    }
+  }
+
+  createPriceTagIcon(price: string, textColor: string): string {
+    const textLength = price.length;
+    const dynamicWidth = textLength * 10 +20;
+    const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${dynamicWidth}" height="30">
+      <rect x="0" y="0" width="${dynamicWidth}" height="30" rx="20" style="fill:#F76900;" />
+      <text x="50%" y="50%" alignment-baseline="central" text-anchor="middle"
+            font-size="16" dominant-baseline="middle" font-weight="900"  letter-spacing="1.5px" fill="${textColor}" font-family="Poppins, sans-serif">${price}</text>
+    </svg>
+  `;
+
+    return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+  }
+
+   formatCurrency(value) {
+  if (isNaN(value)) return 'Invalid number';
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+  shortList(obj) {
+    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+    if (isLoggedIn /* this.logged_in */) {
+      this.addRemoveFavorite(obj.id)
+      this._memberService.addShortlists(obj.id).then((data) => {
+        // this.openSnackBar(data.message, 'Dismiss');
+        // obj.is_shortlisted = !!!obj.is_shortlisted;
+        this.spaces_list.forEach((element) => {
+          if (element.id == obj.id) {
+            element.is_shortlisted = data.new_shortlist;
+          }
+        });
+      });
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000);
+    } else {
+      this.openLoginDialog();
+    }
+  }
+
+  addRemoveFavorite(space_id) {
+    this.favouriteWorkSpaceService.addRemoveFavouriteWorkSpace(space_id).subscribe((result: any) => {
+      this.openSnackBar(result.message, 'Dismiss');
+    }, error => {
+      console.log('removeFavouriteWorkSpace | error : ', error);
+    })
+  }
+
+  pagination(num) {
+    this.page_start = num * this.page_size - (this.page_size - 1);
+    this.page_end =
+      this.space_count < num * this.page_size
+        ? this.space_count
+        : num * this.page_size;
+    this.active_page = num;
+    this.page = num;
+    this.getSpacesByCity();
+  }
+
+  openLoginDialog() {
+    let config = new MatDialogConfig();
+    config.viewContainerRef = this.login_viewContainerRef;
+    config.panelClass = 'dialogClass';
+    config.minWidth = '380px';
+
+    this.login_dialogRef = this.login_dialog.open(LoginDialog, config);
+    this.login_dialogRef.componentInstance.ref = this.login_dialogRef;
+    this.login_dialogRef.componentInstance.flag = 1;
+    // this.login_dialogRef.componentInstance.selected_teamcabin = teamcabin_obj;
+    // this.login_dialogRef.componentInstance.action_type = action_type;
+    this.login_dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.success) {
+        window.location.reload();
+      }
+      this.login_dialogRef = null;
+    });
+  }
+
+
+  removeLoaction() {
+    localStorage.removeItem("locationLat")
+    localStorage.removeItem("locationLong")
+  }
+  ngOnDestroy(): void {
+    this.removeLoaction()
+    let arr = ["range", "distance", "min_price", "max_price"]
+    for (let index = 0; index < arr.length; index++) {
+      localStorage.removeItem(arr[index])
+    }
+  }
+
+  formatUrl(value: string): string {
+    return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
+  }
+
+  getType(spaceType: string): string {
+    const shortTermSpaces = [
+      'coworking-cafe/restaurant', 'shoot-studio', 'recording-studio', 'podcast-studio',
+      'activity-space', 'sports-turf', 'sports-venue', 'party-space', 'banquet-hall',
+      'gallery', 'classroom', 'private-cabin', 'meeting-room', 'training-room', 'event-space'
+    ];
+    const longTermSpaces = [
+      'managed-office', 'private-office', 'shared-office', 'virtual-office'
+    ];
+    if (spaceType === 'coworking-space') {
+      return "coworking";
+    } else if (shortTermSpaces.includes(spaceType)) {
+      return "shortterm";
+    } else if (longTermSpaces.includes(spaceType)) {
+      return "longterm";
+    } else {
+      return "coworking";
+    }
+  }
+
+  onSpaceNameClicked(e: any) {
+    let type = this.getType(this.router.url.split("/")[2])
+    if (type === 'coworking') {
+      window.open(
+        `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
+        '_blank'
+      );
+    } else {
+      window.open(
+        `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.contact_city_name)}/${this.formatUrl(e.location_name)}/${e.id}`,
+        '_blank'
+      );
+    }
+  }
+}
+

@@ -1,0 +1,93 @@
+/* .scheduled-visit-list {
+  align-items: center;
+}
+
+.scheduled-visit-list-container h2 {
+  padding: 20px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 25px;
+  padding-left: 20px;
+}
+@media only screen and (max-width: 900px) {
+  .scheduled-visit-list-container {
+    font-size: 25px 0;
+  }
+  .scheduled-visit-list-container h2 {
+    font-size: 25px;
+  }
+}
+
+.schedule-visit-main-div {
+  background: #f9f9f9;
+  border-radius: 5px;
+  padding: 15px 20px;
+  min-height: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btn-icn {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.btn-icn-edit:hover {
+  border: 1px solid #0abb87;
+  color: #ffff;
+  background-color: #0abb87;
+}
+
+.btn-icn-delete:hover {
+  border: 1px solid #fd397a;
+  color: #ffff;
+  background-color: #fd397a;
+}
+ */
+
+.schedule-visit-list-container {
+  align-items: center;
+}
+
+.schedule-visit-list-container h2 {
+  padding-top: 20px;
+  padding-left: 15px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 25px;
+}
+.btn-icn-div {
+  position: absolute;
+  padding-left: 77%;
+  padding-top: 15px;
+}
+.btn-icn {
+  background-color: #ffff;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.btn-icn-edit:hover {
+  border: 1px solid #0abb87;
+  color: #ffff;
+  background-color: #0abb87;
+}
+
+.btn-icn-delete:hover {
+  border: 1px solid #fd397a;
+  color: #ffff;
+  background-color: #fd397a;
+}
+
+@media only screen and (max-width: 900px) {
+  .schedule-visit-list-container {
+    font-size: 25px 0;
+  }
+  .schedule-visit-list-container h2 {
+    font-size: 25px;
+  }
+}

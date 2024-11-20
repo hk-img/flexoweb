@@ -1,0 +1,7 @@
+.f-w-mdl img{
+    margin: 0 auto !important;
+}
+
+::ng-deep .cdk-overlay-pane{
+    /* width: 370px !important; */
+}

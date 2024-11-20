@@ -1,0 +1,23 @@
+<div class="f-w-mdl">
+    <img src="assets/images/thanku.png" alt="">
+    <!-- <h4></h4> -->
+    <h5 *ngIf="data?.isinstant == 1" style="font-size: 18px;">Thank You For Your Booking!</h5>
+    <p *ngIf="data?.isinstant == 1" class="mt-2" style="font-size: 16px;">Your Booking Is Confirmed! You will receive details about the space via email and whatsapp.</p>
+    
+    <h5 *ngIf="data?.isinstant == 0" style="font-size: 18px;">Thank You For Your Booking Request!</h5>
+     <p *ngIf="data?.isinstant == 0" class="mt-2" style="font-size: 16px;">Your booking request has been sent to the host. Once the host accepts your booking request, you will receive a payment link via email. If your requested date and time cannot be accommodated, you will be promptly notified.</p>
+
+     <p *ngIf="data?.category == 'inquirenow'" class="mt-2" style="font-size: 16px;">{{data.title}}</p>
+
+     <p *ngIf="data?.onCategory == 'coworking'" class="mt-2" style="font-size: 16px;">{{data.title}}</p>
+
+     <p *ngIf="data?.visit == 'coworking-visit'" class="mt-2" style="font-size: 16px;">{{data.title}}</p>
+     
+     <p *ngIf="data?.status == 'review'" class="mt-2" style="font-size: 16px;">{{data.title}}</p>
+     
+     <p *ngIf="data?.visit != 'coworking-visit' && data?.title == 'Visit scheduled successfully. Our team will get back to you shortly.'" class="mt-2" style="font-size: 16px;">{{data.title}}</p>
+
+    <div class="btn-grp-c">
+      <button  class="custum-btn" style="width: 100px; font-size: 18px;" (click)="closeDialog(null)">Ok</button>
+    </div>
+  </div>

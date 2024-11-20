@@ -1,0 +1,531 @@
+<div class="login-register" *ngIf="userAction=='register' && !otpReceived && !showUserRegister && !createPassword">
+  <div class="login-register-header">
+    <h2>Register/Create an <span> Account </span></h2>
+    <button (click)="closeDialog(null)" type="button" class="btn-close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="login-register-input
+  ">
+    <form [formGroup]="mobileNumberForm" class="w-100 mb-3">
+      <div class="col-md-12" *ngIf="selectedLoginType==LoginTypeEnum.Mobile">
+        <div class="pm-single">
+          <div class="form-group">
+            <p style="margin-bottom: 4px;">Mobile<span class="text-danger">*</span></p>
+            <div class="input-group input-group-lg">
+              <span class="input-group-text form-control" style="flex-grow: .5;" id="basic-addon3">
+                <ng-select #select (change)="onCountryCodeChange($event)" formControlName="phone_code"
+                  [searchable]="false">
+                  <ng-template ng-header-tmp>
+                    <input style="width: 100%; line-height: 24px" type="text"
+                      (input)="select.filter($event.target.value)" />
+                  </ng-template>
+                  <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}" alt=""
+                      width="20px"> {{list.dialcode}} &nbsp; {{list.name}} </ng-option>
+                </ng-select>
+              </span>
+              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4"
+               formControlName="mobile">
+              <mat-error class="col-12" style="margin-top: 20px; padding: 0;" *ngIf="mobileFormControl['mobile']?.touched && !this.mobileFormControl['mobile'].valid">Please enter mobile number</mat-error>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-register-input-single" *ngIf="selectedLoginType==LoginTypeEnum.Email">
+        <p style="margin-bottom: 4px; font-weight: 600;">Email<span class="text-danger">*</span></p>
+        <mat-form-field appearance="outline" class="w-100">
+          <!-- <mat-label>Email</mat-label> -->
+          <input matInput matInput formControlName="email" placeholder="Enter email" />
+        </mat-form-field>
+        <mat-error class="col-12" style="padding: 0;" *ngIf="mobileFormControl['email']?.touched && !this.mobileFormControl['email'].valid">Please enter a valid email</mat-error>
+      </div>
+    </form>
+    <button type="button" [ngClass]="isLoading?'disabled':''" (click)="sendMobileOTP()" class="custum-btn">Get
+      OTP</button>
+    <!-- <button type="button" (click)="selectedLoginType==LoginTypeEnum.Mobile?sendMobileOTP():sendEmailOTP()" class="custum-btn">Get
+      OTP 000</button> -->
+    <div class="login-register-inutp-other">
+      <div class="login-register-inutp-other-heading">
+        <p>or Continue with</p>
+      </div>
+      <div class="login-register-input-other-grp">
+
+        <asl-google-signin-button type="standard" theme="filled_blue" text="signup_with"
+          data-size="large"></asl-google-signin-button>
+        <!-- <span> Google
+        <span 
+          class="outline-btn login-register-input-other-grp-btn">
+          </span></span> -->
+        <span *ngIf="selectedLoginType==LoginTypeEnum.Mobile"
+          (click)="destroyLibrary();onLibraryCheck();handleLoginMethod(LoginTypeEnum.Email)"
+          class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/mail-icon.png" alt> <span>
+            Mail
+          </span></span>
+        <span *ngIf="selectedLoginType==LoginTypeEnum.Email"
+          (click)="onLibraryCheck();handleLoginMethod(LoginTypeEnum.Mobile)"
+          class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/call-ph.png" alt> <span>
+            Mobile
+          </span></span>
+
+      </div>
+      <div class="login-register-inutp-other-btn">
+        <p>Already have an account ?</p>
+        <button [ngClass]="isLoading?'disabled':''" (click)="onLibraryCheck();userAction='login'" type="button"
+          class="custum-btn login-btn">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- otp verification -->
+<div class="login-register" *ngIf="otpReceived">
+  <div class="login-register-header">
+    <h2>Register/Create an <span> Account </span></h2>
+    <button type="button" (click)="closeDialog(null)" class="btn-close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="login-register-input">
+    <div class="otp-heading">
+      <h4>OTP Verification</h4>
+      <p>Enter the OTP send to <span *ngIf="selectedLoginType === 'Mobile'">{{"+" +
+          selectedCountryData.dialCode}}</span><span>
+          {{selectedLoginType==LoginTypeEnum.Mobile?userDetail?.mobile||
+          mobileNumberForm.value.mobile:(userDetail?.email||mobileNumberForm.value.email)}}</span></p>
+    </div>
+    <form [formGroup]="otpForm" class="w-100 otp-from-c">
+      <div class="otp-inputs">
+        <input (keyup)="onDigitInput($event)" #input0 maxlength="1" formControlName="otp1" type="text" placeholder="0">
+        <input (keyup)="onDigitInput($event)" #input1 maxlength="1" formControlName="otp2" type="text" placeholder="0">
+        <input (keyup)="onDigitInput($event)" #input2 maxlength="1" formControlName="otp3" type="text" placeholder="0">
+        <input maxlength="1" (keyup)="onDigitInput($event)" #input2 formControlName="otp4" #input3 type="text"
+          placeholder="0">
+      </div>
+      <mat-error
+        *ngIf="otpControl['otp1']?.errors?.pattern ||otpControl['otp2']?.errors?.pattern||otpControl['otp3']?.errors?.pattern||otpControl['otp4']?.errors?.pattern ">Please
+        enter Valid otp</mat-error>
+      <mat-error
+        *ngIf="otpControl['otp1']?.errors?.required && otpControl['otp1']?.touched  ||otpControl['otp2']?.errors?.required&& otpControl['otp2']?.touched||otpControl['otp3']?.errors?.required&& otpControl['otp3']?.touched||otpControl['otp4']?.errors?.required&& otpControl['otp4']?.touched ">Please
+        enter otp</mat-error>
+    </form>
+    <div class="login-register-inutp-other-btn otp-resend">
+      <p>Didn’t receive the OTP</p>
+      <button [ngClass]="isLoading || counter!=0 ?'disabled like-1':''" type="button" (click)="resendOtp()"
+        class="otp-resend-btn mr-2"> Resend OTP</button>
+      <span class="timer" *ngIf="counter!=0">in {{transform(counter)}} Sec</span>
+    </div>
+    <button [ngClass]="isLoading?'disabled':''" type="button" (click)="verifyOtp()" class="custum-btn">Verify
+      OTP</button>
+  </div>
+</div>
+<!-- create account enter name -->
+<div class="login-register" *ngIf="showUserRegister">
+  <div class="login-register-header">
+    <h2>Register/Create an <span> Account </span></h2>
+    <button type="button" (click)="closeDialog(null)" class="btn-close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="login-register-input">
+    <div class="otp-success" *ngIf="!this.socialUser?.email">
+      <img src="assets/images/tick.png" alt *ngIf="!this.socialUser?.email">
+      <h5 *ngIf="!this.socialUser?.email">OTP Verified Successfully</h5>
+    </div>
+    <form [formGroup]="userEmailRegisterForm">
+      <div class="login-register-all-input-group">
+        <div class="login-register-input-single">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>First Name</mat-label>
+            <input onkeypress="return /[a-zA-Z ]/.test(event.key)" [maxLength]="20" matInput type="input"
+              name="First Name" formControlName="firstName" placeholder="First Name" [readonly]="socialUserFirstName">
+          </mat-form-field>
+          <mat-error
+            *ngIf="userEmailRegisterControls.firstName?.errors?.required && userEmailRegisterControls.firstName?.touched ">Please
+            enter first name</mat-error>
+          <mat-error
+            *ngIf="userEmailRegisterControls.firstName?.errors?.pattern && userEmailRegisterControls.firstName?.touched ">Please
+            enter valid first name</mat-error>
+        </div>
+        <div class="login-register-input-single">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Last Name</mat-label>
+            <input onkeypress="return /[a-zA-Z ]/.test(event.key)" [maxLength]="20" matInput type="input"
+              name="Last Name" formControlName="lastName" placeholder="Last Name" [readonly]="socialUserLastName">
+          </mat-form-field>
+          <mat-error
+            *ngIf="userEmailRegisterControls['lastName']?.errors?.required && userEmailRegisterControls['lastName']?.touched">Please
+            enter last name</mat-error>
+          <mat-error
+            *ngIf="userEmailRegisterControls['lastName']?.errors?.pattern && userEmailRegisterControls['lastName']?.touched">Please
+            enter valid last name</mat-error>
+        </div>
+      </div>
+      <div class="login-register-all-input-group">
+        <div class="login-register-input-single" *ngIf="this.selectedLoginType === LoginTypeEnum.Mobile">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Email</mat-label>
+            <input matInput type="input" name="Email" formControlName="email" placeholder="Email" required>
+          </mat-form-field>
+          <mat-error
+            *ngIf="userEmailRegisterControls['email']?.errors?.required && userEmailRegisterControls['email']?.touched">Please
+            enter email</mat-error>
+          <mat-error
+            *ngIf="userEmailRegisterControls['email']?.errors?.email && userEmailRegisterControls['email']?.touched">Please
+            enter valid email</mat-error>
+        </div>
+        <div class="login-register-input-single mt-1"
+          *ngIf="(this.selectedLoginType === LoginTypeEnum.Google) || (this.selectedLoginType === LoginTypeEnum.Email)">
+          
+          <div class="pm-single">
+            <div class="form-group">
+              <div class="input-group input-group-lg"  [ngClass]="value && 'flag-border' ">
+                <span class="input-group-text form-control" style="flex-grow: .5;" id="basic-addon3">
+                  <ng-select class="select-country" #select (change)="onCountryCodeChange($event)" formControlName="phone_code"
+                    [searchable]="false">
+                    <ng-template ng-header-tmp>
+                      <input style="width: 100%; line-height: 24px" type="text"
+                        (input)="select.filter($event.target.value)" />
+                    </ng-template>
+                    <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}" alt=""
+                        width="20px"> {{list.dialcode}} &nbsp; {{list.name}} </ng-option>
+                  </ng-select>
+                </span>
+                <!-- <input type="text" placeholder="Mobile" class="form-control mobile-input" id="basic-url" aria-describedby="basic-addon3 basic-addon4"
+                   formControlName="mobile"> -->
+                   <div class="input-group2" style="width: 16px;">
+                    <input onkeypress="return /[0-9]/i.test(event.key)" class="inputt" type="text" required formControlName="mobile" maxlength="15"  placeholder="Mobile *" (focus)="value=true" (blur)="value=false">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Mobile *</label>
+                  </div>
+                  <!-- <mat-error
+                  *ngIf="userEmailRegisterControls['mobile']?.errors?.required && userEmailRegisterControls['mobile']?.touched">Please
+                  enter last name</mat-error> -->
+              </div>
+            </div>
+          </div>          
+          
+        </div>
+        <div class="login-register-input-single">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Company Name</mat-label>
+            <input matInput type="input" name="companyName" formControlName="companyName" placeholder="Company Name">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <button [ngClass]="isLoading?'disabled':''" (click)="registerUser()" type="button"
+      class="custum-btn">Register</button>
+  </div>
+</div>
+
+<div class="login-register" *ngIf="createPassword">
+  <div class="login-register-header">
+    <h2>Register/Create an <span> Account </span></h2>
+    <button type="button" (click)="closeDialog(null)" class="btn-close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="login-register-input">
+    <!-- <div class="otp-success">
+      <img src="../../assets/images/tick.png" alt>
+      <h5>OTP Verified Successfully</h5>
+    </div> -->
+    <form [formGroup]="userCreatePassForm">
+      <div class="login-register-input-single">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>New Password</mat-label>
+          <input matInput type="input" name="NewPassworde" formControlName="newPassword" placeholder="New Password">
+        </mat-form-field>
+        <mat-error
+          *ngIf="userCreatePassFormControls['newPassword']?.errors?.required && userCreatePassFormControls['newPassword']?.touched">Please
+          enter password</mat-error>
+      </div>
+
+      <div class="login-register-input-single">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="input" name="confirm Password" formControlName="confirmPassword"
+            placeholder="confirmPassword">
+        </mat-form-field>
+        <mat-error
+          *ngIf="userCreatePassFormControls['confirmPassword']?.errors?.required && userCreatePassFormControls['confirmPassword']?.touched">Please
+          enter confirm password</mat-error>
+      </div>
+      <!-- <div class="login-register-all-input-group">
+        
+      </div>
+      <div class="login-register-all-input-group">
+        
+      </div> -->
+    </form>
+    <button [ngClass]="isLoading?'disabled':''" (click)="createUserPassword()" type="button"
+      class="custum-btn">Continue</button>
+  </div>
+</div>
+<!-- login part -->
+<div class="login-register" *ngIf="userAction=='login'">
+  <div class="login-register-header">
+    <h2>{{isForgotPass|| emailOtpForgotReceived?'Forgot Password':(resetPasswordForLogin?'Reset Password':'Login')}}
+    </h2>
+    <button (click)="closeDialog(null)" type="button" class="btn-close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="login-register-input">
+    <form [formGroup]="emailForm"
+      *ngIf="!isForgotPass && !emailOtpForgotReceived && !resetPasswordForLogin && loginType==LoginTypeEnum.Email && !loginOtpReceived"
+      class="w-100">
+      <div class="login-register-input-single">
+        <a (click)="onLibraryCheck();loginType=LoginTypeEnum.Mobile" class="back-btn"> <i class="fa fa-chevron-left"
+            aria-hidden="true"></i> <span> Back </span> </a>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Enter Email">
+        </mat-form-field>
+        <mat-error *ngIf="emailFormControl['email']?.errors?.required">Please
+          enter email</mat-error>
+        <mat-error *ngIf="emailFormControl['email']?.errors?.email">Please
+          enter valid email</mat-error>
+      </div>
+      <div class="login-register-input-single">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword1 ? 'password' : 'text'" id="password1" formControlName="password"
+            placeholder="Enter Password">
+          <i class="fa fa-eye fa_eye_input" id="togglePassword1"
+            (click)="togglePasswordVisibility('password1', 'togglePassword1')" aria-hidden="true"></i>
+          <mat-error *ngIf="emailFormControl['password']?.errors?.required">Password is required.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="login-register-inutp-other-btn otp-resend forgot-passwpord">
+        <button [ngClass]="isLoading?'disabled':''" type="button" (click)="isForgotPass=true" class="otp-resend-btn">
+          Forgot Password </button>
+      </div>
+      <button [ngClass]="isLoading?'disabled':''" type="button" (click)="userLogin()" class="custum-btn">Login</button>
+      <!-- <div class="login-register-inutp-other">
+          <div class="login-register-inutp-other-heading">
+            <p>or Continue with</p>
+          </div>
+          <div class="login-register-input-other-grp">
+            <span (click)="googleLogin()"
+              class="outline-btn login-register-input-other-grp-btn"> <img
+                src="../../assets/images/google-icon.png" alt> <span> Google
+              </span></span>
+            <span *ngIf="selectedLoginType==LoginTypeEnum.Mobile"
+              (click)="handleLoginMethod(LoginTypeEnum.Email)"
+              class="outline-btn login-register-input-other-grp-btn"> <img
+                src="../../assets/images/mail-icon.png" alt> <span> Mail
+              </span></span>
+            <span *ngIf="selectedLoginType==LoginTypeEnum.Email"
+              (click)="handleLoginMethod(LoginTypeEnum.Mobile)"
+              class="outline-btn login-register-input-other-grp-btn"> <img
+                src="../../assets/images/call-ph.png" alt> <span> Mobile
+              </span></span>
+    
+          </div>
+          <div class="login-register-inutp-other-btn">
+            <p>Have no account ?</p>
+            <button type="button" (click)="userAction='register'"
+              class="custum-btn login-btn"
+              (click)="handleLoginMethod(LoginTypeEnum.Mobile)">Register</button>
+          </div>
+        </div> -->
+
+
+    </form>
+
+    <form [formGroup]="mobileLoginForm" *ngIf="loginType==LoginTypeEnum.Mobile && !loginOtpReceived">
+      <div class="col-md-12">
+        <div class="pm-single">
+          <div class="form-group">
+            <p style="margin-bottom: 4px;">Mobile<span class="text-danger">*</span></p>
+            <div class="input-group input-group-lg">
+              <span class="input-group-text form-control" style="flex-grow: .5;" id="basic-addon3">
+                <ng-select #select (change)="onCountryCodeChange($event)" formControlName="phone_code"
+                  [searchable]="false">
+                  <ng-template ng-header-tmp>
+                    <input style="width: 100%; line-height: 24px" type="text"
+                      (input)="select.filter($event.target.value)" />
+                  </ng-template>
+                  <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}" alt=""
+                      width="20px"> {{list.dialcode}} &nbsp; {{list.name}} </ng-option>
+                </ng-select>
+              </span>
+              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4"
+                 formControlName="mobile">
+                <mat-error class="col-12" style="margin-top: 20px;" *ngIf="!this.mobileLoginForm.valid && this.mobileLoginForm.get('mobile')?.touched">Please enter mobile number</mat-error>
+            </div>
+          </div>
+        </div>
+      </div>      
+
+      <button [ngClass]="isLoading?'disabled':''" type="button" (click)="sendMobileLoginOTP()"
+        class="mt-3 custum-btn">Get
+        OTP</button>
+
+      <div class="login-register-inutp-other">
+        <div class="login-register-inutp-other-heading">
+          <p>or Continue with</p>
+        </div>
+        <div class="login-register-input-other-grp">
+          <!-- <span (click)="googleLogin()"
+        class="outline-btn login-register-input-other-grp-btn"> <img
+          src="../../assets/images/google-icon.png" alt> <span> Google
+        </span></span> -->
+          <!-- <span 
+        class="outline-btn login-register-input-other-grp-btn"><asl-google-signin-button></asl-google-signin-button> <span> Google
+        </span></span> -->
+
+          <asl-google-signin-button type="standard" theme="filled_blue" text="signin_with"
+            data-size="large"></asl-google-signin-button>
+
+
+
+
+          <span *ngIf="loginType==LoginTypeEnum.Mobile" (click)="loginType=LoginTypeEnum.Email"
+            class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/mail-icon.png" alt> <span>
+              Mail
+            </span></span>
+
+        </div>
+        <div class="login-register-inutp-other-btn">
+          <p>Have no account ?</p>
+          <button [ngClass]="isLoading?'disabled':''" type="button" (click)="userAction='register'"
+            class="custum-btn login-btn"
+            (click)="onLibraryCheck();handleLoginMethod(LoginTypeEnum.Mobile)">Register</button>
+        </div>
+      </div>
+
+
+
+    </form>
+
+    <div class="login-register" *ngIf="loginOtpReceived">
+      <div class="login-register-input">
+        <div class="otp-heading">
+          <h4>OTP Verification</h4>
+          <p>Enter the OTP send to <span *ngIf="selectedLoginType === 'Mobile'">{{"+" +
+              selectedCountryData.dialCode}}</span> <span>
+              {{loginType==LoginTypeEnum.Mobile?(userDetail?.mobile ||
+              mobileLoginForm.value.mobile):userDetail?.email||mobileNumberForm.value.email}}</span></p>
+        </div>
+        <form [formGroup]="loginVerifyForm" class="w-100">
+          <div class="otp-inputs">
+            <input (keyup)="onDigitInput($event)" #input0 maxlength="1" formControlName="otp1" type="text"
+              placeholder="0">
+            <input (keyup)="onDigitInput($event)" #input1 maxlength="1" formControlName="otp2" type="text"
+              placeholder="0">
+            <input (keyup)="onDigitInput($event)" #input2 maxlength="1" formControlName="otp3" type="text"
+              placeholder="0">
+            <input (keyup)="onDigitInput($event)" #input3 maxlength="1" formControlName="otp4" type="text"
+              placeholder="0">
+          </div>
+          <mat-error
+            *ngIf="loginVerifyFormControls['otp1']?.errors?.pattern ||loginVerifyFormControls['otp2']?.errors?.pattern||loginVerifyFormControls['otp3']?.errors?.pattern||loginVerifyFormControls['otp4']?.errors?.pattern ">Please
+            enter Valid otp</mat-error>
+          <mat-error
+            *ngIf="loginVerifyFormControls['otp1']?.errors?.required && loginVerifyFormControls['otp1']?.touched  ||loginVerifyFormControls['otp2']?.errors?.required&& loginVerifyFormControls['otp2']?.touched||loginVerifyFormControls['otp3']?.errors?.required&& loginVerifyFormControls['otp3']?.touched||loginVerifyFormControls['otp4']?.errors?.required&& loginVerifyFormControls['otp4']?.touched ">Please
+            enter otp</mat-error>
+        </form>
+        <div class="login-register-inutp-other-btn otp-resend">
+          <p>Didn’t receive the OTP</p>
+          <button [ngClass]="isLoading|| counter!=0 ?'disabled like-1':''" type="button" (click)="sendMobileLoginOTP()"
+            class="otp-resend-btn"> Resend OTP</button>
+          <span class="timer" *ngIf="counter!=0">in {{transform(counter)}} Sec</span>
+        </div>
+        <button [ngClass]="isLoading?'disabled':''" type="button" (click)="verifyLoginOtp()" class="custum-btn">Verify
+          OTP</button>
+      </div>
+    </div>
+
+
+
+    <form [formGroup]="forgotEmailOtpForm" *ngIf="isForgotPass" class="w-100">
+      <a (click)="onLibraryCheck();isForgotPass=false" class="back-btn"> <i class="fa fa-chevron-left"
+          aria-hidden="true"></i> <span> Back </span> </a>
+      <div class="login-register-input-single">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput matInput formControlName="email" placeholder="Enter email" />
+        </mat-form-field>
+        <mat-error
+          *ngIf="forgotEmailOtpFormControls['email']?.errors?.required && forgotEmailOtpFormControls['email']?.touched">Email
+          is required.</mat-error>
+        <mat-error
+          *ngIf="forgotEmailOtpFormControls['email']?.errors?.email && forgotEmailOtpFormControls['email']?.touched">Enter
+          valid email</mat-error>
+      </div>
+      <button [ngClass]="isLoading?'disabled':''" type="button" (click)="sendForgotEmailOTP()" class="custum-btn">Get
+        OTP</button>
+    </form>
+
+    <div class="w-100" *ngIf="emailOtpForgotReceived">
+      <div class="otp-heading">
+        <h4>OTP Verification</h4>
+        <p>Enter the OTP send to <span>
+            {{forgotEmailOtpForm.value.email}}</span></p>
+      </div>
+      <form [formGroup]="forgotOtpForm" class="w-100">
+        <div class="otp-inputs">
+          <input (keyup)="onDigitInput($event)" #input0 maxlength="1" formControlName="otp1" type="text"
+            placeholder="0">
+          <input (keyup)="onDigitInput($event)" #input1 maxlength="1" formControlName="otp2" type="text"
+            placeholder="0">
+          <input (keyup)="onDigitInput($event)" #input2 maxlength="1" formControlName="otp3" type="text"
+            placeholder="0">
+          <input (keyup)="onDigitInput($event)" #input3 maxlength="1" formControlName="otp4" type="text"
+            placeholder="0">
+        </div>
+        <mat-error
+          *ngIf="otpControl['otp1']?.errors?.pattern ||otpControl['otp2']?.errors?.pattern||otpControl['otp3']?.errors?.pattern||otpControl['otp4']?.errors?.pattern ">Please
+          enter Valid otp</mat-error>
+      </form>
+      <div class="login-register-inutp-other-btn otp-resend">
+        <p>Didn’t receive the OTP</p>
+        <button [ngClass]="isLoading || counter!=0 ?'disabled like-1':''" type="button" (click)="sendForgotEmailOTP()"
+          class="otp-resend-btn"> Resend OTP</button>
+        <span *ngIf="counter!=0">in {{counter}} Second </span>
+      </div>
+      <button [ngClass]="isLoading?'disabled':''" type="button" (click)="verifyForgotOtp()" class="custum-btn">Verify
+        Email</button>
+    </div>
+
+    <div class="w-100" *ngIf="resetPasswordForLogin">
+
+      <form [formGroup]="resetPasswordForm" class="w-100">
+        <div class="login-register-input-single">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>New Password</mat-label>
+            <input [type]="hidePassword2 ? 'password' : 'text'" id="password2" matInput type="input" name="NewPassworde"
+              formControlName="newPassword" placeholder="New Password">
+            <i id="togglePassword2" class="fa fa-eye fa_eye_input"
+              (click)="togglePasswordVisibility('password2', 'togglePassword2')" aria-hidden="true"></i>
+          </mat-form-field>
+          <mat-error
+            *ngIf="resetPasswordFormControls['newPassword']?.errors?.required && resetPasswordFormControls['newPassword']?.touched">Please
+            enter password</mat-error>
+        </div>
+        <div class="login-register-input-single">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Confirm Password</mat-label>
+            <input [type]="hidePassword1 ? 'password3' : 'text'" id="password3" matInput type="input"
+              name="confirm Password" formControlName="confirmPassword" placeholder="confirmPassword">
+            <i id="togglePassword3" class="fa fa-eye fa_eye_input"
+              (click)="togglePasswordVisibility('password3', 'togglePassword3')" aria-hidden="true"></i>
+          </mat-form-field>
+          <mat-error
+            *ngIf="resetPasswordFormControls['confirmPassword']?.errors?.required&& resetPasswordFormControls.confirmPassword?.touched">Please
+            enter confirm password</mat-error>
+        </div>
+
+      </form>
+      <button [ngClass]="isLoading?'disabled':''" type="button" (click)="resetUserPassword()" class="custum-btn">Reset
+        Password</button>
+
+    </div>
+
+
+
+  </div>
+</div>

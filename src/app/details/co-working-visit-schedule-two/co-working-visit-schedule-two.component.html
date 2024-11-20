@@ -1,0 +1,288 @@
+
+<div [ngClass]="{'open': isOpen}" class="modal vs-modal">
+   
+    <div class="modal-content">
+      <div class="modal-custom-header">
+        <h4> Visit Scheduling </h4>
+        <button type="button" class="btn-close" (click)="closeModal1()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="multi-step-header">
+        <p> Book a tour with one of our experts. It only takes a minute! </p>
+      </div>
+      <div class="step step-1 stp-2-cont">
+        <!-- <h2>When would you like to visit?</h2> -->
+        <form [formGroup]="coWorkingSchduleVisitForm">
+            <div class="step step-2">
+                <h2>What type of space are you looking for?</h2>
+                <div class="multi-step-inputs-looking">
+                    <div class="radio-buttons">
+                      <label class="custom-radio people-qty" *ngIf="private_cabin_price != null && private_cabin_price != '' && private_cabin_price > 0">
+                        <input type="radio" formControlName="spaceType" value="Private Office">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon looking-cont">
+                            <h6 class=""> Private Office </h6>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty" *ngIf="managed_office_price != null && managed_office_price != '' && managed_office_price > 0">
+                        <input type="radio" formControlName="spaceType" value="Managed Office">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon looking-cont">
+                            <h6 class=""> Managed Office </h6>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty" *ngIf="dedicated_desk_price != null && dedicated_desk_price != '' && dedicated_desk_price > 0">
+                        <input type="radio" checked formControlName="spaceType" value="Dedicated Desk">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon looking-cont">
+                            <h6 class=""> Dedicated Desk </h6>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty" *ngIf="flexible_dek_price != null && flexible_dek_price != '' && flexible_dek_price > 0">
+                        <input type="radio" checked formControlName="spaceType" value="Flexible Desk">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon looking-cont">
+                            <h6 class=""> Flexible Desk </h6>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty" *ngIf="virtual_office_price != null && virtual_office_price != '' && virtual_office_price > 0">
+                        <input type="radio" checked formControlName="spaceType" value="Virtual Office">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon looking-cont">
+                            <h6 class=""> Virtual Office </h6>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty" *ngIf="meeting_room_price != null && meeting_room_price != '' && meeting_room_price > 0">
+                        <input type="radio" checked formControlName="spaceType" value="Meeting Room">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon looking-cont">
+                            <h6 class=""> Meeting Room </h6>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio" formControlName="spaceType"  value="Not sure">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon looking-cont">
+                            <h6 class=""> Not sure </h6>
+                          </div>
+                        </span>
+                      </label>
+                      <small class="text-danger" *ngIf="!coWorkingSchduleVisitForm.get('spaceType').valid && submitForm">*Please select space type</small>
+                    </div>
+                </div>
+                <h2>For How Many People?</h2>
+                <div class="multi-step-inputs">
+                    <div class="radio-buttons">
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="1">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">1</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="2">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">2</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="3">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">3</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="4">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">4</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="5">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">5</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="6">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">6</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="7">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">7</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="8">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">8</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="9">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">9</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="10">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">10</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="11">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">11</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="12">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">12</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="13">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">13</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="14">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">14</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="15">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">15</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="16">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">16</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="17">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">17</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="18">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">18</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="19">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">19</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="20">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">20</h5>
+                          </div>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="radio-buttons radio-buttons-big">
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="21-50">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">21-50</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formControlName="howManyPeople" value="51-100">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">51-100</h5>
+                          </div>
+                        </span>
+                      </label>
+                      <label class="custom-radio people-qty">
+                        <input type="radio"  formArrayName="howManyPeople" value="100+">
+                        <span class="radio-btn">
+                          <div class="hobbies-icon people-qty-content">
+                            <h5 class="">100+</h5>
+                          </div>
+                        </span>
+                      </label>
+                    </div>
+                    <small class="text-danger" *ngIf="!coWorkingSchduleVisitForm.get('howManyPeople').valid && submitForm">*Please select people count</small>
+                </div>
+               
+              </div>
+        </form>
+        <div class="custom-btn-grp">
+            <button type="button" style="font-size: 14px;" class="outline-btn prev-step" (click)="Privious()">Previous</button>
+            <button type="button" style="font-size: 14px;" class="custum-btn next-step" (click)="submit()">Submit</button>
+           </div>
+          <div class="step-term-condition">
+            <!-- <p>By submitting your application and subscribing to our services, you agree to our <a href="">Global Terms of Use.</a></p> -->
+            <hr>
+            <p style="font-size: 11px;">After you submit a workspace enquiry to us, we may share your enquiry details (including contact details) with workspace providers and our commercial broker partners, who may contact you to follow up on your enquiry. Please read our <a href="" style="font-size: 12px;"> Privacy and Cookies Policy </a> for details of how we process the information you provide.</p>
+          </div>
+       
+      </div>
+    </div>
+  </div>
+  <!-- <app-co-working-visit-schedule #modal2></app-co-working-visit-schedule> -->

@@ -1,0 +1,379 @@
+<div class="hero v2 section-padding">
+  <div class="overlay op-1" style="background: rgb(146 142 142)"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+      
+
+        <h1 class="hero-title v2">Discover Amazing Office Spaces</h1>
+        <p class="hero-desc v2" *ngIf="!isMobile">
+          <span style="background: black; color: white; padding: 0px 10px"
+            >Explore our collection of offices and coworking spaces</span
+          >
+        </p>
+        <p class="hero-desc v2" style="line-height: 20px" *ngIf="isMobile">
+          Explore our collection of offices and coworking spaces
+        </p>
+      </div>
+      <div class="col-md-8 text-center mar-top-20" style="margin: auto">
+        <form class="hero__form v2">
+          <div class="row" style="align-items: center;">
+            <div class="col-lg-9 col-md-12 d-flex" style="justify-content: space-evenly;">
+              <div class="col-lg-5 p-0 col-md-6">
+                <!-- <mat-form-field>
+                  <mat-label>What are you planning?</mat-label>
+                  <mat-select (selectionChange)="getVal($event.value)">
+                      <mat-option *ngFor="let item of spaces" [value]="item.spaceType">{{item?.spaceType}}</mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+                <ng-select placeholder="What are you planning?" (change)="getVal($event)">
+                  <ng-option *ngFor="let item of spaces" [value]="item.spaceType">
+                      {{item?.spaceType}}
+                  </ng-option>
+                </ng-select>
+              </div>
+              <div class="col-lg-5 col-md-6" style="align-self: center;">
+                <input
+                  class="hero__form-input custom-select"
+                  type="text"
+                  name="place-event"
+                  id="key-word"
+                  (input)="onInputChange($event.target.value)"
+                  style="font-family: Poppins, FontAwesome; width: 430px;"
+                  placeholder="&#xF002; Where are you looking for office space?" [formControl]="control"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
+                  <ng-container *ngIf="filteredPlaces">
+                  <mat-option  *ngFor="let val of filteredPlaces" [value]="val">
+                    {{val}}
+                  </mat-option>
+                    </ng-container>
+                    <ng-container *ngIf="!filteredPlaces.length">
+                    <mat-option>
+                      Location not found
+                    </mat-option>
+                    </ng-container>
+                  </mat-autocomplete>
+              </div>
+              <!-- <div class="col-lg-2 col-md-12">
+                <div class="submit_btn text-right md-left">
+                  <button class="btn v3  mar-right-5" type="submit" ><i class="ion-search" aria-hidden="true"></i>
+                    Search</button>
+                </div>
+              </div> -->
+            </div>
+            <div class="col-lg-3 col-md-5">
+              <a
+                (click)="onSearchSubmit()"
+                class="col-md-12 col-lg-3 cursor-pointer"
+                >Search &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="col-md-10 offset-md-1">
+        <div class="hero-catagory-menu text-center">
+          <p>Or browse Popular Categories</p>
+          <ul>
+            <li><a routerLink="all-categories.html"><i class="ion-android-restaurant"></i> Restaurant</a></li>
+            <li><a routerLink="all-categories.html"><i class="ion-ios-musical-notes"></i> Event</a></li>
+            <li><a routerLink="all-categories.html"><i class="ion-ios-home-outline"></i> Hotel</a></li>
+            <li><a routerLink="all-categories.html"><i class="ion-ios-cart-outline"></i> Shopping</a></li>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="popular-catagory pad-bot-10" style="margin-top: 40px">
+  <div class="container">
+    <div class="row">
+      <img
+        class="how-can-help-img web"
+        src="assets/images/how-can-flexo-web.jpg"
+      />
+      <img
+        class="how-can-help-img mobile"
+        src="assets/images/how-can-flexo-mobile.jpg"
+      />
+      <!-- <div class="col-md-8 offset-md-2 text-center">
+        <h2 class="section-title v1">What is Flexo</h2>
+      </div>
+      <p style="font-size: 16px;
+      color: #3a2f2f;">Flexo transforms your favourite neighbourhood restaurants in to your workspace during office
+        hours. You get to
+        work in a beautiful ambience equipped with all the work essentials to help you be more productive and socially
+        engaged (while practicing social distancing). All our plans are visit based and pay-per-use. There is no fixed
+        monthly rental, no deposit and no lock-in period.</p> -->
+    </div>
+  </div>
+</div>
+<div
+  class="work-process pad-bot-90 section-padding"
+  style="background-image: url(assets/images/others/dots-bg.svg)"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 text-center">
+        <h2 class="section-title v1">Testimonials</h2>
+      </div>
+      <!-- <div class="col-md-4">
+        <div class="work-process-content v1 text-center">
+          <div class="process-icon v1">
+            <img src="assets/images/others/1.png" alt="...">
+            <span>1</span>
+          </div>
+          <h4 class="title">Explore The City</h4>
+          <p class="info">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique iste aliquam possimus, quaerat aut
+            veritatis minima atque quam. Placeat, molestiae?
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="work-process-content v1 text-center">
+          <div class="process-icon v1">
+            <img src="assets/images/others/2.png" alt="...">
+
+            <span>2</span>
+
+          </div>
+          <h4 class="title">Find The Best Place</h4>
+          <p class="info">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique iste aliquam possimus, quaerat aut
+            veritatis minima atque quam. Placeat, molestiae?
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="work-process-content v1 text-center">
+          <div class="process-icon v1">
+            <img src="assets/images/others/3.png" alt="...">
+
+            <span>3</span>
+          </div>
+          <h4 class="title">Add Your Listing</h4>
+          <p class="info">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique iste aliquam possimus, quaerat aut
+            veritatis minima atque quam. Placeat, molestiae?
+          </p>
+        </div>
+      </div> -->
+
+      <div class="col-md-12">
+        <div class="swiper-container popular-place-wrap v2">
+          <div class="swiper-wrapper">
+            <ngx-slick-carousel
+              class="carousel"
+              #slickTestimonialModal="slick-carousel"
+              [config]="reviewsConfig"
+              responsive="breakpoints"
+            >
+              <div
+                ngxSlickItem
+                class="swiper-slide popular-item slide"
+                *ngFor="let testimonial of testimonials"
+              >
+                <div class="work-process-content v1 text-center">
+                  <div class="process-icon v1">
+                    <img
+                      [src]="'assets/images/testimonials/' + testimonial.image"
+                    />
+                    <!-- <span>{{testimonial.id}}</span> -->
+                  </div>
+                  <br />
+                  <h4 class="title">
+                    {{ testimonial.name }}<br /><span style="font-size: 15px">{{
+                      testimonial.designation
+                    }}</span>
+                  </h4>
+                  <ul class="product-rating">
+                    <li><i class="ion-android-star"></i></li>
+                    <li><i class="ion-android-star"></i></li>
+                    <li><i class="ion-android-star"></i></li>
+                    <li><i class="ion-android-star"></i></li>
+                    <li><i class="ion-android-star"></i></li>
+                  </ul>
+                  <p class="info">
+                    {{ testimonial.content }}
+                  </p>
+                </div>
+              </div>
+            </ngx-slick-carousel>
+          </div>
+        </div>
+        <div
+          class="slider-btn v1 popular-next style2"
+          (click)="nextTestimonial()"
+        >
+          <i class="ion-arrow-right-c"></i>
+        </div>
+        <div
+          class="slider-btn v1 popular-prev style2"
+          (click)="prevTestimonial()"
+        >
+          <i class="ion-arrow-left-c"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="popular-cities section-padding mar-top-20">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 text-center">
+        <h2 class="section-title v1">
+          Explore Our Popular Locations In Mumbai
+        </h2>
+      </div>
+      <div class="col-md-12">
+        <div class="swiper-container popular-place-wrap v2">
+          <div class="swiper-wrapper">
+            <ngx-slick-carousel
+              class="carousel"
+              #slickReviewsModal="slick-carousel"
+              [config]="reviewsConfig"
+              responsive="breakpoints"
+            >
+              <div ngxSlickItem class="swiper-slide popular-item slide">
+                <div class="single-place">
+                  <img
+                    class="single-place-image"
+                    src="assets/images/category/Andheri-East.jpg"
+                    alt="place-image"
+                  />
+                  <div class="single-place-content">
+                    <h2 class="single-place-title">
+                      <a routerLink="/in/spaces/Mumbai/Andheri-East"
+                        >Andheri East</a
+                      >
+                    </h2>
+                    <!--
+                    <ul class="single-place-list">
+                      <li><span>5</span> Cities</li>
+                      <li><span>255</span> Listing</li>
+                    </ul> -->
+                    <a
+                      class="btn v6 explore-place"
+                      routerLink="/in/spaces/Mumbai/Andheri-East"
+                      >Explore</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div ngxSlickItem class="swiper-slide popular-item slide">
+                <div class="single-place">
+                  <img
+                    class="single-place-image"
+                    src="assets/images/category/LowerParel.jpg"
+                    alt="place-image"
+                  />
+                  <div class="single-place-content">
+                    <h2 class="single-place-title">
+                      <a routerLink="/in/spaces/Mumbai/Lower-Parel"
+                        >Lower Parel</a
+                      >
+                    </h2>
+                    <!-- <ul class="single-place-list">
+                      <li><span>5</span> Cities</li>
+                      <li><span>255</span> Listing</li>
+                    </ul> -->
+                    <a
+                      class="btn v6 explore-place"
+                      routerLink="/in/spaces/Mumbai/Lower-Parel"
+                      >Explore</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div ngxSlickItem class="swiper-slide popular-item slide">
+                <div class="single-place">
+                  <img
+                    class="single-place-image"
+                    src="assets/images/category/Powai.jpg"
+                    alt="place-image"
+                  />
+                  <div class="single-place-content">
+                    <h2 class="single-place-title">
+                      <a routerLink="/in/spaces/Mumbai/Powai">Powai</a>
+                    </h2>
+                    <!--
+                    <ul class="single-place-list">
+                      <li><span>5</span> Cities</li>
+                      <li><span>255</span> Listing</li>
+                    </ul> -->
+                    <a
+                      class="btn v6 explore-place"
+                      routerLink="/in/spaces/Mumbai/Powai"
+                      >Explore</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div ngxSlickItem class="swiper-slide popular-item slide">
+                <div class="single-place">
+                  <img
+                    class="single-place-image"
+                    src="assets/images/category/Thane.jpg"
+                    alt="place-image"
+                  />
+                  <div class="single-place-content">
+                    <h2 class="single-place-title">
+                      <a routerLink="/in/spaces/Mumbai/Thane">Thane</a>
+                    </h2>
+                    <!--
+                    <ul class="single-place-list">
+                      <li><span>5</span> Cities</li>
+                      <li><span>255</span> Listing</li>
+                    </ul> -->
+                    <a
+                      class="btn v6 explore-place"
+                      routerLink="/in/spaces/Mumbai/Thane"
+                      >Explore</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div ngxSlickItem class="swiper-slide popular-item slide">
+                <div class="single-place">
+                  <img
+                    class="single-place-image"
+                    src="assets/images/category/BKC.jpg"
+                    alt="place-image"
+                  />
+                  <div class="single-place-content">
+                    <h2 class="single-place-title">
+                      <a
+                        routerLink="/in/spaces/Mumbai/Bandra-Kurla-Complex"
+                        >Bandra Kurla Complex</a
+                      >
+                    </h2>
+                    <!--
+                    <ul class="single-place-list">
+                      <li><span>5</span> Cities</li>
+                      <li><span>255</span> Listing</li>
+                    </ul> -->
+                    <a
+                      class="btn v6 explore-place"
+                      routerLink="/in/spaces/Mumbai/Bandra-Kurla-Complex"
+                      >Explore</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </ngx-slick-carousel>
+          </div>
+        </div>
+        <div class="slider-btn v1 popular-next style2" (click)="next()">
+          <i class="ion-arrow-right-c"></i>
+        </div>
+        <div class="slider-btn v1 popular-prev style2" (click)="prev()">
+          <i class="ion-arrow-left-c"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

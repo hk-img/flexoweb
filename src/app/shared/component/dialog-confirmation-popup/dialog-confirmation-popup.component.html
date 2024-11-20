@@ -1,0 +1,29 @@
+<div class="f-w-mdl">
+  <img *ngIf="data.title !== 'Cancel Booking' && !data.price"   src="assets/images/un-fab-icon.png" alt="">
+  <h4>{{data.title}}</h4>
+  <p *ngIf="data.title === 'Cancel Booking' ">{{data.message}}</p>
+  <div *ngIf="data.price">
+    <table class="table table-bordered my-3">
+      <tr>
+        <td>Booking Amount</td>
+        <td>{{data.price}}</td>
+      </tr>
+      <tr>
+        <td>Cancellation Fee(10%)</td>
+        <td>{{(data.price * .10).toFixed(2) }}</td>
+      </tr>
+      <tr>
+        <td>Receivable Amount</td>
+        <td>{{(data.price) - +(data.price * .10).toFixed(2)}}</td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="data.title === 'Cancel Booking' || data.price " class="btn-grp-c">
+    <button mat-button mat-dialog-close cdkFocusInitial class=" custum-btn outline-orng-btn" (click)="confirmed()" >Ok</button>
+    <button mat-button mat-dialog-close class=" custum-btn">Cancel</button>
+  </div>
+  <div *ngIf="data.title !== 'Cancel Booking' && !data.price  " class="btn-grp-c">
+    <button mat-button mat-dialog-close cdkFocusInitial class=" custum-btn outline-orng-btn">No</button>
+    <button mat-button mat-dialog-close class=" custum-btn" (click)="successConfirmation()">Yes</button>
+  </div>
+</div>

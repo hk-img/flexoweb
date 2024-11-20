@@ -1,0 +1,124 @@
+<ngx-json-ld [json]="schema"></ngx-json-ld>
+
+<div class="form-group filter-group">
+  <h1 class="heading" *ngIf="area_name == 0 && show">
+    {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' : selectedRadio }} in {{ city_name_display | titlecase }}
+  </h1>
+  <h1 class="heading" *ngIf="area_name != 0 && city_name != null">
+    {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' : selectedRadio }} in {{ area_name_display | titlecase }}
+    {{ city_name_display | titlecase }}
+  </h1>
+  <h1 class="heading" *ngIf="find_near_me == 1">{{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' : selectedRadio }}s Near Me</h1>
+  <div class="scrollmenu" *ngIf="show">
+    <a *ngFor="let space of nearByLocationsList" (click)="openNearByList(space)" 
+    [ngClass]="space?.location_name.toLowerCase() === nearByLocation && 'selected' " >{{ space?.location_name }}  </a>
+  </div>
+  <div class="row" style="flex-wrap: nowrap; align-items: baseline">
+    <div class="col-md-8 col-sm-12">
+      <div class="filter-buttons">
+        <div>
+          <nav role="navigation" class="primary-navigation">
+            <ul>
+              <li><a (click)="openSpaceType()" class="cursor-pointer" style="color: inherit">Space Type &dtrif;</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <a (click)="openLocation()" class="cursor-pointer"><i class="ion-edit"></i> Location</a>
+        </div>
+        <div>
+          <a class="filters" (click)="openFiltersDialog()" class="cursor-pointer"><i class="ion-android-funnel"></i> Filters</a>
+        </div>
+        <div>
+          <mat-slide-toggle [(ngModel)]="_showMap" (change)="showHideMap()" >Map</mat-slide-toggle>
+        </div>
+      </div>
+<div class="col-md-12" style="padding: 0px; margin-top: 10px" [hidden]="!open_spaceType">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <!-- <ng-select
+              [items]="spaces"
+              [multiple]="true"
+              bindLabel="name"
+              groupBy="type"
+              [selectableGroup]="true"
+              [closeOnSelect]="false"
+              bindValue="name"
+              [(ngModel)]="filteredSpaces"
+              name="space-type"
+              (ngModelChange)="onSelectionChange($event)"
+              placeholder="Select your space type...">
+              
+              <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="name">
+                <input [disabled]="shouldDisable(item)" id="item-{{ item.name }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.type }}
+              </ng-template>
+              
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="name">
+                <input id="item-{{ item.name }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.name }}
+              </ng-template>
+            </ng-select> -->
+      <div #selectedValueDiv>
+        <div (click)="showCard = !showCard" class="d-flex custom_values" style="gap: 20px;">
+          <ng-container *ngFor="let selected of selectedValues">
+            <div class="border p-1 rounded" *ngIf="!selectedRadio && selectedValues.length">{{selected}}</div>
+          </ng-container>
+          <div class="border p-1 rounded" *ngIf="selectedRadio">{{selectedRadio}}</div>
+        </div>
+        <div [ngClass]="showCard ? 'd-block' :'d-none' " class="card shadow-lg space_dropdown">
+          <div class="card-body">
+            <div *ngFor="let list of spaces; let i = index">
+              <input [attr.id]="i" type="radio" name="type" [value]="list.spaceType" (change)="onRadioChange(list)"
+                [checked]="selectedRadio === list.spaceType" [(ngModel)]="selectedRadio">
+              <label [attr.for]="i">{{ list.spaceType }}</label>
+              <div *ngIf="list.subpart">
+                <div *ngFor="let item of list.subpart; let k = index">
+                  &nbsp; &nbsp;
+                  <input type="checkbox" [attr.id]="'name'+k" (change)="onCheckboxChange(item, list.spaceType)"
+                    [checked]="item.selected">
+                  <label [attr.for]="'name'+k">{{ item.spaceType }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="col-md-12 text-center" style="padding: 0px; margin-top: 10px" [hidden]="!open_location">
+        <form class="hero__form v2">
+          <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12 d-flex" style="align-items: center; justify-content: space-between;">
+              <input
+                  class="hero__form-input custom-select"
+                  type="text"
+                  name="place-event"
+                  id="key-word"
+                  (input)="onInputChange($event.target.value)"
+                  style="font-family: Poppins, FontAwesome; width: 430px;"
+                  placeholder="&#xF002; Where are you looking for office space?" [formControl]="control"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
+                  <ng-container *ngIf="filteredPlaces">
+                  <mat-option *ngFor="let val of filteredPlaces" [value]="val">
+                   {{val}}
+                  </mat-option>
+                  </ng-container>
+                  <mat-option *ngIf="!filteredPlaces">
+                    Location not found
+                  </mat-option>
+                </mat-autocomplete>
+                  <a (click)="onNearmeClicked()" class="cursor-pointer" style="color: inherit"><i class="ion-ios-location"></i>
+                    Near Me</a>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+<ngx-json-ld [json]="schema"></ngx-json-ld>

@@ -1,0 +1,492 @@
+<div class="mar-top-50" *ngIf="!show_submit_response">
+  <mat-progress-bar
+    mode="determinate"
+    *ngIf="percentage"
+    [value]="percentage"
+  ></mat-progress-bar>
+  <div
+    [ngClass]="{
+      'stepper-container1': height_neccessary == false,
+      'stepper-container': height_neccessary == true
+    }"
+  >
+    <!-- <mat-step [stepControl]="firstFormGroup"> -->
+    <div class="form-container" *ngIf="page1">
+      <!-- <form [formGroup]="firstFormGroup"> -->
+      <!-- <ng-template class = "template" matStepLabel>Fill out Space name</ng-template> -->
+      <p style="font-size: 35px; text-align: center">
+        We will help you find the perfect office
+      </p>
+      <br />
+      <p style="font-size: 30px; text-align: center">
+        Where are you looking for office space?
+      </p>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Start Typing City or Area name</mat-label>
+        <input
+          autocomplete="off"
+          #autocomplete
+          name="location_name"
+          matInput
+          placeholder="Start typing City or Area name and select from dropdown. "
+          required
+        />
+        <!-- <mat-hint>Hint</mat-hint> -->
+        <mat-icon matSuffix>location_on</mat-icon>
+      </mat-form-field>
+      <div>
+        <button
+          type="submit"
+          class="btn large-btn mar-top-10"
+          (click)="nextHelper(1)"
+          [disabled]="!autocomplete_location_name"
+        >
+          Next
+        </button>
+        <!-- <button mat-button matStepperNext>Next</button> -->
+      </div>
+    </div>
+    <div class="form-container" *ngIf="page2">
+      <!-- <p *ngIf="location_name">Your selected location is <b>{{location_name}}</b>. To change it go to previous page
+      </p> -->
+      <!-- <ng-template matStepLabel>Fill out Space type</ng-template> -->
+      <p class="back-arrow">
+        <i
+          [hidden]="location_name || city_name || space_id"
+          (click)="
+            page1 = true;
+            page2 = false;
+            page3 = false;
+            height_neccessary = false
+          "
+          class="material-icons"
+          >keyboard_arrow_left</i
+        ><span
+          >Great choice! Just give us a few details so we can better assist
+          you.</span
+        >
+      </p>
+      <p class="form-header" style="margin-top: 7px">
+        What are you looking for?
+      </p>
+      <ul class="resource-types-container">
+        <li *ngFor="let resource_type of resource_types">
+          <mat-radio-button
+            color="primary"
+            (click)="onResourceTypeSelection(resource_type.id)"
+            [checked]="resource_type.id == space_type"
+          >
+            <span>{{ resource_type.name }}</span>
+          </mat-radio-button>
+        </li>
+      </ul>
+      <mat-form-field
+        appearance="outline"
+        *ngIf="is_select_date_time_visible"
+        style="width: 100%"
+      >
+        <mat-label>Choose a date</mat-label>
+        <input matInput type="datetime-local" [(ngModel)]="booking_date_time" />
+      </mat-form-field>
+
+      <button
+        type="submit"
+        class="btn large-btn mar-top-10"
+        (click)="nextHelper(2)"
+        [disabled]="!space_type"
+      >
+        Next
+      </button>
+    </div>
+    <!-- </mat-step> -->
+    <!-- <mat-step [stepControl]="thirdFormGroup"> -->
+    <div class="form-container" *ngIf="page3">
+      <p
+        class="back-arrow"
+        (click)="
+          page1 = false; page2 = true; page3 = false; height_neccessary = true
+        "
+      >
+        <i class="material-icons">keyboard_arrow_left</i>
+      </p>
+      <p class="form-header">For how many people?</p>
+      <div>
+        <p style="display: flex; flex-wrap: wrap; justify-content: center">
+          <span
+            *ngFor="
+              let num of [
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                19, 20
+              ]
+            "
+            class="no-people-circle"
+            [ngClass]="{ selected: no_of_persons == num }"
+            (click)="setNoOfPeople(num)"
+            ><span>{{ num }}</span></span
+          >
+        </p>
+        <p style="margin: 40px 0px">
+          <span
+            style="padding: 25px 15px"
+            class="no-people-circle big"
+            (click)="setNoOfPeople(21)"
+            [ngClass]="{ selected: no_of_persons == 21 }"
+            ><span>21-50</span></span
+          >
+          <span
+            style="padding: 25px 11px"
+            class="no-people-circle big"
+            (click)="setNoOfPeople(51)"
+            [ngClass]="{ selected: no_of_persons == 51 }"
+            ><span>51-100</span></span
+          >
+          <span
+            class="no-people-circle big"
+            [ngClass]="{ selected: no_of_persons == 100 }"
+            (click)="setNoOfPeople(100)"
+            ><span>100+</span></span
+          >
+        </p>
+      </div>
+      <p class="form-header">What is your company name?</p>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Company</mat-label>
+        <input
+          [(ngModel)]="company_name"
+          name="company_name"
+          matInput
+          placeholder="Company"
+          required
+        />
+      </mat-form-field>
+      <p class="form-header">What is the purpose of enquiry?</p>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Description</mat-label>
+        <input
+          [(ngModel)]="description"
+          name="description"
+          matInput
+          placeholder="Description"
+          required
+        />
+      </mat-form-field>
+      <div>
+        <button
+          type="submit"
+          class="btn large-btn mar-top-10"
+          (click)="nextHelper(3)"
+          [disabled]="!company_name || !no_of_persons"
+        >
+          <!-- {{ logged_in ? "Submit" : "Next" }} -->
+          Submit
+        </button>
+      </div>
+    </div>
+    <div *ngIf="!logged_in && page4">
+      <!-- <ng-template matStepLabel>Login/SignUp</ng-template> -->
+      <div class="form-container">
+        <p
+          class="back-arrow"
+          (click)="
+            page1 = false;
+            page2 = false;
+            page3 = true;
+            height_neccessary = true;
+            page4 = false
+          "
+        >
+          <i class="material-icons">keyboard_arrow_left</i>
+        </p>
+        <div class="no-scroll" *ngIf="login">
+          <div class="detail-container">
+            <p style="font-size: 20px; text-align: center; font-weight: bold">
+              That's it! Enter your details so we can reach you
+            </p>
+          </div>
+
+          <form [formGroup]="loginForm" (ngSubmit)="Login()" class="space-form">
+            <mat-form-field
+              style="align-items: center"
+              class="form-field"
+              appearance="outline"
+            >
+              <mat-label>Mobile</mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="mobile"
+                formControlName="mobile"
+                maxlength="10"
+                minlength="10"
+                name="mobile"
+                placeholder="Enter mobile number"
+                required
+              />
+              <mat-error *ngIf="lf.mobile.errors?.required"
+                >Mobile is required.</mat-error
+              >
+            </mat-form-field>
+            <div>
+              <button
+                style="align-self: center"
+                class="btn v1 mar-top-10"
+                type="submit"
+                [disabled]="!loginForm.valid"
+              >
+                Submit
+              </button>
+              <!-- <button style = "align-items: center;" mat-raised-button color="accent" type="submit" [disabled]="!loginForm.form.valid">Submit</button> -->
+            </div>
+          </form>
+          <p>
+            Don't have an account?
+            <a
+              class="link-to-page"
+              (click)="login = false; signup = true; otp_sent = false"
+              >Sign Up</a
+            >
+          </p>
+          <br />
+          <p>
+            By continuing, you agree to our
+            <a class="link-to-page" routerLink="/terms-conditions"
+              >Terms and Conditions</a
+            >
+            and
+            <a class="link-to-page" routerLink="/privacy-policy"
+              >Privacy Policy</a
+            >
+          </p>
+        </div>
+        <div class="no-scroll" *ngIf="signup && !otp_sent">
+          <div class="detail-container">
+            <p style="font-size: 20px; text-align: center; font-weight: bold">
+              That's it! Enter your details so we can reach you
+            </p>
+          </div>
+          <form (ngSubmit)="addWorker()" [formGroup]="form" class="space-form">
+            <mat-form-field
+              style="align-items: center"
+              class="form-field"
+              appearance="outline"
+            >
+              <mat-label>Name</mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="name"
+                name="name"
+                formControlName="name"
+                placeholder="Enter Name"
+                required
+              />
+              <mat-error *ngIf="f.name.errors?.required"
+                >Name is required.</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field
+              style="align-items: center"
+              class="form-field"
+              appearance="outline"
+            >
+              <mat-label>Mobile</mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="mobile"
+                formControlName="mobile"
+                maxlength="10"
+                minlength="10"
+                name="mobile"
+                placeholder="Enter mobile number"
+                required
+              />
+              <!-- <mat-error *ngIf="f.mobile.errors?.pattern()">Not a valid Mobile</mat-error> -->
+              <mat-error *ngIf="f.mobile.errors?.required"
+                >Mobile is required.</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="email"
+                name="email"
+                formControlName="email"
+                placeholder="Enter Email"
+                required
+              />
+              <mat-error *ngIf="f.email.errors?.email"
+                >Not a valid Email.</mat-error
+              >
+              <mat-error *ngIf="f.email.errors?.required"
+                >Email is required.</mat-error
+              >
+            </mat-form-field>
+            <div>
+              <button
+                style="align-self: center"
+                class="btn v1 mar-top-10"
+                type="submit"
+                [disabled]="!form.valid"
+              >
+                Send me Quotes & Options
+              </button>
+              <!-- <button style = "align-items: center;" mat-raised-button color="accent" type="submit" [disabled]="!signupForm.form.valid">Submit</button> -->
+            </div>
+          </form>
+          <p>
+            Have an account?
+            <a
+              class="link-to-page"
+              (click)="login = true; signup = false; otp_sent = false"
+              style="color: blue; text-decoration: underline"
+              >Sign In</a
+            >
+          </p>
+          <br />
+          <p>
+            By continuing, you agree to our
+            <a class="link-to-page" routerLink="/terms-conditions"
+              >Terms and Conditions</a
+            >
+            and
+            <a class="link-to-page" routerLink="/privacy-policy"
+              >Privacy Policy</a
+            >
+          </p>
+        </div>
+        <div *ngIf="otp_sent" class="no-scroll">
+          <div class="detail-container">
+            <p style="flex: 1; font-size: 30px; text-align: center">
+              Enter OTP
+            </p>
+          </div>
+          <form
+            [formGroup]="otpForm"
+            (ngSubmit)="verifyOtp()"
+            class="space-form"
+          >
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>OTP</mat-label>
+              <input
+                type="password"
+                matInput
+                [(ngModel)]="otp"
+                formControlName="otp"
+                name="otp"
+                placeholder="Enter OTP"
+                required
+              />
+              <mat-error *ngIf="of.otp.errors?.required"
+                >OTP is required.</mat-error
+              >
+            </mat-form-field>
+            <div>
+              <button
+                style="align-self: center"
+                class="btn v1 mar-top-10"
+                type="submit"
+                [disabled]="!otpForm.valid"
+              >
+                Submit
+              </button>
+              <!-- <button style = "align-items: center;" mat-raised-button color="accent" type="submit" [disabled]="!otpForm.form.valid">Submit</button> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mar-top-100" *ngIf="show_submit_response">
+  <p
+    style="text-align: center; font-size: 30px; color: green; padding: 30px"
+    *ngIf="
+      city_name &&
+      location_name &&
+      !autocomplete_location_name &&
+      !autocomplete_city_name
+    "
+  >
+    Thank you for your enquiry. We will get in touch with you shortly. In the
+    meanwhile, you can
+    <a
+      class="static-page-links"
+      [routerLink]="'/in/spaces/' + city_name + '/' + location_name"
+      >continue exploring other office spaces</a
+    >.
+  </p>
+  <p
+    style="text-align: center; font-size: 30px; color: green; padding: 30px"
+    *ngIf="
+      city_name &&
+      !location_name &&
+      !autocomplete_location_name &&
+      !autocomplete_city_name
+    "
+  >
+    Thank you for your enquiry. We will get in touch with you shortly. In the
+    meanwhile, you can
+    <a class="static-page-links" [routerLink]="'/in/coworking/' + city_name"
+      >continue exploring other office spaces</a
+    >.
+  </p>
+  <p
+    style="text-align: center; font-size: 30px; color: green; padding: 30px"
+    *ngIf="
+      autocomplete_location_name &&
+      autocomplete_city_name &&
+      !city_name &&
+      !location_name
+    "
+  >
+    Thank you for your enquiry. We will get in touch with you shortly. In the
+    meanwhile, you can
+    <a
+      class="static-page-links"
+      [routerLink]="
+        '/in/spaces/' +
+        autocomplete_city_name +
+        '/' +
+        autocomplete_location_name
+      "
+      >continue exploring other office spaces</a
+    >.
+  </p>
+  <p
+    style="text-align: center; font-size: 30px; color: green; padding: 30px"
+    *ngIf="
+      !autocomplete_location_name &&
+      autocomplete_city_name &&
+      !city_name &&
+      !location_name
+    "
+  >
+    Thank you for your enquiry. We will get in touch with you shortly. In the
+    meanwhile, you can
+    <a
+      class="static-page-links"
+      [routerLink]="'/in/coworking/' + autocomplete_city_name"
+      >continue exploring other office spaces</a
+    >.
+  </p>
+  <p
+    style="text-align: center; font-size: 30px; color: green; padding: 30px"
+    *ngIf="
+      !city_name &&
+      !location_name &&
+      !autocomplete_location_name &&
+      !autocomplete_city_name &&
+      space_id
+    "
+  >
+    Thank you for your enquiry. We will get in touch with you shortly. In the
+    meanwhile, you can
+    <a class="static-page-links" routerLink="/"
+      >continue exploring other office spaces</a
+    >.
+  </p>
+</div>

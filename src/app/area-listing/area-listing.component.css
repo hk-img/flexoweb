@@ -1,0 +1,18 @@
+/* mat-slider {
+    width: 60%;
+  } */
+
+:host ::ng-deep .min .mat-slider-thumb {
+  background-color: #f76900;
+}
+
+:host ::ng-deep .min .mat-slider-thumb-label {
+  background-color: #f76900;
+}
+
+:host ::ng-deep .min .mat-slider-track-fill {
+  background-color: #f76900;
+}
+.mt-70 {
+  margin-top: 70px;
+}

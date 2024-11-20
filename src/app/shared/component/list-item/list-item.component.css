@@ -1,0 +1,135 @@
+.inventory-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.inventory-label i {
+  position: relative;
+  top: 5px;
+  font-size: 18px;
+}
+
+.slide img {
+  height: 320px;
+}
+
+.ribbon-label {
+  position: absolute;
+  left: 0;
+  width: max-content;
+}
+
+@media only screen and (max-width: 700px) {
+  .slide img {
+    height: 285px;
+  }
+}
+
+.icon-color {
+  font-size: 15px;
+  color: #888 !important;
+}
+
+.available-resources {
+  margin: 12px 0px 6px 0px;
+  height: 39px;
+  overflow: hidden;
+}
+
+.available-resources span {
+  font-size: 12px;
+  color: gray;
+}
+
+.cursor-pointer {
+  font-weight: bold;
+  color: #f76900;
+  cursor: pointer;
+}
+
+.price-value {
+  color: black;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.ms-10{
+  margin-left: -10px;
+}
+
+.shortlist-share-container {
+  position: absolute;
+  top: 3px !important;
+  z-index: 3;
+  right: 2px;
+  display: flex;
+  padding: 10px;
+}
+
+.shortlist-share-container .btn i {
+  font-size: 18px;
+  position: relative;
+  right: 3px;
+  bottom: 3px;
+}
+
+
+.description p {
+  line-height: 21px;
+  font-size: 14px;
+}
+
+.less-content {
+  height: 2.8rem;
+  overflow: hidden;
+}
+
+.btn-accent {
+  background-color: #F76900;
+  cursor: pointer;
+  font-weight: 500;
+  color: #fff;
+}
+
+
+.accent_back {
+  background-color: #F76900;
+  color: #fff;
+  padding-right: 10px;
+  padding-block: .25rem;
+}
+
+.rs_icon{
+  filter: grayscale(1);
+  height: 16px;
+  width: 11px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.cursor_pointer {
+  cursor: pointer;
+}
+
+.overflow_wrap {
+  overflow-wrap: anywhere;
+}
+
+.instant_back {
+  background-color: #FFBF00;
+  border-radius: 5px;
+  font-size: small;
+  margin-left: 5px;
+}
+
+.bolt_icon {
+  color: #FFBF00;
+  font-size: 19px;
+  vertical-align: bottom;
+}
+
+.status_back {
+  background-color: navy;
+  border-radius: 5px;
+  font-size: small !important;
+}

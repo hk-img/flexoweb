@@ -1,0 +1,319 @@
+
+<div class="page-wrapper">
+  <!--header starts-->
+  <header class="header transparent scroll-hide">
+    <!--Main Menu starts-->
+    <div class="site-navbar-wrap v2">
+      <div class="container">
+        <div class="site-navbar">
+          <div class="row align-items-center">
+            <div class="col-md-2 col-6">
+              <a class="navbar-brand" routerLink="/"><img src="assets/images/logo.png" alt="logo" class="img-fluid logo-top" /></a>
+            </div>
+            <div class="col-md-10 col-6">
+              <nav class="site-navigation float-right">
+              
+                  <ul class="site-menu d-none d-lg-block">
+                    <li class="has-no-children">
+                      <a routerLink="/enterprise">Enterprise Solutions</a>
+                    </li>
+                    <li class="has-no-children">
+                      <a routerLink="/joy-of-giving">Joy Of Giving</a>
+                    </li>
+                    <li class="has-no-children">
+                      <a routerLink="/list-with-us">List With Us</a>
+                    </li>
+                    <li class="has-no-children">
+                      <a routerLink="/my-shortlists">My Shortlist</a>
+                    </li>
+                    <li class="has-no-children" *ngIf="!isMobile">
+                      <a href="tel:+91 95133 92400"><span class="ion-android-call"></span>&nbsp;9513392400</a>
+                    </li>
+                    <li class="has-no-children" style="cursor: pointer;" (click)="openLoginDialog()" *ngIf="!isLoggedIn && !userDetails?.firstName">
+                      <a class="custum-btn" >Login/Register</a>
+                    </li>
+                    <li class="has-no-children" style="cursor: pointer;" *ngIf="isLoggedIn || userDetails?.firstName">
+                      <div class="dropdown">
+                        <button class="li-drp-btn" data-toggle="dropdown" type="button" aria-expanded="true" (click)="onMenueOpenClose()" [title]="userDetails?.name"> <i class="ion-person"></i> </button>
+                        <ul id="myDropdown" class="dropdown-menu userInfoMenu" data-toggle="collapse" aria-expanded="false" data-target="#bs-example-navbar-collapse-2" style="width: 250px;">
+                            <li *ngFor="let sbl of sideBarList" data-toggle="collapse" aria-expanded="true">
+                              <a [routerLink]="sbl.page">{{sbl.title}}</a>
+                            </li>
+                            <li class="li-drp-btn-logout" (click)="logout();onMenueOpenClose();"> <a>Logout</a></li>
+                        </ul>
+                    </div>
+                    </li>
+                  </ul>
+                
+              </nav>
+              <div class="d-lg-none sm-right mobile-nav-icons">
+                <a href="tel:+91 95133 92400" class="mobile-bar"><span class="ion-android-call"></span>
+                </a>
+                <a routerLink="/my-shortlists" class="mobile-bar"><span class="ion-ios-heart"></span>
+                </a>
+                <a href="#" class="mobile-bar js-menu-toggle">
+                  <span class="ion-android-menu"></span>
+                </a>
+              </div>
+              <!-- <div class="add-list float-right">
+                <a class="btn v8" href="add-listing.html">Add Listing <i class="ion-plus-round"></i></a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <!--mobile-menu starts -->
+        <div class="site-mobile-menu">
+          <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close js-menu-toggle">
+              <span class="ion-ios-close-empty"></span>
+            </div>
+          </div>
+          <div class="site-mobile-menu-body">
+            <ul class="site-menu d-lg-block">
+              <li class="has-no-children">
+                <a routerLink="/enterprise">Enterprise Solutions</a>
+              </li>
+              <li class="has-no-children">
+                <a routerLink="/joy-of-giving">Joy Of Giving</a>
+              </li>
+              <li class="has-no-children">
+                <a routerLink="/list-with-us">List With Us</a>
+              </li>
+              <li class="has-no-children" (click)="openLoginDialog()" *ngIf="!isLoggedIn && !userDetails">
+                <a class="custum-btnFlogi" routerLink="/list-with-us">Login/Register</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--mobile-menu ends-->
+      </div>
+    </div>
+    <!--Main Menu ends-->
+  </header>
+  <div  class="other-block">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- <div  [ngClass]="isLoggedIn ? 'main other-block' : 'other-block'">
+    <router-outlet></router-outlet>
+  </div> -->
+  <!-- <span class="scrolltotop"><i class="ion-arrow-up-c"></i></span> -->
+  <div class="footer-wrapper no-pad-tb v2" style="
+      margin-top: 10px;
+
+      position: absolute;
+      min-width: 100vw;
+    ">
+    <div class="footer-top-area section-padding">
+      <div class="container pt-5">
+        <div class="row pt-5">
+          <div class="col-lg-3 col-md-12">
+            <div class="footer-content nav">
+              <ul class="list">
+                <li>
+                  <a class="link-hov style2" routerLink="/enterprise">Enterprise Solutions</a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/joy-of-giving">Joy Of Giving</a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/list-with-us">List With Us</a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/enterprise">Flexo For Enterprises</a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/contact">Contact Us</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-12">
+            <div class="footer-content nav">
+              <ul class="list">
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/mumbai">Coworking Space in Mumbai
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/pune">Coworking Space in Pune
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/bengaluru">Coworking Space in Bangalore
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/hyderabad">Coworking Space in Hyderabad
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/new-delhi">Coworking Space in Delhi
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/navi-mumbai">Coworking Spaces in Navi Mumbai
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/panaji">Coworking Space in Panaji Goa
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/vadodara">Coworking Space in Vadodara
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/spaces/mumbai/lower-parel">Coworking Space in Lower Parel
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/spaces/mumbai/bandra-kurla-complex">Coworking Space in BKC
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/spaces/mumbai/andheri-east">Coworking Space in Andheri
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-12">
+            <div class="footer-content nav">
+              <ul class="list">
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/ahmedabad">Coworking Space in Ahmedabad
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/chandigarh">Coworking Space in Chandigarh
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/noida">Coworking Space in Noida
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/gurugram">Coworking Space in Gurgaon
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/indore">Coworking Space in Indore
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/chennai">Coworking Space in Chennai
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/kochi">Coworking Space in Kochi
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/lucknow">Coworking Space in Lucknow
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/surat">Coworking Space in Surat
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/kolkata">Coworking Space in Kolkata
+                  </a>
+                </li>
+                <li>
+                  <a class="link-hov style2" routerLink="/in/coworking/coimbatore">Coworking Space in Coimbatore
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-12">
+            <div class="footer-content nav">
+              <h2 class="title">Subscribe</h2>
+              <ul class="list footer-list">
+                <li>
+                  <div class="contact-info">
+                    <!-- <div class="icon">
+                      <i class="ion-ios-location"></i>
+                    </div> -->
+                    <div class="text">
+                      Join our mailing list to receive offers, discounts,
+                      promotions, event invites, updates and other awesome
+                      stuff.
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="contact-info">
+                    <!-- <div class="icon">
+                      <i class="ion-ios-telephone"></i>
+                    </div> -->
+                    <form id="subscribe">
+                      <mat-form-field appearance="outline" style="width: 285px">
+                        <mat-label>Enter Email</mat-label>
+                        <input name="email" id="subscribe-email" matInput placeholder="Email" required />
+                      </mat-form-field>
+                      <button type="submit" class="btn large-btn mar-top-10 subscribe-button" id="subscribe-button">
+                        Subscribe
+                      </button>
+                      <!-- <button type="submit" id="subscribe-button" class="subscribe-button"><i
+                              class="fa fa-rss"></i> Subscribe</button> -->
+                      <label for="subscribe-email" class="subscribe-message"></label>
+                    </form>
+
+                    <!-- <input class="enteremail" name="email" id="subscribe-email" placeholder="Email"
+                    spellcheck="false" type="text"> -->
+                  </div>
+                </li>
+              </ul>
+              <ul class="social-buttons style2">
+                <li>
+                  <a href="https://www.facebook.com/flexospaces/"><i class="ion-social-facebook"></i></a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/flexospaces"><i class="ion-social-twitter"></i></a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/company/flexospaces/"><i class="ion-social-linkedin"></i></a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/flexospaces/"><i class="ion-social-instagram"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom-area">
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- <div class="col-md-6">
+            <div class="payment-method">
+              <img src="assets/images/payment/payment-1.png" alt="...">
+              <img src="assets/images/payment/payment-2.png" alt="...">
+              <img src="assets/images/payment/payment-3.png" alt="...">
+            </div>
+          </div> -->
+          <div class="col-lg-6 col-md-6">
+            <div class="footer-logo">
+              <a routerLink="/">
+                <img src="assets/images/logo.png" alt="logo" /></a>
+            </div>
+          </div>
+          <div class="col-md-6 text-right sm-left">
+            <ul class="additional-link">
+              <li><a routerLink="/terms-conditions">Terms Of Use</a></li>
+              <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
+              <li>Copyright Flexo Spaces 2023. All Rights Reserved.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

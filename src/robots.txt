@@ -1,0 +1,5 @@
+Disallow:
+Sitemap: https://www.flexospaces.com/sitemap.xml
+User-Agent: Googlebot
+Allow: .js
+Allow: .css

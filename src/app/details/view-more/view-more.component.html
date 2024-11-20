@@ -1,0 +1,25 @@
+<!-- <div class="image-container">
+  <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
+    responsive="breakpoints">
+    <div ngxSlickItem class="swiper-slide single-listing-slider slide" *ngFor="let element of images">
+      <img width="750px" [src]="aws_base_url + id + '/' + element" alt="...">
+    </div>
+  </ngx-slick-carousel>
+</div> -->
+<div class="col-md-12" style="padding: 10px">
+  <div class="swiper-container popular-place-wrap v2">
+    <div class="swiper-wrapper">
+      <div class="image-container">
+        <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
+          responsive="breakpoints">
+          <div ngxSlickItem class="swiper-slide single-listing-slider slide" *ngFor="let element of images">
+            <img (error)="onImageError($event)" width="750px" [src]="element" alt="...">
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider-btn v1 popular-next style2" (click)="next()"><i class="ion-arrow-right-c"></i></div>
+  <div class="slider-btn v1 popular-prev style2" (click)="prev()"><i class="ion-arrow-left-c"></i></div>
+</div>
