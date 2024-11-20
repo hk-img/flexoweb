@@ -9,7 +9,6 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { InquiryComponent } from 'src/app/details/inquiry/inquiry.component';
 import { environment } from '../../../../environments/environment';
 import { GlobalVariables } from '../../../global/global-variables';
-
 @Component({
   selector: 'app-list-item',
   templateUrl: './list-item.component.html',
@@ -52,6 +51,7 @@ export class ListItemComponent implements OnInit{
     // for (let i = 0; i < this.spaceDetails.images.length; i++) {
     //   console.log('========================',this.spaceDetails.images[i]);
     // }
+    
   }
 
   @ViewChild('slickMainCarousel', { static: false })
