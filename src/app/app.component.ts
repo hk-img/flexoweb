@@ -21,6 +21,10 @@ import { MemberService } from './services/member.service';
 import { SEOService } from './services/seo.service';
 import { UserService } from './services/user.service';
 declare var $: any;
+
+declare global {
+  interface Window { initMap: any; }
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -1392,6 +1396,10 @@ export class AppComponent {
   public hidden_routes = ['in/coworking', 'in/coworking-space'];
 
   ngOnInit() {
+    window.initMap = () => {
+
+    };
+    this.userService.loadGoogleMapsScript();
     if (window.innerWidth < 700) {
       this.isMobile = true;
     }
