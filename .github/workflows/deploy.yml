@@ -67,6 +67,6 @@ jobs:
             scp -r ${{ env.DEPLOY_PATH }}/dist/. ${{ env.DEPLOYBUILD_PATH }}/dist/  &&
 
             # Restart the PM2 process with ID 17 
-            pm2 resstart 17
+            pm2 restart 17
           "
           
