@@ -44,6 +44,7 @@ import { RequestBookingComponent } from './request-booking/request-booking.compo
 import { ViewMoreDialog } from './view-more/view-more.component';
 declare var $: any;
 
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -311,7 +312,44 @@ export class DetailsComponent implements OnInit {
       .getShortDetailsById(spaceId)
       .then((res) => {
         if(res.success){
-          this.city = res.spaceData.contact_city_name
+          const spaceType = res.spaceData.spaceType?.toLowerCase()
+          const { actual_name, spaceTitle, location_name, contact_city_name } = res.spaceData
+          if (spaceType === 'coworking space') {
+            this.titleService.setTitle(`${actual_name} ${location_name} - ${spaceType} | Pricing - FLEXO`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Discover ${actual_name}, ${location_name}, a coworking space with modern amenities and great pricing, Get customised quotes today!`,
+            });
+          } else if (
+            spaceType === 'coworking cafe/restaurant' ||
+            spaceType === 'shoot studio' ||
+            spaceType === 'recording studio' ||
+            spaceType === 'podcast studio' ||
+            spaceType === 'activity space' ||
+            spaceType === 'sports turf' ||
+            spaceType === 'sports venue' ||
+            spaceType === 'party space' ||
+            spaceType === 'banquet hall' ||
+            spaceType === 'gallery' ||
+            spaceType === 'classroom' ||
+            spaceType === 'private cabin' ||
+            spaceType === 'meeting room' ||
+            spaceType === 'training room' ||
+            spaceType === 'event space'
+          ) {
+            this.titleService.setTitle(`${spaceTitle} at ${location_name}, ${contact_city_name}`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Book ${spaceTitle} at ${location_name}, ${contact_city_name} for Rs.2000 /hour on FLEXO. `,
+            });
+          } else {
+            this.titleService.setTitle(`${spaceType} for Rent at ${location_name}, ${contact_city_name}`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Rent ${spaceTitle} at ${location_name}, ${contact_city_name} for Rs.2000 /month`,
+            });
+          }
+          this.city = contact_city_name
           this.country = res.spaceData.country
           this.getSpaceDetails(this.country, this.city, this.spaceType, this.space_id);
         }
@@ -602,8 +640,34 @@ export class DetailsComponent implements OnInit {
         if (!res.success) {
           this.router.navigate(['/error']);
         }
-
-        this.space_details = Object.assign({}, res.data);
+        const data = res.data
+        const actual_name = data.actual_name?.toLowerCase()
+        const buildingName = data.buildingName?.toLowerCase()
+        const location_name = data.location_name?.toLowerCase()
+        const spaceType = data.spaceType?.toLowerCase()
+        if (
+          spaceType === 'coworking space' ||
+          spaceType === 'coworking cafe/restaurant' ||
+          spaceType === 'shoot studio' ||
+          spaceType === 'recording studio' ||
+          spaceType === 'podcast studio' ||
+          spaceType === 'activity space' ||
+          spaceType === 'sports turf' ||
+          spaceType === 'sports venue' ||
+          spaceType === 'party space' ||
+          spaceType === 'banquet hall' ||
+          spaceType === 'gallery' ||
+          spaceType === 'classroom' ||
+          spaceType === 'private cabin' ||
+          spaceType === 'meeting room' ||
+          spaceType === 'training room' ||
+          spaceType === 'event space'
+        ) {
+          data.imageAlt = `${actual_name} ${location_name} ${spaceType}`
+        } else {
+          data.imageAlt = `${buildingName} ${location_name} ${spaceType}`
+        }
+        this.space_details = Object.assign({}, data);
         console.log('------------------------', this.space_details);
         this.ribbon = this.space_details.ribbon;
         this.ribbon_color = this.space_details.ribbon_color;
@@ -846,7 +910,7 @@ export class DetailsComponent implements OnInit {
         // this.is_shortlisted =
         //   this.shortlists.indexOf(this.space_details.id) > -1 ? true : false;
 
-        this.setMetaTags();
+       
         this.marker = {
           position: {
             lat: this.space_details.latitude,
@@ -1048,6 +1112,7 @@ export class DetailsComponent implements OnInit {
     this.login_dialogRef = this.login_dialog.open(ViewMoreDialog, config);
     this.login_dialogRef.componentInstance.ref = this.login_dialogRef;
     this.login_dialogRef.componentInstance.images = this.space_details.images;
+    this.login_dialogRef.componentInstance.imageAlt = this.space_details.imageAlt;
     this.login_dialogRef.componentInstance.id = this.space_details.id;
     this.login_dialogRef.afterClosed().subscribe((result) => {
       this.login_dialogRef = null;
@@ -1142,7 +1207,7 @@ export class DetailsComponent implements OnInit {
   openRequetBuyPassPopup() {
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
     let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    let authToken = localStorage.getItem('authToken') || null;
+    let authToken = localStorage.getItem('authToken') || '';
     if (isLoggedIn || userDetails?.accessToken || authToken) {
       let config = new MatDialogConfig();
       config.viewContainerRef = this.buyPass_viewContainerRef;
@@ -1185,7 +1250,7 @@ export class DetailsComponent implements OnInit {
   openScheduleVisitPopup() {
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
     let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    let authToken = localStorage.getItem('authToken') || null;
+    let authToken = localStorage.getItem('authToken') || '';
     if (isLoggedIn || userDetails?.accessToken || authToken) {
       let config = new MatDialogConfig();
       config.viewContainerRef = this.scheduleVisit_viewContainerRef;
@@ -1411,37 +1476,43 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  setMetaTags() {
-    const titleCase = (str) => str.replace(/\b\S/g, (t) => t.toUpperCase());
-    const locationName = titleCase(this.space_details.location_name);
+  map: google.maps.Map | undefined;
+  loadGoogleMapsScript(): void {
+    const scriptId = 'google-maps-script';
 
-    let imageUrl = `${this.aws_base_url}${this.space_details.id}/${this.space_details.images[0]}`;
-    // this.titleService.setTitle(
-    //   `Flexible office for rent in ${locationName} | Coworking Space | Flexo ${this.space_details.mask_id}`
-    // );
-    this.titleService.setTitle(
-      `${this.space_details.name} - Pricing | Amenities | Gallery - FLEXO`
-    );
-    this.metaService.updateTag({
-      name: 'description',
-      content: `${this.space_details.name}. Our service is FREE. Get customised quotes and best deals for ${this.space_details.name} today!`,
-    });
-    this.metaService.updateTag({
-      name: 'keywords',
-      content: ``,
-    });
-    this.meta.addTags(
-      [
-        {
-          name: 'og:title',
-          content: `Flexible office for rent in ${this.space_details.location_name} | Coworking Space | Flexo ${this.space_details.mask_id}`,
-        },
-        { name: 'og:description', content: `` },
-        { name: 'og:image', content: imageUrl },
-      ],
-      true
-    );
+    // Avoid adding the script multiple times
+    if (document.getElementById(scriptId)) {
+      this.initializeMap();
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.id = scriptId;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.mapKey}&callback=initMap&libraries=places`;
+    script.defer = true;
+    script.async = true;
+
+    // Append the script to the head
+    document.head.appendChild(script);
+
+    // Define the initMap function
+    (window as any).initMap = () => {
+      this.initializeMap();
+    };
   }
+
+  initializeMap(): void {
+    const mapDiv = document.getElementById('map');
+    if (mapDiv) {
+      this.map = new google.maps.Map(mapDiv, {
+        center: { lat: 40.712776, lng: -74.005974 }, // Example: New York
+        zoom: 12
+      });
+    } else {
+      console.error('Map div is not available.');
+    }
+  }
+
 
   openAddReviewDialog() {
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;

@@ -489,6 +489,11 @@ h6 {
 
 .mar-bot-10 {
   margin-bottom: 10px !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  margin-bottom: 0;
+  color: #777;
 }
 
 .mar-bot-15 {
@@ -11217,16 +11222,17 @@ h4 {
 
 
 .separate-dial-code {
-  & .show{
-  & .country-dropdown{
-  display: inline-table;
-  width: 100% !important;
-  height: 250px;
-  top: -6px !important;
-  /* overflow-y: hidden; */
-  /* overflow-x: hidden; */
+  & .show {
+    & .country-dropdown {
+      display: inline-table;
+      width: 100% !important;
+      height: 250px;
+      top: -6px !important;
+      /* Uncomment these lines if needed */
+      /* overflow-y: hidden; */
+      /* overflow-x: hidden; */
+    }
   }
-}
 }
 
 .custom{

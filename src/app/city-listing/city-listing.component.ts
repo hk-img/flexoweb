@@ -264,7 +264,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.spaceType === 'training room' ||
         this.spaceType === 'event space'
       ) {
-        this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour | Book Now`);
+        this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour`);
         this.metaService.updateTag({
           name: "description",
           content: `Book ${this.spaceType} spaces in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour. Find your shared office fast and FREE with Flexo.`,
@@ -278,7 +278,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       }
     }  else if(this.areaName) {
         if (this.spaceType === 'coworking space') {
-          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['area'])} (${new Date().getFullYear()}) | Book A Shared Office`);
+          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['area'])} | Book A Shared Office`);
           this.metaService.updateTag({
             name: "description",
             content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area'])} ${this.getOriginalUrlParam(params['city'])}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
@@ -300,16 +300,16 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.spaceType === 'training room' ||
           this.spaceType === 'event space'
         ) {
-          this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour | Book Now`);
+          this.titleService.setTitle(`${this.spaceType} in ${this.getOriginalUrlParam(params['area'])} | Book Now`);
           this.metaService.updateTag({
             name: "description",
-            content: `Book ${this.spaceType} spaces in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour. Find your shared office fast and FREE with Flexo.`,
+            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['area'])} ${this.getOriginalUrlParam(params['city'])} Starting from Rs.20000 /hour. Compare prices, services and amenities. Explore available options now.`,
           });
         } else {
-          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['city'])} | Managed Offices`);
+          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['area'])} ${this.getOriginalUrlParam(params['city'])}`);
           this.metaService.updateTag({
             name: "description",
-            content: `Explore offices for rent in ${this.getOriginalUrlParam(params['city'])}. Choose from a wide range of furnished, unfurnished, built-to-suit and managed office options.`,
+            content: `Find office space for rent in ${this.getOriginalUrlParam(params['area'])} ${this.getOriginalUrlParam(params['city'])}. Choose from a variety of furnished, unfurnished, and custom-built options to suit your needs.`,
           });
         }
     }

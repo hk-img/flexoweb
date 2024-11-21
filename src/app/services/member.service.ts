@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 // import 'rxjs/add/operator/toPromise';
-import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 // import { AppGlobals } from './app-globals';
 
 @Injectable()
@@ -58,7 +58,7 @@ export class MemberService {
     environment.apiUrl + '/api/v1/user/markAsNotVerified';
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('authToken') || null
+    'Authorization': localStorage.getItem('authToken')
   });
 
   private _options = {
