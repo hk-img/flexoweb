@@ -2,13 +2,13 @@
   {{spaceDetails.ribbon_name}}
 </div>
 <div (click)="onSpaceNameClicked(spaceDetails)" class="cursor_pointer trending-place-item position-relative box-shadow">
-  <div class="trending-img position-relative" *ngIf="!is_similar_listing">
+  <div class="trending-img position-relative" >
     <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
       responsive="breakpoints">
       <ng-container *ngIf="spaceDetails.images?.length">
         <div ngxSlickItem class="swiper-slide single-listing-slider slide" *ngFor="let image of spaceDetails.images">
           <a style="cursor: pointer;">
-            <img [src]="image" (error)="onImageError($event)" alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"/>
+            <img [src]="image" (error)="onImageError($event,spaceDetails.imageAlt)" alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"/>
           </a>
         </div>
       </ng-container>
@@ -50,12 +50,12 @@
       </div>
     </div>
   </div>
-  <div class="trending-img" *ngIf="is_similar_listing">
+  <!-- <div class="trending-img" *ngIf="is_similar_listing">
     <a [href]="webDomain + 'details/' + spaceDetails.link_name" target="_blank">
-      <img (error)="handleImageError($event)"
+      <img (error)="handleImageError($event,spaceDetails.imageAlter)"
         [src]="aws_base_url + spaceDetails.id + '/' + spaceDetails.images[0]" 
          alt="{{spaceDetails.imageAlter}} {{spaceDetails.images[0] | slice:(spaceDetails.images[0]?.lastIndexOf('/') + 1) }}"/></a>
-  </div>
+  </div> -->
   <div class="trending-title-box">
 
     <div class="customer-review d-flex justify-content-between mb-2 align-items-end">
@@ -129,9 +129,9 @@
     <div>
       <div class="inventory-label">
         <p>Private Office from</p>
-        <p>
+        <p >
           <ng-container *ngIf="spaceDetails?.privatecabin_price">
-            <div class="m-0">
+            <div class="m-0 d-flex align-items-baseline">
               <img src="assets/images/rs-icon.png" class="rs_icon" alt="">
               <span class="price-value">{{spaceDetails?.privatecabin_price}}</span>
               <small> / seat / month</small>
@@ -147,7 +147,7 @@
         <p>Desks from</p>
         <p>
           <ng-container *ngIf="spaceDetails.flexible_desk_price">
-            <div>
+            <div class="d-flex align-items-baseline">
               <img src="assets/images/rs-icon.png" class="rs_icon mr-0" alt="">
               <span class="price-value"> {{ spaceDetails.flexible_desk_price }}</span>
               <small> / seat / month</small>
@@ -199,7 +199,7 @@
         <span *ngIf="spaceDetails.training_room_price != null">Training Room/Event Space</span>
       </div>
     </div> -->
-    <hr style="margin-top: 5px" *ngIf="!is_similar_listing" />
+    <!-- <hr style="margin-top: 5px" *ngIf="!is_similar_listing" />
     <div class="commute-details" *ngIf="!is_similar_listing">
       <div class="commute-details-item">
         <div class="commute-label">
@@ -233,7 +233,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
     </div>
     <!-- <ul class="trending-address">
         <li>

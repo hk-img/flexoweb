@@ -39,9 +39,10 @@ export class ViewMoreDialog implements OnInit {
     };
 
 
-    onImageError(event: Event) {
+    onImageError(event: Event, imageAlt:string) {
         const target = event.target as HTMLImageElement;
         target.src = 'assets/images/details_placeholder_image.jpg';
+        target.alt = `${imageAlt} details_placeholder_image.jpg`;
     }
     next() {
         this.slickMainCarousel.slickNext();

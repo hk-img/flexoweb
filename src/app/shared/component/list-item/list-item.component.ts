@@ -112,9 +112,10 @@ export class ListItemComponent implements OnInit{
     return Array(length).fill(0);
   }
 
-  onImageError(event: Event) {
+  onImageError(event: Event, imageAlt:string) {
     const target = event.target as HTMLImageElement;
     target.src = 'assets/images/details_placeholder_image.jpg';
+    target.alt = `${imageAlt} details_placeholder_image.jpg`;
   }
 
   next(evt: any) {
@@ -250,10 +251,10 @@ export class ListItemComponent implements OnInit{
   }
 
 
-  handleImageError(event: any) {
+  handleImageError(event: any, imageAlt:string) {
     const imgElement = event.target as HTMLImageElement
     imgElement.src = 'assets/images/details_placeholder_image.jpg';
-    imgElement.alt = 'Failed to Load Image';
+    imgElement.alt = `${imageAlt} details_placeholder_image.jpg`;
   }
   
 
