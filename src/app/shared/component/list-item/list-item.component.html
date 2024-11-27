@@ -1,14 +1,14 @@
 <div *ngIf="spaceDetails.ribbon_name" class="ribbon-label" [style.backgroundColor]="spaceDetails.ribbon_color">
   {{spaceDetails.ribbon_name}}
 </div>
-<div (click)="onSpaceNameClicked(spaceDetails)" class="cursor_pointer trending-place-item position-relative">
-  <div class="trending-img" *ngIf="!is_similar_listing">
+<div (click)="onSpaceNameClicked(spaceDetails)" class="cursor_pointer trending-place-item position-relative box-shadow">
+  <div class="trending-img position-relative" *ngIf="!is_similar_listing">
     <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
       responsive="breakpoints">
       <ng-container *ngIf="spaceDetails.images?.length">
         <div ngxSlickItem class="swiper-slide single-listing-slider slide" *ngFor="let image of spaceDetails.images">
           <a style="cursor: pointer;">
-            <img [src]="image" (error)="onImageError($event)"/>
+            <img [src]="image" (error)="onImageError($event)" alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"/>
           </a>
         </div>
       </ng-container>
@@ -51,15 +51,18 @@
     </div>
   </div>
   <div class="trending-img" *ngIf="is_similar_listing">
-    <a [href]="webDomain + 'details/' + spaceDetails.link_name" target="_blank"><img
-        [src]="aws_base_url + spaceDetails.id + '/' + spaceDetails.images[0]" alt="..." /></a>
+    <a [href]="webDomain + 'details/' + spaceDetails.link_name" target="_blank">
+      <img (error)="handleImageError($event)"
+        [src]="aws_base_url + spaceDetails.id + '/' + spaceDetails.images[0]" 
+         alt="{{spaceDetails.imageAlter}} {{spaceDetails.images[0] | slice:(spaceDetails.images[0]?.lastIndexOf('/') + 1) }}"/></a>
   </div>
   <div class="trending-title-box">
 
     <div class="customer-review d-flex justify-content-between mb-2 align-items-end">
-      <h2 style="font-size: 18px" class="h-cursor m-0">
+      <h3 style="font-size: 18px" class="h-cursor m-0">
         {{ spaceDetails.name
-        }}<span style="
+        }}
+        <span style="
             background: unset;
             float: unset;
             margin: unset;
@@ -69,7 +72,7 @@
           ">
           <i class="fa-solid fa-location-dot" style="color: #f76900;"></i>
           {{spaceDetails.location_name }}, {{spaceDetails.contact_city_name}}</span>
-      </h2>
+      </h3>
     </div>
     <div class="rating-summary d-flex" style="gap: 22px;align-items: baseline;">
       <div class="rating-result d-flex align-items-center" style="gap:10px;height:0" title="60%" *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) ">
@@ -172,9 +175,9 @@
     <!-- <p style="font-size: 13px" *ngIf = "spaceDetails.customized_space_price || spaceDetails.flexible_desk_price || spaceDetails.virtual_office_price || spaceDetails.meeting_room_price || spaceDetails.training_room_price || spaceDetails?.privatecabin_price || spaceDetails.desks_price"> -->
     <div class="row mt-2">
       <div class="description col-8">
-        <h3 *ngIf="is_see_more_visible" class="less-content" style="font-size: 12px">
+        <h4 *ngIf="is_see_more_visible" class="less-content" style="font-size: 12px;color:#999">
           {{ spaceDetails?.about }}
-        </h3>
+        </h4>
         <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="is_see_more_visible"
           (click)="toggleSeeMore($event, 0)">See more</a>
         <p class="overflow_wrap" *ngIf="!is_see_more_visible">{{ spaceDetails?.about }}</p>

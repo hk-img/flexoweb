@@ -489,6 +489,11 @@ h6 {
 
 .mar-bot-10 {
   margin-bottom: 10px !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  margin-bottom: 0;
+  color: #777;
 }
 
 .mar-bot-15 {
@@ -5409,6 +5414,15 @@ ul.icon li::before {
   font-size: 35px;
 } */
 
+.commute-details h3 {
+  line-height: 1.5;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  color: #777;
+  margin: 0;
+}
 .commute-details p {
   line-height: 1.5;
   font-size: 12px;
@@ -6564,9 +6578,6 @@ ul.business-hours li span {
   margin: 0;
 }
 
-.business-hours .business-open {
-  padding-bottom: 18px;
-}
 
 .business-hours .business-open:last-child {
   padding-bottom: 0;
@@ -11217,16 +11228,17 @@ h4 {
 
 
 .separate-dial-code {
-  & .show{
-  & .country-dropdown{
-  display: inline-table;
-  width: 100% !important;
-  height: 250px;
-  top: -6px !important;
-  /* overflow-y: hidden; */
-  /* overflow-x: hidden; */
+  & .show {
+    & .country-dropdown {
+      display: inline-table;
+      width: 100% !important;
+      height: 250px;
+      top: -6px !important;
+      /* Uncomment these lines if needed */
+      /* overflow-y: hidden; */
+      /* overflow-x: hidden; */
+    }
   }
-}
 }
 
 .custom{
@@ -11300,4 +11312,20 @@ h4 {
 
 .cdk-global-scrollblock{
   top: auto !important;
+}
+
+
+.fs-20{
+font-size: 20px;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-17 {
+  font-size: 17px;
+}
+.fs-18 {
+  font-size: 18px;
 }

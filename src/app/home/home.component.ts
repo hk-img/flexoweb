@@ -191,12 +191,15 @@ export class HomeComponent {
       if (index > lastIndex) {
         segments.push({ text: value.substring(lastIndex, index), highlight: false });
       }
-      segments.push({ text: value.substring(index, index + searchTermLower.length), highlight: true });
-      lastIndex = index + searchTermLower.length;
+      segments.push({ text: value.substring(index, index + searchTermLower?.length
+), highlight: true });
+      lastIndex = index + searchTermLower?.length
+;
       index = value.toLowerCase().indexOf(searchTermLower, lastIndex);
     }
 
-    if (lastIndex < value.length) {
+    if (lastIndex < value?.length
+) {
       segments.push({ text: value.substring(lastIndex), highlight: false });
     }
 
@@ -332,7 +335,8 @@ export class HomeComponent {
   }
 
   getCityAndLocationDetails2(address_components) {
-    let address_length = address_components.length;
+    let address_length = address_components?.length
+;
     let main_address_component = address_components[0];
     let is_city = false;
     let city_name = '';

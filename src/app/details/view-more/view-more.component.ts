@@ -14,6 +14,7 @@ import { environment } from '../../../environments/environment';
 export class ViewMoreDialog implements OnInit {
     public ref;
     public images;
+    public imageAlt;
     public id;
     public aws_base_url = "https://s3.ap-south-1.amazonaws.com/" + environment.s3_bucket_path + '/details_images/';
 
@@ -50,6 +51,7 @@ export class ViewMoreDialog implements OnInit {
         this.slickMainCarousel.slickPrev();
     }
     ngOnInit() {
-
+        
+        
     }
 }

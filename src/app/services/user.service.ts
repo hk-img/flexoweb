@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -11,4 +10,5 @@ export class UserService {
   public isLoggedInSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isLoggedIn: Observable<boolean> = this.isLoggedInSource.asObservable();
   constructor() {}
+  
 }

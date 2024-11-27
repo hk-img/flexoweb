@@ -1261,7 +1261,17 @@ export class SpaceService {
 
   setFaqs(faqs) {
     this.faqsSubject.next(faqs);
-  }
+	}
+	getFaqBySpaceId(id:any){
+	return this.http
+		.get(this.validateSessionUrl, {
+			headers: this.headers,
+			withCredentials: true,
+		})
+		.toPromise()
+		.then((res) => res)
+		.catch(this.handleError);
+	}
   validateSession(): Promise<any> {
     return this.http
       .get(this.validateSessionUrl, {

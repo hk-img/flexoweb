@@ -77,7 +77,7 @@ export class ViewMoreReviews implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.space_name = params.get('space-name');
-      this.space_id = +this.space_name.substring(
+      this.space_id = +this.space_name?.substring(
         this.space_name.lastIndexOf('-') + 1
       );
     });

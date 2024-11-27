@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SpaceService } from 'src/app/services/space.service';
 
@@ -10,6 +10,9 @@ import { SpaceService } from 'src/app/services/space.service';
 })
 export class FaqsComponent implements OnInit {
   @Input() faqs: Observable<any>;
+  @Input() spaceType: '';
+  @Input() cityName: '';
+  @Input() location: '';
   shortQuestions: any[] = [];
   briefQuestions: any[] = [];
   @Input() showMap = false;
@@ -20,6 +23,8 @@ export class FaqsComponent implements OnInit {
   ngOnInit() {
     this.spaceService.faqsSubject.subscribe((data) => {
       this.data = data;
+      console.log(data,".>>>>>");
+      
       this.shortQuestions = this.data.filter((x) => x.type == 1);
       this.briefQuestions = this.data.filter((x) => x.type == 2);
     });

@@ -37,6 +37,32 @@ export class ListItemComponent implements OnInit{
   public filter_type_col_name;
   ngOnInit(): void {
     console.log("this.spaceDetails", this.spaceDetails);
+    const  name =this.spaceDetails.name?.toLowerCase()
+    const  buildingName =this.spaceDetails.buildingName?.toLowerCase()
+    const location_name = this.spaceDetails.location_name?.toLowerCase()
+    const spaceType = this.spaceDetails.spaceType?.toLowerCase()
+     if (
+      spaceType === 'coworking space' ||
+      spaceType === 'coworking cafe/restaurant' ||
+      spaceType === 'shoot studio' ||
+      spaceType === 'recording studio' ||
+      spaceType === 'podcast studio' ||
+      spaceType === 'activity space' ||
+      spaceType === 'sports turf' ||
+      spaceType === 'sports venue' ||
+      spaceType === 'party space' ||
+      spaceType === 'banquet hall' ||
+      spaceType === 'gallery' ||
+      spaceType === 'classroom' ||
+      spaceType === 'private cabin' ||
+      spaceType === 'meeting room' ||
+      spaceType === 'training room' ||
+      spaceType === 'event space'
+    ) {
+      this.spaceDetails.imageAlt = `${name} ${location_name} ${spaceType}`
+    } else {
+       this.spaceDetails.imageAlt = `${buildingName} ${location_name} ${spaceType}`
+    }
     if (this.filters && this.filters.type != null) {
       this.filter_type_name = this.resource_types.find(
         (x) => x.id == this.filters.type
@@ -224,6 +250,11 @@ export class ListItemComponent implements OnInit{
   }
 
 
+  handleImageError(event: any) {
+    const imgElement = event.target as HTMLImageElement
+    imgElement.src = 'assets/images/details_placeholder_image.jpg';
+    imgElement.alt = 'Failed to Load Image';
+  }
   
 
 }
