@@ -13,7 +13,7 @@
         <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
           responsive="breakpoints">
           <div ngxSlickItem class="swiper-slide single-listing-slider slide" *ngFor="let element of images">
-            <img (error)="onImageError($event)" width="750px" [src]="element" alt="{{imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}">
+            <img (error)="onImageError($event,imageAlt)" width="750px" [src]="element" alt="{{imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}">
           </div>
         </ngx-slick-carousel>
       </div>

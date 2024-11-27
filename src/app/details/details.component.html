@@ -46,7 +46,7 @@
                 allowfullscreen></iframe>
             </div>
           </div>
-          <img (error)="onImageError($event)" *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined"  [src]="
+          <img (error)="onImageError($event,space_details?.imageAlt)" *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined"  [src]="
           space_details?.images[0]
           ? 
           space_details?.images[0]
@@ -57,7 +57,7 @@
     </div>
     <div class="gallery-one-third" (click)="openImagesDialog()">
       <div class="gallery-banner">
-        <img (error)="onImageError($event)" [src]="
+        <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 0 : 1]
               ? 
                 space_details?.images[space_details?.youtube_url ? 0 : 1]
@@ -66,7 +66,7 @@
           alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}" />
       </div>
       <div class="gallery-banner">
-        <img (error)="onImageError($event)" [src]="
+        <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 2 : 3]
               ? 
                 space_details?.images[space_details?.youtube_url ? 2 : 3]
@@ -76,7 +76,7 @@
     </div>
     <div class="gallery-one-third" (click)="openImagesDialog()">
       <div class="gallery-banner">
-        <img (error)="onImageError($event)" [src]="
+        <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 1 : 2]
               ? 
                 space_details?.images[space_details?.youtube_url ? 1 : 2]
@@ -84,7 +84,7 @@
           " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}" />
       </div>
       <div class="gallery-banner">
-        <img (error)="onImageError($event)" [src]="
+        <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 3 : 4]
               ? 
                 space_details?.images[space_details?.youtube_url ? 3 : 4] : 'assets/images/details_placeholder_image.jpg'

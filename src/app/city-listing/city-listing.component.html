@@ -206,7 +206,7 @@
                   <ng-container *ngIf="selected_marker_window?.images?.length">
                     <div *ngFor="let image of selected_marker_window?.images" ngxSlickItem class="swiper-slide single-listing-slider slide">
                       <a style="cursor: pointer;">
-                        <img [src]="image" (error)="handleImageError($event)"/>
+                        <img [src]="image" (error)="handleImageError($event)" />
                       </a>
                     </div>
                   </ng-container>
