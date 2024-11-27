@@ -22,6 +22,7 @@ import { SEOService } from './services/seo.service';
 import { UserService } from './services/user.service';
 declare var $: any;
 
+
 declare global {
   interface Window { initMap: any; }
 }
@@ -1398,6 +1399,7 @@ export class AppComponent {
   public hidden_routes = ['in/coworking', 'in/coworking-space'];
 
   ngOnInit() {
+
     if (isPlatformBrowser(this.platformId)) {
       if (window.innerWidth < 700) {
         this.isMobile = true;

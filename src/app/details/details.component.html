@@ -358,22 +358,22 @@
                     <div class="over-view-drop-heading">
                       <div class="over-view-drop-heading-logo-grp">
                         <img src="assets/images/parking-icon.png" alt class="over-view-drop-heading-icon">
-                        <h5> Parking</h5>
+                        <h2 class="fs-18 m-0"> Parking</h2>
                       </div>
                     </div>
                   </mat-expansion-panel-header>
                   <div class="over-view-drop-content">
                     <div class="pb-4">
                       <div class="font-weight-bold pb-1" style="font-size: 17px;">Parking options</div>
-                      <p style="text-transform: capitalize;">
+                      <h3 class="operational" style="text-transform: capitalize;">
                         {{parkingOptionsString}}
-                      </p>
+                      </h3>
                     </div>
                     <div class="pb-4">
                       <div class="font-weight-bold pb-1" style="font-size: 17px;">Parking description</div>
-                      <p>
+                      <h3 class="operational">
                         {{space_details?.parkingDescription}}
-                      </p>
+                      </h3>
                     </div>
                   </div>
                   <!-- <mat-form-field>
@@ -390,14 +390,14 @@
                     <div class="over-view-drop-heading">
                       <div class="over-view-drop-heading-logo-grp">
                         <img src="assets/images/lighting-icon.png" alt class="over-view-drop-heading-icon">
-                        <h5> Lighting</h5>
+                        <h2 class="fs-18 m-0"> Lighting</h2>
                       </div>
                     </div>
                   </mat-expansion-panel-header>
                   <div class="over-view-drop-content">
-                    <p>
+                    <h3 class="operational">
                       {{space_details?.lightingDescription}}
-                    </p>
+                    </h3>
                   </div>
 
                 </mat-expansion-panel>
@@ -408,14 +408,14 @@
                     <div class="over-view-drop-heading">
                       <div class="over-view-drop-heading-logo-grp">
                         <img src="assets/images/sound-icon.png" alt class="over-view-drop-heading-icon">
-                        <h5> Sound</h5>
+                        <h2 class="fs-18 m-0"> Sound</h2>
                       </div>
                     </div>
                   </mat-expansion-panel-header>
                   <div class="over-view-drop-content">
-                    <p>
+                    <h3 class="operational">
                       {{space_details?.soundDescription}}
-                    </p>
+                    </h3>
                   </div>
 
                 </mat-expansion-panel>
@@ -426,14 +426,14 @@
                     <div class="over-view-drop-heading">
                       <div class="over-view-drop-heading-logo-grp">
                         <img src="assets/images/host-rule-icon.png" alt class="over-view-drop-heading-icon">
-                        <h5> Host rules</h5>
+                        <h2 class="fs-18 m-0"> Host rules</h2>
                       </div>
                     </div>
                   </mat-expansion-panel-header>
                   <div class="over-view-drop-content">
-                    <p>
+                    <h3 class="operational">
                       {{space_details?.hostRulesDescription}}
-                    </p>
+                    </h3>
                   </div>
 
                 </mat-expansion-panel>
@@ -445,7 +445,7 @@
 
             </div>
             <div class="mar-top-20" *ngIf="space_details?.facilities.length > 0">
-              <h2 style="font-size: 20px">Amenities</h2>
+              <h2 class="fs-20">Amenities</h2>
               <ul class="listing-features" *ngIf="!isMobile">
                 <li *ngFor="let element of space_details?.facilities">
                   <span class="d-inline-block mr-1 font-size-md">
@@ -493,7 +493,7 @@
             </div>
           </div>
           <div id="price" class="list-details-section" *ngIf="isCoworking">
-            <h2 style="font-size: 20px">Pricing</h2>
+            <h2 class="fs-20">Pricing</h2>
             <ul class="plan-list" *ngIf="space_details">
               <div *ngFor="let resource of resources_list">
                 <li
@@ -566,7 +566,7 @@
           </div>
 
           <div id="location" class="list-details-section">
-            <h2 class="location-section" style="font-size: 20px">Location</h2>
+            <h2 class="location-section fs-20" >Location</h2>
             <google-map height="400px" width="100%" [zoom]="15" [center]="marker?.position">
               <!-- <map-circle [center]="marker?.position" [radius]="circleRadius1" [options]="circleOptions1"></map-circle> -->
               <map-circle [center]="marker?.position" [radius]="circleRadius2" [options]="circleOptions2"></map-circle>
@@ -575,33 +575,33 @@
               <div class="commute-details-item">
                 <div class="commute-label">
                   <i class="material-icons">subway</i>
-                  <p>Metro</p>
+                  <h3>Metro</h3>
                 </div>
                 <div class="commute-value">
-                  <p>{{ space_details?.near_by_metro || "NA" }}</p>
-                  <p>
+                  <h3>{{ space_details?.near_by_metro || "NA" }}</h3>
+                  <h3>
                     {{
                     space_details?.metro_distance
                     ? space_details?.metro_distance + " kms"
                     : "NA"
                     }}
-                  </p>
+                  </h3>
                 </div>
               </div>
               <div class="commute-details-item">
                 <div class="commute-label">
                   <i class="material-icons">train</i>
-                  <p>Railway</p>
+                  <h3>Railway</h3>
                 </div>
                 <div class="commute-value">
-                  <p>{{ space_details?.near_by_railway_name || "NA" }}</p>
-                  <p>
+                  <h3>{{ space_details?.near_by_railway_name || "NA" }}</h3>
+                  <h3>
                     {{
                     space_details?.railway_distance
                     ? space_details?.railway_distance + " kms"
                     : "NA"
                     }}
-                  </p>
+                  </h3>
                 </div>
               </div>
             </div>
@@ -609,15 +609,16 @@
           </div>
 
           <div id="timings" class="list-details-section" id="Business" *ngIf="!isLongterm">
-            <h2 style="font-size: 20px;">Business Hours</h2>
+            <h2 class="fs-20">Business Hours</h2>
             <div class="business-hour-subtitle" *ngIf="space_details?.has_247_access">
               <img src="assets/images/business-hour-subtitle-icon.png" alt class="business-hour-subtitle-icon">
-              <p>This space is operational <span> 24x7 </span></p>
+              <h3 class="operational">This space is operational <span> 24x7 </span></h3>
             </div>
             <ul class="business-hours">
               <li class="business-open">
-                <span class="day">Monday</span>
-                <div class="atbd_open_close_time">
+                <h3>
+                <span class="day">Monday</span></h3>
+                <h3 class="atbd_open_close_time">
                   <span
                     *ngIf="workingTime?.length && !workingTime[0]?.isClosed && mon_opening_time && mon_closing_time">
                     <span class="time">{{mon_opening_time}}</span>
@@ -627,11 +628,11 @@
                   <span *ngIf="workingTime?.length && workingTime[0]?.isClosed" class="trend-closed">
                     <span class="time">Closed</span>
                   </span>
-                </div>
+                </h3>
               </li>
               <li class="business-open">
-                <span class="day">Tuesday</span>
-                <div class="atbd_open_close_time">
+                <h3><span class="day">Tuesday</span></h3>
+                <h3 class="atbd_open_close_time">
                   <span
                     *ngIf="workingTime?.length && !workingTime[1]?.isClosed && tue_opening_time && tue_closing_time">
                     <span class="time">{{tue_opening_time}}</span>
@@ -641,11 +642,11 @@
                   <span *ngIf="workingTime?.length && workingTime[1]?.isClosed" class="trend-closed">
                     <span class="time">Closed</span>
                   </span>
-                </div>
+                </h3>
               </li>
               <li class="business-open">
-                <span class="day">Wednesday</span>
-                <div class="atbd_open_close_time">
+                <h3><span class="day">Wednesday</span></h3>
+                <h3 class="atbd_open_close_time">
                   <span
                     *ngIf="workingTime?.length && !workingTime[2]?.isClosed && wed_opening_time && wed_closing_time">
                     <span class="time">{{wed_opening_time}}</span>
@@ -655,11 +656,11 @@
                   <span *ngIf="workingTime?.length && workingTime[2]?.isClosed" class="trend-closed">
                     <span class="time">Closed</span>
                   </span>
-                </div>
+                </h3>
               </li>
               <li class="business-open">
-                <span class="day">Thursday</span>
-                <div class="atbd_open_close_time">
+                <h3><span class="day">Thursday</span></h3>
+                <h3 class="atbd_open_close_time">
                   <span
                     *ngIf=" workingTime?.length && !workingTime[3]?.isClosed && thu_opening_time && thu_closing_time">
                     <span class="time">{{thu_opening_time}}</span>
@@ -669,11 +670,11 @@
                   <span *ngIf="workingTime?.length && workingTime[3]?.isClosed" class="trend-closed">
                     <span class="time">Closed</span>
                   </span>
-                </div>
+                </h3>
               </li>
               <li class="business-open">
-                <span class="day">Friday</span>
-                <div class="atbd_open_close_time">
+                <h3><span class="day">Friday</span></h3>
+                <h3 class="atbd_open_close_time">
                   <span
                     *ngIf="workingTime?.length && !workingTime[4]?.isClosed && fri_opening_time && fri_closing_time">
                     <span class="time">{{fri_opening_time}}</span>
@@ -683,11 +684,11 @@
                   <span *ngIf="workingTime?.length && workingTime[4]?.isClosed" class="trend-closed">
                     <span class="time">Closed</span>
                   </span>
-                </div>
+                </h3>
               </li>
               <li class="business-open">
-                <span class="day">Saturday</span>
-                <div class="atbd_open_close_time">
+                <h3><span class="day">Saturday</span></h3>
+                <h3 class="atbd_open_close_time">
                   <span
                     *ngIf="workingTime?.length && !workingTime[5]?.isClosed && sat_opening_time && sat_closing_time">
                     <span class="time">{{sat_opening_time}}</span>
@@ -697,11 +698,11 @@
                   <span *ngIf="workingTime?.length && workingTime[5]?.isClosed" class="trend-closed">
                     <span class="time">Closed</span>
                   </span>
-                </div>
+                </h3>
               </li>
               <li class="business-open">
-                <span class="day">Sunday</span>
-                <div class="atbd_open_close_time">
+                <h3><span class="day">Sunday</span></h3>
+                <h3 class="atbd_open_close_time">
                   <span
                     *ngIf="workingTime?.length && !workingTime[6]?.isClosed && sun_opening_time && sun_closing_time">
                     <span class="time">{{sun_opening_time}}</span>
@@ -711,16 +712,16 @@
                   <span *ngIf="workingTime?.length && workingTime[6]?.isClosed" class="trend-closed">
                     <span class="time">Closed</span>
                   </span>
-                </div>
+                </h3>
               </li>
             </ul>
           </div>
           <div class="list-details-section" *ngIf="serviceArray?.length > 0 && !isLongterm && !isCoworking">
             <div class="add-ons">
               <div class="add-ons-heading">
-                <h4 class>Add-ons from the host</h4>
-                <p>Host provided services, items or options. Available at
-                  checkout.</p>
+                <h2 class="fs-20">Add-ons from the host</h2>
+                <h3 class="operational">Host provided services, items or options. Available at
+                  checkout.</h3>
               </div>
 
               <div class="add-ons-all list-details-section-content-c">
@@ -735,8 +736,8 @@
                     <img src="assets/images/speaker.png" alt>
                   </div> -->
                   <div class="add-ons-single-text">
-                    <h6 class="add-ons-single-text-heading">
-                      {{item?.serviceName}}</h6>
+                    <h3 class="add-ons-single-text-heading fs-16">
+                      {{item?.serviceName}}</h3>
                     <p> <img src="assets/images/rupee-icon.png" alt class="rupee-icon"> <span>
                         {{item?.servicePrice}}/{{item?.servicePriceType}} </span></p>
                   </div>
@@ -748,12 +749,12 @@
           <div class="list-details-section" id="Cancellation_Policy" *ngIf="!isLongterm && !isCoworking">
             <div class="cancel-policy-c">
               <div class="cancel-policy-heading">
-                <h4 class>Cancellation Policy</h4>
+                <h2 class="fs-20">Cancellation Policy</h2>
               </div>
               <div class="cancel-policy-content list-details-section-content-c">
-                <h5>{{space_details?.cancellationPolicy}}</h5>
+                <h3 class="fs-18">{{space_details?.cancellationPolicy}}</h3>
                 <!-- <p>{{space_details?.cancellationPolicyDescription}}</p> -->
-                <p [innerHtml]="space_details?.cancellationPolicyDescription"></p>
+                <h3 class="operational" [innerHtml]="space_details?.cancellationPolicyDescription"></h3>
                 <!-- <a href class="read-more-btn"> Read More </a>
                 <p>All Bookings are subject to Peerspace’s Grace Period policy
                   which provides a full refund for Bookings cancelled within 24
@@ -769,7 +770,7 @@
             <div class="review-section">
 
               <div class="review-section-heading">
-                <h2 style="font-size: 20px;">Reviews & Ratings <span *ngIf="reviews?.length > 0">({{reviews?.length}})</span> </h2>
+                <h2 class="fs-20 m-0">Reviews & Ratings <span *ngIf="reviews?.length > 0">({{reviews?.length}})</span> </h2>
                 <a (click)="openAddReviewDialog()" class="custum-btn outline-orng-btn"> <i class="fa fa-pencil"
                     aria-hidden="true"></i> Leave a Review</a>
               </div>
@@ -973,7 +974,7 @@
                 <p class="" style="font-size: 13px !important;"><b>Carpet Area:</b> {{ space_details?.originalPrice / space_details?.spacesqft | number:'1.0-0' }} sq. ft. | <b>{{space_details?.spaceStatus}}</b></p>
               </div>
               <div class="booking-container">
-                <h2 style="font-size: 20px;" class="booking-heading text-center" *ngIf="!isShortterm">Interested in this space?</h2>
+                <h2 class="booking-heading text-center fs-20"  *ngIf="!isShortterm">Interested in this space?</h2>
                 <!-- <br /> -->
                 <ul *ngIf="isCoworking" class="row">
                 <li class="col-md-6">

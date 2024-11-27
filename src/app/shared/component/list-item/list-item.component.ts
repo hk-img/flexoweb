@@ -250,6 +250,11 @@ export class ListItemComponent implements OnInit{
   }
 
 
+  handleImageError(event: any) {
+    const imgElement = event.target as HTMLImageElement
+    imgElement.src = 'assets/images/details_placeholder_image.jpg';
+    imgElement.alt = 'Failed to Load Image';
+  }
   
 
 }

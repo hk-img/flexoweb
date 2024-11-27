@@ -26,10 +26,7 @@
   }
 }
 
-.icon-color {
-  font-size: 15px;
-  color: #888 !important;
-}
+
 
 .available-resources {
   margin: 12px 0px 6px 0px;
@@ -54,7 +51,7 @@
   font-size: 19px;
 }
 
-.ms-10{
+.ms-10 {
   margin-left: -10px;
 }
 
@@ -100,13 +97,14 @@
   padding-block: .25rem;
 }
 
-.rs_icon{
+.rs_icon {
   filter: grayscale(1);
   height: 16px;
   width: 11px;
   margin-right: 5px;
   margin-bottom: 5px;
 }
+
 .cursor_pointer {
   cursor: pointer;
 }
@@ -132,4 +130,16 @@
   background-color: navy;
   border-radius: 5px;
   font-size: small !important;
+}
+
+
+::ng-deep .slick-next::before {
+    color: #888 !important;
+}
+::ng-deep .slick-prev::before {
+    color: #888 !important;
+}
+
+.box-shadow{
+ box-shadow: 0 0 17px 0 rgba(0, 0, 0, 0.1);
 }

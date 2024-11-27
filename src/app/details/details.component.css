@@ -895,3 +895,20 @@
   margin-left: 5px;
   border: 1px solid #F76900;
 }
+
+.business-open{
+  h3{
+    color: #777;
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
+.operational{
+margin: 0;
+color: #646464;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.8;
+}
+

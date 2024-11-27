@@ -5414,6 +5414,15 @@ ul.icon li::before {
   font-size: 35px;
 } */
 
+.commute-details h3 {
+  line-height: 1.5;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  color: #777;
+  margin: 0;
+}
 .commute-details p {
   line-height: 1.5;
   font-size: 12px;
@@ -6569,9 +6578,6 @@ ul.business-hours li span {
   margin: 0;
 }
 
-.business-hours .business-open {
-  padding-bottom: 18px;
-}
 
 .business-hours .business-open:last-child {
   padding-bottom: 0;
@@ -11306,4 +11312,20 @@ h4 {
 
 .cdk-global-scrollblock{
   top: auto !important;
+}
+
+
+.fs-20{
+font-size: 20px;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-17 {
+  font-size: 17px;
+}
+.fs-18 {
+  font-size: 18px;
 }

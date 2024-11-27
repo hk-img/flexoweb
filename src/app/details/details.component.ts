@@ -307,11 +307,11 @@ export class DetailsComponent implements OnInit {
   sun_closing_time: any = '';
 
 
-  getShortDetails(spaceId:number){
+  getShortDetails(spaceId: number) {
     this.spaceService
       .getShortDetailsById(spaceId)
       .then((res) => {
-        if(res.success){
+        if (res.success) {
           const spaceType = res.spaceData.spaceType?.toLowerCase()
           const { actual_name, spaceTitle, location_name, contact_city_name } = res.spaceData
           if (spaceType === 'coworking space') {
@@ -354,13 +354,13 @@ export class DetailsComponent implements OnInit {
           this.getSpaceDetails(this.country, this.city, this.spaceType, this.space_id);
         }
       }
-  )
+      )
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
-      if (params.spaceType === 'coworking-space'){
+      if (params.spaceType === 'coworking-space') {
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
         this.space_id = this.spaceName.match(/(\d+)$/)?.[0];
       } else {
@@ -381,6 +381,61 @@ export class DetailsComponent implements OnInit {
       this.isMobile = true;
     }
   }
+
+
+  updateJsonLd(
+    spaceType: string,
+    imageUrl: string,
+    detail: string,
+    priceMin: number,
+    priceMax?: any,
+    location?: string
+  ) {
+    const jsonLdId = 'json-ld-product';
+
+    const existingScript = document.getElementById(jsonLdId);
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    const jsonLd: any = {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": `${spaceType} in ${location}`,
+      "image": imageUrl,
+      "description": detail,
+      "brand": {
+        "@type": "Brand",
+        "name": "Flexo"
+      },
+      "mpn": "",
+      "sku": "",
+      "offers": {
+        "@type": "Offer",
+        "url": window.location.href,
+        "priceCurrency": "INR",
+      }
+    };
+
+    if (priceMax === "none") {
+      jsonLd.offers.Price = priceMin
+      jsonLd.offers.availability = "https://schema.org/InStock"
+      jsonLd.offers.itemCondition = "https://schema.org/NewCondition"
+    } else {
+      jsonLd.offers.lowPrice = priceMin;
+      jsonLd.offers.highPrice = priceMax;
+      jsonLd.offers.availability = "https://schema.org/InStock"
+      jsonLd.offers.itemCondition = "https://schema.org/NewCondition"
+    }
+
+    const jsonLdScript = document.createElement('script');
+    jsonLdScript.id = jsonLdId;
+    jsonLdScript.type = 'application/ld+json';
+    jsonLdScript.text = JSON.stringify(jsonLd);
+
+    document.head.appendChild(jsonLdScript);
+  }
+
 
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
@@ -632,6 +687,27 @@ export class DetailsComponent implements OnInit {
   ribbon: any;
   ribbon_color: any;
 
+
+  getType(spaceType: string): string {
+    const shortTermSpaces = [
+      'coworking-cafe/restaurant', 'shoot studio', 'recording studio', 'podcast studio',
+      'activity space', 'sports turf', 'sports venue', 'party space', 'banquet hall',
+      'gallery', 'classroom', 'private cabin', 'meeting room', 'training room', 'event space'
+    ];
+    const longTermSpaces = [
+      'managed office', 'private office', 'shared office', 'virtual office'
+    ];
+    if (spaceType === 'coworking space') {
+      return "coworking";
+    } else if (shortTermSpaces.includes(spaceType)) {
+      return "shortterm";
+    } else if (longTermSpaces.includes(spaceType)) {
+      return "longterm";
+    } else {
+      return "coworking";
+    }
+  }
+
   getSpaceDetails(country: any, city: any, spaceType: any, spaceId: any) {
     this.spaceService
       .getSpaceDetails(country, city, spaceType, spaceId)
@@ -664,11 +740,32 @@ export class DetailsComponent implements OnInit {
           spaceType === 'event space'
         ) {
           data.imageAlt = `${actual_name} ${location_name} ${spaceType}`
+          for (let i = 0; i < data.similar_spaces.length; i++) {
+            data.similar_spaces[i].imageAlter = `${actual_name} ${location_name} ${spaceType}`;
+          }
         } else {
           data.imageAlt = `${buildingName} ${location_name} ${spaceType}`
+          for (let i = 0; i < data.similar_spaces.length; i++) {
+          data.similar_spaces[i].imageAlter = `${buildingName} ${location_name} ${spaceType}`
+          }
         }
         this.space_details = Object.assign({}, data);
         console.log('------------------------', this.space_details);
+        const type = this.getType(spaceType)
+        const spaceStatus = this.space_details?.spaceStatus === "Furnished" ? "furnished" : "unfurnished"
+        const cityName = this.space_details?.contact_city_name
+        const min = this.space_details?.originalPrice
+        const imageUrl = this.space_details?.images.length ? this.space_details.images[0] : ''
+        if (type === 'coworking') {
+          const minPrice = this.space_details.flexible_desk_price
+          const maxPrice = this.space_details.privatecabin_price;
+          this.updateJsonLd(spaceType, imageUrl, `Book your workspace at ${actual_name}, a fully furnished coworking space in ${location_name}, ${cityName}. With flexible membership plans, premium facilities, and a collaborative environment, it's the perfect place for freelancers, startups, and teams.`, minPrice, maxPrice, location_name)
+        } else if (type === 'shortterm') {
+          this.updateJsonLd(spaceType, imageUrl, `Reserve this ${spaceType} at, located in ${location_name}, ${cityName}. Available by the hour, this space offers top-notch amenities, flexible bookings, and a professional setup perfect for your next project, event or activity.`, min, "none", location_name)
+        } else {
+          this.updateJsonLd(spaceType, imageUrl, `Rent your ${spaceType}, at ${location_name}, ${cityName}. This ${spaceStatus} office is listed at Rs. ${min}/month. Get in touch with Flexo now to schedule your visit`, min, "none", location_name)
+        }
+
         this.ribbon = this.space_details.ribbon;
         this.ribbon_color = this.space_details.ribbon_color;
 
@@ -910,7 +1007,7 @@ export class DetailsComponent implements OnInit {
         // this.is_shortlisted =
         //   this.shortlists.indexOf(this.space_details.id) > -1 ? true : false;
 
-       
+
         this.marker = {
           position: {
             lat: this.space_details.latitude,

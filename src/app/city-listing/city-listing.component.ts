@@ -239,7 +239,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
       this.city_param = this.getOriginalUrlParam(params['city']);
       this.areaName = this.getOriginalUrlParam(params['area'])
-
       if(!this.areaName){
         if (this.spaceType === 'coworking space') {
         this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['city'])} (${new Date().getFullYear()}) | Compare & Book`);
@@ -267,7 +266,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour`);
         this.metaService.updateTag({
           name: "description",
-          content: `Book ${this.spaceType} spaces in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour. Find your shared office fast and FREE with Flexo.`,
+          content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} starting from Rs.20000 /hour. View images, amenities, pricing to find the best fit.Explore and book now!.`,
         });
       } else {
         this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['city'])} | Managed Offices`);
@@ -281,7 +280,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['area'])} | Book A Shared Office`);
           this.metaService.updateTag({
             name: "description",
-            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area'])} ${this.getOriginalUrlParam(params['city'])}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
+            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
           });
         } else if (
           this.spaceType === 'coworking cafe/restaurant' ||
@@ -303,13 +302,13 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.titleService.setTitle(`${this.spaceType} in ${this.getOriginalUrlParam(params['area'])} | Book Now`);
           this.metaService.updateTag({
             name: "description",
-            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['area'])} ${this.getOriginalUrlParam(params['city'])} Starting from Rs.20000 /hour. Compare prices, services and amenities. Explore available options now.`,
+            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])} Starting from Rs.20000 /hour. Compare prices, services and amenities. Explore available options now.`,
           });
         } else {
-          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['area'])} ${this.getOriginalUrlParam(params['city'])}`);
+          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])}`);
           this.metaService.updateTag({
             name: "description",
-            content: `Find office space for rent in ${this.getOriginalUrlParam(params['area'])} ${this.getOriginalUrlParam(params['city'])}. Choose from a variety of furnished, unfurnished, and custom-built options to suit your needs.`,
+            content: `Find office space for rent in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])}. Choose from a variety of furnished, unfurnished, and custom-built options to suit your needs.`,
           });
         }
     }
@@ -355,6 +354,54 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.userId = 0
     }
   }
+
+
+  updateJsonLd(
+    spaceType: string,
+    cityName: string,
+    imageUrl: string,
+    detail: string,
+    priceMin: number,
+    priceMax: number,
+    location?: string
+  ) {
+    const jsonLdId = 'json-ld-product'; 
+
+    const existingScript = document.getElementById(jsonLdId);
+    if (existingScript) {
+      existingScript.remove();
+    }
+    const jsonLd = {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": location ? `${spaceType} in ${location}` : `${spaceType} in ${cityName}`,
+      "image": imageUrl,
+      "description": detail,
+      "brand": {
+        "@type": "Brand",
+        "name": "Flexo"
+      },
+      "mpn": "",
+      "sku": "",
+      "offers": {
+        "@type": "Offer",
+        "url": window.location.href,
+        "priceCurrency": "INR",
+        "lowPrice": priceMin,
+        "highPrice": priceMax,
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    };
+
+    const jsonLdScript = document.createElement('script');
+    jsonLdScript.id = jsonLdId; 
+    jsonLdScript.type = 'application/ld+json';
+    jsonLdScript.text = JSON.stringify(jsonLd);
+
+    document.head.appendChild(jsonLdScript);
+  }
+
 
   openInquiryPopUp() {
     this.isCoworking = sessionStorage.getItem('isCoworking');
@@ -516,8 +563,24 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
             this.nearBySpaces.next(res.faqs);
             this.spaces_list = Object.assign([], res.data);
-
-
+            console.log(this.spaces_list, "areaAvailable");
+            if (this.spaces_list.length) {
+              const spaceType = this.spaces_list[0].spaceType
+              const cityName = this.spaces_list[0].contact_city_name
+              const location = this.spaces_list[0].location_name
+              const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
+              const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
+              const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
+              if (this.type === 'coworking') {
+                const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+                const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
+                this.updateJsonLd(spaceType, cityName, imageUrl, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
+              } else if (this.type === 'shortterm') {
+                this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+              } else {
+                this.updateJsonLd(spaceType, cityName, imageUrl, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
+              }
+            }
             this.recommended_spaces = Object.assign([], res.recommended_spaces);
             this.space_count = res.space_count;
             if (this.spaces_list.length) {
@@ -628,8 +691,23 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
         this.nearBySpaces.next(res.faqs);
         this.spaces_list = Object.assign([], res.data);
-
-
+        console.log(this.type,this.spaces_list, "areaNotAvailable");
+        if(this.spaces_list.length){
+          const spaceType = this.spaces_list[0].spaceType
+          const cityName = this.spaces_list[0].contact_city_name
+          const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
+          const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
+          const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
+          if (this.type === 'coworking'){
+          const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+          const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
+          this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`,minPrice,maxPrice)
+        } else if (this.type === 'shortterm'){
+            this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+        } else {
+            this.updateJsonLd(spaceType, cityName, imageUrl, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
+        }
+      }
         this.recommended_spaces = Object.assign([], res.recommended_spaces);
         this.space_count = res.space_count;
         if (this.spaces_list.length) {

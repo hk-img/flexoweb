@@ -1,8 +1,8 @@
 <div *ngIf="spaceDetails.ribbon_name" class="ribbon-label" [style.backgroundColor]="spaceDetails.ribbon_color">
   {{spaceDetails.ribbon_name}}
 </div>
-<div (click)="onSpaceNameClicked(spaceDetails)" class="cursor_pointer trending-place-item position-relative">
-  <div class="trending-img" *ngIf="!is_similar_listing">
+<div (click)="onSpaceNameClicked(spaceDetails)" class="cursor_pointer trending-place-item position-relative box-shadow">
+  <div class="trending-img position-relative" *ngIf="!is_similar_listing">
     <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
       responsive="breakpoints">
       <ng-container *ngIf="spaceDetails.images?.length">
@@ -51,15 +51,18 @@
     </div>
   </div>
   <div class="trending-img" *ngIf="is_similar_listing">
-    <a [href]="webDomain + 'details/' + spaceDetails.link_name" target="_blank"><img
-        [src]="aws_base_url + spaceDetails.id + '/' + spaceDetails.images[0]" alt="..." /></a>
+    <a [href]="webDomain + 'details/' + spaceDetails.link_name" target="_blank">
+      <img (error)="handleImageError($event)"
+        [src]="aws_base_url + spaceDetails.id + '/' + spaceDetails.images[0]" 
+         alt="{{spaceDetails.imageAlter}} {{spaceDetails.images[0] | slice:(spaceDetails.images[0]?.lastIndexOf('/') + 1) }}"/></a>
   </div>
   <div class="trending-title-box">
 
     <div class="customer-review d-flex justify-content-between mb-2 align-items-end">
       <h3 style="font-size: 18px" class="h-cursor m-0">
         {{ spaceDetails.name
-        }}<span style="
+        }}
+        <span style="
             background: unset;
             float: unset;
             margin: unset;

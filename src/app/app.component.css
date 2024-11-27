@@ -80,3 +80,19 @@
   margin-top: 10px;
 }
 .show { display: block; }
+
+
+.style2{
+ & h4{
+color: #555;
+transition: 0.5s;
+position: relative;
+font-size: 14px;
+font-weight: 400;
+}
+} 
+
+.margin-block{
+margin-top: 20px;
+margin-bottom: 15px;
+}

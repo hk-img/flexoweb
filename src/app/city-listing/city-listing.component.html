@@ -303,6 +303,9 @@
     [showMap]="_showMap"
     #faqsChild
     inViewport
+    [spaceType]="spaceType"
+    [cityName]="city_param"
+    [location]="areaName"
     [inViewportOptions]="{ threshold: [0] }"
     (inViewportAction)="onIntersection($event)"
   ></app-faqs>
