@@ -72,8 +72,7 @@ export class ListItemComponent implements OnInit{
       )?.column_name;
     }
 
-    this.type = this.getType(this.router.url.split("/")[2])
-
+    this.type = this.getType(spaceType)
     // for (let i = 0; i < this.spaceDetails.images.length; i++) {
     //   console.log('========================',this.spaceDetails.images[i]);
     // }
@@ -187,14 +186,14 @@ export class ListItemComponent implements OnInit{
 
   getType(spaceType: string): string {
     const shortTermSpaces = [
-      'coworking-cafe/restaurant', 'shoot-studio', 'recording-studio', 'podcast-studio',
-      'activity-space', 'sports-turf', 'sports-venue', 'party-space', 'banquet-hall',
-      'gallery', 'classroom', 'private-cabin', 'meeting-room', 'training-room', 'event-space'
+      'coworking cafe/restaurant', 'shoot studio', 'recording studio', 'podcast studio',
+      'activity space', 'sports turf', 'sports venue', 'party space', 'banquet hall',
+      'gallery', 'classroom', 'private cabin', 'meeting room', 'training room', 'event space'
     ];
     const longTermSpaces = [
-      'managed-office', 'private-office', 'shared-office', 'virtual-office'
+      'managed office', 'private office', 'shared office', 'virtual office'
     ];
-    if (spaceType === 'coworking-space') {
+    if (spaceType === 'coworking space') {
       return "coworking";
     } else if (shortTermSpaces.includes(spaceType)) {
       return "shortterm";
@@ -206,8 +205,7 @@ export class ListItemComponent implements OnInit{
   }
   
   onSpaceNameClicked(e: any) {
-    let type = this.getType(this.router.url.split("/")[2])
-    if (type === 'coworking'){
+    if (this.type === 'coworking'){
       window.open(
         `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
         '_blank'
