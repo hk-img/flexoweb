@@ -20,7 +20,6 @@ import { LoginRegisterService } from './services/login-register.service';
 import { MemberService } from './services/member.service';
 import { SEOService } from './services/seo.service';
 import { UserService } from './services/user.service';
-declare var $: any;
 
 
 declare global {
@@ -1413,19 +1412,19 @@ export class AppComponent {
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      $('#subscribe').ajaxChimp({
-        language: 'eng',
-        url: 'http://kwst.us18.list-manage.com/subscribe/post?u=42df802713d4826a4b137cd9e&id=815d11e811',
-      });
-      $.ajaxChimp.translations.eng = {
-        submit: 'Submitting...',
-        0: '<i class="fa fa-check"></i> We will be in touch soon!',
-        1: '<i class="fa fa-warning"></i> You must enter a valid e-mail address.',
-        2: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-        3: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-        4: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-        5: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-      };
+    //   $('#subscribe').ajaxChimp({
+    //     language: 'eng',
+    //     url: 'http://kwst.us18.list-manage.com/subscribe/post?u=42df802713d4826a4b137cd9e&id=815d11e811',
+    //   });
+    //   $.ajaxChimp.translations.eng = {
+    //     submit: 'Submitting...',
+    //     0: '<i class="fa fa-check"></i> We will be in touch soon!',
+    //     1: '<i class="fa fa-warning"></i> You must enter a valid e-mail address.',
+    //     2: '<i class="fa fa-warning"></i> E-mail address is not valid.',
+    //     3: '<i class="fa fa-warning"></i> E-mail address is not valid.',
+    //     4: '<i class="fa fa-warning"></i> E-mail address is not valid.',
+    //     5: '<i class="fa fa-warning"></i> E-mail address is not valid.',
+    //   };
     }
   }
 

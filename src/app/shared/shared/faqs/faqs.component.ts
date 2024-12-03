@@ -28,31 +28,31 @@ export class FaqsComponent implements OnInit {
       this.shortQuestions = this.data.filter((x) => x.type == 1);
       this.briefQuestions = this.data.filter((x) => x.type == 2);
     });
-    setTimeout(() => {
-      if (this.data.length > 0) {
-        this.schema = {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": `${this.data[0].question}`,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": `${this.data[0].answer}`
-              }
-            },
-            {
-              "@type": "Question",
-              "name": `${this.data[1].question}`,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": `${this.data[1].answer}`
-              }
-            }
-          ]
-        }
-      }
-    }, 3000);
+    // setTimeout(() => {
+    //   if (this.data.length > 0) {
+    //     this.schema = {
+    //       "@context": "https://schema.org",
+    //       "@type": "FAQPage",
+    //       "mainEntity": [
+    //         {
+    //           "@type": "Question",
+    //           "name": `${this.data[0].question}`,
+    //           "acceptedAnswer": {
+    //             "@type": "Answer",
+    //             "text": `${this.data[0].answer}`
+    //           }
+    //         },
+    //         {
+    //           "@type": "Question",
+    //           "name": `${this.data[1].question}`,
+    //           "acceptedAnswer": {
+    //             "@type": "Answer",
+    //             "text": `${this.data[1].answer}`
+    //           }
+    //         }
+    //       ]
+    //     }
+    //   }
+    // }, 3000);
   }
 }
