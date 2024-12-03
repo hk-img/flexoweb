@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -45,6 +45,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { environment } from 'src/environments/environment';
 import { HttpRequestInterceptor } from './login/tokanInterceptor';
 import { PaymentsComponent } from './payments/payments.component';
 import { ShimmerLoadingComponent } from './shared/component/shimmer-loading/shimmer-loading.component';
@@ -62,6 +63,29 @@ export const MY_FORMATS = {
         monthYearA11yLabel: 'MMMM YYYY',
     },
 };
+
+
+
+export function loadGoogleMaps(): () => Promise<void> {
+  return () =>
+    new Promise((resolve, reject) => {
+      if (!document.getElementById('googleMapsScript')) {
+        const script = document.createElement('script');
+        script.id = 'googleMapsScript';
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.mapKey}&libraries=places`;
+        script.async = true;
+        script.defer = true;
+
+        script.onload = () => resolve();
+        script.onerror = () => reject('Google Maps API could not be loaded.');
+
+        document.head.appendChild(script);
+      } else {
+        resolve(); // Script already loaded
+      }
+    });
+}
+
 
 // SocialLoginModule,
 // GoogleSigninButtonModule,
@@ -104,6 +128,11 @@ export const MY_FORMATS = {
     NgxSliderModule,
     ],
     providers: [
+      {
+        provide: APP_INITIALIZER,
+        useFactory: loadGoogleMaps,
+        multi: true,
+      },
         DatePipe,
         {
             provide: MatDialogRef,
@@ -127,7 +156,7 @@ export const MY_FORMATS = {
                 {
                   id: GoogleLoginProvider.PROVIDER_ID,
                   // provider: new GoogleLoginProvider('260639831318-gf3qtjrekfpc6dhvf95gfual9e2anv97.apps.googleusercontent.com'),
-                  provider: new GoogleLoginProvider('696066348928-dpugnnhq6v9ou191b40dcm7mmh4esuto.apps.googleusercontent.com'),
+                  provider: new GoogleLoginProvider(environment.clientId),
                 },
               ],
             } as SocialAuthServiceConfig,
