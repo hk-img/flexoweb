@@ -197,8 +197,8 @@
             ></map-marker>
            
             <map-info-window>
-              <div style="cursor: pointer;" id="marker_info">
-                <span class="map_wishlist" [style.color]="selected_marker_window?.existingfavorite?.favourite ? '#F76900' : 'gray'"><i (click)="shortList(selected_marker_window)" class="ion-heart scale_2"></i></span>
+              <div (click)="onSpaceNameClicked(selected_marker_window)" style="cursor: pointer;" id="marker_info">
+                <span class="map_wishlist" [style.color]="selected_marker_window?.existingfavorite?.favourite ? '#F76900' : 'gray'"><i (click)="shortList(selected_marker_window,$event)" class="ion-heart scale_2"></i></span>
                 <!-- <img [src]="selected_marker_window?.map_image_url" alt="" (error)="handleImageError($event)" width="320"/> -->
                 <div class="position-relative max-width">
                 <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"

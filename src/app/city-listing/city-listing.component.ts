@@ -851,7 +851,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-  shortList(obj) {
+  shortList(obj, e?: MouseEvent) {
+    e.stopPropagation()
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
     if (isLoggedIn /* this.logged_in */) {
       this.addRemoveFavorite(obj.id)
@@ -948,8 +949,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   onSpaceNameClicked(e: any) {
-    let type = this.getType(this.router.url.split("/")[2])
-    if (type === 'coworking') {
+    if (e.spaceType === 'Coworking Space') {
       window.open(
         `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
         '_blank'
