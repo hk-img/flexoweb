@@ -14,7 +14,8 @@ export const environment = {
   apiUrl: "${env.API_URL}",
   s3_bucket_path: "${env.S3_BUCKET_PATH}",
   mapKey: "${env.MAP_KEY}",
-  webDomain: "${env.WEB_DOMAIN || ''}"
+  webDomain: "${env.WEB_DOMAIN || ''}",
+  clientId: "${env.GOOGLE_CLIENT_ID}"
 };
 `;
 

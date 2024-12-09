@@ -23,18 +23,16 @@
 									</div>
 								</div>
 							</div>
-
-							<div *ngIf="fileTypeError" class="error-message">
-								<p class="text-danger">Please select a valid image file.</p>
-							</div>
-							<div *ngIf="fileSizeError" class="error-message">
-								<p class="text-danger">File size exceeds 1 MB. Please select a smaller file.</p>
-							</div>
-							<div class="error-message">
-								<p class="text-danger">Please upload image in JPG or PNG format, up to 1 MB.</p>
-							</div>
-
 						</div>
+						<div *ngIf="fileTypeError" class="error-message">
+							<p class="text-danger">Please select a valid image file.</p>
+						</div>
+						<div *ngIf="fileSizeError" class="error-message">
+							<p class="text-danger">File size exceeds 1 MB. Please select a smaller file.</p>
+						</div>
+						<!-- <div class="error-message">
+							<p class="text-danger">Please upload image in JPG or PNG format, up to 1 MB.</p>
+						</div> -->
 
 
 

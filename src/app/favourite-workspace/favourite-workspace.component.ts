@@ -1,15 +1,14 @@
-import { ChangeDetectorRef, Component, Input, NgZone, OnInit, ViewChild, ViewRef } from '@angular/core';
-import { FavouriteWorkSpaceService } from './favourite-workspace.service';
-import { ToastrService } from 'ngx-toastr';
+import { ChangeDetectorRef, Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import {
-    MatLegacyDialog as MatDialog
+  MatLegacyDialog as MatDialog
 } from '@angular/material/legacy-dialog';
-import { DialogConfirmationPopUp } from '../shared/component/dialog-confirmation-popup/dialog-confirmation-popup.component';
-import { AppGlobals } from '../services/app-globals';
-import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { Router } from '@angular/router';
-import { concat, lowerCase, replace } from 'lodash';
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { AppGlobals } from '../services/app-globals';
+import { DialogConfirmationPopUp } from '../shared/component/dialog-confirmation-popup/dialog-confirmation-popup.component';
+import { FavouriteWorkSpaceService } from './favourite-workspace.service';
 
 @Component({
   selector: 'app-favourite-workspace',
@@ -161,4 +160,23 @@ export class FavouriteWorkSpaceComponent implements OnInit {
     imgElement.alt = 'Failed to Load Image';
   }
 
+
+
+  formatUrl(value: string): string {
+    return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
+  }
+
+  onSpaceNameClicked(e: any) {
+    if (e.spaceType === 'Coworking Space') {
+      window.open(
+        `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
+        '_blank'
+      );
+    } else {
+      window.open(
+        `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.contact_city_name)}/${this.formatUrl(e.location_name)}/${e.id}`,
+        '_blank'
+      );
+    }
+  }
 }

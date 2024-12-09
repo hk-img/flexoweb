@@ -6,7 +6,7 @@
     <div class="booking-all-list">
       <div class="booking-all-list-single" *ngFor="let spaceDetails of shortListReviewListOffset; let i = index">  
         <div class="booking-all-list-single-img-cont">
-          <a target="_blank" [href]=" webDomain + 'coworking-space/' + spaceDetails?.linkName " class="booking-all-list-single-img">            
+          <a target="_blank" (click)="onSpaceNameClicked(spaceDetails)" class="booking-all-list-single-img cursor-pointer">            
                 <img
                 [src]="(spaceDetails?.images[0])|| 'assets/images/details_placeholder_image.jpg'"
                 [alt]="spaceDetails.actual_name" (error)="handleImageError($event)"
@@ -18,7 +18,7 @@
           <div class="booking-all-list-single-cont">
               <div class="booking-all-list-single-cont-od">
                 <div class="booking-all-list-single-cont-od-heading">
-                  <h4> {{ spaceDetails.actual_name }} </h4>
+                  <h4 class="cursor-pointer" (click)="onSpaceNameClicked(spaceDetails)"> {{ spaceDetails.actual_name }} </h4>
                   <div class="save-btn-c">
                     <a
                       class="btn save-btn-custom"

@@ -55,6 +55,50 @@ export class HomeComponent {
       },
     ],
   };
+  @ViewChild('slickReviewsModal2', { static: false })
+  slickReviewsModal2: SlickCarouselComponent;
+  public reviewsConfig1 = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    loop:true,
+    arrows: false,
+    variableHeight: false,
+    // autoplay: true,
+    autoplaySpeed: 8000,
+    dots: false,
+    swipeToSlide: true,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+  @ViewChild('slickReviewsModal3', { static: false })
+  slickReviewsModal3: SlickCarouselComponent;
+  public reviewsConfig3 = {
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    loop:true,
+    arrows: false,
+    variableHeight: false,
+    autoplay: true,
+    autoplaySpeed: 8000,
+    dots: false,
+    swipeToSlide: true,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
   locations: string[] = [];
   control = new FormControl('');
   filteredPlaces: any;
@@ -80,6 +124,135 @@ export class HomeComponent {
       },
     ],
   };
+
+  @ViewChild('citySlickSlider', { static: false })
+  citySlickSlider: SlickCarouselComponent;
+  public cityConfig = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: '<button class="slick-prev">></button>',
+    nextArrow: '<button class="slick-next"><</button>',
+    variableHeight: false,
+    // autoplay: true,
+    autoplaySpeed: 1000,
+    dots: false,
+    swipeToSlide: true,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
+  @ViewChild('workSpaceSlider', { static: false })
+  workSpaceSlider: SlickCarouselComponent;
+  public workSpaceConfig = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: false,
+    variableHeight: false,
+    // autoplay: true,
+    autoplaySpeed: 1000,
+    dots: true,
+    swipeToSlide: true,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+    ],
+  };
+
+  @ViewChild('companyModal', { static: false })
+  companyModal: SlickCarouselComponent;
+  public companyConfig = {
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    arrows: false,
+    variableHeight: false,
+    autoplay: true,
+    autoplaySpeed: 0,
+    pauseOnHover: false, 
+    pauseOnFocus: false, 
+    swipeToSlide: true,
+    infinite: true, 
+    speed: 5000,
+    cssEase: 'linear',
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 6,
+        },
+      },
+    ],
+  };
+  
+  @ViewChild('coworkBrandSlider', { static: false })
+  coworkBrandSlider: SlickCarouselComponent;
+  public brandConfig = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    variableHeight: false,
+    // autoplay: true,
+    autoplaySpeed: 1000,
+    dots: true,
+    swipeToSlide: true,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
+  @ViewChild('spaceListSlider', { static: false })
+  spaceListSlider: SlickCarouselComponent;
+  public spaceListConfig = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: false,
+    variableHeight: false,
+    // autoplay: true,
+    autoplaySpeed: 1000,
+    dots: true,
+    swipeToSlide: true,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   user_lat: number;
   user_long: number;
   spaces = [];
@@ -97,6 +270,8 @@ export class HomeComponent {
   prev() {
     this.slickReviewsModal.slickPrev();
   }
+
+
 
   nextTestimonial() {
     this.slickTestimonialModal.slickNext();
