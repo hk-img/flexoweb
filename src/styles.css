@@ -11326,3 +11326,13 @@ h4 {
   z-index: 99;
 }
 
+@media (min-width: 1400px) {
+  .container {
+      max-width: 1280px !important;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+      max-width: 1140px;
+  }
+}

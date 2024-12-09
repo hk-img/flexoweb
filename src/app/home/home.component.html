@@ -87,7 +87,7 @@
             <div class="col-md-8 text-center mar-top-20" style="margin: auto">
               <form class="hero__form v2">
                 <div class="row" style="align-items: center;">
-                  <div class="col-lg-10 col-md-12 row m-0" style="justify-content: space-evenly;">
+                  <div class="col-lg-9 col-md-8 row m-0" style="justify-content: space-evenly;">
                     <div class="p-0 col-md-6">
                       <!-- <mat-form-field>
                       <mat-label>What are you planning?</mat-label>
@@ -104,8 +104,7 @@
                     <div class="col-md-6 border-l-r" style="align-self: center;">
                       <input class="hero__form-input custom-select" type="text" name="place-event" id="key-word"
                         (input)="onInputChange($event.target.value)" style="font-family: Poppins, FontAwesome;"
-                        placeholder="&#xF002; Where are you looking for office space?" [formControl]="control"
-                        [matAutocomplete]="auto" />
+                        placeholder="&#xF002; Where?" [formControl]="control" [matAutocomplete]="auto" />
                       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
                         <ng-container *ngIf="filteredPlaces">
                           <mat-option *ngFor="let val of filteredPlaces" [value]="val">
@@ -126,8 +125,8 @@
                     </div>
                   </div> -->
                   </div>
-                  <div class="col-md-2">
-                    <a (click)="onSearchSubmit()" class="col-md-12 col-lg-3 cursor-pointer">Search &nbsp; <i
+                  <div class="col-lg-3 col-md-4">
+                    <a (click)="onSearchSubmit()" class="col-12 cursor-pointer">Search &nbsp; <i
                         class="fa fa-long-arrow-right" aria-hidden="true"></i>
                     </a>
                   </div>
