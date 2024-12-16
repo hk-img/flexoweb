@@ -33,7 +33,29 @@ export class HomeComponent {
   powai = 'assets/images/category/Powai.jpg';
   thane = 'assets/images/category/Thane.jpg';
   bkc = 'assets/images/category/BKC.jpg';
+  currentText: string = 'Office Spaces';  // Initial Text
+  currentImageUrl: string = '';  // The background image URL
 
+  imageIndex: number = 0; // Track the current background image index
+
+  // Define text for each image
+  heroTexts = [
+    'Office Spaces',
+    'Co-working Spaces',
+    'Private Offices',
+    'Shared Workspaces'
+  ];
+
+  // Background image URLs for slideshow
+  images = [
+    'https://web.archive.org/web/20211221170236///img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive/homepage_images/hero_images/1-hero',
+    'https://web.archive.org/web/20211221170236///img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive/homepage_images/hero_images/5-hero',
+    'https://web.archive.org/web/20211221170236///img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive/homepage_images/hero_images/Party.png',
+    'https://homepress.stylemixthemes.com/wp-content/uploads/revslider/home-slider/slide_2-scaled.jpg'
+  ];
+
+  // Define the interval time for the text/image change
+  changeInterval = 3000; // in ms (8 seconds) // in ms (8 seconds)
   @ViewChild('slickReviewsModal', { static: false })
   slickReviewsModal: SlickCarouselComponent;
   public reviewsConfig = {
@@ -77,6 +99,7 @@ export class HomeComponent {
       },
     ],
   };
+  
   @ViewChild('slickReviewsModal3', { static: false })
   slickReviewsModal3: SlickCarouselComponent;
   public reviewsConfig3 = {
@@ -128,22 +151,24 @@ export class HomeComponent {
   @ViewChild('citySlickSlider', { static: false })
   citySlickSlider: SlickCarouselComponent;
   public cityConfig = {
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
     arrows: true,
     prevArrow: '<button class="slick-prev">></button>',
     nextArrow: '<button class="slick-next"><</button>',
     variableHeight: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 1000,
+    speed: 500,
     dots: false,
     swipeToSlide: true,
     infinite: true,
+    cssEase: 'linear',
     responsive: [
       {
         breakpoint: 1167,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
         },
       },
     ],
@@ -156,7 +181,7 @@ export class HomeComponent {
     slidesToScroll: 1,
     arrows: false,
     variableHeight: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 1000,
     dots: true,
     swipeToSlide: true,
@@ -199,20 +224,24 @@ export class HomeComponent {
   @ViewChild('coworkBrandSlider', { static: false })
   coworkBrandSlider: SlickCarouselComponent;
   public brandConfig = {
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
+    prevArrow: '<button class="slick-prev">></button>',
+    nextArrow: '<button class="slick-next"><</button>',
     variableHeight: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 1000,
-    dots: true,
+    speed: 500,
+    dots: false,
     swipeToSlide: true,
     infinite: true,
+    cssEase: 'linear',
     responsive: [
       {
         breakpoint: 1167,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
         },
       },
     ],
@@ -306,6 +335,11 @@ export class HomeComponent {
   }
 
   ngOnInit() {
+    this.currentImageUrl = this.images[0];
+    this.currentText = this.heroTexts[0];
+
+    // Start the slideshow
+    this.startSlideshow();
     this.getCoords();
     this.getSpacecategory();
     if (window.innerWidth < 500) {
@@ -320,6 +354,19 @@ export class HomeComponent {
     );
 
     this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
+  }
+
+  startSlideshow() {
+    setInterval(() => {
+      // Change the image
+      this.currentImageUrl = this.images[this.imageIndex];
+
+      // Change the text
+      this.currentText = this.heroTexts[this.imageIndex];
+
+      // Update the image index for next iteration
+      this.imageIndex = (this.imageIndex + 1) % this.images.length;
+    }, this.changeInterval);
   }
 
   getSpacecategory() {

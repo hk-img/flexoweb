@@ -32,6 +32,9 @@
 .flex_btn .btn {
   color: #f76900;
   transition: all 500ms;
+  background: #0000006b;
+  backdrop-filter: blur(5px);
+  padding: 2px 8px;
 }
 .flex_btn .btn:hover {
   text-decoration: underline;
@@ -63,14 +66,17 @@ mark {
   }
 }
 
-.cursor-pointer {
+.hero_sec .cursor-pointer {
   color: #fff !important;
   background: #f76900;
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
   padding: 6px 18px;
-  border-radius: 50px;
+  border-radius: 4px;
+  height: 49px;
+  display: flex;
+  align-items: center;
 }
 
 .how-can-help-img {
@@ -94,9 +100,9 @@ mark {
   display: none;
 }
 
-::ng-deep .cdk-overlay-pane {
+/* ::ng-deep .cdk-overlay-pane {
   width: 399px !important;
-}
+} */
 
 ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
   padding-bottom: 0px !important;
@@ -111,7 +117,7 @@ mark {
 }
 
 @media only screen and (max-width: 900px) {
-  .cursor-pointer {
+  /* .cursor-pointer {
     border: 1px solid darkgray;
     width: fit-content;
     padding: 8px 11px;
@@ -119,7 +125,7 @@ mark {
     background-color: white;
     border-radius: 20px;
     font-weight: 600;
-  }
+  } */
   .web {
     display: none;
   }
@@ -200,12 +206,12 @@ mark {
   border-radius: 5px;
 }
 .cities_sec .city-img-box.city_main_img img {
-  height: 416px;
+  height: 409px;
 }
 .cities_sec .city-img-box::before {
   position: absolute;
   content: "";
-  background: #0000006e;
+  background: #0000002b;
   left: 0;
   top: 0;
   width: 100%;
@@ -230,19 +236,18 @@ mark {
 }
 
 
-.work-space-option .workspace_carousel .workspace_box::before {
-  position: absolute;
-  content: "";
-  background: #00000061;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
 .work-space-option .workspace_carousel .workspace_box img {
   height: 400px;
   object-fit: cover;
+}
+.work-space-option .workspace_carousel .workspace_box .working-space-cal-single-txt-price-amount h6{
+  font-size: 12px;
+  font-weight: 700;
+  color: #b2b2b2;
+}
+.work-space-option .workspace_carousel .workspace_box .working-space-cal-single-txt-price-amount p{
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .work-space-option .workspace_carousel .workSpace_content {
@@ -286,7 +291,7 @@ mark {
 }
 .cowrking_brands .cowork_carousel .cowork_brand_box img {
   transition: all 500ms;
-  height: 34px;
+  height: 40px;
   object-fit: contain;
 }
 
@@ -328,24 +333,14 @@ mark {
   font-size: 17px;
 }
 
-.count_sec .count_box {
-  background: #ececec;
-  border-radius: 6px;
-  box-shadow: 0 0 3px #b9b9b9;
-  height: 100%;
-  transition: all 500ms;
+
+
+.count_sec .count_box h2 {
+   font-size: 28px;
 }
-.count_sec .count_box:hover {
-  background: #f76900 !important;
-}
-.count_sec .count_box:hover h4 {
-  color: #fff !important;
-}
-.count_sec .count_box:hover h5 {
-  color: #fff !important;
-}
+
 .why_choose {
-  background-image: url("https://weborgraphics.com/flexo-2/assets/images/how-it-work.webp");
+  background-image: url("//img.peerspace.com/image/upload/f_auto,q_auto,fl_progressive,c_fill,ar_3:2,h_1000/v1527030305/new_host_images/host-couple.jpg");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -354,7 +349,7 @@ mark {
   position: relative;
 }
 .why_choose::before {
-  background: #000000c7;
+  background: #0000008a;
   position: absolute;
   content: "";
   top: 0;
@@ -403,183 +398,43 @@ mark {
   box-shadow: 0 0 3px #f76900;
 }
 
-.our_team .team_img_box .img_name {
-  background: #fff;
-  box-shadow: 0 0 3px #9a9a9a;
-  border-radius: 6px;
-  overflow: hidden;
-  padding: 16px;
-}
 
-.our_team .team_img_box .img_name img {
-  height: 200px;
+
+.hero_sec {
   width: 100%;
-  object-fit: cover;
-  border-radius: 6px;
-}
-.our_team .team_box p{
-  font-size: 14px;
-}
-
-.list_sapce{
-  background-image: url('https://img.peerspace.com/image/upload/dpr_auto,f_auto,q_auto,fl_progressive/ar_3:2,c_fill,h_1000/v1528389448/new_host_images/host-hero.jpg');
-  background-position: center;
+  height: 100vh;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-position: center center;
   position: relative;
-  overflow: hidden;
-  background-attachment: fixed;
-}
-.list_sapce::before{
-  position: absolute;
-  content: "";
-  background: #000000a3;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-.list_sapce h2{
-  font-size: 40px;
+  box-shadow: 1px 2px 10px 5px white;
+  transition: background-image 1s ease-in-out;
 }
 
-.choose_share .share_content{
-  box-shadow: 0 0 3px #bababa;
-  background: #fff;
-  border-radius: 6px;
-  margin-left: -80px;
-  border: 2px dashed #f76900;
-}
-.choose_share .share_img{
-  overflow: hidden;
-  border-radius: 8px;
-}
-.choose_share .share_img::before{
-  position: absolute;
-  content: "";
-  background: #000000a3;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-.choose_share .share_img .share_img_txt{
-  position: absolute;
-  left: 16px;
-  bottom: 16px;
-  background: #0000006b;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(12px);
-  border-radius: 6px;
-  padding: 16px;
-  box-shadow: 0 0 3px #da6107;
-}
-.choose_share .share_img .share_img_txt h6{
-  color: #f76900;
+.hero-heading {
+  opacity: 0;
+  font-size: 48px;
+  font-weight: bold;
+  transition: fadeInText 1s ease-in-out;
 }
 
-
-.works_sec .works_box{
-  position: relative;
-  box-shadow: 0 0 3px #8b8b8b;
-  border-radius: 6px;
-  overflow: hidden;
-  height: 100%;
-  transition: all 500ms;
-}
-.works_sec .works_box:hover{
-  transform: translateY(-10px);
-}
-.works_sec .works_box::before{
-  position: absolute;
-  content: "";
-  left: -1px;
-  height: 48px;
-  top: -1px;
-  border: 3px solid #f76900;
-  border-radius: 30px;
-}
-
-.works_sec .works_box::after{
-  position: absolute;
-  content: "";
-  right: -1px;
-  height: 48px;
-  bottom: -1px;
-  border: 3px solid #f76900;
-  border-radius: 30px;
-}
-
-.works_sec .works_box h5{
-  color: #f76900;
-}
-
-.works_sec .works_box .works_count span{
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 3px #f76900;
-  width: 40px;
-  height: 40px;
+.hero_sec .hero-content {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  font-weight: 500;
-  color: #f76900;
-  border: 2px solid #f76900
 }
 
-.space_list_sec .spce_list_box img{
-   border-radius: 6px;
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-.space_list_sec .spce_list_box{
-  height: 350px;
-  box-shadow: 0 0 3px #cfcfcf;
-  border-radius: 6px;
-  position: relative;
-  margin: 12px 0;
-}
-.space_list_sec .spce_list_box h5{
-  color: #f76900;
-}
-
-
-.faq_sec .card{
-   box-shadow: 0 0 3px #a7a7a7;
-   background: #fff;
-   border-radius: 6px 6px 0 6px !important;
-   margin: 9px 0;
-   border: none;
-}
-.faq_sec .card .card-header{
-  background: #f76900 !important;
-  border-bottom: none !important;
-  border-radius: 0 !important;
-}
-
-.faq_sec .card .btn{
-   background: none;
-   border: none;
-   color: #fff;
-}
-
-.earn_sec{
-  background-image: url('https://img.peerspace.com/image/upload/c_fill,h_900/c_crop,g_north,h_300,w_1440,y_120/b_black,o_90/v1527267560/new_host_images/basketball-hoop.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
-  overflow: hidden;
-  background-attachment: fixed;
-}
-
-.earn_sec::before{
-  position: absolute;
-  content: "";
-  background: #000000a3;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-

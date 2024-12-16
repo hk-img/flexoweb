@@ -200,20 +200,43 @@ export class DetailsComponent implements OnInit {
   public similarSpacesConfig = {
     slidesToShow: 3,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
     variableHeight: false,
     autoplaySpeed: 1000,
-    dots: false,
+    dots: true,
     swipeToSlide: true,
     infinite: true,
     responsive: [
       {
-        breakpoint: 900,
+        breakpoint: 1200, 
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 900, 
         settings: {
           slidesToShow: 1,
         },
       },
+      {
+        breakpoint: 600, 
+        settings: {
+          slidesToShow: 1,
+          dots: true,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 1,
+          dots: true,
+          arrows: false,
+        },
+      },
     ],
+    
   };
 
   public similarRatingReviewConfig = {

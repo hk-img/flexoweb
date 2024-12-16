@@ -1,144 +1,62 @@
-<div class="hero">
-  <ngx-slick-carousel class="carousel p-0 m-0" #slickReviewsModal2="slick-carousel" [config]="reviewsConfig1"
-    responsive="breakpoints">
-    <div ngxSlickItem class="swiper-slide popular-item slide p-0">
-      <div class="position-relative hero-slide">
-        <img class="w-100" src="assets/images/header/main_banner.jpg" alt="place-image" />
-        <div class="hero-content d-flex w-100 justify-content-center align-items-center position-absolute h-100">
-          <div class="col-md-12 text-center">
-            <div class="col-12">
-              <h1 class="hero-title v2">Discover Amazing Office Spaces</h1>
-              <p class="hero-desc v2" *ngIf="!isMobile">
-                <span style="background: black; color: white; padding: 0px 10px">Explore our collection of offices and
-                  coworking spaces</span>
-              </p>
-              <p class="hero-desc v2" style="line-height: 20px" *ngIf="isMobile">
-                Explore our collection of offices and coworking spaces
-              </p>
-            </div>
-            <div class="col-md-8 text-center mar-top-20" style="margin: auto">
-              <form class="hero__form v2">
-                <div class="row" style="align-items: center;">
-                  <div class="col-lg-9 col-md-8 row m-0" style="justify-content: space-evenly;">
-                    <div class="p-0 col-md-6">
-                      <!-- <mat-form-field>
-                      <mat-label>What are you planning?</mat-label>
-                      <mat-select (selectionChange)="getVal($event.value)">
-                          <mat-option *ngFor="let item of spaces" [value]="item.spaceType">{{item?.spaceType}}</mat-option>
-                      </mat-select>
-                    </mat-form-field> -->
-                      <ng-select placeholder="What are you planning?" (change)="getVal($event)">
-                        <ng-option *ngFor="let item of spaces" [value]="item.spaceType">
-                          {{item?.spaceType}}
-                        </ng-option>
-                      </ng-select>
-                    </div>
-                    <div class="col-md-6 border-l-r" style="align-self: center;">
-                      <input class="hero__form-input custom-select" type="text" name="place-event" id="key-word"
-                        (input)="onInputChange($event.target.value)" style="font-family: Poppins, FontAwesome;"
-                        placeholder="&#xF002; Where?" [formControl]="control" [matAutocomplete]="auto" />
-                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
-                        <ng-container *ngIf="filteredPlaces">
-                          <mat-option *ngFor="let val of filteredPlaces" [value]="val">
-                            {{val}}
-                          </mat-option>
-                        </ng-container>
-                        <ng-container *ngIf="!filteredPlaces.length">
-                          <mat-option>
-                            Location not found
-                          </mat-option>
-                        </ng-container>
-                      </mat-autocomplete>
-                    </div>
-                    <!-- <div class="col-lg-2 col-md-12">
-                    <div class="submit_btn text-right md-left">
-                      <button class="btn v3  mar-right-5" type="submit" ><i class="ion-search" aria-hidden="true"></i>
-                        Search</button>
-                    </div>
-                  </div> -->
-                  </div>
-                  <div class="col-lg-3 col-md-4">
-                    <a (click)="onSearchSubmit()" class="col-12 cursor-pointer">Search &nbsp; <i
-                        class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                    </a>
-                  </div>
+<div class="hero hero_sec" [style.backgroundImage]="'url(' + currentImageUrl + ')'">
+  <div class="hero-slide">
+    <div class="hero-content d-flex w-100 justify-content-center align-items-center position-absolute">
+      <div class="col-md-12 text-center">
+        <div class="col-12">
+          <h1 class="hero-title v2">
+            Discover Amazing <span class="hero_heading">{{ currentText }}</span>
+          </h1>
+          <p class="hero-desc v2" *ngIf="!isMobile">
+            <span style="background: black; color: white; padding: 0px 10px">
+              Explore our collection of offices and coworking spaces
+            </span>
+          </p>
+          <p class="hero-desc v2" style="line-height: 20px" *ngIf="isMobile">
+            Explore our collection of offices and coworking spaces
+          </p>
+        </div>
+        <div class="col-lg-8 col-md-7 col-12 text-center mar-top-20" style="margin: auto">
+          <form class="hero__form v2">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-lg-7 col-md-8 col-12 row m-0 hero_input_box p-0" style="justify-content: space-evenly;">
+                <div class="p-0 col-md-6 col-12 border-l-r">
+                  <ng-select placeholder="What are you looking for?" (change)="getVal($event)">
+                    <ng-option *ngFor="let item of spaces" [value]="item.spaceType">
+                      {{item?.spaceType}}
+                    </ng-option>
+                  </ng-select>
                 </div>
-              </form>
+                <div class="col-md-6" style="align-self: center;">
+                  <input class="hero__form-input custom-select" type="text" name="place-event" id="key-word"
+                    (input)="onInputChange($event.target.value)" style="font-family: Poppins, FontAwesome;"
+                    placeholder="&#xF002; Where?" [formControl]="control" [matAutocomplete]="auto" />
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
+                    <ng-container *ngIf="filteredPlaces">
+                      <mat-option *ngFor="let val of filteredPlaces" [value]="val">
+                        {{val}}
+                      </mat-option>
+                    </ng-container>
+                    <ng-container *ngIf="!filteredPlaces.length">
+                      <mat-option>
+                        Location not found
+                      </mat-option>
+                    </ng-container>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-auto col-12">
+                <a (click)="onSearchSubmit()" class="col-12 cursor-pointer">Search &nbsp; <i
+                    class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
-    <div ngxSlickItem class="swiper-slide popular-item slide p-0">
-      <div class="position-relative hero-slide">
-        <img class="w-100" src="assets/images/header/main_banner.jpg" alt="place-image" />
-        <div class="hero-content d-flex w-100 justify-content-center align-items-center position-absolute h-100">
-          <div class="col-md-12 text-center">
-            <div class="col-12">
-              <h1 class="hero-title v2">Discover Amazing Office Spaces</h1>
-              <p class="hero-desc v2" *ngIf="!isMobile">
-                <span style="background: black; color: white; padding: 0px 10px">Explore our collection of offices and
-                  coworking spaces</span>
-              </p>
-              <p class="hero-desc v2" style="line-height: 20px" *ngIf="isMobile">
-                Explore our collection of offices and coworking spaces
-              </p>
-            </div>
-            <div class="col-md-8 text-center mar-top-20" style="margin: auto">
-              <form class="hero__form v2">
-                <div class="row" style="align-items: center;">
-                  <div class="col-lg-9 col-md-8 row m-0" style="justify-content: space-evenly;">
-                    <div class="p-0 col-md-6">
-                      <!-- <mat-form-field>
-                      <mat-label>What are you planning?</mat-label>
-                      <mat-select (selectionChange)="getVal($event.value)">
-                          <mat-option *ngFor="let item of spaces" [value]="item.spaceType">{{item?.spaceType}}</mat-option>
-                      </mat-select>
-                    </mat-form-field> -->
-                      <ng-select placeholder="What are you planning?" (change)="getVal($event)">
-                        <ng-option *ngFor="let item of spaces" [value]="item.spaceType">
-                          {{item?.spaceType}}
-                        </ng-option>
-                      </ng-select>
-                    </div>
-                    <div class="col-md-6 border-l-r" style="align-self: center;">
-                      <input class="hero__form-input custom-select" type="text" name="place-event" id="key-word"
-                        (input)="onInputChange($event.target.value)" style="font-family: Poppins, FontAwesome;"
-                        placeholder="&#xF002; Where?" [formControl]="control" [matAutocomplete]="auto" />
-                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
-                        <ng-container *ngIf="filteredPlaces">
-                          <mat-option *ngFor="let val of filteredPlaces" [value]="val">
-                            {{val}}
-                          </mat-option>
-                        </ng-container>
-                        <ng-container *ngIf="!filteredPlaces.length">
-                          <mat-option>
-                            Location not found
-                          </mat-option>
-                        </ng-container>
-                      </mat-autocomplete>
-                    </div>
-                    <!-- <div class="col-lg-2 col-md-12">
-                    <div class="submit_btn text-right md-left">
-                      <button class="btn v3  mar-right-5" type="submit" ><i class="ion-search" aria-hidden="true"></i>
-                        Search</button>
-                    </div>
-                  </div> -->
-                  </div>
-                  <div class="col-lg-3 col-md-4">
-                    <a (click)="onSearchSubmit()" class="col-12 cursor-pointer">Search &nbsp; <i
-                        class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                    </a>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ngx-slick-carousel>
+  </div>
 </div>
+
 
 
 <div class="container-fluid Spaces_box section-padding">
@@ -153,10 +71,7 @@
         <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
           <div class="space_img_box position-relative">
             <div class="img-container">
-              <img class="img-rounded" alt=""
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/activities/Video_shoot_tile_v2.png"
-                srcset="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/c_fill,w_500,h_500/homepage_images/activities/Video_shoot_tile_v2.png 500w"
-                sizes="300px" class="img-fluid">
+              <img src="../../assets/images/desk-spaces.webp" alt="" class="img-fluid">
             </div>
             <div class="space_txt position-absolute">
               <h5 class="text-white m-0">Coworking Space</h5>
@@ -168,10 +83,7 @@
         <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
           <div class="space_img_box position-relative">
             <div class="img-container">
-              <img class="img-rounded" alt=""
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/why_peerspace/Why_Peerspace.png"
-                srcset="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/why_peerspace/Why_Peerspace.png"
-                sizes="300px" class="img-fluid">
+            <img src="../../assets/images/managed-offices.webp" alt="" class="img-fluid">
             </div>
             <div class="space_txt position-absolute">
               <h5 class="text-white m-0">Managed Office</h5>
@@ -183,10 +95,7 @@
         <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
           <div class="space_img_box position-relative">
             <div class="img-container">
-              <img class="img-rounded" alt=""
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/why_peerspace/Why_Peerspace.png"
-                srcset="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/why_peerspace/Why_Peerspace.png"
-                sizes="300px" class="img-fluid">
+              <img src="../../assets/images/private-office.webp" alt="" class="img-fluid">
             </div>
             <div class="space_txt position-absolute">
               <h5 class="text-white m-0">Private Office</h5>
@@ -198,10 +107,7 @@
         <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
           <div class="space_img_box position-relative">
             <div class="img-container">
-              <img class="img-rounded" alt=""
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/why_peerspace/Why_Peerspace.png"
-                srcset="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/why_peerspace/Why_Peerspace.png"
-                sizes="300px" class="img-fluid">
+              <img src="../../assets/images/private-cabins.webp" alt="" class="img-fluid">
             </div>
             <div class="space_txt position-absolute">
               <h5 class="text-white m-0">Private Cabin</h5>
@@ -228,10 +134,7 @@
         <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
           <div class="space_img_box position-relative">
             <div class="img-container">
-              <img class="img-rounded" alt=""
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/why_peerspace/Why_Peerspace.png"
-                srcset="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/why_peerspace/Why_Peerspace.png"
-                sizes="300px" class="img-fluid">
+              <img src="../../assets/images/desk-spaces.webp" alt="" class="img-fluid">
             </div>
             <div class="space_txt position-absolute">
               <h5 class="text-white m-0">Desk Space</h5>
@@ -354,120 +257,121 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-4">
-        <h2 class="section-title v1">India's Premier Network of Coworking Spaces</h2>
+        <h2 class="section-title v1">Explore India's Premier Network of Coworking Spaces</h2>
       </div>
     </div>
     <div class="row h-100">
-      <div class="col-lg-4 col-md-4 col-12">
-        <div class="city-img-box city_main_img position-relative">
-          <img
-            src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-            class="w-100 img-fluid" />
-          <div class="city_txt">
-            <div class="text-white">NEW!</div>
-            <h2 class="text-white m-0 custom-lh">Vancouver</h2>
-            <p class="text-white m-0">Explore spaces in London</p>
+      <div class="col-lg-4 col-md-4 col-12 px-0 mb-md-0 mb-3">
+        <a href="">
+          <div class="city-img-box city_main_img position-relative">
+            <img
+              src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+              class="w-100 img-fluid" />
+            <div class="city_txt">
+              <div class="text-white">NEW!</div>
+              <h2 class="text-white m-0 custom-lh">Vancouver</h2>
+              <p class="text-white m-0">Explore spaces in London</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
-      <div class="col-lg-8 col-md-8 col-12">
+      <div class="col-lg-8 col-md-8 col-12 px-0">
         <ngx-slick-carousel class="carousel city_carousel" #citySlickSlider="slick-carousel" [config]="cityConfig"
           responsive="breakpoints">
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
+              <div class="col-12 mb-2 px-2">
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+                      <div class="text-white">NEW!</div>
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
                   </div>
+                </a>
+              </div>
+              <div class="col-12 mb-2 px-2">
+            <a href="#">
+              <div class="city-img-box position-relative">
+                <img
+                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/la"
+                  class="w-100 img-fluid" />
+                <div class="city_txt">
+                  <div class="text-white">NEW!</div>
+                  <h3 class="text-white m-0">Vancouver</h3>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
-                  </div>
-                </div>
+            </a>
               </div>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
-                  </div>
+              <div class="col-12 mb-2 px-2">
+            <a href="#">
+              <div class="city-img-box position-relative">
+                <img
+                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/toronto-v2"
+                  class="w-100 img-fluid" />
+                <div class="city_txt">
+                  <div class="text-white">NEW!</div>
+                  <h3 class="text-white m-0">Vancouver</h3>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
+            </a>
+              </div>
+              <div class="col-12 mb-2 px-2">
+               <a href="#">
                 <div class="city-img-box position-relative">
                   <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/sf"
                     class="w-100 img-fluid" />
                   <div class="city_txt">
                     <div class="text-white">NEW!</div>
                     <h3 class="text-white m-0">Vancouver</h3>
                   </div>
+                </div>
+               </a>
+              </div>
+            </div>
+          </div>
+          <div ngxSlickItem class="swiper-slide popular-item slide">
+            <div class="row">
+              <div class="col-12 mb-2 px-2">
+            <a href="#">
+              <div class="city-img-box position-relative">
+                <img
+                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/chicago"
+                  class="w-100 img-fluid" />
+                <div class="city_txt">
+                  <div class="text-white">NEW!</div>
+                  <h3 class="text-white m-0">Vancouver</h3>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
+            </a>
+              </div>
+              <div class="col-12 mb-2 px-2">
+           <a href="#">
+            <div class="city-img-box position-relative">
+              <img
+                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/denver"
+                class="w-100 img-fluid" />
+              <div class="city_txt">
+                <div class="text-white">NEW!</div>
+                <h3 class="text-white m-0">Vancouver</h3>
+              </div>
+            </div>
+           </a>
+              </div>
+            </div>
+          </div>
+          <div ngxSlickItem class="swiper-slide popular-item slide">
+            <div class="row">
+              <div class="col-12 mb-2 px-2">
+               <a href="#">
                 <div class="city-img-box position-relative">
                   <img
                     src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
@@ -476,9 +380,28 @@
                     <div class="text-white">NEW!</div>
                     <h3 class="text-white m-0">Vancouver</h3>
                   </div>
+                </div>
+               </a>
+              </div>
+              <div class="col-12 mb-2 px-2">
+             <a href="#">
+              <div class="city-img-box position-relative">
+                <img
+                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+                  class="w-100 img-fluid" />
+                <div class="city_txt">
+                  <div class="text-white">NEW!</div>
+                  <h3 class="text-white m-0">Vancouver</h3>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
+             </a>
+              </div>
+            </div>
+          </div>
+          <div ngxSlickItem class="swiper-slide popular-item slide">
+            <div class="row">
+              <div class="col-12 mb-2 px-2">
+              <a href="#">
                 <div class="city-img-box position-relative">
                   <img
                     src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
@@ -487,29 +410,21 @@
                     <div class="text-white">NEW!</div>
                     <h3 class="text-white m-0">Vancouver</h3>
                   </div>
+                </div>
+              </a>
+              </div>
+              <div class="col-12 mb-2 px-2">
+            <a href="#">
+              <div class="city-img-box position-relative">
+                <img
+                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+                  class="w-100 img-fluid" />
+                <div class="city_txt">
+                  <div class="text-white">NEW!</div>
+                  <h3 class="text-white m-0">Vancouver</h3>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-4 mb-3 px-2">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
-                  </div>
-                </div>
+            </a>
               </div>
             </div>
           </div>
@@ -532,8 +447,7 @@
         [config]="workSpaceConfig" responsive="breakpoints">
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="https://weborgraphics.com/flexo-2/assets/images/private-office.webp" class="img-fluid w-100"
-              alt="">
+            <img src="../../assets/images/private-cabins.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -541,8 +455,8 @@
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
-                  <h6 class="m-0 text-white"> For Team Size </h6>
-                  <p class="text-white">1 to 50</p>
+                  <h6 class="m-0"> For Team Size </h6>
+                  <p class="text-white">3 to 50</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
                   Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
@@ -558,8 +472,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="https://weborgraphics.com/flexo-2/assets/images/private-office.webp" class="img-fluid w-100"
-              alt="">
+            <img src="../../assets/images/private-office.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -567,8 +480,8 @@
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
-                  <h6 class="m-0 text-white"> For Team Size </h6>
-                  <p class="text-white">1 to 50</p>
+                  <h6 class="m-0"> For Team Size </h6>
+                  <p class="text-white">15 to 500</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
                   Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
@@ -584,8 +497,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="https://weborgraphics.com/flexo-2/assets/images/private-office.webp" class="img-fluid w-100"
-              alt="">
+            <img src="../../assets/images/managed-offices.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -593,8 +505,8 @@
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
-                  <h6 class="m-0 text-white"> For Team Size </h6>
-                  <p class="text-white">1 to 50</p>
+                  <h6 class="m-0"> For Team Size </h6>
+                  <p class="text-white">25 to 1000</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
                   Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
@@ -610,8 +522,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="https://weborgraphics.com/flexo-2/assets/images/private-office.webp" class="img-fluid w-100"
-              alt="">
+            <img src="../../assets/images/built-to-suit.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -619,8 +530,8 @@
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
-                  <h6 class="m-0 text-white"> For Team Size </h6>
-                  <p class="text-white">1 to 50</p>
+                  <h6 class="m-0"> For Team Size </h6>
+                  <p class="text-white">25 to 1000</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
                   Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
@@ -636,8 +547,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="https://weborgraphics.com/flexo-2/assets/images/private-office.webp" class="img-fluid w-100"
-              alt="">
+            <img src="../../assets//images/desk-spaces.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -645,7 +555,7 @@
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
-                  <h6 class="m-0 text-white"> For Team Size </h6>
+                  <h6 class="m-0"> For Team Size </h6>
                   <p class="text-white">1 to 50</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
@@ -678,235 +588,35 @@
         <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig"
           responsive="breakpoints">
           <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="row">
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-2.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-3.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-4.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-5.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-6.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-7.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-8.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
+            <div class="cowork_brand_box position-relative py-4 px-5 text-center">
+              <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" />
+            </div>
+            <div class="cowork_brand_box position-relative py-4 px-5 text-center mt-2">
+              <img src="assets/images/brand-logo/brand-logo-2.webp" class="w-100 img-fluid" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="row">
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-2.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-3.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-4.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-5.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-6.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-7.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-4 mb-3 px-2">
-                <div class="cowork_brand_box position-relative py-4 px-5 text-center">
-                  <img src="assets/images/brand-logo/brand-logo-8.webp" class="w-100 img-fluid" />
-                  <div class="cowork_btn mt-2">
-                    <a href="" class="btn">Explore<span>
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                          height="25px" width="25px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                          </path>
-                        </svg></span></a>
-                  </div>
-                </div>
-              </div>
+            <div class="cowork_brand_box position-relative py-4 px-5 text-center">
+              <img src="assets/images/brand-logo/brand-logo-3.webp" class="w-100 img-fluid" />
+            </div>
+            <div class="cowork_brand_box position-relative py-4 px-5 text-center mt-2">
+              <img src="assets/images/brand-logo/brand-logo-4.webp" class="w-100 img-fluid" />
+            </div>
+          </div>
+          <div ngxSlickItem class="swiper-slide popular-item slide">
+            <div class="cowork_brand_box position-relative py-4 px-5 text-center">
+              <img src="assets/images/brand-logo/brand-logo-5.webp" class="w-100 img-fluid" />
+            </div>
+            <div class="cowork_brand_box position-relative py-4 px-5 text-center mt-2">
+              <img src="assets/images/brand-logo/brand-logo-6.webp" class="w-100 img-fluid" />
+            </div>
+          </div>
+          <div ngxSlickItem class="swiper-slide popular-item slide">
+            <div class="cowork_brand_box position-relative py-4 px-5 text-center">
+              <img src="assets/images/brand-logo/brand-logo-7.webp" class="w-100 img-fluid" />
+            </div>
+            <div class="cowork_brand_box position-relative py-4 px-5 text-center mt-2">
+              <img src="assets/images/brand-logo/brand-logo-8.webp" class="w-100 img-fluid" />
             </div>
           </div>
         </ngx-slick-carousel>
@@ -943,6 +653,9 @@
             <p>Finalize the agreement and move-in, hassle-free.</p>
           </div>
         </div>
+        <div class="mt-3">
+          <button class="btn btn_hover w-100">Book Your Workspace</button>
+        </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <div class="workspace_img">
@@ -965,211 +678,27 @@
       <div class="col-lg-10 col-md-10 col-12">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-12">
-            <div class="count_box text-center p-4" style="background: #f76900;">
-              <div class="count_icon mb-3">
-                <svg height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path style="fill:#2633D8;"
-                      d="M120.433,139.63c12.853,0,23.273-10.42,23.273-23.273V93.085H256h112.294v23.273 c0,12.853,10.42,23.273,23.273,23.273c12.853,0,23.273-10.42,23.273-23.273V69.812c0-12.853-10.42-23.273-23.273-23.273H279.273 v-23.26c0-12.853-10.42-23.273-23.273-23.273c-12.853,0-23.273,10.42-23.273,23.273v23.26H120.433 c-12.853,0-23.273,10.42-23.273,23.273v46.545C97.161,129.21,107.58,139.63,120.433,139.63z">
-                    </path>
-                    <path style="fill:#EFC27B;"
-                      d="M120.433,182.108c-38.498,0-69.818,31.32-69.818,69.818s31.32,69.818,69.818,69.818 s69.818-31.32,69.818-69.818S158.933,182.108,120.433,182.108z">
-                    </path>
-                    <path style="fill:#5286FA;"
-                      d="M120.433,368.289C54.025,368.289,0,422.315,0,488.721c0,12.853,10.42,23.273,23.273,23.273h97.161 h97.159c12.853,0,23.273-10.42,23.273-23.273C240.865,422.315,186.84,368.289,120.433,368.289z">
-                    </path>
-                    <path style="fill:#ECB45C;"
-                      d="M50.615,251.926c0,38.498,31.32,69.818,69.818,69.818V182.108 C81.936,182.108,50.615,213.428,50.615,251.926z">
-                    </path>
-                    <path style="fill:#3D6DEB;"
-                      d="M0,488.721c0,12.853,10.42,23.273,23.273,23.273h97.161V368.289C54.025,368.289,0,422.315,0,488.721z ">
-                    </path>
-                    <path style="fill:#EFC27B;"
-                      d="M391.567,182.108c-38.498,0-69.818,31.32-69.818,69.818s31.32,69.818,69.818,69.818 s69.818-31.32,69.818-69.818S430.064,182.108,391.567,182.108z">
-                    </path>
-                    <path style="fill:#00E7F0;"
-                      d="M391.567,368.289c-66.406,0-120.432,54.025-120.432,120.432c0,12.853,10.42,23.273,23.273,23.273 h97.159h97.161c12.853,0,23.273-10.42,23.273-23.273C512,422.315,457.975,368.289,391.567,368.289z">
-                    </path>
-                    <path style="fill:#ECB45C;"
-                      d="M321.749,251.926c0,38.498,31.32,69.818,69.818,69.818V182.108 C353.067,182.108,321.749,213.428,321.749,251.926z">
-                    </path>
-                    <path style="fill:#00D7DF;"
-                      d="M271.135,488.721c0,12.853,10.42,23.273,23.273,23.273h97.159V368.289 C325.16,368.289,271.135,422.315,271.135,488.721z">
-                    </path>
-                  </g>
-                </svg>
-              </div>
-              <h4 class="text-white custom-lh mb-1">1800+</h4>
-              <h5 class="text-white custom-lh m-0">Partner Spaces</h5>
+            <div class="count_box text-center p-4">
+              <h2 class="main_color custom-lh mb-1">1800+</h2>
+              <h5 class="custom-lh m-0">Partner Spaces</h5>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
             <div class="count_box text-center p-4">
-              <div class="count_icon mb-3">
-                <svg height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 473.935 473.935" xml:space="preserve"
-                  fill="#000000">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <circle style="fill:#4ABC96;" cx="236.967" cy="236.967" r="236.967"></circle>
-                    <g>
-                      <path style="fill:#DAECEF;"
-                        d="M235.37,117.013c17.598,0,35.525-16.64,35.525-34.245c0-17.583-17.074-35.498-34.679-35.498 c-17.59,0-35.087,18.346-35.087,35.932C201.132,100.804,217.765,117.013,235.37,117.013z M304.69,166.117 c0-17.268,1.141-15.611,0-26.406c-4.408-13.197-13.205-17.59-22.005-17.59c-18.802,0-25.051,0-39.588,0 c-17.665,0-26.245-0.052-43.85-0.052c-8.801,0-14.529-0.599-21.063,5.351c-8.887,10.069-8.004,10.971-8.004,39.128 c0,13.901,0,38.192,0,53.721c0,13.893-2.354,35.517,11.577,35.517c13.197,0,13.081-9.414,13.081-23.465 c0-19.82-0.052-24.965-0.052-36.681c0-12.819-0.737-14.99,1.841-14.99c2.601,0,2.578,0.168,2.578,13.785 c0,12.599-0.094,190.195-0.094,200.455c0,8.801,4.685,18.211,17.934,18.211c13.212,0,18.731-7.719,18.731-16.531 c0-15.85,0-84.879,0-92.381c0-8.808,0.299-13.059,2.47-13.059c2.223,0,1.923,4.254,1.923,13.059c0,7.936,0,76.13,0,92.381 c0,5.467,5.811,17.373,19.016,17.373c8.793,0,16.89-11.319,16.89-17.19c0-35.173,0.198-191.774,0.198-202.854 c0-5.994-0.513-13.631,1.732-13.631s2.208,2.077,2.208,10.713c0,9.931,0,19.989,0,33.889c0,23.147,3.596,29.235,12.397,29.235 c13.197,0,12.082-22.604,12.082-35.195C304.69,201.742,304.69,183.568,304.69,166.117z">
-                      </path>
-                      <rect x="230.307" y="283.291" style="fill:#3F3E3D;" width="125.964" height="32.939"></rect>
-                      <path style="fill:#827159;"
-                        d="M230.333,285.102c0,0,35.861,14.099,62.705,14.099c29.328,0,63.221-14.23,63.221-14.23v-17.343 c0-8.801-8.666-8.404-8.666-8.404H238.565c-8.535,0-8.228,8.404-8.228,8.404v17.474H230.333z M301.618,295.085l-16.947-0.131 c0,0,0.131-1.878,0.131-4.202c0-2.324,1.886-4.21,4.202-4.21h8.412c2.324,0,4.202,1.886,4.202,4.21 C301.618,293.076,301.618,295.085,301.618,295.085z M356.263,330.505v-40.677c0,0-27.281,13.616-63.405,13.616 c-33.231,0-62.522-14.009-62.522-14.009v41.074c0,8.535,8.097,8.412,8.097,8.412h109.294 C356.779,338.92,356.263,330.505,356.263,330.505z M301.48,311.9c0,2.316-1.878,4.064-4.195,4.064h-8.412 c-2.316,0-4.202-1.747-4.202-4.064c0-2.331,0-4.34,0-4.34l16.947-0.131C301.618,307.425,301.48,309.569,301.48,311.9z">
-                      </path>
-                      <path style="fill:#5B4F3F;"
-                        d="M230.333,285.102c0,0,35.861,14.099,62.705,14.099c29.328,0,63.221-14.23,63.221-14.23v-17.343 c0-8.801-8.666-8.404-8.666-8.404H238.565c-8.535,0-8.228,8.404-8.228,8.404v17.474H230.333z M301.618,295.085l-16.947-0.131 c0,0,0.131-1.878,0.131-4.202c0-2.324,1.886-4.21,4.202-4.21h8.412c2.324,0,4.202,1.886,4.202,4.21 C301.618,293.076,301.618,295.085,301.618,295.085z">
-                      </path>
-                      <path style="fill:#3F3E3D;"
-                        d="M314.093,259.224v-8.535c0-8.673-8.142-8.273-8.142-8.273h-25.485c-8.011,0-8.281,8.412-8.281,8.412 v8.397L314.093,259.224L314.093,259.224z M280.469,254.748c0-3.802,4.202-4.064,4.202-4.064h16.947 c4.464,0,4.202,4.591,4.202,4.591l-0.131,3.948h-25.22V254.748z">
-                      </path>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-              <h4 class="text-secondary custom-lh mb-1">1000+</h4>
-              <h5 class="text-secondary custom-lh m-0">Clients Served</h5>
+              <h2 class="main_color custom-lh mb-1">1000+</h2>
+              <h5 class="custom-lh m-0">Clients Served</h5>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
             <div class="count_box text-center p-4">
-              <div class="count_icon mb-3">
-                <svg height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <circle style="fill:#AFF0E8;" cx="285.867" cy="341.333" r="170.667"></circle>
-                    <g>
-                      <path style="fill:#74DBC9;"
-                        d="M302.933,494.933c-94.257,0-170.667-76.41-170.667-170.667c0-42.785,15.745-81.891,41.756-111.844 c-36.035,31.292-58.822,77.439-58.822,128.911C115.2,435.59,191.61,512,285.867,512c51.472,0,97.62-22.787,128.911-58.822 C384.825,479.188,345.718,494.933,302.933,494.933z">
-                      </path>
-                      <path style="fill:#74DBC9;"
-                        d="M380.78,468.543l-36.615-21.97l-7.098-21.291V358.4c0-1.685-0.498-3.332-1.434-4.734l-13.186-19.779 l20.653-20.654c2.192-2.191,3.022-5.398,2.172-8.378l-14.822-51.877l17.677-5.892c2.922-0.839,33.517-9.713,50.589-17.98 c5.339-2.585,6.42-9.989,2.027-13.989c-31.475-28.663-72.273-44.45-114.875-44.45c-47.903,0-93.893,20.32-126.178,55.751 c-2.158,2.368-2.807,5.744-1.683,8.743l8.938,23.835c1.249,3.331,4.433,5.537,7.99,5.537h45.05l6.589,19.765 c0.716,2.147,2.255,3.922,4.279,4.933l15.265,7.633l48.284,64.38v36.288l-31.634,31.634c-0.398,0.398-0.755,0.833-1.067,1.3 l-17.067,25.6c-1.226,1.838-1.691,4.08-1.297,6.254l7.325,40.448c0.642,3.546,3.442,6.306,6.996,6.897 c9.312,1.549,18.803,2.334,28.21,2.334c34.141,0,67.092-10.05,95.293-29.064c2.419-1.631,3.837-4.384,3.76-7.301 C384.843,472.719,383.281,470.045,380.78,468.543z">
-                      </path>
-                    </g>
-                    <path id="SVGCleanerId_0" style="fill:#74DBC9;"
-                      d="M437.015,262.034c-2.629-5.004-9.584-6.068-13.587-2.064l-32.662,32.662 c-3.333,3.332-3.333,8.735,0,12.067l11.834,11.834l-21.159,28.213c-2.548,3.397-2.21,8.151,0.793,11.154l14.567,14.566V384 c0,2.263,0.899,4.434,2.499,6.034l26.979,26.979c4.101,4.102,11.248,2.86,13.738-2.364c10.961-23.003,16.517-47.67,16.517-73.316 C456.533,313.746,449.783,286.324,437.015,262.034z">
-                    </path>
-                    <g>
-                      <path style="fill:#74DBC9;"
-                        d="M228.832,324.705l-25.6-8.533c-0.87-0.29-1.781-0.438-2.699-0.438H178.24l4.789-14.368 c1.678-5.034-1.78-10.509-7.037-11.166l-43.927-5.49c-4.105-0.514-7.981,1.988-9.207,5.936 c-5.082,16.355-7.658,33.409-7.658,50.688c0,44.032,16.721,85.833,47.082,117.701c2.382,2.5,6.141,3.319,9.348,2.037l23.539-9.415 c1.94-0.777,3.529-2.238,4.463-4.107l7.914-15.828l16.087-16.087c3.751-3.751,3.108-10.195-1.3-13.134l-18.094-12.063 l20.188-26.917c0.55-0.734,0.978-1.551,1.268-2.421l8.533-25.6C235.719,331.027,233.302,326.195,228.832,324.705z">
-                      </path>
-                      <path style="fill:#74DBC9;"
-                        d="M159.689,226.418c-1.99,2.185-2.678,5.225-1.893,8.037c4.789-7.723,10.167-15.042,16.091-21.879 C168.913,216.894,164.164,221.505,159.689,226.418z">
-                      </path>
-                    </g>
-                    <path style="fill:#6AC8B7;"
-                      d="M247.579,485.749l3.082,17.02c0.642,3.546,3.442,6.306,6.996,6.897 c9.312,1.549,18.803,2.334,28.21,2.334c34.141,0,67.092-10.05,95.293-29.064c2.419-1.631,3.837-4.384,3.76-7.301 c-0.014-0.526-0.092-1.04-0.199-1.545c-24.286,13.286-52.152,20.844-81.787,20.844C283.557,494.933,264.938,491.698,247.579,485.749 z">
-                    </path>
-                    <g>
-                      <path id="SVGCleanerId_0_1_" style="fill:#74DBC9;"
-                        d="M437.015,262.034c-2.629-5.004-9.584-6.068-13.587-2.064l-32.662,32.662 c-3.333,3.332-3.333,8.735,0,12.067l11.834,11.834l-21.159,28.213c-2.548,3.397-2.21,8.151,0.793,11.154l14.567,14.566V384 c0,2.263,0.899,4.434,2.499,6.034l26.979,26.979c4.101,4.102,11.248,2.86,13.738-2.364c10.961-23.003,16.517-47.67,16.517-73.316 C456.533,313.746,449.783,286.324,437.015,262.034z">
-                      </path>
-                    </g>
-                    <path style="fill:#6AC8B7;"
-                      d="M132.267,324.267c0-13.409,1.551-26.455,4.476-38.974l-4.678-0.585 c-4.105-0.514-7.981,1.988-9.207,5.936c-5.081,16.356-7.657,33.41-7.657,50.689c0,44.032,16.721,85.833,47.082,117.701 c2.382,2.5,6.141,3.319,9.348,2.037l19.546-7.818C155.09,421.962,132.267,375.779,132.267,324.267z">
-                    </path>
-                    <path style="fill:#FDD042;"
-                      d="M337.067,0c-47.053,0-85.333,38.281-85.333,85.333c0,19.303,13.401,49.215,39.83,88.902 c19.209,28.845,38.096,52.052,38.891,53.025c3.361,4.119,9.861,4.119,13.222,0c0.795-0.974,19.683-24.181,38.891-53.025 C409,134.548,422.4,104.637,422.4,85.333C422.4,38.281,384.119,0,337.067,0z">
-                    </path>
-                    <path style="fill:#F2C127;"
-                      d="M308.63,174.236c-26.43-39.687-39.83-69.599-39.83-88.902c0-44.173,33.739-80.61,76.8-84.906 C342.793,0.147,339.947,0,337.067,0c-47.053,0-85.333,38.281-85.333,85.333c0,19.303,13.401,49.215,39.83,88.902 c19.209,28.845,38.096,52.052,38.891,53.025c3.361,4.119,9.861,4.119,13.222,0c0.137-0.166,0.814-0.999,1.922-2.387 C340.238,218.16,324.549,198.141,308.63,174.236z">
-                    </path>
-                    <circle style="fill:#EBEBEC;" cx="337.067" cy="85.333" r="51.2"></circle>
-                    <path style="fill:#D7D8D9;"
-                      d="M345.6,128c-28.277,0-51.2-22.923-51.2-51.2c0-11.964,4.114-22.96,10.991-31.676 c-11.886,9.376-19.524,23.895-19.524,40.209c0,28.277,22.923,51.2,51.2,51.2c16.314,0,30.833-7.638,40.209-19.524 C368.56,123.886,357.564,128,345.6,128z">
-                    </path>
-                    <g>
-                      <path style="fill:#606268;"
-                        d="M320,93.867c-3.529,0-6.787-2.268-8.004-5.58c-1.213-3.299-0.235-7.166,2.461-9.444 c2.789-2.358,6.879-2.692,10-0.783c3.012,1.843,4.605,5.474,3.907,8.938C327.568,90.938,324.033,93.867,320,93.867z">
-                      </path>
-                      <path style="fill:#606268;"
-                        d="M354.133,93.867c-3.534,0-6.785-2.261-8.004-5.58c-1.236-3.362-0.194-7.281,2.591-9.55 c2.734-2.227,6.681-2.548,9.725-0.763c3.046,1.788,4.719,5.375,4.082,8.859C361.793,90.849,358.233,93.867,354.133,93.867z">
-                      </path>
-                    </g>
-                    <path style="fill:#E5563C;"
-                      d="M157.867,85.333c-56.464,0-102.4,45.936-102.4,102.4c0,23.175,16.253,59.988,48.307,109.417 c23.412,36.103,47.159,66.24,47.396,66.54c3.363,4.256,10.029,4.256,13.393,0c0.237-0.3,23.984-30.436,47.396-66.54 c32.054-49.428,48.307-86.241,48.307-109.417C260.267,131.269,214.331,85.333,157.867,85.333z">
-                    </path>
-                    <path style="fill:#CF442B;"
-                      d="M120.841,297.15c-32.054-49.428-48.307-86.241-48.307-109.417c0-53.589,41.381-97.691,93.867-102.042 c-2.815-0.234-5.66-0.358-8.533-0.358c-56.464,0-102.4,45.936-102.4,102.4c0,23.175,16.253,59.988,48.307,109.417 c23.412,36.103,47.159,66.24,47.396,66.54c3.363,4.256,10.029,4.256,13.393,0c0.038-0.048,0.688-0.873,1.837-2.357 C160.384,353.559,140.497,327.462,120.841,297.15z">
-                    </path>
-                    <circle style="fill:#EBEBEC;" cx="157.867" cy="187.733" r="68.267"></circle>
-                    <path style="fill:#D7D8D9;"
-                      d="M174.933,247.467c-37.702,0-68.267-30.564-68.267-68.267c0-23.311,11.692-43.882,29.522-56.198 c-27.072,9.063-46.589,34.61-46.589,64.732c0,37.702,30.564,68.267,68.267,68.267c14.393,0,27.737-4.464,38.745-12.068 C189.798,246.212,182.514,247.467,174.933,247.467z">
-                    </path>
-                    <g>
-                      <path style="fill:#606268;"
-                        d="M157.867,196.267H156.8c-4.713,0-8.533-3.821-8.533-8.533c0-4.713,3.821-8.533,8.533-8.533h1.067 c4.713,0,8.533,3.821,8.533,8.533C166.4,192.446,162.579,196.267,157.867,196.267z">
-                      </path>
-                      <path style="fill:#606268;"
-                        d="M183.467,196.267c-3.511,0-6.73-1.158-8.528-4.389c-1.906-3.425-1.17-7.837,1.73-10.467 c2.443-2.215,6.271-2.802,9.387-1.811c3.711,1.18,6.193,4.849,5.924,8.731C191.675,192.742,187.888,196.267,183.467,196.267z">
-                      </path>
-                      <path style="fill:#606268;"
-                        d="M132.267,196.267H131.2c-4.713,0-8.533-3.821-8.533-8.533c0-4.713,3.821-8.533,8.533-8.533h1.067 c4.713,0,8.533,3.821,8.533,8.533C140.8,192.446,136.979,196.267,132.267,196.267z">
-                      </path>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-              <h4 class="text-secondary custom-lh mb-1">20+</h4>
-              <h5 class="text-secondary custom-lh m-0">Cities Across India</h5>
+              <h2 class="main_color custom-lh mb-1">20+</h2>
+              <h5 class="custom-lh m-0">Cities Across India</h5>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
             <div class="count_box text-center p-4">
-              <div class="count_icon mb-3">
-                <svg height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <circle style="fill:#273B7A;" cx="256" cy="256" r="256"></circle>
-                    <g>
-                      <polygon style="fill:#121149;" points="195.663,118.662 228.993,151.992 175.552,145.67 "></polygon>
-                      <path style="fill:#121149;"
-                        d="M282.51,510.64c128.652-13.236,229.048-121.742,229.479-253.79L403.682,148.542l-294.097,18.153 l74.13,75.059l-74.247,10.225l78.645,78.645l-78.662,6.647L282.51,510.64z">
-                      </path>
-                    </g>
-                    <path style="fill:#FFFFFF;"
-                      d="M119.38,170.667H392.62c7.854,0,14.222-6.368,14.222-14.222l0,0c0-7.854-6.368-14.222-14.222-14.222 H119.38c-7.854,0-14.222,6.368-14.222,14.222l0,0C105.158,164.299,111.526,170.667,119.38,170.667z">
-                    </path>
-                    <path style="fill:#D8D8D8;"
-                      d="M392.62,142.222H255.426v28.444H392.62c7.854,0,14.222-6.368,14.222-14.222 S400.474,142.222,392.62,142.222z">
-                    </path>
-                    <path style="fill:#FFFFFF;"
-                      d="M119.38,256H392.62c7.854,0,14.222-6.368,14.222-14.222l0,0c0-7.854-6.368-14.222-14.222-14.222 H119.38c-7.854,0-14.222,6.368-14.222,14.222l0,0C105.158,249.632,111.526,256,119.38,256z">
-                    </path>
-                    <path style="fill:#D8D8D8;"
-                      d="M392.62,227.556H255.426V256H392.62c7.854,0,14.222-6.368,14.222-14.222 S400.474,227.556,392.62,227.556z">
-                    </path>
-                    <path style="fill:#FFFFFF;"
-                      d="M119.38,341.333H392.62c7.854,0,14.222-6.368,14.222-14.222l0,0c0-7.854-6.368-14.222-14.222-14.222 H119.38c-7.854,0-14.222,6.368-14.222,14.222l0,0C105.158,334.965,111.526,341.333,119.38,341.333z">
-                    </path>
-                    <path style="fill:#D8D8D8;"
-                      d="M392.62,312.889H255.426v28.444H392.62c7.854,0,14.222-6.368,14.222-14.222 C406.842,319.257,400.474,312.889,392.62,312.889z">
-                    </path>
-                    <path style="fill:#FF6262;"
-                      d="M185.391,199.111h-29.449c-7.577,0-13.721-6.142-13.721-13.721v-57.892 c0-7.577,6.142-13.721,13.721-13.721h29.449c7.577,0,13.719,6.142,13.719,13.721v57.894 C199.111,192.969,192.969,199.111,185.391,199.111z">
-                    </path>
-                    <path style="fill:#71E2EF;"
-                      d="M356.057,284.444h-29.449c-7.577,0-13.719-6.142-13.719-13.719v-57.894 c0-7.577,6.142-13.721,13.719-13.721h29.449c7.577,0,13.719,6.142,13.719,13.721v57.894 C369.778,278.302,363.635,284.444,356.057,284.444z">
-                    </path>
-                    <path style="fill:#FFC61B;"
-                      d="M299.168,369.778h-29.449c-7.577,0-13.719-6.142-13.719-13.719v-57.894 c0-7.577,6.142-13.719,13.719-13.719h29.449c7.577,0,13.719,6.142,13.719,13.719v57.894 C312.889,363.635,306.747,369.778,299.168,369.778z">
-                    </path>
-                  </g>
-                </svg>
-              </div>
-              <h4 class="text-secondary custom-lh mb-1">25 million+</h4>
-              <h5 class="text-secondary custom-lh  m-0">Square Feet of Coworking Options</h5>
+              <h2 class="main_color custom-lh mb-1">25 million+</h2>
+              <h5 class=" custom-lh  m-0">Square Feet of Coworking Options</h5>
             </div>
           </div>
         </div>
@@ -1183,13 +712,15 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-6 col-12">
-        <h2 class="section-title mb-1 text-white" style="font-weight: 500;">Why choose Flexo ?</h2>
-        <p class="text-white">We make your office-search, a hassle-less experience. With an in depth knowledge, let our workspace solution
+        <h2 class="section-title mb-1 text-white" style="font-weight: 500;">Why choose <span class="main_color">Flexo
+            ?</span></h2>
+        <p class="text-white">We make your office-search, a hassle-less experience. With an in depth knowledge, let our
+          workspace solution
           experts find what you’re looking for.</p>
         <div class="flex_btn mt-3">
-          <a href="" class="btn p-0" style="white-space: normal;"> Claim Your Free Consultation with Zero Brokerage Offer Now! <span><svg
-                stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="20px"
-                width="20px" xmlns="http://www.w3.org/2000/svg">
+          <a href="" class="btn" style="white-space: normal;"> Claim Your Free Consultation with Zero Brokerage Offer
+            Now! <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
                 </path>
@@ -1198,54 +729,76 @@
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-12 mb-4">
-              <div class="choose_sec">
-                <div class="whychos_box text-center position-relative p-4">
-                  <div class="choose_icon mb-2">
-                    <svg height="40px" width="40px" fill="#fff" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Solid"> <path d="M37,25.95537A11.02234,11.02234,0,1,0,48,36.97768,11.02363,11.02363,0,0,0,37,25.95537Zm4.707,14.322A1.00091,1.00091,0,0,1,40.293,41.69426L37,38.39462l-3.293,3.29964a1.01563,1.01563,0,0,1-1.41406,0,1.00309,1.00309,0,0,1,0-1.41693l3.293-3.29965L32.293,33.678A1.00091,1.00091,0,0,1,33.707,32.2611L37,35.56075l3.293-3.29965A1.00091,1.00091,0,0,1,41.707,33.678l-3.293,3.29965ZM42,15.93508a3.94829,3.94829,0,0,1,.04956-.491,20.27071,20.27071,0,0,0,3.27026-.903,1.97685,1.97685,0,0,1,1.82178.23338A2.0057,2.0057,0,0,1,48,16.41946v2.96615a3.94783,3.94783,0,0,1-2,.55759A4.00865,4.00865,0,0,1,42,15.93508ZM3.98779,13.44518c.54047-.20073,1.08069-.36965,1.62085-.52359A3.99264,3.99264,0,0,1,3,19.9432a3.94633,3.94633,0,0,1-1-.14232V16.28051A3.04444,3.04444,0,0,1,3.98779,13.44518ZM8,43.99189a3.9489,3.9489,0,0,1-.05023.49771,20.08607,20.08607,0,0,0-3.26813.89671,1.985,1.985,0,0,1-1.82519-.23485A2.00567,2.00567,0,0,1,2,43.508V40.54136a3.94773,3.94773,0,0,1,2-.55759A4.00865,4.00865,0,0,1,8,43.99189ZM25,21.94725a8.01447,8.01447,0,0,0-.94733,15.971C24.03015,37.606,24,37.29565,24,36.97768A13.0321,13.0321,0,0,1,31.44507,25.218,8.026,8.026,0,0,0,25,21.94725Zm0,4.00812a4.00865,4.00865,0,0,0-4,4.00811,1,1,0,1,1-2,0,6.01267,6.01267,0,0,1,6-6.01217,1.002,1.002,0,0,1,0,2.00406ZM8,5.34516V4.11427A2.01778,2.01778,0,0,1,9.80615,2.1112c5.189-.48194,10.38819.69085,15.41309,1.824,4.80859,1.08423,9.7793,2.20466,14.59568,1.801A2.01561,2.01561,0,0,1,42,7.72608v.67006c-9.81992,1.9151-19.63647-3.51761-29.69824-3.38356A27.49122,27.49122,0,0,0,8,5.34516Zm-3,5.528V9.624A1.997,1.997,0,0,1,6.52588,7.66883c6.30908-1.51527,12.604-.09638,18.69336,1.27651,5.99463,1.35186,11.6582,2.62837,17.37934,1.37636C43.92057,9.99936,46.261,12.1365,45,12.55917A20.68943,20.68943,0,0,1,41.09576,13.62C30.00439,15.032,18.81959,8.268,7.49805,10.43077ZM46,21.94725a6.01266,6.01266,0,0,1-6-6.01217c0-.06746.00787-.13284.01007-.19974-4.8399.4571-9.712-.63477-14.79034-1.77985-5.67359-1.2789-11.505-2.58972-17.3739-1.55118A5.98053,5.98053,0,0,1,9,15.93508a6.01266,6.01266,0,0,1-6,6.01217,5.97706,5.97706,0,0,1-1-.09051V38.33046a5.94945,5.94945,0,0,1,2-.35075,6.01267,6.01267,0,0,1,6,6.01218c0,.07167-.00824.14127-.01074.21234,4.82043-.44028,9.67346.66663,14.73144,1.82743,1.27533.29283,2.56562.586,3.86383.85665a13.05511,13.05511,0,0,1-4.23712-6.93763,10.01376,10.01376,0,1,1,9.01593-15.47089A12.91434,12.91434,0,0,1,48,30.06715V21.59651A5.9497,5.9497,0,0,1,46,21.94725ZM11,30.96551H9a1.002,1.002,0,0,1,0-2.00406h2a1.002,1.002,0,0,1,0,2.00406Z"></path> </g> </g></svg>
-                  </div>
-                  <h6 class="m-0">Tell Us Your Needs</h6>
-                  <p class="text-white">Share your requirements, and a dedicated workspace advisor will handle the rest.</p>
+          <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div class="choose_sec">
+              <div class="whychos_box text-center position-relative p-4">
+                <div class="choose_icon mb-2">
+                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 512 512" height="40px"
+                    width="40px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M258 21.89c-.5 0-1.2 0-1.8.12-4.6.85-10.1 5.1-13.7 14.81-3.8 9.7-4.6 23.53-1.3 38.34 3.4 14.63 10.4 27.24 18.2 34.94 7.6 7.7 14.5 9.8 19.1 9 4.8-.7 10.1-5.1 13.7-14.7 3.8-9.64 4.8-23.66 1.4-38.35-3.5-14.8-10.4-27.29-18.2-34.94-6.6-6.8-12.7-9.22-17.4-9.22zM373.4 151.4c-11 .3-24.9 3.2-38.4 8.9-15.6 6.8-27.6 15.9-34.2 24.5-6.6 8.3-7.2 14.6-5.1 18.3 2.2 3.7 8.3 7.2 20 7.7 11.7.7 27.5-2.2 43-8.8 15.5-6.7 27.7-15.9 34.3-24.3 6.6-8.3 7.1-14.8 5-18.5-2.1-3.8-8.3-7.1-20-7.5-1.6-.3-3-.3-4.6-.3zm-136.3 92.9c-6.6.1-12.6.9-18 2.3-11.8 3-18.6 8.4-20.8 14.9-2.5 6.5 0 14.3 7.8 22.7 8.2 8.2 21.7 16.1 38.5 20.5 16.7 4.4 32.8 4.3 44.8 1.1 12.1-3.1 18.9-8.6 21.1-15 2.3-6.5 0-14.2-8.1-22.7-7.9-8.2-21.4-16.1-38.2-20.4-9.5-2.5-18.8-3.5-27.1-3.4zm160.7 58.1L336 331.7c4.2.2 14.7.5 14.7.5l6.6 8.7 54.7-28.5-14.2-10zm-54.5.1l-57.4 27.2c5.5.3 18.5.5 23.7.8l49.8-23.6-16.1-4.4zm92.6 10.8l-70.5 37.4 14.5 18.7 74.5-44.6-18.5-11.5zm-278.8 9.1a40.33 40.33 0 0 0-9 1c-71.5 16.5-113.7 17.9-126.2 17.9H18v107.5s11.6-1.7 30.9-1.8c37.3 0 103 6.4 167 43.8 3.4 2.1 10.7 2.9 19.8 2.9 24.3 0 61.2-5.8 69.7-9C391 452.6 494 364.5 494 364.5l-32.5-28.4s-79.8 50.9-89.9 55.8c-91.1 44.7-164.9 16.8-164.9 16.8s119.9 3 158.4-27.3l-22.6-34s-82.8-2.3-112.3-6.2c-15.4-2-48.7-18.8-73.1-18.8z">
+                    </path>
+                  </svg>
                 </div>
-            
+                <h6 class="m-0">Tell Us Your Needs</h6>
+                <p class="text-white">Share your requirements, and a dedicated workspace advisor will handle the rest.
+                </p>
               </div>
+
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mb-4">
-              <div class="choose_sec">
-                <div class="whychos_box text-center position-relative p-4">
-                  <div class="choose_icon mb-2">
-                     <svg height="40px" width="40px" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M27.954 14.394C30.2317 12.09 33.1724 10.5552 36.365 10.0041C39.5576 9.45293 42.8426 9.91301 45.761 11.32L38.099 19.042C37.3647 19.7842 36.9529 20.786 36.9529 21.83C36.9529 22.874 37.3647 23.8759 38.099 24.618L39.945 26.479C40.3069 26.8449 40.7377 27.1354 41.2126 27.3336C41.6874 27.5319 42.1969 27.6339 42.7115 27.6339C43.2261 27.6339 43.7356 27.5319 44.2104 27.3336C44.6853 27.1354 45.1161 26.8449 45.478 26.479L53.14 18.757C54.6974 22.0413 55.0787 25.7609 54.2201 29.2928C53.3615 32.8247 51.3152 35.9542 48.424 38.157C46.1421 39.8846 43.4283 40.95 40.5806 41.2365C37.7329 41.523 34.8613 41.0194 32.281 39.781L18.418 53.751C18.0562 54.1169 17.6255 54.4073 17.1507 54.6056C16.6759 54.8038 16.1665 54.9058 15.652 54.9058C15.1375 54.9058 14.6281 54.8038 14.1533 54.6056C13.6785 54.4073 13.2478 54.1169 12.886 53.751L11.04 51.89C10.3052 51.1482 9.89305 50.1462 9.89305 49.102C9.89305 48.0579 10.3052 47.0559 11.04 46.3141L24.905 32.3401C23.5083 29.3978 23.0517 26.0968 23.5972 22.8858C24.1428 19.6749 25.664 16.7099 27.954 14.394V14.394Z" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                  </div>
-                  <h6 class="m-0">Fast & Efficient Service</h6>
-                  <p>Experience a quick turnaround time and a smooth process from search to move-in.</p>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div class="choose_sec">
+              <div class="whychos_box text-center position-relative p-4">
+                <div class="choose_icon mb-2">
+                  <svg stroke="currentColor" fill="#fff" stroke-width="0" role="img" viewBox="0 0 24 24" height="40px"
+                    width="40px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M11.9996 0C5.3833 0 0 5.3834 0 11.9998c0 2.5316.7813 4.9544 2.2599 7.0051l.6955-.5014C1.5827 16.5993.8571 14.3505.8571 11.9998.8571 5.856 5.856.8572 12.0004.8572c6.144 0 11.1425 4.999 11.1425 11.1426 0 2.3508-.7256 4.5995-2.0983 6.5037l.6955.5014C23.2187 16.9542 24 14.5314 24 11.9998 24 5.3834 18.6163 0 11.9996 0zM6 16.7142a.4285.4285 0 0 0-.4286.4285v1.7598c-.9643.2048-1.7143 1.0822-1.7143 2.0974 0 1.1615.9815 2.143 2.1429 2.143s2.1429-.9815 2.1429-2.143c0-1.0152-.75-1.8926-1.7143-2.0974v-1.3312h5.1428v2.1883c-.9643.2049-1.7143 1.0822-1.7143 2.0975C9.8571 23.0186 10.8386 24 12 24s2.1429-.9814 2.1429-2.1429c0-1.0153-.75-1.8926-1.7143-2.0975v-2.1883h5.1428v1.3312c-.9643.2048-1.7143 1.0822-1.7143 2.0974 0 1.1615.9815 2.143 2.1429 2.143s2.1429-.9815 2.1429-2.143c0-1.0152-.75-1.8926-1.7143-2.0974v-1.7598A.4285.4285 0 0 0 18 16.7142h-5.5714v-2.5715H18c.237 0 .4286-.192.4286-.4286V5.9997A.4285.4285 0 0 0 18 5.571H6a.4285.4285 0 0 0-.4286.4286v7.7144c0 .2366.1916.4286.4286.4286h5.5714v2.5715H6zm1.2857 4.2857c0 .697-.5889 1.2858-1.2857 1.2858s-1.2857-.5889-1.2857-1.2858c0-.6968.5889-1.2857 1.2857-1.2857S7.2857 20.3031 7.2857 21zm12 0c0 .697-.5889 1.2858-1.2857 1.2858s-1.2857-.5889-1.2857-1.2858c0-.6968.5889-1.2857 1.2857-1.2857s1.2857.5889 1.2857 1.2857zm-1.7143-8.248L14.259 9.7703l3.3124-2.8389v5.8205zm-.7298-6.3236-4.842 4.1499-4.8412-4.15h9.6832zm-10.413.5031L9.741 9.7707 6.4286 12.752V6.9314zm.6878 6.3541 3.2807-2.9525 1.3239 1.135a.4253.4253 0 0 0 .2786.1032.4253.4253 0 0 0 .2785-.1033l1.3243-1.1349 3.2812 2.9525H7.1164zM12 20.5714c.6968 0 1.2857.5888 1.2857 1.2857 0 .6969-.5889 1.2857-1.2857 1.2857s-1.2857-.5888-1.2857-1.2857c0-.6969.5889-1.2857 1.2857-1.2857z">
+                    </path>
+                  </svg>
                 </div>
-            
+                <h6 class="m-0">Fast & Efficient Service</h6>
+                <p class="text-white">Experience a quick turnaround time and a smooth process from search to move-in.
+                </p>
               </div>
+
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mb-4">
-              <div class="choose_sec">
-                <div class="whychos_box text-center position-relative p-4">
-                  <div class="choose_icon mb-2">
-                    <svg height="40px" width="40px" fill="#ffffff" viewBox="-1.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M15.084 15.2H.916a.264.264 0 0 1-.254-.42l2.36-4.492a.865.865 0 0 1 .696-.42h.827a9.51 9.51 0 0 0 .943 1.108H3.912l-1.637 3.116h11.45l-1.637-3.116h-1.34a9.481 9.481 0 0 0 .943-1.109h.591a.866.866 0 0 1 .696.421l2.36 4.492a.264.264 0 0 1-.254.42zM11.4 7.189c0 2.64-2.176 2.888-3.103 5.46a.182.182 0 0 1-.356 0c-.928-2.572-3.104-2.82-3.104-5.46a3.282 3.282 0 0 1 6.563 0zm-1.86-.005a1.425 1.425 0 1 0-1.425 1.425A1.425 1.425 0 0 0 9.54 7.184z"></path></g></svg>
-                  </div>
-                  <h6 class="m-0">Largest Coverage</h6>
-                  <p>Access 1800+ coworking spaces across India with Flexo’s extensive network.</p>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div class="choose_sec">
+              <div class="whychos_box text-center position-relative p-4">
+                <div class="choose_icon mb-2">
+                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 24 24" height="40px" width="40px"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 14V16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM20.8284 21.0711L18 24L15.1716 21.0711C13.6095 19.4535 13.6095 16.8308 15.1716 15.2132C16.7337 13.5956 19.2663 13.5956 20.8284 15.2132C22.3905 16.8308 22.3905 19.4535 20.8284 21.0711ZM19.3897 19.6818C20.2034 18.8392 20.2034 17.4451 19.3897 16.6025C18.614 15.7992 17.386 15.7992 16.6103 16.6025C15.7966 17.4451 15.7966 18.8392 16.6103 19.6818L18 21.1209L19.3897 19.6818Z">
+                    </path>
+                  </svg>
                 </div>
-            
+                <h6 class="m-0">Largest Coverage</h6>
+                <p class="text-white">Access 1800+ coworking spaces across India with Flexo’s extensive network.</p>
               </div>
+
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mb-4">
-              <div class="choose_sec">
-                <div class="whychos_box text-center position-relative p-4">
-                  <div class="choose_icon mb-2">
-                   <svg height="40px" width="40px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M14.9238 7.281C14.9227 8.5394 13.9018 9.55874 12.6435 9.558C11.3851 9.55726 10.3654 8.53673 10.3658 7.27833C10.3662 6.01994 11.3864 5 12.6448 5C13.2495 5.00027 13.8293 5.24073 14.2567 5.6685C14.6841 6.09627 14.924 6.67631 14.9238 7.281Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M14.9968 12.919H10.2968C8.65471 12.9706 7.35028 14.3166 7.35028 15.9595C7.35028 17.6024 8.65471 18.9484 10.2968 19H14.9968C16.6388 18.9484 17.9432 17.6024 17.9432 15.9595C17.9432 14.3166 16.6388 12.9706 14.9968 12.919V12.919Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M20.6878 9.02403C20.6872 9.98653 19.9066 10.7664 18.9441 10.766C17.9816 10.7657 17.2016 9.9852 17.2018 9.0227C17.202 8.06019 17.9823 7.28003 18.9448 7.28003C19.4072 7.28003 19.8507 7.4638 20.1776 7.7909C20.5045 8.11799 20.688 8.56158 20.6878 9.02403V9.02403Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M4.3338 9.02401C4.3338 9.98664 5.11417 10.767 6.0768 10.767C7.03943 10.767 7.8198 9.98664 7.8198 9.02401C7.8198 8.06137 7.03943 7.28101 6.0768 7.28101C5.11417 7.28101 4.3338 8.06137 4.3338 9.02401V9.02401Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M19.4368 12.839C19.0226 12.839 18.6868 13.1748 18.6868 13.589C18.6868 14.0032 19.0226 14.339 19.4368 14.339V12.839ZM20.7438 13.589L20.7593 12.8392C20.7541 12.839 20.749 12.839 20.7438 12.839V13.589ZM20.7438 18.24V18.99C20.749 18.99 20.7541 18.9899 20.7593 18.9898L20.7438 18.24ZM19.4368 17.49C19.0226 17.49 18.6868 17.8258 18.6868 18.24C18.6868 18.6542 19.0226 18.99 19.4368 18.99V17.49ZM5.58477 14.339C5.99899 14.339 6.33477 14.0032 6.33477 13.589C6.33477 13.1748 5.99899 12.839 5.58477 12.839V14.339ZM4.27777 13.589V12.839C4.27259 12.839 4.26741 12.839 4.26222 12.8392L4.27777 13.589ZM4.27777 18.24L4.26222 18.9898C4.26741 18.9899 4.27259 18.99 4.27777 18.99V18.24ZM5.58477 18.99C5.99899 18.99 6.33477 18.6542 6.33477 18.24C6.33477 17.8258 5.99899 17.49 5.58477 17.49V18.99ZM19.4368 14.339H20.7438V12.839H19.4368V14.339ZM20.7282 14.3388C21.5857 14.3566 22.2715 15.0568 22.2715 15.9145H23.7715C23.7715 14.2405 22.4329 12.8739 20.7593 12.8392L20.7282 14.3388ZM22.2715 15.9145C22.2715 16.7722 21.5857 17.4724 20.7282 17.4902L20.7593 18.9898C22.4329 18.9551 23.7715 17.5885 23.7715 15.9145H22.2715ZM20.7438 17.49H19.4368V18.99H20.7438V17.49ZM5.58477 12.839H4.27777V14.339H5.58477V12.839ZM4.26222 12.8392C2.58861 12.8739 1.25 14.2405 1.25 15.9145H2.75C2.75 15.0568 3.43584 14.3566 4.29332 14.3388L4.26222 12.8392ZM1.25 15.9145C1.25 17.5885 2.58861 18.9551 4.26222 18.9898L4.29332 17.4902C3.43584 17.4724 2.75 16.7722 2.75 15.9145H1.25ZM4.27777 18.99H5.58477V17.49H4.27777V18.99Z" fill="#ffffff"></path> </g></svg>
-                  </div>
-                  <h6 class="m-0">Dedicated Workspace Experts</h6>
-                  <p>Get personalized, end-to-end support from experts for shortlisting.</p>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div class="choose_sec">
+              <div class="whychos_box text-center position-relative p-4">
+                <div class="choose_icon mb-2">
+                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="40px" width="40px"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M 8 5 C 4.7 5 2 7.7 2 11 C 2 13 3 14.800781 4.5 15.800781 C 1.8 17.200781 0 19.9 0 23 L 2 23 C 2 19.7 4.7 17 8 17 C 11.3 17 14 19.7 14 23 L 16 23 C 16 19.8 18.600781 17.1 21.800781 17 L 22 17 C 24.5 17 26.6 15.500391 27.5 13.400391 C 27.5 13.400391 27.499609 13.300781 27.599609 13.300781 C 27.699609 13.200781 27.699219 13.000391 27.699219 12.900391 C 27.699219 12.800391 27.700781 12.799219 27.800781 12.699219 C 27.800781 12.599219 27.900391 12.400781 27.900391 12.300781 C 27.900391 12.200781 27.9 12.1 28 12 C 28 11.9 27.999609 11.799219 28.099609 11.699219 L 28.099609 11.199219 L 28.099609 11.099609 C 28.099609 7.7996094 25.399609 5.0996094 22.099609 5.0996094 C 18.799609 5.0996094 16.099609 7.7996094 16.099609 11.099609 C 16.099609 13.099609 17.099609 14.900391 18.599609 15.900391 C 17.099609 16.600391 15.899609 17.799219 15.099609 19.199219 C 14.299609 17.799219 13.099609 16.600391 11.599609 15.900391 C 12.999609 14.800391 14 13 14 11 C 14 7.7 11.3 5 8 5 z M 8 7 C 10.2 7 12 8.8 12 11 C 12 13.2 10.2 15 8 15 C 5.8 15 4 13.2 4 11 C 4 8.8 5.8 7 8 7 z M 22 7 C 24.2 7 26 8.8 26 11 C 26 13.2 24.2 15 22 15 C 19.8 15 18 13.2 18 11 C 18 8.8 19.8 7 22 7 z M 24.099609 18 L 24.099609 20.099609 C 23.499609 20.199609 22.900391 20.500781 22.400391 20.800781 L 20.900391 19.300781 L 19.5 20.699219 L 21 22.199219 C 20.6 22.699219 20.400781 23.3 20.300781 24 L 18 24 L 18 26 L 20.099609 26 C 20.199609 26.6 20.500781 27.200781 20.800781 27.800781 L 19.300781 29.300781 L 20.699219 30.699219 L 22.199219 29.199219 C 22.699219 29.499219 23.300391 29.800391 23.900391 29.900391 L 23.900391 32 L 25.900391 32 L 25.900391 29.900391 C 26.500391 29.800391 27.099609 29.499219 27.599609 29.199219 L 29.099609 30.699219 L 30.5 29.300781 L 29 27.800781 C 29.4 27.300781 29.599219 26.7 29.699219 26 L 32 26 L 32 24 L 29.900391 24 C 29.800391 23.4 29.499219 22.799219 29.199219 22.199219 L 30.699219 20.699219 L 29.300781 19.300781 L 27.800781 20.800781 C 27.300781 20.500781 26.699609 20.199609 26.099609 20.099609 L 26.099609 18 L 24.099609 18 z M 25 22 C 26.7 22 28 23.3 28 25 C 28 26.7 26.7 28 25 28 C 23.3 28 22 26.7 22 25 C 22 23.3 23.3 22 25 22 z M 25 24 C 24.875 24 24.75 24.03125 24.632812 24.085938 C 24.515625 24.140625 24.40625 24.21875 24.3125 24.3125 C 24.21875 24.40625 24.140625 24.515625 24.085938 24.632812 C 24.03125 24.75 24 24.875 24 25 C 24 25.125 24.03125 25.25 24.085938 25.367188 C 24.140625 25.484375 24.21875 25.59375 24.3125 25.6875 C 24.40625 25.78125 24.515625 25.859375 24.632812 25.914062 C 24.75 25.96875 24.875 26 25 26 C 25.5 26 26 25.5 26 25 C 26 24.5 25.5 24 25 24 z">
+                    </path>
+                  </svg>
                 </div>
-            
+                <h6 class="m-0">Dedicated Workspace Experts</h6>
+                <p class="text-white">Get personalized, end-to-end support from experts for shortlisting.</p>
               </div>
+
             </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1256,78 +809,50 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-4">
-        <h2 class="section-title v1">Meet Our Team of Experts!</h2>
-        <p>With over 1,000 businesses and professionals helped, we bring unmatched expertise and personalized service to every client.</p>
+        <h2 class="section-title v1">Your Office Search, Simplified By Experts</h2>
+        <p>With over 1,000 businesses and professionals helped, we bring unmatched expertise and personalized service to
+          every client.</p>
       </div>
     </div>
     <div class="row mt-4">
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
-              <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-             <h5 class="mb-0">Space shortlisting </h5>
-             <p>We find the perfect office that suits your needs and budget.</p>
+          <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+          <h5 class="mb-0">Space shortlisting </h5>
+          <p>We find the perfect office that suits your needs and budget.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
-              <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-             <h5 class="mb-0">Personalized Tours </h5>
-             <p>Visit only the spaces that match your criteria—saving you time and effort.</p>
+          <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+          <h5 class="mb-0">Personalized Tours </h5>
+          <p>Visit only the spaces that match your criteria—saving you time and effort.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
-              <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-             <h5 class="mb-0">Smart Price Negotiation </h5>
-             <p>We secure the best deal, so you can focus on growing your business.</p>
+          <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+          <h5 class="mb-0">Smart Price Negotiation </h5>
+          <p>We secure the best deal, so you can focus on growing your business.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
-              <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-             <h5 class="mb-0">Seamless Contract Handling</h5>
-             <p>From paperwork to move in, we make it effortless.</p>
+          <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+          <h5 class="mb-0">Seamless Contract Handling</h5>
+          <p>From paperwork to move in, we make it effortless.</p>
         </div>
       </div>
     </div>
-    <div class="row mt-3 justify-content-center">
-        <div class="col-lg-8 col-md-8 col-12">
-             <div class="row justify-content-center">
-              <div class="col-lg-auto col-md-auto col-auto">
-                 <div class="team_img_box text-center">
-                    <div class="img_name">
-                      <img src="https://weborgraphics.com/flexo-2/assets/images/aparna-palsamkar.webp" class="img-fluid" alt="">
-                    </div>
-                    <h5>Aparna Palsamkar</h5>
-                 </div>
-              </div>
-              <div class="col-lg-auto col-md-auto col-auto">
-                <div class="team_img_box text-center">
-                   <div class="img_name">
-                     <img src="https://weborgraphics.com/flexo-2/assets/images/harikesh-pathak.webp" class="img-fluid" alt="">
-                   </div>
-                   <h5>Harikesh Pathak</h5>
-                </div>
-             </div>
-             <div class="col-lg-auto col-md-auto col-auto">
-              <div class="team_img_box text-center">
-                 <div class="img_name">
-                   <img src="https://weborgraphics.com/flexo-2/assets/images/vivek-h-kundnani.webp" class="img-fluid" alt="">
-                 </div>
-                 <h5>Vivek H Kundnani</h5>
-              </div>
-           </div>
-             </div>
-        </div>
-    </div>
+
   </div>
 </div>
 
-<div class="work-process pad-bot-90 section-padding" style="background-image: url(assets/images/others/dots-bg.svg)">
+<div class="work-process pad-bot-90 section-padding">
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center mb-4">
-        <h2 class="section-title v1">Testimonials</h2>
+        <h2 class="section-title v1">Trusted by Teams, Loved by Leaders</h2>
       </div>
       <!-- <div class="col-md-4">
         <div class="work-process-content v1 text-center">
@@ -1379,26 +904,26 @@
               responsive="breakpoints">
               <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let testimonial of testimonials">
                 <div class="work-process-content v1  p-4">
-            <div class="d-flex align-items-center mb-2">
-              <div class="process-icon v1">
-                <img [src]="'assets/images/testimonials/' + testimonial.image" />
-                <!-- <span>{{testimonial.id}}</span> -->
-              </div>
-              <div class="pl-3">
-                <h5 class="title mb-0">
-                  {{ testimonial.name }}<br /><span style="font-size: 15px">{{
-                    testimonial.designation
-                    }}</span>
-                </h5>
-                <ul class="product-rating text-left">
-                  <li><i class="ion-android-star"></i></li>
-                  <li><i class="ion-android-star"></i></li>
-                  <li><i class="ion-android-star"></i></li>
-                  <li><i class="ion-android-star"></i></li>
-                  <li><i class="ion-android-star"></i></li>
-                </ul>
-              </div>
-            </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <div class="process-icon v1">
+                      <img [src]="'assets/images/testimonials/' + testimonial.image" />
+                      <!-- <span>{{testimonial.id}}</span> -->
+                    </div>
+                    <div class="pl-3">
+                      <h5 class="title mb-0">
+                        {{ testimonial.name }}<br /><span style="font-size: 15px">{{
+                          testimonial.designation
+                          }}</span>
+                      </h5>
+                      <ul class="product-rating text-left">
+                        <li><i class="ion-android-star"></i></li>
+                        <li><i class="ion-android-star"></i></li>
+                        <li><i class="ion-android-star"></i></li>
+                        <li><i class="ion-android-star"></i></li>
+                        <li><i class="ion-android-star"></i></li>
+                      </ul>
+                    </div>
+                  </div>
                   <p class="info">
                     {{ testimonial.content }}
                   </p>
@@ -1421,154 +946,6 @@
   </div>
 </div>
 
-<div class="container-fluid list_sapce section-padding">
-  <div class="container">
-    <div class="row justify-content-center">
-       <div class="col-12 text-center py-3">
-        <h2 class="text-white mb-2">Earn Money as a Flexo Host</h2>
-        <p class="text-white custom-lh">Join thousands of hosts renting their space for coworking, meetings, <br> events, podcasts, and video and photo shoots.</p>
-         <div class="get_btn text-center mt-4">
-           <button type="button" class="btn custum-btn" style="border-radius: 6px;font-size: 15px;">Get Started. List Your Space Today – It’s Free and Easy</button>
-         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container-fluid choose_share section-padding">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-7 col-md-7 col-6">
-          <div class="share_img position-relative">
-             <img src="https://img.peerspace.com/image/upload/dpr_auto,f_auto,q_auto,fl_progressive/ar_3:2,c_fill,w_1000/v1527041847/new_host_images/host-share.jpg" alt="" class="img-fluid w-100">
-               
-             <div class="share_img_txt">
-                <h6 class="mb-0">Ben Seidel</h6>
-                <p class="text-white">Hosting since 2016</p>
-             </div>
-            </div>
-      </div>
-      <div class="col-lg-5 col-md-5 col-6">
-        <div class="share_content p-3">
-          <h3 class="section-title mb-0">Meet Our Team of Experts!</h3>
-          <p>You love your space, so you control how you share it. Open your doors to meetings during the week, dinners at night, or just film shoots on the weekends – whatever works best for you.</p>
-          <p>Hosts receive <b style="color: #f76900;">10 inquiries per month</b>, on average, so you can choose what works for you.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="container-fluid works_sec section-padding">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center mb-4">
-        <h2 class="section-title v1">How It Works</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-12 mb-lg-0 mb-md-0 mb-5">
-           <div class="works_box p-4">
-              <div class="works_count mb-2">
-                <span>01</span>
-              </div>
-              <h5 class="mb-0">Sign Up and Create Your Listing</h5>
-              <p>Provide key details like location, size, amenities, and usage categories. Upload high-quality photos to showcase your space.</p>
-           </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-12 mb-lg-0 mb-md-0 mb-5">
-        <div class="works_box p-4">
-           <div class="works_count mb-2">
-             <span>02</span>
-           </div>
-           <h5 class="mb-0">Set Your Preferences</h5>
-           <p>Choose hourly, daily, or monthly booking options. Decide between “Request to Book” or “Instant Book” for each listing.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-12 mb-lg-0 mb-md-0 mb-5">
-        <div class="works_box p-4">
-          <div class="works_count mb-2">
-            <span>03</span>
-          </div>
-          <h5 class="mb-0">Start Earning</h5>
-          <p>Go live on the platform, receive booking requests, and manage everything through our dashboard. Get paid directly to your account.</p>
-        </div>
-    </div>
-    </div>
-  </div>
-</div>
-
-<div class="container-fluid space_list_sec section-padding">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center mb-4">
-        <h2 class="section-title v1">What Types of Spaces Can You List?</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure porro eaque assumenda, quidem nemo in aliquam perferendis laboriosam aut repudiandae asperiores quod molestias ducimus consectetur dicta eveniet illo architecto natus?</p>
-      </div>
-    </div>
-    <div class="col-12 mt-3">
-      <ngx-slick-carousel class="carousel space-list-carousel" #spaceListSlider="slick-carousel" [config]="spaceListConfig"
-      responsive="breakpoints">
-      <div ngxSlickItem class="swiper-slide popular-item slide">
-        <div class="spce_list_box">
-          <div>
-            <img src="https://img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive,ar_4:3,c_fill/v1527616243/new_host_images/host-homes.jpg" alt="" class="img-fluid">
-          </div>
-          <div class="space_list_content text-center p-3">
-             <h5 class="mb-0">Coworking Spaces</h5>
-             <p>For long-term and daily rentals.</p>
-          </div>           
-        </div>
-    </div>
-    <div ngxSlickItem class="swiper-slide popular-item slide">
-      <div class="spce_list_box">
-        <div>
-          <img src="https://img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive,ar_4:3,c_fill/v1527616243/new_host_images/host-homes.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="space_list_content text-center p-3">
-           <h5 class="mb-0">Studios</h5>
-           <p>Perfect for podcasting, photoshoots, and video production.</p>
-        </div>           
-       </div>
-    </div>
-    <div ngxSlickItem class="swiper-slide popular-item slide">
-      <div class="spce_list_box">
-        <div>
-          <img src="https://img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive,ar_4:3,c_fill/v1527616243/new_host_images/host-homes.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="space_list_content text-center p-3">
-           <h5 class="mb-0">Meeting Rooms</h5>
-           <p>Equipped for business discussions and training sessions.</p>
-        </div>           
-       </div>
-    </div>
-    <div ngxSlickItem class="swiper-slide popular-item slide">
-      <div class="spce_list_box">
-        <div>
-         <img src="https://img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive,ar_4:3,c_fill/v1527616243/new_host_images/host-homes.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="space_list_content text-center p-3">
-          <h5 class="mb-0">Event Spaces</h5>
-          <p>Ideal for workshops, small gatherings, and networking events.</p>
-        </div>           
-      </div>
-    </div>
-    <div ngxSlickItem class="swiper-slide popular-item slide">
-    <div class="spce_list_box">
-      <div>
-        <img src="https://img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive,ar_4:3,c_fill/v1527616243/new_host_images/host-homes.jpg" alt="" class="img-fluid">
-      </div>
-      <div class="space_list_content text-center p-3">
-        <h5 class="mb-0">Office Spaces</h5>
-        <p>For long-term rentals</p>
-      </div>           
-     </div>
-    </div>
-    </ngx-slick-carousel>
-    </div>
-  </div>
-</div>
 
 
 <!-- 
@@ -1702,34 +1079,41 @@
     <div class="row">
       <div class="col-12 text-center mb-4">
         <h2 class="section-title v1">Frequently Asked Question</h2>
+        <p>Addressing common questions and concerns about Coworking Spaces in Mumbai</p>
       </div>
     </div>
     <div class="row">
-       <div class="col-12">
+      <div class="col-12">
         <div class="accordion" id="accordionExample">
-          <div class="card">
+          <div class="card card_acord">
             <div class="card-header" id="headingOne">
-                <button class="d-flex align-items-center justify-content-between btn w-100 text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <h5 class="mb-0 text-white">How much does it cost to list my space? </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg"><path d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z"></path></svg>
-                </div>
+              <button class="card_btn d-flex align-items-center btn w-100 text-left" type="button"
+                data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <img src="../../assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <h5 class="pl-2 mb-0">How much does it cost to list my space? </h5>
               </button>
             </div>
 
-        
+
             <div id="collapseOne" class="collapsed show" aria-labelledby="headingOne" data-parent="#accordionExample">
               <div class="card-body">
                 Listing is free; Flexo charges a small commission per booking.
               </div>
             </div>
           </div>
-          <div class="card">
+          <div class="card card_acord">
             <div class="card-header" id="headingTwo">
-                <button class="d-flex align-items-center justify-content-between btn collapsed w-100 text-left" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  <h5 class="text-white mb-0">What happens after I receive a booking request?</h5>
+              <button class="card_btn d-flex align-items-center btn collapsed w-100 text-left" type="button"
+                data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <img src="../../assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <h5 class="pl-2 mb-0">What happens after I receive a booking request?</h5>
                 <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg"><path d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z"></path></svg>
+                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
+                    </path>
+                  </svg>
                 </div>
               </button>
             </div>
@@ -1741,12 +1125,19 @@
           </div>
           <div class="card">
             <div class="card-header" id="headingThree">
-                <button class="d-flex align-items-center justify-content-between btn collapsed w-100 text-left" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  <h5 class="text-white mb-0">
-                    Can I customize my listing?
-                  </h5>
+              <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
+                data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <img src="../../assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <h5 class="pl-2  mb-0">
+                  Can I customize my listing?
+                </h5>
                 <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg"><path d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z"></path></svg>
+                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
+                    </path>
+                  </svg>
                 </div>
               </button>
             </div>
@@ -1756,25 +1147,14 @@
               </div>
             </div>
           </div>
-          
-        </div>
-       </div>
-    </div>
-  </div>
-</div>
 
-<div class="container-fluid earn_sec section-padding mt-5">
-  <div class="container">
-    <div class="row justify-content-center">
-       <div class="col-12 text-center py-3">
-        <h2 class="text-white mb-2">Ready to Earn with Flexo?</h2>
-         <div class="get_btn text-center mt-4">
-           <button type="button" class="btn custum-btn" style="border-radius: 6px;font-size: 15px;">List Your Space Now</button>
-         </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 <div class="location_model">

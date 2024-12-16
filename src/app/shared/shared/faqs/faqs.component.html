@@ -1,36 +1,34 @@
-<div
-  class="main-container"
-  *ngIf="shortQuestions.length || briefQuestions.length"
->
+<div class="main-container" *ngIf="shortQuestions.length || briefQuestions.length">
   <div class="container">
-    <h2 class="heading">Frequently Asked Questions About {{spaceType}} {{cityName}} | Best {{spaceType}} in {{location}} {{cityName}}</h2>
+    <h2 class="heading">Frequently Asked Questions About {{spaceType}} {{cityName}} | Best {{spaceType}} in {{location}}
+      {{cityName}}</h2>
 
-    <div class="short-questions">
-      <div class="squestion-wrapper" *ngFor="let sQuestion of shortQuestions">
-        <p>
-          {{ sQuestion?.heading }}
-        </p>
-        <p>
-          <strong>Q- {{ sQuestion?.question }}</strong>
-        </p>
-        <div class="d-flex justify-content-start" *ngIf="sQuestion?.answer">
-          <p>Ans-</p>
-          <p class="question-new" [innerHtml]="sQuestion?.answer"></p>
+    <div class="row justify-content-center">
+    <div class="col-md-10 co-12">
+      <div class="short-questions ">
+        <div class="squestion-wrapper" *ngFor="let sQuestion of shortQuestions">
+          <p>
+            {{ sQuestion?.heading }}
+          </p>
+          <p>
+            <strong>Q- {{ sQuestion?.question }}</strong>
+          </p>
+          <div class="d-flex justify-content-start" *ngIf="sQuestion?.answer">
+            <p>Ans-</p>
+            <p class="question-new" [innerHtml]="sQuestion?.answer"></p>
+          </div>
+        </div>
+      </div>
+      <div class="brief-questions">
+        <div class="b-question-wrapper" *ngFor="let bQuestion of briefQuestions">
+          <h2 class="question-new-brief strong" style="margin-bottom: 30px" [innerHtml]="bQuestion?.question"></h2>
+
+          <p class="answer-new" [innerHtml]="bQuestion?.answer"></p>
+          <!-- <h4>{{ bQuestion?.question }}</h4>
+      <p class="paragraph" [innerHtml]="bQuestion?.answer"></p> -->
         </div>
       </div>
     </div>
-    <div class="brief-questions">
-      <div class="b-question-wrapper" *ngFor="let bQuestion of briefQuestions">
-        <h2
-          class="question-new-brief strong"
-          style="margin-bottom: 30px"
-          [innerHtml]="bQuestion?.question"
-        ></h2>
-
-        <p class="answer-new" [innerHtml]="bQuestion?.answer"></p>
-        <!-- <h4>{{ bQuestion?.question }}</h4>
-        <p class="paragraph" [innerHtml]="bQuestion?.answer"></p> -->
-      </div>
     </div>
   </div>
 </div>
