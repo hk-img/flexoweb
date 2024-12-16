@@ -496,6 +496,7 @@
           justify-content: space-between;
   padding: 15px 0 25px;
   border-bottom: 1px solid #DBDBDB;
+  flex-wrap: wrap;
 }
 .like-dislike-c {
   margin-left: 20px;

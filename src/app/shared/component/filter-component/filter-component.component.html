@@ -1,12 +1,12 @@
-<div class="detail-container row align-items-baseline">
+<div class="detail-container row align-items-center">
     <p class="col-2 pe-0">Filters</p>
-    <div  class="book-btn col-3 text-center">
+    <div  class="book-btn col-md-3 col-4 text-center">
         <button class="btn filter_btn w-100 text-white p-2" (click)="filters()">Apply</button>
     </div>
-    <div class="book-btn col-3 text-center">
+    <div class="book-btn col-md-3 col-4 text-center">
         <button class="btn filter_btn w-100 text-white p-2" (click)="clearFilters()">Clear</button>
     </div>
-    <i  class="col-4 text-right cross material-icons" style="cursor: pointer;" (click)="closeDialog(null)">
+    <i  class="col-md-4 col-2 text-right cross material-icons" style="cursor: pointer;" (click)="closeDialog(null)">
         close
     </i>
 </div>
@@ -36,7 +36,7 @@
     <div>
         <p class="text-head">Amenities</p>
         <br>
-        <ul style="column-count: 3;">
+        <ul class="col_count" style="column-count: 3;">
             <li *ngFor="let facility of amenities">
                 <mat-checkbox (change)="setAmenity(facility.id, $event)"
                     [checked]="filter.amenities.includes(facility.id)" color="accent">

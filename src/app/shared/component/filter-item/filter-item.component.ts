@@ -495,7 +495,8 @@ export class FilterItemComponent implements OnInit {
     let config = new MatDialogConfig();
     config.viewContainerRef = this.login_viewContainerRef;
     config.panelClass = 'dialogClass';
-    config.minWidth = '40vw';
+    config.width = '100%';
+    config.maxWidth = '40vw';
     config.data = {type};
     if (this.isMobile) {
       config.height = '100%';

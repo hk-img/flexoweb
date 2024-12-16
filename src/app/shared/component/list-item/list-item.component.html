@@ -2,23 +2,24 @@
   {{spaceDetails.ribbon_name}}
 </div>
 <div (click)="onSpaceNameClicked(spaceDetails)" class="cursor_pointer trending-place-item position-relative box-shadow">
-  <div class="trending-img position-relative" >
+  <div class="trending-img position-relative">
     <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
       responsive="breakpoints">
       <ng-container *ngIf="spaceDetails.images?.length">
         <div ngxSlickItem class="swiper-slide single-listing-slider slide" *ngFor="let image of spaceDetails.images">
           <a style="cursor: pointer;">
-            <img [src]="image" (error)="onImageError($event,spaceDetails.imageAlt)" alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"/>
+            <img [src]="image" (error)="onImageError($event,spaceDetails.imageAlt)"
+              alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}" />
           </a>
         </div>
       </ng-container>
       <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
-      <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide">
-        <a style="cursor: pointer;">
-          <img src="assets/images/details_placeholder_image.jpg" />
-        </a>
-      </div>
-    </ng-container>
+        <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide">
+          <a style="cursor: pointer;">
+            <img src="assets/images/details_placeholder_image.jpg" />
+          </a>
+        </div>
+      </ng-container>
     </ngx-slick-carousel>
     <a class="carousel-control-prev" style="top: 45%" (click)="prev($event)" role="button" data-slide="prev">
       <span class="icon ion-chevron-left icon-color"></span>
@@ -58,7 +59,7 @@
   </div> -->
   <div class="trending-title-box">
 
-    <div class="customer-review d-flex justify-content-between mb-2 align-items-end">
+    <div class="customer-review d-flex justify-content-between mb-md-2 mb-1 align-items-end">
       <h3 style="font-size: 18px" class="h-cursor m-0 text-truncate">
         {{ spaceDetails.name
         }}
@@ -74,9 +75,10 @@
           {{spaceDetails.location_name }}, {{spaceDetails.contact_city_name}}</span>
       </h3>
     </div>
-    <div class="rating-summary d-flex" style="gap: 22px;align-items: baseline;">
-      <div class="rating-result d-flex align-items-center" style="gap:10px;height:0" title="60%" *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) ">
-        <ul class="product-rating">
+    <div class="rating-summary d-flex align-items-center mb-1" style="">
+      <div class="rating-result d-flex align-items-center pr-2" style="" title="60%"
+        *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) ">
+        <ul class="product-rating pr-1">
           <li *ngFor="let element of spaceDetails.rating_array">
             <i class="ion-android-star"></i>
           </li>
@@ -91,73 +93,75 @@
         </ul>
         {{spaceDetails.rating}} ({{spaceDetails.reviewCount}})
       </div>
-      <div *ngIf="type === 'coworking' || type === 'shortterm'  ">
-      <i class="fa fa-user" style="color: #f76900;"></i> &nbsp;{{spaceDetails.howManyPeopleInYourSpace}} people
+      <div class="d-flex align-items-center">
+        <div *ngIf="type === 'coworking' || type === 'shortterm'  " class="pr-1 rate_txt">
+          <i class="fa fa-user" style="color: #f76900;"></i> &nbsp;{{spaceDetails.howManyPeopleInYourSpace}} people
+        </div>
+        <div *ngIf="type === 'longterm'" class="rate_txt">
+          <i class="fa-solid fa-house" style="color: #f76900;"></i> {{spaceDetails.spaceStatus}}
+        </div>
+      <div class="rate_txt">
+        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="18" viewBox="0 0 24 24"
+          width="18" style="fill: #f76900;vertical-align: sub;">
+          <path d="m0 0h24v24h-24z" fill="none" />
+          <path
+            d="m17.66 17.66-1.06 1.06-.71-.71 1.06-1.06-1.94-1.94-1.06 1.06-.71-.71 1.06-1.06-1.94-1.94-1.06 1.06-.71-.71 1.06-1.06-1.95-1.95-1.06 1.06-.71-.71 1.06-1.06-1.94-1.94-1.06 1.06-.71-.71 1.06-1.06-2.34-2.34v14c0 1.1.9 2 2 2h14zm-10.66-.66v-5.76l5.76 5.76z" />
+        </svg>{{spaceDetails.spacesqft}} sqft
       </div>
-      <div *ngIf="type === 'longterm'">
-      <i class="fa-solid fa-house" style="color: #f76900;"></i> {{spaceDetails.spaceStatus}}
-      </div>
-      <div>
-      <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="18" viewBox="0 0 24 24" width="18"
-        style="fill: #f76900;vertical-align: sub;">
-        <path d="m0 0h24v24h-24z" fill="none" />
-        <path
-          d="m17.66 17.66-1.06 1.06-.71-.71 1.06-1.06-1.94-1.94-1.06 1.06-.71-.71 1.06-1.06-1.94-1.94-1.06 1.06-.71-.71 1.06-1.06-1.95-1.95-1.06 1.06-.71-.71 1.06-1.06-1.94-1.94-1.06 1.06-.71-.71 1.06-1.06-2.34-2.34v14c0 1.1.9 2 2 2h14zm-10.66-.66v-5.76l5.76 5.76z" />
-      </svg>{{spaceDetails.spacesqft}} sqft
-      </div>
+    </div>
     </div>
     <div class="d-flex" style="gap:30px;align-items: baseline;">
-    <div *ngIf="type === 'shortterm' || type === 'longterm'">
-  <span class="accent_back">
-  <svg style="scale: .2;" version="1.1" xmlns="http://www.w3.org/2000/svg" width="42" height="60">
-    <path
-      d="M0 0 C13.86 0 27.72 0 42 0 C42 2.64 42 5.28 42 8 C38.04 8 34.08 8 30 8 C30.495 8.94875 30.99 9.8975 31.5 10.875 C33 14 33 14 33 16 C35.97 16 38.94 16 42 16 C42 18.97 42 21.94 42 25 C39.03 25 36.06 25 33 25 C32.6596875 26.5778125 32.6596875 26.5778125 32.3125 28.1875 C30.51419436 34.42497969 25.44689864 37.87093057 20 41 C18.68 41 17.36 41 16 41 C21.31429814 47.17252553 21.31429814 47.17252553 27 53 C25.70700306 55.88437779 24.34058637 57.87219421 22 60 C16.5852468 57.64346638 12.88182545 53.29027355 8.75 49.1875 C7.90953125 48.37990234 7.0690625 47.57230469 6.203125 46.74023438 C5.01203125 45.55977539 5.01203125 45.55977539 3.796875 44.35546875 C2.70391113 43.28268677 2.70391113 43.28268677 1.58886719 42.18823242 C-0.33321464 39.54108746 -0.49327943 38.20332474 0 35 C2.72728976 32.27271024 4.44519804 32.70583158 8.25 32.5625 C13.16548702 32.25290579 16.86582159 31.90509834 21 29 C21.66 28.01 22.32 27.02 23 26 C11.615 25.505 11.615 25.505 0 25 C0 22.03 0 19.06 0 16 C7.59 16 15.18 16 23 16 C18.57285488 10.4660686 17.1864717 9.37157976 10.44921875 8.5859375 C9.20785156 8.51632812 7.96648438 8.44671875 6.6875 8.375 C5.43324219 8.30023438 4.17898437 8.22546875 2.88671875 8.1484375 C1.93410156 8.09945313 0.98148437 8.05046875 0 8 C0 5.36 0 2.72 0 0 Z "
-      fill="#fff" transform="translate(0,0)" />
-  </svg>
+      <div *ngIf="type === 'shortterm' || type === 'longterm'">
+        <span class="accent_back">
+          <svg style="scale: .2;" version="1.1" xmlns="http://www.w3.org/2000/svg" width="42" height="60">
+            <path
+              d="M0 0 C13.86 0 27.72 0 42 0 C42 2.64 42 5.28 42 8 C38.04 8 34.08 8 30 8 C30.495 8.94875 30.99 9.8975 31.5 10.875 C33 14 33 14 33 16 C35.97 16 38.94 16 42 16 C42 18.97 42 21.94 42 25 C39.03 25 36.06 25 33 25 C32.6596875 26.5778125 32.6596875 26.5778125 32.3125 28.1875 C30.51419436 34.42497969 25.44689864 37.87093057 20 41 C18.68 41 17.36 41 16 41 C21.31429814 47.17252553 21.31429814 47.17252553 27 53 C25.70700306 55.88437779 24.34058637 57.87219421 22 60 C16.5852468 57.64346638 12.88182545 53.29027355 8.75 49.1875 C7.90953125 48.37990234 7.0690625 47.57230469 6.203125 46.74023438 C5.01203125 45.55977539 5.01203125 45.55977539 3.796875 44.35546875 C2.70391113 43.28268677 2.70391113 43.28268677 1.58886719 42.18823242 C-0.33321464 39.54108746 -0.49327943 38.20332474 0 35 C2.72728976 32.27271024 4.44519804 32.70583158 8.25 32.5625 C13.16548702 32.25290579 16.86582159 31.90509834 21 29 C21.66 28.01 22.32 27.02 23 26 C11.615 25.505 11.615 25.505 0 25 C0 22.03 0 19.06 0 16 C7.59 16 15.18 16 23 16 C18.57285488 10.4660686 17.1864717 9.37157976 10.44921875 8.5859375 C9.20785156 8.51632812 7.96648438 8.44671875 6.6875 8.375 C5.43324219 8.30023438 4.17898437 8.22546875 2.88671875 8.1484375 C1.93410156 8.09945313 0.98148437 8.05046875 0 8 C0 5.36 0 2.72 0 0 Z "
+              fill="#fff" transform="translate(0,0)" />
+          </svg>
 
-  <span class="price-value text-white ms-10 align-middle">{{spaceDetails?.originalPrice}} </span>
-  <small> / {{type === 'shortterm' ? 'hour' : 'month' }}</small></span>
-    </div>
-    <div *ngIf="spaceDetails.isInstant && type === 'shortterm'">
-      <i class="fa fa-bolt bolt_icon"></i><span class="instant_back p-1 text-dark">Instant Book</span>
-    </div>
-    <div *ngIf="spaceDetails.spaceStatus?.toLowerCase() === 'furnished' && type === 'longterm'">
-    <span class="status_back p-1 text-white"> {{spaceDetails.spaceStatus}}</span>
-    </div>
-    </div>
-    <div  *ngIf="type === 'coworking'">
-    <div>
-      <div class="inventory-label">
-        <p>Private Office from</p>
-        <p >
-          <ng-container *ngIf="spaceDetails?.privatecabin_price">
-            <div class="m-0 d-flex align-items-baseline">
-              <img src="assets/images/rs-icon.png" class="rs_icon" alt="">
-              <span class="price-value">{{spaceDetails?.privatecabin_price}}</span>
-              <small class="pl-2"> per seat / month</small>
-            </div>
-          </ng-container>
-        </p>
-        <p *ngIf="spaceDetails?.privatecabin_price == null || spaceDetails?.privatecabin_price == 0">NA</p>
+          <span class="price-value text-white ms-10 align-middle">{{spaceDetails?.originalPrice}} </span>
+          <small> / {{type === 'shortterm' ? 'hour' : 'month' }}</small></span>
       </div>
-      <!-- <div class="inventory-label" >
+      <div *ngIf="spaceDetails.isInstant && type === 'shortterm'">
+        <i class="fa fa-bolt bolt_icon"></i><span class="instant_back p-1 text-dark">Instant Book</span>
+      </div>
+      <div *ngIf="spaceDetails.spaceStatus?.toLowerCase() === 'furnished' && type === 'longterm'">
+        <span class="status_back p-1 text-white"> {{spaceDetails.spaceStatus}}</span>
+      </div>
+    </div>
+    <div *ngIf="type === 'coworking'">
+      <div>
+        <div class="inventory-label">
+          <p>Private Office from</p>
+          <p>
+            <ng-container *ngIf="spaceDetails?.privatecabin_price">
+              <div class="m-0 d-flex align-items-baseline">
+                <img src="assets/images/rs-icon.png" class="rs_icon " alt="">
+                <span class="price-value">{{spaceDetails?.privatecabin_price}}</span>
+                <small class="pl-1"> per seat / month</small>
+              </div>
+            </ng-container>
+          </p>
+          <p *ngIf="spaceDetails?.privatecabin_price == null || spaceDetails?.privatecabin_price == 0">NA</p>
+        </div>
+        <!-- <div class="inventory-label" >
         <p>Private Cabins from</p>
       </div> -->
-      <div class="inventory-label">
-        <p>Desks from</p>
-        <p>
-          <ng-container *ngIf="spaceDetails.flexible_desk_price">
-            <div class="d-flex align-items-baseline">
-              <img src="assets/images/rs-icon.png" class="rs_icon mr-0" alt="">
-              <span class="price-value"> {{ spaceDetails.flexible_desk_price }}</span>
-              <small class="pl-2"> per seat / month</small>
-            </div>
-          </ng-container>
-        </p>
-        <p *ngIf="spaceDetails.flexible_desk_price == null || spaceDetails?.flexible_desk_price == 0">NA</p>
+        <div class="inventory-label">
+          <p>Desks from</p>
+          <p>
+            <ng-container *ngIf="spaceDetails.flexible_desk_price">
+              <div class="d-flex align-items-baseline">
+                <img src="assets/images/rs-icon.png" class="rs_icon" alt="">
+                <span class="price-value"> {{ spaceDetails.flexible_desk_price }}</span>
+                <small class="pl-1"> per seat / month</small>
+              </div>
+            </ng-container>
+          </p>
+          <p *ngIf="spaceDetails.flexible_desk_price == null || spaceDetails?.flexible_desk_price == 0">NA</p>
+        </div>
       </div>
-    </div>
-    <!-- <div *ngIf="filters?.type != null">
+      <!-- <div *ngIf="filters?.type != null">
       <div class="inventory-label">
         <p>{{ filter_type_name }} from</p>
         <p *ngIf="spaceDetails[filter_type_col_name]">
@@ -169,26 +173,26 @@
           target="_blank" class="cursor-pointer">Enquire Now</a>
       </div>
     </div> -->
-    <!-- <div class="inventory-label" >
+      <!-- <div class="inventory-label" >
       <p>Desks from</p>
     </div> -->
-    <!-- <p style="font-size: 13px" *ngIf = "spaceDetails.customized_space_price || spaceDetails.flexible_desk_price || spaceDetails.virtual_office_price || spaceDetails.meeting_room_price || spaceDetails.training_room_price || spaceDetails?.privatecabin_price || spaceDetails.desks_price"> -->
-    <div class="row mt-2">
-      <div class="description col-8">
-        <h4 *ngIf="is_see_more_visible" class="less-content" style="font-size: 12px;color:#999">
-          {{ spaceDetails?.about }}
-        </h4>
-        <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="is_see_more_visible"
-          (click)="toggleSeeMore($event, 0)">See more</a>
-        <p class="overflow_wrap" *ngIf="!is_see_more_visible">{{ spaceDetails?.about }}</p>
-        <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="!is_see_more_visible"
-          (click)="toggleSeeMore($event, 1)">See less</a>
+      <!-- <p style="font-size: 13px" *ngIf = "spaceDetails.customized_space_price || spaceDetails.flexible_desk_price || spaceDetails.virtual_office_price || spaceDetails.meeting_room_price || spaceDetails.training_room_price || spaceDetails?.privatecabin_price || spaceDetails.desks_price"> -->
+      <div class="row mt-2 align-items-end">
+        <div class="description col-lg-8 col-md-7 col-6">
+          <h4 *ngIf="is_see_more_visible" class="less-content" style="font-size: 12px;color:#999">
+            {{ spaceDetails?.about }}
+          </h4>
+          <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="is_see_more_visible"
+            (click)="toggleSeeMore($event, 0)">See more</a>
+          <p class="overflow_wrap" *ngIf="!is_see_more_visible">{{ spaceDetails?.about }}</p>
+          <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="!is_see_more_visible"
+            (click)="toggleSeeMore($event, 1)">See less</a>
+        </div>
+        <div class="col-lg-4 col-md-5 col-6 text-right">
+          <button class="btn btn-accent" (click)="openInquiryPopUp($event,spaceDetails)">GET QUOTE</button>
+        </div>
       </div>
-      <div class="col-4 text-right">
-        <button class="btn btn-accent" (click)="openInquiryPopUp($event,spaceDetails)" >GET QUOTE</button>
-      </div>
-    </div>
-    <!--  <div class="available-resources">
+      <!--  <div class="available-resources">
       <div
         [hidden]="!(!is_similar_listing && (spaceDetails.customized_space_price != null || spaceDetails.desks_price != null || spaceDetails.virtual_office_price != null || spaceDetails.meeting_room_price != null || spaceDetails.training_room_price != null))">
         <span>Also Available:&nbsp;</span>
@@ -199,7 +203,7 @@
         <span *ngIf="spaceDetails.training_room_price != null">Training Room/Event Space</span>
       </div>
     </div> -->
-    <!-- <hr style="margin-top: 5px" *ngIf="!is_similar_listing" />
+      <!-- <hr style="margin-top: 5px" *ngIf="!is_similar_listing" />
     <div class="commute-details" *ngIf="!is_similar_listing">
       <div class="commute-details-item">
         <div class="commute-label">

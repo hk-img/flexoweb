@@ -84,7 +84,7 @@ export class ListItemComponent implements OnInit{
   public mainSliderConfig = {
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
     centerMode: true,
     dots: false,
     centerPadding: '0',
@@ -227,7 +227,8 @@ export class ListItemComponent implements OnInit{
       let config = new MatDialogConfig();
       config.viewContainerRef = this.inquiryVisit_viewContainerRef;
       config.panelClass = 'enq-mod-c';
-      config.width = '55vw';
+      config.width = '100%';
+      config.maxWidth = '55vw'
       config.data = {
         spaceId: id,
         value: 'listing'

@@ -47,8 +47,8 @@
 
 .price-value {
   color: black;
-  font-weight: 700;
-  font-size: 19px;
+  font-weight: 600;
+  font-size: 17px;
 }
 
 .ms-10 {
@@ -85,8 +85,9 @@
 .btn-accent {
   background-color: #F76900;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   color: #fff;
+  font-size: 12px;
 }
 
 
@@ -99,10 +100,11 @@
 
 .rs_icon {
   filter: grayscale(1);
-  height: 16px;
-  width: 11px;
-  margin-right: 5px;
+  height: 14px;
+  width: 12px;
+  margin-right: 2px;
   margin-bottom: 5px;
+  object-fit: contain;
 }
 
 .cursor_pointer {

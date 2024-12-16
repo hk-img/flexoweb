@@ -1,3 +1,46 @@
+.slide {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.slide:focus {
+  outline: none;
+}
+
+.author-image:focus {
+  outline: none;
+}
+
+.carousel {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.prev-slide.slick-disabled,
+.next-slide.slick-disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.prev-slide:hover {
+  background-position: 0px -53px;
+}
+
+.next-slide:hover {
+  background-position: -24px -53px;
+}
+.flex_btn .btn {
+  color: #f76900;
+  transition: all 500ms;
+  background: #0000006b;
+  backdrop-filter: blur(5px);
+  padding: 2px 8px;
+}
+.flex_btn .btn:hover {
+  text-decoration: underline;
+  transform: scale(1.1);
+}
+
 li {
   width: 100%;
   list-style-type: circle;
@@ -23,6 +66,187 @@ li {
   width: 21%;
   text-align: center;
 }
+
+.list_sapce{
+  background-image: url('https://img.peerspace.com/image/upload/dpr_auto,f_auto,q_auto,fl_progressive/ar_3:2,c_fill,h_1000/v1528389448/new_host_images/host-hero.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  background-attachment: fixed;
+}
+.list_sapce::before{
+  position: absolute;
+  content: "";
+  background: #000000a3;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.list_sapce h2{
+  font-size: 40px;
+}
+
+.choose_share .share_content{
+  box-shadow: 0 0 3px #bababa;
+  background: #fff;
+  border-radius: 6px;
+  margin-left: -80px;
+  border: 2px dashed #f76900;
+}
+.choose_share .share_img{
+  overflow: hidden;
+  border-radius: 8px;
+}
+.choose_share .share_img::before{
+  position: absolute;
+  content: "";
+  background: #00000077;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.choose_share .share_img .share_img_txt{
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  background: #0000006b;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(12px);
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 0 3px #da6107;
+}
+.choose_share .share_img .share_img_txt h6{
+  color: #f76900;
+}
+
+
+.works_sec .works_box{
+  position: relative;
+  box-shadow: 0 0 3px #8b8b8b;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 100%;
+  transition: all 500ms;
+}
+.works_sec .works_box:hover{
+  transform: translateY(-10px);
+}
+.works_sec .works_box::before{
+  position: absolute;
+  content: "";
+  left: -1px;
+  height: 48px;
+  top: -1px;
+  border: 3px solid #f76900;
+  border-radius: 30px;
+}
+
+.works_sec .works_box::after{
+  position: absolute;
+  content: "";
+  right: -1px;
+  height: 48px;
+  bottom: -1px;
+  border: 3px solid #f76900;
+  border-radius: 30px;
+}
+
+.works_sec .works_box h5{
+  color: #f76900;
+}
+
+.works_sec .works_box .works_count span{
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 3px #f76900;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #f76900;
+  border: 2px solid #f76900
+}
+
+.space_list_sec .spce_list_box img{
+   border-radius: 6px;
+}
+.space_list_sec .spce_list_box{
+  height: 350px;
+  box-shadow: 0 0 3px #cfcfcf;
+  border-radius: 6px;
+  position: relative;
+  margin: 12px 0;
+}
+.space_list_sec .spce_list_box h5{
+  color: #f76900;
+}
+
+.list_with_flexo .listFlexo_box {
+  position: relative;
+  box-shadow: 0 0 3px #8b8b8b;
+  background: #f76900;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 100%;
+  transition: all 500ms;
+}
+.list_with_flexo .listFlexo_box:hover {
+  transform: translateY(-10px);
+}
+
+
+.list_with_flexo .listFlexo_box::after {
+  position: absolute;
+  content: "";
+  left: 0px;
+  width: 0px;
+  bottom: 0px;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  transition: all 500ms;
+}
+.list_with_flexo .listFlexo_box:hover:after{
+  width: 100%;
+}
+
+.list_with_flexo .listFlexo_box:hover .listFlexo_count span{
+  opacity: 1;
+  font-size: 40px;
+  bottom: 0;
+}
+
+.list_with_flexo .listFlexo_box h5 {
+  color: #fff;
+}
+
+.list_with_flexo .listFlexo_box .listFlexo_count span {
+  font-size: 60px;
+  font-weight: 500;
+  color: #fff;
+  position: absolute;
+  bottom: -19px;
+  opacity: 0.2;
+  right: 13px;
+  transition: all 500ms;
+}
+.succes_story_sec .success_box {
+  box-shadow: 0 0 3px #b3b3b3;
+  border-radius: 5px;
+}
+
+
+.succes_story_sec .success_box .success_content .success_txt{
+   font-size: 24px;
+}
+
 
 @media only screen and (max-width: 900px) {
   .large-btn {

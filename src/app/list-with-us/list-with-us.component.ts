@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Meta, Title } from "@angular/platform-browser";
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
 
 @Component({
   selector: 'app-list-with-us',
@@ -8,6 +9,80 @@ import { Meta, Title } from "@angular/platform-browser";
 })
 export class ListWithUsComponent implements OnInit {
 
+  
+  
+
+  @ViewChild('spaceListSlider', { static: false })
+  spaceListSlider: SlickCarouselComponent;
+  public spaceListConfig = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: false,
+    variableHeight: false,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    dots: true,
+    swipeToSlide: true,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  @ViewChild('successSlider', { static: false })
+  successSlider: SlickCarouselComponent;
+  public successConfig = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    variableHeight: false,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    dots: true,
+    swipeToSlide: true,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1167,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  
   constructor(
     private metaService: Meta,
     private titleService: Title,
@@ -34,3 +109,4 @@ export class ListWithUsComponent implements OnInit {
   }
 
 }
+
