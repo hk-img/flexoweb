@@ -117,9 +117,6 @@ mark {
   display: none;
 }
 
-/* ::ng-deep .cdk-overlay-pane {
-  width: 399px !important;
-} */
 
 ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
   padding-bottom: 0px !important;
