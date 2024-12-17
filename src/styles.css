@@ -2136,6 +2136,7 @@ ul.list-inline li {
   margin-bottom: 10px;
   margin-left: -4px;
   text-transform: capitalize;
+  transition: all 500ms;
 }
 
 .hero__title.events-tab {
@@ -2808,11 +2809,12 @@ ul.list-inline li {
 .work-process-content {
   background: #fff;
   transition: 0.5s;
-  height: 100%;
   box-shadow: 0 0 3px #cbcbcb;
   border-radius: 6px;
   margin: 12px 0;
   position: relative;
+  min-height: 270px;
+  height: 100%;
 }
 
 .work-process-content.v1:hover {
@@ -2893,6 +2895,11 @@ ul.list-inline li {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all 500ms;
+}
+
+.work-process-content:hover .info {
+  -webkit-line-clamp: none;
 }
 
 /*--------------------------------------------
