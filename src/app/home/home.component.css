@@ -84,6 +84,17 @@ mark {
   display: flex;
   align-items: center;
 }
+::ng-deep .hero_sec .ng-select  .ng-placeholder{
+  color: #000 !important;
+  font-weight: 400;
+}
+::ng-deep .ng-select .ng-value-label {
+  color: #000 !important;
+  font-weight: 400;
+}
+.hero_sec .hero__form-input::placeholder{
+  color: #000 !important;
+}
 
 .how-can-help-img {
   margin: auto;
@@ -432,7 +443,7 @@ mark {
 }
 
 .hero_heading {
-  font-size: 48px;
+  font-size: 40px;
   font-weight: bold;
   opacity: 1;
   transition: opacity 1s ease-in-out; 
