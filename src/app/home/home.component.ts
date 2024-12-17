@@ -41,7 +41,7 @@ export class HomeComponent {
   // Define text for each image
   heroTexts = [
     'Office Spaces',
-    'Co-working Spaces',
+    'Coworking Spaces',
     'Private Offices',
     'Shared Workspaces'
   ];
@@ -368,6 +368,7 @@ export class HomeComponent {
       this.imageIndex = (this.imageIndex + 1) % this.images.length;
     }, this.changeInterval);
   }
+  
 
   getSpacecategory() {
     this.spaceService.getSpaceCategory().subscribe((res: any) => {
