@@ -34,10 +34,10 @@ export class HomeComponent {
   thane = 'assets/images/category/Thane.jpg';
   bkc = 'assets/images/category/BKC.jpg';
   backgrounds: string[] = [
-    '../../../assets/images/hero-1.webp',
-    '../../../assets/images/hero-2.webp',
-    '../../../assets/images/hero-3.webp',
-    '../../../assets/images/hero-4.webp',
+    'assets/images/hero-1.webp',
+    'assets/images/hero-2.webp',
+    'assets/images/hero-3.webp',
+    'assets/images/hero-4.webp',
   ];
 
   texts: string[] = [
