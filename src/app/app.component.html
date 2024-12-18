@@ -20,7 +20,7 @@
                       <a routerLink="/joy-of-giving">Joy Of Giving</a>
                     </li> -->
                     <li class="has-no-children">
-                      <a routerLink="/list-with-us">List With Us</a>
+                      <a routerLink="/list-with-us" >List Your Space</a>
                     </li>
                     <!-- <li class="has-no-children">
                       <a routerLink="/my-shortlists">My Shortlist</a>
@@ -29,7 +29,7 @@
                       <a href="tel:+91 95133 92400"><span class="ion-android-call"></span>&nbsp;9513392400</a>
                     </li>
                     <li class="has-no-children" style="cursor: pointer;" (click)="openLoginDialog()" *ngIf="!isLoggedIn && !userDetails?.firstName">
-                      <a class="custum-btn" >Login/Register</a>
+                      <a class="header_btn" >Login/Register</a>
                     </li>
                     <li class="has-no-children" style="cursor: pointer;" *ngIf="isLoggedIn || userDetails?.firstName">
                       <div class="dropdown">
