@@ -2069,7 +2069,7 @@ ul.list-inline li {
 ---------------------------------------------------- */
 
 .hero_sec .ng-select {
-  padding: 6px;
+  padding: 10px 6px;
 }
 .hero_sec .hero_input_box {
   background: #fff;
@@ -7614,13 +7614,16 @@ new css */
  box-shadow: none;
  border-radius: 0 !important;
 }
+.faq_sec  .card .card-body p{
+  font-size: 18px;
+}
 .faq_sec  .card_acord{
  border-bottom: 1px solid #dddddd !important;
 }
 
 .faq_sec .card .btn{
   background: none;
-  box-shadow: 0 0 3px #de8b4e !important;
+  box-shadow: 5px 5px 15px rgba(0,0,0,.2) !important;
   padding: 12px;
   border: none;
   color: #fff;
@@ -11460,6 +11463,28 @@ h4 {
   content: "\f054";
   font-family: "FONTAWESOME";
 }
+.work-process .slick-prev:before {
+  content: "\f053";
+  font-family: "FONTAWESOME";
+}
+.work-process .slick-next:before {
+  content: "\f054";
+  font-family: "FONTAWESOME";
+}
+.work-process .slick-next{
+  right: 0;
+}
+.work-space-option .slick-prev:before {
+  content: "\f053";
+  font-family: "FONTAWESOME";
+}
+.work-space-option .slick-next:before {
+  content: "\f054";
+  font-family: "FONTAWESOME";
+}
+.work-space-option .slick-next{
+  right: 0;
+}
 .cowrking_brands .slick-prev:before {
   content: "\f053";
   font-family: "FONTAWESOME";
@@ -11467,6 +11492,9 @@ h4 {
 .cowrking_brands .slick-next:before {
   content: "\f054";
   font-family: "FONTAWESOME";
+}
+.cowrking_brands .slick-next{
+  right: 0;
 }
 
 .slick-prev::before,
