@@ -1,21 +1,36 @@
-<div class="hero hero_sec" [style.backgroundImage]="'url(' + currentImageUrl + ')'">
+
+<div class="hero hero_sec">
+  <div class="backgrounds animateIMG">
+    <div *ngFor="let background of backgrounds; let i = index"
+        [ngStyle]="{'background-image': 'url(' + background + ')'}"
+        [class.active]="i === currentImageIndex">
+    </div>
+</div>
   <div class="hero-slide">
     <div class="hero-content d-flex w-100 align-items-center">
       <div class="col-md-12 text-md-left text-center">
         <div class="col-12">
           <h1 class="hero-title v2">
-            Discover Amazing <span class="hero_heading d-block main_color">{{ currentText }}</span>
+            Discover Amazing 
+            <!-- <div class="text animateIMG">
+                <span *ngFor="let text of texts; let i = index" [class.active]="i === currentIndex">
+                    {{ text }}
+                </span>
+            </div> -->
+            <div class="text animateIMG">
+              <span *ngFor="let text of texts; let i = index" 
+                  [class.fade-out]="i === currentImageIndex && isTextFadingOut"
+                  [class.active]="i === currentTextIndex && !isTextFadingOut">
+                  {{ text }}
+              </span>
+          </div>
           </h1>
-          <p class="hero-desc v2" *ngIf="!isMobile">
-            <span style="background: black; color: white; padding: 0px 10px">
-              Explore our collection of offices and coworking spaces
-            </span>
-          </p>
+
           <p class="hero-desc v2" style="line-height: 20px" *ngIf="isMobile">
             Explore our collection of offices and coworking spaces
           </p>
         </div>
-        <div class="col-lg-12 col-md-12 col-12 mar-top-20 ml-3">
+        <div class="col-lg-10 col-md-12 col-12 mar-top-20 ml-3">
           <form class="hero__form v2">
             <div class="row align-items-center">
               <div class="col-lg-7 col-md-8 col-12 row m-0 hero_input_box p-0" style="justify-content: space-evenly;">
@@ -27,23 +42,23 @@
                   </ng-select>
                 </div>
                 <div class="col-md-6 px-0" style="align-self: center;">
-                <div class="position-relative">
-                  <input class="hero__form-input custom-select" type="text" name="place-event" id="key-word"
-                  (input)="onInputChange($event.target.value)" style="font-family: Poppins, FontAwesome;"
-                  placeholder="Where?" [formControl]="control" [matAutocomplete]="auto" />
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
-                  <ng-container *ngIf="filteredPlaces">
-                    <mat-option *ngFor="let val of filteredPlaces" [value]="val">
-                      {{val}}
-                    </mat-option>
-                  </ng-container>
-                  <ng-container *ngIf="!filteredPlaces.length">
-                    <mat-option>
-                      Location not found
-                    </mat-option>
-                  </ng-container>
-                </mat-autocomplete>
-                </div>
+                  <div class="position-relative">
+                    <input class="hero__form-input custom-select" type="text" name="place-event" id="key-word"
+                      (input)="onInputChange($event.target.value)" style="font-family: Poppins, FontAwesome;"
+                      placeholder="Where?" [formControl]="control" [matAutocomplete]="auto" />
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
+                      <ng-container *ngIf="filteredPlaces">
+                        <mat-option *ngFor="let val of filteredPlaces" [value]="val">
+                          {{val}}
+                        </mat-option>
+                      </ng-container>
+                      <ng-container *ngIf="!filteredPlaces.length">
+                        <mat-option>
+                          Location not found
+                        </mat-option>
+                      </ng-container>
+                    </mat-autocomplete>
+                  </div>
                 </div>
               </div>
               <div class="col-md-auto col-12">
@@ -57,8 +72,6 @@
     </div>
   </div>
 </div>
-
-
 
 <div class="container-fluid Spaces_box section-padding">
   <div class="container">
@@ -84,7 +97,7 @@
         <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
           <div class="space_img_box position-relative">
             <div class="img-container">
-            <img src="assets/images/managed-offices.webp" alt="" class="img-fluid">
+              <img src="assets/images/managed-offices.webp" alt="" class="img-fluid">
             </div>
             <div class="space_txt position-absolute">
               <h5 class="text-white m-0">Managed Office</h5>
@@ -258,7 +271,8 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-4">
-        <h2 class="section-title v1">Explore India's Premier Network of <span class="main_color">Coworking Spaces</span></h2>
+        <h2 class="section-title v1">Explore India's Premier Network of <span class="main_color">Coworking Spaces</span>
+        </h2>
       </div>
     </div>
     <div class="row h-100">
@@ -269,7 +283,7 @@
               src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
               class="w-100 img-fluid" />
             <div class="city_txt">
-              <div class="text-white">NEW!</div>
+   
               <h2 class="text-white m-0 custom-lh">Vancouver</h2>
               <p class="text-white m-0">Explore spaces in London</p>
             </div>
@@ -288,144 +302,144 @@
                       src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
-                      <div class="text-white">NEW!</div>
+           
                       <h3 class="text-white m-0">Vancouver</h3>
                     </div>
                   </div>
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-            <a href="#">
-              <div class="city-img-box position-relative">
-                <img
-                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/la"
-                  class="w-100 img-fluid" />
-                <div class="city_txt">
-                  <div class="text-white">NEW!</div>
-                  <h3 class="text-white m-0">Vancouver</h3>
-                </div>
-              </div>
-            </a>
-              </div>
-            </div>
-          </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="row">
-              <div class="col-12 mb-1 px-2">
-            <a href="#">
-              <div class="city-img-box position-relative">
-                <img
-                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/toronto-v2"
-                  class="w-100 img-fluid" />
-                <div class="city_txt">
-                  <div class="text-white">NEW!</div>
-                  <h3 class="text-white m-0">Vancouver</h3>
-                </div>
-              </div>
-            </a>
-              </div>
-              <div class="col-12 mb-1 px-2">
-               <a href="#">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/sf"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/la"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
                   </div>
-                </div>
-               </a>
+                </a>
               </div>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-            <a href="#">
-              <div class="city-img-box position-relative">
-                <img
-                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/chicago"
-                  class="w-100 img-fluid" />
-                <div class="city_txt">
-                  <div class="text-white">NEW!</div>
-                  <h3 class="text-white m-0">Vancouver</h3>
-                </div>
-              </div>
-            </a>
-              </div>
-              <div class="col-12 mb-1 px-2">
-           <a href="#">
-            <div class="city-img-box position-relative">
-              <img
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/denver"
-                class="w-100 img-fluid" />
-              <div class="city_txt">
-                <div class="text-white">NEW!</div>
-                <h3 class="text-white m-0">Vancouver</h3>
-              </div>
-            </div>
-           </a>
-              </div>
-            </div>
-          </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="row">
-              <div class="col-12 mb-1 px-2">
-               <a href="#">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/toronto-v2"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
                   </div>
-                </div>
-               </a>
+                </a>
               </div>
               <div class="col-12 mb-1 px-2">
-             <a href="#">
-              <div class="city-img-box position-relative">
-                <img
-                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                  class="w-100 img-fluid" />
-                <div class="city_txt">
-                  <div class="text-white">NEW!</div>
-                  <h3 class="text-white m-0">Vancouver</h3>
-                </div>
-              </div>
-             </a>
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/sf"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-              <a href="#">
-                <div class="city-img-box position-relative">
-                  <img
-                    src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                    class="w-100 img-fluid" />
-                  <div class="city_txt">
-                    <div class="text-white">NEW!</div>
-                    <h3 class="text-white m-0">Vancouver</h3>
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/chicago"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
               </div>
               <div class="col-12 mb-1 px-2">
-            <a href="#">
-              <div class="city-img-box position-relative">
-                <img
-                  src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
-                  class="w-100 img-fluid" />
-                <div class="city_txt">
-                  <div class="text-white">NEW!</div>
-                  <h3 class="text-white m-0">Vancouver</h3>
-                </div>
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/denver"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
+                  </div>
+                </a>
               </div>
-            </a>
+            </div>
+          </div>
+          <div ngxSlickItem class="swiper-slide popular-item slide">
+            <div class="row">
+              <div class="col-12 mb-1 px-2">
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-12 mb-1 px-2">
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div ngxSlickItem class="swiper-slide popular-item slide">
+            <div class="row">
+              <div class="col-12 mb-1 px-2">
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-12 mb-1 px-2">
+                <a href="#">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/cities/vancouver"
+                      class="w-100 img-fluid" />
+                    <div class="city_txt">
+           
+                      <h3 class="text-white m-0">Vancouver</h3>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
@@ -440,11 +454,12 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-9 col-12 text-center mb-4">
-        <h2 class="section-title v1">With <span class="main_color">1800+</span> Workspace Options, We have the Right Space for Every Team</h2>
+        <h2 class="section-title v1">With <span class="main_color">1800+</span> Workspace Options, We have the Right
+          Space for Every Team</h2>
       </div>
     </div>
-    <div class="col-12">
-      <ngx-slick-carousel class="carousel workspace_carousel" #workSpaceSlider="slick-carousel"
+    <div class="">
+      <ngx-slick-carousel class="carousel workspace_carousel p-0" #workSpaceSlider="slick-carousel"
         [config]="workSpaceConfig" responsive="breakpoints">
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
@@ -585,7 +600,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-lg-10 col-md-10 col-12">
+      <div class="col-lg-12 col-md-12 col-12">
         <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig"
           responsive="breakpoints">
           <div ngxSlickItem class="swiper-slide popular-item slide">
@@ -631,7 +646,8 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-6 col-12">
-        <h2 class="section-title" style="font-weight: 500;">Find and <span class="main_color">Book</span> Your Perfect Workspace in 4 Easy Steps</h2>
+        <h2 class="section-title" style="font-weight: 500;">Find and <span class="main_color">Book</span> Your Perfect
+          Workspace in 4 Easy Steps</h2>
         <div class="space_list mt-3">
           <div class="list_items position-relative px-4 py-3 mb-2">
             <div><span class="space_count">1</span></div>
@@ -672,11 +688,12 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-4">
-        <h2 class="section-title v1">India's Premier Marketplace for <span class="main_color">Flexible Workspaces</span></h2>
+        <h2 class="section-title v1">India's Premier Marketplace for <span class="main_color">Flexible Workspaces</span>
+        </h2>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-lg-10 col-md-10 col-12">
+      <div class="col-lg-12 col-md-12 col-12">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-12">
             <div class="count_box text-center p-4">
@@ -699,7 +716,7 @@
           <div class="col-lg-3 col-md-6 col-12">
             <div class="count_box text-center p-4">
               <h2 class="main_color custom-lh mb-1">25 million+</h2>
-              <h5 class=" custom-lh  m-0">Square Feet of Coworking Options</h5>
+              <h5 class=" custom-lh  m-0">Sqft of Office Space Options</h5>
             </div>
           </div>
         </div>
@@ -827,7 +844,7 @@
         <div class="team_box position-relative px-4 py-2 bg-white">
           <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
           <h5 class="mb-0">Personalized Tours </h5>
-          <p>Visit only the spaces that match your criteria—saving you time and effort.</p>
+          <p>Visit spaces that match your criteria—saving you time and effort.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
@@ -936,12 +953,7 @@
             </ngx-slick-carousel>
           </div>
         </div>
-        <div class="slider-btn v1 popular-next style2" (click)="nextTestimonial()">
-          <i class="ion-arrow-right-c"></i>
-        </div>
-        <div class="slider-btn v1 popular-prev style2" (click)="prevTestimonial()">
-          <i class="ion-arrow-left-c"></i>
-        </div>
+    
       </div>
     </div>
   </div>
@@ -1074,13 +1086,26 @@
   </div>
 </div> -->
 
+<div class="container-fluid earn_sec section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+       <div class="col-12 text-center py-3">
+        <h2 class="text-white mb-2">Ready to move-in Coworking Spaces in Mumbai</h2>
+        <p class="text-white">Our workspace experts will get in touch to help you with your requirements.</p>
+         <div class="get_btn text-center mt-4">
+           <button type="button" class="btn custum-btn" style="border-radius: 6px;font-size: 15px;">Request Callback</button>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="container-fluid faq_sec">
+
+<div class="container-fluid faq_sec section-padding">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-4">
         <h2 class="section-title v1">Frequently Asked Question</h2>
-        <p>Addressing common questions and concerns about Coworking Spaces in Mumbai</p>
       </div>
     </div>
     <div class="row">
@@ -1098,7 +1123,7 @@
 
             <div id="collapseOne" class="collapsed show" aria-labelledby="headingOne" data-parent="#accordionExample">
               <div class="card-body">
-                Listing is free; Flexo charges a small commission per booking.
+                <p> Listing is free; Flexo charges a small commission per booking.</p>
               </div>
             </div>
           </div>
@@ -1120,7 +1145,7 @@
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
               <div class="card-body">
-                Accept or decline within 24 hours; users will be notified instantly.
+                <p> Accept or decline within 24 hours; users will be notified instantly.</p>
               </div>
             </div>
           </div>
@@ -1144,7 +1169,7 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
               <div class="card-body">
-                Absolutely! Highlight key amenities, unique features, and more.
+                <p> Absolutely! Highlight key amenities, unique features, and more.</p>
               </div>
             </div>
           </div>
@@ -1155,7 +1180,19 @@
   </div>
 </div>
 
-
+<div class="container-fluid become_host section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+       <div class="col-12 text-center py-3">
+        <h2 class=" mb-2">Share your space and start earning</h2>
+        <p class="">List for free, set your price, and rest assured with our $1M liability insurance</p>
+         <div class="get_btn text-center mt-4">
+           <button type="button" class="btn custum-btn" style="border-radius: 6px;font-size: 15px;">Become a host</button>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <div class="location_model">

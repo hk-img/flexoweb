@@ -33,29 +33,31 @@ export class HomeComponent {
   powai = 'assets/images/category/Powai.jpg';
   thane = 'assets/images/category/Thane.jpg';
   bkc = 'assets/images/category/BKC.jpg';
-  currentText: string = 'Office Spaces';  // Initial Text
-  currentImageUrl: string = '';  // The background image URL
+  backgrounds: string[] = [
+    '../../../assets/images/hero-1.webp',
+    '../../../assets/images/hero-2.webp',
+    '../../../assets/images/hero-3.webp',
+    '../../../assets/images/hero-4.webp',
+  ];
 
-  imageIndex: number = 0; // Track the current background image index
-
-  // Define text for each image
-  heroTexts = [
+  texts: string[] = [
     'Office Spaces',
     'Coworking Spaces',
     'Private Offices',
     'Shared Workspaces'
   ];
 
-  // Background image URLs for slideshow
-  images = [
-    'https://web.archive.org/web/20211221170236///img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive/homepage_images/hero_images/1-hero',
-    'https://web.archive.org/web/20211221170236///img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive/homepage_images/hero_images/5-hero',
-    'https://web.archive.org/web/20211221170236///img.peerspace.com/image/upload/f_auto,q_auto,dpr_auto,fl_progressive/homepage_images/hero_images/Party.png',
-    'https://homepress.stylemixthemes.com/wp-content/uploads/revslider/home-slider/slide_2-scaled.jpg'
-  ];
+  currentImageIndex: number = 0;
+  currentTextIndex: number = 0;
+  isTextFadingOut: boolean = false;
+  
+  imageDuration: number = 5000; // Duration for image (in ms)
+  textDelay: number = 900; // Delay for text fade in/out (in ms)
 
-  // Define the interval time for the text/image change
-  changeInterval = 3000; // in ms (8 seconds) // in ms (8 seconds)
+  intervalId: any;
+
+
+ 
   @ViewChild('slickReviewsModal', { static: false })
   slickReviewsModal: SlickCarouselComponent;
   public reviewsConfig = {
@@ -131,7 +133,9 @@ export class HomeComponent {
   public testimonialConfig = {
     slidesToShow: 3,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
+    prevArrow: '<button class="slick-prev">></button>',
+    nextArrow: '<button class="slick-next"><</button>',
     variableHeight: false,
     autoplay: true,
     autoplaySpeed: 1000,
@@ -179,11 +183,13 @@ export class HomeComponent {
   public workSpaceConfig = {
     slidesToShow: 4,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
+    prevArrow: '<button class="slick-prev">></button>',
+    nextArrow: '<button class="slick-next"><</button>',
     variableHeight: false,
     autoplay: false,
     autoplaySpeed: 1000,
-    dots: true,
+    dots: false,
     swipeToSlide: true,
     infinite: true,
     responsive: [
@@ -224,7 +230,7 @@ export class HomeComponent {
   @ViewChild('coworkBrandSlider', { static: false })
   coworkBrandSlider: SlickCarouselComponent;
   public brandConfig = {
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
     prevArrow: '<button class="slick-prev">></button>',
@@ -241,7 +247,7 @@ export class HomeComponent {
       {
         breakpoint: 1167,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
         },
       },
     ],
@@ -302,13 +308,13 @@ export class HomeComponent {
 
 
 
-  nextTestimonial() {
-    this.slickTestimonialModal.slickNext();
-  }
+  // nextTestimonial() {
+  //   this.slickTestimonialModal.slickNext();
+  // }
 
-  prevTestimonial() {
-    this.slickTestimonialModal.slickPrev();
-  }
+  // prevTestimonial() {
+  //   this.slickTestimonialModal.slickPrev();
+  // }
 
   constructor(
     private router: Router,
@@ -335,11 +341,7 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    this.currentImageUrl = this.images[0];
-    this.currentText = this.heroTexts[0];
-
-    // Start the slideshow
-    this.startSlideshow();
+    this.startCarousel();
     this.getCoords();
     this.getSpacecategory();
     if (window.innerWidth < 500) {
@@ -356,19 +358,25 @@ export class HomeComponent {
     this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
   }
 
-  startSlideshow() {
-    setInterval(() => {
-      // Change the image
-      this.currentImageUrl = this.images[this.imageIndex];
-
-      // Change the text
-      this.currentText = this.heroTexts[this.imageIndex];
-
-      // Update the image index for next iteration
-      this.imageIndex = (this.imageIndex + 1) % this.images.length;
-    }, this.changeInterval);
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId); // Cleanup on component destroy
   }
-  
+
+  startCarousel(): void {
+    this.intervalId = setInterval(() => {
+      // Step 1: Trigger text fade-out
+      this.isTextFadingOut = true;
+
+      // Step 2: Wait for textDelay before updating text
+      setTimeout(() => {
+        this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
+        this.isTextFadingOut = false;
+      }, this.textDelay);
+
+      // Step 3: Update image index after full duration
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.backgrounds.length;
+    }, this.imageDuration);
+  }
 
   getSpacecategory() {
     this.spaceService.getSpaceCategory().subscribe((res: any) => {
