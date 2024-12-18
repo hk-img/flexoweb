@@ -126,6 +126,13 @@ h6 {
   box-shadow: none;
 }
 
+.header_btn{
+  border: 2px solid #f76900;
+  background: #fff;
+  border-radius: 30px;
+  padding: 8px 22px;
+  color: #f76900 !important;
+}
 .no-pad-left {
   padding-left: 0 !important;
 }

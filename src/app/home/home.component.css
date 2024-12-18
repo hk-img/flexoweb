@@ -418,19 +418,32 @@ mark {
   align-items: center;
   box-shadow: 0 0 3px #f76900;
 }
-
+::ng-deep .ng-select .ng-select-container{
+  box-shadow: none !important;
+}
+::ng-deep .ng-select .ng-select-container:focus{
+  box-shadow: none !important;
+}
+::ng-deep .ng-select .ng-select-container:hover{
+  box-shadow: none !important;
+}
 
 
 .hero_sec {
   width: 100%;
+  position: relative;
+  height: calc(100dvh - 82px);
 }
 
 .hero_sec .hero-content {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 150px;
+}
+
+.hero_sec .hero-slide{
+   height: 100%;
 }
 
 
@@ -440,7 +453,7 @@ mark {
   left: 0;
   top: 0;
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
