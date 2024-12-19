@@ -90,6 +90,7 @@ mark {
   height: 55px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 ::ng-deep .hero_sec .ng-select  .ng-placeholder{
   color: #000 !important;
@@ -360,8 +361,12 @@ mark {
    font-size: 40px;
 }
 
+.trusted_logos img{
+  height: 56px;
+}
+
 .why_choose {
-  background-image: url("//img.peerspace.com/image/upload/f_auto,q_auto,fl_progressive,c_fill,ar_3:2,h_1000/v1527030305/new_host_images/host-couple.jpg");
+  background-image: url("../../assets/images/why-choose-flexo.webp");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -385,6 +390,9 @@ mark {
   background: #0000002b;
   backdrop-filter: blur(6px);
   transition:  all 500ms;
+}
+.why_choose .whychos_box .choose_icon img{
+  height: 55px;
 }
 .why_choose .whychos_box:hover{
   transform: translateY(-10px);
@@ -510,11 +518,21 @@ mark {
 
 
 .become_host{
-  background-image: url('https://web.archive.org/web/20210608161249/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/c_fill,w_1500/v1/homepage_images/banners/host-banner.jpg');
+  background-image: url('../../assets/images/become-a-host.webp');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
  }
+
+ .become_host::before {
+  position: absolute;
+  content: "";
+  background: #000000a3;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
  

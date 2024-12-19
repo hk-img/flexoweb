@@ -212,6 +212,10 @@
   z-index: 2;
 }
 
+.detail_head{
+  font-size: 1.3rem;
+}
+
 .gallery img {
   vertical-align: middle;
   border-style: none;

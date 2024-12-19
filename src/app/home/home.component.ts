@@ -34,17 +34,21 @@ export class HomeComponent {
   thane = 'assets/images/category/Thane.jpg';
   bkc = 'assets/images/category/BKC.jpg';
   backgrounds: string[] = [
-    'assets/images/hero-1.webp',
-    'assets/images/hero-2.webp',
-    'assets/images/hero-3.webp',
-    'assets/images/hero-4.webp',
+    'assets/images/coworking-space.webp',
+    'assets/images/managed-offices.webp',
+    'assets/images/meeting-rooms.webp',
+    'assets/images/desk-spaces.webp',
+    'assets/images/private-cabins.webp',
+    'assets/images/private-office.webp',
   ];
 
   texts: string[] = [
-    'Office Spaces',
     'Coworking Spaces',
+    'Managed Offices',
+    'Meeting Rooms',
+    'Desk Spaces',
+    'Private Cabins',
     'Private Offices',
-    'Shared Workspaces'
   ];
 
   currentImageIndex: number = 0;
@@ -130,27 +134,59 @@ export class HomeComponent {
 
   @ViewChild('slickTestimonialModal', { static: false })
   slickTestimonialModal: SlickCarouselComponent;
+  
   public testimonialConfig = {
-    slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToShow: 3, 
     arrows: true,
-    prevArrow: '<button class="slick-prev">></button>',
-    nextArrow: '<button class="slick-next"><</button>',
+    prevArrow: '<button class="slick-prev"></button>',
+    nextArrow: '<button class="slick-next"></button>',
     variableHeight: false,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 3000, 
     dots: false,
     swipeToSlide: true,
     infinite: true,
     responsive: [
       {
-        breakpoint: 1167,
+        breakpoint: 1167, 
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 1024, 
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 480, 
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          arrows: false, 
+          dots: true, 
         },
       },
     ],
   };
+  
 
   @ViewChild('citySlickSlider', { static: false })
   citySlickSlider: SlickCarouselComponent;
@@ -173,10 +209,33 @@ export class HomeComponent {
         breakpoint: 1167,
         settings: {
           slidesToShow: 3,
+          arrows: true,
+          dots: false,
+
+        },
+      },
+      {
+        breakpoint: 1024, 
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 2,
         },
       },
     ],
   };
+
+  
 
   @ViewChild('workSpaceSlider', { static: false })
   workSpaceSlider: SlickCarouselComponent;
@@ -197,6 +256,24 @@ export class HomeComponent {
         breakpoint: 1167,
         settings: {
           slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 1024, 
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 1,
         },
       },
     ],
@@ -224,6 +301,24 @@ export class HomeComponent {
           slidesToShow: 6,
         },
       },
+      {
+        breakpoint: 1024, 
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 2,
+        },
+      },
     ],
   };
   
@@ -248,6 +343,24 @@ export class HomeComponent {
         breakpoint: 1167,
         settings: {
           slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 1024, 
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 2,
         },
       },
     ],
