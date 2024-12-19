@@ -90,6 +90,7 @@ mark {
   height: 55px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 ::ng-deep .hero_sec .ng-select  .ng-placeholder{
   color: #000 !important;
