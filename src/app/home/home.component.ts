@@ -34,12 +34,13 @@ export class HomeComponent {
   thane = 'assets/images/category/Thane.jpg';
   bkc = 'assets/images/category/BKC.jpg';
   backgrounds: string[] = [
-    'assets/images/coworking-space.webp',
+    'assets/images/coworking-spaces.webp',
     'assets/images/managed-offices.webp',
     'assets/images/meeting-rooms.webp',
     'assets/images/desk-spaces.webp',
     'assets/images/private-cabins.webp',
-    'assets/images/private-office.webp',
+    'assets/images/private-offices.webp',
+    'assets/images/workspaces.webp',
   ];
 
   texts: string[] = [
@@ -49,6 +50,7 @@ export class HomeComponent {
     'Desk Spaces',
     'Private Cabins',
     'Private Offices',
+    'Workspaces',
   ];
 
   currentImageIndex: number = 0;

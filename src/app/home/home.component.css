@@ -2,7 +2,9 @@
   padding-left: 12px;
   padding-right: 12px;
 }
-
+.slick-list{
+  border-radius: 6px !important;
+}
 .work-space-option .slide{
   padding-left: 5px;
   padding-right: 5px;
@@ -246,10 +248,15 @@ mark {
 }
 .cities_sec .city-img-box .city_txt {
   position: absolute;
-  bottom: 9px;
-  left: 9px;
+  bottom: 0px;
+  left: 0px;
+  right: 0;
+  padding: 50px 50px 5px 10px;
+  background: linear-gradient(18deg, #000000c4, transparent, transparent);
 }
-
+.cities_sec .slick-list{
+  border-radius: 6px !important;
+}
 .work-space-option .workspace_carousel .workspace_box {
   overflow: hidden;
   height: 100%;
@@ -276,7 +283,7 @@ mark {
   background: rgba(0, 0, 0, 0.5);
   margin: 10px;
   position: absolute;
-  bottom: 7px;
+  bottom: 0px;
   left: 0;
   border-radius: 5px;
   padding: 10px 15px;
@@ -362,7 +369,7 @@ mark {
 }
 
 .trusted_logos img{
-  height: 56px;
+  height: 75px;
 }
 
 .why_choose {
@@ -375,7 +382,7 @@ mark {
   position: relative;
 }
 .why_choose::before {
-  background: #0000008a;
+  background: #00000066;
   position: absolute;
   content: "";
   top: 0;
@@ -500,6 +507,7 @@ mark {
   opacity: 0;
   transition: opacity 1s ease-in-out;
   white-space: nowrap;
+  text-shadow: 0px 0px 40px black;
 }
 
 
@@ -520,16 +528,20 @@ mark {
 .become_host{
   background-image: url('../../assets/images/become-a-host.webp');
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
- }
+  justify-content: center;
+  aspect-ratio: 1024 / 259;
+  display: flex;
+  flex-direction: column;
+}
 
  .become_host::before {
   position: absolute;
   content: "";
-  background: #000000a3;
+  background: #00000061;
   width: 100%;
   height: 100%;
   top: 0;
