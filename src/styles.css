@@ -7635,19 +7635,22 @@ new css */
 }
 
 .earn_sec {
-  background-image: url("./assets/images/ready-to-move-in.webp");
+  background-image: url("./assets/images/ready-to-move.webp");
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
-  background-attachment: fixed;
+  justify-content: center;
+  aspect-ratio: 1024 / 259;
+  display: flex;
+  flex-direction: column;
 }
 
 .earn_sec::before {
   position: absolute;
   content: "";
-  background: #000000a3;
+  background: #00000061;
   width: 100%;
   height: 100%;
   top: 0;
@@ -11031,6 +11034,9 @@ h4 {
   .hero__form-input {
     margin-bottom: 5px;
   }
+  .cities_sec .city-img-box img{
+    height: 100% !important;
+  }
   .Spaces_box .space_img_box .space_txt {
     width: auto !important;
   }
@@ -11067,6 +11073,9 @@ h4 {
   .workspace_steps .space_list .list_items .space_count {
     position: static !important;
     margin-bottom: 10px;
+  }
+  .choose_share .share_content{
+    margin-left: 0 !important;
   }
   .workspace_steps .workspace_img img {
     height: 100% !important;
@@ -11118,6 +11127,14 @@ h4 {
   }
   .image-container {
     width: 100% !important;
+  }
+  .earn_sec {
+    background-size: cover;
+    aspect-ratio: 0;
+  }
+  .become_host{
+    background-size: cover;
+    aspect-ratio: 0;
   }
 }
 
