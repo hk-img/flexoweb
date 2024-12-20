@@ -17,11 +17,13 @@ export class ListWithUsComponent implements OnInit {
   public spaceListConfig = {
     slidesToShow: 4,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
+    prevArrow: '<button class="slick-prev">></button>',
+    nextArrow: '<button class="slick-next"><</button>',
     variableHeight: false,
     autoplay: true,
     autoplaySpeed: 1000,
-    dots: true,
+    dots: false,
     swipeToSlide: true,
     infinite: true,
     responsive: [
@@ -29,6 +31,12 @@ export class ListWithUsComponent implements OnInit {
         breakpoint: 1167,
         settings: {
           slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
         },
       },
       {

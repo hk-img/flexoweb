@@ -11136,6 +11136,9 @@ h4 {
     background-size: cover !important;
     aspect-ratio: 0 !important;
   }
+  .succes_story_sec .success_box .success_content .success_txt {
+    font-size: 15px !important;
+}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
@@ -11545,6 +11548,18 @@ h4 {
   content: "\f054";
   font-family: "FONTAWESOME";
 }
+.space_list_sec .slick-prev:before {
+  content: "\f053";
+  font-family: "FONTAWESOME";
+}
+
+.space_list_sec .slick-next:before {
+  content: "\f054";
+  font-family: "FONTAWESOME";
+}
+.space_list_sec .slick-next {
+  right: 0;
+}
 .work-process .slick-next {
   right: 0;
 }
@@ -11558,6 +11573,9 @@ h4 {
 }
 .work-space-option .slick-next {
   right: 0;
+}
+.work-space-option .slick-prev {
+  left: -22px;
 }
 .cowrking_brands .slick-prev:before {
   content: "\f053";
