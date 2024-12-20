@@ -11133,8 +11133,8 @@ h4 {
     aspect-ratio: 0;
   }
   .become_host{
-    background-size: cover;
-    aspect-ratio: 0;
+    background-size: cover !important;
+    aspect-ratio: 0 !important;
   }
 }
 
