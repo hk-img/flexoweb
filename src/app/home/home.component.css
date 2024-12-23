@@ -46,10 +46,12 @@
   color: #f76900;
   transition: all 500ms;
   background: #0000006b;
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  padding: 2px 8px;
+  padding: 6px 8px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 14px;
+  border-radius: 10px;
 }
 .flex_btn .btn:hover {
   text-decoration: underline;
@@ -88,7 +90,7 @@ mark {
   font-size: 16px;
   cursor: pointer;
   padding: 6px 32px;
-  border-radius: 4px;
+  border-radius: 15px;
   height: 55px;
   display: flex;
   align-items: center;
@@ -369,7 +371,7 @@ mark {
 }
 
 .trusted_logos img{
-  height: 75px;
+  height: 140px;
 }
 
 .why_choose {
@@ -397,6 +399,7 @@ mark {
   background: #0000002b;
   backdrop-filter: blur(6px);
   transition:  all 500ms;
+  height: 100%;
 }
 .why_choose .whychos_box .choose_icon img{
   height: 55px;
