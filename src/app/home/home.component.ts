@@ -134,56 +134,91 @@ export class HomeComponent {
   control = new FormControl('');
   filteredPlaces: any;
 
+  // @ViewChild('slickTestimonialModal', { static: false })
+  // slickTestimonialModal: SlickCarouselComponent;
+  
+  // public testimonialConfig = {
+  //   slidesToShow: 3, 
+  //   arrows: true,
+  //   prevArrow: '<button class="slick-prev">></button>',
+  //   nextArrow: '<button class="slick-next"><</button>',
+  //   variableHeight: false,
+  //   autoplay: true,
+  //   autoplaySpeed: 3000, 
+  //   dots: false,
+  //   swipeToSlide: true,
+  //   infinite: true,
+  //   responsive: [
+  //     {
+  //       breakpoint: 1167, 
+  //       settings: {
+  //         slidesToShow: 3,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 1024, 
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 1,
+  //         arrows: true,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 768, 
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480, 
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  // };
+
   @ViewChild('slickTestimonialModal', { static: false })
   slickTestimonialModal: SlickCarouselComponent;
-  
   public testimonialConfig = {
-    slidesToShow: 3, 
+    slidesToShow: 3,
+    slidesToScroll: 1,
     arrows: true,
-    prevArrow: '<button class="slick-prev"></button>',
-    nextArrow: '<button class="slick-next"></button>',
+    loop:true,
+    prevArrow: '<button class="slick-prev">></button>',
+    nextArrow: '<button class="slick-next"><</button>',
     variableHeight: false,
-    autoplay: true,
-    autoplaySpeed: 3000, 
+    autoplay: false,
+    autoplaySpeed: 1000,
     dots: false,
     swipeToSlide: true,
     infinite: true,
     responsive: [
       {
-        breakpoint: 1167, 
+        breakpoint: 1167,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-          arrows: true,
         },
       },
       {
         breakpoint: 1024, 
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          arrows: true,
         },
       },
       {
         breakpoint: 768, 
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          arrows: true,
+          slidesToShow: 1,
         },
       },
       {
         breakpoint: 480, 
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          arrows: false, 
-          dots: true, 
         },
       },
     ],
