@@ -23,7 +23,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import { DatePipe } from '@angular/common';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -67,6 +67,7 @@ export const MY_FORMATS = {
 
 
 export function loadGoogleMaps(): () => Promise<void> {
+  if (isPlatformBrowser(this.platformId)) {
   return () =>
     new Promise((resolve, reject) => {
       if (!document.getElementById('googleMapsScript')) {
@@ -84,6 +85,7 @@ export function loadGoogleMaps(): () => Promise<void> {
         resolve(); // Script already loaded
       }
     });
+  }
 }
 
 

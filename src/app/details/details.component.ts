@@ -417,10 +417,11 @@ export class DetailsComponent implements OnInit {
     location?: string
   ) {
     const jsonLdId = 'json-ld-product';
-
-    const existingScript = document.getElementById(jsonLdId);
-    if (existingScript) {
-      existingScript.remove();
+    if (isPlatformBrowser(this.platformId)) {
+      const existingScript = document.getElementById(jsonLdId);
+      if (existingScript) {
+        existingScript.remove();
+      }
     }
 
     const jsonLd: any = {
@@ -452,13 +453,14 @@ export class DetailsComponent implements OnInit {
       jsonLd.offers.availability = "https://schema.org/InStock"
       jsonLd.offers.itemCondition = "https://schema.org/NewCondition"
     }
+    if (isPlatformBrowser(this.platformId)) {
+      const jsonLdScript = document.createElement('script');
+      jsonLdScript.id = jsonLdId;
+      jsonLdScript.type = 'application/ld+json';
+      jsonLdScript.text = JSON.stringify(jsonLd);
 
-    const jsonLdScript = document.createElement('script');
-    jsonLdScript.id = jsonLdId;
-    jsonLdScript.type = 'application/ld+json';
-    jsonLdScript.text = JSON.stringify(jsonLd);
-
-    document.head.appendChild(jsonLdScript);
+      document.head.appendChild(jsonLdScript);
+    }
   }
 
 
@@ -518,7 +520,9 @@ export class DetailsComponent implements OnInit {
     } else {
       this.list_tab = 4;
     }
-    document.getElementById(element_id).scrollIntoView();
+    if (isPlatformBrowser(this.platformId)) {
+      document.getElementById(element_id).scrollIntoView();
+    }
   }
 
   openFacebook() {
@@ -693,7 +697,9 @@ export class DetailsComponent implements OnInit {
   }
 
   goBack() {
-    window.location.href = document.referrer;
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.href = document.referrer;
+    }
   }
 
   alterDescriptionText() {
@@ -1608,12 +1614,12 @@ export class DetailsComponent implements OnInit {
   map: google.maps.Map | undefined;
   loadGoogleMapsScript(): void {
     const scriptId = 'google-maps-script';
-
-    // Avoid adding the script multiple times
-    if (document.getElementById(scriptId)) {
-      this.initializeMap();
-      return;
-    }
+    if (isPlatformBrowser(this.platformId)) {
+      // Avoid adding the script multiple times
+      if (document.getElementById(scriptId)) {
+        this.initializeMap();
+        return;
+      }
 
     const script = document.createElement('script');
     script.id = scriptId;
@@ -1628,6 +1634,7 @@ export class DetailsComponent implements OnInit {
     (window as any).initMap = () => {
       this.initializeMap();
     };
+  }
   }
 
   initializeMap(): void {

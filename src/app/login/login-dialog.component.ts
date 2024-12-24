@@ -1,6 +1,8 @@
 import {
   Component,
-  OnInit
+  Inject,
+  OnInit,
+  PLATFORM_ID
 } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -28,6 +30,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { timer } from 'rxjs/internal/observable/timer';
 import { take } from 'rxjs/operators';
 import { SpaceService } from '../services/space.service';
+import { isPlatformBrowser } from '@angular/common';
 
 enum LoginTypeEnum {
   Mobile = 'Mobile',
@@ -117,6 +120,7 @@ export class LoginDialog implements OnInit {
 	placeholder: string = '';
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
     public dialogRef: MatDialogRef<any>,
     public fb: UntypedFormBuilder,
     public snackBar: MatSnackBar,
@@ -171,6 +175,7 @@ export class LoginDialog implements OnInit {
   }
 
   private initializeIntlTelInput(): void {
+    if (isPlatformBrowser(this.platformId)) {
     const input = document.querySelector("#tel") as HTMLInputElement;
 
     if (input && !this.itiInitialized) {
@@ -224,6 +229,7 @@ export class LoginDialog implements OnInit {
       input3.addEventListener("countrychange", () => this.onCountryChange2(this.iti3));
       this.iti3Initialized = true;
     }
+  }
   }
 
   private destroyIntlTelInput(): void {
@@ -1290,15 +1296,17 @@ export class LoginDialog implements OnInit {
   hidePassword2 = true;
   hidePassword3 = true;
  togglePasswordVisibility(passwordId: string, iconId: string) {
-  const passwordElement = document.getElementById(passwordId) as HTMLInputElement;
-    const iconElement = document.getElementById(iconId);
+  if (isPlatformBrowser(this.platformId)) {
+    const passwordElement = document.getElementById(passwordId) as HTMLInputElement;
+      const iconElement = document.getElementById(iconId);
 
-    if (passwordElement.type === 'password') {
-      passwordElement.type = 'text';
-      iconElement?.classList.replace('fa-eye', 'fa-eye-slash');
-    } else {
-      passwordElement.type = 'password';
-      iconElement?.classList.replace('fa-eye-slash', 'fa-eye');
+      if (passwordElement.type === 'password') {
+        passwordElement.type = 'text';
+        iconElement?.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        passwordElement.type = 'password';
+        iconElement?.classList.replace('fa-eye-slash', 'fa-eye');
+      }
     }
   }
 
