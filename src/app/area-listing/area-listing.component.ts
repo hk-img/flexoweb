@@ -350,7 +350,8 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
   }
 
   shortList(obj) {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
     if (isLoggedIn /* this.logged_in */) {
       this.addRemoveFavorite(obj.id);
       this._memberService.addShortlists(obj.id).then((data) => {
@@ -362,6 +363,7 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
     } else {
       this.openLoginDialog();
     }
+  }
   }
 
   addRemoveFavorite(space_id){

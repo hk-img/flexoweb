@@ -1,5 +1,5 @@
-import { DatePipe } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
+import { Component, EventEmitter, Inject, Output, PLATFORM_ID } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import {
   MatLegacyDialog as MatDialog
@@ -37,6 +37,7 @@ export class CoWorkingVisitScheduleTwoComponent {
   country: any;
   spaceType: string;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
     private fb: UntypedFormBuilder,
     public dialog: MatDialog,
     private spaceService: SpaceService,
@@ -47,7 +48,9 @@ export class CoWorkingVisitScheduleTwoComponent {
   ) {
 
     setTimeout(() => {
+      if (isPlatformBrowser(this.platformId)) {
       this.spaceId = sessionStorage.getItem('space_id');
+      }
     }, 300);
     this.visitDate = localStorage.getItem('coWorkingVisitInfo');
     // this.visitTime = JSON.parse(localStorage.getItem('coWorkingVisitInfo'));

@@ -395,7 +395,9 @@ export class DetailsComponent implements OnInit {
 
     // this.getFaqsBySpaceBy(this.space_id);
     // alert(this.space_id.toString());
+    if (isPlatformBrowser(this.platformId)) {
     sessionStorage.setItem('space_id', this.space_id?.toString());
+    }
     this.coWorkingSchduleVisitForm = this.fb.group({
       visitDate: ['', [Validators.required]],
       visitTime: ['', [Validators.required]],
@@ -799,13 +801,19 @@ export class DetailsComponent implements OnInit {
         this.parkingOptionsValue = this.space_details?.parkingOptionsValue;
 
         this.isShortterm = this.space_details.isShortterm;
+        if (isPlatformBrowser(this.platformId)) {
         sessionStorage.setItem('isShortterm', JSON.stringify(this.isShortterm));
+        }
 
         this.isCoworking = this.space_details.isCoworking;
+        if (isPlatformBrowser(this.platformId)) {
         sessionStorage.setItem('isCoworking', JSON.stringify(this.isCoworking));
+        }
 
         this.isLongterm = this.space_details.isLongterm;
+        if (isPlatformBrowser(this.platformId)) {
         sessionStorage.setItem('isLongterm', JSON.stringify(this.isLongterm));
+        }
 
         this.is_shortlisted = res?.existingfavorite?.favourite ?? false;
 

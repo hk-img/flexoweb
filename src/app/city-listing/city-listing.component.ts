@@ -225,12 +225,12 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
   onHoverSpace(name: string) {
     this.hoveredSpaceId = name;
-    this.updateMarkerPriceColor(name,'black');
+    this.updateMarkerPriceColor(name, 'black');
   }
 
   onLeaveSpace(name: string) {
     this.hoveredSpaceId = null;
-    this.updateMarkerPriceColor(name,'white');
+    this.updateMarkerPriceColor(name, 'white');
   }
 
   ngOnInit(): void {
@@ -239,43 +239,43 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
       this.city_param = this.getOriginalUrlParam(params['city']);
       this.areaName = this.getOriginalUrlParam(params['area'])
-      if(!this.areaName){
+      if (!this.areaName) {
         if (this.spaceType === 'coworking space') {
-        this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['city'])} (${new Date().getFullYear()}) | Compare & Book`);
-        this.metaService.updateTag({
-          name: "description",
-          content: `Book coworking spaces in ${this.getOriginalUrlParam(params['city'])} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.`,
-        });
-      } else if (
-        this.spaceType === 'coworking cafe/restaurant' ||
-        this.spaceType === 'shoot studio' ||
-        this.spaceType === 'recording studio' ||
-        this.spaceType === 'podcast studio' ||
-        this.spaceType === 'activity space' ||
-        this.spaceType === 'sports turf' ||
-        this.spaceType === 'sports venue' ||
-        this.spaceType === 'party space' ||
-        this.spaceType === 'banquet hall' ||
-        this.spaceType === 'gallery' ||
-        this.spaceType === 'classroom' ||
-        this.spaceType === 'private cabin' ||
-        this.spaceType === 'meeting room' ||
-        this.spaceType === 'training room' ||
-        this.spaceType === 'event space'
-      ) {
-        this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour`);
-        this.metaService.updateTag({
-          name: "description",
-          content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} starting from Rs.20000 /hour. View images, amenities, pricing to find the best fit.Explore and book now!.`,
-        });
-      } else {
-        this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['city'])} | Managed Offices`);
-        this.metaService.updateTag({
-          name: "description",
-          content: `Explore offices for rent in ${this.getOriginalUrlParam(params['city'])}. Choose from a wide range of furnished, unfurnished, built-to-suit and managed office options.`,
-        });
-      }
-    }  else if(this.areaName) {
+          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['city'])} (${new Date().getFullYear()}) | Compare & Book`);
+          this.metaService.updateTag({
+            name: "description",
+            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['city'])} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.`,
+          });
+        } else if (
+          this.spaceType === 'coworking cafe/restaurant' ||
+          this.spaceType === 'shoot studio' ||
+          this.spaceType === 'recording studio' ||
+          this.spaceType === 'podcast studio' ||
+          this.spaceType === 'activity space' ||
+          this.spaceType === 'sports turf' ||
+          this.spaceType === 'sports venue' ||
+          this.spaceType === 'party space' ||
+          this.spaceType === 'banquet hall' ||
+          this.spaceType === 'gallery' ||
+          this.spaceType === 'classroom' ||
+          this.spaceType === 'private cabin' ||
+          this.spaceType === 'meeting room' ||
+          this.spaceType === 'training room' ||
+          this.spaceType === 'event space'
+        ) {
+          this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour`);
+          this.metaService.updateTag({
+            name: "description",
+            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} starting from Rs.20000 /hour. View images, amenities, pricing to find the best fit.Explore and book now!.`,
+          });
+        } else {
+          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['city'])} | Managed Offices`);
+          this.metaService.updateTag({
+            name: "description",
+            content: `Explore offices for rent in ${this.getOriginalUrlParam(params['city'])}. Choose from a wide range of furnished, unfurnished, built-to-suit and managed office options.`,
+          });
+        }
+      } else if (this.areaName) {
         if (this.spaceType === 'coworking space') {
           this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['area'])} | Book A Shared Office`);
           this.metaService.updateTag({
@@ -311,7 +311,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             content: `Find office space for rent in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])}. Choose from a variety of furnished, unfurnished, and custom-built options to suit your needs.`,
           });
         }
-    }
+      }
 
       // const titleCase = (str) => str.replace(/\b\S/g, (t) => t.toUpperCase());
 
@@ -326,7 +326,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       const inIndex = segments2.indexOf('in');
       if (inIndex !== -1 && segments2.length > inIndex + 1) {
         this.staticValue = segments2[inIndex + 1];  // Extracts 'longTerm'
-        localStorage.setItem('staticValue', this.staticValue);
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem('staticValue', this.staticValue);
+        }
       }
     });
 
@@ -344,14 +346,15 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.recommended_spaces = message
       }
     );
-
-    if(localStorage.getItem('userDetails')){
-      this.isCoworking = sessionStorage.getItem('isCoworking')
-      const userDetail = localStorage.getItem('userDetails');
-      const userDetailObj = JSON.parse(userDetail);
-      this.userId = userDetailObj.id
-    }else{
-      this.userId = 0
+    if (isPlatformBrowser(this.platformId)) {
+      if (localStorage.getItem('userDetails')) {
+        this.isCoworking = sessionStorage.getItem('isCoworking')
+        const userDetail = localStorage.getItem('userDetails');
+        const userDetailObj = JSON.parse(userDetail);
+        this.userId = userDetailObj.id
+      } else {
+        this.userId = 0
+      }
     }
   }
 
@@ -365,7 +368,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     priceMax: number,
     location?: string
   ) {
-    const jsonLdId = 'json-ld-product'; 
+    const jsonLdId = 'json-ld-product';
 
     const existingScript = document.getElementById(jsonLdId);
     if (existingScript) {
@@ -395,7 +398,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     };
 
     const jsonLdScript = document.createElement('script');
-    jsonLdScript.id = jsonLdId; 
+    jsonLdScript.id = jsonLdId;
     jsonLdScript.type = 'application/ld+json';
     jsonLdScript.text = JSON.stringify(jsonLd);
 
@@ -404,7 +407,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
 
   openInquiryPopUp() {
+    if (isPlatformBrowser(this.platformId)) {
     this.isCoworking = sessionStorage.getItem('isCoworking');
+    }
     let config = new MatDialogConfig();
     config.viewContainerRef = this.inquiryVisit_viewContainerRef;
     config.panelClass = 'enq-mod-c';
@@ -609,43 +614,43 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   element.rating_array.push(r);
                 }
                 let price;
-                
-            if (this.type === 'coworking') {
-              if (element.flexible_desk_price === null) {
-                price = element.privatecabin_price
-              } else{
-                price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price 
-              }
-            } else {
-              price = this.formatCurrency(element.originalPrice) 
-            }
-                // let duration = this.type === 'longterm' ? 'month' : this.type === 'shortterm' ? 'hour' : this.type === 'coworking' && element?.originalPrice > 0 ? 'day': 'seat'
-            let obj = {
-              position: {
-                lat: element.lat,
-                lng: element.longi,
-              },
-              title: element.name,
-              options: {
-                price:price,
-                // duration:duration,
-                draggable: false,
-                icon: {
-                  url: this.createPriceTagIcon(`₹${price}`,'white'),
-                  scaledSize: {
-                    width: `₹${price}`.length * 10 + 20,
-                    height: 30, 
+
+                if (this.type === 'coworking') {
+                  if (element.flexible_desk_price === null) {
+                    price = element.privatecabin_price
+                  } else {
+                    price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
                   }
+                } else {
+                  price = this.formatCurrency(element.originalPrice)
                 }
-              },
-              info: {
-                map_image_url:
-                  this.aws_base_url + element.id + '/' + element.images[0],
-                name: element.name,
-                url: '/details/' + element.link_name,
-              },
-            };
-            this.markersData.push(obj);
+                // let duration = this.type === 'longterm' ? 'month' : this.type === 'shortterm' ? 'hour' : this.type === 'coworking' && element?.originalPrice > 0 ? 'day': 'seat'
+                let obj = {
+                  position: {
+                    lat: element.lat,
+                    lng: element.longi,
+                  },
+                  title: element.name,
+                  options: {
+                    price: price,
+                    // duration:duration,
+                    draggable: false,
+                    icon: {
+                      url: this.createPriceTagIcon(`₹${price}`, 'white'),
+                      scaledSize: {
+                        width: `₹${price}`.length * 10 + 20,
+                        height: 30,
+                      }
+                    }
+                  },
+                  info: {
+                    map_image_url:
+                      this.aws_base_url + element.id + '/' + element.images[0],
+                    name: element.name,
+                    url: '/details/' + element.link_name,
+                  },
+                };
+                this.markersData.push(obj);
               });
               console.log(this.markersData);
               this.center = this.calculateCenter(this.markersData)
@@ -691,23 +696,23 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
         this.nearBySpaces.next(res.faqs);
         this.spaces_list = Object.assign([], res.data);
-        console.log(this.type,this.spaces_list, "areaNotAvailable");
-        if(this.spaces_list.length){
+        console.log(this.type, this.spaces_list, "areaNotAvailable");
+        if (this.spaces_list.length) {
           const spaceType = this.spaces_list[0].spaceType
           const cityName = this.spaces_list[0].contact_city_name
           const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
           const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
           const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
-          if (this.type === 'coworking'){
-          const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
-          const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-          this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`,minPrice,maxPrice)
-        } else if (this.type === 'shortterm'){
+          if (this.type === 'coworking') {
+            const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+            const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
+            this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
+          } else if (this.type === 'shortterm') {
             this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
-        } else {
+          } else {
             this.updateJsonLd(spaceType, cityName, imageUrl, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
+          }
         }
-      }
         this.recommended_spaces = Object.assign([], res.recommended_spaces);
         this.space_count = res.space_count;
         if (this.spaces_list.length) {
@@ -736,12 +741,12 @@ export class CityListingComponent implements OnInit, AfterViewInit {
               element.rating_array.push(r);
             }
             let price;
-            
+
             if (this.type === 'coworking') {
               if (element.flexible_desk_price === null) {
                 price = element.privatecabin_price
-              } else{
-                price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price 
+              } else {
+                price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
               }
             } else {
               price = this.formatCurrency(element.originalPrice)
@@ -754,14 +759,14 @@ export class CityListingComponent implements OnInit, AfterViewInit {
               },
               title: element.name,
               options: {
-                price:price,
+                price: price,
                 // duration:duration,
                 draggable: false,
                 icon: {
-                  url: this.createPriceTagIcon(`₹${price}`,'white'),
+                  url: this.createPriceTagIcon(`₹${price}`, 'white'),
                   scaledSize: {
                     width: `₹${price}`.length * 10 + 20,
-                    height: 30, 
+                    height: 30,
                   }
                 }
               },
@@ -801,7 +806,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 }
               }
             }
-          });                                                                                                                                                                                                                                                                                                   
+          });
         }
         this.ngZone.run(() => this.cdRef.detectChanges());
         this.shimming = false;
@@ -809,32 +814,32 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     }
 
   }
-  
+
   updateMarkerPriceColor(name: string, color: string) {
     const markerIndex = this.markersData.findIndex(marker => marker.title === name);
-    
-    if (markerIndex !== -1) {
-        const newIconUrl = this.createPriceTagIcon(`₹${this.markersData[markerIndex].options.price}`, color);
 
-        this.markersData[markerIndex] = {
-            ...this.markersData[markerIndex],
-            options: {
-                ...this.markersData[markerIndex].options,
-                icon: {
-                    url: newIconUrl,
-                    scaledSize: {
-                      width: `₹${this.markersData[markerIndex].options.price}`.length * 10 + 20,
-                      height: 30, 
-                    }
-                }
+    if (markerIndex !== -1) {
+      const newIconUrl = this.createPriceTagIcon(`₹${this.markersData[markerIndex].options.price}`, color);
+
+      this.markersData[markerIndex] = {
+        ...this.markersData[markerIndex],
+        options: {
+          ...this.markersData[markerIndex].options,
+          icon: {
+            url: newIconUrl,
+            scaledSize: {
+              width: `₹${this.markersData[markerIndex].options.price}`.length * 10 + 20,
+              height: 30,
             }
-        };
+          }
+        }
+      };
     }
   }
 
   createPriceTagIcon(price: string, textColor: string): string {
     const textLength = price.length;
-    const dynamicWidth = textLength * 10 +20;
+    const dynamicWidth = textLength * 10 + 20;
     const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="${dynamicWidth}" height="30">
       <rect x="0" y="0" width="${dynamicWidth}" height="30" rx="20" style="fill:#F76900;" />
@@ -846,10 +851,10 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
   }
 
-   formatCurrency(value) {
-  if (isNaN(value)) return 'Invalid number';
-  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+  formatCurrency(value) {
+    if (isNaN(value)) return 'Invalid number';
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   shortList(obj, e?: MouseEvent) {
     e.stopPropagation()

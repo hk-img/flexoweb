@@ -1,5 +1,5 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Router } from '@angular/router';
@@ -32,6 +32,7 @@ export class ScheduleVisitComponent implements OnInit {
   selectedDay: any;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
     private fb: UntypedFormBuilder,
     private datePipe: DatePipe,
     public dialog: MatDialog,
@@ -40,14 +41,16 @@ export class ScheduleVisitComponent implements OnInit {
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.spaceId = sessionStorage.getItem('space_id');
-     this.isShortterm = JSON.parse(sessionStorage.getItem('isShortterm'));
-    console.log("isShortterm",this.isShortterm);
-    
-    this.isCoworking = JSON.parse(sessionStorage.getItem('isCoworking'));
-   this.isLongterm = JSON.parse(sessionStorage.getItem('isLongterm'));
+    if (isPlatformBrowser(this.platformId)) {
+      this.spaceId = sessionStorage.getItem('space_id');
+      this.isShortterm = JSON.parse(sessionStorage.getItem('isShortterm'));
+      console.log("isShortterm",this.isShortterm);
+      
+      this.isCoworking = JSON.parse(sessionStorage.getItem('isCoworking'));
+    this.isLongterm = JSON.parse(sessionStorage.getItem('isLongterm'));
 
-   console.log(JSON.parse(sessionStorage.getItem('spaceDetail')))
+    console.log(JSON.parse(sessionStorage.getItem('spaceDetail')))
+    }
   }
   startTimes = [
     {value: '10:00', viewValue: '10:00 AM'},

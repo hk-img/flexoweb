@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewContainerRef, } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewContainerRef, } from '@angular/core';
 import { SpaceService } from '../services/space.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import {
   MatLegacyDialog as MatDialog,
@@ -56,16 +56,19 @@ export class BookingListComponent implements OnInit {
     { workSpaceName: 'Event Space', typeOfSpace: "Short-Term" },
   ]
   constructor(public requestBooking_viewContainerRef: ViewContainerRef,
+    @Inject(PLATFORM_ID) private platformId: any,
     public login_dialog: MatDialog,
     public login_dialogRef: MatDialogRef<any>,
     public login_viewContainerRef: ViewContainerRef,
     public addReview_dialogRef: MatDialogRef<any>,
     private toastr: ToastrService,
     public addReview_dialog: MatDialog, private _spaceService: SpaceService, private datePipe: DatePipe,) {
-    let userData: any = localStorage.getItem('userDetails');
+    if (isPlatformBrowser(this.platformId)) {
+      let userData: any = localStorage.getItem('userDetails');
     userData ? (userData = JSON.parse(userData)) : '';
 
     this.userId = userData?.id;
+    }
   }
 
   ngOnInit(): void {
@@ -159,6 +162,7 @@ export class BookingListComponent implements OnInit {
   // }
 
   openAddReviewDialog(spaceId: any) {
+  if (isPlatformBrowser(this.platformId)) {
     localStorage.setItem("space_id", spaceId);
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
     let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
@@ -203,6 +207,7 @@ export class BookingListComponent implements OnInit {
         });
       }
     }
+  }
   }
   
   getUserInvoiceByBookingId(bookingID:any){
