@@ -1,5 +1,5 @@
-import { DatePipe, Location } from '@angular/common';
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { DatePipe, isPlatformBrowser, Location } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewContainerRef } from '@angular/core';
 import {
   MatLegacyDialog as MatDialog,
   MatLegacyDialogConfig as MatDialogConfig,
@@ -26,7 +26,7 @@ export class BookingDetailComponent implements OnInit {
   paymentDetail: any = [];
   totalHours: any;
   formattedDates: any = [];
-  constructor(public requestBooking_viewContainerRef: ViewContainerRef,
+  constructor(public requestBooking_viewContainerRef: ViewContainerRef,@Inject(PLATFORM_ID) private platformId: any,
     public login_dialog: MatDialog,
     public login_dialogRef: MatDialogRef<any>,
     public login_viewContainerRef: ViewContainerRef,
@@ -159,6 +159,7 @@ export class BookingDetailComponent implements OnInit {
   }
 
   openAddReviewDialog(spaceID: any) {
+    if (isPlatformBrowser(this.platformId)) {
     localStorage.setItem("space_id", spaceID);
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
     let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
@@ -207,6 +208,7 @@ export class BookingDetailComponent implements OnInit {
     } else {
       // this.openLoginDialog();
     }
+  }
   }
 
 

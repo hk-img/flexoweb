@@ -326,11 +326,13 @@ export class FilterItemComponent implements OnInit {
     })
 
 
-    if ((this.spaceType == 'coworking') || (this.spaceType == 'privateoffice') || (this.spaceType == 'managedoffice') || (this.spaceType == 'dedicateddesk') || (this.spaceType == 'flexibledesk') || (this.spaceType == 'virtualoffice') || (this.spaceType == 'daypass')) {
-      sessionStorage.setItem('isCoworking', 'true');
+    if (isPlatformBrowser(this.platformId)) {
+      if ((this.spaceType == 'coworking') || (this.spaceType == 'privateoffice') || (this.spaceType == 'managedoffice') || (this.spaceType == 'dedicateddesk') || (this.spaceType == 'flexibledesk') || (this.spaceType == 'virtualoffice') || (this.spaceType == 'daypass')) {
+        sessionStorage.setItem('isCoworking', 'true');
 
-    } else {
-      sessionStorage.setItem('isCoworking', 'false');
+      } else {
+        sessionStorage.setItem('isCoworking', 'false');
+      }
     }
   }
 

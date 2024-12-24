@@ -187,7 +187,9 @@ export class RequestBookingComponent {
     @Inject(PLATFORM_ID) private platformId: object
     // public dialogRef: MatDialogRef<RequestBookingComponent>
   ) {
-    this.spaceId = sessionStorage.getItem('space_id');
+    if (isPlatformBrowser(this.platformId)) {
+      this.spaceId = sessionStorage.getItem('space_id');
+    }
     this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
   }
 

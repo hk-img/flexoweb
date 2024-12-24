@@ -1,4 +1,4 @@
-import { Component, Inject, Input, ViewChild } from '@angular/core';
+import { Component, Inject, Input, PLATFORM_ID, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {
   MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SpaceService } from 'src/app/services/space.service';
 import { ThankyopopupComponent } from 'src/app/thankyopopup/thankyopopup.component';
 import { DetailsComponent } from '../details.component';
+import { isPlatformBrowser } from '@angular/common';
 declare var $: any;
 
 @Component({
@@ -77,7 +78,7 @@ export class InquiryComponent {
     { workSpaceName: 'Not Sure', typeOfSpace: "Not Sure" },
   ]
 
-  constructor(public dialogRef: MatDialogRef<InquiryComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private detailPage: DetailsComponent, private service: SpaceService, private route: ActivatedRoute, private toastr: ToastrService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: any,public dialogRef: MatDialogRef<InquiryComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private detailPage: DetailsComponent, private service: SpaceService, private route: ActivatedRoute, private toastr: ToastrService) {
     if (localStorage.getItem("spaceDetail")) {
 
       let space_detail = JSON.parse(localStorage.getItem("spaceDetail"));
@@ -105,8 +106,10 @@ export class InquiryComponent {
 
   ngOnInit(): void {
     this.formData.spaceType = this.data.name ?? "";
+    if (isPlatformBrowser(this.platformId)) {
     this.isCoworkings = sessionStorage.getItem('isCoworking');
     this.valueForListingPage = localStorage.getItem('staticValue');
+    }
 
     const url = window.location.href;  // Get the full URL
     const segments2 = url.split('/');
@@ -168,8 +171,10 @@ export class InquiryComponent {
     if (!this.profileDetailForm.value.spaceType){
       this.profileDetailForm.value.spaceType = this.data?.name;
     }
-    if (sessionStorage.getItem('isCoworking') == 'true') {
-      this.profileDetailForm.value.type = 'Coworking';
+    if (isPlatformBrowser(this.platformId)) {
+      if (sessionStorage.getItem('isCoworking') == 'true') {
+        this.profileDetailForm.value.type = 'Coworking';
+      }
     }
     else {
       this.profileDetailForm.value.type = 'Longterm';

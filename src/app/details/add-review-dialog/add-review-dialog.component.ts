@@ -1,5 +1,5 @@
-import { Component, Inject, NgZone, ViewContainerRef } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component, Inject, NgZone, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -27,6 +27,7 @@ export class AddReviewDialogComponent {
   submitForm:boolean = false;
   public reviewForm: UntypedFormGroup;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
     public dialog: MatDialog,
     private spaceService: SpaceService,
     private toastr: ToastrService,
@@ -34,7 +35,9 @@ export class AddReviewDialogComponent {
     private _fb: FormBuilder
     // public dialogRef: MatDialogRef<RequestBookingComponent>
   ) {
+    if (isPlatformBrowser(this.platformId)) {
     this.spaceId = sessionStorage.getItem('space_id');
+    }
   }
   ngOnInit(): void {
     this.createForm();
