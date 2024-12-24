@@ -200,10 +200,12 @@ export class BookingListComponent implements OnInit {
 
         // Ensure proper handling of the afterClosed() subscription
         this.addReview_dialogRef.afterClosed().subscribe((result) => {
-          if ((result && result.success) || result) {
-            window.location.reload();
+          if (isPlatformBrowser(this.platformId)) {
+            if ((result && result.success) || result) {
+              window.location.reload();
+            }
+            this.addReview_dialogRef = null;
           }
-          this.addReview_dialogRef = null;
         });
       }
     }
@@ -213,8 +215,10 @@ export class BookingListComponent implements OnInit {
   getUserInvoiceByBookingId(bookingID:any){
     this._spaceService.getUserInvoice(bookingID).subscribe((res:any)=>{
       if(res.success){
+        if (isPlatformBrowser(this.platformId)) {
         window.open(environment.apiUrl+'/'+res.pdfFilePath, '_blank');
         this.toastr.success(res.message);
+        }
       }else{
         this.toastr.error(res.message);
       }

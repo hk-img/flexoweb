@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from "@angular/platform-browser";
 
 @Component({
@@ -9,6 +10,7 @@ import { Meta, Title } from "@angular/platform-browser";
 export class AboutComponent implements OnInit {
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
     private metaService: Meta,
     private titleService: Title,
   ) { }
@@ -16,12 +18,14 @@ export class AboutComponent implements OnInit {
   public isMobile: boolean = false;
   public frame_height;
   ngOnInit(): void {
-    if (window.innerWidth < 700) {
-      this.isMobile = true;
-      this.frame_height = 300;
-    } else {
-      this.frame_height = 600;
+    if (isPlatformBrowser(this.platformId)) {
+      if (window.innerWidth < 700) {
+        this.isMobile = true;
+        this.frame_height = 300;
+      } else {
+        this.frame_height = 600;
 
+      }
     }
     this.titleService.setTitle(`Flexo™ | Our Story`);
     this.metaService.updateTag(

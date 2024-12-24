@@ -1471,7 +1471,9 @@ export class AppComponent {
         localStorage.removeItem('authToken');
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userDetails');
-        window.location.reload();
+        if (isPlatformBrowser(this.platformId)) {
+          window.location.reload();
+        }
         this.userService.userDetails.next(null);
         this.userService.isLoggedInSource.next(false);
         // this.toastr.success(result.message || "Logout successfully!");
