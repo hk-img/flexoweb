@@ -1638,14 +1638,16 @@ export class DetailsComponent implements OnInit {
   }
 
   initializeMap(): void {
-    const mapDiv = document.getElementById('map');
-    if (mapDiv) {
-      this.map = new google.maps.Map(mapDiv, {
-        center: { lat: 40.712776, lng: -74.005974 }, // Example: New York
-        zoom: 12
-      });
-    } else {
-      console.error('Map div is not available.');
+    if (isPlatformBrowser(this.platformId)) {
+      const mapDiv = document.getElementById('map');
+      if (mapDiv) {
+        this.map = new google.maps.Map(mapDiv, {
+          center: { lat: 40.712776, lng: -74.005974 }, // Example: New York
+          zoom: 12
+        });
+      } else {
+        console.error('Map div is not available.');
+      }
     }
   }
 
