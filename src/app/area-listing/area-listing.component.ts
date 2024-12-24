@@ -243,9 +243,11 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
     ) {
       this.show_location_message = true;
     }
+    if (isPlatformBrowser(this.platformId)) {
     if (window.innerWidth < 700) {
       this.isMobile = true;
     }
+  }
     this.zoom = 13;
     // this.populateData();
     // this.area_long = Number(localStorage.getItem('area_long'));
@@ -357,9 +359,11 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
       this._memberService.addShortlists(obj.id).then((data) => {
         this.openSnackBar(data.message, 'Dismiss');
       });
+      if (isPlatformBrowser(this.platformId)) {
       setTimeout(() => {
         window.location.reload()
       }, 1000);
+    }
     } else {
       this.openLoginDialog();
     }
@@ -532,7 +536,9 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
         : num * this.page_size;
     this.active_page = num;
     this.page = num;
+    if (isPlatformBrowser(this.platformId)) {
     window.scrollTo(0, 0);
+    }
     this.populateData();
   }
   onIntersection(e) {
