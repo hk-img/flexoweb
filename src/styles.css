@@ -125,7 +125,7 @@ h6 {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.btn{
+.btn {
   white-space: normal !important;
 }
 .header_btn {
@@ -136,14 +136,14 @@ h6 {
   color: white !important;
 }
 
-.login_btn{
+.login_btn {
   border: 2px solid #ffe9d8;
   border-radius: 15px;
   padding: 8px 22px;
   color: #f76900 !important;
   background: #f7690012;
 }
-.call_btn{
+.call_btn {
   border: 2px solid #ffe9d8;
   border-radius: 50%;
   padding: 8px 22px;
@@ -5902,7 +5902,7 @@ ul.listing-features {
   margin-top: 85px;
   list-style: none;
 }
-.call_icon{
+.call_icon {
   position: fixed;
   width: 45px;
   height: 45px;
@@ -5919,7 +5919,7 @@ ul.listing-features {
   align-items: center;
   justify-content: center;
 }
-.call_icon i{
+.call_icon i {
   color: #fff;
 }
 
@@ -5960,7 +5960,7 @@ ul.listing-features {
   line-height: 0;
   box-shadow: 0 0 3px #a9a9a9;
 }
-.zsiq_theme1 .zsiq_user{
+.zsiq_theme1 .zsiq_user {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8018,7 +8018,7 @@ new css */
   }
   .hero_sec {
     height: calc(100dvh - 500px) !important;
-}
+  }
 
   .hero-category-content {
     width: calc(100% * (1 / 3) - 21px);
@@ -8531,8 +8531,6 @@ new css */
   .coupon-owner {
     margin-bottom: 20px;
   }
-
-
 
   .contact-widget {
     margin-top: 50px;
@@ -11107,7 +11105,7 @@ h4 {
   .hero__form-input {
     margin-bottom: 5px;
   }
-  .cities_sec .city-img-box img{
+  .cities_sec .city-img-box img {
     height: 100% !important;
   }
   .Spaces_box .space_img_box .space_txt {
@@ -11147,7 +11145,7 @@ h4 {
     position: static !important;
     margin-bottom: 10px;
   }
-  .choose_share .share_content{
+  .choose_share .share_content {
     margin-left: 0 !important;
   }
   .workspace_steps .workspace_img img {
@@ -11159,7 +11157,7 @@ h4 {
   .flex_btn .btn {
     font-size: 14px !important;
   }
-  .our_team .team_box .team_icon{
+  .our_team .team_box .team_icon {
     position: static !important;
     transform: none !important;
     margin-bottom: 6px;
@@ -11205,13 +11203,17 @@ h4 {
     background-size: cover;
     aspect-ratio: 0;
   }
-  .become_host{
+  .become_host {
     background-size: cover !important;
     aspect-ratio: 0 !important;
   }
   .succes_story_sec .success_box .success_content .success_txt {
     font-size: 15px !important;
-}
+  }
+  .contact_txt{
+    font-size: 22px !important;
+  }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
