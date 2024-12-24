@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MemberService } from '../services/member.service';
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { isPlatformBrowser } from '@angular/common';
 declare var $: any;
 declare var grecaptcha: any;
 
@@ -17,6 +18,7 @@ export class ContactComponent implements OnInit {
   public message;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
     public snackBar: MatSnackBar,
     private _memberService: MemberService,
   ) {
@@ -34,6 +36,7 @@ export class ContactComponent implements OnInit {
   }
 
   public loadScript() {
+  if (isPlatformBrowser(this.platformId)) {
     $(document).on('submit', '#contactform', function () {
       if (grecaptcha.getResponse()) {
         var a = 'https://devapis.flexospaces.com/api/v1/queries/add';
@@ -60,6 +63,7 @@ export class ContactComponent implements OnInit {
       }
       return false;
     });
+  }
   }
 
   openSnackBar(message: string, action: string) {

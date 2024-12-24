@@ -369,10 +369,11 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     location?: string
   ) {
     const jsonLdId = 'json-ld-product';
-
-    const existingScript = document.getElementById(jsonLdId);
-    if (existingScript) {
-      existingScript.remove();
+    if (isPlatformBrowser(this.platformId)) {
+      const existingScript = document.getElementById(jsonLdId);
+      if (existingScript) {
+        existingScript.remove();
+      }
     }
     const jsonLd = {
       "@context": "https://schema.org/",
@@ -397,12 +398,14 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       }
     };
 
-    const jsonLdScript = document.createElement('script');
-    jsonLdScript.id = jsonLdId;
-    jsonLdScript.type = 'application/ld+json';
-    jsonLdScript.text = JSON.stringify(jsonLd);
+    if (isPlatformBrowser(this.platformId)) {
+      const jsonLdScript = document.createElement('script');
+      jsonLdScript.id = jsonLdId;
+      jsonLdScript.type = 'application/ld+json';
+      jsonLdScript.text = JSON.stringify(jsonLd);
 
-    document.head.appendChild(jsonLdScript);
+      document.head.appendChild(jsonLdScript);
+    }
   }
 
 

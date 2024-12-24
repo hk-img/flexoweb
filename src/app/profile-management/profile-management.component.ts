@@ -1,5 +1,5 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import intlTelInput from 'intl-tel-input';
 import { CountryISO } from 'ngx-intl-tel-input';
@@ -43,6 +43,7 @@ export class ProfileManagementComponent implements OnInit {
 	iti: any = intlTelInput;
 
 	constructor(
+		@Inject(PLATFORM_ID) private platformId: any,
 		private fb: UntypedFormBuilder,
 		private profileService: ProfileManagementService,
 		private toastr: ToastrService,
@@ -105,19 +106,21 @@ export class ProfileManagementComponent implements OnInit {
 		}
 
 	changeTab(evt, detail) {
-		var i, tabcontent, tablinks;
-		tabcontent = document.getElementsByClassName("tab-pane");
-		for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
-		}
-		tablinks = document.getElementsByClassName("tablinks");
-		for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(" active", "");
-		}
-		document.getElementById(detail).style.display = "block";
-		evt.currentTarget.className += " active";
-		if(detail == 'changePassword'){
-			this.changePasswordFrom.reset();
+		if (isPlatformBrowser(this.platformId)) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tab-pane");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(detail).style.display = "block";
+			evt.currentTarget.className += " active";
+			if(detail == 'changePassword'){
+				this.changePasswordFrom.reset();
+			}
 		}
 	}
  

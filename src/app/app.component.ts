@@ -1381,17 +1381,19 @@ export class AppComponent {
       });
       // this.createLinkForCanonicalURL();
 
-      this.renderer.listen('window', 'click', (e: Event) => {
-        var dropdowns = document.getElementsByClassName("dropdown-menu");
-        if (dropdowns.length > 0) {
-          for (let i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
+      if (isPlatformBrowser(this.platformId)) {
+        this.renderer.listen('window', 'click', (e: Event) => {
+          var dropdowns = document.getElementsByClassName("dropdown-menu");
+          if (dropdowns.length > 0) {
+            for (let i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
             }
           }
-        }
-      })
+        })
+      }
     }
   }
 
@@ -1513,7 +1515,9 @@ export class AppComponent {
   }
 
   public onMenueOpenClose(){
-    document.getElementById("myDropdown").classList.toggle("show");
+    if (isPlatformBrowser(this.platformId)) {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
   }
 
   title = 'flexo-aggregation-website';
