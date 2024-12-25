@@ -425,46 +425,47 @@ export class DetailsComponent implements OnInit {
       if (existingScript) {
         existingScript.remove();
       }
-      const jsonLd: any = {
-        "@context": "https://schema.org/",
-        "@type": "Product",
-        "name": `${spaceType} in ${location}`,
-        "image": imageUrl,
-        "description": detail,
-        "brand": {
-          "@type": "Brand",
-          "name": "Flexo"
-        },
-        "mpn": "",
-        "sku": "",
-        "offers": {
-          "@type": "Offer",
-          "url": window.location.href,
-          "priceCurrency": "INR",
-        }
-      };
-
     }
-
+  
+    const jsonLd: any = {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": `${spaceType} in ${location || 'an unknown location'}`,
+      "image": imageUrl,
+      "description": detail,
+      "brand": {
+        "@type": "Brand",
+        "name": "Flexo"
+      },
+      "mpn": "",
+      "sku": "",
+      "offers": {
+        "@type": "AggregateOffer",
+        "url": window.location.href,
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    };
+  
+    // Handle priceMin and priceMax
     if (priceMax === "none") {
-      jsonLd.offers.Price = priceMin
-      jsonLd.offers.availability = "https://schema.org/InStock"
-      jsonLd.offers.itemCondition = "https://schema.org/NewCondition"
+      jsonLd.offers.price = priceMin;
     } else {
       jsonLd.offers.lowPrice = priceMin;
       jsonLd.offers.highPrice = priceMax;
-      jsonLd.offers.availability = "https://schema.org/InStock"
-      jsonLd.offers.itemCondition = "https://schema.org/NewCondition"
     }
+  
     if (isPlatformBrowser(this.platformId)) {
       const jsonLdScript = document.createElement('script');
       jsonLdScript.id = jsonLdId;
       jsonLdScript.type = 'application/ld+json';
-      jsonLdScript.text = JSON.stringify(jsonLdId);
-
+      jsonLdScript.text = JSON.stringify(jsonLd);
+  
       document.head.appendChild(jsonLdScript);
     }
   }
+  
 
 
   onImageError(event: Event, imageAlt:string) {
