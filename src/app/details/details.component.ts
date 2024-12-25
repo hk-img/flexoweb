@@ -460,7 +460,7 @@ export class DetailsComponent implements OnInit {
       const jsonLdScript = document.createElement('script');
       jsonLdScript.id = jsonLdId;
       jsonLdScript.type = 'application/ld+json';
-      jsonLdScript.text = JSON.stringify(jsonLd);
+      jsonLdScript.text = JSON.stringify(jsonLdId);
 
       document.head.appendChild(jsonLdScript);
     }
