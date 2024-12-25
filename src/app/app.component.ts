@@ -1432,14 +1432,16 @@ export class AppComponent {
   }
 
   private initialSubscribers(): void {
-    this.userService.loginUserDetails.subscribe((user: any) => {
-      // this.userDetails = user;
-      this.userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    });
-    this.userService.isLoggedIn.subscribe((result: any) => {
-      // this.isLoggedIn = result;
-      this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      this.userService.loginUserDetails.subscribe((user: any) => {
+        // this.userDetails = user;
+        this.userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+      });
+      this.userService.isLoggedIn.subscribe((result: any) => {
+        // this.isLoggedIn = result;
+        this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      });
+    }
   }
 
   openLoginDialog() {
@@ -1465,29 +1467,31 @@ export class AppComponent {
   }
 
   logout() {
-    this.loginRegisterService.userLogOut().subscribe((result: any) => {
-      localStorage.clear();
-      if(result.success){
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('userDetails');
-        if (isPlatformBrowser(this.platformId)) {
-          window.location.reload();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loginRegisterService.userLogOut().subscribe((result: any) => {
+        localStorage.clear();
+        if(result.success){
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('userDetails');
+          if (isPlatformBrowser(this.platformId)) {
+            window.location.reload();
+          }
+          this.userService.userDetails.next(null);
+          this.userService.isLoggedInSource.next(false);
+          // this.toastr.success(result.message || "Logout successfully!");
+          // this.socialAuthService.signOut();
+          // this.router.navigate(['']);
         }
+        this.toastr.success("Logout successfully!");
+      }, (error) => {      
+        localStorage.clear();
+        this.toastr.success("Logout successfully!");
         this.userService.userDetails.next(null);
         this.userService.isLoggedInSource.next(false);
-        // this.toastr.success(result.message || "Logout successfully!");
-        // this.socialAuthService.signOut();
-        // this.router.navigate(['']);
-      }
-      this.toastr.success("Logout successfully!");
-    }, (error) => {      
-      localStorage.clear();
-      this.toastr.success("Logout successfully!");
-      this.userService.userDetails.next(null);
-      this.userService.isLoggedInSource.next(false);
 
-    })
+      })
+    }
   }
 
   basicInfo() {
