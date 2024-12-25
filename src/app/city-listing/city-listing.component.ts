@@ -522,300 +522,303 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
   getSpacesByCity() {
 
-    this.isloader = true;
+    if (isPlatformBrowser(this.platformId)) {
 
-    if (this.spaceType?.toLowerCase() == 'coworking space') {
-      this.type = "coworking";
+      this.isloader = true;
 
-    } else if ((this.spaceType?.toLowerCase() == 'coworking cafe/restaurant') || (this.spaceType?.toLowerCase() == 'shoot studio') || (this.spaceType?.toLowerCase() == 'recording studio') || (this.spaceType?.toLowerCase() == 'podcast studio') || (this.spaceType?.toLowerCase() == 'activity space') || (this.spaceType?.toLowerCase() == 'sports turf') || (this.spaceType?.toLowerCase() == 'sports venue') || (this.spaceType?.toLowerCase() == 'party space') || (this.spaceType?.toLowerCase() == 'banquet hall') || (this.spaceType?.toLowerCase() == 'gallery') || (this.spaceType?.toLowerCase() == 'classroom') || (this.spaceType?.toLowerCase() == 'private cabin') || (this.spaceType?.toLowerCase() == 'meeting room') || (this.spaceType?.toLowerCase() == 'training room') || (this.spaceType?.toLowerCase() == 'event space')) {
-      this.type = "shortterm";
+      if (this.spaceType?.toLowerCase() == 'coworking space') {
+        this.type = "coworking";
 
-    } else if ((this.spaceType?.toLowerCase() == 'managed office' || this.spaceType?.toLowerCase() == 'private office' || this.spaceType?.toLowerCase() == 'shared office' || this.spaceType?.toLowerCase() == 'virtual office')) {
-      this.type = "longTerm";
+      } else if ((this.spaceType?.toLowerCase() == 'coworking cafe/restaurant') || (this.spaceType?.toLowerCase() == 'shoot studio') || (this.spaceType?.toLowerCase() == 'recording studio') || (this.spaceType?.toLowerCase() == 'podcast studio') || (this.spaceType?.toLowerCase() == 'activity space') || (this.spaceType?.toLowerCase() == 'sports turf') || (this.spaceType?.toLowerCase() == 'sports venue') || (this.spaceType?.toLowerCase() == 'party space') || (this.spaceType?.toLowerCase() == 'banquet hall') || (this.spaceType?.toLowerCase() == 'gallery') || (this.spaceType?.toLowerCase() == 'classroom') || (this.spaceType?.toLowerCase() == 'private cabin') || (this.spaceType?.toLowerCase() == 'meeting room') || (this.spaceType?.toLowerCase() == 'training room') || (this.spaceType?.toLowerCase() == 'event space')) {
+        this.type = "shortterm";
 
-    } else {
-      this.type = "coworking";
-    }
+      } else if ((this.spaceType?.toLowerCase() == 'managed office' || this.spaceType?.toLowerCase() == 'private office' || this.spaceType?.toLowerCase() == 'shared office' || this.spaceType?.toLowerCase() == 'virtual office')) {
+        this.type = "longTerm";
 
-
-    let city_name = this.city_param;
-    let api_params: any = {
-      city_name,
-      spaceType: this.spaceType === 'none' ? [] : [this.spaceType],
-      type: this.type,
-      userId: this.userId
-    };
-    _.extend(api_params, this.filter);
-
-    if (this.areaName) {
-      api_params.location_name = this.areaName
-      const details = {
-        cityId: this.city_param,
-        spaceType: this.spaceType
+      } else {
+        this.type = "coworking";
       }
-      this.spaceService.getNearBySpaces(details).pipe(finalize(() => { this.isloader = false })).subscribe(
-        (response) => {
-          if (this.areaName && response.length) {
-            let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
-            if (!isExist) {
-              this.router.navigate(['/error'])
-            }
-            const currentArea = response.find(val => val.location_name.toLowerCase() === this.areaName)
-            //  api_params.city_lat = String(currentArea?.lat)
-            //  api_params.city_long = String(currentArea?.longi)
-            api_params.city_lat = 0
-            api_params.city_long = 0
-          }
 
 
-          this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
-            this.nearBySpaces.next(res.faqs);
-            this.spaces_list = Object.assign([], res.data);
-            console.log(this.spaces_list, "areaAvailable");
-            if (this.spaces_list.length) {
-              const spaceType = this.spaces_list[0].spaceType
-              const cityName = this.spaces_list[0].contact_city_name
-              const location = this.spaces_list[0].location_name
-              const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
-              const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
-              const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
-              if (this.type === 'coworking') {
-                const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
-                const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-                this.updateJsonLd(spaceType, cityName, imageUrl, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
-              } else if (this.type === 'shortterm') {
-                this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
-              } else {
-                this.updateJsonLd(spaceType, cityName, imageUrl, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
+      let city_name = this.city_param;
+      let api_params: any = {
+        city_name,
+        spaceType: this.spaceType === 'none' ? [] : [this.spaceType],
+        type: this.type,
+        userId: this.userId
+      };
+      _.extend(api_params, this.filter);
+
+      if (this.areaName) {
+        api_params.location_name = this.areaName
+        const details = {
+          cityId: this.city_param,
+          spaceType: this.spaceType
+        }
+        this.spaceService.getNearBySpaces(details).pipe(finalize(() => { this.isloader = false })).subscribe(
+          (response) => {
+            if (this.areaName && response.length) {
+              let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
+              if (!isExist) {
+                this.router.navigate(['/error'])
               }
+              const currentArea = response.find(val => val.location_name.toLowerCase() === this.areaName)
+              //  api_params.city_lat = String(currentArea?.lat)
+              //  api_params.city_long = String(currentArea?.longi)
+              api_params.city_lat = 0
+              api_params.city_long = 0
             }
-            this.recommended_spaces = Object.assign([], res.recommended_spaces);
-            this.space_count = res.space_count;
-            if (this.spaces_list.length) {
-              this.page_end =
-                this.space_count < this.page_size * this.page
-                  ? this.space_count
-                  : this.page_size * this.page;
-              this.total_pages =
-                this.space_count % 2 == 0
-                  ? this.space_count / this.page_size
-                  : Math.floor(this.space_count / this.page_size) + 1;
-              this.pages.splice(0, this.pages.length);
-              for (let i = 1; i <= this.total_pages; i++) {
-                this.pages.push(i);
-              }
-              this.markersData = [];
-              this.spaces_list.forEach((element) => {
-                element.rating_array = [];
-                element.empty_star_array = [];
-                element.rating_floor = Math.floor(element.rating);
-                element.empty_rating_stars = 5 - element.rating;
-                for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
-                  element.empty_star_array.push(k);
-                }
-                for (let r = 0; r < Math.floor(element.rating); r++) {
-                  element.rating_array.push(r);
-                }
-                let price;
 
+
+            this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
+              this.nearBySpaces.next(res.faqs);
+              this.spaces_list = Object.assign([], res.data);
+              console.log(this.spaces_list, "areaAvailable");
+              if (this.spaces_list.length) {
+                const spaceType = this.spaces_list[0].spaceType
+                const cityName = this.spaces_list[0].contact_city_name
+                const location = this.spaces_list[0].location_name
+                const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
+                const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
+                const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
                 if (this.type === 'coworking') {
-                  if (element.flexible_desk_price === null) {
-                    price = element.privatecabin_price
-                  } else {
-                    price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
-                  }
+                  const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+                  const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
+                  this.updateJsonLd(spaceType, cityName, imageUrl, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
+                } else if (this.type === 'shortterm') {
+                  this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
                 } else {
-                  price = this.formatCurrency(element.originalPrice)
+                  this.updateJsonLd(spaceType, cityName, imageUrl, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
                 }
-                // let duration = this.type === 'longterm' ? 'month' : this.type === 'shortterm' ? 'hour' : this.type === 'coworking' && element?.originalPrice > 0 ? 'day': 'seat'
-                let obj = {
-                  position: {
-                    lat: element.lat,
-                    lng: element.longi,
-                  },
-                  title: element.name,
-                  options: {
-                    price: price,
-                    // duration:duration,
-                    draggable: false,
-                    icon: {
-                      url: this.createPriceTagIcon(`₹${price}`, 'white'),
-                      scaledSize: {
-                        width: `₹${price}`.length * 10 + 20,
-                        height: 30,
+              }
+              this.recommended_spaces = Object.assign([], res.recommended_spaces);
+              this.space_count = res.space_count;
+              if (this.spaces_list.length) {
+                this.page_end =
+                  this.space_count < this.page_size * this.page
+                    ? this.space_count
+                    : this.page_size * this.page;
+                this.total_pages =
+                  this.space_count % 2 == 0
+                    ? this.space_count / this.page_size
+                    : Math.floor(this.space_count / this.page_size) + 1;
+                this.pages.splice(0, this.pages.length);
+                for (let i = 1; i <= this.total_pages; i++) {
+                  this.pages.push(i);
+                }
+                this.markersData = [];
+                this.spaces_list.forEach((element) => {
+                  element.rating_array = [];
+                  element.empty_star_array = [];
+                  element.rating_floor = Math.floor(element.rating);
+                  element.empty_rating_stars = 5 - element.rating;
+                  for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+                    element.empty_star_array.push(k);
+                  }
+                  for (let r = 0; r < Math.floor(element.rating); r++) {
+                    element.rating_array.push(r);
+                  }
+                  let price;
+
+                  if (this.type === 'coworking') {
+                    if (element.flexible_desk_price === null) {
+                      price = element.privatecabin_price
+                    } else {
+                      price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
+                    }
+                  } else {
+                    price = this.formatCurrency(element.originalPrice)
+                  }
+                  // let duration = this.type === 'longterm' ? 'month' : this.type === 'shortterm' ? 'hour' : this.type === 'coworking' && element?.originalPrice > 0 ? 'day': 'seat'
+                  let obj = {
+                    position: {
+                      lat: element.lat,
+                      lng: element.longi,
+                    },
+                    title: element.name,
+                    options: {
+                      price: price,
+                      // duration:duration,
+                      draggable: false,
+                      icon: {
+                        url: this.createPriceTagIcon(`₹${price}`, 'white'),
+                        scaledSize: {
+                          width: `₹${price}`.length * 10 + 20,
+                          height: 30,
+                        }
+                      }
+                    },
+                    info: {
+                      map_image_url:
+                        this.aws_base_url + element.id + '/' + element.images[0],
+                      name: element.name,
+                      url: '/details/' + element.link_name,
+                    },
+                  };
+                  this.markersData.push(obj);
+                });
+                console.log(this.markersData);
+                this.center = this.calculateCenter(this.markersData)
+              } else {
+                this.recommended_spaces_length = this.recommended_spaces.length;
+                this.recommended_spaces.forEach((element) => {
+                  element.rating_array = [];
+                  element.empty_star_array = [];
+                  element.rating_floor = Math.floor(element.rating);
+                  element.empty_rating_stars = 5 - element.rating;
+                  for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+                    element.empty_star_array.push(k);
+                  }
+                  for (let r = 0; r < Math.floor(element.rating); r++) {
+                    element.rating_array.push(r);
+                  }
+                });
+              }
+              if (this.shortlists && this.shortlists.length) {
+                this.spaces_list.forEach((element) => {
+                  element.is_shortlisted = false;
+                  if (this.shortlists && this.shortlists.length > 0) {
+                    for (let j = 1; j <= this.shortlists.length; j++) {
+                      if (this.shortlists[j] == element.id) {
+                        element.is_shortlisted = true;
                       }
                     }
-                  },
-                  info: {
-                    map_image_url:
-                      this.aws_base_url + element.id + '/' + element.images[0],
-                    name: element.name,
-                    url: '/details/' + element.link_name,
-                  },
-                };
-                this.markersData.push(obj);
-              });
-              console.log(this.markersData);
-              this.center = this.calculateCenter(this.markersData)
+                  }
+                });
+              }
+              this.ngZone.run(() => this.cdRef.detectChanges());
+              this.shimming = false;
+            });
+          })
+
+
+      } else {
+        // api_params.city_lat = localStorage.getItem("lat")
+        // api_params.city_long= localStorage.getItem("long")
+        api_params.city_lat = localStorage.getItem("locationLat") ?? 0
+        api_params.city_long = localStorage.getItem("locationLong") ?? 0
+
+        this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
+          this.nearBySpaces.next(res.faqs);
+          this.spaces_list = Object.assign([], res.data);
+          console.log(this.type, this.spaces_list, "areaNotAvailable");
+          if (this.spaces_list.length) {
+            const spaceType = this.spaces_list[0].spaceType
+            const cityName = this.spaces_list[0].contact_city_name
+            const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
+            const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
+            const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
+            if (this.type === 'coworking') {
+              const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+              const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
+              this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
+            } else if (this.type === 'shortterm') {
+              this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
             } else {
-              this.recommended_spaces_length = this.recommended_spaces.length;
-              this.recommended_spaces.forEach((element) => {
-                element.rating_array = [];
-                element.empty_star_array = [];
-                element.rating_floor = Math.floor(element.rating);
-                element.empty_rating_stars = 5 - element.rating;
-                for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
-                  element.empty_star_array.push(k);
-                }
-                for (let r = 0; r < Math.floor(element.rating); r++) {
-                  element.rating_array.push(r);
-                }
-              });
+              this.updateJsonLd(spaceType, cityName, imageUrl, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
             }
-            if (this.shortlists && this.shortlists.length) {
-              this.spaces_list.forEach((element) => {
-                element.is_shortlisted = false;
-                if (this.shortlists && this.shortlists.length > 0) {
-                  for (let j = 1; j <= this.shortlists.length; j++) {
-                    if (this.shortlists[j] == element.id) {
-                      element.is_shortlisted = true;
+          }
+          this.recommended_spaces = Object.assign([], res.recommended_spaces);
+          this.space_count = res.space_count;
+          if (this.spaces_list.length) {
+            this.page_end =
+              this.space_count < this.page_size * this.page
+                ? this.space_count
+                : this.page_size * this.page;
+            this.total_pages =
+              this.space_count % 2 == 0
+                ? this.space_count / this.page_size
+                : Math.floor(this.space_count / this.page_size) + 1;
+            this.pages.splice(0, this.pages.length);
+            for (let i = 1; i <= this.total_pages; i++) {
+              this.pages.push(i);
+            }
+            this.markersData = [];
+            this.spaces_list.forEach((element) => {
+              element.rating_array = [];
+              element.empty_star_array = [];
+              element.rating_floor = Math.floor(element.rating);
+              element.empty_rating_stars = 5 - element.rating;
+              for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+                element.empty_star_array.push(k);
+              }
+              for (let r = 0; r < Math.floor(element.rating); r++) {
+                element.rating_array.push(r);
+              }
+              let price;
+
+              if (this.type === 'coworking') {
+                if (element.flexible_desk_price === null) {
+                  price = element.privatecabin_price
+                } else {
+                  price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
+                }
+              } else {
+                price = this.formatCurrency(element.originalPrice)
+              }
+              // let duration = this.type === 'longterm' ? 'month' : this.type === 'shortterm' ? 'hour' : this.type === 'coworking' && element?.originalPrice > 0 ? 'day' : 'seat' 
+              let obj = {
+                position: {
+                  lat: element.lat,
+                  lng: element.longi,
+                },
+                title: element.name,
+                options: {
+                  price: price,
+                  // duration:duration,
+                  draggable: false,
+                  icon: {
+                    url: this.createPriceTagIcon(`₹${price}`, 'white'),
+                    scaledSize: {
+                      width: `₹${price}`.length * 10 + 20,
+                      height: 30,
                     }
                   }
-                }
-              });
-            }
-            this.ngZone.run(() => this.cdRef.detectChanges());
-            this.shimming = false;
-          });
-        })
-
-
-    } else {
-      // api_params.city_lat = localStorage.getItem("lat")
-      // api_params.city_long= localStorage.getItem("long")
-      api_params.city_lat = localStorage.getItem("locationLat") ?? 0
-      api_params.city_long = localStorage.getItem("locationLong") ?? 0
-
-      this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
-        this.nearBySpaces.next(res.faqs);
-        this.spaces_list = Object.assign([], res.data);
-        console.log(this.type, this.spaces_list, "areaNotAvailable");
-        if (this.spaces_list.length) {
-          const spaceType = this.spaces_list[0].spaceType
-          const cityName = this.spaces_list[0].contact_city_name
-          const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
-          const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
-          const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
-          if (this.type === 'coworking') {
-            const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
-            const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-            this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
-          } else if (this.type === 'shortterm') {
-            this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+                },
+                info: {
+                  map_image_url:
+                    this.aws_base_url + element.id + '/' + element.images[0],
+                  name: element.name,
+                  url: '/details/' + element.link_name,
+                },
+              };
+              this.markersData.push(obj);
+            });
+            console.log(this.markersData);
+            this.center = this.calculateCenter(this.markersData)
           } else {
-            this.updateJsonLd(spaceType, cityName, imageUrl, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
-          }
-        }
-        this.recommended_spaces = Object.assign([], res.recommended_spaces);
-        this.space_count = res.space_count;
-        if (this.spaces_list.length) {
-          this.page_end =
-            this.space_count < this.page_size * this.page
-              ? this.space_count
-              : this.page_size * this.page;
-          this.total_pages =
-            this.space_count % 2 == 0
-              ? this.space_count / this.page_size
-              : Math.floor(this.space_count / this.page_size) + 1;
-          this.pages.splice(0, this.pages.length);
-          for (let i = 1; i <= this.total_pages; i++) {
-            this.pages.push(i);
-          }
-          this.markersData = [];
-          this.spaces_list.forEach((element) => {
-            element.rating_array = [];
-            element.empty_star_array = [];
-            element.rating_floor = Math.floor(element.rating);
-            element.empty_rating_stars = 5 - element.rating;
-            for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
-              element.empty_star_array.push(k);
-            }
-            for (let r = 0; r < Math.floor(element.rating); r++) {
-              element.rating_array.push(r);
-            }
-            let price;
-
-            if (this.type === 'coworking') {
-              if (element.flexible_desk_price === null) {
-                price = element.privatecabin_price
-              } else {
-                price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
+            this.recommended_spaces_length = this.recommended_spaces.length;
+            this.recommended_spaces.forEach((element) => {
+              element.rating_array = [];
+              element.empty_star_array = [];
+              element.rating_floor = Math.floor(element.rating);
+              element.empty_rating_stars = 5 - element.rating;
+              for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+                element.empty_star_array.push(k);
               }
-            } else {
-              price = this.formatCurrency(element.originalPrice)
-            }
-            // let duration = this.type === 'longterm' ? 'month' : this.type === 'shortterm' ? 'hour' : this.type === 'coworking' && element?.originalPrice > 0 ? 'day' : 'seat' 
-            let obj = {
-              position: {
-                lat: element.lat,
-                lng: element.longi,
-              },
-              title: element.name,
-              options: {
-                price: price,
-                // duration:duration,
-                draggable: false,
-                icon: {
-                  url: this.createPriceTagIcon(`₹${price}`, 'white'),
-                  scaledSize: {
-                    width: `₹${price}`.length * 10 + 20,
-                    height: 30,
+              for (let r = 0; r < Math.floor(element.rating); r++) {
+                element.rating_array.push(r);
+              }
+            });
+          }
+          if (this.shortlists && this.shortlists.length) {
+            this.spaces_list.forEach((element) => {
+              element.is_shortlisted = false;
+              if (this.shortlists && this.shortlists.length > 0) {
+                for (let j = 1; j <= this.shortlists.length; j++) {
+                  if (this.shortlists[j] == element.id) {
+                    element.is_shortlisted = true;
                   }
                 }
-              },
-              info: {
-                map_image_url:
-                  this.aws_base_url + element.id + '/' + element.images[0],
-                name: element.name,
-                url: '/details/' + element.link_name,
-              },
-            };
-            this.markersData.push(obj);
-          });
-          console.log(this.markersData);
-          this.center = this.calculateCenter(this.markersData)
-        } else {
-          this.recommended_spaces_length = this.recommended_spaces.length;
-          this.recommended_spaces.forEach((element) => {
-            element.rating_array = [];
-            element.empty_star_array = [];
-            element.rating_floor = Math.floor(element.rating);
-            element.empty_rating_stars = 5 - element.rating;
-            for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
-              element.empty_star_array.push(k);
-            }
-            for (let r = 0; r < Math.floor(element.rating); r++) {
-              element.rating_array.push(r);
-            }
-          });
-        }
-        if (this.shortlists && this.shortlists.length) {
-          this.spaces_list.forEach((element) => {
-            element.is_shortlisted = false;
-            if (this.shortlists && this.shortlists.length > 0) {
-              for (let j = 1; j <= this.shortlists.length; j++) {
-                if (this.shortlists[j] == element.id) {
-                  element.is_shortlisted = true;
-                }
               }
-            }
-          });
-        }
-        this.ngZone.run(() => this.cdRef.detectChanges());
-        this.shimming = false;
-      });
-    }
+            });
+          }
+          this.ngZone.run(() => this.cdRef.detectChanges());
+          this.shimming = false;
+        });
+      }
 
+    }
   }
 
   updateMarkerPriceColor(name: string, color: string) {
@@ -860,24 +863,28 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   shortList(obj, e?: MouseEvent) {
-    e.stopPropagation()
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    if (isLoggedIn /* this.logged_in */) {
-      this.addRemoveFavorite(obj.id)
-      this._memberService.addShortlists(obj.id).then((data) => {
-        // this.openSnackBar(data.message, 'Dismiss');
-        // obj.is_shortlisted = !!!obj.is_shortlisted;
-        this.spaces_list.forEach((element) => {
-          if (element.id == obj.id) {
-            element.is_shortlisted = data.new_shortlist;
-          }
+    
+    if (isPlatformBrowser(this.platformId)) {
+        
+      e.stopPropagation()
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      if (isLoggedIn /* this.logged_in */) {
+        this.addRemoveFavorite(obj.id)
+        this._memberService.addShortlists(obj.id).then((data) => {
+          // this.openSnackBar(data.message, 'Dismiss');
+          // obj.is_shortlisted = !!!obj.is_shortlisted;
+          this.spaces_list.forEach((element) => {
+            if (element.id == obj.id) {
+              element.is_shortlisted = data.new_shortlist;
+            }
+          });
         });
-      });
-      setTimeout(() => {
-        window.location.reload()
-      }, 1000);
-    } else {
-      this.openLoginDialog();
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
+      } else {
+        this.openLoginDialog();
+      }
     }
   }
 
@@ -921,15 +928,20 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
 
   removeLoaction() {
-    localStorage.removeItem("locationLat")
-    localStorage.removeItem("locationLong")
-  }
-  ngOnDestroy(): void {
-    this.removeLoaction()
-    let arr = ["range", "distance", "min_price", "max_price"]
-    for (let index = 0; index < arr.length; index++) {
-      localStorage.removeItem(arr[index])
+
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem("locationLat")
+      localStorage.removeItem("locationLong")
     }
+  }
+    ngOnDestroy(): void {
+      if (isPlatformBrowser(this.platformId)) {
+        this.removeLoaction()
+        let arr = ["range", "distance", "min_price", "max_price"]
+        for (let index = 0; index < arr.length; index++) {
+          localStorage.removeItem(arr[index])
+        }
+      }
   }
 
   formatUrl(value: string): string {

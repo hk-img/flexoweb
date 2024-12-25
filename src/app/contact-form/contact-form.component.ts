@@ -6,6 +6,7 @@ import {
   ViewChild,
   NgZone,
   ViewContainerRef,
+  PLATFORM_ID
 } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MemberService } from '../services/member.service';
@@ -16,6 +17,7 @@ import { GlobalVariables } from '../global/global-variables';
 import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { LoginDialog } from '../login/login-dialog.component';
 import { SpaceService } from '../services/space.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-contact-form',
@@ -73,6 +75,7 @@ export class ContactFormComponent implements OnInit {
   public autocomplete: google.maps.places.Autocomplete;
   @ViewChild('autocomplete', { static: false }) autocompleteElement: ElementRef;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
     private route: ActivatedRoute,
     public snackBar: MatSnackBar,
     private ngZone: NgZone,
@@ -301,77 +304,81 @@ export class ContactFormComponent implements OnInit {
   public prevHelper(page) {}
 
   public nextHelper(page) {
-    if (page == 1) {
-      this.percentage = 100 / this.no_of_pages;
-      this.page1 = false;
-      this.page2 = true;
-      this.page3 = false;
-      this.height_neccessary = true;
-    } else if (page == 2) {
-      this.percentage = 2 * (100 / this.no_of_pages);
-      this.page1 = false;
-      this.page2 = false;
-      this.page3 = true;
-      this.height_neccessary = false;
-    } else if (page == 3) {
-      /* if (!this.logged_in) {
-        this.percentage = 3 * (100 / this.no_of_pages);
+
+    if (isPlatformBrowser(this.platformId)) {
+      if (page == 1) {
+        this.percentage = 100 / this.no_of_pages;
+        this.page1 = false;
+        this.page2 = true;
         this.page3 = false;
-        this.page4 = true;
-        this.signup = true;
-        this.login = false;
-        this.otp_sent = false;
-      } else {
-        this.percentage = 3 * (100 / this.no_of_pages);
-        this.submitForm();
-      } */
-
-      const isLoggedIn = localStorage.getItem('isLoggedIn')
-      if(isLoggedIn){
-        console.log('isLoggedIn')
-        let payload = {
-          inquirySpaceTypeId: this.space_type ? this.space_type : null,
-          inquirySpaceBookingDateTime: this.booking_date_time ? this.booking_date_time : null,
-          inquirySpaceCapacity: this.no_of_persons ? this.no_of_persons : null,
-          inquiryCompanyName: this.company_name ? this.company_name : null,
-          inquiryDescription: this.description ? this.description : ""
-        }
-
-        if(this.inquiry_id){
-          this.spaceService.updateInquiry(this.inquiry_id,this.space_id, payload).subscribe((response:any) => {
-            console.log('response : ',response);
-            if(response.result.success){
-              this.openSnackBar(response.result.message || 'Booking request updated successfully!', 'Success');
-              this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{
-                this.router.navigate([`/booking-request-inquires`])
-              })
-            } else {
-              this.openSnackBar(response.result.message || 'Some error occurred while update inquiry!', 'Error');
-            }
-          }, error => {
-            console.log('error : ',error);
-            this.openSnackBar('Some error occurred while sent inquiry!', 'Error');
-          })
+        this.height_neccessary = true;
+      } else if (page == 2) {
+        this.percentage = 2 * (100 / this.no_of_pages);
+        this.page1 = false;
+        this.page2 = false;
+        this.page3 = true;
+        this.height_neccessary = false;
+      } else if (page == 3) {
+        /* if (!this.logged_in) {
+          this.percentage = 3 * (100 / this.no_of_pages);
+          this.page3 = false;
+          this.page4 = true;
+          this.signup = true;
+          this.login = false;
+          this.otp_sent = false;
         } else {
-          this.spaceService.sentInquiry(this.space_id, payload).subscribe((response:any) => {
-            console.log('response : ',response);
-            if(response.result.success){
-              this.openSnackBar(response.result.message || 'Inquiry sent successfully!', 'Success');
-              this.show_submit_response = true;
-  
-            } else {
-              this.openSnackBar(response.result.message || 'Some error occurred while sent inquiry!', 'Error');
-            }
-          }, error => {
-            console.log('error : ',error);
-            this.openSnackBar('Some error occurred while sent inquiry!', 'Error');
-          })
-        }
+          this.percentage = 3 * (100 / this.no_of_pages);
+          this.submitForm();
+        } */
 
-      } else {
-        this.openLoginDialog();
+        const isLoggedIn = localStorage.getItem('isLoggedIn')
+        if(isLoggedIn){
+          console.log('isLoggedIn')
+          let payload = {
+            inquirySpaceTypeId: this.space_type ? this.space_type : null,
+            inquirySpaceBookingDateTime: this.booking_date_time ? this.booking_date_time : null,
+            inquirySpaceCapacity: this.no_of_persons ? this.no_of_persons : null,
+            inquiryCompanyName: this.company_name ? this.company_name : null,
+            inquiryDescription: this.description ? this.description : ""
+          }
+
+          if(this.inquiry_id){
+            this.spaceService.updateInquiry(this.inquiry_id,this.space_id, payload).subscribe((response:any) => {
+              console.log('response : ',response);
+              if(response.result.success){
+                this.openSnackBar(response.result.message || 'Booking request updated successfully!', 'Success');
+                this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{
+                  this.router.navigate([`/booking-request-inquires`])
+                })
+              } else {
+                this.openSnackBar(response.result.message || 'Some error occurred while update inquiry!', 'Error');
+              }
+            }, error => {
+              console.log('error : ',error);
+              this.openSnackBar('Some error occurred while sent inquiry!', 'Error');
+            })
+          } else {
+            this.spaceService.sentInquiry(this.space_id, payload).subscribe((response:any) => {
+              console.log('response : ',response);
+              if(response.result.success){
+                this.openSnackBar(response.result.message || 'Inquiry sent successfully!', 'Success');
+                this.show_submit_response = true;
+    
+              } else {
+                this.openSnackBar(response.result.message || 'Some error occurred while sent inquiry!', 'Error');
+              }
+            }, error => {
+              console.log('error : ',error);
+              this.openSnackBar('Some error occurred while sent inquiry!', 'Error');
+            })
+          }
+
+        } else {
+          this.openLoginDialog();
+        }
       }
     }
+
   }
 
   openLoginDialog() {
