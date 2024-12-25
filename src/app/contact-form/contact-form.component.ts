@@ -6,7 +6,8 @@ import {
   ViewChild,
   NgZone,
   ViewContainerRef,
-  PLATFORM_ID
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MemberService } from '../services/member.service';
