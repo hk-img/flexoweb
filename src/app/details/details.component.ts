@@ -396,15 +396,18 @@ export class DetailsComponent implements OnInit {
     // this.getFaqsBySpaceBy(this.space_id);
     // alert(this.space_id.toString());
     if (isPlatformBrowser(this.platformId)) {
-    sessionStorage.setItem('space_id', this.space_id?.toString());
+      sessionStorage.setItem('space_id', this.space_id?.toString());
+
+      this.coWorkingSchduleVisitForm = this.fb.group({
+        visitDate: ['', [Validators.required]],
+        visitTime: ['', [Validators.required]],
+      });
+      if (window.innerWidth < 700) {
+        this.isMobile = true;
+      }
+
     }
-    this.coWorkingSchduleVisitForm = this.fb.group({
-      visitDate: ['', [Validators.required]],
-      visitTime: ['', [Validators.required]],
-    });
-    if (window.innerWidth < 700) {
-      this.isMobile = true;
-    }
+
   }
 
 
@@ -422,26 +425,26 @@ export class DetailsComponent implements OnInit {
       if (existingScript) {
         existingScript.remove();
       }
-    }
+      const jsonLd: any = {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": `${spaceType} in ${location}`,
+        "image": imageUrl,
+        "description": detail,
+        "brand": {
+          "@type": "Brand",
+          "name": "Flexo"
+        },
+        "mpn": "",
+        "sku": "",
+        "offers": {
+          "@type": "Offer",
+          "url": window.location.href,
+          "priceCurrency": "INR",
+        }
+      };
 
-    const jsonLd: any = {
-      "@context": "https://schema.org/",
-      "@type": "Product",
-      "name": `${spaceType} in ${location}`,
-      "image": imageUrl,
-      "description": detail,
-      "brand": {
-        "@type": "Brand",
-        "name": "Flexo"
-      },
-      "mpn": "",
-      "sku": "",
-      "offers": {
-        "@type": "Offer",
-        "url": window.location.href,
-        "priceCurrency": "INR",
-      }
-    };
+    }
 
     if (priceMax === "none") {
       jsonLd.offers.Price = priceMin
@@ -526,173 +529,196 @@ export class DetailsComponent implements OnInit {
   }
 
   openFacebook() {
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u=' +
-      window.location.origin +
-      '/coworking-space/' +
-      this.space_details.link_name.toLowerCase(),
-      'facebook-popup',
-      'height=350,width=600'
-    );
+
+    if (isPlatformBrowser(this.platformId)) {
+      window.open(
+        'https://www.facebook.com/sharer/sharer.php?u=' +
+        window.location.origin +
+        '/coworking-space/' +
+        this.space_details.link_name.toLowerCase(),
+        'facebook-popup',
+        'height=350,width=600'
+      );
+    }
   }
 
   openLinkedIn() {
-    window.open(
-      'https://www.linkedin.com/shareArticle?mini=true&url=' +
-      window.location.origin +
-      '/coworking-space/' +
-      this.space_details.link_name.toLowerCase() +
-      '&title=Share%Spaces',
-      'linkedin-popup',
-      'height=350,width=600'
-    );
+
+    if (isPlatformBrowser(this.platformId)) {
+      window.open(
+        'https://www.linkedin.com/shareArticle?mini=true&url=' +
+        window.location.origin +
+        '/coworking-space/' +
+        this.space_details.link_name.toLowerCase() +
+        '&title=Share%Spaces',
+        'linkedin-popup',
+        'height=350,width=600'
+      );
+    }
   }
 
   openWhatsapp() {
-    if (!this.isMobile) {
-      window.open(
-        `https://web.whatsapp.com/send?text=${window.location.origin}/coworking-space/` +
-        this.space_details.link_name.toLowerCase(),
-        'whatapp-popup',
-        'height=650,width=650'
-      );
-    } else {
-      window.open(
-        `whatsapp://send?text=${window.location.origin}/coworking-space/${this.space_details.link_name}`
-      );
+
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.isMobile) {
+        window.open(
+          `https://web.whatsapp.com/send?text=${window.location.origin}/coworking-space/` +
+          this.space_details.link_name.toLowerCase(),
+          'whatapp-popup',
+          'height=650,width=650'
+        );
+      } else {
+        window.open(
+          `whatsapp://send?text=${window.location.origin}/coworking-space/${this.space_details.link_name}`
+        );
+      }
     }
   }
 
   openInstagram() {
-    if (!this.isMobile) {
-      window.open(
-        `https://www.instagram.com/?url=${window.location.origin}/coworking-space/` +
-        this.space_details.link_name.toLowerCase(),
-        'instagram-popup',
-        'height=650,width=650'
-      );
-    } else {
-      window.open(
-        `instagram://share?text=${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`
-      );
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.isMobile) {
+        window.open(
+          `https://www.instagram.com/?url=${window.location.origin}/coworking-space/` +
+          this.space_details.link_name.toLowerCase(),
+          'instagram-popup',
+          'height=650,width=650'
+        );
+      } else {
+        window.open(
+          `instagram://share?text=${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`
+        );
+      }
     }
   }
 
   openPinterest() {
-    if (!this.isMobile) {
-      window.open(
-        `https://www.pinterest.com/pin/create/button/?url=${window.location.origin}/coworking-space/` +
-        this.space_details.link_name.toLowerCase(),
-        'pinterest-popup',
-        'height=650,width=650'
-      );
-    } else {
-      window.open(
-        `pinterest://pin/create/bookmarklet/?url=${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`
-      );
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.isMobile) {
+        window.open(
+          `https://www.pinterest.com/pin/create/button/?url=${window.location.origin}/coworking-space/` +
+          this.space_details.link_name.toLowerCase(),
+          'pinterest-popup',
+          'height=650,width=650'
+        );
+      } else {
+        window.open(
+          `pinterest://pin/create/bookmarklet/?url=${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`
+        );
+      }
     }
   }
 
   copyLink() {
-    const link = `${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`;
-    navigator.clipboard.writeText(link).then(() => {
-      this.toastr.success('Link copied to clipboard', 'Success');
-    }).catch(err => {
-      this.toastr.error(err, 'Error');
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      const link = `${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`;
+      navigator.clipboard.writeText(link).then(() => {
+        this.toastr.success('Link copied to clipboard', 'Success');
+      }).catch(err => {
+        this.toastr.error(err, 'Error');
+      });
+    }
   }
 
   updateShortList() {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    if (isLoggedIn /* this.logged_in */) {
-      this.addRemoveFavorite(this.space_id);
-      this._memberService
-        .addShortlists(this.space_id)
-        .then(() => {
-          if (!!this.is_shortlisted) {
-            this.is_shortlisted = false;
-            this.toastr.success('Removed from Favourite Workspaces', 'Success');
-            // this._openSnackBar('Removed from Shortlist', 'Dismiss');
-          } else {
-            this.is_shortlisted = true;
-            this.toastr.success('Added to Favourite Workspaces', 'Success');
-            // this._openSnackBar('Added to Shortlist', 'Dismiss');
-          }
-        })
-        .catch((error) => { });
-    } else {
-      this.openLoginDialog();
-      localStorage.setItem('afterLogin', '8');
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      if (isLoggedIn /* this.logged_in */) {
+        this.addRemoveFavorite(this.space_id);
+        this._memberService
+          .addShortlists(this.space_id)
+          .then(() => {
+            if (!!this.is_shortlisted) {
+              this.is_shortlisted = false;
+              this.toastr.success('Removed from Favourite Workspaces', 'Success');
+              // this._openSnackBar('Removed from Shortlist', 'Dismiss');
+            } else {
+              this.is_shortlisted = true;
+              this.toastr.success('Added to Favourite Workspaces', 'Success');
+              // this._openSnackBar('Added to Shortlist', 'Dismiss');
+            }
+          })
+          .catch((error) => { });
+      } else {
+        this.openLoginDialog();
+        localStorage.setItem('afterLogin', '8');
+      }
     }
   }
 
   addRemoveFavorite(space_id) {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    if (isLoggedIn /* this.logged_in */) {
-      this.favouriteWorkSpaceService
-        .addRemoveFavouriteWorkSpace(space_id)
-        .subscribe(
-          (result: any) => {
-            setTimeout(() => {
-              window.location.reload()
-            }, 2000);
-          },
-          (error) => {
-          }
-        );
-    } else {
-      this.openLoginDialog();
-      localStorage.setItem('afterLogin', '10');
+
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      if (isLoggedIn /* this.logged_in */) {
+        this.favouriteWorkSpaceService
+          .addRemoveFavouriteWorkSpace(space_id)
+          .subscribe(
+            (result: any) => {
+              setTimeout(() => {
+                window.location.reload()
+              }, 2000);
+            },
+            (error) => {
+            }
+          );
+      } else {
+        this.openLoginDialog();
+        localStorage.setItem('afterLogin', '10');
+      }
     }
   }
 
   onRatingReview() {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    if (isLoggedIn /* this.logged_in */) {
 
-      if (userDetails != null && userDetails.id) {
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+      if (isLoggedIn /* this.logged_in */) {
 
-        if (this.userGivenReview) {
-          this.toastr.error('You have already given review for this space.', 'Error');
-          return false;
+        if (userDetails != null && userDetails.id) {
+
+          if (this.userGivenReview) {
+            this.toastr.error('You have already given review for this space.', 'Error');
+            return false;
+          }
+
         }
 
+        let actual_name = this.space_details.actual_name.replace(/ /g, '-');
+        let location_name = this.space_details.location_name.replace(/ /g, '-');
+        let link_name = `${actual_name}-${location_name}-${this.space_details.id}`;
+        let config = new MatDialogConfig();
+        config.viewContainerRef = this.workspaceRatingReview_viewContainerRef;
+        config.panelClass = 'dialogClass';
+        config.width = '550px';
+        config.data = {
+          space_id: this.space_id,
+          link_name: link_name.toLowerCase(),
+          userSpaceReviewDetails: this.userSpaceRating
+            ? this.userSpaceRating
+            : null,
+        };
+
+        this.workspaceRatingReview_dialogRef =
+          this.workspaceRatingReview_dialog.open(
+            WorkspaceRatingReviewComponent,
+            config
+          );
+        this.workspaceRatingReview_dialogRef.componentInstance.ref =
+          this.workspaceRatingReview_dialogRef;
+        this.workspaceRatingReview_dialogRef.componentInstance.flag = 1;
+        this.workspaceRatingReview_dialogRef.afterClosed().subscribe((result) => {
+          if (result && result.success) {
+            window.location.reload();
+            localStorage.removeItem('afterLogin');
+          }
+          this.workspaceRatingReview_dialogRef = null;
+        });
+      } else {
+        this.openLoginDialog();
+        localStorage.setItem('afterLogin', '9');
       }
-
-      let actual_name = this.space_details.actual_name.replace(/ /g, '-');
-      let location_name = this.space_details.location_name.replace(/ /g, '-');
-      let link_name = `${actual_name}-${location_name}-${this.space_details.id}`;
-      let config = new MatDialogConfig();
-      config.viewContainerRef = this.workspaceRatingReview_viewContainerRef;
-      config.panelClass = 'dialogClass';
-      config.width = '550px';
-      config.data = {
-        space_id: this.space_id,
-        link_name: link_name.toLowerCase(),
-        userSpaceReviewDetails: this.userSpaceRating
-          ? this.userSpaceRating
-          : null,
-      };
-
-      this.workspaceRatingReview_dialogRef =
-        this.workspaceRatingReview_dialog.open(
-          WorkspaceRatingReviewComponent,
-          config
-        );
-      this.workspaceRatingReview_dialogRef.componentInstance.ref =
-        this.workspaceRatingReview_dialogRef;
-      this.workspaceRatingReview_dialogRef.componentInstance.flag = 1;
-      this.workspaceRatingReview_dialogRef.afterClosed().subscribe((result) => {
-        if (result && result.success) {
-          window.location.reload();
-          localStorage.removeItem('afterLogin');
-        }
-        this.workspaceRatingReview_dialogRef = null;
-      });
-    } else {
-      this.openLoginDialog();
-      localStorage.setItem('afterLogin', '9');
     }
   }
 
