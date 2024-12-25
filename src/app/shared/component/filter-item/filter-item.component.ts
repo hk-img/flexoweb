@@ -56,10 +56,10 @@ export class FilterItemComponent implements OnInit {
     private titleCasePipe: TitleCasePipe,
     private snackBar : MatSnackBar
   ) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.clickListener = (event: Event) => this.onClick(event);
-      document.addEventListener('click', this.clickListener);
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    //   this.clickListener = (event: Event) => this.onClick(event);
+    //   document.addEventListener('click', this.clickListener);
+    // }
   }
 
   @HostListener('click', ['$event'])
@@ -646,12 +646,12 @@ export class FilterItemComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      document.removeEventListener('click', this.clickListener);
-      let arr = ["areaLocation"]
-      for (let index = 0; index < arr.length; index++) {
-        localStorage.removeItem(arr[index])
-      }
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    //   document.removeEventListener('click', this.clickListener);
+    //   let arr = ["areaLocation"]
+    //   for (let index = 0; index < arr.length; index++) {
+    //     localStorage.removeItem(arr[index])
+    //   }
+    // }
   }
 }
