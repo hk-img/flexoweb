@@ -491,21 +491,24 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    this.startCarousel();
-    this.getCoords();
-    this.getSpacecategory();
-    if (window.innerWidth < 500) {
-      this.isMobile = true;
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.startCarousel();
+      this.getCoords();
+      this.getSpacecategory();
+      if (window.innerWidth < 500) {
+        this.isMobile = true;
+      }
+      this.workspace_type = 0;
+      this.geolocate();
+
+      this.filteredPlaces = this.control.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value || '')),
+      );
+
+      this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
     }
-    this.workspace_type = 0;
-    this.geolocate();
-
-    this.filteredPlaces = this.control.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
-
-    this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
   }
 
   ngOnDestroy(): void {
