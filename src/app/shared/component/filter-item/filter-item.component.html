@@ -13,7 +13,7 @@
     <a *ngFor="let space of nearByLocationsList" (click)="openNearByList(space)" 
     [ngClass]="space?.location_name.toLowerCase() === nearByLocation && 'selected' " >{{ space?.location_name }}  </a>
   </div>
-  <div class="row" style="flex-wrap: nowrap; align-items: baseline">
+  <div class="row mb_filter_row" style="flex-wrap: nowrap; align-items: baseline">
     <div class="col-lg-8 col-md-12 col-sm-12">
       <div class="filter-buttons align-items-center">
         <div>

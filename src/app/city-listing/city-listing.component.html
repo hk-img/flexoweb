@@ -4,7 +4,7 @@
 <div
   [ngClass]="_showMap ? 'filter-wrapper style1 mar-top-100 half-map' : 'mt-70'"
 >
-  <div class="container-fluid position-relative" style="z-index: 99;">
+  <div class="container-fluid position-relative city_google_drop" style="z-index: 99;">
     <div class="row">
       <div class="col-lg-7 col-md-12" [class.col-lg-12]="!_showMap">
         <filter-item
@@ -200,7 +200,7 @@
               <div (click)="onSpaceNameClicked(selected_marker_window)" style="cursor: pointer;" id="marker_info">
                 <span class="map_wishlist" [style.color]="selected_marker_window?.existingfavorite?.favourite ? '#F76900' : 'gray'"><i (click)="shortList(selected_marker_window,$event)" class="ion-heart scale_2"></i></span>
                 <!-- <img [src]="selected_marker_window?.map_image_url" alt="" (error)="handleImageError($event)" width="320"/> -->
-                <div class="position-relative max-width">
+                <div class="position-relative max-width" style="min-width: 100%;">
                 <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
                   responsive="breakpoints">
                   <ng-container *ngIf="selected_marker_window?.images?.length">

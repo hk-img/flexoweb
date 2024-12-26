@@ -226,3 +226,11 @@ small{
   border-radius: 5px;
   font-size: small !important;
 }
+
+::ng-deep .city_google_drop .gm-style-iw{
+  max-height: max-content !important;
+}
+
+::ng-deep .city_google_drop .gm-style-iw-d{
+  max-height: 100% !important;
+}
