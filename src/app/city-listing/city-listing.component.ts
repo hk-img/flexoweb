@@ -84,7 +84,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   public mainSliderConfig = {
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
     centerMode: true,
     dots: false,
     centerPadding: '0',
@@ -850,7 +850,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     <svg xmlns="http://www.w3.org/2000/svg" width="${dynamicWidth}" height="30">
       <rect x="0" y="0" width="${dynamicWidth}" height="30" rx="20" style="fill:#F76900;" />
       <text x="50%" y="50%" alignment-baseline="central" text-anchor="middle"
-            font-size="16" dominant-baseline="middle" font-weight="900"  letter-spacing="1.5px" fill="${textColor}" font-family="Poppins, sans-serif">${price}</text>
+            font-size="14" dominant-baseline="middle" font-weight="600"  letter-spacing="1.5px" fill="${textColor}" font-family="Poppins, sans-serif">${price}</text>
     </svg>
   `;
 

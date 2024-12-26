@@ -100,6 +100,10 @@ img {
   max-width: 100%;
   height: auto;
 }
+input:focus {
+  outline: none !important;
+  box-shadow: none !important; 
+}
 
 h1,
 h2,
@@ -697,6 +701,29 @@ h6 {
 
 section.coupon {
   padding-top: 30px;
+}
+
+.mat-checkbox-layout{
+  white-space: normal !important;
+}
+
+/* bottom mobile bar */
+.mobile_btm_bar{
+  background: #000e54;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  display: none;
+}
+.mobile_btm_bar ul li{
+  text-align: center;
+}
+.mobile_btm_bar ul li a{
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 /* .container-fluid {
@@ -8109,12 +8136,11 @@ new css */
   .explore__map-side {
     width: 100%;
     position: absolute;
-    top: 58px;
+    top: 320px;
     left: 0 !important;
     height: 350px;
     padding-left: 0;
-  }
-
+}
   .gmnoprint {
     bottom: 150px !important;
   }
@@ -8134,11 +8160,14 @@ new css */
   }
 
   .filter-wrapper.style1.mar-top-100.half-map {
-    margin-top: 0 !important;
+    margin-top: 38px !important;
   }
-
+/* 
   .filter-wrapper.style1.mar-top-100.half-map .form-group.filter-group {
     margin-top: 450px;
+  } */
+  .filter-wrapper.style1.mar-top-100.half-map .mb_filter_row{
+    margin-bottom: 400px;
   }
 
   .add-list {
@@ -8158,7 +8187,6 @@ new css */
   }
 
   .listing-sidebar {
-    margin-top: 80px;
     padding-left: 0;
   }
 
@@ -10552,10 +10580,10 @@ h4 {
     margin-bottom: 25px;
   }
 
-  .booking-all-list-single-img img {
+  /* .booking-all-list-single-img img {
     width: 190px;
     height: 145px;
-  }
+  } */
 
   .booking-list-single-confirm-info .booking-list-single-info-single img {
     width: 20px;
@@ -10807,7 +10835,7 @@ h4 {
   }
 
   .single-listing-title h1 {
-    font-size: 24px;
+    font-size: 18px;
   }
 
   h5 {
@@ -11080,28 +11108,68 @@ h4 {
   h3 {
     font-size: 20px;
   }
+  .mobile_btm_bar{
+    display: block !important;
+  }
+  .call_icon{
+    display: none;
+  }
+  .whatsapp_icons{
+    display: none;
+  }
+  .zsiq_floatmain {
+    display: none !important;
+  }
+  .footer-wrapper{
+    padding-bottom: 80px !important;
+  }
   .hero_sec .hero-title {
-    font-size: 29px;
+    font-size: 37px;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    text-align: center;
   }
   .hero_sec .animateIMG.text {
-    font-size: 27px;
+    font-size: 33px;
   }
   .hero_sec {
-    height: calc(100dvh - 250px) !important;
+    height: calc(100dvh - 50px) !important;
+  }
+  .animateIMG.text {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: baseline !important;
+  }
+
+  .mb_input_box{
+    flex: 0 0 auto;
   }
 
   .border-l-r {
     border-right: none !important;
   }
-  .hero_sec .ng-select {
-    border-bottom: 1px solid #e8e8e8;
-  }
+
   .hero_sec .hero_input_box {
     border-radius: 0;
   }
-  .hero_sec .cursor-pointer {
-    border-radius: 0 !important;
+
+  .mb_hero{
+    height: 100%;
   }
+  .mb_row{
+    display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: 100%;
+        padding-block: 16px;
+    }
+    .mb_text_content{
+      flex: 1 1 auto;
+      display: flex;
+    }  
+  
+
   .hero__form-input {
     margin-bottom: 5px;
   }
@@ -11163,7 +11231,7 @@ h4 {
     margin-bottom: 6px;
   }
   .inventory-label p {
-    font-size: 12px;
+    font-size: 15px;
   }
   .price-value {
     font-size: 14px !important;
@@ -11212,6 +11280,25 @@ h4 {
   }
   .contact_txt{
     font-size: 22px !important;
+  }
+
+
+  .bg_face{
+     background: #fff;
+     padding: 15px;
+     border-radius: 15px;
+  }
+
+  .bg_face .ng-select .ng-select-container{
+    border-radius: 15px;
+    border: 1px solid #000 !important;
+    min-height: 52px;
+    height: 52px;
+   }
+   .bg_face .hero__form-input {
+    border: 1px solid #000 !important;
+    border-radius: 15px;
+    height: 52px;
   }
 
 }

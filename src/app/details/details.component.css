@@ -141,23 +141,23 @@
   display: flex;
   padding: 27px;
 }
-
-.plan-list li {
+.plan-list li{
   background: #f7f7f7;
   border-radius: 5px;
   padding: 15px 20px;
   min-height: 115px;
+  margin-bottom: 20px;
+}
+
+.plan-list li .pricing_list {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 20px;
 }
 
 .plan-list h4 {
   color: #010101;
   font-size: 18px;
-  line-height: 24px;
   margin-bottom: 0px;
 }
 

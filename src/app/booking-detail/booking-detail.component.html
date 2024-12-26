@@ -123,26 +123,26 @@
                 </div>
                 </div>
                 <div class="booking-details-booking-information" style="display:block" *ngIf="bookingDetail?.spaceType !== 'Coworking Space' && bookingPeriod && bookingPeriod.length > 0">
-                    <div class="d-flex py-2" *ngFor="let bookings of bookingPeriod">
-                        <div class="booking-details-booking-information-single">
+                    <div class="row py-2 m-0" *ngFor="let bookings of bookingPeriod">
+                        <div class="col-lg-3 col-md-auto col-6 mb-md-0 mb-4 booking-details-booking-information-single">
                             <p>Date</p>
                             <div class="booking-details-booking-information-single-cont">
                                 <p>{{ bookings.startDate | date : 'dd-MM-YYYY' }}</p>
                             </div>
                         </div>
-                        <div class="booking-details-booking-information-single">
+                        <div class="col-lg-3 col-md-auto col-6 mb-md-0 mb-4 booking-details-booking-information-single">
                             <p>Start Time</p>
                             <div class="booking-details-booking-information-single-cont">
                                 <p>{{ formatTime(bookings.startTime) }}</p>
                             </div>
                         </div>
-                        <div class="booking-details-booking-information-single">
+                        <div class="col-lg-3 col-md-auto col-6 booking-details-booking-information-single">
                             <p>End Time</p>
                             <div class="booking-details-booking-information-single-cont">
                                 <p>{{ formatTime(bookings.endTime)}}</p>
                             </div>
                         </div>
-                        <div class="booking-details-booking-information-single">
+                        <div class="col-lg-3 col-md-auto col-6 booking-details-booking-information-single">
                             <p>No of Hours</p>
                             <div class="booking-details-booking-information-single-cont">
                                 <p>{{calculateHourDifference(bookings.startTime, bookings.endTime)}}</p>

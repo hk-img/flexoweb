@@ -14,7 +14,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide single-listing-slider slide"
           *ngFor="let element of space_details?.images">
-          <img  [src]="element" alt="{{space_details?.imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}"/>
+          <img [src]="element" alt="{{space_details?.imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}" />
         </div>
       </ngx-slick-carousel>
       <a class="carousel-control-prev" style="top: 18%" (click)="prev()" role="button" data-slide="prev">
@@ -32,11 +32,11 @@
       View More
     </button>
     <div class="gallery-half position-relative" (click)="openImagesDialog()">
-        <div *ngIf="space_details !== undefined">
-          <div class="gallery-banner">
-            <div *ngIf="ribbon" class="ribbon-label-details" [style.backgroundColor]="ribbon_color">
-              {{ribbon}}
-            </div>
+      <div *ngIf="space_details !== undefined">
+        <div class="gallery-banner">
+          <div *ngIf="ribbon" class="ribbon-label-details" [style.backgroundColor]="ribbon_color">
+            {{ribbon}}
+          </div>
           <div *ngIf="space_details?.youtube_url !== undefined ">
             <div *ngIf="space_details?.youtube_url !== '' && space_details?.youtube_url !== null"
               class="responsive-container">
@@ -46,12 +46,14 @@
                 allowfullscreen></iframe>
             </div>
           </div>
-          <img (error)="onImageError($event,space_details?.imageAlt)" *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined"  [src]="
+          <img (error)="onImageError($event,space_details?.imageAlt)"
+            *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined" [src]="
           space_details?.images[0]
           ? 
           space_details?.images[0]
           : 'assets/images/details_placeholder_image.jpg'
-          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
+          "
+            alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
         </div>
       </div>
     </div>
@@ -62,7 +64,7 @@
               ? 
                 space_details?.images[space_details?.youtube_url ? 0 : 1]
               : 'assets/images/details_placeholder_image.jpg'
-          " 
+          "
           alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}" />
       </div>
       <div class="gallery-banner">
@@ -71,7 +73,8 @@
               ? 
                 space_details?.images[space_details?.youtube_url ? 2 : 3]
               : 'assets/images/details_placeholder_image.jpg'
-          " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}" />
+          "
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}" />
       </div>
     </div>
     <div class="gallery-one-third" (click)="openImagesDialog()">
@@ -81,14 +84,16 @@
               ? 
                 space_details?.images[space_details?.youtube_url ? 1 : 2]
               : 'assets/images/details_placeholder_image.jpg'
-          " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}" />
+          "
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}" />
       </div>
       <div class="gallery-banner">
         <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 3 : 4]
               ? 
                 space_details?.images[space_details?.youtube_url ? 3 : 4] : 'assets/images/details_placeholder_image.jpg'
-          " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}" />
+          "
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}" />
       </div>
     </div>
   </div>
@@ -163,12 +168,12 @@
                     <li style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a href="#">{{
                         space_details?.location_name}}</a>
                     </li>
-                    <li style="text-transform: capitalize;" *ngIf="isLongterm || isShortterm" class="breadcrumb-item"
+                    <!-- <li style="text-transform: capitalize;" *ngIf="isLongterm || isShortterm" class="breadcrumb-item"
                       aria-current="page">{{
                       space_details?.spaceTitle}}</li>
                     <li style="text-transform: capitalize;" *ngIf="isCoworking" class="breadcrumb-item"
                       aria-current="page">{{space_details?.actual_name}}
-                    </li>
+                    </li> -->
                   </ol>
                 </nav>
               </div>
@@ -311,8 +316,8 @@
 <div class="section-padding" style="padding-top: 0px">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-12">
-        <div id="list-menu" class="list_menu">
+      <div class="col-lg-8 col-md-12 order-lg-0 order-md-1 order-1">
+        <div id="list-menu" class="list_menu d-md-block d-none">
           <ul class="list-details-tab fixed-nav list-details-tab-item">
             <li class="nav-item" [ngClass]="{ active: list_tab == 1 }">
               <a (click)="scrollToSection('overview')" [ngClass]="{ active: list_tab == 1 }">About the Space</a>
@@ -498,67 +503,73 @@
               <div *ngFor="let resource of resources_list">
                 <li
                   *ngIf="space_details[resource.column_name] != null && space_details[resource.column_name] >0 && resource?.id != 8">
-                  <div>
-                    <h4 class="text-capitalize">{{ resource.name }}</h4>
-                    <p>{{ resource.desc }}</p>
-                    <span>
-                      <a class="custum-btn blu-btn" (click)="openInquiryPopUp2(resource.name)">
-                        Enquire Now
-                      </a>
-                    </span>
-                  </div>
-                  <div class="action-box col-lg-4 col-md-5 col-12 pl-md-2 pl-0">
-                    <div class="price ml-md-2 ml-0" *ngIf="space_details[resource.column_name]">
-                      <span>from</span>
-                      <div style="
+                  <div class="pricing_list">
+                    <div>
+                      <h4 class="text-capitalize">{{ resource.name }}</h4>
+                      <p class="m-0">{{ resource.desc }}</p>
+
+                    </div>
+                    <div class="action-box col-lg-4 col-md-5 col-12 pl-md-2 pl-0">
+                      <div class="price ml-md-2 ml-0" *ngIf="space_details[resource.column_name]">
+                        <span>from</span>
+                        <div style="
                           display: flex;
                         ">
-                        <i class="icon-rupee"></i>
-                        <h2 style="font-size: 18px">
-                          <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
-                          space_details[resource.column_name]|| '' }}
-                        </h2>
-                        <small><span *ngIf="resource?.id !== 5">/seat</span>/{{
-                          resource?.id == 6 || resource?.id == 7
-                          ? "hour"
-                          : "month"
-                          }}</small>
+                          <i class="icon-rupee"></i>
+                          <h2 style="font-size: 18px">
+                            <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
+                            space_details[resource.column_name]|| '' }}
+                          </h2>
+                          <small><span *ngIf="resource?.id !== 5">/seat</span>/{{
+                            resource?.id == 6 || resource?.id == 7
+                            ? "hour"
+                            : "month"
+                            }}</small>
+                        </div>
                       </div>
-                    </div>
 
+                    </div>
+                  </div>
+                  <div class="enqry_btn mt-2">
+                    <a class="custum-btn blu-btn mt-0" (click)="openInquiryPopUp2(resource.name)">
+                      Enquire Now
+                    </a>
                   </div>
                 </li>
                 <li *ngIf="resource?.id == 8 && space_details?.originalPrice > 0">
-                  <div>
-                    <h4 class="text-capitalize">{{ resource.name }}</h4>
-                    <p>{{ resource.desc }}</p>
-                    <span>
-                      <a (click)="openRequetBuyPassPopup()" class="custum-btn" style="border-color: #4b975f;
-                      background: #4b975f;">
-                        Buy pass
-                      </a>
-                    </span>
-                  </div>
-                  <div class="action-box col-lg-4 col-md-5 col-12 d-flex pl-md-2 pl-0">
-                    <div class="price ml-md-2 ml-0" *ngIf="space_details[resource.column_name]">
-                      <span>from</span>
-                      <div style="
+                  <div class="pricing_list">
+                    <div>
+                      <h4 class="text-capitalize">{{ resource.name }}</h4>
+                      <p>{{ resource.desc }}</p>
+
+                    </div>
+                    <div class="action-box col-lg-4 col-md-5 col-12 d-flex pl-md-2 pl-0">
+                      <div class="price ml-md-2 ml-0" *ngIf="space_details[resource.column_name]">
+                        <span>from</span>
+                        <div style="
                           display: flex;
                           /* gap: 2px; */
                           align-items: baseline;
                         ">
-                        <i class="icon-rupee"></i>
-                        <h2 style="font-size: 18px">
-                          <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
-                          space_details[resource.column_name]|| '' }}
-                        </h2>
-                        <small>/seat/{{
-                          resource?.id == 6 || resource?.id == 7
-                          ? "hour"
-                          : "day"
-                          }}</small>
+                          <i class="icon-rupee"></i>
+                          <h2 style="font-size: 18px">
+                            <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
+                            space_details[resource.column_name]|| '' }}
+                          </h2>
+                          <small>/seat/{{
+                            resource?.id == 6 || resource?.id == 7
+                            ? "hour"
+                            : "day"
+                            }}</small>
+                        </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="enqry_btn mt-2">
+                    <a (click)="openRequetBuyPassPopup()" class="custum-btn" style="border-color: #4b975f;
+                  background: #4b975f;">
+                      Buy pass
+                    </a>
                   </div>
                 </li>
               </div>
@@ -566,7 +577,7 @@
           </div>
 
           <div id="location" class="list-details-section">
-            <h2 class="location-section fs-20" >Location</h2>
+            <h2 class="location-section fs-20">Location</h2>
             <google-map height="400px" width="100%" [zoom]="15" [center]="marker?.position">
               <!-- <map-circle [center]="marker?.position" [radius]="circleRadius1" [options]="circleOptions1"></map-circle> -->
               <map-circle [center]="marker?.position" [radius]="circleRadius2" [options]="circleOptions2"></map-circle>
@@ -617,7 +628,8 @@
             <ul class="business-hours">
               <li class="business-open">
                 <h3>
-                <span class="day">Monday</span></h3>
+                  <span class="day">Monday</span>
+                </h3>
                 <h3 class="atbd_open_close_time">
                   <span
                     *ngIf="workingTime?.length && !workingTime[0]?.isClosed && mon_opening_time && mon_closing_time">
@@ -770,7 +782,8 @@
             <div class="review-section">
 
               <div class="review-section-heading">
-                <h2 class="fs-20 m-0">Reviews & Ratings <span *ngIf="reviews?.length > 0">({{reviews?.length}})</span> </h2>
+                <h2 class="fs-20 m-0">Reviews & Ratings <span *ngIf="reviews?.length > 0">({{reviews?.length}})</span>
+                </h2>
                 <a (click)="openAddReviewDialog()" class="custum-btn outline-orng-btn"> <i class="fa fa-pencil"
                     aria-hidden="true"></i> Leave a Review</a>
               </div>
@@ -929,7 +942,8 @@
               <div *ngIf="reviews.length > spaceRatingReviewList.length"
                 style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
                 <a (click)="nextReviewList()" class="link-hov style2 text-dark"
-                  style="border: 1px solid #ccc7c7; padding: 15px 20px; font-weight: 600;cursor: pointer;">See more reviews </a>
+                  style="border: 1px solid #ccc7c7; padding: 15px 20px; font-weight: 600;cursor: pointer;">See more
+                  reviews </a>
               </div>
 
               <div *ngIf="spaceRatingReviewList.length == 0">
@@ -948,7 +962,7 @@
 
 
       </div>
-      <div class="col-lg-4 col-md-12">
+      <div class="col-lg-4 col-md-12 order-lg-1 order-md-0 order-0">
         <div class="listing-sidebar" style="position: sticky; top:90px;">
           <div class="sidebar-widget info enquire-container-desktop" *ngIf="!isMobile">
             <!-- <h3><i class="ion-android-calendar"></i>Booking</h3>
@@ -960,21 +974,32 @@
               <div class="booking-container hour-rate" *ngIf="isShortterm">
                 <!-- <p>Prices starting from</p> -->
                 <h2>
-                  <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="45px" fill="none" xmlns="http://www.w3.org/2000/svg">
-                 <g id="SVGRepo_iconCarrier"> <path d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z" fill="#fed42d"></path> </g></svg> <img src="assets/images/rs-icon.png" alt=""> {{space_details?.originalPrice}} <span> / hr</span></h2>
+                  <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="45px" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
+                        fill="#fed42d"></path>
+                    </g>
+                  </svg> <img src="assets/images/rs-icon.png" alt=""> {{space_details?.originalPrice}} <span> /
+                    hr</span>
+                </h2>
                 <p class=""> {{space_details?.minimum_hours/60}} hrs minimum</p>
               </div>
               <div class="booking-container hour-rate" *ngIf="isLongterm">
                 <p>Monthly rental</p>
                 <h2><img src="assets/images/rs-icon.png" alt="">{{space_details?.originalPrice}}</h2>
-                <span
-                    class="font-weight-normal pl-1" style="font-size: 12px;"> <img src="assets/images/rs-icon.png" style="width: 8px;" alt=""> {{ space_details?.originalPrice / space_details?.spacesqft | number:'1.0-0' }}/Sqft
-                    <span class="font-weight-bold text-gray mb-1 mt-1" style="font-size: 11px;" *ngIf="space_details?.negociable_price">(Negotiable)</span>
-                  </span>
-                <p class="" style="font-size: 13px !important;"><b>Carpet Area:</b> {{ space_details?.originalPrice / space_details?.spacesqft | number:'1.0-0' }} sq. ft. | <b>{{space_details?.spaceStatus}}</b></p>
+                <span class="font-weight-normal pl-1" style="font-size: 12px;"> <img src="assets/images/rs-icon.png"
+                    style="width: 8px;" alt=""> {{ space_details?.originalPrice / space_details?.spacesqft |
+                  number:'1.0-0' }}/Sqft
+                  <span class="font-weight-bold text-gray mb-1 mt-1" style="font-size: 11px;"
+                    *ngIf="space_details?.negociable_price">(Negotiable)</span>
+                </span>
+                <p class="" style="font-size: 13px !important;"><b>Carpet Area:</b> {{ space_details?.originalPrice /
+                  space_details?.spacesqft | number:'1.0-0' }} sq. ft. | <b>{{space_details?.spaceStatus}}</b></p>
               </div>
               <div class="booking-container">
-                <h2 class="booking-heading text-center fs-20"  *ngIf="!isShortterm">Interested in this space?</h2>
+                <h2 class="booking-heading text-center fs-20" *ngIf="!isShortterm">Interested in this space?</h2>
                 <!-- <br /> -->
                 <ul *ngIf="isCoworking" class="row g-3 align-items-center">
                   <li class="col-12 col-md-6 d-flex align-items-center">
@@ -1010,50 +1035,50 @@
                     </p>
                   </li>
                 </ul>
-                
 
-              <ul *ngIf="isLongterm" class="row g-3 align-items-center">
-                <li class="col-12 col-md-6 d-flex align-items-center">
-                  <span class="booking-icon">
-                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
-                  <p class="booking-text">
-                    1000+ Clients Served
-                  </p>
-                </li>
-                <li class="col-12 col-md-6 d-flex align-items-center">
-                  <span class="booking-icon">
-                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+
+                <ul *ngIf="isLongterm" class="row g-3 align-items-center">
+                  <li class="col-12 col-md-6 d-flex align-items-center">
+                    <span class="booking-icon">
+                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <p class="booking-text">
+                      1000+ Clients Served
+                    </p>
+                  </li>
+                  <li class="col-12 col-md-6 d-flex align-items-center">
+                    <span class="booking-icon">
+                      <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="#000000"
                         d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
                     </svg> -->
-                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
-                  <p class="booking-text">
-                    Expert Advisors 
-                  </p>
-                </li>
-                <li class="col-12 col-md-6 d-flex align-items-center">
-                  <span class="booking-icon">
-                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <p class="booking-text">
+                      Expert Advisors
+                    </p>
+                  </li>
+                  <li class="col-12 col-md-6 d-flex align-items-center">
+                    <span class="booking-icon">
+                      <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="#000000"
                         d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
                     </svg> -->
-                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
-                  <p class="booking-text">
-                    End-to-End Support
-                  </p>
-                </li>
-                <li class="col-12 col-md-6 d-flex align-items-center">
-                  <span class="booking-icon">
-                    <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <p class="booking-text">
+                      End-to-End Support
+                    </p>
+                  </li>
+                  <li class="col-12 col-md-6 d-flex align-items-center">
+                    <span class="booking-icon">
+                      <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="#000000"
                         d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
                     </svg> -->
-                    <img src="assets/images/tick.svg" alt /> </span>&nbsp;
-                  <p class="booking-text">
-                    Best Deals
-                  </p>
-                </li>
-              </ul>
+                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <p class="booking-text">
+                      Best Deals
+                    </p>
+                  </li>
+                </ul>
 
                 <div class="btn-grp-c mt-0">
                   <!-- <div class="book-btn text-center" style="margin-top: 30px">
@@ -1065,25 +1090,30 @@
                       REQUEST TO BOOK</a>
                     <a *ngIf="space_details?.isInstant == 1" (click)="openRequestBookPopup()" class="custum-btn">
                       BOOK NOW</a>
-                      <div class="mt-4" *ngIf="space_details?.isInstant == 1">                                                                        
-                        <div>
-                          <span class="mb-2">
-                            <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="35px" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <g id="SVGRepo_iconCarrier"> <path d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z" fill="#fed42d"></path> </g></svg>
-                              <span class>Instant Book</span>
-                            </span>
-                         
-                          <p class="text-gray-dark text-small pl-3">
-                            <span>After payment, your booking will be instantly confirmed.</span>
-                          </p>
-                        </div>
-                        
+                    <div class="mt-4" *ngIf="space_details?.isInstant == 1">
+                      <div>
+                        <span class="mb-2">
+                          <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="35px" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_iconCarrier">
+                              <path
+                                d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
+                                fill="#fed42d"></path>
+                            </g>
+                          </svg>
+                          <span class>Instant Book</span>
+                        </span>
+
+                        <p class="text-gray-dark text-small pl-3">
+                          <span>After payment, your booking will be instantly confirmed.</span>
+                        </p>
                       </div>
+
+                    </div>
                   </div>
 
                   <div class="mt-3" *ngIf="isCoworking">
-                    <a  (click)="openInquiryPopUp()"
-                      class=" custum-btn">
+                    <a (click)="openInquiryPopUp()" class=" custum-btn">
                       Get Quote</a>
                   </div>
                   <div *ngIf="isLongterm">
@@ -1112,7 +1142,8 @@
               </div>
               <div class="booking-container" *ngIf="!isShortterm" sty>
                 <p class="booking-text2 text-center">Speak to our office space experts.</p>
-                <a hrf="tel:+919513392400" class="booking-call text-center" style="display: block;">Call +91 95133 92400</a>
+                <a hrf="tel:+919513392400" class="booking-call text-center" style="display: block;">Call +91 95133
+                  92400</a>
               </div>
             </div>
             <!-- <div class="booking-container">

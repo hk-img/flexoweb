@@ -486,8 +486,10 @@ mark {
 
 .hero_sec .hero-title {
   display: flex;
-  flex-direction: column;
-  padding-bottom: 57px;
+      flex-direction: column;
+      padding-bottom: 57px;
+      position: relative;
+      z-index: 1;
   }
 .animateIMG.text {
   display: inline;
@@ -551,3 +553,16 @@ mark {
   left: 0;
 }
  
+h1.hero-title.v2.ml-0::before {
+  display: block;
+  content: '';
+  width: 80%;
+  height: 40px;
+  position: absolute;
+  inset: 0;
+  background: black;
+  border-radius: 50px;
+  margin: auto;
+  z-index: -1;
+  filter: blur(68px);
+}
