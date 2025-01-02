@@ -10828,7 +10828,7 @@ h4 {
   }
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1400px) { 
   p,
   a {
     font-size: 14px;
