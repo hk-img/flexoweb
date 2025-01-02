@@ -52,7 +52,7 @@ jobs:
             cd ${{ env.DEPLOY_PATH }} && 
             git pull origin ${{ env.BRANCH }} &&
             npm install --legacy-peer-deps &&
-            node generate-env.js && npx ng build --base-href=/flexospaces/website/ && npx ng run flexo-aggregation-website:server
+            node generate-env.js && npx ng run flexo-aggregation-website:server && npx ng build --base-href=/flexospaces/website/
           "
 
       - name: Deploy build to DigitalOcean server
