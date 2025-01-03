@@ -52,7 +52,7 @@ jobs:
             cd ${{ env.DEPLOY_PATH }} && 
             git pull origin ${{ env.BRANCH }} &&
             npm install --legacy-peer-deps &&
-            node generate-env.js && npx ng build --base-href=/flexospaces/website/
+            node generate-env.js && npx ng run flexo-aggregation-website:server && npx ng build --base-href=/flexospaces/website/
           "
 
       - name: Deploy build to DigitalOcean server
@@ -67,6 +67,6 @@ jobs:
             scp -r ${{ env.DEPLOY_PATH }}/dist/. ${{ env.DEPLOYBUILD_PATH }}/dist/  &&
 
             # Restart the PM2 process with ID 17 
-            npx pm2 restart 17
+            npx pm2 restart 5
           "
           
