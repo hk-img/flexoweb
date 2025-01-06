@@ -709,7 +709,7 @@ section.coupon {
 
 /* bottom mobile bar */
 .mobile_btm_bar{
-  background: #000e54;
+  background: #f76900;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -722,8 +722,15 @@ section.coupon {
 .mobile_btm_bar ul li a{
   color: #fff;
   text-align: center;
-  font-size: 16px;
+  font-size: 11px;
   font-weight: 500;
+  line-height: normal;
+}
+
+.svgIconBottom{
+  height: 20px;
+  width: 20px;
+  display: inline-block;
 }
 
 /* .container-fluid {
@@ -2121,7 +2128,7 @@ ul.list-inline li {
 ---------------------------------------------------- */
 
 .hero_sec .ng-select {
-  padding: 10px 6px;
+  padding: 5px 6px;
 }
 .hero_sec .hero_input_box {
   background: #fff;
