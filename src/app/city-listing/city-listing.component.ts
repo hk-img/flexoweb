@@ -332,7 +332,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       }
     });
 
-
     this.zoom = 12;
     if (window.innerWidth < 700) {
       this.isMobile = true;
