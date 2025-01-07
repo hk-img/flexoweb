@@ -1,7 +1,7 @@
 
 <div class="hero hero_sec">
   <div class="backgrounds animateIMG">
-    <div *ngFor="let background of backgrounds; let i = index"
+    <div class="homeInnerSwiper" *ngFor="let background of backgrounds; let i = index"
         [ngStyle]="{'background-image': 'url(' + background + ')'}"
         [class.active]="i === currentImageIndex">
     </div>
