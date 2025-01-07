@@ -130,10 +130,10 @@
       </div>
     </div>
     <div *ngIf="type === 'coworking'">
-      <div>
+      <div class="coworkingPlaceClass">
         <div class="inventory-label">
           <p>Private Office from</p>
-          <p>
+          <p class="amountClass">
             <ng-container *ngIf="spaceDetails?.privatecabin_price">
               <div class="m-0 d-flex align-items-baseline">
                 <img src="assets/images/rs-icon.png" class="rs_icon " alt="">
@@ -149,7 +149,7 @@
       </div> -->
         <div class="inventory-label">
           <p>Desks from</p>
-          <p>
+          <p class="amountClass">
             <ng-container *ngIf="spaceDetails.flexible_desk_price">
               <div class="d-flex align-items-baseline">
                 <img src="assets/images/rs-icon.png" class="rs_icon" alt="">

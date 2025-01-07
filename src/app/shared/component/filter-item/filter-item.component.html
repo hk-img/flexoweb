@@ -110,8 +110,12 @@
                     Location not found
                   </mat-option>
                 </mat-autocomplete>
-                  <a (click)="onNearmeClicked()" class="cursor-pointer" style="color: inherit"><i class="ion-ios-location"></i>
-                    Near Me</a>
+                  <a (click)="onNearmeClicked()" class="cursor-pointer d-flex align-items-center" style="gap: 8px; color: inherit">
+                    <i class="ion-ios-location"></i>
+                    <span class="d-inline-flex" style="white-space: nowrap;">
+                      Near Me
+                    </span>
+                  </a>
             </div>
           </div>
         </form>
