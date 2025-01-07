@@ -8153,9 +8153,9 @@ new css */
     height: 350px;
     padding-left: 0;
 }
-  .gmnoprint {
+  /* .gmnoprint {
     bottom: 150px !important;
-  }
+  } */
 
   .contact-map {
     margin-top: 50px;
@@ -10727,9 +10727,9 @@ h4 {
 }
 
 @media only screen and (max-width: 567px) {
-  .amountClass{
+  /* .amountClass{
     width: 100%;
-  }
+  } */
   .booking-list-tabs {
     padding: 0px;
   }
@@ -11246,7 +11246,7 @@ h4 {
     margin-bottom: 6px;
   }
   .inventory-label p {
-    font-size: 15px;
+    font-size: 13px;
   }
   .price-value {
     font-size: 14px !important;
@@ -11706,9 +11706,9 @@ h4 {
   cursor: pointer;
 }
 
-.gmnoprint {
+/* .gmnoprint {
   top: 150px !important;
-}
+} */
 .city_carousel .slick-prev:before {
   content: "\f053";
   font-family: "FONTAWESOME";

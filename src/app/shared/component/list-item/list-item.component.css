@@ -30,11 +30,11 @@
   .inventory-label{
     flex-wrap: wrap;
   }
-  .coworkingPlaceClass{
+  /* .coworkingPlaceClass{
     display: flex;
     flex-direction: column;
     row-gap: 10px;
-  }
+  } */
 }
 
 
