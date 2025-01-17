@@ -111,6 +111,7 @@ export class LoginDialog implements OnInit {
   socialUserFirstName: any;
   socialUserLastName: any;
   telInputInstance: any;
+  initialDialCode:any = "+91"
   selectedCountryData: any;
   iti2: import("intl-tel-input").Iti;
   iti: import("intl-tel-input").Iti;
@@ -265,6 +266,7 @@ export class LoginDialog implements OnInit {
   }
 
   onCountryChange2(iti: any) {
+    alert("aa")
     this.selectedCountryData = iti.getSelectedCountryData();
     this.mobileLoginForm.patchValue({"phone_code":this.selectedCountryData?.dialCode});
     this.mobileNumberForm.patchValue({"phone_code":this.selectedCountryData?.dialCode});
