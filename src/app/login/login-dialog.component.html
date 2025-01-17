@@ -89,7 +89,8 @@
     <div class="otp-heading">
       <h4>OTP Verification</h4>
       <p>Enter the OTP send to <span *ngIf="selectedLoginType === 'Mobile'">{{"+" +
-          selectedCountryData.dialCode}}</span><span>
+          selectedCountryData?.dialCode && selectedCountryData?.dialCode.trim() ? selectedCountryData?.dialCode :
+          initialDialCode}}</span><span>
           {{selectedLoginType==LoginTypeEnum.Mobile?userDetail?.mobile||
           mobileNumberForm.value.mobile:(userDetail?.email||mobileNumberForm.value.email)}}</span></p>
     </div>
