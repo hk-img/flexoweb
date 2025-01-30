@@ -87,11 +87,11 @@ mark {
   color: #fff !important;
   background: #f76900;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
-  padding: 6px 32px;
-  border-radius: 15px;
-  height: 55px;
+  padding: 6px 20px;
+  border-radius: 12px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -502,7 +502,7 @@ mark {
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
@@ -565,4 +565,39 @@ h1.hero-title.v2.ml-0::before {
   margin: auto;
   z-index: -1;
   filter: blur(68px);
+}
+
+@media only screen and (max-width: 576px) {
+  .hero-slide{
+    position: relative;
+    z-index: 2;
+  }
+  .homeInnerSwiper{
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 200px) !important;
+    background-size: cover;
+    background-position: bottom;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 0;
+  }
+  .backgrounds.animateIMG::before {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 1;
+    background: linear-gradient(0deg, #3a0d00, #3a0d00, #3a0d00, transparent);
+    height: 300px;
+}
+.animateIMG.backgrounds{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
 }

@@ -28,7 +28,7 @@ export class FilterDialog implements OnInit {
   }
   option: Options = {
     floor: 0,
-    ceil: 10,
+    ceil: 50,
   };
 
   constructor(

@@ -980,5 +980,79 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       );
     }
   }
+
+  isScriptLoaded: boolean = false;
+
+  loadZohoScript() {
+    if (this.isScriptLoaded) {
+      console.log("Zoho script already loaded.");
+      return;
+    }
+
+    this.isScriptLoaded = true; // Prevent duplicate script loading
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.id = 'zsiqchat';
+    script.defer = true;
+
+    script.innerHTML = `
+      var $zoho = $zoho || {};
+      $zoho.salesiq = $zoho.salesiq || {
+        widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
+        values: {},
+        ready: function () {}
+      };
+      var d = document;
+      var s = d.createElement("script");
+      s.type = "text/javascript";
+      s.id = "zsiqscript";
+      s.defer = true;
+      s.src = "https://salesiq.zoho.in/widget";
+      var t = d.getElementsByTagName("script")[0];
+      t.parentNode.insertBefore(s, t);
+    `;
+
+    document.body.appendChild(script); // Append the script to the body
+    console.log("Zoho script loaded.");
+  }
+
+  loadZohoScript2() {
+    const existingScript = document.getElementById('zsiqscript');
+    if (existingScript) {
+      existingScript.remove();
+      this.isScriptLoaded = false;
+    }
+
+    if (!this.isScriptLoaded) {
+      this.isScriptLoaded = true;
+
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.id = 'zsiqscript';
+      script.defer = true;
+      script.src = 'https://salesiq.zoho.in/widget';
+
+      const inlineScript = `
+        var $zoho = $zoho || {};
+        $zoho.salesiq = $zoho.salesiq || {
+          widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
+          values: {},
+          ready: function () {}
+        };
+      `;
+
+      const inlineScriptTag = document.createElement('script');
+      inlineScriptTag.type = 'text/javascript';
+      inlineScriptTag.id = 'zsiqchat';
+      inlineScriptTag.defer = true;
+      inlineScriptTag.innerHTML = inlineScript;
+
+      document.body.appendChild(inlineScriptTag);
+      document.body.appendChild(script);
+
+      console.log('Zoho script reloaded.');
+    }
+  }
 }
 
