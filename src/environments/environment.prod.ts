@@ -8,4 +8,5 @@ export const environment = {
   webDomain: 'https://www.flexospaces.com/',
   // mapKey: 'AIzaSyBO3Aj_uDEPrIoZb9owi11Aewrpy6VW45U',
   mapKey: 'AIzaSyD4dM3hVfGGmT5VkryrtmiD__QHWeFpV0M',
+  clientId:""
 };

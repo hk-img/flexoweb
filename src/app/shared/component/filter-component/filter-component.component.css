@@ -89,3 +89,20 @@ background: #f76900;
 ::ng-deep .ngx-slider-ceil{
   visibility: hidden !important;
 }
+
+::ng-deep .dialogClass {
+  position: relative !important;
+  overflow: hidden;
+}
+::ng-deep .dialogClass:has(.overlayy)::before {
+  content: "Loading...";
+  position: absolute;
+  inset: 0;
+  z-index: 10000;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  height: 100dvh;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Meta, Title } from "@angular/platform-browser";
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-list-with-us',
@@ -98,6 +99,7 @@ export class ListWithUsComponent implements OnInit {
 
   public isMobile: boolean = false;
   public frame_height
+  public hostWebUrl:any=environment.HOST_WEBLINK;
 
   ngOnInit(): void {
     if (window.innerWidth < 700) {

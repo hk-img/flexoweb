@@ -73,9 +73,14 @@ export class FilterDialog implements OnInit {
     this.ref.close(options);
   }
 
+  loadAmenties=false;
   getAmenities(){
+    this.loadAmenties=true
     this.service.getAllAmenities().subscribe((res:any) => {
       this.amenities = res;
+      setTimeout(() => {
+        this.loadAmenties=false;
+      }, 500);
     })
   }
 

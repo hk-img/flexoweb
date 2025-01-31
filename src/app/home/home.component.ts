@@ -61,6 +61,7 @@ export class HomeComponent {
   textDelay: number = 900; // Delay for text fade in/out (in ms)
 
   intervalId: any;
+  hostWebUrl:any=environment.HOST_WEBLINK;
 
 
  
