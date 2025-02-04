@@ -865,7 +865,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     
     if (isPlatformBrowser(this.platformId)) {
         
-      e.stopPropagation()
+      // e.stopPropagation()
       let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
       if (isLoggedIn /* this.logged_in */) {
         this.addRemoveFavorite(obj.id)
