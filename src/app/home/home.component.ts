@@ -562,6 +562,15 @@ export class HomeComponent {
 
   onInputChange(value: string) {
     this.searchTerm = value.toLowerCase().trim().replace(/\s/g, '');
+    this.filterLocations();
+  }
+
+  filterLocations() {
+    if (this.searchTerm) {
+      this.filteredPlaces = this.locations.filter(val =>
+        val.toLowerCase().startsWith(this.searchTerm[0])
+      );
+    }
   }
 
   getHighlightedSegments(value: string) {
@@ -641,6 +650,7 @@ export class HomeComponent {
     }
   }
 
+
   onSearchSubmit() {
     let url = '';
     this.spaceType = this.spaceType.toLowerCase();
@@ -656,7 +666,11 @@ export class HomeComponent {
 
     // }
     if ((this.spaceType == 'coworking space')) {
-      url = `in/coworking/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
+      if(this.filteredPlaces.find(place => place.trim().endsWith('(City)'))){
+        url = `in/coworking/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
+      }else{
+        url = `in/coworking-space/` + `${(this.city).replace(' ', '-').toLowerCase() + '/' + this?.filteredPlaces.map(place => place.split(',')[0].trim()).join('-')}`;
+      }
     }else {
       url = `in/${this.spaceType}/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
     }

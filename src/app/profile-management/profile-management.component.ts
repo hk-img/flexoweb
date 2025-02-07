@@ -285,10 +285,24 @@ export class ProfileManagementComponent implements OnInit {
 		const formValue = form.value;
 		const userId = this.userDetails.id;
 		
-		if(!form.valid){
-			this.toastr.error('Form is not valid!')
-			return false;
-		}
+		if (!form.valid) {
+			for (const controlName in form.controls) {
+				if (form.controls[controlName].invalid) {
+					const control = form.controls[controlName];
+					
+					if (control.errors?.required) {
+						this.toastr.error(`${controlName} is required!`);
+					} else if (control.errors?.minlength) {
+						this.toastr.error(`${controlName} must be at least ${control.errors.minlength.requiredLength} characters long!`);
+					} else if (control.errors?.maxlength) {
+						this.toastr.error(`${controlName} cannot exceed ${control.errors.maxlength.requiredLength} characters!`);
+					} else if (control.errors?.pattern) {
+						this.toastr.error(`${controlName} is invalid format!`);
+					}
+					return false;
+				}
+			}
+		}		
 		
 		let payload = {
 			"phone_code": formValue.phone_code,

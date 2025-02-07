@@ -1482,6 +1482,7 @@ export class LoginDialog implements OnInit {
     this.loginRegisterService
       .verifyLoginOtp(mobile, otp)
       .subscribe((res: any) => {
+        console.log(res)
         if (res['success'] === true) {
           this.isLoading = false;
           this.loginOtpReceived = false;
@@ -1514,7 +1515,7 @@ export class LoginDialog implements OnInit {
           }
         } else {
           this.isLoading = false;
-          this.toastr.error(res.message);
+          this.toastr.error("Please enter correct OTP");
         }
       });
   }
