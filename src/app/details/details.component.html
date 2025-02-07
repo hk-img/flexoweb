@@ -1,31 +1,77 @@
 <div class="listing-details-slider swiper-container">
   <div class="swiper-wrapper" *ngIf="isMobile">
-    <div class="col-lg-12" style="padding: 0px">
-      <ngx-slick-carousel *ngIf="space_details !== undefined" class="carousel" #slickMainCarousel="slick-carousel"
-        [config]="mainSliderConfig">
-        <div ngxSlickItem *ngIf="space_details?.youtube_url !== undefined && space_details?.youtube_url !== ''">
-          <div *ngIf="space_details?.youtube_url !== '' && space_details?.youtube_url !== null"
-            class="responsive-container">
-            <iframe class="responsive-iframe" [src]="space_details?.youtube_url" title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen></iframe>
+   <div class="position-relative">
+    <div class="gallery-half position-relative" (click)="openImagesDialog()">
+      <div *ngIf="space_details !== undefined">
+        <div class="gallery-banner">
+          <div *ngIf="ribbon" class="ribbon-label-details" [style.backgroundColor]="ribbon_color">
+            {{ribbon}}
           </div>
+          <div *ngIf="space_details?.youtube_url !== undefined ">
+            <div *ngIf="space_details?.youtube_url !== '' && space_details?.youtube_url !== null"
+              class="responsive-container">
+              <iframe class="responsive-iframe" [src]="space_details?.youtube_url" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <img (error)="onImageError($event,space_details?.imageAlt)"
+            *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined" [src]="
+          space_details?.images[0]
+          ? 
+          space_details?.images[0]
+          : 'assets/images/details_placeholder_image.jpg'
+          "
+            alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
         </div>
-        <div ngxSlickItem class="swiper-slide single-listing-slider slide"
-          *ngFor="let element of space_details?.images">
-          <img [src]="element" alt="{{space_details?.imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}" />
-        </div>
-      </ngx-slick-carousel>
-      <a class="carousel-control-prev" style="top: 18%" (click)="prev()" role="button" data-slide="prev">
-        <span class="icon ion-chevron-left icon-color"></span>
-        <!-- <span class="sr-only">Previous</span> -->
-      </a>
-      <a class="carousel-control-next" style="top: 18%" (click)="next()" role="button" data-slide="next">
-        <span class="icon ion-chevron-right icon-color"></span>
-        <!-- <span class="sr-only">Next</span> -->
-      </a>
+      </div>
     </div>
+    <div class="gallry_side_img ">
+      <div class="gallery-one-third" (click)="openImagesDialog()">
+        <div class="gallery-banner">
+          <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+              space_details?.images[space_details?.youtube_url ? 0 : 1]
+                ? 
+                  space_details?.images[space_details?.youtube_url ? 0 : 1]
+                : 'assets/images/details_placeholder_image.jpg'
+            "
+            alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}" />
+        </div>
+        <div class="gallery-banner">
+          <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+              space_details?.images[space_details?.youtube_url ? 2 : 3]
+                ? 
+                  space_details?.images[space_details?.youtube_url ? 2 : 3]
+                : 'assets/images/details_placeholder_image.jpg'
+            "
+            alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}" />
+        </div>
+      </div>
+      <div class="gallery-one-third" (click)="openImagesDialog()">
+        <div class="gallery-banner">
+          <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+              space_details?.images[space_details?.youtube_url ? 1 : 2]
+                ? 
+                  space_details?.images[space_details?.youtube_url ? 1 : 2]
+                : 'assets/images/details_placeholder_image.jpg'
+            "
+            alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}" />
+        </div>
+        <div class="gallery-banner">
+          <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+              space_details?.images[space_details?.youtube_url ? 3 : 4]
+                ? 
+                  space_details?.images[space_details?.youtube_url ? 3 : 4] : 'assets/images/details_placeholder_image.jpg'
+            "
+            alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}" />
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-white-view-more" (click)="openImagesDialog()" type="button">
+      View More
+    </button>
+   </div>
   </div>
   <div class="gallery" *ngIf="!isMobile">
     <button class="btn btn-white-view-more" (click)="openImagesDialog()" type="button">

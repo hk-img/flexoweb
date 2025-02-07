@@ -927,3 +927,37 @@ line-height: 1.8;
     margin-left: 0px;
   }
 }
+
+@media only screen and (min-width: 320px) and (max-width: 768px){
+  .gallery-half {
+    /* height: 100%; */
+    width: 100%;
+  }
+  
+  /* .gallery-banner {
+    height: 100%;
+  } */
+
+  .gallry_side_img {
+    display: flex;
+    margin-top: 2px;
+    gap: 2px;
+  }
+  
+  .gallery-one-third {
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    gap: 2px;
+  }
+  .gallery-one-third
+  {
+    border-left: none !important;
+  }
+  .btn-white-view-more{
+     bottom: auto;
+    top: 24px;
+    right: auto;
+    left: 18px;
+   }
+}
