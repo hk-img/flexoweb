@@ -237,14 +237,21 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
-      this.city_param = this.getOriginalUrlParam(params['city']);
+      if(this.spaceType == 'coworking café'){
+        this.spaceType = 'Coworking Café/Restaurant';
+      }
+      if(this?.spaceType == 'Coworking Café/Restaurant'){
+        this.city_param = this.getOriginalUrlParam(params['area']);
+      }else{
+        this.city_param = this.getOriginalUrlParam(params['city']);
+      }
       this.areaName = this.getOriginalUrlParam(params['area'])
       if (!this.areaName) {
         if (this.spaceType === 'coworking space') {
-          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['city'])} (${new Date().getFullYear()}) | Compare & Book`);
+          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['city']).toUpperCase()} (${new Date().getFullYear()}) | Compare & Book`);
           this.metaService.updateTag({
             name: "description",
-            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['city'])} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.`,
+            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['city']).toUpperCase()} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.`,
           });
         } else if (
           this.spaceType === 'coworking cafe/restaurant' ||
@@ -263,24 +270,24 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.spaceType === 'training room' ||
           this.spaceType === 'event space'
         ) {
-          this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} from Rs.20000 /hour`);
+          this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city']).toUpperCase()} from Rs.20000 /hour`);
           this.metaService.updateTag({
             name: "description",
-            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city'])} starting from Rs.20000 /hour. View images, amenities, pricing to find the best fit.Explore and book now!.`,
+            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city']).toUpperCase()} starting from Rs.20000 /hour. View images, amenities, pricing to find the best fit.Explore and book now!.`,
           });
         } else {
-          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['city'])} | Managed Offices`);
+          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['city']).toUpperCase()} | Managed Offices`);
           this.metaService.updateTag({
             name: "description",
-            content: `Explore offices for rent in ${this.getOriginalUrlParam(params['city'])}. Choose from a wide range of furnished, unfurnished, built-to-suit and managed office options.`,
+            content: `Explore offices for rent in ${this.getOriginalUrlParam(params['city']).toUpperCase()}. Choose from a wide range of furnished, unfurnished, built-to-suit and managed office options.`,
           });
         }
       } else if (this.areaName) {
         if (this.spaceType === 'coworking space') {
-          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['area'])} | Book A Shared Office`);
+          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['area']).toUpperCase()} | Book A Shared Office`);
           this.metaService.updateTag({
             name: "description",
-            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
+            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
           });
         } else if (
           this.spaceType === 'coworking cafe/restaurant' ||
@@ -299,16 +306,16 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.spaceType === 'training room' ||
           this.spaceType === 'event space'
         ) {
-          this.titleService.setTitle(`${this.spaceType} in ${this.getOriginalUrlParam(params['area'])} | Book Now`);
+          this.titleService.setTitle(`${this.spaceType} in ${this.getOriginalUrlParam(params['area']).toUpperCase()} | Book Now`);
           this.metaService.updateTag({
             name: "description",
-            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])} Starting from Rs.20000 /hour. Compare prices, services and amenities. Explore available options now.`,
+            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city']).toUpperCase()} Starting from Rs.20000 /hour. Compare prices, services and amenities. Explore available options now.`,
           });
         } else {
-          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])}`);
+          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}`);
           this.metaService.updateTag({
             name: "description",
-            content: `Find office space for rent in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city'])}. Choose from a variety of furnished, unfurnished, and custom-built options to suit your needs.`,
+            content: `Find office space for rent in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}. Choose from a variety of furnished, unfurnished, and custom-built options to suit your needs.`,
           });
         }
       }
