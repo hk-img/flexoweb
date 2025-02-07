@@ -106,3 +106,10 @@ background: #f76900;
   font-weight: bold;
   height: 100dvh;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+    .filter_radio{
+      flex-direction: column;
+      align-items: start !important;
+    }
+}
