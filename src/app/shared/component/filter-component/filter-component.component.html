@@ -28,9 +28,9 @@
         <hr>
         <h4 class="mb-3">Sort By:</h4>
         <div>
-            <mat-radio-group aria-label="Select an option" (change)="radioChange($event)" [(ngModel)]="priceRange">
-                <mat-radio-button value="review">Rating High to Low </mat-radio-button> &nbsp;
-                <mat-radio-button value="high_to_low">Price High to Low</mat-radio-button> &nbsp;
+            <mat-radio-group class="filter_radio d-flex align-items-center" style="gap:12px;flex-wrap: wrap;" aria-label="Select an option" (change)="radioChange($event)" [(ngModel)]="priceRange">
+                <mat-radio-button value="review">Rating High to Low </mat-radio-button> 
+                <mat-radio-button value="high_to_low">Price High to Low</mat-radio-button> 
                 <mat-radio-button value="low_to_high">Price Low to High</mat-radio-button>
             </mat-radio-group>
         </div>
