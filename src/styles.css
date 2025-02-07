@@ -526,6 +526,7 @@ h6 {
   line-height: 1.8;
   margin-bottom: 0;
   color: #777;
+  word-wrap: break-word;
 }
 
 .mar-bot-15 {

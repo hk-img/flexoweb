@@ -260,9 +260,9 @@
                           {{reviews?.length || 0}} reviews </a>
                       </div>
                     </div>
-                    <div *ngIf="space_details?.ratingsAvg == 0 && !isLongterm" class="total-viewer">
+                    <div *ngIf="space_details?.ratingsAvg == 0 && !isLongterm" class="total-viewer pr-2">
                       <!-- <div class="review-heading h3 text-dark">Reviews</div> -->
-                      <p style="margin:0;color:#646464">No review yet</p>
+                      <p style="margin:0;color:#646464" *ngIf="reviews?.length > 0">No review yet</p>
                     </div>
                     <div class="d-flex align-items-center gap-2 reviewInnerClass">
                       <div class="total-viewer rating-info-single" *ngIf="!isLongterm">
@@ -1006,7 +1006,7 @@
                 <h2 class="booking-heading text-center fs-20" *ngIf="!isShortterm">Interested in this space?</h2>
                 <!-- <br /> -->
                 <ul *ngIf="isCoworking" class="row g-3 align-items-center">
-                  <li class="col-12 col-md-6 d-flex align-items-center">
+                  <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon me-2">
                       <img src="assets/images/tick.svg" alt="Tick Icon" class="img-fluid" />
                     </span>
@@ -1014,7 +1014,7 @@
                       Zero Brokerage
                     </p>
                   </li>
-                  <li class="col-12 col-md-6 d-flex align-items-center">
+                  <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon me-2">
                       <img src="assets/images/tick.svg" alt="Tick Icon" class="img-fluid" />
                     </span>
@@ -1022,7 +1022,7 @@
                       Best Deals
                     </p>
                   </li>
-                  <li class="col-12 col-md-6 d-flex align-items-center">
+                  <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon me-2">
                       <img src="assets/images/tick.svg" alt="Tick Icon" class="img-fluid" />
                     </span>
@@ -1030,7 +1030,7 @@
                       1000+ Clients Served
                     </p>
                   </li>
-                  <li class="col-12 col-md-6 d-flex align-items-center">
+                  <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon me-2">
                       <img src="assets/images/tick.svg" alt="Tick Icon" class="img-fluid" />
                     </span>
@@ -1042,14 +1042,14 @@
 
 
                 <ul *ngIf="isLongterm" class="row g-3 align-items-center">
-                  <li class="col-12 col-md-6 d-flex align-items-center">
+                  <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon">
                       <img src="assets/images/tick.svg" alt /> </span>&nbsp;
                     <p class="booking-text">
                       1000+ Clients Served
                     </p>
                   </li>
-                  <li class="col-12 col-md-6 d-flex align-items-center">
+                  <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon">
                       <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="#000000"
@@ -1060,7 +1060,7 @@
                       Expert Advisors
                     </p>
                   </li>
-                  <li class="col-12 col-md-6 d-flex align-items-center">
+                  <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon">
                       <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="#000000"
@@ -1071,7 +1071,7 @@
                       End-to-End Support
                     </p>
                   </li>
-                  <li class="col-12 col-md-6 d-flex align-items-center">
+                  <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon">
                       <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="#000000"

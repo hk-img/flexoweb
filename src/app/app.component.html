@@ -69,17 +69,20 @@
           </div>
           <div class="site-mobile-menu-body">
             <ul class="site-menu d-lg-block">
-              <li class="has-no-children">
+              <li class="has-no-children js-menu-toggle">
                 <a routerLink="/enterprise">Enterprise Solutions</a>
               </li>
-              <li class="has-no-children">
+              <li class="has-no-children js-menu-toggle">
                 <a routerLink="/joy-of-giving">Joy Of Giving</a>
               </li>
-              <li class="has-no-children">
+              <li class="has-no-children js-menu-toggle">
                 <a routerLink="/list-with-us">List With Us</a>
               </li>
-              <li class="has-no-children" (click)="openLoginDialog()" *ngIf="!isLoggedIn && !userDetails">
+              <li class="has-no-children js-menu-toggle" (click)="openLoginDialog()" *ngIf="!isLoggedIn && !userDetails">
                 <a class="custum-btnFlogi" routerLink="/list-with-us">Login/Register</a>
+              </li>
+              <li class="has-no-children js-menu-toggle" (click)="logout();onMenueOpenClose();"> 
+                <a routerLink="/">Logout</a>
               </li>
             </ul>
           </div>
