@@ -613,13 +613,28 @@ export class DetailsComponent implements OnInit {
   copyLink() {
     if (isPlatformBrowser(this.platformId)) {
       const link = `${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`;
-      navigator.clipboard.writeText(link).then(() => {
+  
+      // Fallback to execCommand if clipboard API is not available
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(link).then(() => {
+          this.toastr.success('Link copied to clipboard', 'Success');
+        }).catch(err => {
+          this.toastr.error(err, 'Error');
+        });
+      } else {
+        // Fallback method using document.execCommand (older browsers)
+        const textArea = document.createElement('textarea');
+        textArea.value = link;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+  
         this.toastr.success('Link copied to clipboard', 'Success');
-      }).catch(err => {
-        this.toastr.error(err, 'Error');
-      });
+      }
     }
   }
+  
 
   updateShortList() {
     if (isPlatformBrowser(this.platformId)) {

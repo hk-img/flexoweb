@@ -1526,5 +1526,11 @@ export class AppComponent {
     }
   }
 
+  public onMenueOpenClose2(){
+    if (isPlatformBrowser(this.platformId)) {
+      document.getElementById("myDropdown2").classList.toggle("show");
+    }
+  }
+
   title = 'flexo-aggregation-website';
 }

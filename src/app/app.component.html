@@ -45,13 +45,24 @@
                   </ul>
                 
               </nav>
-              <div class="d-lg-none sm-right mobile-nav-icons">
+              <div class="d-lg-none sm-right mobile-nav-icons d-flex align-items-center" style="gap:15px">
                 <a href="tel:+91 95133 92400" class="mobile-bar"><span class="ion-android-call"></span>
                 </a>
                 <a routerLink="/my-shortlists" class="mobile-bar"><span class="ion-ios-heart"></span>
                 </a>
-                <a href="#" class="mobile-bar js-menu-toggle">
-                  <span class="ion-android-menu"></span>
+                <li class="has-no-children" style="cursor: pointer;" *ngIf="isLoggedIn || userDetails?.firstName">
+                  <div class="dropdown">
+                    <button class="bg-transparent border-0 p-0 mobile-bar" data-toggle="dropdown" type="button" aria-expanded="true" (click)="onMenueOpenClose2()" [title]="userDetails?.name"> <span class="ion-person"></span> </button>
+                    <ul id="myDropdown2" class="dropdown-menu userInfoMenu" data-toggle="collapse" aria-expanded="false" data-target="#bs-example-navbar-collapse-2" style="width: 250px;">
+                        <li *ngFor="let sbl of sideBarList" data-toggle="collapse" aria-expanded="true">
+                          <a [routerLink]="sbl.page">{{sbl.title}}</a>
+                        </li>
+                        <li class="li-drp-btn-logout" (click)="logout();onMenueOpenClose();"> <a>Logout</a></li>
+                    </ul>
+                </div>
+                </li>
+                <a *ngIf="!isLoggedIn || !userDetails?.firstName" class="" (click)="openLoginDialog()">
+                  <span class="fa-solid fa-right-to-bracket" style="color:#000"></span>
                 </a>
               </div>
               <!-- <div class="add-list float-right">
@@ -69,7 +80,7 @@
           </div>
           <div class="site-mobile-menu-body">
             <ul class="site-menu d-lg-block">
-              <li class="has-no-children js-menu-toggle">
+              <!-- <li class="has-no-children js-menu-toggle">
                 <a routerLink="/enterprise">Enterprise Solutions</a>
               </li>
               <li class="has-no-children js-menu-toggle">
@@ -77,13 +88,13 @@
               </li>
               <li class="has-no-children js-menu-toggle">
                 <a routerLink="/list-with-us">List With Us</a>
-              </li>
+              </li> -->
               <li class="has-no-children js-menu-toggle" (click)="openLoginDialog()" *ngIf="!isLoggedIn && !userDetails">
-                <a class="custum-btnFlogi" routerLink="/list-with-us">Login/Register</a>
+                <a class="custum-btnFlogi">Login/Register</a>
               </li>
-              <li class="has-no-children js-menu-toggle" (click)="logout();onMenueOpenClose();"> 
+              <!-- <li *ngIf="isLoggedIn && userDetails" class="has-no-children js-menu-toggle" (click)="logout();onMenueOpenClose();"> 
                 <a routerLink="/">Logout</a>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>
@@ -266,44 +277,44 @@
 
           <div class="col-lg-3 col-md-12">
             <div class="footer-content nav mt-lg-0 mt-md-4 mt-4">
-              <h4 class="title margin-block mt-0">Subscribe</h4>
-              <ul class="list footer-list">
-                <li>
+              <h4 class="title margin-block mt-0">Follow us on</h4>
+              <!-- <ul class="list footer-list"> -->
+                <!-- <li>
                   <div class="contact-info">
-                    <!-- <div class="icon">
+                    <div class="icon">
                       <i class="ion-ios-location"></i>
-                    </div> -->
+                    </div>
                     <div class="text">
                       Join our mailing list to receive offers, discounts,
                       promotions, event invites, updates and other awesome
                       stuff.
                     </div>
                   </div>
-                </li>
-
+                </li> -->
+<!-- 
                 <li>
-                  <div class="contact-info">
+                  <div class="contact-info"> -->
                     <!-- <div class="icon">
                       <i class="ion-ios-telephone"></i>
                     </div> -->
-                    <form id="subscribe">
-                      <mat-form-field appearance="outline" style="width: 285px">
+                    <!-- <form id="subscribe"> -->
+                      <!-- <mat-form-field appearance="outline" style="width: 285px">
                         <mat-label>Enter Email</mat-label>
                         <input name="email" id="subscribe-email" matInput placeholder="Email" required />
                       </mat-form-field>
                       <button type="submit" class="btn large-btn mar-top-10 subscribe-button" id="subscribe-button">
                         Subscribe
-                      </button>
+                      </button> -->
                       <!-- <button type="submit" id="subscribe-button" class="subscribe-button"><i
                               class="fa fa-rss"></i> Subscribe</button> -->
-                      <label for="subscribe-email" class="subscribe-message"></label>
-                    </form>
+                      <!-- <label for="subscribe-email" class="subscribe-message"></label> -->
+                    <!-- </form> -->
 
                     <!-- <input class="enteremail" name="email" id="subscribe-email" placeholder="Email"
                     spellcheck="false" type="text"> -->
-                  </div>
+                  <!-- </div>
                 </li>
-              </ul>
+              </ul> -->
               <ul class="social-buttons style2">
                 <li>
                   <a href="https://www.facebook.com/flexospaces/"><i class="ion-social-facebook"></i></a>
