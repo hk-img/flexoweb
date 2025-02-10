@@ -1136,9 +1136,9 @@
                             GET A QUOTE</a>
                         </div> -->
                   <div *ngIf="isShortterm">
-                    <a *ngIf="space_details?.isInstant == 0" (click)="openRequestBookPopup()" class="custum-btn">
+                    <a *ngIf="space_details?.isInstant == 0 && !isMobile" (click)="openRequestBookPopup()" class="custum-btn">
                       REQUEST TO BOOK</a>
-                    <a *ngIf="space_details?.isInstant == 1" (click)="openRequestBookPopup()" class="custum-btn">
+                    <a *ngIf="space_details?.isInstant == 1 && !isMobile" (click)="openRequestBookPopup()" class="custum-btn">
                       BOOK NOW</a>
                     <div class="mt-4" *ngIf="space_details?.isInstant == 1">
                       <div>
