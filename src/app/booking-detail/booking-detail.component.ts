@@ -233,7 +233,13 @@ export class BookingDetailComponent implements OnInit {
         });
         dialog_Ref.afterClosed().subscribe((result) => {
           if (result) {
-            
+            this._spaceService.cancelUserBooking(this?.bookingId).subscribe((res:any)=>{
+              if(res?.success){
+                this.toastr.success(res?.message)
+              }else{
+                this.toastr.error(res?.message)
+              }
+            })
           }
         })
       }

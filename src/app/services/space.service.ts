@@ -51,6 +51,7 @@ export class SpaceService {
   private getAmenitiesURL = environment.apiUrl + '/api/v1/user/getAllAmenities';
 
   private urlRejectBookinonPaymentExpiry = environment.apiUrl + '/api/v1/user/rejectBookingOnPaymentExpiry';
+  private userBookingUrl = environment.apiUrl + '/api/v1/user/cancelBooking';
 
   getLocationUrl = environment.apiUrl + '/api/v1/user/getAllLocations';
 	shortDetailsUrl = environment.apiUrl + '/api/v1/spaces/getSpaceDetails/';
@@ -1502,6 +1503,11 @@ export class SpaceService {
   }
   voteDevoteSpace(data,id): Observable<any> {
     return this.http.post(`${this.voteDevoteEndPoint}/${id}`,data,{ headers: this.appGlobals.setHeaders()});
+  }
+
+  cancelUserBooking(bookingId:any){
+   return this.http
+      .post(this.userBookingUrl, {"bookingId":bookingId}, { headers: this.appGlobals.setHeaders()});
   }
 
   getNearbySpaces(keyword, location, radius, type): Observable<any> {
