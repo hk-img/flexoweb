@@ -20,6 +20,15 @@
                         <p>Your request to update booking has been declined.</p>
                     </div>
                 </div>
+                <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'cancel'">
+                    <div class="mr-2">
+                        <img src="assets/images/bc-c.png" alt="" class="" style="border-radius: 50%;height: 43px;">
+                    </div>
+                    <div class="booking-details-confirmation-cont">
+                        <h4 style="color:red !important">Booking {{bookingDetail?.bookingStatus}} !</h4>
+                        <p>Your request to update booking has been cancelled.</p>
+                    </div>
+                </div>
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'pending'">
                     <div class="col">
                     <span class="booking-details-confirmation-img" style="padding: 0 !important; background: #fff !important;">
