@@ -1,6 +1,7 @@
 import { DatePipe, isPlatformBrowser, TitleCasePipe } from '@angular/common';
 import {
   Component,
+  HostListener,
   Inject,
   NgZone,
   OnInit,
@@ -380,11 +381,10 @@ export class DetailsComponent implements OnInit {
       )
   }
 
+  @HostListener('window:resize', ['$event'])
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      if (window.innerWidth < 700) {
-        this.isMobile = true;
-      }
+      this.checkScreenSize();
     }
     this.route.params.subscribe((params: Params) => {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
@@ -411,6 +411,13 @@ export class DetailsComponent implements OnInit {
 
   }
 
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isMobile = window.innerWidth < 700;
+  }
 
   updateJsonLd(
     spaceType: string,
