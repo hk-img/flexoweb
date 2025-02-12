@@ -78,7 +78,7 @@ export class InquiryComponent {
     { workSpaceName: 'Not Sure', typeOfSpace: "Not Sure" },
   ]
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any,public dialogRef: MatDialogRef<InquiryComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private detailPage: DetailsComponent, private service: SpaceService, private route: ActivatedRoute, private toastr: ToastrService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: any, public dialogRef: MatDialogRef<InquiryComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private detailPage: DetailsComponent, private service: SpaceService, private route: ActivatedRoute, private toastr: ToastrService) {
     if (localStorage.getItem("spaceDetail")) {
 
       let space_detail = JSON.parse(localStorage.getItem("spaceDetail"));
@@ -107,8 +107,8 @@ export class InquiryComponent {
   ngOnInit(): void {
     this.formData.spaceType = this.data.name ?? "";
     if (isPlatformBrowser(this.platformId)) {
-    this.isCoworkings = sessionStorage.getItem('isCoworking');
-    this.valueForListingPage = localStorage.getItem('staticValue');
+      this.isCoworkings = sessionStorage.getItem('isCoworking');
+      this.valueForListingPage = localStorage.getItem('staticValue');
     }
 
     const url = window.location.href;  // Get the full URL
@@ -125,7 +125,7 @@ export class InquiryComponent {
       this.formData.firstName = this.userDetail?.firstName;
       this.formData.lastName = this.userDetail?.lastName;
       this.formData.userEmail = this.userDetail?.email;
-      this.formData.userMobile = this.userDetail?.mobile?.replace(" ","");
+      this.formData.userMobile = this.userDetail?.mobile?.replace(" ", "");
       this.formData.phone = this.userDetail?.mobile;
       this.formData.phone_code = String(`+${this.userDetail?.phone_code}`);
       this.dialCode = this.userDetail?.phone_code;
@@ -136,17 +136,17 @@ export class InquiryComponent {
   }
 
   onCountryCodeChange(country: any) {
-    this.profileDetailForm.control.patchValue({userMobile:''})
+    this.profileDetailForm.control.patchValue({ userMobile: '' })
     this.profileDetailForm.value.phone_code = country;
     this.selectedIndex = this.countryCodes.findIndex((code: any) => code?.dialcode === country);
     this.updatePlaceholder();
   }
-  
+
   updatePlaceholder() {
     if (this.selectedIndex) {
       this.placeholder = Array.from({ length: this.countryCodes[this.selectedIndex]['number-of-digits-in-number'] }, (_, i) => i).join('');
     }
-    }
+  }
 
   closeModal(options: any) {
     this.ref.close(options);
@@ -168,17 +168,16 @@ export class InquiryComponent {
   }
 
   onSubmit(formData: any) {
-    if (!this.profileDetailForm.value.spaceType){
+    if (!this.profileDetailForm.value.spaceType) {
       this.profileDetailForm.value.spaceType = this.data?.name;
     }
     if (isPlatformBrowser(this.platformId)) {
       if (sessionStorage.getItem('isCoworking') == 'true') {
         this.profileDetailForm.value.type = 'Coworking';
+      } else {
+        this.profileDetailForm.value.type = 'Longterm';
+        formData.city = [this.city_name]
       }
-    }
-    else {
-      this.profileDetailForm.value.type = 'Longterm';
-      formData.city = [this.city_name]
     }
     if (this.staticValue == 'coworking') {
       this.profileDetailForm.value.type = 'Coworking';
@@ -186,11 +185,11 @@ export class InquiryComponent {
     if (this.city_name) {
       formData.city = [this.city_name]
     }
-    if(this.formData.firstName || this.formData.lastName || this.formData.userEmail){
+    if (this.formData.firstName || this.formData.lastName || this.formData.userEmail) {
       formData.firstName = this.formData.firstName
       formData.lastName = this.formData.lastName
       formData.userEmail = this.formData.userEmail
-    }else{
+    } else {
       this.profileDetailForm.value.firstName = this.userDetail?.firstName
       this.profileDetailForm.value.lastName = this.userDetail?.lastName
       this.profileDetailForm.value.userEmail = this.userDetail?.email
