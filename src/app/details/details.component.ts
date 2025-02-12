@@ -381,6 +381,11 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      if (window.innerWidth < 700) {
+        this.isMobile = true;
+      }
+    }
     this.route.params.subscribe((params: Params) => {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
       if (params.spaceType === 'coworking-space') {
@@ -402,10 +407,6 @@ export class DetailsComponent implements OnInit {
         visitDate: ['', [Validators.required]],
         visitTime: ['', [Validators.required]],
       });
-      if (window.innerWidth < 700) {
-        this.isMobile = true;
-      }
-
     }
 
   }
