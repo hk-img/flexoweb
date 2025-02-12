@@ -37,7 +37,7 @@ import { LoginDialog } from '../login/login-dialog.component';
 import { AppGlobals } from '../services/app-globals';
 declare var geolocation: any;
 declare var google: any;
-
+declare var $zoho: any;
 @Component({
   selector: 'app-city-listing',
   templateUrl: './city-listing.component.html',
@@ -237,12 +237,12 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
-      if(this.spaceType == 'coworking café'){
+      if (this.spaceType == 'coworking café') {
         this.spaceType = 'Coworking Café/Restaurant';
       }
-      if(this?.spaceType == 'Coworking Café/Restaurant'){
+      if (this?.spaceType == 'Coworking Café/Restaurant') {
         this.city_param = this.getOriginalUrlParam(params['area']);
-      }else{
+      } else {
         this.city_param = this.getOriginalUrlParam(params['city']);
       }
       this.areaName = this.getOriginalUrlParam(params['area'])
@@ -417,7 +417,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
   openInquiryPopUp() {
     if (isPlatformBrowser(this.platformId)) {
-    this.isCoworking = sessionStorage.getItem('isCoworking');
+      this.isCoworking = sessionStorage.getItem('isCoworking');
     }
     let config = new MatDialogConfig();
     config.viewContainerRef = this.inquiryVisit_viewContainerRef;
@@ -869,9 +869,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   shortList(obj, e?: MouseEvent) {
-    
+
     if (isPlatformBrowser(this.platformId)) {
-        
+
       // e.stopPropagation()
       let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
       if (isLoggedIn /* this.logged_in */) {
@@ -940,14 +940,14 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       localStorage.removeItem("locationLong")
     }
   }
-    ngOnDestroy(): void {
-      if (isPlatformBrowser(this.platformId)) {
-        this.removeLoaction()
-        let arr = ["range", "distance", "min_price", "max_price"]
-        for (let index = 0; index < arr.length; index++) {
-          localStorage.removeItem(arr[index])
-        }
+  ngOnDestroy(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.removeLoaction()
+      let arr = ["range", "distance", "min_price", "max_price"]
+      for (let index = 0; index < arr.length; index++) {
+        localStorage.removeItem(arr[index])
       }
+    }
   }
 
   formatUrl(value: string): string {
@@ -990,76 +990,47 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
   isScriptLoaded: boolean = false;
 
-  loadZohoScript() {
-    if (this.isScriptLoaded) {
-      console.log("Zoho script already loaded.");
-      return;
-    }
-
-    this.isScriptLoaded = true; // Prevent duplicate script loading
-
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.id = 'zsiqchat';
-    script.defer = true;
-
-    script.innerHTML = `
-      var $zoho = $zoho || {};
-      $zoho.salesiq = $zoho.salesiq || {
-        widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
-        values: {},
-        ready: function () {}
-      };
-      var d = document;
-      var s = d.createElement("script");
-      s.type = "text/javascript";
-      s.id = "zsiqscript";
-      s.defer = true;
-      s.src = "https://salesiq.zoho.in/widget";
-      var t = d.getElementsByTagName("script")[0];
-      t.parentNode.insertBefore(s, t);
-    `;
-
-    document.body.appendChild(script); // Append the script to the body
-    console.log("Zoho script loaded.");
-  }
-
   loadZohoScript2() {
-    const existingScript = document.getElementById('zsiqscript');
+
+    const existingScript = document.getElementById("zsiqscript");
     if (existingScript) {
       existingScript.remove();
-      this.isScriptLoaded = false;
+      console.log("Existing Zoho script removed.");
     }
-
-    if (!this.isScriptLoaded) {
-      this.isScriptLoaded = true;
-
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.id = 'zsiqscript';
+  
+    setTimeout(() => {
+      window['$zoho'] = window['$zoho'] || {};
+      window['$zoho'].salesiq = {
+        widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
+        values: {},
+        ready: function () {
+          console.log("Zoho SalesIQ is ready!");
+        },
+      };
+      setTimeout(() => {
+        this.clickZohoChatButton();
+      }, 1000);
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.id = "zsiqscript";
       script.defer = true;
-      script.src = 'https://salesiq.zoho.in/widget';
-
-      const inlineScript = `
-        var $zoho = $zoho || {};
-        $zoho.salesiq = $zoho.salesiq || {
-          widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
-          values: {},
-          ready: function () {}
-        };
-      `;
-
-      const inlineScriptTag = document.createElement('script');
-      inlineScriptTag.type = 'text/javascript';
-      inlineScriptTag.id = 'zsiqchat';
-      inlineScriptTag.defer = true;
-      inlineScriptTag.innerHTML = inlineScript;
-
-      document.body.appendChild(inlineScriptTag);
+      script.src = "https://salesiq.zoho.in/widget";
       document.body.appendChild(script);
-
-      console.log('Zoho script reloaded.');
-    }
+  
+      console.log("Zoho SalesIQ script reloaded.");
+    }, 200);
   }
+
+  clickZohoChatButton() {
+    const interval = setInterval(() => {
+      const chatButton = document.getElementById("zsiq_agtpic");
+      if (chatButton) {
+        chatButton.click();
+        console.log("Chat button clicked!");
+        clearInterval(interval);
+      }
+    }, 300);
+  }
+  
 }
 
