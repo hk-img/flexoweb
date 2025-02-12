@@ -1029,7 +1029,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         console.log("Chat button clicked!");
         clearInterval(interval);
       }
-    }, 300);
+    }, 100);
   }
   
 }
