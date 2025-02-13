@@ -1056,7 +1056,7 @@
             <ngx-slick-carousel class="carousel" #slickTestimonialModal="slick-carousel" [config]="testimonialConfig"
               responsive="breakpoints">
               <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let testimonial of testimonials">
-                <div class="work-process-content v1  p-4">
+                <div class="work-process-content v1 p-4 h-100 d-flex flex-column">
                   <div class="d-flex align-items-center mb-2">
                     <div class="process-icon v1" style="flex-shrink: 0;">
                       <img [src]="'assets/images/testimonials/' + testimonial.image" />
