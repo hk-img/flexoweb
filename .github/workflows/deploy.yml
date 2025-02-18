@@ -97,7 +97,7 @@ jobs:
               ssh ubuntu@13.232.163.107 "
                 sudo -i -u root bash -c '
                   scp -r \"${{ env.DEPLOY_PATH }}/dist/.\" \"${{ env.DEPLOYBUILD_PATH }}/dist\" && \
-                  npx pm2 restart flxo-website
+                  pm2 restart flxo-website
                 '
               "
           fi
