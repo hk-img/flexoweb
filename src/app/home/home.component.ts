@@ -56,15 +56,15 @@ export class HomeComponent {
   currentImageIndex: number = 0;
   currentTextIndex: number = 0;
   isTextFadingOut: boolean = false;
-  
+
   imageDuration: number = 5000; // Duration for image (in ms)
   textDelay: number = 900; // Delay for text fade in/out (in ms)
 
   intervalId: any;
-  hostWebUrl:any=environment.HOST_WEBLINK;
+  hostWebUrl: any = environment.HOST_WEBLINK;
 
 
- 
+
   @ViewChild('slickReviewsModal', { static: false })
   slickReviewsModal: SlickCarouselComponent;
   public reviewsConfig = {
@@ -91,7 +91,7 @@ export class HomeComponent {
   public reviewsConfig1 = {
     slidesToShow: 1,
     slidesToScroll: 1,
-    loop:true,
+    loop: true,
     arrows: false,
     variableHeight: false,
     autoplay: true,
@@ -108,13 +108,13 @@ export class HomeComponent {
       },
     ],
   };
-  
+
   @ViewChild('slickReviewsModal3', { static: false })
   slickReviewsModal3: SlickCarouselComponent;
   public reviewsConfig3 = {
     slidesToShow: 5,
     slidesToScroll: 1,
-    loop:true,
+    loop: true,
     arrows: false,
     variableHeight: false,
     autoplay: true,
@@ -137,7 +137,7 @@ export class HomeComponent {
 
   // @ViewChild('slickTestimonialModal', { static: false })
   // slickTestimonialModal: SlickCarouselComponent;
-  
+
   // public testimonialConfig = {
   //   slidesToShow: 3, 
   //   arrows: true,
@@ -188,7 +188,7 @@ export class HomeComponent {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: true,
-    loop:true,
+    loop: true,
     prevArrow: '<button class="slick-prev">></button>',
     nextArrow: '<button class="slick-next"><</button>',
     variableHeight: false,
@@ -205,26 +205,26 @@ export class HomeComponent {
         },
       },
       {
-        breakpoint: 1024, 
+        breakpoint: 1024,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 768, 
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
         },
       },
       {
-        breakpoint: 480, 
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
         },
       },
     ],
   };
-  
+
 
   @ViewChild('citySlickSlider', { static: false })
   citySlickSlider: SlickCarouselComponent;
@@ -253,19 +253,19 @@ export class HomeComponent {
         },
       },
       {
-        breakpoint: 1024, 
+        breakpoint: 1024,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 768, 
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 480, 
+        breakpoint: 480,
         settings: {
           slidesToShow: 2,
         },
@@ -273,7 +273,7 @@ export class HomeComponent {
     ],
   };
 
-  
+
 
   @ViewChild('workSpaceSlider', { static: false })
   workSpaceSlider: SlickCarouselComponent;
@@ -297,19 +297,19 @@ export class HomeComponent {
         },
       },
       {
-        breakpoint: 1024, 
+        breakpoint: 1024,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 768, 
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
         },
       },
       {
-        breakpoint: 480, 
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
         },
@@ -326,10 +326,10 @@ export class HomeComponent {
     variableHeight: false,
     autoplay: true,
     autoplaySpeed: 0,
-    pauseOnHover: false, 
-    pauseOnFocus: false, 
+    pauseOnHover: false,
+    pauseOnFocus: false,
     swipeToSlide: true,
-    infinite: true, 
+    infinite: true,
     speed: 5000,
     cssEase: 'linear',
     responsive: [
@@ -340,26 +340,26 @@ export class HomeComponent {
         },
       },
       {
-        breakpoint: 1024, 
+        breakpoint: 1024,
         settings: {
           slidesToShow: 4,
         },
       },
       {
-        breakpoint: 768, 
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 480, 
+        breakpoint: 480,
         settings: {
           slidesToShow: 2,
         },
       },
     ],
   };
-  
+
   @ViewChild('coworkBrandSlider', { static: false })
   coworkBrandSlider: SlickCarouselComponent;
   public brandConfig = {
@@ -384,19 +384,19 @@ export class HomeComponent {
         },
       },
       {
-        breakpoint: 1024, 
+        breakpoint: 1024,
         settings: {
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 768, 
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 480, 
+        breakpoint: 480,
         settings: {
           slidesToShow: 2,
         },
@@ -424,14 +424,14 @@ export class HomeComponent {
         },
       },
       {
-        breakpoint: 768, 
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 480, 
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -561,14 +561,14 @@ export class HomeComponent {
   }
 
   onInputChange(value: string) {
-    this.searchTerm = value.toLowerCase().trim().replace(/\s/g, '');
+    this.searchTerm = value.toLowerCase().trim().split(' ')[0];
     this.filterLocations();
   }
 
   filterLocations() {
     if (this.searchTerm) {
       this.filteredPlaces = this.locations.filter(val =>
-        val.toLowerCase().startsWith(this.searchTerm[0])
+        val.toLowerCase().startsWith(this.searchTerm)
       );
     }
   }
@@ -585,15 +585,17 @@ export class HomeComponent {
       if (index > lastIndex) {
         segments.push({ text: value.substring(lastIndex, index), highlight: false });
       }
-      segments.push({ text: value.substring(index, index + searchTermLower?.length
-), highlight: true });
+      segments.push({
+        text: value.substring(index, index + searchTermLower?.length
+        ), highlight: true
+      });
       lastIndex = index + searchTermLower?.length
-;
+        ;
       index = value.toLowerCase().indexOf(searchTermLower, lastIndex);
     }
 
     if (lastIndex < value?.length
-) {
+    ) {
       segments.push({ text: value.substring(lastIndex), highlight: false });
     }
 
@@ -666,12 +668,12 @@ export class HomeComponent {
 
     // }
     if ((this.spaceType == 'coworking space')) {
-      if(this.filteredPlaces.find(place => place.trim().endsWith('(City)'))){
+      if (this.filteredPlaces.find(place => place.trim().endsWith('(City)'))) {
         url = `in/coworking/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
-      }else{
+      } else {
         url = `in/coworking-space/` + `${(this.city).replace(' ', '-').toLowerCase() + '/' + this?.filteredPlaces.map(place => place.split(',')[0].trim()).join('-')}`;
       }
-    }else {
+    } else {
       url = `in/${this.spaceType}/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
     }
     console.log(url)
@@ -735,7 +737,7 @@ export class HomeComponent {
 
   getCityAndLocationDetails2(address_components) {
     let address_length = address_components?.length
-;
+      ;
     let main_address_component = address_components[0];
     let is_city = false;
     let city_name = '';
