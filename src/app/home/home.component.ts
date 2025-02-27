@@ -673,10 +673,11 @@ export class HomeComponent {
       } else {
         url = `in/coworking-space/` + `${(this.city).replace(' ', '-').toLowerCase() + '/' + this?.filteredPlaces.map(place => place.split(',')[0].trim()).join('-')}`;
       }
+    }else if(this.spaceType == 'coworking café/restaurant'){
+      url = `in/coworking-cafe-restaurant/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
     } else {
       url = `in/${this.spaceType}/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
     }
-    console.log(url)
     // if (is_city) {
     // }else {
     // url = `in/coworking-space` + '/' + city_name + '/' + location_name;

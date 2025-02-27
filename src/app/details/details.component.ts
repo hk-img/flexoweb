@@ -374,7 +374,7 @@ export class DetailsComponent implements OnInit {
           }
           this.city = contact_city_name
           this.country = res.spaceData.country
-          this.getSpaceDetails(this.country, this.city, this.spaceType, this.space_id);
+          this.getSpaceDetails(this.country, this.city, spaceType, this.space_id);
         }
       }
       )
@@ -385,10 +385,13 @@ export class DetailsComponent implements OnInit {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
       if (params.spaceType === 'coworking-space') {
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
-        this.space_id = this.spaceName.match(/(\d+)$/)?.[0];
+        this.space_id = params.spaceName.match(/\d+$/)?.[0];
+      }else if(this.spaceType == 'coworking café'){
+        this.spaceName = this.getOriginalUrlParam(params.spaceName);
+        this.space_id = params.spaceName.match(/\d+$/)?.[0];
       } else {
         this.location = this.getOriginalUrlParam(params.location);
-        this.space_id = params.spaceId;
+        this.space_id = params.spaceName.match(/\d+$/)?.[0];
       }
       this.getShortDetails(this.space_id)
     });
@@ -440,7 +443,7 @@ export class DetailsComponent implements OnInit {
       "mpn": "",
       "sku": "",
       "offers": {
-        "@type": "AggregateOffer",
+        "@type": "Offer",
         "url": window.location.href,
         "priceCurrency": "INR",
         "availability": "https://schema.org/InStock",

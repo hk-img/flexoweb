@@ -61,7 +61,7 @@ export class CoWorkingVisitScheduleTwoComponent {
     }
 
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.space_name = params.get('space-name');
+      this.space_name = params.get('spaceName');
       this.space_id = +this.space_name?.substring(
         this.space_name.lastIndexOf('-') + 1
       );
@@ -106,8 +106,9 @@ export class CoWorkingVisitScheduleTwoComponent {
     });
     this.route.params.subscribe((params: Params) => {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
-      this.space_id = params.spaceId;
-      this.getShortDetails(params.spaceId)
+      // this.space_id = params.spaceId;
+      // alert(this.space_id)
+      this.getShortDetails(this.space_id)
     });
 
   }

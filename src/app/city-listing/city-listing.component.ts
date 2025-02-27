@@ -237,10 +237,10 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
-      if (this.spaceType == 'coworking café') {
+      if (this.spaceType == 'coworking cafe restaurant') {
         this.spaceType = 'Coworking Café/Restaurant';
       }
-      if (this?.spaceType == 'Coworking Café/Restaurant') {
+      if (this?.spaceType == 'coworking cafe restaurant') {
         this.city_param = this.getOriginalUrlParam(params['area']);
       } else {
         this.city_param = this.getOriginalUrlParam(params['city']);
