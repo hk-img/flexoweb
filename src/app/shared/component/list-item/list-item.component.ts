@@ -205,12 +205,18 @@ export class ListItemComponent implements OnInit{
   }
   
   onSpaceNameClicked(e: any) {
-    if (this.type === 'coworking'){
+    console.log(e);
+    if(e.spaceType == 'Coworking Café/Restaurant'){
+      window.open(
+        `${this.formatUrl(e.spaceType.replace('/', '-'))}/${this.formatUrl(e.location_name)}-${e.id}`,
+        '_blank'
+      );
+    }else if (this.type === 'coworking'){
       window.open(
         `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
         '_blank'
       );
-    } else {
+    }else {
       window.open(
         `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.contact_city_name)}/${this.formatUrl(e.location_name)}/${e.id}`,
         '_blank'
