@@ -757,7 +757,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 if (element.flexible_desk_price === null) {
                   price = element.privatecabin_price
                 } else {
-                  price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
+                  price = element?.privatecabin_price < element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
                 }
               } else {
                 price = this.formatCurrency(element.originalPrice)
