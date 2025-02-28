@@ -2,7 +2,7 @@
 
 <div *ngIf="selectedRadio" class="form-group filter-group">
   <h1 class="heading" *ngIf="area_name == 0 && show && selectedRadio != 'Coworking Café'">
-    {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' : selectedRadio }} in {{nearByLocation && nearByLocation + ', '}}{{ city_name_display | titlecase }}
+    {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' : selectedRadio }} in {{nearByLocation && nearByLocation + ', '}}{{ city_name | titlecase }}
   </h1>
   <h1 class="heading" *ngIf="area_name == 0 && show && selectedRadio == 'Coworking Café'">
     {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' : selectedRadio }} {{ city_name_display | titlecase }} in {{nearByLocation && nearByLocation}}

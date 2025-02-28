@@ -711,6 +711,12 @@ export class HomeComponent {
     // }, 500);
   }
 
+  navigateToCity(city:any,locationValue:any){
+    let url = "";
+    url = `in/coworking/` + `${(city).replace(' ', '-').toLowerCase()}`;
+    localStorage.setItem("location", locationValue)
+    this.router.navigate([this.formatUrl(url)]);
+  }
 
   formatUrl(value: string): string {
     return value.trim()?.toLowerCase()?.replace(/\s+/g, '-');
