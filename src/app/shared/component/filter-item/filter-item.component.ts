@@ -121,10 +121,8 @@ export class FilterItemComponent implements OnInit {
     this.long = localStorage.getItem('long');
     this.getCoords();
     localStorage.setItem("city_name", this.city_name);
-    this.city_name_display =
-      this.city_name?.charAt(0)?.toUpperCase() + this.city_name?.slice(1);
-    this.area_name_display =
-      this.area_name.charAt(0).toUpperCase() + this.area_name?.slice(1);
+    this.city_name_display = this.city_name?.charAt(0)?.toUpperCase() + this.city_name?.slice(1);
+    this.area_name_display = this.area_name.charAt(0).toUpperCase() + this.area_name?.slice(1);
     this.city_name_display = this.city_name_display?.replace(/-/g, ' ');
     this.area_name_display = this.area_name_display?.replace(/-/g, ' ');
 
@@ -415,7 +413,7 @@ export class FilterItemComponent implements OnInit {
     // const mappedLocation = location_ === 'delhi' ? 'new-delhi' : location_ === 'bangalore' ? 'bengaluru' : location_;
     const mappedLocation = location_ === 'delhi' ? 'delhi' : location_ === 'bangalore' ? 'bengaluru' : location_;
     const details = {
-      cityId: isLocationChange ? mappedLocation : this.cityName,
+      cityId: isLocationChange ? mappedLocation : this.city_name_display,
       spaceType: this.selectedRadio === "Co-working" || this.selectedValues.length ? "coworking space" : this.selectedRadio
     };
     // alert(this.cityName)
