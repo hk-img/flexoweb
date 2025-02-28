@@ -212,7 +212,7 @@ export class RequestBookingComponent {
         if (res.success) {
           this.city = res.spaceData.contact_city_name
           this.country = res.spaceData.country
-          this.getSpaceDetails(this.country, this.city, this.spaceType, this.space_id);
+          this.getSpaceDetails(this.country, this.city, this.spaceType, spaceId);
         }
       }
       )
@@ -222,8 +222,14 @@ export class RequestBookingComponent {
     
     this.route.params.subscribe((params: Params) => {
        this.spaceType = this.getOriginalUrlParam(params.spaceType);
-      this.space_id = params.spaceId;
-      this.getShortDetails(params.spaceId)
+        this.space_id = params.spaceId;
+      if(this.spaceType == 'Coworking Café Restaurant'){
+        this.spaceType = "Coworking Café/Restaurant";
+        this.getShortDetails(params.spaceName?.match(/\d+$/)?.[0])
+      }else{
+        alert(this.space_id)
+        this.getShortDetails(params.spaceId)
+      }
     });
 
     const date = new Date();

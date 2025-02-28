@@ -385,15 +385,17 @@ export class DetailsComponent implements OnInit {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
       if (params.spaceType === 'coworking-space') {
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
-        this.space_id = params.spaceName.match(/\d+$/)?.[0];
-      }else if(this.spaceType == 'coworking café'){
+        this.space_id = this.spaceName?.match(/(\d+)$/)?.[0];
+        this.getShortDetails(this.space_id)
+      }else if(this.spaceType == 'coworking café restaurant'){
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
-        this.space_id = params.spaceName.match(/\d+$/)?.[0];
+        this.space_id = params.spaceName?.match(/\d+$/)?.[0];
+        this.getShortDetails(this.space_id)
       } else {
         this.location = this.getOriginalUrlParam(params.location);
-        this.space_id = params.spaceName.match(/\d+$/)?.[0];
+        this.space_id = params.spaceId;
+        this.getShortDetails(this.space_id);
       }
-      this.getShortDetails(this.space_id)
     });
 
     // this.getFaqsBySpaceBy(this.space_id);
