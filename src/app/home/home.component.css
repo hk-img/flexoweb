@@ -62,6 +62,25 @@
   text-align: center;
 } */
 
+
+::ng-deep .mb_input_box .hero__form .ng-dropdown-panel{
+   margin-top: 0 !important;
+   border-radius: 11px;
+   overflow: hidden;
+}
+
+::ng-deep  .cdk-overlay-pane{
+  overflow: hidden;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  background: #fff;
+  border-radius: 11px;
+  margin-top: 4px;
+}
+
+::ng-deep  .cdk-overlay-pane .mat-autocomplete-panel{
+  background: transparent;
+  box-shadow: none;
+}
 .search-icon {
   position: absolute;
   margin: auto;
