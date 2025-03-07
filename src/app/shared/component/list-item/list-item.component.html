@@ -77,7 +77,7 @@
     </div>
     <div class="rating-summary d-flex align-items-center mb-1" style="">
       <div class="rating-result d-flex align-items-center pr-2" style="" title="60%"
-        *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) ">
+        *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) && spaceDetails.reviewCount.length > 0">
         <ul class="product-rating pr-1">
           <li *ngFor="let element of spaceDetails.rating_array">
             <i class="ion-android-star"></i>
