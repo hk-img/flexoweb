@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" *ngIf="(isCoworkings=='true' || valueForListingPage == 'coworking') && value === 'detail'">
+            <div class="col-md-6" *ngIf="(isCoworkings=='true' || valueForListingPage == 'Coworking') && value === 'detail'">
                 <div class="pm-single">
                     <p>Space Type<span class="text-danger">*</span></p>
                     <mat-form-field appearance="outline" class="w-100">
@@ -96,13 +96,13 @@
                             <mat-option value="Meeting Room" *ngIf="meeting_room_price != null && meeting_room_price != ''">Meeting Room</mat-option>
                             <mat-option value="Not sure">Not sure</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="profileDetailForm.controls.spaceType?.errors?.required && isCoworkings || valueForListingPage == 'coworking'">
+                        <mat-error *ngIf="profileDetailForm.controls.spaceType?.errors?.required && isCoworkings || valueForListingPage == 'Coworking'">
                             Space Type is required.
                         </mat-error>
                     </mat-form-field>
                 </div>
             </div>
-            <div class="col-md-6" *ngIf="(isCoworkings=='true' || valueForListingPage == 'coworking') && value === 'listing' ">
+            <div class="col-md-6" *ngIf="(isCoworkings=='true' || valueForListingPage == 'Coworking') && value === 'listing' ">
                 <div class="pm-single">
                     <p>Space Type<span class="text-danger">*</span></p>
                     <mat-form-field appearance="outline" class="w-100">
@@ -115,7 +115,7 @@
                             <mat-option value="Meeting Room" *ngIf="meeting_room_price != null && meeting_room_price != ''">Meeting Room</mat-option>
                             <mat-option value="Not sure">Not sure</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="profileDetailForm.controls.spaceType?.errors?.required && isCoworkings || valueForListingPage == 'coworking'">
+                        <mat-error *ngIf="profileDetailForm.controls.spaceType?.errors?.required && isCoworkings || valueForListingPage == 'Coworking'">
                             Space Type is required.
                         </mat-error>
                     </mat-form-field>
@@ -140,7 +140,7 @@
                     </mat-form-field>
                 </div>
             </div> -->
-            <div class="col-md-6" *ngIf="isCoworkings=='true' || valueForListingPage == 'coworking'">
+            <div class="col-md-6" *ngIf="isCoworkings=='true' || valueForListingPage == 'Coworking'">
                 <div class="pm-single">
                     <p>No. of Seats<span class="text-danger">*</span></p>
                     <mat-form-field appearance="outline" class="w-100">
@@ -152,7 +152,7 @@
                             <mat-option value="51-100">51-100</mat-option>
                             <mat-option value="100+">100+</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="profileDetailForm.controls.inquirySpaceCapacity?.errors?.required && isCoworkings || valueForListingPage == 'coworking'">
+                        <mat-error *ngIf="profileDetailForm.controls.inquirySpaceCapacity?.errors?.required && isCoworkings || valueForListingPage == 'Coworking'">
                             No. of Seats is required.
                         </mat-error>
                     </mat-form-field>

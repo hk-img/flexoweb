@@ -115,10 +115,10 @@ export class InquiryComponent {
     const segments2 = url.split('/');
 
     // Find 'in' in the URL and extract the next static segment ('longTerm')
-    const inIndex = segments2.indexOf('in');
-    if (inIndex !== -1 && segments2.length > inIndex + 1) {
-      this.staticValue = segments2[inIndex + 1];
-    }
+    // const inIndex = segments2.indexOf('in');
+    // if (inIndex !== -1 && segments2.length > inIndex + 1) {
+    //   this.staticValue = segments2[inIndex + 1];
+    // }
 
     if (localStorage.getItem('userDetails')) {
       this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
@@ -172,15 +172,12 @@ export class InquiryComponent {
       this.profileDetailForm.value.spaceType = this.data?.name;
     }
     if (isPlatformBrowser(this.platformId)) {
-      if (sessionStorage.getItem('isCoworking') == 'true') {
+      if (this.valueForListingPage == 'Coworking') {
         this.profileDetailForm.value.type = 'Coworking';
       } else {
         this.profileDetailForm.value.type = 'Longterm';
         formData.city = [this.city_name]
       }
-    }
-    if (this.staticValue == 'coworking') {
-      this.profileDetailForm.value.type = 'Coworking';
     }
     if (this.city_name) {
       formData.city = [this.city_name]

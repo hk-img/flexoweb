@@ -160,7 +160,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   // public type = null;
   public pages = [];
   public page_start = 1;
-  public page_size = 24;
+  public page_size = 30;
   // public amenities = [];
   public page_end;
   public spaces_list: any[] = [];
@@ -332,7 +332,12 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       // Find 'in' in the URL and extract the next static segment ('longTerm')
       const inIndex = segments2.indexOf('in');
       if (inIndex !== -1 && segments2.length > inIndex + 1) {
-        this.staticValue = segments2[inIndex + 1];  // Extracts 'longTerm'
+        this.staticValue = segments2[inIndex + 1];
+        if(this.staticValue == 'coworking-space'){
+          this.staticValue = "Coworking"
+        }else{
+          this.staticValue = 'Longterm';
+        }
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('staticValue', this.staticValue);
         }
@@ -578,8 +583,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
             this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
               this.nearBySpaces.next(res.faqs);
+              console.log(res.data);
               this.spaces_list = Object.assign([], res.data);
-              console.log(this.spaces_list, "areaAvailable");
               if (this.spaces_list.length) {
                 const spaceType = this.spaces_list[0].spaceType
                 const cityName = this.spaces_list[0].contact_city_name
@@ -604,10 +609,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   this.space_count < this.page_size * this.page
                     ? this.space_count
                     : this.page_size * this.page;
-                this.total_pages =
-                  this.space_count % 2 == 0
-                    ? this.space_count / this.page_size
-                    : Math.floor(this.space_count / this.page_size) + 1;
+                this.total_pages = Math.ceil(this.space_count / this.page_size);
                 this.pages.splice(0, this.pages.length);
                 for (let i = 1; i <= this.total_pages; i++) {
                   this.pages.push(i);
