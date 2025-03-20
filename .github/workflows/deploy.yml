@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - staging
+      - production
 
 jobs:
   deploy:
@@ -16,7 +17,7 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_CODE }}
+          ssh-private-key: ${{ (github.ref == 'refs/heads/production') && secrets.PRODUCTION || secrets.DEPLOY_CODE }}
 
       - name: Add GitHub to known_hosts (ensure SSH connection to GitHub)
         run: |
@@ -25,48 +26,80 @@ jobs:
 
       - name: Add DigitalOcean server to known_hosts
         run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan 46.101.222.112 >> ~/.ssh/known_hosts
+          if [[ "$GITHUB_REF" == "refs/heads/staging" ]]; then
+            mkdir -p ~/.ssh
+            ssh-keyscan 46.101.222.112 >> ~/.ssh/known_hosts
+          elif [[ "$GITHUB_REF" == "refs/heads/production" ]]; then
+            mkdir -p ~/.ssh
+            ssh-keyscan 13.232.163.107 >> ~/.ssh/known_hosts
+          fi
 
       - name: Determine the branch to deploy
         id: deploy_branch
         run: |
-          echo "Deploying to branch: $GITHUB_REF"
-          echo "DEPLOYBUILD_PATH=/mnt/volume_fra1_01/project.imgglobal.in/flexospaces/website" >> $GITHUB_ENV
+          echo "Deploying to branch: $GITHUB_REF" 
           if [[ "$GITHUB_REF" == "refs/heads/staging" ]]; then
             echo "BRANCH=staging" >> $GITHUB_ENV
             echo "DEPLOY_PATH=/mnt/volume_fra1_01/project.imgglobal.in/flexospaces/website/codebackup" >> $GITHUB_ENV
+            echo "DEPLOYBUILD_PATH=/mnt/volume_fra1_01/project.imgglobal.in/flexospaces/website" >> $GITHUB_ENV
           elif [[ "$GITHUB_REF" == "refs/heads/production" ]]; then
             echo "BRANCH=production" >> $GITHUB_ENV
-            echo "DEPLOY_PATH=/mnt/volume_fra1_01/project.imgglobal.in/backend" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/home/ubuntu/docker/flexo-website/codebackup" >> $GITHUB_ENV
+            echo "DEPLOYBUILD_PATH=/home/ubuntu/docker/flexo-website" >> $GITHUB_ENV
           fi
 
       - name: Pull latest code on DigitalOcean server and Install dependencies
         run: |
-          ssh root@46.101.222.112 "
-            # Ensure that NVM is sourced for the current shell
-            source ~/.nvm/nvm.sh && 
-            nvm use 20.12.0 &&
-            node -v && 
-            npm -v &&
-            cd ${{ env.DEPLOY_PATH }} && 
-            git pull origin ${{ env.BRANCH }} &&
-            npm install --legacy-peer-deps &&
-            node generate-env.js && npx ng run flexo-aggregation-website:server && npx ng build --base-href=/flexospaces/website/
-          "
+
+          if [[ "$GITHUB_REF" == "refs/heads/staging" ]]; then
+            ssh root@46.101.222.112 "
+              # Ensure that NVM is sourced for the current shell
+              source ~/.nvm/nvm.sh && 
+              nvm use 20.12.0 &&
+              node -v && 
+              npm -v &&
+              cd ${{ env.DEPLOY_PATH }} && 
+              git pull origin ${{ env.BRANCH }} &&
+              npm install --legacy-peer-deps &&
+              node generate-env.js && npx ng run flexo-aggregation-website:server && npx ng build --base-href=/flexospaces/website/
+            "
+          elif [[ "$GITHUB_REF" == "refs/heads/production" ]]; then
+            ssh ubuntu@13.232.163.107 "
+                    sudo -i -u root bash -c '
+                      cd \"${{ env.DEPLOY_PATH }}\" && git pull origin \"${{ env.BRANCH }}\" && \
+                      cd /home/docker && docker exec -t docker-node-projects-1 bash -c \"
+                        cd app1/codebackup && npm install --legacy-peer-deps && \
+                        node generate-env.js && \
+                        npx ng run flexo-aggregation-website:server && \
+                        npx ng build --base-href=/
+                      \"
+                    '
+                  "
+            fi
 
       - name: Deploy build to DigitalOcean server
         run: |
-          ssh root@46.101.222.112 "
-            # Check if the dist folder exists, if not, create it
-            if [ ! -d '${{ env.DEPLOYBUILD_PATH }}/dist' ]; then
-              mkdir -p '${{ env.DEPLOYBUILD_PATH }}/dist';
-            fi
-            
-            # Now copy the contents from the source dist folder to the target dist folder
-            scp -r ${{ env.DEPLOY_PATH }}/dist/. ${{ env.DEPLOYBUILD_PATH }}/dist/  &&
 
-            # Restart the PM2 process with ID 17 
-            npx pm2 restart 5
-          "
-          
+          if [[ "$GITHUB_REF" == "refs/heads/staging" ]]; then
+            ssh root@46.101.222.112 "
+              # Check if the dist folder exists, if not, create it
+              if [ ! -d '${{ env.DEPLOYBUILD_PATH }}/dist' ]; then
+                mkdir -p '${{ env.DEPLOYBUILD_PATH }}/dist';
+              fi
+              
+              # Now copy the contents from the source dist folder to the target dist folder
+              scp -r ${{ env.DEPLOY_PATH }}/dist/. ${{ env.DEPLOYBUILD_PATH }}/dist/  &&
+  
+              # Restart the PM2 process with ID 17 
+              npx pm2 restart 5
+            "
+           elif [[ "$GITHUB_REF" == "refs/heads/production" ]]; then
+              ssh ubuntu@13.232.163.107 "
+                sudo -i -u root bash -c '
+                  scp -r \"${{ env.DEPLOY_PATH }}/dist/.\" \"${{ env.DEPLOYBUILD_PATH }}/dist\" && \
+                   cd /home/docker && docker exec -t docker-node-projects-1 bash -c \"
+                      pm2 restart flxo-website
+                    \"
+                '
+              "
+          fi
