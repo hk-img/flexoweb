@@ -31,7 +31,7 @@ jobs:
             ssh-keyscan 46.101.222.112 >> ~/.ssh/known_hosts
           elif [[ "$GITHUB_REF" == "refs/heads/production" ]]; then
             mkdir -p ~/.ssh
-            ssh-keyscan 13.232.163.107 >> ~/.ssh/known_hosts
+            ssh-keyscan 13.235.251.69 >> ~/.ssh/known_hosts
           fi
 
       - name: Determine the branch to deploy
