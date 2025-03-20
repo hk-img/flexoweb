@@ -64,7 +64,7 @@ jobs:
               node generate-env.js && npx ng run flexo-aggregation-website:server && npx ng build --base-href=/flexospaces/website/
             "
           elif [[ "$GITHUB_REF" == "refs/heads/production" ]]; then
-            ssh ubuntu@13.232.163.107 "
+            ssh ubuntu@13.235.251.69 "
                     sudo -i -u root bash -c '
                       cd \"${{ env.DEPLOY_PATH }}\" && git pull origin \"${{ env.BRANCH }}\" && \
                       cd /home/docker && docker exec -t docker-node-projects-1 bash -c \"
