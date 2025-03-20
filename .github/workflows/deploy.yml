@@ -94,7 +94,7 @@ jobs:
               npx pm2 restart 5
             "
            elif [[ "$GITHUB_REF" == "refs/heads/production" ]]; then
-              ssh ubuntu@13.232.163.107 "
+              ssh ubuntu@13.235.251.69 "
                 sudo -i -u root bash -c '
                   scp -r \"${{ env.DEPLOY_PATH }}/dist/.\" \"${{ env.DEPLOYBUILD_PATH }}/dist\" && \
                    cd /home/docker && docker exec -t docker-node-projects-1 bash -c \"
