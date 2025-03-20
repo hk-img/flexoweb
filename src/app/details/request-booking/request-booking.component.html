@@ -72,7 +72,7 @@
         (click)="onSumbit()">Book Now</button>
     </div>
 
-    <p class="booking-popup-input-cont">You will not be charged yet. Your booking request will be sent to the host. Once the host accepts your booking request, you will receive a link to make the payment.</p>
+    <p *ngIf="space_details?.isInstant == 0" class="booking-popup-input-cont">You will not be charged yet. Your booking request will be sent to the host. Once the host accepts your booking request, you will receive a link to make the payment.</p>
   </div>
   <div class="booking-popup-right booking-popup-half position-relative">
     <div class="booking-popup-heading booking_cls_btn position-absolute">

@@ -227,7 +227,6 @@ export class RequestBookingComponent {
         this.spaceType = "Coworking Café/Restaurant";
         this.getShortDetails(params.spaceName?.match(/\d+$/)?.[0])
       }else{
-        alert(this.space_id)
         this.getShortDetails(params.spaceId)
       }
     });

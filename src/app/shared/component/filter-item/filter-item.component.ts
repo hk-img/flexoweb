@@ -81,8 +81,8 @@ export class FilterItemComponent implements OnInit {
   public city_name_display = '';
   public area_name_display = '';
   private getCityAndLocationDetails = GlobalVariables.getCityAndLocationDetails;
-  public open_location: boolean = true;
-  open_spaceType: boolean = true;
+  public open_location: boolean = false;
+  open_spaceType: boolean = false;
   nearBySpaces: any[] = [];
   @Output() filterItemEvent = new EventEmitter<any>();
   locations: string[] = [];
@@ -284,6 +284,7 @@ export class FilterItemComponent implements OnInit {
     let url;
     const splitLocation = event.option.value.split(",");
     const location = splitLocation.at(-3)?.trim();
+    const location_name = splitLocation.at(-4)?.trim();
     const spaceType = this.selectedRadio === null ? 'coworking space' : this.selectedRadio === 'Co-working' ? 
     'coworking space' : this.selectedRadio?.toLowerCase();
     
@@ -291,8 +292,10 @@ export class FilterItemComponent implements OnInit {
       console.error("Location is undefined or invalid");
       return;
     }
-    if (spaceType === 'coworking space') {
+    if (spaceType === 'coworking space' && !location_name) {
       url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
+    }else if (spaceType === 'coworking space' && location_name){
+      url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}/${location_name}`;
     } else if ([
       'coworking cafe/restaurant', 'shoot studio', 'recording studio', 'podcast studio', 'activity space',
       'sports turf', 'sports venue', 'party space', 'banquet hall', 'gallery',
@@ -479,13 +482,11 @@ export class FilterItemComponent implements OnInit {
   }
 
   openLocation() {
-    // this.open_location = this.open_location ? false : true;
-    this.open_location =  true;
+    this.open_location = this.open_location ? false : true;
   }
 
   openSpaceType() {
-    // this.open_spaceType = this.open_spaceType ? false : true;
-    this.open_spaceType = true;
+    this.open_spaceType = this.open_spaceType ? false : true;
   }
 
   showHideMap() {

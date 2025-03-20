@@ -111,6 +111,7 @@ export class DetailsComponent implements OnInit {
   spaceType: string;
   spaceName: string;
   location: string;
+  city_param: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -415,7 +416,9 @@ export class DetailsComponent implements OnInit {
 
   }
 
-
+  formatUrl(value: string): string {
+    return value ? value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-') : '';
+  }  
   updateJsonLd(
     spaceType: string,
     imageUrl: string,
@@ -617,9 +620,8 @@ export class DetailsComponent implements OnInit {
 
   copyLink() {
     if (isPlatformBrowser(this.platformId)) {
-      const link = `${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`;
-  
-      // Fallback to execCommand if clipboard API is not available
+      const link = `${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}`;
+
       if (navigator.clipboard) {
         navigator.clipboard.writeText(link).then(() => {
           this.toastr.success('Link copied to clipboard', 'Success');
@@ -627,7 +629,6 @@ export class DetailsComponent implements OnInit {
           this.toastr.error(err, 'Error');
         });
       } else {
-        // Fallback method using document.execCommand (older browsers)
         const textArea = document.createElement('textarea');
         textArea.value = link;
         document.body.appendChild(textArea);
@@ -832,7 +833,8 @@ export class DetailsComponent implements OnInit {
         console.log('------------------------', this.space_details);
         const type = this.getType(spaceType)
         const spaceStatus = this.space_details?.spaceStatus === "Furnished" ? "furnished" : "unfurnished"
-        const cityName = this.space_details?.contact_city_name
+        const cityName = this.space_details?.contact_city_name;
+        this.city_param = this.space_details?.contact_city_name;
         const min = this.space_details?.originalPrice
         const imageUrl = this.space_details?.images.length ? this.space_details.images[0] : ''
         if (type === 'coworking') {

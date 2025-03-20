@@ -205,13 +205,18 @@
               <div class="bredcrumb_sec">
                 <nav>
                   <ol class="breadcrumb bg-white p-0 mb-0">
-                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                    <li style="text-transform: capitalize;" class="breadcrumb-item"><a
-                        href="#">{{space_details?.spaceType}}</a></li>
-                    <li style="text-transform: capitalize;" class="breadcrumb-item " aria-current="page"><a
+                    <!-- <li class="breadcrumb-item"><a routerLink="/">Home</a></li> -->
+                    <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/{{this.spaceType?.replace(' ', '-')}}/{{this.city_param?.toLowerCase()}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item"><a [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase()]">
+                      {{ space_details?.spaceType }} in {{ space_details?.contact_city_name }}
+                    </a></li>
+                    <!-- <li style="text-transform: capitalize;" class="breadcrumb-item " aria-current="page"><a
                         routerLink="/in/spaces/{{space_details?.contact_city_name}}">{{
-                        space_details?.contact_city_name}}</a></li>
-                    <li style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a href="#">{{
+                        space_details?.contact_city_name}}</a></li> -->
+                    <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a routerLink="/in/{{this.spaceType?.replace(' ', '-')}}/{{this.city_param?.toLowerCase()}}/{{space_details?.location_name?.replace(' ', '-')?.toLowerCase()}}">{{
+                        space_details?.location_name}}</a>
+                    </li>
+                    <li *ngIf="spaceType == 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase(), space_details?.location_name?.replace(' ', '-')?.toLowerCase()]">{{
                         space_details?.location_name}}</a>
                     </li>
                     <!-- <li style="text-transform: capitalize;" *ngIf="isLongterm || isShortterm" class="breadcrumb-item"
@@ -570,11 +575,7 @@
                             <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
                             space_details[resource.column_name]|| '' }}
                           </h2>
-                          <small><span *ngIf="resource?.id !== 5">/seat</span>/{{
-                            resource?.id == 6 || resource?.id == 7
-                            ? "hour"
-                            : "month"
-                            }}</small>
+                          <small><span *ngIf="resource?.id !== 5 && resource?.id !== 6 && resource?.id !== 7">/seat</span>/{{resource?.id == 6 || resource?.id == 7? "hour": "month"}}</small>
                         </div>
                       </div>
 
@@ -1237,7 +1238,7 @@
     <div class="row" style="margin-top: 60px">
       <div class="col-lg-12">
         <div class="similar-listing-title" id="similar-listing-title">
-          <h2 style="font-size: 24px;">Nearby Office Spaces</h2>
+          <h2 style="font-size: 24px;">Nearby <span *ngIf="spaceType != 'coworking space'">{{spaceType | titlecase}}</span> <span *ngIf="spaceType == 'coworking space'">{{spaceType.split(" ")[0] | titlecase}}</span> Spaces</h2>
         </div>
         <!-- <div class="swiper-container similar-list-wrap">
         <div class="swiper-wrapper"> -->
