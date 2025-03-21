@@ -69,8 +69,9 @@
             </div>
           </div>
           <div style="text-align: center;" *ngIf="!spaces_list.length && !recommended_spaces.length && !isloader">
-            <img style="width: 35%;" src="../../assets/images/not-found.jpg" alt="">
-            <h3>Finding the best options for you. Stay tuned!</h3>
+            <!-- <img style="width: 10%;" src="../../assets/images/not-found.jpg" alt=""> -->
+            <img style="width: 10%;" src="assets/images/preloader.gif" alt="..." />
+            <h3 style="font-size: 16px !important;color: #897777 !important;">Finding the best options for you. Stay tuned!</h3>
           </div>
           <div
             class="tab-content"
@@ -228,10 +229,10 @@
               <div class="info_window_content">
                 <div class="row align-items-center justify-content-between">
                   <div [ngClass]="selected_marker_window?.rating ? 'col-8 pr-0' : 'col-12'"><h5 class="m-0" [ngClass]="selected_marker_window?.rating && 'text-truncate'" [title]="selected_marker_window?.name"  >{{selected_marker_window?.name}}</h5></div>
-                  <div  *ngIf="selected_marker_window?.rating" class="col-4 pl-0 text-right "><h5 class="m-0 text-truncate" > <i class="ion ion-star"></i>{{selected_marker_window?.rating}} ({{selected_marker_window?.reviewCount}})</h5></div>
+                  <div  *ngIf="selected_marker_window?.rating && selected_marker_window?.reviewCount.length > 0" class="col-4 pl-0 text-right "><h5 class="m-0 text-truncate" > <i class="ion ion-star"></i>{{selected_marker_window?.rating}} ({{selected_marker_window?.reviewCount}})</h5></div>
                 </div>
                 <div class="d-flex align-items-center mb-1" style="gap: 22px;">
-                  <div *ngIf="mapType === 'coworking' || mapType === 'shortterm'  ">
+                  <div *ngIf="mapType === 'coworking' || mapType === 'shortterm'">
                     <i class="fa fa-user" style="color: #f76900;"></i> &nbsp;{{selected_marker_window?.howManyPeopleInYourSpace}} people
                   </div>
                   <div *ngIf="mapType === 'longterm'">

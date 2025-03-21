@@ -616,6 +616,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 }
                 this.markersData = [];
                 this.spaces_list.forEach((element) => {
+                  console.log(element)
                   element.rating_array = [];
                   element.empty_star_array = [];
                   element.rating_floor = Math.floor(element.rating);
