@@ -1046,8 +1046,7 @@
                   <span class="font-weight-bold text-gray mb-1 mt-1" style="font-size: 11px;"
                     *ngIf="space_details?.negociable_price">(Negotiable)</span>
                 </span>
-                <p class="" style="font-size: 13px !important;"><b>Carpet Area:</b> {{ space_details?.originalPrice /
-                  space_details?.spacesqft | number:'1.0-0' }} sq. ft. | <b>{{space_details?.spaceStatus}}</b></p>
+                <p class="" style="font-size: 13px !important;margin-top: 5px !important;"><b>Carpet Area:</b> {{ space_details?.spacesqft | number:'1.0-0' }} sq. ft. | <b>{{space_details?.spaceStatus}}</b></p>
               </div>
               <div class="booking-container">
                 <h2 class="booking-heading text-center fs-20" *ngIf="!isShortterm">Interested in this space?</h2>

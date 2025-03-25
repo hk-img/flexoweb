@@ -448,7 +448,7 @@ export class DetailsComponent implements OnInit {
       "mpn": "",
       "sku": "",
       "offers": {
-        "@type": "Offer",
+        "@type": "AggregateOffer",
         "url": window.location.href,
         "priceCurrency": "INR",
         "availability": "https://schema.org/InStock",
@@ -853,6 +853,16 @@ export class DetailsComponent implements OnInit {
 
         console.log(this.ribbon, this.ribbon_color);
 
+        this.marker = {
+          position: {
+            lat: this.space_details.latitude,
+            lng: this.space_details.longitude,
+          },
+          title: this.space_details.name,
+          options: { draggable: false, icon: 'assets/images/marker1.svg' },
+          url: `https://www.google.com/maps/search/?api=1&query=${this.space_details.latitude},${this.space_details.longitude}`,
+        };
+
         this.parkingOptionsValue = this.space_details?.parkingOptionsValue;
 
         this.isShortterm = this.space_details.isShortterm;
@@ -1062,7 +1072,7 @@ export class DetailsComponent implements OnInit {
             },
           },
           offers: {
-            '@type': 'Offer',
+            '@type': 'AggregateOffer',
             price: `Rs. ${this.space_details.privatecabin_price}`,
           },
         };
@@ -1094,16 +1104,6 @@ export class DetailsComponent implements OnInit {
         // this.is_shortlisted =
         //   this.shortlists.indexOf(this.space_details.id) > -1 ? true : false;
 
-
-        this.marker = {
-          position: {
-            lat: this.space_details.latitude,
-            lng: this.space_details.longitude,
-          },
-          title: this.space_details.name,
-          options: { draggable: false, icon: 'assets/images/marker1.svg' },
-          url: `https://www.google.com/maps/search/?api=1&query=${this.space_details.latitude},${this.space_details.longitude}`,
-        };
       })
       .catch((error) => { });
   }
