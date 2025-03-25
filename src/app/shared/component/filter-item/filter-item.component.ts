@@ -275,6 +275,7 @@ export class FilterItemComponent implements OnInit {
 
 
   getLocationValue(event: any) {
+    console.log(event.option.value)
     localStorage.removeItem("locationLat")
     localStorage.removeItem("locationLong")
     localStorage.setItem("location", event.option.value)
@@ -296,8 +297,7 @@ export class FilterItemComponent implements OnInit {
       url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
     }else if (spaceType === 'coworking space' && location_name){
       url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}/${location_name}`;
-    } else if ([
-      'coworking cafe/restaurant', 'shoot studio', 'recording studio', 'podcast studio', 'activity space',
+    } else if (['shoot studio', 'recording studio', 'podcast studio', 'activity space',
       'sports turf', 'sports venue', 'party space', 'banquet hall', 'gallery',
       'classroom', 'private cabin', 'meeting room', 'training room', 'event space'
     ].includes(spaceType)) {
@@ -306,6 +306,8 @@ export class FilterItemComponent implements OnInit {
       'managed office', 'private office', 'shared office', 'virtual office'
     ].includes(spaceType)) {
       url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
+    } else if(['coworking café/restaurant'].includes(spaceType)){
+      url = `in/coworking-cafe-restaurant/${location?.replace(' ', '-')?.toLowerCase()}`
     }
 
     console.log(url);
@@ -352,7 +354,7 @@ export class FilterItemComponent implements OnInit {
   getParams(nearMe?:boolean) {
     if ((this.selectedRadio?.toLowerCase() == 'coworking space')) {
       this.type = "coworking";
-    } else if ((this.selectedRadio?.toLowerCase() == 'coworking cafe/restaurant') || (this.selectedRadio?.toLowerCase() == 'shoot studio') || (this.selectedRadio?.toLowerCase() == 'recording studio') || (this.selectedRadio?.toLowerCase() == 'podcast studio') || (this.selectedRadio?.toLowerCase() == 'activity space') || (this.selectedRadio?.toLowerCase() == 'sports turf') || (this.selectedRadio?.toLowerCase() == 'sports venue') || (this.selectedRadio?.toLowerCase() == 'party space') || (this.selectedRadio?.toLowerCase() == 'banquet hall') || (this.selectedRadio?.toLowerCase() == 'gallery') || (this.selectedRadio?.toLowerCase() == 'classroom') || (this.selectedRadio?.toLowerCase() == 'private cabin') || (this.selectedRadio?.toLowerCase() == 'meeting room') || (this.selectedRadio?.toLowerCase() == 'training room') || (this.selectedRadio?.toLowerCase() == 'event space')) {
+    } else if ((this.selectedRadio?.toLowerCase() == 'coworking-café') || (this.selectedRadio?.toLowerCase() == 'shoot studio') || (this.selectedRadio?.toLowerCase() == 'recording studio') || (this.selectedRadio?.toLowerCase() == 'podcast studio') || (this.selectedRadio?.toLowerCase() == 'activity space') || (this.selectedRadio?.toLowerCase() == 'sports turf') || (this.selectedRadio?.toLowerCase() == 'sports venue') || (this.selectedRadio?.toLowerCase() == 'party space') || (this.selectedRadio?.toLowerCase() == 'banquet hall') || (this.selectedRadio?.toLowerCase() == 'gallery') || (this.selectedRadio?.toLowerCase() == 'classroom') || (this.selectedRadio?.toLowerCase() == 'private cabin') || (this.selectedRadio?.toLowerCase() == 'meeting room') || (this.selectedRadio?.toLowerCase() == 'training room') || (this.selectedRadio?.toLowerCase() == 'event space')) {
       this.type = "shortterm";
     } else if ((this.selectedRadio?.toLowerCase() == 'managed office' || this.selectedRadio?.toLowerCase() == 'private office' || this.selectedRadio?.toLowerCase() == 'shared office' || this.selectedRadio?.toLowerCase() == 'virtual office')) {
       this.type = "longterm";

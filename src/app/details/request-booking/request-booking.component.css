@@ -26,10 +26,10 @@
     margin: 0;
   }
   
-  .booking-popup .booking-popup-half .booking-popup-all-input {
+  /* .booking-popup .booking-popup-half .booking-popup-all-input {
     margin-bottom: 20px;
   }
-  
+   */
   .booking-popup .booking-popup-half .booking-popup-all-input .booking-popup-all-input-group {
     margin-bottom: 20px;
     display: -webkit-box;
@@ -65,10 +65,10 @@
     margin-left: 10px;
   }
   
-  .booking-popup .booking-popup-half .booking-popup-all-input .booking-popup-input-single {
+  /* .booking-popup .booking-popup-half .booking-popup-all-input .booking-popup-input-single {
     margin-bottom: 20px;
   }
-  
+   */
   .booking-popup .booking-popup-right {
     background: #FFF0E6;
   }
@@ -271,12 +271,13 @@
   padding: 0 !important;
 }
 
-.booking-popup-right .booking_cls_btn{
-  right: 8px;
-  top: 8px;
+.booking-popup .booking_cls_btn{
+  right: 14px;
+  top: 10px;
+  z-index: 9;
 }
 
-.booking-popup-right .booking_cls_btn .btn-close{
+.booking-popup .booking_cls_btn .btn-close{
   width: 31px;
   height: 31px;
   border-radius: 50%;

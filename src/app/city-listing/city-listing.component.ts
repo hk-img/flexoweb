@@ -399,7 +399,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       "mpn": "",
       "sku": "",
       "offers": {
-        "@type": "Offer",
+        "@type": "AggregateOffer",
         "url": window.location.href,
         "priceCurrency": "INR",
         "lowPrice": priceMin,
