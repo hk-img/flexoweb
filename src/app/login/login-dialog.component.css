@@ -541,9 +541,9 @@ span.timer {
   font-size: 14px;
 }
 
-::ng-deep .mat-dialog-container {
+/* ::ng-deep .mat-dialog-container {
   overflow: unset !important;
-}
+} */
 
 /* ::ng-deep .cdk-overlay-pane {
     width: 700px !important;

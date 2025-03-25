@@ -1,102 +1,92 @@
 <div class="booking-popup">
-    <div class="booking-popup-left booking-popup-half">
-        <div class="booking-popup-heading">
-            <h4>Complete your Day Pass Booking</h4>
-        </div>
-        <form [formGroup]="dayPassForm">
-            <div class="booking-popup-all-input">
-                <div class="booking-popup-only-input">
-                    <div class="booking-popup-all-input-group">
-                        <div class="booking-popup-input-single">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>First Name</mat-label>
-                                <input matInput placeholder="First name " formControlName="firstName">
-                                <mat-error *ngIf="formControls.firstName?.errors?.required && formControls.firstName?.touched">First name is required.</mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="booking-popup-input-single">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Last Name</mat-label>
-                                <input matInput placeholder="Last name " formControlName="lastName">
-                                <mat-error *ngIf="formControls.lastName?.errors?.required && formControls.lastName?.touched">Last name is required.</mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="booking-popup-input-single">
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Email Address</mat-label>
-                            <input matInput placeholder="Email Address" formControlName="email">
-                            <mat-error *ngIf="formControls.email?.errors?.required && formControls.email?.touched">Email is required.</mat-error>
-                            <mat-error *ngIf="formControls.email?.errors?.email && formControls.email?.touched">Please enter email.</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="booking-popup-all-input-group">
-                        <div class="booking-popup-input-single">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Phone Number</mat-label>
-                                <input matInput placeholder="Phone Number" minlength="10" [maxlength]="10" formControlName="mobile">
-                                <mat-error *ngIf="formControls.mobile?.errors?.required && formControls.mobile?.touched">Phone Number is required.</mat-error>
-                                <mat-error *ngIf="formControls.mobile?.errors?.pattern && formControls.mobile?.touched">Please enter valid phone number.</mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="booking-popup-input-single">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Company Name</mat-label>
-                                <input matInput placeholder="Company Name" formControlName="companyName">
-                                <mat-error *ngIf="formControls.companyName?.errors?.required && formControls.companyName?.touched">Company name is required.</mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="booking-popup-all-input-group">
-                        <div class="booking-popup-input-single">
-                            <!-- <mat-form-field>
+  <div class="booking-popup-left booking-popup-half">
+    <div class="booking-popup-heading">
+      <h4>Complete your Day Pass Booking</h4>
+    </div>
+    <form [formGroup]="dayPassForm">
+      <div class="booking-popup-all-input">
+        <div class="booking-popup-only-input">
+          <div class="booking-popup-all-input-group">
+            <div class="booking-popup-input-single">
+              <mat-form-field class="example-full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First name " formControlName="firstName">
+                <mat-error *ngIf="formControls.firstName?.errors?.required && formControls.firstName?.touched">First
+                  name is required.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="booking-popup-input-single">
+              <mat-form-field class="example-full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last name " formControlName="lastName">
+                <mat-error *ngIf="formControls.lastName?.errors?.required && formControls.lastName?.touched">Last name
+                  is required.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="booking-popup-input-single">
+            <mat-form-field class="example-full-width">
+              <mat-label>Email Address</mat-label>
+              <input matInput placeholder="Email Address" formControlName="email">
+              <mat-error *ngIf="formControls.email?.errors?.required && formControls.email?.touched">Email is
+                required.</mat-error>
+              <mat-error *ngIf="formControls.email?.errors?.email && formControls.email?.touched">Please enter
+                email.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="booking-popup-all-input-group">
+            <div class="booking-popup-input-single">
+              <mat-form-field class="example-full-width">
+                <mat-label>Phone Number</mat-label>
+                <input matInput placeholder="Phone Number" minlength="10" [maxlength]="10" formControlName="mobile">
+                <mat-error *ngIf="formControls.mobile?.errors?.required && formControls.mobile?.touched">Phone Number is
+                  required.</mat-error>
+                <mat-error *ngIf="formControls.mobile?.errors?.pattern && formControls.mobile?.touched">Please enter
+                  valid phone number.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="booking-popup-input-single">
+              <mat-form-field class="example-full-width">
+                <mat-label>Company Name</mat-label>
+                <input matInput placeholder="Company Name" formControlName="companyName">
+                <mat-error
+                  *ngIf="formControls.companyName?.errors?.required && formControls.companyName?.touched">Company name
+                  is required.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="booking-popup-all-input-group align-items-end">
+            <div class="booking-popup-input-single">
+              <!-- <mat-form-field>
                                 <mat-label>Start date</mat-label>
                                 <input matInput [matDatepicker]="picker" formControlName="startDate">
                                 <mat-hint>MM/DD/YYYY</mat-hint>
                                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>                            -->
-                            <!-- <mat-form-field>
+              <!-- <mat-form-field>
                                 <mat-label>Choose a date</mat-label>
                                 <input [matDatepickerFilter]="dateFilter" [readonly]="true" (click)="picker.open();" matInput formControlName="startDate" [matDatepicker]="picker" [min]="minDate"  (dateChange)="onDateChange($event)">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker ></mat-datepicker>
                                <mat-error *ngIf="formControls.startDate?.errors?.required && formControls.startDate?.touched">Company name is required.</mat-error>
                             </mat-form-field> -->
-                            <mat-form-field>
-                                <mat-chip-list #chipList (click)="picker.open()">
-                                  <mat-chip 
-                                    *ngFor="let value of model"
-                                    [selectable]="false"
-                                    [removable]="true"
-                                    (removed)="remove(value)"
-                                  >
-                                    {{ value | date }}
-                                    <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
-                                  </mat-chip>
-                                  <input
-                                    [value]="resetModel"
-                                    matInput
-                                    [matDatepickerFilter]="dateFilter"
-                                    formControlName="startDate"
-                                    [min]="minDate"
-                                    [readonly]="true"
-                                    [matDatepicker]="picker"
-                                    placeholder="Choose a date"
-                                    (dateChange)="dateChanged($event)"
-                                    [matChipInputFor]="chipList"
-                                    hidden
-                                  />
-                                </mat-chip-list>
-                                <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker
-                                  #picker
-                                  [startAt]="init"
-                                  [dateClass]="dateClass"
-                                ></mat-datepicker>
-                              </mat-form-field>
-                        </div>
-                        <!-- <div class="booking-popup-input-single">
+              <mat-form-field>
+                <mat-chip-list #chipList (click)="picker.open()">
+                  <mat-chip *ngFor="let value of model" [selectable]="false" [removable]="true"
+                    (removed)="remove(value)">
+                    {{ value | date }}
+                    <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                  </mat-chip>
+                  <input [value]="resetModel" matInput [matDatepickerFilter]="dateFilter" formControlName="startDate"
+                    [min]="minDate" [readonly]="true" [matDatepicker]="picker" placeholder="Choose a date"
+                    (dateChange)="dateChanged($event)" [matChipInputFor]="chipList" hidden />
+                </mat-chip-list>
+                <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <!-- <div class="booking-popup-input-single">
                             <input matInput placeholder="# of Days" formControlName="ofDays" (input)="onInput()">
                             <mat-form-field class="example-full-width">
                                 <mat-label># of Days</mat-label>
@@ -108,7 +98,7 @@
                                 <mat-error *ngIf="formControls.ofDays?.errors?.required && formControls.ofDays?.touched">Please select no. of days.</mat-error>
                             </mat-form-field>
                         </div> -->
-                        <!-- <div class="booking-popup-input-single">
+            <!-- <div class="booking-popup-input-single">
                           <mat-form-field>
                               <mat-label>Start time</mat-label>
                               <mat-select formControlName="estimateArrivalTime">
@@ -119,54 +109,57 @@
                               <mat-error *ngIf="formControls.estimateArrivalTime?.errors?.required && formControls.estimateArrivalTime?.touched">Please select start time.</mat-error>
                           </mat-form-field>
                       </div> -->
-                      <!-- <div class="booking-popup-all-input-group"> -->
-                        <div class="booking-popup-input-single">
-                            <!-- <input matInput placeholder="Number of Guest" formControlName="noOfGuest" (input)="onInput()"> -->
-                            <mat-form-field class="example-full-width" style="margin-top: 25px;">
-                                <mat-label>Number of Guest</mat-label>
-                                <mat-select formControlName="noOfGuest">
-                                    <mat-option *ngFor="let data of passOptions" [value]="data" >
-                                        {{data}}
-                                    </mat-option>
-                                    </mat-select>    
-                                <mat-error *ngIf="formControls.noOfGuest?.errors?.required && formControls.noOfGuest?.touched">Please enter no of guest.</mat-error>
-                            </mat-form-field>
-                        </div>
-                    <!-- </div> -->
-                    </div>
-                    <div class="booking-popup-input-single">
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Message or additional requirements</mat-label>
-                            <textarea matInput placeholder="Message or additional requirements" formControlName="message"></textarea>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <button [ngClass]="isLoading?'disabled':''" type="button" class="custum-btn next-step" (click)="onSumbit()">Continue</button>
+            <!-- <div class="booking-popup-all-input-group"> -->
+            <div class="booking-popup-input-single">
+              <!-- <input matInput placeholder="Number of Guest" formControlName="noOfGuest" (input)="onInput()"> -->
+              <mat-form-field class="example-full-width">
+                <mat-label>Number of Guest</mat-label>
+                <mat-select formControlName="noOfGuest">
+                  <mat-option *ngFor="let data of passOptions" [value]="data">
+                    {{data}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="formControls.noOfGuest?.errors?.required && formControls.noOfGuest?.touched">Please
+                  enter no of guest.</mat-error>
+              </mat-form-field>
             </div>
-        </form>
-        <p class="booking-popup-input-cont">You will not be charged until you confirm this booking on the next screen</p>
-    </div>
-<div class="booking-popup-right booking-popup-half">
+            <!-- </div> -->
+          </div>
+          <div class="booking-popup-input-single">
+            <mat-form-field class="example-full-width">
+              <mat-label>Message or additional requirements</mat-label>
+              <textarea matInput placeholder="Message or additional requirements" formControlName="message"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <button [ngClass]="isLoading?'disabled':''" type="button" class="custum-btn next-step"
+          (click)="onSumbit()">Continue</button>
+      </div>
+    </form>
+    <p class="booking-popup-input-cont">You will not be charged until you confirm this booking on the next screen</p>
+  </div>
+  <div class="booking-popup-right booking-popup-half">
     <div class="booking-popup-heading">
-        <button type="button" [mat-dialog-close]="true" class="btn-close">
-            <i class="fa fa-times" aria-hidden="true"></i>
-        </button>
+      <button type="button" [mat-dialog-close]="true" class="btn-close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
     </div>
     <div class="booking-popup-plot">
-        <div class="booking-popup-plot-img">
-            <img [src]="space_details?.images[0]|| 'assets/images/add-on-img-1.jpg'" alt="">
+      <div class="booking-popup-plot-img">
+        <img [src]="space_details?.images[0]|| 'assets/images/add-on-img-1.jpg'" alt="">
+      </div>
+      <div class="booking-popup-plot-cont">
+        <h5>{{spaceName}}</h5>
+        <p> <i class="fa fa-map-marker" aria-hidden="true"></i> <span> {{landmark}} </span> </p>
+        <div class="booking-container hour-rate align-items-start border-0">
+          <p style="font-weight: 700;">
+            <img src="assets/images/rs-icon.png" style=" height: 15px;" alt=""> {{space_details?.originalPrice}} <span>
+              /Day</span>
+            <!-- <span style="font-weight: 500; padding-left: 5px;">2 hr minimum</span> -->
+          </p>
+
         </div>
-        <div class="booking-popup-plot-cont">
-            <h5>{{spaceName}}</h5>
-            <p> <i class="fa fa-map-marker" aria-hidden="true"></i> <span> {{landmark}} </span> </p>
-            <div class="booking-container hour-rate align-items-start border-0">
-                <p style="font-weight: 700;"> 
-                  <img src="assets/images/rs-icon.png" style=" height: 15px;" alt=""> {{space_details?.originalPrice}} <span> /Day</span>
-                  <!-- <span style="font-weight: 500; padding-left: 5px;">2 hr minimum</span> -->
-                </p> 
-                
-              </div>
-            <!-- <ul class="product-rating-c" *ngIf="space_details?.ratingsAvg > 0">
+        <!-- <ul class="product-rating-c" *ngIf="space_details?.ratingsAvg > 0">
                 <li class>
                   <i style="cursor: context-menu;" [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 1, 'fa-star-half-o': space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1, 'fa-star-o': space_details?.ratingsAvg <= 0}" aria-hidden="true"></i>
                 </li>
@@ -183,66 +176,75 @@
                   <i style="cursor: context-menu;" [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 5, 'fa-star-half-o': space_details?.ratingsAvg > 4 && space_details?.ratingsAvg < 5, 'fa-star-o': space_details?.ratingsAvg <= 4}" aria-hidden="true"></i>
                 </li>
               </ul> -->
-        </div>
+      </div>
     </div>
     <div class="booking-popup-payment-info">
-        <div class="booking-popup-payment-info-date">
-            <h5> <i class="fa fa-calendar-o" aria-hidden="true"></i> <span>Booking Summary</span></h5>
+      <div class="booking-popup-payment-info-date">
+        <h5> <i class="fa fa-calendar-o" aria-hidden="true"></i> <span>Booking Summary</span></h5>
+      </div>
+      <div class="booking-popup-payment-info-details">
+        <div class="booking-popup-payment-info-details-single" *ngFor="let model of model">
+          <p> <span>{{model | date:'EEE MMM dd, yyyy' }}, </span> <span>Guest {{dayPassForm.get('noOfGuest').value}}
+            </span> x <span><img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""> {{originalPrice}}</span>
+          </p>
+          <h6> {{dayPassForm.get('noOfGuest').value * originalPrice | number: '0.2-2'}} <img
+              src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
         </div>
-        <div class="booking-popup-payment-info-details">
-            <div class="booking-popup-payment-info-details-single" *ngFor="let model of model">
-                <p> <span>{{model | date:'EEE MMM dd, yyyy' }}, </span> <span>Guest  {{dayPassForm.get('noOfGuest').value}} </span> x <span><img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""> {{originalPrice}}</span></p>
-                <h6> {{dayPassForm.get('noOfGuest').value * originalPrice  | number: '0.2-2'}} <img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
-            </div>
-        </div>
-        <!-- <div class="booking-popup-payment-info-deposit">
+      </div>
+      <!-- <div class="booking-popup-payment-info-deposit">
                 <p> Deposit </p>
                 <h6>{{bookingPrice}} INR</h6>
             </div> -->
-        <div class="booking-popup-payment-info-total">
-            <p> Subtotal </p>
-            <h6>{{dayPassForm.get('noOfGuest').value * originalPrice * model.length | number: '0.2-2' }} <img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
-        </div>
-        <div class="booking-popup-payment-info-total">
-            <p> GST(18%) </p>
-            <h6>{{(dayPassForm.get('noOfGuest').value * originalPrice * model.length)>0 ? (dayPassForm.get('noOfGuest').value * originalPrice * model.length)*0.18: 0 | number: '0.2-2'}} <img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
-        </div>
-        <div class="booking-popup-payment-info-pay">
-            <h5> Payable Now </h5>
-            <h5>{{(dayPassForm.get('noOfGuest').value * originalPrice * model.length)+((dayPassForm.get('noOfGuest').value * originalPrice * model.length)>0 ? (dayPassForm.get('noOfGuest').value * originalPrice * model.length)*0.18: 0) | number: '0.2-2'}} <img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h5>
-        </div>
+      <div class="booking-popup-payment-info-total">
+        <p> Subtotal </p>
+        <h6>{{dayPassForm.get('noOfGuest').value * originalPrice * model.length | number: '0.2-2' }} <img
+            src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
+      </div>
+      <div class="booking-popup-payment-info-total">
+        <p> GST(18%) </p>
+        <h6>{{(dayPassForm.get('noOfGuest').value * originalPrice * model.length)>0 ?
+          (dayPassForm.get('noOfGuest').value * originalPrice * model.length)*0.18: 0 | number: '0.2-2'}} <img
+            src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
+      </div>
+      <div class="booking-popup-payment-info-pay">
+        <h5> Payable Now </h5>
+        <h5>{{(dayPassForm.get('noOfGuest').value * originalPrice * model.length)+((dayPassForm.get('noOfGuest').value *
+          originalPrice * model.length)>0 ? (dayPassForm.get('noOfGuest').value * originalPrice * model.length)*0.18: 0)
+          | number: '0.2-2'}} <img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h5>
+      </div>
     </div>
     <div class="booking-popup-payment-contrnt">
-        <p>The amount payable now is a non-refundable deposit to reserve your day pass. The balance of <span>
-                {{dayPassForm.get('noOfGuest').value * originalPrice * model.length }} INR</span> + applicable taxes is payable on arrival at the property, in
-            the property's
-            currency.</p>
-        <p>Prices on the next page will be converted into US dollars.</p>
+      <p>The amount payable now is a non-refundable deposit to reserve your day pass. The balance of <span>
+          {{dayPassForm.get('noOfGuest').value * originalPrice * model.length }} INR</span> + applicable taxes is
+        payable on arrival at the property, in
+        the property's
+        currency.</p>
+      <p>Prices on the next page will be converted into US dollars.</p>
     </div>
-</div>
+  </div>
 </div>
 
 <div class="modal" id="updateModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Update Profile</h5>
-          <button type="button" class="close" data-dismiss="updateModal" aria-label="Close" (click)="closeModal()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="">
-            <div class="pm-single">
-              <p>GST No.</p>
-              <mat-form-field appearance="outline" class="w-100">
-                <input (keyup)="chkValidateGstPanForm($event,'GSTnumber')" type="text" value="{{GSTnumber}}" matInput
-                  placeholder="Enter GST No." oninput="this.value = this.value.toUpperCase()"
-                  pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$" maxlength="15" />
-              </mat-form-field>
-              <!-- <small *ngIf="gstErrorMsg" class="text-danger">{{gstErrorMsg}}*</small> -->
-            </div>
-            <!-- <div class="pm-single">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Profile</h5>
+        <button type="button" class="close" data-dismiss="updateModal" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="pm-single">
+            <p>GST No.</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <input (keyup)="chkValidateGstPanForm($event,'GSTnumber')" type="text" value="{{GSTnumber}}" matInput
+                placeholder="Enter GST No." oninput="this.value = this.value.toUpperCase()"
+                pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$" maxlength="15" />
+            </mat-form-field>
+            <!-- <small *ngIf="gstErrorMsg" class="text-danger">{{gstErrorMsg}}*</small> -->
+          </div>
+          <!-- <div class="pm-single">
               <p>PAN No.</p>
               <mat-form-field appearance="outline" class="w-100">
                 <input (keyup)="chkValidateGstPanForm($event,'PANnumber')" type="text" matInput value="{{PANnumber}}"
@@ -251,28 +253,29 @@
               </mat-form-field>
               <small *ngIf="panErrorMsg" class="text-danger">{{panErrorMsg}}*</small>
             </div> -->
-            <div class="pm-single">
-              <p>Billing address 1 <span class="text-danger">*</span> </p>
-              <mat-form-field appearance="outline" class="w-100">
-                <textarea (keyup)="chkValidateGstPanForm($event,'billingAddress')" type="text" matInput
-                  value="{{billingAddress}}" placeholder="Enter Billing Address"></textarea>
-              </mat-form-field>
-              <small *ngIf="billingMsg" class="text-danger">{{billingMsg}}*</small>
-            </div>
-            <div class="pm-single">
-              <p>Billing address 2</p>
-              <mat-form-field appearance="outline" class="w-100">
-                <textarea (keyup)="chkValidateGstPanForm($event,'billingAddress2')" type="text" matInput
-                  value="{{billingAddress2}}" placeholder="Enter Billing Address"></textarea>
-              </mat-form-field>
-              <!-- <small *ngIf="billingMsg" class="text-danger">{{billingMsg}}*</small> -->
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer gstbtn-grp-c">
-          <button type="button" class="outline-orng-btn custum-btn" data-dismiss="updateModal" (click)="closeModal()">Close</button>
-          <button type="button" class="custum-btn" (click)="submitGstAndPan()">Save changes</button>
-        </div>
+          <div class="pm-single">
+            <p>Billing address 1 <span class="text-danger">*</span> </p>
+            <mat-form-field appearance="outline" class="w-100">
+              <textarea (keyup)="chkValidateGstPanForm($event,'billingAddress')" type="text" matInput
+                value="{{billingAddress}}" placeholder="Enter Billing Address"></textarea>
+            </mat-form-field>
+            <small *ngIf="billingMsg" class="text-danger">{{billingMsg}}*</small>
+          </div>
+          <div class="pm-single">
+            <p>Billing address 2</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <textarea (keyup)="chkValidateGstPanForm($event,'billingAddress2')" type="text" matInput
+                value="{{billingAddress2}}" placeholder="Enter Billing Address"></textarea>
+            </mat-form-field>
+            <!-- <small *ngIf="billingMsg" class="text-danger">{{billingMsg}}*</small> -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer gstbtn-grp-c">
+        <button type="button" class="outline-orng-btn custum-btn" data-dismiss="updateModal"
+          (click)="closeModal()">Close</button>
+        <button type="button" class="custum-btn" (click)="submitGstAndPan()">Save changes</button>
       </div>
     </div>
   </div>
+</div>
