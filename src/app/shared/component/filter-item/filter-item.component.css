@@ -30,7 +30,7 @@
 .hero__form {
   padding: 7px 18px;
   border: 2px solid #d4d0d0;
-  border-radius: 30px;
+  border-radius: 50px;
 }
 
 ::ng-deep .mat-form-field {
@@ -72,8 +72,11 @@ mark {
 }
 
 @media only screen and (max-width: 900px) {
-  .hero__form {
+  /* .hero__form {
     border: solid white;
+  } */
+  .hero__form-input {
+    text-align: center;
   }
 }
 
@@ -139,7 +142,6 @@ div.scrollmenu a:hover {
   font-weight: 400 !important;
 }
 
-
 .mat-autocomplete-panel {
   max-width: none;
 }
@@ -147,7 +149,6 @@ div.scrollmenu a:hover {
 .custom-select {
   padding: 0;
 }
-
 
 .selected {
   background: #e9e9ff !important;

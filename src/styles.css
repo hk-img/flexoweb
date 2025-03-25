@@ -8191,7 +8191,7 @@ new css */
     top: 320px;
     left: 0 !important;
     height: 350px;
-    padding-left: 0;
+    padding-left: 15px;
   }
   /* .gmnoprint {
     bottom: 150px !important;
@@ -8243,7 +8243,7 @@ new css */
   }
 
   .hero__form.v2 {
-    padding: 0;
+    /* padding: 0; */
     background: transparent;
   }
 
