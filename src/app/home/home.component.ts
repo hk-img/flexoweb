@@ -790,4 +790,48 @@ export class HomeComponent {
       location_name,
     };
   }
+
+  isScriptLoaded: boolean = false;
+
+  loadZohoScript2() {
+
+    const existingScript = document.getElementById("zsiqscript");
+    if (existingScript) {
+      existingScript.remove();
+      console.log("Existing Zoho script removed.");
+    }
+  
+    setTimeout(() => {
+      window['$zoho'] = window['$zoho'] || {};
+      window['$zoho'].salesiq = {
+        widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
+        values: {},
+        ready: function () {
+          console.log("Zoho SalesIQ is ready!");
+        },
+      };
+      setTimeout(() => {
+        this.clickZohoChatButton();
+      }, 1000);
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.id = "zsiqscript";
+      script.defer = true;
+      script.src = "https://salesiq.zoho.in/widget";
+      document.body.appendChild(script);
+  
+      console.log("Zoho SalesIQ script reloaded.");
+    }, 200);
+  }
+
+  clickZohoChatButton() {
+    const interval = setInterval(() => {
+      const chatButton = document.getElementById("zsiq_agtpic");
+      if (chatButton) {
+        chatButton.click();
+        console.log("Chat button clicked!");
+        clearInterval(interval);
+      }
+    }, 100);
+  }
 }

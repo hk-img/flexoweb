@@ -600,11 +600,17 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 if (this.type === 'coworking') {
                   const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
                   const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
+                  setTimeout(() => {
+                    this.updateJsonLd(spaceType, cityName, imageUrl, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
+                  }, 300);
                 } else if (this.type === 'shortterm') {
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+                  setTimeout(() => {
+                    this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+                  }, 300);
                 } else {
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
+                  setTimeout(() => {
+                    this.updateJsonLd(spaceType, cityName, imageUrl, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
+                  }, 300);
                 }
               }
               this.recommended_spaces = Object.assign([], res.recommended_spaces);
@@ -726,11 +732,17 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             if (this.type === 'coworking') {
               const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
               const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-              this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
+              setTimeout(() => {
+                this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
+              }, 300);
             } else if (this.type === 'shortterm') {
-              this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+              setTimeout(() => {
+                this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+              }, 300);
             } else {
-              this.updateJsonLd(spaceType, cityName, imageUrl, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
+              setTimeout(() => {
+                this.updateJsonLd(spaceType, cityName, imageUrl, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
+              }, 300);
             }
           }
           this.recommended_spaces = Object.assign([], res.recommended_spaces);
