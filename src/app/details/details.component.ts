@@ -792,7 +792,7 @@ export class DetailsComponent implements OnInit {
     this.spaceService
       .getSpaceDetails(country, city, spaceType, spaceId)
       .then((res) => {
-
+        console.log(res)
         if (!res.success) {
           this.router.navigate(['/error']);
         }
