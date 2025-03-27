@@ -485,10 +485,12 @@ export class FilterItemComponent implements OnInit {
 
   openLocation() {
     this.open_location = this.open_location ? false : true;
+    sessionStorage.setItem('open_location', this.open_location.toString());
   }
 
   openSpaceType() {
     this.open_spaceType = this.open_spaceType ? false : true;
+    sessionStorage.setItem('open_spaceType', this.open_spaceType.toString());
   }
 
   showHideMap() {

@@ -104,6 +104,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   };
   mapType: string;
   cityForMetaTag: any;
+  open_spaceType: any;
+  open_location: any;
 
   constructor(
     private router: Router,
@@ -136,6 +138,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.logged_in = user_details.is_logged_in;
       this.shortlists = user_details.shortlists;
     });
+
+    this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
+    this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
   }
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
@@ -458,7 +463,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     return Array(length).fill(0);
   }
   openMapInfoWindow(marker: MapMarker, info: any) {
-    this.selected_marker_window = this.spaces_list.find((arr) => arr.name === info.name);
+    this.selected_marker_window = this.spaces_list.find((arr) => arr.id === info.id);
     console.log(this.markersData);
     this.infoWindow.open(marker);
   }
@@ -661,6 +666,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                       map_image_url:
                         this.aws_base_url + element.id + '/' + element.images[0],
                       name: element.name,
+                      id: element.id,
                       url: '/details/' + element.link_name,
                     },
                   };
