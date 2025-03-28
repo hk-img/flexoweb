@@ -10,6 +10,7 @@ import { GlobalVariables } from 'src/app/global/global-variables';
 import { SpaceService } from 'src/app/services/space.service';
 import { environment } from '../../../../environments/environment';
 import { FilterDialog } from '../filter-component/filter-dialog.component';
+import { CityListingComponent } from 'src/app/city-listing/city-listing.component';
 
 @Component({
   selector: 'filter-item',
@@ -54,7 +55,8 @@ export class FilterItemComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: any,
     private elRef: ElementRef,
     private titleCasePipe: TitleCasePipe,
-    private snackBar : MatSnackBar
+    private snackBar : MatSnackBar,
+    private cityListing: CityListingComponent
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.clickListener = (event: Event) => this.onClick(event);
@@ -147,7 +149,7 @@ export class FilterItemComponent implements OnInit {
       map(value => this._filter(value || '')),
     );
 
-    this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
+    // this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
     
     this.route.params.subscribe({
       next: (params) => {
@@ -184,6 +186,8 @@ export class FilterItemComponent implements OnInit {
       .subscribe((res: any) => {
         const updatedRes = res.filter(val => val.spaceType?.toLowerCase() !== "coworking space")
         this.spaces = [...this.staticSpaces, ...updatedRes];
+        this.selectedValues = this.spaces[0]?.subpart?.map(sub => sub.spaceType);
+        console.log(this.selectedValues)
         if (this.spaceType?.toLowerCase() === "coworking space") {
           const newArr = this.staticSpaces.map(space => ({
             ...space,
@@ -410,34 +414,53 @@ export class FilterItemComponent implements OnInit {
     })
   }
 
-  getNearByLocations(isLocationChange?:boolean) {
-    if(this.location){
-      var locationArray_ = this.location.split(",");
-      var location_ = locationArray_.at(-3)?.trim();
+  getNearByLocations(isLocationChange?: boolean) {
+    if (this.location) {
+        var locationArray_ = this.location.split(",");
+        var location_ = locationArray_.at(-3)?.trim();
     }
-    // const mappedLocation = location_ === 'delhi' ? 'new-delhi' : location_ === 'bangalore' ? 'bengaluru' : location_;
-    const mappedLocation = location_ === 'delhi' ? 'delhi' : location_ === 'bangalore' ? 'bengaluru' : location_;
-    const details = {
-      cityId: isLocationChange ? mappedLocation : this.city_name_display,
-      spaceType: this.selectedRadio === "Co-working" || this.selectedValues.length ? "coworking space" : this.selectedRadio
-    };
-    // alert(this.cityName)
-      this.spaceService.getNearBySpaces(details).subscribe(
-        (response) => {
-          this.nearByLocationsList = response.map((val) => {
-            return {
-              ...val,
-              city: details.cityId,
-              type: this.type
-            }
-          });
-          this.city_name_display = isLocationChange ? this.location.split(",").at(-3)?.trim() : this.cityName
-        },
-        ({ message }) => { }
-      );
-   
 
-  }
+    // Mapping location to the desired format
+    const mappedLocation = location_ === 'delhi' ? 'delhi' : location_ === 'bangalore' ? 'bengaluru' : location_;
+
+    // Define subparts that can be selected
+    const allSubParts = [
+        'Private Office',
+        'Managed Office',
+        'Dedicated Desk',
+        'Flexible Desk',
+        'Virtual Office',
+        'Day Pass'
+    ];
+
+    // Filter subparts to only include those present in selectedValues
+    const subPart = allSubParts.filter(part => this.selectedValues.includes(part));
+
+    // Prepare details object for the request
+    const details = {
+        cityId: isLocationChange ? mappedLocation : this.city_name_display,
+        spaceType: this.selectedRadio === "Co-working" || subPart.length > 0 ? subPart : this.selectedRadio
+    };
+
+    // Call service to get nearby spaces
+    this.spaceService.getNearBySpaces(details).subscribe(
+        (response) => {
+            this.nearByLocationsList = response.map((val) => {
+                return {
+                    ...val,
+                    city: details.cityId,
+                    type: this.type
+                }
+            });
+            // Update the city_name_display based on location change
+            this.city_name_display = isLocationChange ? this.location.split(",").at(-3)?.trim() : this.cityName;
+        },
+        ({ message }) => {
+            // Handle error (if needed)
+        }
+    );
+}
+
 
   onSearchSubmit(is_near_me_selected) {
     let query_params = {};
@@ -615,17 +638,13 @@ export class FilterItemComponent implements OnInit {
     } else {
       this.selectedValues = this.selectedValues.filter(val => val !== item.spaceType);
     }
+    sessionStorage.setItem('selectedValues', JSON.stringify(this.selectedValues));
+    this.cityListing.getSpacesByCity();
     const coWorkingList = this.spaces.find(p => p.spaceType === 'Co-working');
     if (coWorkingList) {
       const allSubpartsSelected = coWorkingList.subpart.every(sub => sub.selected);
       if (allSubpartsSelected) {
         this.selectedRadio = 'Co-working';
-      } else {
-        this.selectedRadio = null;
-      }
-    } else {
-      if (item.selected) {
-        this.selectedRadio = null;
       }
     }
     this.show =false
