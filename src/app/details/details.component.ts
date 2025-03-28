@@ -434,6 +434,12 @@ export class DetailsComponent implements OnInit {
         existingScript.remove();
       }
     }
+
+    if(priceMax === "none"){
+      var offer = "Offer"
+    }else{
+      var offer = "AggregateOffer"
+    }
   
     const jsonLd: any = {
       "@context": "https://schema.org/",
@@ -448,7 +454,7 @@ export class DetailsComponent implements OnInit {
       "mpn": "",
       "sku": "",
       "offers": {
-        "@type": "AggregateOffer",
+        "@type": offer,
         "url": window.location.href,
         "priceCurrency": "INR",
         "availability": "https://schema.org/InStock",
