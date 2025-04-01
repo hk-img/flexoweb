@@ -451,8 +451,6 @@ export class DetailsComponent implements OnInit {
         "@type": "Brand",
         "name": "Flexo"
       },
-      "mpn": "",
-      "sku": "",
       "offers": {
         "@type": offer,
         "url": window.location.href,

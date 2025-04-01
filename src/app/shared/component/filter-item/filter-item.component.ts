@@ -239,6 +239,7 @@ export class FilterItemComponent implements OnInit {
 
   onInputChange(value: string) {
     this.searchTerm = value?.toLowerCase()?.trim()?.replace(/\s/g, '');
+    this.filteredPlaces = this.locations?.filter(street => this._normalizeValue(street).includes(this.searchTerm));
   }
 
   getCoords() {
@@ -313,8 +314,6 @@ export class FilterItemComponent implements OnInit {
     } else if(['coworking café/restaurant'].includes(spaceType)){
       url = `in/coworking-cafe-restaurant/${location?.replace(' ', '-')?.toLowerCase()}`
     }
-
-    console.log(url);
 
     if (url) {
       this.router.navigate([this.formatUrl(url)]);
