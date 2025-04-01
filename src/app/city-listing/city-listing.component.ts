@@ -269,7 +269,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             content: `Book coworking spaces in ${this.getOriginalUrlParam(params['city']).toUpperCase()} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.`,
           });
         } else if (
-          this.spaceType === 'coworking cafe/restaurant' ||
+          this.spaceType === 'coworking café/restaurant' ||
           this.spaceType === 'shoot studio' ||
           this.spaceType === 'recording studio' ||
           this.spaceType === 'podcast studio' ||
@@ -305,7 +305,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
           });
         } else if (
-          this.spaceType === 'coworking cafe/restaurant' ||
+          this.spaceType === 'coworking café/restaurant' ||
           this.spaceType === 'shoot studio' ||
           this.spaceType === 'recording studio' ||
           this.spaceType === 'podcast studio' ||
@@ -411,8 +411,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         "@type": "Brand",
         "name": "Flexo"
       },
-      "mpn": "",
-      "sku": "",
       "offers": {
         "@type": "AggregateOffer",
         "url": window.location.href,
@@ -555,7 +553,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       if (this.spaceType?.toLowerCase() == 'coworking space') {
         this.type = "coworking";
 
-      } else if ((this.spaceType?.toLowerCase() == 'coworking cafe/restaurant') || (this.spaceType?.toLowerCase() == 'shoot studio') || (this.spaceType?.toLowerCase() == 'recording studio') || (this.spaceType?.toLowerCase() == 'podcast studio') || (this.spaceType?.toLowerCase() == 'activity space') || (this.spaceType?.toLowerCase() == 'sports turf') || (this.spaceType?.toLowerCase() == 'sports venue') || (this.spaceType?.toLowerCase() == 'party space') || (this.spaceType?.toLowerCase() == 'banquet hall') || (this.spaceType?.toLowerCase() == 'gallery') || (this.spaceType?.toLowerCase() == 'classroom') || (this.spaceType?.toLowerCase() == 'private cabin') || (this.spaceType?.toLowerCase() == 'meeting room') || (this.spaceType?.toLowerCase() == 'training room') || (this.spaceType?.toLowerCase() == 'event space')) {
+      } else if ((this.spaceType?.toLowerCase() == 'coworking café/restaurant') || (this.spaceType?.toLowerCase() == 'shoot studio') || (this.spaceType?.toLowerCase() == 'recording studio') || (this.spaceType?.toLowerCase() == 'podcast studio') || (this.spaceType?.toLowerCase() == 'activity space') || (this.spaceType?.toLowerCase() == 'sports turf') || (this.spaceType?.toLowerCase() == 'sports venue') || (this.spaceType?.toLowerCase() == 'party space') || (this.spaceType?.toLowerCase() == 'banquet hall') || (this.spaceType?.toLowerCase() == 'gallery') || (this.spaceType?.toLowerCase() == 'classroom') || (this.spaceType?.toLowerCase() == 'private cabin') || (this.spaceType?.toLowerCase() == 'meeting room') || (this.spaceType?.toLowerCase() == 'training room') || (this.spaceType?.toLowerCase() == 'event space')) {
         this.type = "shortterm";
 
       } else if ((this.spaceType?.toLowerCase() == 'managed office' || this.spaceType?.toLowerCase() == 'private office' || this.spaceType?.toLowerCase() == 'shared office' || this.spaceType?.toLowerCase() == 'virtual office')) {
