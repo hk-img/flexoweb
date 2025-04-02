@@ -240,6 +240,15 @@ export class FilterItemComponent implements OnInit {
   onInputChange(value: string) {
     this.searchTerm = value?.toLowerCase()?.trim()?.replace(/\s/g, '');
     this.filteredPlaces = this.locations?.filter(street => this._normalizeValue(street).includes(this.searchTerm));
+    this.filterLocations();
+  }
+
+  filterLocations() {
+    if (this.searchTerm) {
+      this.filteredPlaces = this.locations.filter(val =>
+        val.toLowerCase().startsWith(this.searchTerm)
+      );
+    }
   }
 
   getCoords() {
@@ -437,9 +446,8 @@ export class FilterItemComponent implements OnInit {
 
     // Prepare details object for the request
     const details = {
-        cityId: isLocationChange ? mappedLocation : this.city_name_display,
-        spaceType: this.selectedRadio === "Co-working" || subPart.length > 0 ? subPart : this.selectedRadio
-    };
+      cityId: isLocationChange ? mappedLocation : this.city_name_display,
+      spaceType: this.selectedRadio === "Co-working" || this.selectedValues.length ? "coworking space" : this.selectedRadio}
 
     // Call service to get nearby spaces
     this.spaceService.getNearBySpaces(details).subscribe(
