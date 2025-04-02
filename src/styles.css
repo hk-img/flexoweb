@@ -8441,6 +8441,22 @@ new css */
     height: 500px;
   }
 
+  .desktop-button-fixed-container {
+    width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 12px;
+  }
+  .desktop-button-fixed-container .desktop_content_btm {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .desk_btn {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
   .hero__list-item a {
     padding: 5px 15px;
   }
@@ -9186,7 +9202,7 @@ a.rate-review:hover {
   background: white;
   align-items: baseline;
   z-index: 1000;
-  width: 57.9%;
+  /* width: 57.9%; */
 }
 
 .desktop-button-fixed-container div:first-child {
@@ -11366,6 +11382,9 @@ h4 {
     padding: 0 13px;
   }
   .image-container {
+    width: 100% !important;
+  }
+  .desktop-button-fixed-container {
     width: 100% !important;
   }
 }

@@ -1,14 +1,8 @@
-<div
-  [ngClass]="_showMap ? 'filter-wrapper style1 mar-top-100 half-map' : 'mt-70'"
->
+<div [ngClass]="_showMap ? 'filter-wrapper style1 mar-top-100 half-map' : 'mt-70'">
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-7 col-md-12" [class.col-lg-12]="!_showMap">
-        <filter-item
-          [isMobile]="isMobile"
-          is_city="false"
-          [city_name]="city_param"
-          [area_name]="area_param"
+        <filter-item [isMobile]="isMobile" is_city="false" [city_name]="city_param" [area_name]="area_param"
           [find_near_me]="
             this.user_lat &&
             this.user_long &&
@@ -16,24 +10,16 @@
             !this.city_param
               ? 1
               : 0
-          "
-          [filter]="filter"
-          (filterItemEvent)="openFiltersDialog($event)"
-          (showMap)="showHideMap($event)"
-        >
+          " [filter]="filter" (filterItemEvent)="openFiltersDialog($event)" (showMap)="showHideMap($event)">
         </filter-item>
 
         <div class="row pad-bot-10 align-items-center">
           <div class="col-lg-12 col-sm-12 col-12">
-            <div
-              class="item-element res-box text-right xs-left"
-              *ngIf="spaces_list_length && !recommended_spaces && !shimming"
-            >
+            <div class="item-element res-box text-right xs-left"
+              *ngIf="spaces_list_length && !recommended_spaces && !shimming">
               <p *ngIf="page_start !== page_end">
                 Showing
-                <span
-                  >{{ page_start }}-{{ page_end }} of {{ space_count }}</span
-                >
+                <span>{{ page_start }}-{{ page_end }} of {{ space_count }}</span>
                 Listings
               </p>
               <p *ngIf="page_start == page_end">
@@ -47,17 +33,9 @@
           <div class="tab-content">
             <div id="grid-view" class="tab-pane active product-grid">
               <div class="row">
-                <div
-                  [ngClass]="!_showMap ? 'col-xl-4' : 'col-xl-6'"
-                  *ngFor="let element of spaces_list; let i = index"
-                >
-                  <app-list-item
-                    [spaceDetails]="element"
-                    [isMobile]="isMobile"
-                    [filters]="filter"
-                    [is_similar_listing]="false"
-                    (shortlistItemEvent)="shortList($event)"
-                  >
+                <div [ngClass]="!_showMap ? 'col-xl-4' : 'col-xl-6'" *ngFor="let element of spaces_list; let i = index">
+                  <app-list-item [spaceDetails]="element" [isMobile]="isMobile" [filters]="filter"
+                    [is_similar_listing]="false" (shortlistItemEvent)="shortList($event)">
                   </app-list-item>
                 </div>
               </div>
@@ -68,11 +46,8 @@
                 <div class="col-md-8 offset-md-2 col-xs-12">
                   <div class="page-num text-center">
                     <ul>
-                      <li
-                        *ngFor="let num of pages"
-                        [ngClass]="{ active: active_page == num }"
-                        (click)="pagination(num)"
-                      >
+                      <li *ngFor="let num of pages" [ngClass]="{ active: active_page == num }"
+                        (click)="pagination(num)">
                         <a>{{ num }}</a>
                       </li>
                     </ul>
@@ -82,81 +57,42 @@
             </div>
             <!--pagination ends-->
           </div>
-          <div
-            class="tab-content"
-            *ngIf="recommended_spaces?.length && !shimming"
-          >
+          <div class="tab-content" *ngIf="recommended_spaces?.length && !shimming">
             <div id="grid-view" class="tab-pane active product-grid">
               <span class="flex-center">
                 <p style="font-size: 30px; text-align: center">
                   We are adding more spaces.
-                  <a class="static-page-links" routerLink="/contact"
-                    >Join our mailing list</a
-                  >
+                  <a class="static-page-links" routerLink="/contact">Join our mailing list</a>
                   to get an update as we add spaces to your location.
-                </p> </span
-              ><br />
+                </p>
+              </span><br />
               <div class="row">
-                <div
-                  [ngClass]="!_showMap ? 'col-xl-4' : 'col-xl-6'"
-                  *ngFor="let element of recommended_spaces"
-                >
-                  <app-list-item
-                    [spaceDetails]="element"
-                    [filters]="filter"
-                    [is_similar_listing]="false"
-                    (shortlistItemEvent)="shortList($event)"
-                  >
+                <div [ngClass]="!_showMap ? 'col-xl-4' : 'col-xl-6'" *ngFor="let element of recommended_spaces">
+                  <app-list-item [spaceDetails]="element" [filters]="filter" [is_similar_listing]="false"
+                    (shortlistItemEvent)="shortList($event)">
                   </app-list-item>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            class="row desktop-button-fixed-container col-md-7"
-            *ngIf="!isMobile"
-          >
-            <div class="col-md-7">
-              <span
-                ><i class="ion-checkmark"></i>&nbsp;Our service is
-                <strong>FREE</strong></span
-              ><span
-                ><i class="ion-checkmark"></i>&nbsp;We help you secure the
-                <strong>best deal</strong></span
-              >
+          <div class="row desktop-button-fixed-container col-lg-7 col-md-12" *ngIf="!isMobile">
+            <div class="col-md-7 desktop_content_btm">
+              <span><i class="ion-checkmark"></i>&nbsp;Our service is
+                <strong>FREE</strong></span><span><i class="ion-checkmark"></i>&nbsp;We help you secure the
+                <strong>best deal</strong></span>
             </div>
-            <div class="col-md-5">
-              <a
-                class="large-btn"
-                style="font-size: 14px"
-                [routerLink]="'/contact-form/' + city_param + '/' + area_param"
-                >FIND MY PERFECT OFFICE NOW</a
-              >
+            <div class="col-md-5 desk_btn">
+              <a class="large-btn" style="font-size: 14px"
+                [routerLink]="'/contact-form/' + city_param + '/' + area_param">FIND MY PERFECT OFFICE NOW</a>
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="explore__map-side"
-        [class.d-none]="!_showMap || isFaqsVisible"
-        [@inOutAnimation]
-      >
+      <div class="explore__map-side" [class.d-none]="!_showMap || isFaqsVisible" [@inOutAnimation]>
         <div id="map_right_listing" #map_section>
-          <google-map
-            height="100%"
-            width="100%"
-            [zoom]="zoom"
-            [center]="center"
-            [options]="options"
-          >
-            <map-marker
-              #mapMarker
-              *ngFor="let marker of markersData"
-              [position]="marker.position"
-              [title]="marker.title"
-              [options]="marker.options"
-              (mapClick)="openMapInfoWindow(mapMarker, marker.info)"
-            >
+          <google-map height="100%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+            <map-marker #mapMarker *ngFor="let marker of markersData" [position]="marker.position"
+              [title]="marker.title" [options]="marker.options" (mapClick)="openMapInfoWindow(mapMarker, marker.info)">
             </map-marker>
             <map-info-window>
               <div class="marker_info" id="marker_info">
@@ -165,7 +101,7 @@
                   <h3>
                     <a [href]="selected_marker_window?.url" target="_blank">{{
                       selected_marker_window?.name
-                    }}</a>
+                      }}</a>
                   </h3>
                 </span>
               </div>
@@ -189,25 +125,14 @@
         </p>
       </div>
     </div>
-    <div
-      class="book-btn text-center bottom-fixed-button"
-      style="margin-top: 3px"
-    >
-      <a
-        style="font-size: 14px"
-        [routerLink]="
+    <div class="book-btn text-center bottom-fixed-button" style="margin-top: 3px">
+      <a style="font-size: 14px" [routerLink]="
           '/contact-form/' + city_param ||
           city_name_for_find_near_me + '/' + area_param ||
           area_name_for_find_near_me
-        "
-        >FIND MY PERFECT OFFICE NOW</a
-      >
+        ">FIND MY PERFECT OFFICE NOW</a>
     </div>
   </div>
-  <app-faqs
-    [showMap]="_showMap"
-    inViewport
-    [inViewportOptions]="{ threshold: [0] }"
-    (inViewportAction)="onIntersection($event)"
-  ></app-faqs>
+  <app-faqs [showMap]="_showMap" inViewport [inViewportOptions]="{ threshold: [0] }"
+    (inViewportAction)="onIntersection($event)"></app-faqs>
 </div>
