@@ -202,7 +202,7 @@ export class FilterItemComponent implements OnInit {
         this.selectedRadio = this.spaceType?.toLowerCase() === "coworking space" ? "Co-working" : this.titleCasePipe.transform(this.spaceType)
         let spaceType = this.selectedRadio === 'Co-working' ? "Coworking Space" : this.selectedRadio
         this.getAllLocation(spaceType)
-        this.getNearByLocations()
+        // this.getNearByLocations()
         
         
         
@@ -447,7 +447,10 @@ export class FilterItemComponent implements OnInit {
     // Prepare details object for the request
     const details = {
       cityId: isLocationChange ? mappedLocation : this.city_name_display,
-      spaceType: this.selectedRadio === "Co-working" || this.selectedValues.length ? "coworking space" : this.selectedRadio}
+      spaceType: (this.selectedRadio === "Co-working" || this.selectedValues.length) 
+    ? "coworking space" 
+    : (this.selectedRadio || this.spaceType)
+}
 
     // Call service to get nearby spaces
     this.spaceService.getNearBySpaces(details).subscribe(
@@ -662,7 +665,16 @@ export class FilterItemComponent implements OnInit {
 
   }
   formatUrl(value: string): string {
-    return value?.trim()?.toLowerCase()?.replace(/\s+/g, '-');
+    value = value.replace(/ /g, '-').replace(/%20/g, '-');
+    
+    const lastSegment = value.split('/').pop();
+    
+    if (lastSegment) {
+      const modifiedLastSegment = lastSegment.charAt(0).toLowerCase() + lastSegment.slice(1);
+      value = value.replace(lastSegment, modifiedLastSegment);
+    }
+    
+    return value;
   }
 
   openNearByList(list:any){

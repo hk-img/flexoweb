@@ -719,8 +719,18 @@ export class HomeComponent {
   }
 
   formatUrl(value: string): string {
-    return value.trim()?.toLowerCase()?.replace(/\s+/g, '-');
+    value = value.replace(/ /g, '-').replace(/%20/g, '-');
+    
+    const lastSegment = value.split('/').pop();
+    
+    if (lastSegment) {
+      const modifiedLastSegment = lastSegment.charAt(0).toLowerCase() + lastSegment.slice(1);
+      value = value.replace(lastSegment, modifiedLastSegment);
+    }
+    
+    return value;
   }
+  
 
   onNearmeClicked() {
     this.spaceService.getCityInfo(this.user_lat, this.user_long).subscribe(

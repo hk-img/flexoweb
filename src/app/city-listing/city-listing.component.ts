@@ -348,7 +348,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       const inIndex = segments2.indexOf('in');
       if (inIndex !== -1 && segments2.length > inIndex + 1) {
         this.staticValue = segments2[inIndex + 1];
-        if(this.staticValue == 'coworking-space'){
+        if(this.staticValue == 'coworking-space' || this.staticValue == 'coworking'){
           this.staticValue = "Coworking"
         }else{
           this.staticValue = 'Longterm';
@@ -641,7 +641,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 }
                 this.markersData = [];
                 this.spaces_list.forEach((element) => {
-                  console.log(element)
                   element.rating_array = [];
                   element.empty_star_array = [];
                   element.rating_floor = Math.floor(element.rating);
@@ -814,6 +813,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   map_image_url:
                     this.aws_base_url + element.id + '/' + element.images[0],
                   name: element.name,
+                  id: element.id,
                   url: '/details/' + element.link_name,
                 },
               };
