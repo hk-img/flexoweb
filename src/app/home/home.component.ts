@@ -719,16 +719,7 @@ export class HomeComponent {
   }
 
   formatUrl(value: string): string {
-    value = value.replace(/ /g, '-').replace(/%20/g, '-');
-    
-    const lastSegment = value.split('/').pop();
-    
-    if (lastSegment) {
-      const modifiedLastSegment = lastSegment.charAt(0).toLowerCase() + lastSegment.slice(1);
-      value = value.replace(lastSegment, modifiedLastSegment);
-    }
-    
-    return value;
+    return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
   }
   
 

@@ -471,6 +471,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     return Array(length).fill(0);
   }
   openMapInfoWindow(marker: MapMarker, info: any) {
+    console.log(info);
     this.selected_marker_window = this.spaces_list.find((arr) => arr.id === info.id);
     console.log(this.markersData);
     this.infoWindow.open(marker);
@@ -640,6 +641,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   this.pages.push(i);
                 }
                 this.markersData = [];
+                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 this.spaces_list.forEach((element) => {
                   element.rating_array = [];
                   element.empty_star_array = [];
