@@ -719,8 +719,9 @@ export class HomeComponent {
   }
 
   formatUrl(value: string): string {
-    return value.trim()?.toLowerCase()?.replace(/\s+/g, '-');
+    return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
   }
+  
 
   onNearmeClicked() {
     this.spaceService.getCityInfo(this.user_lat, this.user_long).subscribe(
