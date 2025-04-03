@@ -382,6 +382,19 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.userId = 0
       }
     }
+
+    if(this.spaceType == 'coworking-cafe/restaurant', 'shoot-studio', 'recording-studio', 'podcast-studio',
+      'activity-space', 'sports-turf', 'sports-venue', 'party-space', 'banquet-hall',
+      'gallery', 'classroom', 'private-cabin', 'meeting-room', 'training-room', 'event-space'){
+      const interval = setInterval(() => {
+        const chatButton = document.getElementById("zsiq_agtpic");
+        if (chatButton) {
+          chatButton.click();
+          console.log("Chat button clicked!");
+          clearInterval(interval);
+        }
+      }, 100);
+    }
   }
 
 
@@ -389,6 +402,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     spaceType: string,
     cityName: string,
     imageUrl: string,
+    location_name:string,
     detail: string,
     priceMin: number,
     priceMax: number,
@@ -404,7 +418,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     const jsonLd = {
       "@context": "https://schema.org/",
       "@type": "Product",
-      "name": location ? `${spaceType} in ${location}` : `${spaceType} in ${cityName}`,
+      "name": this.areaName ? `${spaceType} in ${location_name}, ${cityName}` : `${spaceType} in ${cityName}`,
       "image": imageUrl,
       "description": detail,
       "brand": {
@@ -615,17 +629,18 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 const spaceType = this.spaces_list[0].spaceType
                 const cityName = this.spaces_list[0].contact_city_name
                 const location = this.spaces_list[0].location_name
+                const location_name = this.spaces_list[0].location_name
                 const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
                 const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
                 const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
                 if (this.type === 'coworking') {
                   const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
                   const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
+                  this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
                 } else if (this.type === 'shortterm') {
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+                  this.updateJsonLd(spaceType, cityName, imageUrl,  location_name, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
                 } else {
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
+                  this.updateJsonLd(spaceType, cityName, imageUrl,  location_name, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
                 }
               }
               this.recommended_spaces = Object.assign([], res.recommended_spaces);
@@ -741,17 +756,18 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           if (this.spaces_list.length) {
             const spaceType = this.spaces_list[0].spaceType
             const cityName = this.spaces_list[0].contact_city_name
+            const location_name = this.spaces_list[0].location_name
             const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
             const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
             const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
             if (this.type === 'coworking') {
               const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
               const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-              this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
+              this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
             } else if (this.type === 'shortterm') {
-              this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+              this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
             } else {
-              this.updateJsonLd(spaceType, cityName, imageUrl, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
+              this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
             }
           }
           this.recommended_spaces = Object.assign([], res.recommended_spaces);
