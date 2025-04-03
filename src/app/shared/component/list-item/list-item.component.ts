@@ -186,7 +186,7 @@ export class ListItemComponent implements OnInit{
 
   getType(spaceType: string): string {
     const shortTermSpaces = [
-      'coworking cafe/restaurant', 'shoot studio', 'recording studio', 'podcast studio',
+      'coworking café/restaurant', 'shoot studio', 'recording studio', 'podcast studio',
       'activity space', 'sports turf', 'sports venue', 'party space', 'banquet hall',
       'gallery', 'classroom', 'private cabin', 'meeting room', 'training room', 'event space'
     ];
