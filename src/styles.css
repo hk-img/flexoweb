@@ -9991,6 +9991,10 @@ section.parallax-section .bg1 {
   border: none;
   background: transparent;
   font-size: 14px;
+  color: #000;
+}
+.btn-close i {
+  color: #000;
 }
 
 .bookinng-sec-c {
