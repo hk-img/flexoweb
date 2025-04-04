@@ -240,6 +240,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.loadZohoScript2();
     const selectedValues = [
       "Private Office",
       "Managed Office",
@@ -348,9 +349,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       const inIndex = segments2.indexOf('in');
       if (inIndex !== -1 && segments2.length > inIndex + 1) {
         this.staticValue = segments2[inIndex + 1];
-        if(this.staticValue == 'coworking-space' || this.staticValue == 'coworking'){
+        if (this.staticValue == 'coworking-space' || this.staticValue == 'coworking') {
           this.staticValue = "Coworking"
-        }else{
+        } else {
           this.staticValue = 'Longterm';
         }
         if (isPlatformBrowser(this.platformId)) {
@@ -382,19 +383,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.userId = 0
       }
     }
-
-    if(this.spaceType == 'coworking-cafe/restaurant', 'shoot-studio', 'recording-studio', 'podcast-studio',
-      'activity-space', 'sports-turf', 'sports-venue', 'party-space', 'banquet-hall',
-      'gallery', 'classroom', 'private-cabin', 'meeting-room', 'training-room', 'event-space'){
-      const interval = setInterval(() => {
-        const chatButton = document.getElementById("zsiq_agtpic");
-        if (chatButton) {
-          chatButton.click();
-          console.log("Chat button clicked!");
-          clearInterval(interval);
-        }
-      }, 100);
-    }
   }
 
 
@@ -402,7 +390,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     spaceType: string,
     cityName: string,
     imageUrl: string,
-    location_name:string,
+    location_name: string,
     detail: string,
     priceMin: number,
     priceMax: number,
@@ -581,7 +569,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
       let city_name = this.city_param;
       const subpart = sessionStorage.getItem('selectedValues');
-      if(subpart == null){
+      if (subpart == null) {
         console.log(subpart);
       }
       let typeObj = [
@@ -594,10 +582,10 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       ]
       let api_params: any = {
         city_name,
-        spaceType: (this.spaceType === 'coworking space')? (subpart == null ? typeObj : JSON.parse(subpart)): (this.spaceType === 'none' ? [] : [this.spaceType]),
+        spaceType: (this.spaceType === 'coworking space') ? (subpart == null ? typeObj : JSON.parse(subpart)) : (this.spaceType === 'none' ? [] : [this.spaceType]),
         type: this.type,
         userId: this.userId
-      };      
+      };
       _.extend(api_params, this.filter);
 
       if (this.areaName) {
@@ -638,9 +626,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
                   this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
                 } else if (this.type === 'shortterm') {
-                  this.updateJsonLd(spaceType, cityName, imageUrl,  location_name, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+                  this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
                 } else {
-                  this.updateJsonLd(spaceType, cityName, imageUrl,  location_name, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
+                  this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
                 }
               }
               this.recommended_spaces = Object.assign([], res.recommended_spaces);
@@ -1044,7 +1032,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       existingScript.remove();
       console.log("Existing Zoho script removed.");
     }
-  
+
     setTimeout(() => {
       window['$zoho'] = window['$zoho'] || {};
       window['$zoho'].salesiq = {
@@ -1055,7 +1043,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         },
       };
       setTimeout(() => {
-        this.clickZohoChatButton();
+        if (this.spaceType != "event space" && this.spaceType != 'Coworking Café/Restaurant' && this.spaceType != 'shoot studio' && this.spaceType != 'recording studio' && this.spaceType != 'podcast studio' && this.spaceType != 'activity space' && this.spaceType != 'sports turf' && this.spaceType != 'sports venue' && this.spaceType != 'party space' && this.spaceType != 'banquet hall' && this.spaceType != 'gallery' && this.spaceType != 'classroom' && this.spaceType != 'private cabin' && this.spaceType != 'meeting room' && this.spaceType != 'training room') {
+          this.clickZohoChatButton();
+        }
       }, 1000);
       const script = document.createElement("script");
       script.type = "text/javascript";
@@ -1063,7 +1053,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       script.defer = true;
       script.src = "https://salesiq.zoho.in/widget";
       document.body.appendChild(script);
-  
+
       console.log("Zoho SalesIQ script reloaded.");
     }, 200);
   }
@@ -1078,6 +1068,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       }
     }, 100);
   }
-  
+
 }
 
