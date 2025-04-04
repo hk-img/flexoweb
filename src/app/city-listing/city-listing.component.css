@@ -248,7 +248,8 @@ small {
 
   /* / default /  */
   .explore__map-side.goole_map_1 {
-    top: 229px;
+    top: 14rem;
+    transform: translate(0, 10px);
   }
 
   /* / space type true /  */
