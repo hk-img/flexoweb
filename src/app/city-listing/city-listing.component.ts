@@ -351,7 +351,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.staticValue = segments2[inIndex + 1];
         if (this.staticValue == 'coworking-space' || this.staticValue == 'coworking') {
           this.staticValue = "Coworking"
-        }else if(this.staticValue == 'coworking-cafe/restaurant' || this.staticValue == 'shoot-studio' || this.staticValue == 'recording-studio' || this.staticValue == 'podcast-studio' || this.staticValue == 'activity-space' || this.staticValue == 'sports-turf' || this.staticValue == 'sports-venue' || this.staticValue == 'party-space' || this.staticValue == 'banquet-hall' || this.staticValue == 'gallery' || this.staticValue == 'classroom' || this.staticValue == 'private-cabin' || this.staticValue == 'meeting-room' || this.staticValue == 'training-room' || this.staticValue == 'event-space'){
+        }else if(this.staticValue == 'coworking-cafe-restaurant' || this.staticValue == 'shoot-studio' || this.staticValue == 'recording-studio' || this.staticValue == 'podcast-studio' || this.staticValue == 'activity-space' || this.staticValue == 'sports-turf' || this.staticValue == 'sports-venue' || this.staticValue == 'party-space' || this.staticValue == 'banquet-hall' || this.staticValue == 'gallery' || this.staticValue == 'classroom' || this.staticValue == 'private-cabin' || this.staticValue == 'meeting-room' || this.staticValue == 'training-room' || this.staticValue == 'event-space'){
           this.staticValue = 'Shortterm';
         } else {
           this.staticValue = 'Longterm';
