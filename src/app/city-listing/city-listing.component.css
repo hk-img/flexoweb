@@ -254,16 +254,19 @@ small {
 
   /* / space type true /  */
   .explore__map-side.goole_map_2 {
-    top: 300px;
+    top: 19rem;
+    transform: translate(0, 10px);
   }
 
   /* / space type true+location true /  */
   .explore__map-side.goole_map_3 {
-    top: 390px;
+    top: 24rem;
+    transform: translate(0, 10px);
   }
 
   /* / space type false/ location true /  */
   .explore__map-side.goole_map_4 {
-    top: 330px;
+    top: 20rem;
+    transform: translate(0, 10px);
   }
 }
