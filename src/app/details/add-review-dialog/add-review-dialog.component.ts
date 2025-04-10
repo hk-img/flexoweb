@@ -77,7 +77,6 @@ export class AddReviewDialogComponent {
       this.spaceService.addReview(this.spaceId, payload)
       .subscribe(
         (res: any) => {
-          console.log(res);
           if (res?.result?.success) { 
             this.popupOpen("review",res?.result?.message);
             // this.toastr.success(res?.result?.message,"Success", { timeOut: 10000 }); 
@@ -95,7 +94,6 @@ export class AddReviewDialogComponent {
         (error) => {
           this.isLoading = false;
           this.submitForm = true;
-          console.log('error : ', error);
           this.toastr.error('Some error occurred while visit schedule!');
         }
       );

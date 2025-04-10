@@ -100,15 +100,12 @@ export class BookingListComponent implements OnInit {
       (res: any) => {
         if (res?.user) {
           this.bookingList = res?.bookings || res?.upcomingBookings || res?.previousBookings;
-          console.log(this.bookingList)
           for (let i = 0; i < this.bookingList.length; i++) {
             let actual_name = this.bookingList[i]?.spaceName ? this.bookingList[i]?.spaceName.replace(/ /g, "-") : "";
             let location_name = this.bookingList[i]?.location_name ? this.bookingList[i]?.location_name.replace(/ /g, "-") : "";
             let link_name = `${actual_name}-${location_name}-${this.bookingList[i].spaceId}`;
             this.bookingList[i].linkName = link_name.toLowerCase();
           }
-
-          console.log(this.bookingList)
           // Initialize an empty object to store reviews with spaceId as keys
           this.userGivenReviews = {};
 
@@ -129,7 +126,6 @@ export class BookingListComponent implements OnInit {
             }
           }
 
-          console.log(this.userGivenReviews)
           this.isLoading = false;
         } else {
           this.isLoading = false;
@@ -171,7 +167,6 @@ export class BookingListComponent implements OnInit {
 
       // check user is given review or not 
       if (this.userGivenReviews.hasOwnProperty(spaceId)) {
-        console.log(this.userGivenReviews);
         this.toastr.error('You have already given review for this space.', 'Error');
         return false;
       }
