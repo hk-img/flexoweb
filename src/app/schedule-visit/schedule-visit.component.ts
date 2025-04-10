@@ -44,12 +44,9 @@ export class ScheduleVisitComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.spaceId = sessionStorage.getItem('space_id');
       this.isShortterm = JSON.parse(sessionStorage.getItem('isShortterm'));
-      console.log("isShortterm",this.isShortterm);
       
       this.isCoworking = JSON.parse(sessionStorage.getItem('isCoworking'));
     this.isLongterm = JSON.parse(sessionStorage.getItem('isLongterm'));
-
-    console.log(JSON.parse(sessionStorage.getItem('spaceDetail')))
     }
   }
   startTimes = [
@@ -92,8 +89,6 @@ export class ScheduleVisitComponent implements OnInit {
       [Validators.required]]
      
     });
-
-    console.log('ScheduleVisitComponent | this.data : ', this.data);
     if (this.data != null) {
       this.spaceId = this.data.spaceId;
 
@@ -120,7 +115,6 @@ export class ScheduleVisitComponent implements OnInit {
   onDateChange(event: any) {
     const selectedDate = event.value;
     this.selectedDay = moment(selectedDate).format('dddd');
-    console.log('Selected day is: ', this.selectedDay);
 
     if(this.selectedDay === 'Monday'){
       this.startTime = localStorage.getItem("mondayOpenTime");
@@ -165,8 +159,6 @@ export class ScheduleVisitComponent implements OnInit {
     const start = this.convertTo24Hour(this.startTime);
     const end = this.convertTo24Hour(this.endTime);
 
-    console.log('start: ', start, 'end: ', end);
-
     return this.startTimes.filter(time => {
       const value = time.value;
       return value >= start && value <= end;
@@ -200,7 +192,6 @@ export class ScheduleVisitComponent implements OnInit {
   // }
 
   popupOpen(title1:any): void {
-    console.log('removeFavourite : ');
     let payload = {
         component: "favourite-workspace",
         title: title1,
@@ -214,8 +205,6 @@ export class ScheduleVisitComponent implements OnInit {
       return
     }
     const formValue = this.scheduleVisitForm.value;
-    console.log(formValue);
-    console.log(this.scheduleVisitForm.value?.visitDate?._d);
     const visitDate = new Date(this.scheduleVisitForm.value?.visitDate?._d);
     const date = new Date(visitDate.getTime() - (visitDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
     // var date = new Date(this.scheduleVisitForm.value?.visitDate?._d).toISOString().split('T')[0];
@@ -227,7 +216,6 @@ export class ScheduleVisitComponent implements OnInit {
     if (this.isShortterm ) {
       this.spaceService.userShortTermScheduleVisit(this.spaceId, payload).subscribe(
         (response: any) => {
-          console.log('onSubmitScheduleVisit | response : ', response);
           if (response.result.success) {
             this.popupOpen("Visit scheduled successfully. Our team will get back to you shortly.");
             // this.toastr.success(
@@ -242,7 +230,6 @@ export class ScheduleVisitComponent implements OnInit {
           }
         },
         (error) => {
-          console.log('onSubmitScheduleVisit | error : ', error);
           this.toastr.error('Some error occurred while visit schedule!');
         }
       );
@@ -250,7 +237,6 @@ export class ScheduleVisitComponent implements OnInit {
       // Use the other API for long-term
       this.spaceService.userLongTermScheduleVisit(this.spaceId, payload).subscribe(
         (response: any) => {
-          console.log('onSubmitScheduleVisit | response : ', response);
           if (response.result.success) {
             this.popupOpen("Visit scheduled successfully. Our team will get back to you shortly.");
             // this.toastr.success(
@@ -265,7 +251,6 @@ export class ScheduleVisitComponent implements OnInit {
           }
         },
         (error) => {
-          console.log('onSubmitScheduleVisit | error : ', error);
           this.toastr.error('Some error occurred while visit schedule!');
         }
       );

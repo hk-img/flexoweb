@@ -372,7 +372,6 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
   addRemoveFavorite(space_id){
     this.favouriteWorkSpaceService.addRemoveFavouriteWorkSpace(space_id).subscribe((result: any) => {
     }, error => { 
-      console.log('removeFavouriteWorkSpace | error : ', error);
     })
   }
 

@@ -88,7 +88,6 @@ export class FilterDialog implements OnInit {
     const index = this.filter.amenities.indexOf(id);
     if (event.checked) {
       this.filter.amenities.push(id);
-      console.log(this.filter.amenities);
     }
     if (index > -1) {
       this.filter.amenities.splice(index, 1);
