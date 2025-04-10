@@ -128,8 +128,6 @@ export class CoWorkingVisitScheduleComponent {
     const start = this.convertTo24Hour(this.startTime);
     const end = this.convertTo24Hour(this.endTime);
 
-    console.log('start: ', start, 'end: ', end);
-
     return this.startTimes.filter(time => {
       const value = time.value;
       return value >= start && value <= end;
@@ -139,7 +137,6 @@ export class CoWorkingVisitScheduleComponent {
   onDateChange(event: any) {
     const selectedDate = event.value;
     this.selectedDay = moment(selectedDate).format('dddd');
-    console.log('Selected day is: ', this.selectedDay);
 
     if(this.selectedDay === 'Monday'){
       this.startTime = localStorage.getItem("mondayOpenTime");
@@ -207,8 +204,6 @@ export class CoWorkingVisitScheduleComponent {
         visitDate: formattedDate,
         visitTime: formValues.visitTime,
       };
-
-      console.log(visitInfo);
   
       localStorage.setItem('coWorkingVisitInfo', JSON.stringify(visitInfo));
   

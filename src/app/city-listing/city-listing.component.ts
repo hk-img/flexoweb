@@ -135,7 +135,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
     this._appGlobals.userDetails.subscribe((user_details) => {
-      console.log(user_details)
       this.logged_in = user_details.is_logged_in;
       this.shortlists = user_details.shortlists;
     });
@@ -207,7 +206,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   //     const topShown = rect.top >= 0;
   //     const bottomShown = rect.bottom <= window.innerHeight;
   //     this.isTestDivScrolledIntoView = topShown && bottomShown;
-  //     console.log(this.isTestDivScrolledIntoView);
   //   }
   // }
 
@@ -475,9 +473,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     return Array(length).fill(0);
   }
   openMapInfoWindow(marker: MapMarker, info: any) {
-    console.log(info);
     this.selected_marker_window = this.spaces_list.find((arr) => arr.id === info.id);
-    console.log(this.markersData);
     this.infoWindow.open(marker);
   }
 
@@ -517,7 +513,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   //         lng: this.city_long,
   //       };
   //       this.getSpacesByCity();
-  //       console.log(this.center, "center");
 
   //     }
   //   });
@@ -572,7 +567,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       let city_name = this.city_param;
       const subpart = sessionStorage.getItem('selectedValues');
       if (subpart == null) {
-        console.log(subpart);
       }
       let typeObj = [
         'Private Office',
@@ -613,7 +607,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
             this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
               this.nearBySpaces.next(res.faqs);
-              console.log(res.data);
               this.spaces_list = Object.assign([], res.data);
               if (this.spaces_list.length) {
                 const spaceType = this.spaces_list[0].spaceType
@@ -646,7 +639,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   this.pages.push(i);
                 }
                 this.markersData = [];
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 this.spaces_list.forEach((element) => {
                   element.rating_array = [];
                   element.empty_star_array = [];
@@ -698,7 +690,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   };
                   this.markersData.push(obj);
                 });
-                console.log(this.markersData);
                 this.center = this.calculateCenter(this.markersData)
               } else {
                 this.recommended_spaces_length = this.recommended_spaces.length;
@@ -742,7 +733,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
           this.nearBySpaces.next(res.faqs);
           this.spaces_list = Object.assign([], res.data);
-          console.log(this.type, this.spaces_list, "areaNotAvailable");
           if (this.spaces_list.length) {
             const spaceType = this.spaces_list[0].spaceType
             const cityName = this.spaces_list[0].contact_city_name
@@ -827,7 +817,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
               };
               this.markersData.push(obj);
             });
-            console.log(this.markersData);
             this.center = this.calculateCenter(this.markersData)
           } else {
             this.recommended_spaces_length = this.recommended_spaces.length;
@@ -935,7 +924,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     this.favouriteWorkSpaceService.addRemoveFavouriteWorkSpace(space_id).subscribe((result: any) => {
       this.openSnackBar(result.message, 'Dismiss');
     }, error => {
-      console.log('removeFavouriteWorkSpace | error : ', error);
     })
   }
 
@@ -1032,7 +1020,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     const existingScript = document.getElementById("zsiqscript");
     if (existingScript) {
       existingScript.remove();
-      console.log("Existing Zoho script removed.");
     }
 
     setTimeout(() => {
@@ -1041,7 +1028,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
         values: {},
         ready: function () {
-          console.log("Zoho SalesIQ is ready!");
         },
       };
       setTimeout(() => {
@@ -1056,7 +1042,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       script.src = "https://salesiq.zoho.in/widget";
       document.body.appendChild(script);
 
-      console.log("Zoho SalesIQ script reloaded.");
     }, 200);
   }
 
@@ -1065,7 +1050,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       const chatButton = document.getElementById("zsiq_agtpic");
       if (chatButton) {
         chatButton.click();
-        console.log("Chat button clicked!");
         clearInterval(interval);
       }
     }, 100);

@@ -796,7 +796,6 @@ export class DetailsComponent implements OnInit {
     this.spaceService
       .getSpaceDetails(country, city, spaceType, spaceId)
       .then((res) => {
-        console.log(res)
         if (!res.success) {
           this.router.navigate(['/error']);
         }
@@ -834,7 +833,6 @@ export class DetailsComponent implements OnInit {
           }
         }
         this.space_details = Object.assign({}, data);
-        console.log('------------------------', this.space_details);
         const type = this.getType(spaceType)
         const spaceStatus = this.space_details?.spaceStatus === "Furnished" ? "furnished" : "unfurnished"
         const cityName = this.space_details?.contact_city_name;
@@ -853,9 +851,6 @@ export class DetailsComponent implements OnInit {
 
         this.ribbon = this.space_details.ribbon;
         this.ribbon_color = this.space_details.ribbon_color;
-
-
-        console.log(this.ribbon, this.ribbon_color);
 
         this.marker = {
           position: {
@@ -887,7 +882,6 @@ export class DetailsComponent implements OnInit {
         this.is_shortlisted = res?.existingfavorite?.favourite ?? false;
 
         this.workingTimeValue = this.space_details?.working_time;
-        console.log(this.workingTimeValue);
 
         localStorage.setItem("spaceDetail", JSON.stringify(this.space_details));
 
@@ -907,7 +901,6 @@ export class DetailsComponent implements OnInit {
 
         if (this.workingTimeValue) {
           this.workingTime = this.workingTimeValue;
-          console.log(this.workingTime);
 
           if (this.workingTime[0]?.openingTime && this.workingTime[0]?.closingTime) {
             this.mon_opening_time = this.convert24to12(this.workingTime[0].openingTime);
@@ -1162,7 +1155,6 @@ export class DetailsComponent implements OnInit {
           this.reviews = reviewsData;
 
           this.spaceRatingReviewList = this.reviews.slice(this.ratingOffset, 5);
-          console.log(this.spaceRatingReviewList);
           this.ratingOffset += 5;
           // let countFiveStar = 0;
           // let countFourStar = 0;
@@ -1223,11 +1215,6 @@ export class DetailsComponent implements OnInit {
           //   this.ratingBreakDown[3].value = countTwoStar;
           //   this.ratingBreakDown[4].value = countOneStar;
           // }
-
-          // console.log(
-          //   'this.spaceRatingReviewList : ',
-          //   this.spaceRatingReviewList
-          // );
         }
       });
   }
@@ -1571,7 +1558,6 @@ export class DetailsComponent implements OnInit {
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
     let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
     if (isLoggedIn || userDetails?.accessToken) {
-      console.log(this.space_details)
       if (!this.modal.isOpen) {
         this.modal.openModal();
       }

@@ -36,7 +36,6 @@ export class ListItemComponent implements OnInit{
   public is_see_more_visible = 1;
   public filter_type_col_name;
   ngOnInit(): void {
-    console.log("this.spaceDetails", this.spaceDetails);
     const  name =this.spaceDetails.name?.toLowerCase()
     const  buildingName =this.spaceDetails.buildingName?.toLowerCase()
     const location_name = this.spaceDetails.location_name?.toLowerCase()
@@ -73,10 +72,6 @@ export class ListItemComponent implements OnInit{
     }
 
     this.type = this.getType(spaceType)
-    // for (let i = 0; i < this.spaceDetails.images.length; i++) {
-    //   console.log('========================',this.spaceDetails.images[i]);
-    // }
-    
   }
 
   @ViewChild('slickMainCarousel', { static: false })
@@ -205,7 +200,6 @@ export class ListItemComponent implements OnInit{
   }
   
   onSpaceNameClicked(e: any) {
-    console.log(e);
     if(e.spaceType == 'Coworking Café/Restaurant'){
       window.open(
         `${this.formatUrl(e.spaceType.replace('/', '-'))}/${this.formatUrl(e.location_name)}-${e.id}`,

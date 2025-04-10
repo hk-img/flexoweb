@@ -187,7 +187,6 @@ export class FilterItemComponent implements OnInit {
         const updatedRes = res.filter(val => val.spaceType?.toLowerCase() !== "coworking space")
         this.spaces = [...this.staticSpaces, ...updatedRes];
         this.selectedValues = this.spaces[0]?.subpart?.map(sub => sub.spaceType);
-        console.log(this.selectedValues)
         if (this.spaceType?.toLowerCase() === "coworking space") {
           const newArr = this.staticSpaces.map(space => ({
             ...space,
@@ -289,7 +288,6 @@ export class FilterItemComponent implements OnInit {
 
 
   getLocationValue(event: any) {
-    console.log(event.option.value)
     localStorage.removeItem("locationLat")
     localStorage.removeItem("locationLong")
     localStorage.setItem("location", event.option.value)
@@ -567,7 +565,6 @@ export class FilterItemComponent implements OnInit {
         this.params.min_price = this.filter?.min_price;
         this.params.max_price = this.filter?.max_price;
         this.params.sortBy = this.filter.priceSort;
-        console.log(this.params);
         this.filterItemEvent.emit({ filter: this.params });
       }
       this.login_dialogRef = null;
@@ -669,10 +666,12 @@ export class FilterItemComponent implements OnInit {
   }
 
   openNearByList(list:any){
-    window.open(
-      `in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`,
-      '_blank'
-    );
+    console.log(list)
+    alert(`in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`)
+    // window.open(
+    //   `in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`,
+    //   '_blank'
+    // );
   }
 
 

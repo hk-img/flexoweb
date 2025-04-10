@@ -40,8 +40,6 @@ export class WorkspaceRatingReviewComponent implements OnInit {
             rating: [ 0, [Validators.required] ],
             review: [""]
         });
-
-        console.log('this.data  : ',this.data);
         if(this.data.userSpaceReviewDetails != null){
             this.isRateSpace = true;
             this.rating = this.data.userSpaceReviewDetails.rating;
@@ -55,7 +53,6 @@ export class WorkspaceRatingReviewComponent implements OnInit {
 
     public onSubmitRatingReview(){
         const formValue = this.workspaceRatingReviewForm.getRawValue();
-        console.log('onSubmitRatingReview | formValue : ',formValue)
         let payload = {
             rating: formValue.rating,
             Review: formValue.review
@@ -65,7 +62,6 @@ export class WorkspaceRatingReviewComponent implements OnInit {
         if(this.isRateSpace){
             let rating_id = this.data.userSpaceReviewDetails.ratingId ? this.data.userSpaceReviewDetails.ratingId : null;
             this.spaceService.updateRatingReview(rating_id, payload, space_id).subscribe((response:any) => {
-                console.log('response : ',response);
                 if(response.result.success){
                     this.toastr.success(response.result.message || 'Rated space successfully!')
                     this.closeDialog(null);
@@ -78,7 +74,6 @@ export class WorkspaceRatingReviewComponent implements OnInit {
             })
         } else {
             this.spaceService.addRatingReview(payload, this.data.space_id).subscribe((response:any) => {
-                console.log('response : ',response);
                 if(response.result.success){
                     this.toastr.success(response.result.message || 'Rated space successfully!')
                     this.closeDialog(null);
@@ -93,7 +88,6 @@ export class WorkspaceRatingReviewComponent implements OnInit {
     }
 
     onReviewRating(rating:number) {
-        console.log(rating)
         this.rating = rating;
         const formValue = this.workspaceRatingReviewForm.getRawValue();
         this.workspaceRatingReviewForm.setValue({ rating: this.rating, review: formValue.review ? formValue.review : "" });

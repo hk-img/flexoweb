@@ -142,7 +142,6 @@ export class ContactFormComponent implements OnInit {
   }
 
   onResourceTypeSelection(resource_type) {
-    console.log('resource_type : ',resource_type);
     this.space_type = resource_type;
     if (resource_type == 6 || resource_type == 7) {
       this.is_select_date_time_visible = true;
@@ -334,7 +333,6 @@ export class ContactFormComponent implements OnInit {
 
         const isLoggedIn = localStorage.getItem('isLoggedIn')
         if(isLoggedIn){
-          console.log('isLoggedIn')
           let payload = {
             inquirySpaceTypeId: this.space_type ? this.space_type : null,
             inquirySpaceBookingDateTime: this.booking_date_time ? this.booking_date_time : null,
@@ -345,7 +343,6 @@ export class ContactFormComponent implements OnInit {
 
           if(this.inquiry_id){
             this.spaceService.updateInquiry(this.inquiry_id,this.space_id, payload).subscribe((response:any) => {
-              console.log('response : ',response);
               if(response.result.success){
                 this.openSnackBar(response.result.message || 'Booking request updated successfully!', 'Success');
                 this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{
@@ -355,12 +352,10 @@ export class ContactFormComponent implements OnInit {
                 this.openSnackBar(response.result.message || 'Some error occurred while update inquiry!', 'Error');
               }
             }, error => {
-              console.log('error : ',error);
               this.openSnackBar('Some error occurred while sent inquiry!', 'Error');
             })
           } else {
             this.spaceService.sentInquiry(this.space_id, payload).subscribe((response:any) => {
-              console.log('response : ',response);
               if(response.result.success){
                 this.openSnackBar(response.result.message || 'Inquiry sent successfully!', 'Success');
                 this.show_submit_response = true;
@@ -369,7 +364,6 @@ export class ContactFormComponent implements OnInit {
                 this.openSnackBar(response.result.message || 'Some error occurred while sent inquiry!', 'Error');
               }
             }, error => {
-              console.log('error : ',error);
               this.openSnackBar('Some error occurred while sent inquiry!', 'Error');
             })
           }

@@ -41,7 +41,6 @@ export class BookingRequestInquiriesListComponent implements OnInit {
     this.bookingRequestInquiriesList = [];
     this.spaceService.getBookingRequestInquiriesList().subscribe(
       (response: any) => {
-        console.log('response : ', response);
         if (response?.result.success) {
           let requestInquiries = response.result.inquiries
             ? response.result.inquiries
@@ -112,10 +111,8 @@ export class BookingRequestInquiriesListComponent implements OnInit {
           }
         }
         // this.dataSource = this.bookingRequestInquiriesList;
-        console.log(this.bookingRequestInquiriesList)
       },
       (error) => {
-        console.log('error : ', error);
       }
     );
   }
@@ -130,7 +127,6 @@ export class BookingRequestInquiriesListComponent implements OnInit {
   }
 
   onCancelInquiry(item) {
-    console.log('onCancelSchedule | item : ', item);
     let payload = {
       component: 'booking-request-inquiries',
       title: 'Cancel inquiry',

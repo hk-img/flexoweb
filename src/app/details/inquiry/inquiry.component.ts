@@ -101,7 +101,6 @@ export class InquiryComponent {
 
     this.updatePlaceholder();
     this.value = this.data.value;
-    console.log(data)
   }
 
   ngOnInit(): void {
@@ -164,7 +163,6 @@ export class InquiryComponent {
 
   getSpaceType(event: any) {
     this.formData.spaceType = [event];
-    console.log(this.formData.spaceType);
   }
 
   onSubmit(formData: any) {
@@ -205,7 +203,6 @@ export class InquiryComponent {
         formData.spaceId = this.space_id;
       }
       formData.spaceId = this.data.spaceId
-      console.log(formData)
       this.service.inquiryBooking(formData).subscribe((data: any) => {
         if (data?.result?.success) {
           this.popupOpen("inquirenow", `${data?.result?.message}. Our team will get back to you shortly.`);

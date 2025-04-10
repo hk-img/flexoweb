@@ -232,7 +232,6 @@ export class RequestBookingComponent {
     });
 
     const date = new Date();
-    console.log(date)
 
     this.onDateChange(date);
 

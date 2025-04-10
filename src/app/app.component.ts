@@ -275,8 +275,8 @@ export class AppComponent {
 
           if (event.url === '/in/coworking-space/bangalore-urban/bengaluru')
             this.router.navigate(['/in/coworking/bengaluru']);
-          // if (event.url === '/in/coworking/bengaluru')
-          //    this.router.navigate(['/in/coworking/bangalore']);
+          if (event.url === '/in/coworking/bengaluru')
+             this.router.navigate(['/in/coworking/bangalore']);
           if (event.url === '/in/coworking-space/bangalore-urban/infantry-road')
             this.router.navigate(['/in/coworking-space/bangalore/infantry-road']);
           if (event.url === '/in/coworking-space/bangalore-urban/indiranagar')
@@ -1372,11 +1372,11 @@ export class AppComponent {
 
           //new delhi url end
 
-          // if(event.url === '/in/coworking/new-delhi')
-          // this.router.navigate(['/in/coworking/delhi']);
+          if(event.url === '/in/coworking/new-delhi')
+          this.router.navigate(['/in/coworking/delhi']);
 
-          if (event.url === '/in/coworking/delhi')
-            this.router.navigate(['/in/coworking/new-delhi']);
+          // if (event.url === '/in/coworking/delhi')
+          //   this.router.navigate(['/in/coworking/new-delhi']);
         }
       });
       // this.createLinkForCanonicalURL();

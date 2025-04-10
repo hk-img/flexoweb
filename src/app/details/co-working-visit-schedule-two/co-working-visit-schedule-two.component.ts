@@ -78,7 +78,6 @@ export class CoWorkingVisitScheduleTwoComponent {
           setTimeout(() => {
             this.spaceService.getSpaceDetails(this.country, this.city, this.spaceType, this.spaceId).then(
               (res) => {
-                console.log(res)
                 this.private_cabin_price = res?.data?.privatecabin_price;
                 this.managed_office_price = res?.data?.customized_space_price;
                 this.dedicated_desk_price = res?.data?.desks_price;
@@ -178,7 +177,6 @@ export class CoWorkingVisitScheduleTwoComponent {
             }
           },
           (error) => {
-            console.log('booking| error : ', error);
             // this.toastr.error('Some error occurred while visit schedule!');
           }
         );
