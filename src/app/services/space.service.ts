@@ -1528,7 +1528,6 @@ export class SpaceService {
       .get(`${this.getQuestionByLocationNameUrl}/${location}`)
       .pipe(
         map((data) => {
-          console.log(data);
           this.setFaqs(data);
         })
       );
@@ -1537,7 +1536,6 @@ export class SpaceService {
   getFaqsBySpaceId(spaceId): Observable<any> {
     return this.http.get(`${this.getFaqsBySpaceIdUrl}/${spaceId}`).pipe(
       map((data) => {
-        console.log(data);
         this.setFaqs(data);
       })
     );

@@ -508,7 +508,9 @@ export class HomeComponent {
         map(value => this._filter(value || '')),
       );
 
-      this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
+      this.filteredPlaces.subscribe((data:any)=>{
+
+      });
     }
   }
 
@@ -535,7 +537,6 @@ export class HomeComponent {
   getSpacecategory() {
     this.spaceService.getSpaceCategory().subscribe((res: any) => {
       this.spaces = res;
-      console.log(this.spaces)
     })
   }
 
@@ -706,7 +707,6 @@ export class HomeComponent {
     //   }
     // })
     // setTimeout(() => {
-    // console.log({ url, query_params });
     this.router.navigate([this.formatUrl(url)]);
     // }, 500);
   }
@@ -731,7 +731,6 @@ export class HomeComponent {
         this.router.navigate([`/in/spaces/`, cityName, areaName]);
       },
       (err) => {
-        console.log(err);
       }
     );
   }
@@ -799,7 +798,6 @@ export class HomeComponent {
     const existingScript = document.getElementById("zsiqscript");
     if (existingScript) {
       existingScript.remove();
-      console.log("Existing Zoho script removed.");
     }
   
     setTimeout(() => {
@@ -808,7 +806,6 @@ export class HomeComponent {
         widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
         values: {},
         ready: function () {
-          console.log("Zoho SalesIQ is ready!");
         },
       };
       setTimeout(() => {
@@ -820,8 +817,6 @@ export class HomeComponent {
       script.defer = true;
       script.src = "https://salesiq.zoho.in/widget";
       document.body.appendChild(script);
-  
-      console.log("Zoho SalesIQ script reloaded.");
     }, 200);
   }
 
@@ -830,7 +825,6 @@ export class HomeComponent {
       const chatButton = document.getElementById("zsiq_agtpic");
       if (chatButton) {
         chatButton.click();
-        console.log("Chat button clicked!");
         clearInterval(interval);
       }
     }, 100);

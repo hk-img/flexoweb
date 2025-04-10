@@ -30,11 +30,9 @@ export class DialogConfirmationPopUp implements OnInit {
   ) {}
 
   ngOnInit(){
-    console.log('dialog-confirmation-popup | data : ',this.data)
   }
 
   successConfirmation(){
-    console.log('this.data : ',this.data);
     if(this.data.component == 'favourite-workspace'){
       this.removeFavouriteWorkSpace(this.data.componentData)
     }
@@ -47,7 +45,6 @@ export class DialogConfirmationPopUp implements OnInit {
   }
 
   public removeFavouriteWorkSpace(item) {
-    console.log('removeFavouriteWorkSpace | item : ', item);
     this.favouriteWorkspaceSevice
       .addRemoveFavouriteWorkSpace(item.id)
       .subscribe(
@@ -58,7 +55,6 @@ export class DialogConfirmationPopUp implements OnInit {
           })
         },
         (error) => {
-          console.log('removeFavouriteWorkSpace | error : ', error);
           this.toastr.success(
             'Some error occurred while unfavourite work space!'
           );
@@ -67,7 +63,6 @@ export class DialogConfirmationPopUp implements OnInit {
   }
   
   public cancelScheduledVisit(item) {
-    console.log('cancelScheduledVisit | item : ', item);
     this.spaceService.cancelScheduledVisit(item.visitId)
       .subscribe(
         (result: any) => {
@@ -83,7 +78,6 @@ export class DialogConfirmationPopUp implements OnInit {
           }
         },
         (error) => {
-          console.log('cancelScheduledVisit | error : ', error);
           this.toastr.error(
             'Some error occurred while cancel schedule visit!'
           );
@@ -92,7 +86,6 @@ export class DialogConfirmationPopUp implements OnInit {
   }
   
   public cancelInquiry(item) {
-    console.log('cancelInquiry | item : ', item);
     this.spaceService.cancelInquiry(item.spaceId, item.inquiryId)
       .subscribe(
         (response: any) => {
@@ -108,7 +101,6 @@ export class DialogConfirmationPopUp implements OnInit {
           }
         },
         (error) => {
-          console.log('cancelInquiry | error : ', error);
           this.toastr.error(
             'Some error occurred while cancel inquiry!'
           );

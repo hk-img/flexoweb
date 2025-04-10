@@ -72,18 +72,15 @@ export class FavouriteWorkSpaceComponent implements OnInit {
     private ngZone: NgZone,
     private router: Router
   ) {
-    console.log('FavouriteWorkSpaceComponent | constructor')
   }
 
   ngOnInit(): void {
-    console.log('FavouriteWorkSpaceComponent | ngOnInit')
     this.getAllFavouriteWorkSpace();
   }
 
   getAllFavouriteWorkSpace() {
     this.favouriteWorkspaceSevice.getFavoriteList().subscribe(
       (result: any) => {
-        console.log('getAllFavouriteWorkSpace | result : ', result);
         this.favouriteWorkSpaceList = [];
         if (result.favoriteSpaceList && result.favoriteSpaceList.length > 0) {
           for (let i = 0; i < result.favoriteSpaceList.length; i++) {
@@ -104,7 +101,6 @@ export class FavouriteWorkSpaceComponent implements OnInit {
         this.ngZone.run(() => this.dtr.detectChanges());
       },
       (error) => {
-        console.log('getAllFavouriteWorkSpace | error : ', error);
       }
     );
   }
@@ -119,7 +115,6 @@ export class FavouriteWorkSpaceComponent implements OnInit {
   }
 
   onRemoveFavourite(item): void {
-    console.log('removeFavourite : ');
     let payload = {
         component: "favourite-workspace",
         title: 'Remove this space from favorites?',
