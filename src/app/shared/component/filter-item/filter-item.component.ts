@@ -666,12 +666,10 @@ export class FilterItemComponent implements OnInit {
   }
 
   openNearByList(list:any){
-    console.log(list)
-    alert(`in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`)
-    // window.open(
-    //   `in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`,
-    //   '_blank'
-    // );
+    window.open(
+      `in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`,
+      '_blank'
+    );
   }
 
 
