@@ -594,9 +594,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           (response) => {
             if (this.areaName && response.length) {
               let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
-              if (!isExist) {
-                this.router.navigate(['/error'])
-              }
+              // if (!isExist) {
+              //   this.router.navigate(['/error'])
+              // }
               const currentArea = response.find(val => val.location_name.toLowerCase() === this.areaName)
               //  api_params.city_lat = String(currentArea?.lat)
               //  api_params.city_long = String(currentArea?.longi)
