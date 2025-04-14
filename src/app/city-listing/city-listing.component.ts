@@ -594,9 +594,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           (response) => {
             if (this.areaName && response.length) {
               let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
-              // if (!isExist) {
-              //   this.router.navigate(['/error'])
-              // }
+              if (!isExist) {
+                this.router.navigate(['/error'])
+              }
               const currentArea = response.find(val => val.location_name.toLowerCase() === this.areaName)
               //  api_params.city_lat = String(currentArea?.lat)
               //  api_params.city_long = String(currentArea?.longi)
@@ -653,7 +653,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   let price;
 
                   if (this.type === 'coworking') {
-                    if (element.flexible_desk_price === null) {
+                    if (element.flexible_desk_price === null || element.flexible_desk_price === 0) {
                       price = element.privatecabin_price
                     } else {
                       price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
