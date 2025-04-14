@@ -54,7 +54,7 @@
                   [ngClass]="!_showMap ? 'col-xl-4' : 'col-xl-6'">
                   <app-list-item [spaceDetails]="element" [isMobile]="isMobile" [filters]="filter"
                     [is_similar_listing]="false" (shortlistItemEvent)="shortList($event)"
-                    (mouseover)="onHoverSpace(element.name)" (mouseleave)="onLeaveSpace(element.name)">
+                    (mouseover)="onHoverSpace(element.id)" (mouseleave)="onLeaveSpace(element.id)">
                   </app-list-item>
                 </div>
               </div>

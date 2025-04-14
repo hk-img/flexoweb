@@ -107,6 +107,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   open_spaceType: any;
   open_location: any;
   arrayOfSubpart: string;
+  location_latitude: any;
+  location_longitude: any;
 
   constructor(
     private router: Router,
@@ -580,7 +582,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         city_name,
         spaceType: (this.spaceType === 'coworking space') ? (subpart == null ? typeObj : JSON.parse(subpart)) : (this.spaceType === 'none' ? [] : [this.spaceType]),
         type: this.type,
-        userId: this.userId
+        userId: this.userId,
       };
       _.extend(api_params, this.filter);
 
@@ -594,6 +596,17 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           (response) => {
             if (this.areaName && response.length) {
               let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
+              let matchedLocation = response?.find(
+                (val:any) => val.location_name.toLowerCase() === this.areaName
+              );
+              
+              if (matchedLocation) {
+                this.location_latitude = matchedLocation.lat;
+                this.location_longitude = matchedLocation.longi;
+              
+                console.log("Latitude:", this.location_latitude);
+                console.log("Longitude:",this.location_longitude);
+              }
               if (!isExist) {
                 this.router.navigate(['/error'])
               }
@@ -602,6 +615,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
               //  api_params.city_long = String(currentArea?.longi)
               api_params.city_lat = 0
               api_params.city_long = 0
+              api_params.location_lat = this.location_latitude ? this.location_latitude : 0
+              api_params.location_longi = this.location_longitude ? this.location_longitude : 0
             }
 
 
@@ -731,6 +746,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         // api_params.city_long= localStorage.getItem("long")
         api_params.city_lat = localStorage.getItem("locationLat") ?? 0
         api_params.city_long = localStorage.getItem("locationLong") ?? 0
+        api_params.location_lat = 0;
+        api_params.location_longi = 0;
 
         this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
           this.nearBySpaces.next(res.faqs);
@@ -856,7 +873,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   updateMarkerPriceColor(name: string, color: string) {
-    const markerIndex = this.markersData.findIndex(marker => marker.title === name);
+    console.log(this.markersData)
+    const markerIndex = this.markersData.findIndex(marker => marker?.info?.id === name);
 
     if (markerIndex !== -1) {
       const newIconUrl = this.createPriceTagIcon(`₹${this.markersData[markerIndex].options.price}`, color);
