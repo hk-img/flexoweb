@@ -625,6 +625,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 } else {
                   this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
                 }
+              }else{
+                  this.router.navigate(['/error'])
               }
               this.recommended_spaces = Object.assign([], res.recommended_spaces);
               this.space_count = res.space_count;
