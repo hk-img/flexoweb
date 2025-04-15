@@ -227,6 +227,9 @@ export class AppComponent {
           if(event.url === '/in/coworking-space/navi/mumbai/sanpada')
             this.router.navigate(['/in/coworking-space/navi-mumbai/sanpada'])
 
+          if(event.url === '/in/coworking/gurugram')
+            this.router.navigate(['/in/coworking/gurgaon'])
+
           if (event.url === '/in/coworking-space/Navi Mumbai/Kharghar')
             this.router.navigate(['/in/coworking-space/navi mumbai/kharghar']);
           if(event.url === '/in/coworking-space/navi/mumbai/Kharghar')
