@@ -672,6 +672,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   if (this.type === 'coworking') {
                     if (element.flexible_desk_price === null || element.flexible_desk_price === 0) {
                       price = element.privatecabin_price
+                    } else if(element.privatecabin_price === null || element.privatecabin_price === 0){
+                      price = element.flexible_desk_price
                     } else {
                       price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
                     }
