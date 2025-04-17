@@ -200,22 +200,27 @@ export class ListItemComponent implements OnInit{
   }
   
   onSpaceNameClicked(e: any) {
-    if(e.spaceType == 'Coworking Café/Restaurant'){
-      window.open(
-        `${this.formatUrl(e.spaceType.replace('/', '-'))}/${this.formatUrl(e.location_name)}-${e.id}`,
-        '_blank'
-      );
-    }else if (this.type === 'coworking'){
-      window.open(
-        `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
-        '_blank'
-      );
-    }else {
-      window.open(
-        `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.contact_city_name)}/${this.formatUrl(e.location_name)}/${e.id}`,
-        '_blank'
-      );
-    }
+    // if(e.spaceType == 'Coworking Café/Restaurant'){
+    //   window.open(
+    //     `${this.formatUrl(e.spaceType.replace('/', '-'))}/${this.formatUrl(e.location_name)}-${e.id}`,
+    //     '_blank'
+    //   );
+    // }else if (this.type === 'coworking'){
+    //   window.open(
+    //     `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
+    //     '_blank'
+    //   );
+    // }else {
+    //   window.open(
+    //     `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.contact_city_name)}/${this.formatUrl(e.location_name)}/${e.id}`,
+    //     '_blank'
+    //   );
+    // }
+
+    window.open(
+      `${e.slug}`,
+      '_blank'
+    );
   }
 
 

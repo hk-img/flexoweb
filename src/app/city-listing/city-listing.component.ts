@@ -632,7 +632,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
                 const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
                 if (this.type === 'coworking') {
-                  const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+                  const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null && price !== 0));
                   const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
                   this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
                 } else if (this.type === 'shortterm') {
@@ -762,7 +762,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
             const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
             if (this.type === 'coworking') {
-              const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+              const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null && price !== 0));
               const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
               this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
             } else if (this.type === 'shortterm') {
