@@ -263,6 +263,36 @@ export class AppComponent {
           if (event.url === '/in/coworking-space-for-rent/Thane')
             this.router.navigate(['/in/coworking/thane']);
 
+          if(event.url === '/in/coworking-space/mumbai/thane')
+            this.router.navigate(['/in/coworking/thane'])
+
+          if(event.url === '/in/coworking-space/bengaluru/hebbal')
+            this.router.navigate(['/in/coworking-space/bangalore/hebbal'])
+
+          if(event.url === '/in/coworking-space/new-delhi/south-delhi')
+            this.router.navigate(['/in/coworking-space/delhi/south-delhi'])
+
+          if(event.url === '/in/spaces/Hyderabad')
+            this.router.navigate(['/in/coworking/hyderabad'])
+
+          if(event.url === '/in/spaces/Nashik')
+            this.router.navigate(['/in/coworking/nashik'])
+          
+          if(event.url === '/in/spaces/jaipur')
+            this.router.navigate(['/in/coworking/jaipur'])
+
+          if(event.url === '/in/spaces/Nalitabari')
+            this.router.navigate(['/in/coworking/nalitabari'])
+
+          if(event.url === '/in/spaces/Atmakur')
+            this.router.navigate(['/in/coworking/atmakur'])
+
+          if(event.url === '/in/spaces/Kasavanahalli')
+            this.router.navigate(['/in/coworking/kasavanahalli'])
+
+          if(event.url === '/in/spaces/Ghaziabad')
+            this.router.navigate(['/in/coworking/ghaziabad'])
+
           if (event.url === '/in/coworking-space/thane/navi-mumbai')
             this.router.navigate(['/in/coworking/navi-mumbai']);
           if (event.url === '/in/coworking-space/thane/cbd-belapur')
