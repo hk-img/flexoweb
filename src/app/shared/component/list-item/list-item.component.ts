@@ -260,6 +260,22 @@ export class ListItemComponent implements OnInit{
     imgElement.src = 'assets/images/details_placeholder_image.jpg';
     imgElement.alt = `${imageAlt} details_placeholder_image.jpg`;
   }
+
+  getValidPrice(desksPrice: number | null | undefined, flexiblePrice: number | null | undefined): number | null {
+    const validDesks = typeof desksPrice === 'number' && desksPrice > 0 ? desksPrice : null;
+    const validFlexible = typeof flexiblePrice === 'number' && flexiblePrice > 0 ? flexiblePrice : null;
+  
+    if (validDesks !== null && validFlexible !== null) {
+      return Math.min(validDesks, validFlexible);
+    }
+  
+    return validDesks !== null ? validDesks : validFlexible !== null ? validFlexible : null;
+  }  
+
+  isPriceValid(price: number | null | undefined): boolean {
+    return typeof price === 'number' && price > 0;
+  }
+  
   
 
 }
