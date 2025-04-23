@@ -69,25 +69,6 @@ export class DetailsComponent implements OnInit {
   faqs = new BehaviorSubject([]);
   isFaqsVisible: any;
   spaceRatingReviewList = [];
-  spaceRoutes = {
-    'event space': 'event-space',
-    'virtual office': 'virtual-office',
-    'private office': 'private-office',
-    'party space': 'party-space',
-    'coworking space': 'coworking',
-    'shoot studio': 'shoot-studio',
-    'recording studio': 'recording-studio',
-    'activity space': 'activity-space',
-    'sports turf': 'sports-turf',
-    'sports venue': 'sports-venue',
-    'banquet hall': 'banquet-hall',
-    'gallery': 'gallery',
-    'classroom': 'classroom',
-    'private cabin': 'private-cabin',
-    'meeting room': 'meeting-room',
-    'training room': 'training-room',
-    'coworking café restaurant': 'coworking-cafe-restaurant',
-  };  
   ratingBreakDown = [
     {
       star: 5,
