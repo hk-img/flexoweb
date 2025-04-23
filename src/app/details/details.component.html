@@ -205,59 +205,18 @@
               <div class="bredcrumb_sec">
                 <nav>
                   <ol class="breadcrumb bg-white p-0 mb-0">
-                    <!-- <li class="breadcrumb-item"><a routerLink="/">Home</a></li> -->
-                    <!-- <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/coworking/{{this.city_param?.toLowerCase()}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li> -->
-                    <li *ngIf="spaceType == 'coworking café restaurant'" && spaceType != 'event space' style="text-transform: capitalize;" class="breadcrumb-item"><a [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase()]">
-                      {{ space_details?.spaceType }} in {{ space_details?.contact_city_name }}
-                    </a></li>
-                    <!-- breadcrump for event space -->
-                    <li *ngIf="spaceType == 'event space'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/event-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for virtual office -->
-                    <li *ngIf="spaceType == 'virtual office'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/virtual-office/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for private office -->
-                    <li *ngIf="spaceType == 'private office'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/private-office/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for party space -->
-                    <li *ngIf="spaceType == 'party space'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/party-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for coworking space -->
-                    <li *ngIf="spaceType == 'coworking space'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/coworking/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for shoot studio -->
-                    <li *ngIf="spaceType == 'shoot studio'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/shoot-studio/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for recording studio -->
-                    <li *ngIf="spaceType == 'recording studio'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/recording-studio/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for activity space -->
-                    <li *ngIf="spaceType == 'activity space'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/activity-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for sports turf -->
-                    <li *ngIf="spaceType == 'sports turf'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/sports-turf/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for sports venue -->
-                    <li *ngIf="spaceType == 'sports venue'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/sports-venue/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for banquet hall -->
-                    <li *ngIf="spaceType == 'banquet hall'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/banquet-hall/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for gallery -->
-                    <li *ngIf="spaceType == 'gallery'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/gallery/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for classroom -->
-                    <li *ngIf="spaceType == 'classroom'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/classroom/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for private cabin -->
-                    <li *ngIf="spaceType == 'private cabin'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/private-cabin/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for meeting room -->
-                    <li *ngIf="spaceType == 'meeting room'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/meeting-room/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- breadcrump for training room -->
-                    <li *ngIf="spaceType == 'training room'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/training-room/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
-                    <!-- <li style="text-transform: capitalize;" class="breadcrumb-item " aria-current="page"><a
-                        routerLink="/in/spaces/{{space_details?.contact_city_name}}">{{
-                        space_details?.contact_city_name}}</a></li> -->
-                    <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a routerLink="/in/{{this.spaceType?.replace(' ', '-')}}/{{this.city_param?.toLowerCase()}}/{{space_details?.location_name?.replace(' ', '-')?.toLowerCase()}}">{{
-                        space_details?.location_name}}</a>
+                    <li *ngIf="spaceType && spaceRoutes[spaceType]" style="text-transform: capitalize;" class="breadcrumb-item">
+                      <a [routerLink]="['/in', spaceRoutes[spaceType], city_param?.toLowerCase()]">
+                        {{ space_details?.spaceType }} in {{ space_details?.contact_city_name }}
+                      </a>
                     </li>
-                    <li *ngIf="spaceType == 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase(), space_details?.location_name?.replace(' ', '-')?.toLowerCase()]">{{
-                        space_details?.location_name}}</a>
+                  
+                    <li *ngIf="space_details?.location_name" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page">
+                      <a [routerLink]="['/in', spaceRoutes[spaceType], city_param?.toLowerCase(), space_details?.location_name?.replace(' ', '-')?.toLowerCase()]">
+                        {{ space_details?.location_name }}
+                      </a>
                     </li>
-                    <!-- <li style="text-transform: capitalize;" *ngIf="isLongterm || isShortterm" class="breadcrumb-item"
-                      aria-current="page">{{
-                      space_details?.spaceTitle}}</li>
-                    <li style="text-transform: capitalize;" *ngIf="isCoworking" class="breadcrumb-item"
-                      aria-current="page">{{space_details?.actual_name}}
-                    </li> -->
-                  </ol>
+                  </ol>                  
                 </nav>
               </div>
 
