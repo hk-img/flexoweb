@@ -775,13 +775,12 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.space_count = res.space_count;
           if (this.spaces_list.length) {
             this.page_end =
-              this.space_count < this.page_size * this.page
-                ? this.space_count
-                : this.page_size * this.page;
-            this.total_pages =
-              this.space_count % 2 == 0
-                ? this.space_count / this.page_size
-                : Math.floor(this.space_count / this.page_size) + 1;
+            this.space_count < this.page_size * this.page
+            ? this.space_count
+            : this.page_size * this.page;
+            const rawPages = this.space_count / this.page_size;
+            const decimalPart = rawPages - Math.floor(rawPages);
+            this.total_pages = decimalPart >= 0.5 ? Math.ceil(rawPages) : Math.floor(rawPages);
             this.pages.splice(0, this.pages.length);
             for (let i = 1; i <= this.total_pages; i++) {
               this.pages.push(i);
