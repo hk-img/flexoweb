@@ -245,10 +245,10 @@
                     <!-- <li style="text-transform: capitalize;" class="breadcrumb-item " aria-current="page"><a
                         routerLink="/in/spaces/{{space_details?.contact_city_name}}">{{
                         space_details?.contact_city_name}}</a></li> -->
-                    <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a routerLink="/in/{{this.spaceType?.replace(' ', '-')}}/{{this.city_param?.toLowerCase()}}/{{space_details?.location_name?.replace(' ', '-')?.toLowerCase()}}">{{
+                    <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a routerLink="/in/{{this.spaceType?.replace(' ', '-')}}/{{this.city_param?.toLowerCase()}}/{{formatUrl(space_details?.location_name?.replace(' ', '-')?.toLowerCase())}}">{{
                         space_details?.location_name}}</a>
                     </li>
-                    <li *ngIf="spaceType == 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase(), space_details?.location_name?.replace(' ', '-')?.toLowerCase()]">{{
+                    <li *ngIf="spaceType == 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase(), formatUrl(space_details?.location_name?.replace(' ', '-')?.toLowerCase())]">{{
                         space_details?.location_name}}</a>
                     </li>
                     <!-- <li style="text-transform: capitalize;" *ngIf="isLongterm || isShortterm" class="breadcrumb-item"
