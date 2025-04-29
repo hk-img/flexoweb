@@ -1,10 +1,13 @@
 
 <div class="hero hero_sec">
   <div class="backgrounds animateIMG">
-    <div class="homeInnerSwiper" *ngFor="let background of backgrounds; let i = index"
-        [ngStyle]="{'background-image': 'url(' + background + ')'}"
-        [class.active]="i === currentImageIndex">
-    </div>
+    <ng-container *ngFor="let background of backgrounds; let i = index">
+      <img *ngIf="i === currentImageIndex" [src]="background" [alt]="'Background ' + (i + 1)"
+        class="background-image active" fetchpriority="high" decoding="async" />
+
+      <img *ngIf="i === (currentImageIndex + 1) % backgrounds.length" [src]="background" [alt]="'Background ' + (i + 1)"
+        class="background-image" loading="lazy" decoding="async" />
+    </ng-container>
 </div>
   <div class="hero-slide">
     <div class="hero-content d-flex w-100 align-items-center container">
@@ -1072,11 +1075,7 @@
                         testimonial.companyName
                         }}</span>
                       <ul class="product-rating text-left">
-                        <li><i class="ion-android-star"></i></li>
-                        <li><i class="ion-android-star"></i></li>
-                        <li><i class="ion-android-star"></i></li>
-                        <li><i class="ion-android-star"></i></li>
-                        <li><i class="ion-android-star"></i></li>
+                         <li *ngFor="let star of [1, 2, 3, 4, 5]"><i class="ion-android-star"></i></li>
                       </ul>
                     </div>
                   </div>
