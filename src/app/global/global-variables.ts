@@ -60,7 +60,7 @@ export const GlobalVariables = {
       designation: `Founder`,
       companyName: `Shop 101 (Acquired by Glance InMobi)`,
       content: `We were in urgent need of flex space for some of our teams. We communicated our needs to Flexo assuming that it would be a time-consuming process. However, we were delighted as the perfect space was found and booked within 24 hours and our teams started working there the very next day. Flexo’s knowledge of the flex space market and speed of execution is impressive. Highly recommend Flexo for finding and booking flex space.`,
-      image: `abhinavjain.png`,
+      image: `abhinavjain.webp`,
     },
     {
       id: 2,
@@ -68,7 +68,7 @@ export const GlobalVariables = {
       designation: `Managing Director`,
       companyName: `Pi Communications`,
       content: `When we took a decision to move into a co-working space, we could not have found a better guide and friend than Flexo. Conversations with them helped us validate in our minds the benefits of such a move.Their team took care to understand our requirements and they helped us through the entire journey of negotiations, standing by us to get us better benefits. A potentially exhausting process was wrapped up in two days with efficiency and empathy.`,
-      image: `rakhshin.jpg`,
+      image: `rakhshin.webp`,
     },
     {
       id: 3,
@@ -76,7 +76,7 @@ export const GlobalVariables = {
       designation: `Co-Founder & CEO`,
       companyName: `Get Set Learn (An Arvind Mafatlal Group Company)`,
       content: `Finding meeting rooms for our team meetings was becoming a challenge for us. We talked to a couple of spaces but couldn't find what we were looking for. Then we approached Flexo with our requirements and in no time, our ideal meeting rooms were booked at very good discounts. The meeting rooms were fully equipped and everything that was promised was delivered. We will definitely use Flexo again for our flexible workspace requirements.`,
-      image: `ameet.jpg`,
+      image: `ameet.webp`,
     },
     {
       id: 4,
@@ -84,7 +84,7 @@ export const GlobalVariables = {
       designation: `Admin Manager`,
       companyName: `Kennect Technologies`,
       content: `Flexo provided us with multiple office location suggestions, which greatly helped us in selecting the perfect office based on our needs. With Flexo, we didn’t face any issues at all. In fact, it made our work easier and helped us find an office that perfectly matched our requirements. Their team provided excellent support throughout the process, guiding us with the right options and making the experience smooth and hassle-free. What made us choose Flexo over other options was that Flexo offered multiple office choices, a seamless process, and excellent support, making it the best fit for our needs. I would definitely recommend Flexo to others because of its multiple office options, and excellent support, making finding the perfect space effortless. `,
-      image: `riteshsingh.jpeg`,
+      image: `riteshsingh.webp`,
     },
   ],
   min_price_list: [0, 500, 1000, 1500, 2000, 2500],
