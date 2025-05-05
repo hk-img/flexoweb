@@ -104,6 +104,11 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   };
   mapType: string;
   cityForMetaTag: any;
+  open_spaceType: any;
+  open_location: any;
+  arrayOfSubpart: string;
+  location_latitude: any;
+  location_longitude: any;
 
   constructor(
     private router: Router,
@@ -132,10 +137,12 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
     this._appGlobals.userDetails.subscribe((user_details) => {
-      console.log(user_details)
       this.logged_in = user_details.is_logged_in;
       this.shortlists = user_details.shortlists;
     });
+
+    this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
+    this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
   }
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
@@ -160,7 +167,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   // public type = null;
   public pages = [];
   public page_start = 1;
-  public page_size = 24;
+  public page_size = 30;
   // public amenities = [];
   public page_end;
   public spaces_list: any[] = [];
@@ -201,7 +208,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   //     const topShown = rect.top >= 0;
   //     const bottomShown = rect.bottom <= window.innerHeight;
   //     this.isTestDivScrolledIntoView = topShown && bottomShown;
-  //     console.log(this.isTestDivScrolledIntoView);
   //   }
   // }
 
@@ -234,6 +240,16 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.loadZohoScript2();
+    const selectedValues = [
+      "Private Office",
+      "Managed Office",
+      "Dedicated Desk",
+      "Flexible Desk",
+      "Virtual Office",
+      "Day Pass"
+    ];
+    sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
     this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
@@ -254,7 +270,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             content: `Book coworking spaces in ${this.getOriginalUrlParam(params['city']).toUpperCase()} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.`,
           });
         } else if (
-          this.spaceType === 'coworking cafe/restaurant' ||
+          this.spaceType === 'coworking café/restaurant' ||
           this.spaceType === 'shoot studio' ||
           this.spaceType === 'recording studio' ||
           this.spaceType === 'podcast studio' ||
@@ -290,7 +306,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
           });
         } else if (
-          this.spaceType === 'coworking cafe/restaurant' ||
+          this.spaceType === 'coworking café/restaurant' ||
           this.spaceType === 'shoot studio' ||
           this.spaceType === 'recording studio' ||
           this.spaceType === 'podcast studio' ||
@@ -332,7 +348,14 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       // Find 'in' in the URL and extract the next static segment ('longTerm')
       const inIndex = segments2.indexOf('in');
       if (inIndex !== -1 && segments2.length > inIndex + 1) {
-        this.staticValue = segments2[inIndex + 1];  // Extracts 'longTerm'
+        this.staticValue = segments2[inIndex + 1];
+        if (this.staticValue == 'coworking-space' || this.staticValue == 'coworking') {
+          this.staticValue = "Coworking"
+        }else if(this.staticValue == 'coworking-cafe-restaurant' || this.staticValue == 'shoot-studio' || this.staticValue == 'recording-studio' || this.staticValue == 'podcast-studio' || this.staticValue == 'activity-space' || this.staticValue == 'sports-turf' || this.staticValue == 'sports-venue' || this.staticValue == 'party-space' || this.staticValue == 'banquet-hall' || this.staticValue == 'gallery' || this.staticValue == 'classroom' || this.staticValue == 'private-cabin' || this.staticValue == 'meeting-room' || this.staticValue == 'training-room' || this.staticValue == 'event-space'){
+          this.staticValue = 'Shortterm';
+        } else {
+          this.staticValue = 'Longterm';
+        }
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('staticValue', this.staticValue);
         }
@@ -369,6 +392,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     spaceType: string,
     cityName: string,
     imageUrl: string,
+    location_name: string,
     detail: string,
     priceMin: number,
     priceMax: number,
@@ -384,17 +408,15 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     const jsonLd = {
       "@context": "https://schema.org/",
       "@type": "Product",
-      "name": location ? `${spaceType} in ${location}` : `${spaceType} in ${cityName}`,
+      "name": this.areaName ? `${spaceType} in ${location_name}, ${cityName}` : `${spaceType} in ${cityName}`,
       "image": imageUrl,
       "description": detail,
       "brand": {
         "@type": "Brand",
         "name": "Flexo"
       },
-      "mpn": "",
-      "sku": "",
       "offers": {
-        "@type": "Offer",
+        "@type": "AggregateOffer",
         "url": window.location.href,
         "priceCurrency": "INR",
         "lowPrice": priceMin,
@@ -453,8 +475,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     return Array(length).fill(0);
   }
   openMapInfoWindow(marker: MapMarker, info: any) {
-    this.selected_marker_window = this.spaces_list.find((arr) => arr.name === info.name);
-    console.log(this.markersData);
+    this.selected_marker_window = this.spaces_list.find((arr) => arr.id === info.id);
     this.infoWindow.open(marker);
   }
 
@@ -494,7 +515,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   //         lng: this.city_long,
   //       };
   //       this.getSpacesByCity();
-  //       console.log(this.center, "center");
 
   //     }
   //   });
@@ -535,7 +555,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       if (this.spaceType?.toLowerCase() == 'coworking space') {
         this.type = "coworking";
 
-      } else if ((this.spaceType?.toLowerCase() == 'coworking cafe/restaurant') || (this.spaceType?.toLowerCase() == 'shoot studio') || (this.spaceType?.toLowerCase() == 'recording studio') || (this.spaceType?.toLowerCase() == 'podcast studio') || (this.spaceType?.toLowerCase() == 'activity space') || (this.spaceType?.toLowerCase() == 'sports turf') || (this.spaceType?.toLowerCase() == 'sports venue') || (this.spaceType?.toLowerCase() == 'party space') || (this.spaceType?.toLowerCase() == 'banquet hall') || (this.spaceType?.toLowerCase() == 'gallery') || (this.spaceType?.toLowerCase() == 'classroom') || (this.spaceType?.toLowerCase() == 'private cabin') || (this.spaceType?.toLowerCase() == 'meeting room') || (this.spaceType?.toLowerCase() == 'training room') || (this.spaceType?.toLowerCase() == 'event space')) {
+      } else if ((this.spaceType?.toLowerCase() == 'coworking café/restaurant') || (this.spaceType?.toLowerCase() == 'shoot studio') || (this.spaceType?.toLowerCase() == 'recording studio') || (this.spaceType?.toLowerCase() == 'podcast studio') || (this.spaceType?.toLowerCase() == 'activity space') || (this.spaceType?.toLowerCase() == 'sports turf') || (this.spaceType?.toLowerCase() == 'sports venue') || (this.spaceType?.toLowerCase() == 'party space') || (this.spaceType?.toLowerCase() == 'banquet hall') || (this.spaceType?.toLowerCase() == 'gallery') || (this.spaceType?.toLowerCase() == 'classroom') || (this.spaceType?.toLowerCase() == 'private cabin') || (this.spaceType?.toLowerCase() == 'meeting room') || (this.spaceType?.toLowerCase() == 'training room') || (this.spaceType?.toLowerCase() == 'event space')) {
         this.type = "shortterm";
 
       } else if ((this.spaceType?.toLowerCase() == 'managed office' || this.spaceType?.toLowerCase() == 'private office' || this.spaceType?.toLowerCase() == 'shared office' || this.spaceType?.toLowerCase() == 'virtual office')) {
@@ -547,11 +567,22 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
 
       let city_name = this.city_param;
+      const subpart = sessionStorage.getItem('selectedValues');
+      if (subpart == null) {
+      }
+      let typeObj = [
+        'Private Office',
+        'Managed Office',
+        'Dedicated Desk',
+        'Flexible Desk',
+        'Virtual Office',
+        'Day Pass'
+      ]
       let api_params: any = {
         city_name,
-        spaceType: this.spaceType === 'none' ? [] : [this.spaceType],
+        spaceType: (this.spaceType === 'coworking space') ? (subpart == null ? typeObj : JSON.parse(subpart)) : (this.spaceType === 'none' ? [] : [this.spaceType]),
         type: this.type,
-        userId: this.userId
+        userId: this.userId,
       };
       _.extend(api_params, this.filter);
 
@@ -565,6 +596,17 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           (response) => {
             if (this.areaName && response.length) {
               let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
+              let matchedLocation = response?.find(
+                (val:any) => val.location_name.toLowerCase() === this.areaName
+              );
+              
+              if (matchedLocation) {
+                this.location_latitude = matchedLocation.lat;
+                this.location_longitude = matchedLocation.longi;
+              
+                console.log("Latitude:", this.location_latitude);
+                console.log("Longitude:",this.location_longitude);
+              }
               if (!isExist) {
                 this.router.navigate(['/error'])
               }
@@ -573,29 +615,33 @@ export class CityListingComponent implements OnInit, AfterViewInit {
               //  api_params.city_long = String(currentArea?.longi)
               api_params.city_lat = 0
               api_params.city_long = 0
+              api_params.location_lat = this.location_latitude ? this.location_latitude : 0
+              api_params.location_longi = this.location_longitude ? this.location_longitude : 0
             }
 
 
             this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
               this.nearBySpaces.next(res.faqs);
               this.spaces_list = Object.assign([], res.data);
-              console.log(this.spaces_list, "areaAvailable");
               if (this.spaces_list.length) {
                 const spaceType = this.spaces_list[0].spaceType
                 const cityName = this.spaces_list[0].contact_city_name
                 const location = this.spaces_list[0].location_name
+                const location_name = this.spaces_list[0].location_name
                 const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
                 const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
                 const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
                 if (this.type === 'coworking') {
-                  const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+                  const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null && price !== 0));
                   const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
+                  this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Book coworking spaces in ${location}, ${cityName} that offer fully serviced offices with flexible terms, high-speed internet, and community-driven workspaces. Enjoy a productive environment with a range of coworking options on Flexo, from open desks to private cabins.`, minPrice, maxPrice)
                 } else if (this.type === 'shortterm') {
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+                  this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Book the best ${spaceType} in ${location}, ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
                 } else {
-                  this.updateJsonLd(spaceType, cityName, imageUrl, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
+                  this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
                 }
+              }else{
+                  this.router.navigate(['/error'])
               }
               this.recommended_spaces = Object.assign([], res.recommended_spaces);
               this.space_count = res.space_count;
@@ -604,10 +650,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   this.space_count < this.page_size * this.page
                     ? this.space_count
                     : this.page_size * this.page;
-                this.total_pages =
-                  this.space_count % 2 == 0
-                    ? this.space_count / this.page_size
-                    : Math.floor(this.space_count / this.page_size) + 1;
+                this.total_pages = Math.ceil(this.space_count / this.page_size);
                 this.pages.splice(0, this.pages.length);
                 for (let i = 1; i <= this.total_pages; i++) {
                   this.pages.push(i);
@@ -627,8 +670,10 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   let price;
 
                   if (this.type === 'coworking') {
-                    if (element.flexible_desk_price === null) {
+                    if (element.flexible_desk_price === null || element.flexible_desk_price === 0) {
                       price = element.privatecabin_price
+                    } else if(element.privatecabin_price === null || element.privatecabin_price === 0){
+                      price = element.flexible_desk_price
                     } else {
                       price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
                     }
@@ -658,12 +703,12 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                       map_image_url:
                         this.aws_base_url + element.id + '/' + element.images[0],
                       name: element.name,
+                      id: element.id,
                       url: '/details/' + element.link_name,
                     },
                   };
                   this.markersData.push(obj);
                 });
-                console.log(this.markersData);
                 this.center = this.calculateCenter(this.markersData)
               } else {
                 this.recommended_spaces_length = this.recommended_spaces.length;
@@ -703,38 +748,39 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         // api_params.city_long= localStorage.getItem("long")
         api_params.city_lat = localStorage.getItem("locationLat") ?? 0
         api_params.city_long = localStorage.getItem("locationLong") ?? 0
+        api_params.location_lat = 0;
+        api_params.location_longi = 0;
 
         this.spaceService.getSpacesByCity(api_params, this.page).pipe(finalize(() => { this.isloader = false })).subscribe((res) => {
           this.nearBySpaces.next(res.faqs);
           this.spaces_list = Object.assign([], res.data);
-          console.log(this.type, this.spaces_list, "areaNotAvailable");
           if (this.spaces_list.length) {
             const spaceType = this.spaces_list[0].spaceType
             const cityName = this.spaces_list[0].contact_city_name
+            const location_name = this.spaces_list[0].location_name
             const imageUrl = this.spaces_list[0].images.length ? this.spaces_list[0].images[0] : ''
             const min = Math.min(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
             const max = Math.max(...this.spaces_list.map(item => item.originalPrice).filter(price => price !== null));
             if (this.type === 'coworking') {
-              const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null));
+              const minPrice = Math.min(...this.spaces_list.map(item => item.flexible_desk_price).filter(price => price !== null && price !== 0));
               const maxPrice = Math.max(...this.spaces_list.map(item => item.privatecabin_price).filter(price => price !== null));
-              this.updateJsonLd(spaceType, cityName, imageUrl, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
+              this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `'Book premium coworking space in ${cityName} with flexible pricing options, prime locations, and modern amenities. Explore top coworking brands on Flexo for shared offices, private cabins, and collaborative work environments designed for businesses of all sizes'.`, minPrice, maxPrice)
             } else if (this.type === 'shortterm') {
-              this.updateJsonLd(spaceType, cityName, imageUrl, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
+              this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Book the best ${spaceType} in ${cityName} with premium equipments and modern amenities. Find spaces available for reservation by the hour with a variety of setups for your needs. Create, collaborate and celebrate with Flexo.`, min, max)
             } else {
-              this.updateJsonLd(spaceType, cityName, imageUrl, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
+              this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Explore a variety of ${spaceType} for rent in ${cityName}. Choose from fully furnished, unfurnished, or built-to-suit options designed to accommodate growing businesses. Find the perfect office with Flexo today.`, min, max)
             }
           }
           this.recommended_spaces = Object.assign([], res.recommended_spaces);
           this.space_count = res.space_count;
           if (this.spaces_list.length) {
             this.page_end =
-              this.space_count < this.page_size * this.page
-                ? this.space_count
-                : this.page_size * this.page;
-            this.total_pages =
-              this.space_count % 2 == 0
-                ? this.space_count / this.page_size
-                : Math.floor(this.space_count / this.page_size) + 1;
+            this.space_count < this.page_size * this.page
+            ? this.space_count
+            : this.page_size * this.page;
+            const rawPages = this.space_count / this.page_size;
+            const decimalPart = rawPages - Math.floor(rawPages);
+            this.total_pages = decimalPart >= 0.5 ? Math.ceil(rawPages) : Math.floor(rawPages);
             this.pages.splice(0, this.pages.length);
             for (let i = 1; i <= this.total_pages; i++) {
               this.pages.push(i);
@@ -757,7 +803,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 if (element.flexible_desk_price === null) {
                   price = element.privatecabin_price
                 } else {
-                  price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
+                  price = element?.privatecabin_price < element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
                 }
               } else {
                 price = this.formatCurrency(element.originalPrice)
@@ -785,12 +831,12 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   map_image_url:
                     this.aws_base_url + element.id + '/' + element.images[0],
                   name: element.name,
+                  id: element.id,
                   url: '/details/' + element.link_name,
                 },
               };
               this.markersData.push(obj);
             });
-            console.log(this.markersData);
             this.center = this.calculateCenter(this.markersData)
           } else {
             this.recommended_spaces_length = this.recommended_spaces.length;
@@ -828,7 +874,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   updateMarkerPriceColor(name: string, color: string) {
-    const markerIndex = this.markersData.findIndex(marker => marker.title === name);
+    console.log(this.markersData)
+    const markerIndex = this.markersData.findIndex(marker => marker?.info?.id === name);
 
     if (markerIndex !== -1) {
       const newIconUrl = this.createPriceTagIcon(`₹${this.markersData[markerIndex].options.price}`, color);
@@ -898,7 +945,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     this.favouriteWorkSpaceService.addRemoveFavouriteWorkSpace(space_id).subscribe((result: any) => {
       this.openSnackBar(result.message, 'Dismiss');
     }, error => {
-      console.log('removeFavouriteWorkSpace | error : ', error);
     })
   }
 
@@ -995,20 +1041,20 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     const existingScript = document.getElementById("zsiqscript");
     if (existingScript) {
       existingScript.remove();
-      console.log("Existing Zoho script removed.");
     }
-  
+
     setTimeout(() => {
       window['$zoho'] = window['$zoho'] || {};
       window['$zoho'].salesiq = {
         widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
         values: {},
         ready: function () {
-          console.log("Zoho SalesIQ is ready!");
         },
       };
       setTimeout(() => {
-        this.clickZohoChatButton();
+        if (this.spaceType != "event space" && this.spaceType != 'Coworking Café/Restaurant' && this.spaceType != 'shoot studio' && this.spaceType != 'recording studio' && this.spaceType != 'podcast studio' && this.spaceType != 'activity space' && this.spaceType != 'sports turf' && this.spaceType != 'sports venue' && this.spaceType != 'party space' && this.spaceType != 'banquet hall' && this.spaceType != 'gallery' && this.spaceType != 'classroom' && this.spaceType != 'private cabin' && this.spaceType != 'meeting room' && this.spaceType != 'training room') {
+          this.clickZohoChatButton();
+        }
       }, 1000);
       const script = document.createElement("script");
       script.type = "text/javascript";
@@ -1016,8 +1062,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       script.defer = true;
       script.src = "https://salesiq.zoho.in/widget";
       document.body.appendChild(script);
-  
-      console.log("Zoho SalesIQ script reloaded.");
+
     }, 200);
   }
 
@@ -1026,11 +1071,10 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       const chatButton = document.getElementById("zsiq_agtpic");
       if (chatButton) {
         chatButton.click();
-        console.log("Chat button clicked!");
         clearInterval(interval);
       }
     }, 100);
   }
-  
+
 }
 

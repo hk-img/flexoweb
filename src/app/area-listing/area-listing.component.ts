@@ -186,7 +186,6 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
       this.city_param = params.get('city');
       const changeTile = () => {
         // console.trace();
-        console.log(this.area_param);
         const titleCase = (str) => str.replace(/\b\S/g, (t) => t.toUpperCase());
 
         const areaParam = titleCase(this.area_param);
@@ -373,7 +372,6 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
   addRemoveFavorite(space_id){
     this.favouriteWorkSpaceService.addRemoveFavouriteWorkSpace(space_id).subscribe((result: any) => {
     }, error => { 
-      console.log('removeFavouriteWorkSpace | error : ', error);
     })
   }
 
@@ -426,7 +424,6 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
       // window.scrollTo(0, 0);
 
       // this.faqs.next(res.faqs || []);
-      console.log(res);
       this.spaces_list = Object.assign([], res.data);
       this.recommended_spaces = Object.assign([], res.recommended_spaces);
 
@@ -542,7 +539,6 @@ export class AreaListingComponent implements OnInit, AfterViewInit {
     this.populateData();
   }
   onIntersection(e) {
-    console.log(e);
     this.isFaqsVisible = e.visible;
   }
 

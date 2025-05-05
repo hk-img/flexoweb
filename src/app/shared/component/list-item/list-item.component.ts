@@ -36,7 +36,6 @@ export class ListItemComponent implements OnInit{
   public is_see_more_visible = 1;
   public filter_type_col_name;
   ngOnInit(): void {
-    console.log("this.spaceDetails", this.spaceDetails);
     const  name =this.spaceDetails.name?.toLowerCase()
     const  buildingName =this.spaceDetails.buildingName?.toLowerCase()
     const location_name = this.spaceDetails.location_name?.toLowerCase()
@@ -73,10 +72,6 @@ export class ListItemComponent implements OnInit{
     }
 
     this.type = this.getType(spaceType)
-    // for (let i = 0; i < this.spaceDetails.images.length; i++) {
-    //   console.log('========================',this.spaceDetails.images[i]);
-    // }
-    
   }
 
   @ViewChild('slickMainCarousel', { static: false })
@@ -186,7 +181,7 @@ export class ListItemComponent implements OnInit{
 
   getType(spaceType: string): string {
     const shortTermSpaces = [
-      'coworking cafe/restaurant', 'shoot studio', 'recording studio', 'podcast studio',
+      'coworking café/restaurant', 'shoot studio', 'recording studio', 'podcast studio',
       'activity space', 'sports turf', 'sports venue', 'party space', 'banquet hall',
       'gallery', 'classroom', 'private cabin', 'meeting room', 'training room', 'event space'
     ];
@@ -205,23 +200,27 @@ export class ListItemComponent implements OnInit{
   }
   
   onSpaceNameClicked(e: any) {
-    console.log(e);
-    if(e.spaceType == 'Coworking Café/Restaurant'){
-      window.open(
-        `${this.formatUrl(e.spaceType.replace('/', '-'))}/${this.formatUrl(e.location_name)}-${e.id}`,
-        '_blank'
-      );
-    }else if (this.type === 'coworking'){
-      window.open(
-        `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
-        '_blank'
-      );
-    }else {
-      window.open(
-        `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.contact_city_name)}/${this.formatUrl(e.location_name)}/${e.id}`,
-        '_blank'
-      );
-    }
+    // if(e.spaceType == 'Coworking Café/Restaurant'){
+    //   window.open(
+    //     `${this.formatUrl(e.spaceType.replace('/', '-'))}/${this.formatUrl(e.location_name)}-${e.id}`,
+    //     '_blank'
+    //   );
+    // }else if (this.type === 'coworking'){
+    //   window.open(
+    //     `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
+    //     '_blank'
+    //   );
+    // }else {
+    //   window.open(
+    //     `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.contact_city_name)}/${this.formatUrl(e.location_name)}/${e.id}`,
+    //     '_blank'
+    //   );
+    // }
+
+    window.open(
+      `${e.slug}`,
+      '_blank'
+    );
   }
 
 
@@ -261,6 +260,22 @@ export class ListItemComponent implements OnInit{
     imgElement.src = 'assets/images/details_placeholder_image.jpg';
     imgElement.alt = `${imageAlt} details_placeholder_image.jpg`;
   }
+
+  getValidPrice(desksPrice: number | null | undefined, flexiblePrice: number | null | undefined): number | null {
+    const validDesks = typeof desksPrice === 'number' && desksPrice > 0 ? desksPrice : null;
+    const validFlexible = typeof flexiblePrice === 'number' && flexiblePrice > 0 ? flexiblePrice : null;
+  
+    if (validDesks !== null && validFlexible !== null) {
+      return Math.min(validDesks, validFlexible);
+    }
+  
+    return validDesks !== null ? validDesks : validFlexible !== null ? validFlexible : null;
+  }  
+
+  isPriceValid(price: number | null | undefined): boolean {
+    return typeof price === 'number' && price > 0;
+  }
+  
   
 
 }

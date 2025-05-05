@@ -155,7 +155,6 @@ export class BuyPassComponent {
     this.selectedDate = this.minDate;
     const now = new Date();
     this.currentDay = now.toLocaleDateString('en-GB', { weekday: 'long' });
-    console.log(this.data)
     if(Object.keys(this.data)?.length){
       this.getSpaceDetails();
     }
@@ -195,7 +194,6 @@ export class BuyPassComponent {
       .getSpaceDetails(this.data.country,this.data.city,this.data.spaceType,this.data.spaceId)
       .then((res) => {
         this.space_details = res.data
-        console.log("space detail", this.space_details);
         this.spaceName = res.data.actual_name
         this.landmark = res.data.location_name
         this.originalPrice = res.data.originalPrice
@@ -227,8 +225,6 @@ export class BuyPassComponent {
     const start = this.convertTo24Hour(this.startTime);
     const end = this.convertTo24Hour(this.endTime);
 
-    console.log('start: ', start, 'end: ', end);
-
     return this.startTimes.filter(time => {
       const value = time.value;
       return value >= start && value <= end;
@@ -259,8 +255,6 @@ export class BuyPassComponent {
           const day = String(date.getUTCDate()).padStart(2, '0');
           return `${year}-${month}-${day}`;
       });
-      
-        console.log(transformedArray)
         this.dayPassForm.patchValue({
           startDate: transformedArray
         })
@@ -268,9 +262,6 @@ export class BuyPassComponent {
       } else {
         this.model.splice(index, 1);
       }
-
-      console.log('+++++++++++++++++++++++' ,this.originalPrice, this.model.length, this.dayPassForm.value.noOfGuest);
-      console.log(this.originalPrice * (this.model.length + 1) * this.dayPassForm.value.noOfGuest)
       this.resetModel = new Date(0);
 
 
@@ -304,7 +295,6 @@ export class BuyPassComponent {
     this.dialog.open(ThankyopopupComponent, { data: payload ,width: '500px'});
   }
   onSumbit() {
-    console.log(this.dayPassForm)
     if(!this.valGstPanForm){
       $("#updateModal").show();
       return false;
@@ -330,7 +320,6 @@ export class BuyPassComponent {
       message: formValue.message,
       spaceLocation:this.location_name
     };
-    console.log(payload)
     this.isLoading = true
     this.spaceService.userDayPassCoworking(this.data.spaceId, payload).subscribe(
       (response: any) => {
@@ -357,8 +346,6 @@ export class BuyPassComponent {
 
             razerPay.response = result;
 
-            console.log(response)
-
             let resData = result
             resData.amount = razerPay?.amount
             this.spaceService.completeCoworkingPayment(resData).subscribe((bookingRes: any) => {
@@ -367,7 +354,6 @@ export class BuyPassComponent {
                 this.popupOpen('coworking','Booking complete');
                 // this.toastr.success('Booking complete');
                 // this.toastr.success('Booking complete');
-                console.log(bookingRes?.bookingId);
                 setTimeout(() => {
                   this.router.navigate(['/booking-Detail', bookingRes?.bookingId])
                   this.closeDialog(true);
@@ -404,7 +390,6 @@ export class BuyPassComponent {
       },
       (error) => {
         this.isLoading = false
-        console.log('booking| error : ', error);
         // this.toastr.error('Some error occurred while visit schedule!');
       }
     );
@@ -416,7 +401,6 @@ export class BuyPassComponent {
   onDateChange(event: any) {
     this.selectedDate = event.value;
   this.selectedDay = moment(this.selectedDate).format('dddd');
-    console.log('Selected day is: ', this.selectedDay);
 
     if(this.selectedDay === 'Monday'){
       this.startTime = localStorage.getItem("mondayOpenTime");
@@ -524,7 +508,6 @@ export class BuyPassComponent {
       this.profileService.fetchProfiledata().subscribe((result: any) => {
         if (result.success) {
           this.userDetail = result.data;
-          console.log(this.userDetail);
   
           let profileData = {
             email: this.userDetail?.email,
@@ -550,7 +533,6 @@ export class BuyPassComponent {
               this.toastr.error('Some error occurred while update profile!');
             }
           }, (error) => {
-            console.log('onProfileDetailsSubmit | error : ',error);
             this.toastr.error('Some error occurred while update profile!')
             console.error(error);
           })

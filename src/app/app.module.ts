@@ -50,6 +50,7 @@ import { HttpRequestInterceptor } from './login/tokanInterceptor';
 import { PaymentsComponent } from './payments/payments.component';
 import { ShimmerLoadingComponent } from './shared/component/shimmer-loading/shimmer-loading.component';
 import { ThankyopopupComponent } from './thankyopopup/thankyopopup.component';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 
 export const MY_FORMATS = {
@@ -164,6 +165,11 @@ export function loadGoogleMaps(): () => Promise<void> {
             {
               provide: HTTP_INTERCEPTORS,
               useClass: HttpRequestInterceptor,
+              multi: true,
+            },
+            {
+              provide: HTTP_INTERCEPTORS,
+              useClass: ErrorInterceptor,
               multi: true,
             },
     ],

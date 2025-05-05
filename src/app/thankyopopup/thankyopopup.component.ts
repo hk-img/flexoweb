@@ -16,11 +16,9 @@ export class ThankyopopupComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialog: MatDialog) {
     this.data = data;
-    console.log("data", this.data);
   }
 
   closeDialog(data: any) {
-    console.log("data", data);
     this.dialog.closeAll();
   }
 

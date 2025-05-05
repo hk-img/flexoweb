@@ -330,7 +330,6 @@ export class LoginDialog implements OnInit {
           }
         });
     } else {
-      console.log('token exist');
     }
   }
   get mobileFormControl() {
@@ -697,7 +696,6 @@ export class LoginDialog implements OnInit {
       this.loginRegisterService.loginByEmail(payload).subscribe(
         (res: any) => {
           if (res['success'] === true) {
-            console.log(res);
             
             if (res?.User.existsEmail) {
               if (res?.User?.status=== "De-Active"){
@@ -763,7 +761,6 @@ export class LoginDialog implements OnInit {
       // this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(res => {
       //   this.authService.authState.subscribe((user) => {
       //     this.user = user;
-      //     console.log("googleAcc", this.user);
       //     this.loggedIn = (user != null);
       //   });
       // });
@@ -803,9 +800,6 @@ export class LoginDialog implements OnInit {
     //     (googleUser) => {
     //       // User signed in.
     //       const profile = googleUser.getBasicProfile();
-    //       console.log('ID: ' + profile.getId());
-    //       console.log('Name: ' + profile.getName());
-    //       console.log('Email: ' + profile.getEmail());
     //     },
     //     (error) => {
     //       // Handle error
@@ -813,7 +807,6 @@ export class LoginDialog implements OnInit {
     //     }
     //   );
     // this.loginRegisterService.loginWithGoogle().subscribe((res) => {
-    //   console.log('google', res);
     // });
 
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -1095,7 +1088,6 @@ export class LoginDialog implements OnInit {
       (error) => {
         this.isLoading = false;
         this.toastr.error('Some error occurred while reset password!');
-        console.log('resetPassword | error: ', error);
       }
     );
   }
@@ -1273,7 +1265,6 @@ export class LoginDialog implements OnInit {
       },
       (error) => {
         this.toastr.error('Some error occurred while check email is exists!');
-        console.log('checkIsExistEmail | error: ', error);
       }
     );
   }
@@ -1482,7 +1473,6 @@ export class LoginDialog implements OnInit {
     this.loginRegisterService
       .verifyLoginOtp(mobile, otp)
       .subscribe((res: any) => {
-        console.log(res)
         if (res['success'] === true) {
           this.isLoading = false;
           this.loginOtpReceived = false;

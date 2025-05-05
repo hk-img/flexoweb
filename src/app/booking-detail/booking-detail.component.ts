@@ -71,17 +71,14 @@ export class BookingDetailComponent implements OnInit {
     this._spaceService.getBookingDetailById(bookingId).subscribe(
       (res: any) => {
         this.bookingDetail = res?.booking?.booking[0];
-        console.log(this.bookingDetail)
         this.userGivenReview = res?.booking?.rating;
         this.isLoading = false;
         if (this.bookingDetail?.bookingPeriods) {
           this.bookingPeriod = this.bookingDetail?.bookingPeriods;
           this.formattedDates = this.bookingPeriod.map(date => moment(date).format('DD-MM-YYYY'));
-          console.log(this.formattedDates)
         }
 
         this.paymentDetail = JSON.parse(this.bookingDetail?.payment_detail);
-        console.log(this.paymentDetail)
         // if (res?.success) {
         // } else {
         //   this.isLoading = false;

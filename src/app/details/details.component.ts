@@ -111,6 +111,7 @@ export class DetailsComponent implements OnInit {
   spaceType: string;
   spaceName: string;
   location: string;
+  city_param: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -385,15 +386,17 @@ export class DetailsComponent implements OnInit {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
       if (params.spaceType === 'coworking-space') {
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
-        this.space_id = params.spaceName.match(/\d+$/)?.[0];
-      }else if(this.spaceType == 'coworking café'){
+        this.space_id = this.spaceName?.match(/(\d+)$/)?.[0];
+        this.getShortDetails(this.space_id)
+      }else if(this.spaceType == 'coworking café restaurant'){
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
-        this.space_id = params.spaceName.match(/\d+$/)?.[0];
+        this.space_id = params.spaceName?.match(/\d+$/)?.[0];
+        this.getShortDetails(this.space_id)
       } else {
         this.location = this.getOriginalUrlParam(params.location);
-        this.space_id = params.spaceName.match(/\d+$/)?.[0];
+        this.space_id = params.spaceId;
+        this.getShortDetails(this.space_id);
       }
-      this.getShortDetails(this.space_id)
     });
 
     // this.getFaqsBySpaceBy(this.space_id);
@@ -413,7 +416,9 @@ export class DetailsComponent implements OnInit {
 
   }
 
-
+  formatUrl(value: string): string {
+    return value ? value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-') : '';
+  }  
   updateJsonLd(
     spaceType: string,
     imageUrl: string,
@@ -429,6 +434,12 @@ export class DetailsComponent implements OnInit {
         existingScript.remove();
       }
     }
+
+    if(priceMax === "none"){
+      var offer = "Offer"
+    }else{
+      var offer = "AggregateOffer"
+    }
   
     const jsonLd: any = {
       "@context": "https://schema.org/",
@@ -440,10 +451,8 @@ export class DetailsComponent implements OnInit {
         "@type": "Brand",
         "name": "Flexo"
       },
-      "mpn": "",
-      "sku": "",
       "offers": {
-        "@type": "Offer",
+        "@type": offer,
         "url": window.location.href,
         "priceCurrency": "INR",
         "availability": "https://schema.org/InStock",
@@ -615,9 +624,8 @@ export class DetailsComponent implements OnInit {
 
   copyLink() {
     if (isPlatformBrowser(this.platformId)) {
-      const link = `${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`;
-  
-      // Fallback to execCommand if clipboard API is not available
+      const link = `${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}`;
+
       if (navigator.clipboard) {
         navigator.clipboard.writeText(link).then(() => {
           this.toastr.success('Link copied to clipboard', 'Success');
@@ -625,7 +633,6 @@ export class DetailsComponent implements OnInit {
           this.toastr.error(err, 'Error');
         });
       } else {
-        // Fallback method using document.execCommand (older browsers)
         const textArea = document.createElement('textarea');
         textArea.value = link;
         document.body.appendChild(textArea);
@@ -789,7 +796,6 @@ export class DetailsComponent implements OnInit {
     this.spaceService
       .getSpaceDetails(country, city, spaceType, spaceId)
       .then((res) => {
-
         if (!res.success) {
           this.router.navigate(['/error']);
         }
@@ -827,10 +833,10 @@ export class DetailsComponent implements OnInit {
           }
         }
         this.space_details = Object.assign({}, data);
-        console.log('------------------------', this.space_details);
         const type = this.getType(spaceType)
         const spaceStatus = this.space_details?.spaceStatus === "Furnished" ? "furnished" : "unfurnished"
-        const cityName = this.space_details?.contact_city_name
+        const cityName = this.space_details?.contact_city_name;
+        this.city_param = this.space_details?.contact_city_name;
         const min = this.space_details?.originalPrice
         const imageUrl = this.space_details?.images.length ? this.space_details.images[0] : ''
         if (type === 'coworking') {
@@ -846,8 +852,15 @@ export class DetailsComponent implements OnInit {
         this.ribbon = this.space_details.ribbon;
         this.ribbon_color = this.space_details.ribbon_color;
 
-
-        console.log(this.ribbon, this.ribbon_color);
+        this.marker = {
+          position: {
+            lat: this.space_details.latitude,
+            lng: this.space_details.longitude,
+          },
+          title: this.space_details.name,
+          options: { draggable: false, icon: 'assets/images/marker1.svg' },
+          url: `https://www.google.com/maps/search/?api=1&query=${this.space_details.latitude},${this.space_details.longitude}`,
+        };
 
         this.parkingOptionsValue = this.space_details?.parkingOptionsValue;
 
@@ -869,7 +882,6 @@ export class DetailsComponent implements OnInit {
         this.is_shortlisted = res?.existingfavorite?.favourite ?? false;
 
         this.workingTimeValue = this.space_details?.working_time;
-        console.log(this.workingTimeValue);
 
         localStorage.setItem("spaceDetail", JSON.stringify(this.space_details));
 
@@ -889,7 +901,6 @@ export class DetailsComponent implements OnInit {
 
         if (this.workingTimeValue) {
           this.workingTime = this.workingTimeValue;
-          console.log(this.workingTime);
 
           if (this.workingTime[0]?.openingTime && this.workingTime[0]?.closingTime) {
             this.mon_opening_time = this.convert24to12(this.workingTime[0].openingTime);
@@ -1058,7 +1069,7 @@ export class DetailsComponent implements OnInit {
             },
           },
           offers: {
-            '@type': 'Offer',
+            '@type': 'AggregateOffer',
             price: `Rs. ${this.space_details.privatecabin_price}`,
           },
         };
@@ -1090,16 +1101,6 @@ export class DetailsComponent implements OnInit {
         // this.is_shortlisted =
         //   this.shortlists.indexOf(this.space_details.id) > -1 ? true : false;
 
-
-        this.marker = {
-          position: {
-            lat: this.space_details.latitude,
-            lng: this.space_details.longitude,
-          },
-          title: this.space_details.name,
-          options: { draggable: false, icon: 'assets/images/marker1.svg' },
-          url: `https://www.google.com/maps/search/?api=1&query=${this.space_details.latitude},${this.space_details.longitude}`,
-        };
       })
       .catch((error) => { });
   }
@@ -1154,7 +1155,6 @@ export class DetailsComponent implements OnInit {
           this.reviews = reviewsData;
 
           this.spaceRatingReviewList = this.reviews.slice(this.ratingOffset, 5);
-          console.log(this.spaceRatingReviewList);
           this.ratingOffset += 5;
           // let countFiveStar = 0;
           // let countFourStar = 0;
@@ -1215,11 +1215,6 @@ export class DetailsComponent implements OnInit {
           //   this.ratingBreakDown[3].value = countTwoStar;
           //   this.ratingBreakDown[4].value = countOneStar;
           // }
-
-          // console.log(
-          //   'this.spaceRatingReviewList : ',
-          //   this.spaceRatingReviewList
-          // );
         }
       });
   }
@@ -1563,7 +1558,6 @@ export class DetailsComponent implements OnInit {
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
     let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
     if (isLoggedIn || userDetails?.accessToken) {
-      console.log(this.space_details)
       if (!this.modal.isOpen) {
         this.modal.openModal();
       }

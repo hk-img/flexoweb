@@ -62,7 +62,6 @@ export class ScheduledVisitListComponent implements OnInit {
 
     getUserScheduleVisitList(){
         this.spaceService.getUserScheduleVisitList().subscribe((response:any)=> {
-            console.log('getUserScheduleVisitList : response : ',response);
             if(response.result.success){
                 this.scheduleVisitListComplete = []; 
                 this.visits = response.result.visit ? response.result.visit : [];
@@ -113,13 +112,10 @@ export class ScheduledVisitListComponent implements OnInit {
 
                 
                 this.scheduleVisitList = this.scheduleVisitListComplete.slice(this.ratingOffset, 5); 
-                console.log(this.scheduleVisitList);
                 this.ratingOffset += 5;
             }
-            console.log('getUserScheduleVisitList | scheduleVisitList : ',this.scheduleVisitList);
             this.dtr.detectChanges();
         }, error => {
-            console.log('getUserScheduleVisitList | error : ',error);
         })
     }
 
@@ -133,7 +129,6 @@ export class ScheduledVisitListComponent implements OnInit {
     }
 
     onCancelScheduledVisit(item){
-        console.log('onCancelSchedule | item : ',item)
         let payload = {
             component: "scheduled-visit-list",
             title: 'Cancel scheduled visit',
@@ -145,7 +140,6 @@ export class ScheduledVisitListComponent implements OnInit {
     }
     
     onEditScheduledVisit(item){
-        console.log('onEditScheduledVisit | item : ',item)
         let config = new MatDialogConfig();
         config.viewContainerRef = this.scheduleVisit_viewContainerRef;
         config.panelClass = 'dialogClass';

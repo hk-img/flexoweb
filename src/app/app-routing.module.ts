@@ -14,6 +14,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { AuthGuard } from './services/auth.guard';
 import { _404Component } from './shared/shared/_404/_404.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { RefundPolicyComponent } from './refund-policy/refund-policy.component';
 
 export const routes: Routes = [
   {
@@ -96,6 +97,10 @@ export const routes: Routes = [
   {
     path: 'privacy-policy',
     component: PrivacyPolicyComponent,
+  },
+  {
+    path:'refund-policy',
+    component: RefundPolicyComponent
   },
   {
     path: 'terms-conditions',

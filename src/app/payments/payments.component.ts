@@ -194,7 +194,6 @@ payment() {
 
             if (bookingRes?.success) {
               this.toastr.success('Booking complete');
-              console.log(bookingRes?.bookingId);
               setTimeout(() => {
                 this.router.navigate(['/booking-Detail', bookingRes?.bookingId])
                 // this.isLoading = false;

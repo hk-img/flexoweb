@@ -48,9 +48,9 @@ export const GlobalVariables = {
       column_name: "originalPrice"
     },
     {
-      name:"Not sure",
-      id:9,
-      column_name:""
+      name: "Not sure",
+      id: 9,
+      column_name: ""
     }
   ],
   testimonials: [
@@ -122,7 +122,34 @@ export const GlobalVariables = {
     { id: 30, name: 'Tech Support' },
     { id: 31, name: 'Gym' },
     { id: 32, name: 'Swimming Pool' },
-    { id: 33, name: 'Showers' },
+    { id: 33, name: 'Showers' }, ,
+    { id: 36, name: 'Printer' },
+    { id: 37, name: 'Onsite Cafe' },
+    { id: 39, name: 'Breakout Space' },
+    { id: 40, name: 'Ergonomic Chairs' },
+    { id: 41, name: 'Free Drinking Water' },
+    { id: 42, name: 'Housekeeping' },
+    { id: 43, name: 'Lounge / Chill-out Area' },
+    { id: 44, name: 'Nap / Meditation Room' },
+    { id: 45, name: "Natural Light" },
+    { id: 46, name: "Pet Friendly" },
+    { id: 47, name: "Phone Booth" },
+    { id: 48, name: "Electric Car Plug In" },
+    { id: 49, name: "Recreation Zone" },
+    { id: 50, name: "Blackout Blinds" },
+    { id: 51, name: "Chairs" },
+    { id: 52, name: "Dressing Room" },
+    { id: 53, name: "Elevator" },
+    { id: 55, name: "Green Screen" },
+    { id: 56, name: "Colour Backdrops" },
+    { id: 57, name: "Lighting Equipment" },
+    { id: 58, name: "Microphone" },
+    { id: 59, name: "Sound Recording Equipment" },
+    { id: 60, name: "Restrooms" },
+    { id: 61, name: "Speakers" },
+    { id: 62, name: "Soundproof" },
+    { id: 63, name: "Video Recording Equipment" },
+    { id: 64, name: "Wheelchair Accessible" }
   ],
 
   getCityAndLocationDetails: (address_components) => {
@@ -137,7 +164,7 @@ export const GlobalVariables = {
         city_name = main_address_component.long_name;
         is_city = true;
         break;
-      case address_length >=  4:
+      case address_length >= 4:
         if (
           main_address_component.types[0] == 'locality' &&
           address_components[1].types[0] == 'administrative_area_level_3'

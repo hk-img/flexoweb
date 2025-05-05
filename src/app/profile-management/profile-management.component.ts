@@ -368,7 +368,6 @@ export class ProfileManagementComponent implements OnInit {
 				this.toastr.error(result.message || 'Some error occurred while change password!');
 			}
 		}, (error) => {
-			console.log('onSubmitChangePassword | error : ',error);
 			this.toastr.error('Some error occurred while change password!')
 		})
 	}

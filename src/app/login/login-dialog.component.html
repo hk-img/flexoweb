@@ -98,7 +98,7 @@
           {{selectedLoginType==LoginTypeEnum.Mobile?userDetail?.mobile||
           mobileNumberForm.value.mobile:(userDetail?.email||mobileNumberForm.value.email)}}</span></p>
     </div>
-    <form [formGroup]="otpForm" class="w-100 otp-from-c">
+    <form [formGroup]="otpForm" class="otp-from-c w-auto">
       <div class="otp-inputs">
         <input (keyup)="onDigitInput($event)" #input0 maxlength="1" formControlName="otp1" type="text" placeholder="0">
         <input (keyup)="onDigitInput($event)" #input1 maxlength="1" formControlName="otp2" type="text" placeholder="0">
@@ -136,7 +136,7 @@
       <img src="assets/images/tick.png" alt *ngIf="!this.socialUser?.email">
       <h5 *ngIf="!this.socialUser?.email">OTP Verified Successfully</h5>
     </div>
-    <form [formGroup]="userEmailRegisterForm">
+    <form [formGroup]="userEmailRegisterForm" class="w-auto" style="width:auto;">
       <div class="login-register-all-input-group">
         <div class="login-register-input-single">
           <mat-form-field appearance="outline" class="w-100">
@@ -184,7 +184,8 @@
           <div class="pm-single">
             <div class="form-group">
               <div class="input-group input-group-lg" [ngClass]="value && 'flag-border' ">
-                <span class="input-group-text form-control" style="flex-grow: .5;" id="basic-addon3">
+                <span class="input-group-text form-control w-50"
+                  style="height:auto !important;width:50% !important;flex-grow: .5;" id="basic-addon3">
                   <ng-select class="select-country" #select (change)="onCountryCodeChange($event)"
                     formControlName="phone_code" [searchable]="false">
                     <ng-template ng-header-tmp>
@@ -197,14 +198,15 @@
                 </span>
                 <!-- <input type="text" placeholder="Mobile" class="form-control mobile-input" id="basic-url" aria-describedby="basic-addon3 basic-addon4"
                    formControlName="mobile"> -->
-                <div class="input-group2" style="width: 16px;">
-                  <input onkeypress="return /[0-9]/i.test(event.key)" class="inputt" type="text" required
-                    formControlName="mobile" maxlength="15" placeholder="Mobile *" (focus)="value=true"
-                    (blur)="value=false">
-                  <span class="highlight"></span>
-                  <span class="bar"></span>
-                  <label>Mobile *</label>
-                </div>
+                <!-- <div class="input-group2" > -->
+                <input style="width:50%;padding:1em;height:auto !important;border-radius: 0 4px 4px 0px;"
+                  onkeypress="return /[0-9]/i.test(event.key)" class="inputt" type="text" required
+                  formControlName="mobile" maxlength="15" placeholder="Mobile *" (focus)="value=true"
+                  (blur)="value=false">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Mobile *</label>
+                <!-- </div> -->
                 <!-- <mat-error
                   *ngIf="userEmailRegisterControls['mobile']?.errors?.required && userEmailRegisterControls['mobile']?.touched">Please
                   enter last name</mat-error> -->

@@ -508,7 +508,9 @@ export class HomeComponent {
         map(value => this._filter(value || '')),
       );
 
-      this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
+      this.filteredPlaces.subscribe((data:any)=>{
+
+      });
     }
   }
 
@@ -535,7 +537,6 @@ export class HomeComponent {
   getSpacecategory() {
     this.spaceService.getSpaceCategory().subscribe((res: any) => {
       this.spaces = res;
-      console.log(this.spaces)
     })
   }
 
@@ -706,15 +707,21 @@ export class HomeComponent {
     //   }
     // })
     // setTimeout(() => {
-    // console.log({ url, query_params });
     this.router.navigate([this.formatUrl(url)]);
     // }, 500);
   }
 
+  navigateToCity(city:any,locationValue:any){
+    let url = "";
+    url = `in/coworking/` + `${(city).replace(' ', '-').toLowerCase()}`;
+    localStorage.setItem("location", locationValue)
+    this.router.navigate([this.formatUrl(url)]);
+  }
 
   formatUrl(value: string): string {
-    return value.trim()?.toLowerCase()?.replace(/\s+/g, '-');
+    return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
   }
+  
 
   onNearmeClicked() {
     this.spaceService.getCityInfo(this.user_lat, this.user_long).subscribe(
@@ -724,7 +731,6 @@ export class HomeComponent {
         this.router.navigate([`/in/spaces/`, cityName, areaName]);
       },
       (err) => {
-        console.log(err);
       }
     );
   }
@@ -783,5 +789,44 @@ export class HomeComponent {
       city_name,
       location_name,
     };
+  }
+
+  isScriptLoaded: boolean = false;
+
+  loadZohoScript2() {
+
+    const existingScript = document.getElementById("zsiqscript");
+    if (existingScript) {
+      existingScript.remove();
+    }
+  
+    setTimeout(() => {
+      window['$zoho'] = window['$zoho'] || {};
+      window['$zoho'].salesiq = {
+        widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
+        values: {},
+        ready: function () {
+        },
+      };
+      setTimeout(() => {
+        this.clickZohoChatButton();
+      }, 1000);
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.id = "zsiqscript";
+      script.defer = true;
+      script.src = "https://salesiq.zoho.in/widget";
+      document.body.appendChild(script);
+    }, 200);
+  }
+
+  clickZohoChatButton() {
+    const interval = setInterval(() => {
+      const chatButton = document.getElementById("zsiq_agtpic");
+      if (chatButton) {
+        chatButton.click();
+        clearInterval(interval);
+      }
+    }, 100);
   }
 }

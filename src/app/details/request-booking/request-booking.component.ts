@@ -212,7 +212,7 @@ export class RequestBookingComponent {
         if (res.success) {
           this.city = res.spaceData.contact_city_name
           this.country = res.spaceData.country
-          this.getSpaceDetails(this.country, this.city, this.spaceType, this.space_id);
+          this.getSpaceDetails(this.country, this.city, this.spaceType, spaceId);
         }
       }
       )
@@ -222,12 +222,16 @@ export class RequestBookingComponent {
     
     this.route.params.subscribe((params: Params) => {
        this.spaceType = this.getOriginalUrlParam(params.spaceType);
-      this.space_id = params.spaceId;
-      this.getShortDetails(params.spaceId)
+        this.space_id = params.spaceId;
+      if(this.spaceType == 'Coworking Café Restaurant'){
+        this.spaceType = "Coworking Café/Restaurant";
+        this.getShortDetails(params.spaceName?.match(/\d+$/)?.[0])
+      }else{
+        this.getShortDetails(params.spaceId)
+      }
     });
 
     const date = new Date();
-    console.log(date)
 
     this.onDateChange(date);
 
@@ -309,10 +313,7 @@ export class RequestBookingComponent {
 
   onDateChange(event: any) {
     const selectedDate = event.value;
-    console.log(event)
     this.selectedDay = moment(selectedDate).format('dddd');
-
-    console.log(this.selectedDay)
 
     let dayPrefix: string;
     switch (this.selectedDay) {
@@ -370,13 +371,10 @@ export class RequestBookingComponent {
     // Convert times from 12-hour to 24-hour format
     const [startHour, startMinute] = this.convertTo24Hour2(startTime);
     const [endHour, endMinute] = this.convertTo24Hour2(endTime);
-
-    console.log(startHour, startMinute)
     
     const start = startHour * 60 + startMinute; // Total minutes from midnight
     const end = endHour * 60 + endMinute;       // Total minutes from midnight
 
-    console.log(start, end);
   
     for (let timeInMinutes = start; timeInMinutes <= end; timeInMinutes += 30) {
       const hour = Math.floor(timeInMinutes / 60);
@@ -391,11 +389,8 @@ export class RequestBookingComponent {
     }
 
     if (this.endTime == '00:00') {
-      console.log('yes')
       this.endTimes = this.startTimes;
     } else{
-      console.log('no');
-
       for (let timeInMinutes = 30; timeInMinutes <= end; timeInMinutes += 30) {
         const hour = Math.floor(timeInMinutes / 60);
         const minute = timeInMinutes % 60;
@@ -409,8 +404,6 @@ export class RequestBookingComponent {
       }
 
     }
-
-    console.log(this.startTimes);
   }
   
   convertTo24Hour2(time: string): [number, number] {
@@ -471,9 +464,7 @@ export class RequestBookingComponent {
               this.toastr.error(result?.message);
             }
           }, (error) => {
-            console.log('onProfileDetailsSubmit | error : ',error);
             this.toastr.error('Some error occurred while update profile!')
-            console.error(error);
           })
   
         }
@@ -517,7 +508,6 @@ export class RequestBookingComponent {
       .getSpaceDetails(country, city, spaceType,spaceId)
       .then((res) => {``
         this.space_details = res.data;
-        console.log('space detail', this.space_details);
         this.spaceName = this.space_details.actual_name;
         this.landmark = this.space_details.location_name;
         this.minimumHours = this.space_details?.minimum_hours / 60;
@@ -525,7 +515,7 @@ export class RequestBookingComponent {
           this.space_details.originalPrice ||
           this.space_details?.flexible_desk_price;
       })
-      .catch((error) => { console.log(error) });
+      .catch((error) => {});
   }
 
   convertMinutesToHours(minutes: number): string {
@@ -616,7 +606,6 @@ export class RequestBookingComponent {
 
   onSumbit() {
     this.isFormSubmitted = true
-    console.log(this.bookings)
     if (this.isFormValid() && this.totalHours > 0) {
 
       if(!this.valGstPanForm){
@@ -708,7 +697,6 @@ export class RequestBookingComponent {
                   // })
 
                   this.spaceService.completeShortTermLaterPayment(resData).subscribe((bookingRes: any) => {
-                    console.log(bookingRes)
                     if (bookingRes?.success) {
                       this.popupOpen(this.space_details?.isInstant);
                       // this.toastr.success('Booking complete');
@@ -758,7 +746,6 @@ export class RequestBookingComponent {
           },
           (error) => {
             this.isLoading = false;
-            console.log('booking| error : ', error);
             // this.toastr.error('Some error occurred while visit schedule!');
           }
         );
@@ -879,9 +866,6 @@ export class RequestBookingComponent {
       // const prevDate = this.bookings[i - 1].date;
       // const currentDate = booking.date;
 
-      // console.log(prevDate);
-      // console.log(currentDate);
-
 
       // if (prevDate > currentDate) {
       //   return false; // Form is invalid
@@ -961,31 +945,20 @@ export class RequestBookingComponent {
             const startTotalMinutes = startHour * 60 + (isNaN(startMinute) ? 0 : startMinute);
             const endTotalMinutes = endHour * 60 + (isNaN(endMinute) ? 0 : endMinute);
 
-            // console.log(booking.startTime, booking.endTime);
-
-            // console.log(startHour, startMinute);
-            // console.log(endHour, endMinute);
-
-            // console.log(startTotalMinutes, endTotalMinutes);
-
             let timeDifferenceInMinutes;
 
             if (startTotalMinutes === endTotalMinutes) {
               if (booking.startTime == '00:00' && booking.endTime == '00:00') {
                   timeDifferenceInMinutes = 24 * 60; // 24 hours
-                  console.log(`Times are the same and both are 12 AM. Duration set to 24 hours.`);
               } else if (booking.startTime === booking.endTime) {
                 timeDifferenceInMinutes = 0;
                 this.bookings[index].endTime = null;
-                console.log('Start time and end time cannot be the same.')
               }
             } else if (booking.startTime > booking.endTime) {
                 timeDifferenceInMinutes = 24 * 60 - (startTotalMinutes - endTotalMinutes);
-                console.log(`Start time is after end time. Calculated time difference: ${timeDifferenceInMinutes} minutes`);
               
             } else {
                 timeDifferenceInMinutes = endTotalMinutes - startTotalMinutes;
-                console.log(`End time is after start time. Calculated time difference: ${timeDifferenceInMinutes} minutes`);
             }
 
             this.bookings[i].duration = timeDifferenceInMinutes / 60;

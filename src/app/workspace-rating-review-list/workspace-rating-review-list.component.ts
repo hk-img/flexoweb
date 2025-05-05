@@ -29,7 +29,6 @@ export class WorkspaceRatingReviewListComponent implements OnInit {
 
     getReviewRatingListByUser(){
         this.spaceService.getSpaceRatingReviewDetailsByUser().subscribe((result:any)=> {
-            console.log('getReviewRatingListByUser : result : ',result);
             if(result.data.success){
                 this.reviewRatingList = [];
                 this.spaceRatingReviewList = [];
@@ -42,10 +41,8 @@ export class WorkspaceRatingReviewListComponent implements OnInit {
                     this.reviewRatingList[i].linkName = link_name.toLowerCase();
                   }
             }
-            console.log('reviewRatingList : ',this.reviewRatingList);
             this.dtr.detectChanges();
         }, error => {
-            console.log('getReviewRatingListByUser | error : ',error);
         })
     }
 
