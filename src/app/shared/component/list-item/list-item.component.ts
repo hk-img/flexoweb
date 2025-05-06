@@ -226,7 +226,7 @@ export class ListItemComponent implements OnInit{
 
 
 
-  openInquiryPopUp(e:any,{id}) {
+  openInquiryPopUp(e:any,spaceDetail:any) {
     e.stopPropagation()
     setTimeout(() => {
       let config = new MatDialogConfig();
@@ -235,7 +235,8 @@ export class ListItemComponent implements OnInit{
       config.width = '100%';
       config.maxWidth = '55vw'
       config.data = {
-        spaceId: id,
+        spaceDetail,
+        spaceId: spaceDetail?.id,
         value: 'listing'
       };
   
