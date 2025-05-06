@@ -79,17 +79,6 @@ export class InquiryComponent {
   ]
 
   constructor(@Inject(PLATFORM_ID) private platformId: any, public dialogRef: MatDialogRef<InquiryComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private detailPage: DetailsComponent, private service: SpaceService, private route: ActivatedRoute, private toastr: ToastrService) {
-    if (localStorage.getItem("spaceDetail")) {
-
-      let space_detail = JSON.parse(localStorage.getItem("spaceDetail"));
-      this.private_cabin_price = space_detail?.privatecabin_price;
-      this.managed_office_price = space_detail?.customized_space_price;
-      this.dedicated_desk_price = space_detail?.desks_price;
-      this.flexible_dek_price = space_detail?.flexible_desk_price;
-      this.virtual_office_price = space_detail?.virtual_office_price;
-      this.meeting_room_price = space_detail?.meeting_room_price;
-      this.userId = space_detail?.user_id;
-    }
 
     let user_detail = JSON.parse(localStorage.getItem("userDetails"));
     this.userId = user_detail?.id;
@@ -98,9 +87,31 @@ export class InquiryComponent {
       this.space_id = Number(params.get('spaceId'));
     });
 
-
     this.updatePlaceholder();
     this.value = this.data.value;
+    setTimeout(() => {
+      if (localStorage.getItem("spaceDetail")) {
+        let space_detail = JSON.parse(localStorage.getItem("spaceDetail"));
+        this.private_cabin_price = space_detail?.privatecabin_price;
+        this.managed_office_price = space_detail?.customized_space_price;
+        this.dedicated_desk_price = space_detail?.desks_price;
+        this.flexible_dek_price = space_detail?.flexible_desk_price;
+        this.virtual_office_price = space_detail?.virtual_office_price;
+        this.meeting_room_price = space_detail?.meeting_room_price;
+        this.userId = space_detail?.user_id;
+      } else {
+        setTimeout(() => {
+          let space_detail = this.data.spaceDetail;
+          this.private_cabin_price = space_detail?.privatecabin_price;
+          this.managed_office_price = space_detail?.customized_space_price;
+          this.dedicated_desk_price = space_detail?.desks_price;
+          this.flexible_dek_price = space_detail?.flexible_desk_price;
+          this.virtual_office_price = space_detail?.virtual_office_price;
+          this.meeting_room_price = space_detail?.meeting_room_price;
+          this.userId = space_detail?.user_id;
+        }, 300);
+      }
+    }, 300);
   }
 
   ngOnInit(): void {
