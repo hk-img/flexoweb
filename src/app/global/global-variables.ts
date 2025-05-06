@@ -30,18 +30,18 @@ export const GlobalVariables = {
       column_name: 'virtual_office_price',
       desc: `Premium business and mailing address`,
     },
-    {
-      name: 'Meeting Room',
-      id: 6,
-      column_name: 'meeting_room_price',
-      desc: `Well-equipped meeting rooms by the hour`,
-    },
-    {
-      name: 'Training Room/Event Space',
-      id: 7,
-      column_name: 'training_room_price',
-      desc: `Adaptable and aesthetic space by the hour`,
-    },
+    // {
+    //   name: 'Meeting Room',
+    //   id: 6,
+    //   column_name: 'meeting_room_price',
+    //   desc: `Well-equipped meeting rooms by the hour`,
+    // },
+    // {
+    //   name: 'Training Room/Event Space',
+    //   id: 7,
+    //   column_name: 'training_room_price',
+    //   desc: `Adaptable and aesthetic space by the hour`,
+    // },
     {
       name: "Day pass",
       id: 8,
