@@ -241,6 +241,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loadZohoScript2();
+    this.getAllQuestions();
     const selectedValues = [
       "Private Office",
       "Managed Office",
@@ -436,6 +437,43 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     }
   }
 
+
+  updatefaqsJsonLd(res:any){
+    const jsonLdId = 'json-ld-faqs';
+    if (isPlatformBrowser(this.platformId)) {
+      const existingScript = document.getElementById(jsonLdId);
+      if (existingScript) {
+        existingScript.remove();
+      }
+    }
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": res.map((faq:any) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": this.stripTags(faq.answer)
+        }
+      }))
+    };
+
+    if (isPlatformBrowser(this.platformId)) {
+      const jsonLdScript = document.createElement('script');
+      jsonLdScript.id = jsonLdId;
+      jsonLdScript.type = 'application/ld+json';
+      jsonLdScript.text = JSON.stringify(jsonLd);
+
+      document.head.appendChild(jsonLdScript);
+    }
+  }
+
+  stripTags(html: string): string {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div.textContent || div.innerText || '';
+  }
 
   openInquiryPopUp() {
     if (isPlatformBrowser(this.platformId)) {
@@ -1074,6 +1112,21 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         clearInterval(interval);
       }
     }, 100);
+  }
+
+  shortQuestions: any[] = [];
+  briefQuestions: any[] = [];
+
+  getAllQuestions() {
+    this.spaceService.faqsSubject.subscribe((res: any) => {
+      this.shortQuestions = res.filter((x) => x.type == 1);
+      this.briefQuestions = res.filter((x) => x.type == 2);
+
+      const allFaqs = [...this.shortQuestions, ...this.briefQuestions];
+      console.log(allFaqs)
+  
+      this.updatefaqsJsonLd(allFaqs);
+    });
   }
 
 }
