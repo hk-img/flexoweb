@@ -93,7 +93,7 @@
                             <mat-option value="Dedicated Desk" *ngIf="dedicated_desk_price != null && dedicated_desk_price != ''">Dedicated Desk</mat-option>
                             <mat-option value="Flexible Desk" *ngIf="flexible_dek_price != null && flexible_dek_price != ''">Flexible Desk</mat-option>
                             <mat-option value="Virtual Office" *ngIf="virtual_office_price != null && virtual_office_price != ''">Virtual Office</mat-option>
-                            <mat-option value="Meeting Room" *ngIf="meeting_room_price != null && meeting_room_price != ''">Meeting Room</mat-option>
+                            <!-- <mat-option value="Meeting Room" *ngIf="meeting_room_price != null && meeting_room_price != ''">Meeting Room</mat-option> -->
                             <mat-option value="Not sure">Not sure</mat-option>
                         </mat-select>
                         <mat-error *ngIf="profileDetailForm.controls.spaceType?.errors?.required && isCoworkings || valueForListingPage == 'Coworking'">
@@ -112,7 +112,7 @@
                             <mat-option value="Dedicated Desk" *ngIf="dedicated_desk_price != null && dedicated_desk_price != ''">Dedicated Desk</mat-option>
                             <mat-option value="Flexible Desk" *ngIf="flexible_dek_price != null && flexible_dek_price != ''">Flexible Desk</mat-option>
                             <mat-option value="Virtual Office" *ngIf="virtual_office_price != null && virtual_office_price != ''">Virtual Office</mat-option>
-                            <mat-option value="Meeting Room" *ngIf="meeting_room_price != null && meeting_room_price != ''">Meeting Room</mat-option>
+                            <!-- <mat-option value="Meeting Room" *ngIf="meeting_room_price != null && meeting_room_price != ''">Meeting Room</mat-option> -->
                             <mat-option value="Not sure">Not sure</mat-option>
                         </mat-select>
                         <mat-error *ngIf="profileDetailForm.controls.spaceType?.errors?.required && isCoworkings || valueForListingPage == 'Coworking'">
