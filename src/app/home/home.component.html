@@ -74,9 +74,9 @@
     </div>
     <div class="col-12">
       <ngx-slick-carousel class="carousel" #companyModal="slick-carousel" [config]="companyConfig">
-        <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let logo of companyLogos; trackBy: trackByLogo">
+        <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let logo of companyLogos; trackBy: trackByLogo; let i=index">
           <div class="">
-            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" />
+            <img [src]="logo.src" [alt]="logo.alt" [loading]="i === 0 ? 'eager' : 'lazy'" />
           </div>
         </div>
       </ngx-slick-carousel>
@@ -98,7 +98,9 @@
           <div class="city-img-box city_main_img position-relative">
             <img
               src="assets/images/city-slide-images/Mumbai.webp"
-              class="w-100 img-fluid" />
+              class="w-100 img-fluid"
+              alt="Mumbai city view"
+              title="Mumbai city view" />
             <div class="city_txt">
    
               <h3 class="text-white m-0">Mumbai</h3>
@@ -116,7 +118,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Bengaluru.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Bengaluru city view"
+                      title="Bengaluru city view" />
                     <div class="city_txt">        
                       <h3 class="text-white m-0">Bengaluru</h3>
                     </div>
@@ -128,7 +132,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Hyderabad.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Hyderabad city view"
+                      title="Hyderabad city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Hyderabad</h3>
@@ -145,7 +151,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Pune.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Pune city view"
+                      title="Pune city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Pune</h3>
@@ -158,7 +166,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Delhi.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Delhi city view"
+                      title="Delhi city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Delhi</h3>
@@ -175,7 +185,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Gurgaon.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Gurgaon city view"
+                      title="Gurgaon city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Gurgaon</h3>
@@ -188,7 +200,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Noida.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Noida city view"
+                      title="Noida city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Noida</h3>
@@ -205,7 +219,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Chennai.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Chennai city view"
+                      title="Chennai city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Chennai</h3>
@@ -218,7 +234,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Ahmedabad.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Ahmedabad city view"
+                      title="Ahmedabad city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Ahmedabad</h3>
@@ -235,7 +253,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Jaipur.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Jaipur city view"
+                      title="Jaipur city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Jaipur</h3>
@@ -248,7 +268,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Coimbatore.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Coimbatore city view"
+                      title="Coimbatore city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Coimbatore</h3>
@@ -266,7 +288,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Kochi.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Kochi city view"
+                      title="Kochi city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Kochi</h3>
@@ -279,7 +303,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Indore.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Indore city view"
+                      title="Indore city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Indore</h3>
@@ -296,7 +322,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Lucknow.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Lucknow city view"
+                      title="Lucknow city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Lucknow</h3>
@@ -309,7 +337,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Chandigarh.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Chandigarh city view"
+                      title="Chandigarh city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Chandigarh</h3>
@@ -326,7 +356,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Goa.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Goa city view"
+                      title="Goa city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Goa</h3>
@@ -339,7 +371,9 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Surat.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid"
+                      alt="Surat city view"
+                      title="Surat city view" />
                     <div class="city_txt">
            
                       <h3 class="text-white m-0">Surat</h3>
@@ -369,7 +403,7 @@
         [config]="workSpaceConfig" responsive="breakpoints">
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/private-cabins.webp" class="img-fluid w-100" alt="">
+            <img src="assets/images/private-cabins.webp" class="img-fluid w-100" alt="Private Cabins Workspace" title="Private Cabins Workspace">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -394,7 +428,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/private-offices.webp" class="img-fluid w-100" alt="">
+            <img src="assets/images/private-offices.webp" class="img-fluid w-100" alt="Private Offices Workspace" title="Private Offices Workspace">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -419,7 +453,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/managed-offices.webp" class="img-fluid w-100" alt="">
+            <img src="assets/images/managed-offices.webp" class="img-fluid w-100" alt="Managed Offices Workspace" title="Managed Offices Workspace">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -444,7 +478,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/built-to-suit.webp" class="img-fluid w-100" alt="">
+            <img src="assets/images/built-to-suit.webp" class="img-fluid w-100" alt="Built to Suit Workspace" title="Built to Suit Workspace">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -469,7 +503,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets//images/desk-spaces.webp" class="img-fluid w-100" alt="">
+            <img src="assets//images/desk-spaces.webp" class="img-fluid w-100" alt="Desk Spaces Workspace" title="Desk Spaces Workspace">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -508,52 +542,9 @@
     <div class="row justify-content-center">
       <div class="col-lg-12 col-md-12 col-12">
         <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig">
-          <div ngxSlickItem class="swiper-slide popular-item slide">
+          <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let image of backgrounds; let i = index; trackBy: trackByBackground">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" />
-            </div>
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-2.webp" class="w-100 img-fluid" />
-            </div>
-          </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-3.webp" class="w-100 img-fluid" />
-            </div>
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-4.webp" class="w-100 img-fluid" />
-            </div>
-          </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-5.webp" class="w-100 img-fluid" />
-            </div>
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-6.webp" class="w-100 img-fluid" />
-            </div>
-          </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-7.webp" class="w-100 img-fluid" />
-            </div>
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-8.webp" class="w-100 img-fluid" />
-            </div>
-          </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/CoWrksLogo2022.webp" class="w-100 img-fluid" />
-            </div>
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/efc-logo-1.webp" class="w-100 img-fluid" />
-            </div>
-          </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/IncuspazeLogo.webp" class="w-100 img-fluid" />
-            </div>
-            <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/Tablespace-New-Logo.webp" class="w-100 img-fluid" />
+              <img [src]="image" class="w-100 img-fluid" [loading]="i === 0 ? 'eager' : 'lazy'" />
             </div>
           </div>
         </ngx-slick-carousel>
@@ -598,7 +589,7 @@
       <div class="col-lg-6 col-md-12 col-12 mt-lg-0 mt-md-4 mt-4">
         <div class="workspace_img">
           <img src="assets/images/find-work-space-1.jpg"
-            style="height: 544px; border-radius: 7px;object-fit: cover;" alt="" class="w-100 img-fluid">
+            style="height: 544px; border-radius: 7px;object-fit: cover;" alt="Find Workspace" title="Find Workspace" class="w-100 img-fluid">
         </div>
       </div>
     </div>
@@ -672,7 +663,7 @@
             <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/share-your-requirements.svg" alt="" class="img-fluid">
+                  <img src="assets/images/share-your-requirements.svg" alt="Share Requirements Icon" title="Share Requirements Icon" class="img-fluid">
                 </div>
                 <h6 class="m-0">Tell Us Your Needs</h6>
                 <p class="text-white">Share your requirements, and a dedicated workspace advisor will handle the rest.
@@ -685,7 +676,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/fast-service.svg" alt="" class="img-fluid">
+                  <img src="assets/images/fast-service.svg" alt="Fast Service Icon" title="Fast Service Icon" class="img-fluid">
                 </div>
                 <h6 class="m-0">Fast & Efficient Service</h6>
                 <p class="text-white">Experience a quick turnaround time and a smooth process from search to move-in.
@@ -698,7 +689,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/largest-coverage.svg" alt="" class="img-fluid">
+                  <img src="assets/images/largest-coverage.svg" alt="Largest Coverage Icon" title="Largest Coverage Icon" class="img-fluid">
                 </div>
                 <h6 class="m-0">Largest Coverage</h6>
                 <p class="text-white">Access 1800+ coworking spaces across India with Flexo's extensive network.</p>
@@ -710,7 +701,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/dedicated-advisor.svg" alt="" class="img-fluid">
+                  <img src="assets/images/dedicated-advisor.svg" alt="Dedicated Advisor Icon" title="Dedicated Advisor Icon" class="img-fluid">
                 </div>
                 <h6 class="m-0">Dedicated Workspace Experts</h6>
                 <p class="text-white">Get personalized,  support from experts for shortlisting, negotiating and finalizing your perfect office.</p>
@@ -1019,7 +1010,7 @@
             <div class="card-header" id="headingOne">
               <button class="card_btn d-flex align-items-center btn w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2 mb-0">What is Flexo? </h5>
               </button>
             </div>
@@ -1035,7 +1026,7 @@
             <div class="card-header" id="headingTwo">
               <button class="card_btn d-flex align-items-center btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2 mb-0">How does Flexo help me find office spaces?</h5>
                 <div>
                   <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
@@ -1057,7 +1048,7 @@
             <div class="card-header" id="headingThree">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2  mb-0">
                   Does Flexo have coworking spaces of its own?
                 </h5>
@@ -1081,7 +1072,7 @@
             <div class="card-header" id="headingFour">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2  mb-0">
                   What types of spaces are listed on Flexo?
                 </h5>
@@ -1105,7 +1096,7 @@
             <div class="card-header" id="headingFive">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2  mb-0">
                   How does Flexo ensure the quality of its listed spaces?
                 </h5>
@@ -1129,7 +1120,7 @@
             <div class="card-header" id="headingSix">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2  mb-0">
                   Does Flexo manage spaces directly?
                 </h5>
@@ -1153,7 +1144,7 @@
             <div class="card-header" id="headingSeven">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2  mb-0">
                   Can Flexo help me customize my office space?
                 </h5>
@@ -1177,7 +1168,7 @@
             <div class="card-header" id="headingEight">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2  mb-0">
                   How do I list my space on Flexo?
                 </h5>
@@ -1201,7 +1192,7 @@
             <div class="card-header" id="headingNine">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2  mb-0">
                   What makes Flexo different from other platforms?
                 </h5>
@@ -1225,7 +1216,7 @@
             <div class="card-header" id="headingTen">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="Right Arrow Icon" title="Right Arrow Icon">
                 <h5 class="pl-2  mb-0">
                   How do I contact Flexo for assistance?
                 </h5>
