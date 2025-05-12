@@ -848,4 +848,8 @@ export class HomeComponent implements OnDestroy {
       document.head.appendChild(script);
     }
   }  
+
+  getLoadingAttribute(index: number): string {
+    return index === 0 ? 'eager' : 'lazy';
+  }
 }
