@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 import {
   MatLegacyDialog as MatDialog,
@@ -9,21 +9,23 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { InquiryComponent } from 'src/app/details/inquiry/inquiry.component';
 import { environment } from '../../../../environments/environment';
 import { GlobalVariables } from '../../../global/global-variables';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 @Component({
   selector: 'app-list-item',
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.css'],
-  providers:[MatDialog]
+  providers: [MatDialog],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListItemComponent implements OnInit{
+export class ListItemComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  
   public loadAPI: Promise<any>;
-  public aws_base_url =
-    'https://s3.ap-south-1.amazonaws.com/' +
-    environment.s3_bucket_path +
-    '/details_images/';
+  public aws_base_url = 'https://s3.ap-south-1.amazonaws.com/' + environment.s3_bucket_path + '/details_images/';
   webDomain = environment.webDomain;
   type: string;
-  constructor(private router: Router, public inquiryVisit_viewContainerRef: ViewContainerRef, public inquiryVisit_dialogRef: MatDialogRef<any>, public inquiryVisit_dialog: MatDialog,) {}
 
   @Input() spaceDetails;
   @Input() isMobile;
@@ -31,51 +33,15 @@ export class ListItemComponent implements OnInit{
   @Input() is_similar_listing: boolean;
 
   @Output() shortlistItemEvent = new EventEmitter<any>();
+  
   public resource_types = GlobalVariables.resource_types;
   public filter_type_name;
   public is_see_more_visible = 1;
   public filter_type_col_name;
-  ngOnInit(): void {
-    const  name =this.spaceDetails.name?.toLowerCase()
-    const  buildingName =this.spaceDetails.buildingName?.toLowerCase()
-    const location_name = this.spaceDetails.location_name?.toLowerCase()
-    const spaceType = this.spaceDetails.spaceType?.toLowerCase()
-     if (
-      spaceType === 'coworking space' ||
-      spaceType === 'coworking cafe/restaurant' ||
-      spaceType === 'shoot studio' ||
-      spaceType === 'recording studio' ||
-      spaceType === 'podcast studio' ||
-      spaceType === 'activity space' ||
-      spaceType === 'sports turf' ||
-      spaceType === 'sports venue' ||
-      spaceType === 'party space' ||
-      spaceType === 'banquet hall' ||
-      spaceType === 'gallery' ||
-      spaceType === 'classroom' ||
-      spaceType === 'private cabin' ||
-      spaceType === 'meeting room' ||
-      spaceType === 'training room' ||
-      spaceType === 'event space'
-    ) {
-      this.spaceDetails.imageAlt = `${name} ${location_name} ${spaceType}`
-    } else {
-       this.spaceDetails.imageAlt = `${buildingName} ${location_name} ${spaceType}`
-    }
-    if (this.filters && this.filters.type != null) {
-      this.filter_type_name = this.resource_types.find(
-        (x) => x.id == this.filters.type
-      )?.name;
-      this.filter_type_col_name = this.resource_types.find(
-        (x) => x.id == this.filters.type
-      )?.column_name;
-    }
-
-    this.type = this.getType(spaceType)
-  }
 
   @ViewChild('slickMainCarousel', { static: false })
   slickMainCarousel: SlickCarouselComponent;
+
   public mainSliderConfig = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -98,80 +64,119 @@ export class ListItemComponent implements OnInit{
     ],
   };
 
+  constructor(
+    private router: Router,
+    public inquiryVisit_viewContainerRef: ViewContainerRef,
+    public inquiryVisit_dialogRef: MatDialogRef<any>,
+    public inquiryVisit_dialog: MatDialog,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  getArray(length: number): number[] {
-    if(length === 0){
-      length = 5
-    }
-    return Array(length).fill(0);
+  ngOnInit(): void {
+    this.initializeSpaceDetails();
+    this.initializeFilters();
   }
 
-  onImageError(event: Event, imageAlt:string) {
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private initializeSpaceDetails(): void {
+    const name = this.spaceDetails.name?.toLowerCase();
+    const buildingName = this.spaceDetails.buildingName?.toLowerCase();
+    const location_name = this.spaceDetails.location_name?.toLowerCase();
+    const spaceType = this.spaceDetails.spaceType?.toLowerCase();
+
+    const shortTermSpaces = [
+      'coworking space', 'coworking café/restaurant', 'shoot studio', 'recording studio',
+      'podcast studio', 'activity space', 'sports turf', 'sports venue', 'party space',
+      'banquet hall', 'gallery', 'classroom', 'private cabin', 'meeting room',
+      'training room', 'event space'
+    ];
+
+    this.spaceDetails.imageAlt = shortTermSpaces.includes(spaceType) 
+      ? `${name} ${location_name} ${spaceType}`
+      : `${buildingName} ${location_name} ${spaceType}`;
+
+    this.type = this.getType(spaceType);
+    this.cdr.markForCheck();
+  }
+
+  private initializeFilters(): void {
+    if (this.filters?.type != null) {
+      const resourceType = this.resource_types.find(x => x.id == this.filters.type);
+      this.filter_type_name = resourceType?.name;
+      this.filter_type_col_name = resourceType?.column_name;
+      this.cdr.markForCheck();
+    }
+  }
+
+  getArray(length: number): number[] {
+    return Array(length || 5).fill(0);
+  }
+
+  onImageError(event: Event, imageAlt: string): void {
     const target = event.target as HTMLImageElement;
     target.src = 'assets/images/details_placeholder_image.jpg';
     target.alt = `${imageAlt} details_placeholder_image.jpg`;
   }
 
-  next(evt: any) {
-    evt.stopPropagation()
+  next(evt: Event): void {
+    evt.stopPropagation();
     this.slickMainCarousel.slickNext();
   }
 
-  prev(evt:any) {
-    evt.stopPropagation()
+  prev(evt: Event): void {
+    evt.stopPropagation();
     this.slickMainCarousel.slickPrev();
   }
 
-  toggleSeeMore(e: Event, value) {
+  toggleSeeMore(e: Event, value: number): void {
     e.stopPropagation();
     this.is_see_more_visible = value;
+    this.cdr.markForCheck();
   }
 
-  openDetailsPage() {
+  openDetailsPage(): void {
     window.open('coworking-space/' + this.spaceDetails.link_name, '_blank');
   }
 
-  openFacebook() {
+  openFacebook(): void {
+    const url = `${window.location.origin}/coworking-space/${this.spaceDetails.link_name.toLowerCase()}`;
     window.open(
-      'https://www.facebook.com/sharer/sharer.php?u=' +
-        window.location.origin +
-        '/coworking-space/' +
-        this.spaceDetails.link_name.toLowerCase(),
+      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
       'facebook-popup',
       'height=350,width=600'
     );
   }
 
-  openLinkedIn() {
+  openLinkedIn(): void {
+    const url = `${window.location.origin}/coworking-space/${this.spaceDetails.link_name.toLowerCase()}`;
     window.open(
-      'https://www.linkedin.com/shareArticle?mini=true&url=' +
-        window.location.origin +
-        '/coworking-space/' +
-        this.spaceDetails.link_name.toLowerCase() +
-        '&title=Share%Spaces',
+      `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=Share%Spaces`,
       'linkedin-popup',
       'height=350,width=600'
     );
   }
 
-  openWhatsapp() {
-    let staticText = 'Checkout this space on FLEXO ';
+  openWhatsapp(): void {
+    const staticText = 'Checkout this space on FLEXO ';
+    const url = `${window.location.origin}/coworking-space/${this.spaceDetails.link_name}`;
+    
     if (!this.isMobile) {
       window.open(
-        `https://web.whatsapp.com/send?text=${staticText}-${window.location.origin}/details/` +
-          this.spaceDetails.link_name.toLowerCase(),
+        `https://web.whatsapp.com/send?text=${staticText}-${url}`,
         'whatapp-popup',
         'height=650,width=650'
       );
     } else {
-      window.open(
-        `whatsapp://send?text=${staticText}-${window.location.origin}/coworking-space/${this.spaceDetails.link_name}`
-      );
+      window.open(`whatsapp://send?text=${staticText}-${url}`);
     }
   }
 
-  shortListItem(e:any,id, is_shortlisted) {
-    e.stopPropagation()
+  shortListItem(e: Event, id: number, is_shortlisted: boolean): void {
+    e.stopPropagation();
     this.shortlistItemEvent.emit({ id, is_shortlisted });
   }
 
@@ -188,95 +193,64 @@ export class ListItemComponent implements OnInit{
     const longTermSpaces = [
       'managed office', 'private office', 'shared office', 'virtual office'
     ];
+
     if (spaceType === 'coworking space') {
       return "coworking";
     } else if (shortTermSpaces.includes(spaceType)) {
       return "shortterm";
     } else if (longTermSpaces.includes(spaceType)) {
       return "longterm";
-    } else {
-      return "coworking";
     }
-  }
-  
-  onSpaceNameClicked(e: any) {
-    // if(e.spaceType == 'Coworking Café/Restaurant'){
-    //   window.open(
-    //     `${this.formatUrl(e.spaceType.replace('/', '-'))}/${this.formatUrl(e.location_name)}-${e.id}`,
-    //     '_blank'
-    //   );
-    // }else if (this.type === 'coworking'){
-    //   window.open(
-    //     `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.name)}-${e.id}`,
-    //     '_blank'
-    //   );
-    // }else {
-    //   window.open(
-    //     `${this.formatUrl(e.spaceType)}/${this.formatUrl(e.contact_city_name)}/${this.formatUrl(e.location_name)}/${e.id}`,
-    //     '_blank'
-    //   );
-    // }
-
-    window.open(
-      `${e.slug}`,
-      '_blank'
-    );
+    return "coworking";
   }
 
+  onSpaceNameClicked(e: any): void {
+    window.open(e.slug, '_blank');
+  }
 
-
-
-  openInquiryPopUp(e:any,spaceDetail:any) {
-    e.stopPropagation()
+  openInquiryPopUp(e: Event, spaceDetail: any): void {
+    e.stopPropagation();
     setTimeout(() => {
-      let config = new MatDialogConfig();
+      const config = new MatDialogConfig();
       config.viewContainerRef = this.inquiryVisit_viewContainerRef;
       config.panelClass = 'enq-mod-c';
       config.width = '100%';
-      config.maxWidth = '55vw'
+      config.maxWidth = '55vw';
       config.data = {
         spaceDetail,
         spaceId: spaceDetail?.id,
         value: 'listing'
       };
-  
+
       this.inquiryVisit_dialogRef = this.inquiryVisit_dialog.open(
         InquiryComponent,
         config
       );
+
       this.inquiryVisit_dialogRef.componentInstance.ref = this.inquiryVisit_dialogRef;
       this.inquiryVisit_dialogRef.componentInstance.flag = 1;
-      this.inquiryVisit_dialogRef.afterClosed().subscribe((result) => {
-        if (result && result.success) {
-          window.location.reload();
-        }
-        this.inquiryVisit_dialogRef = null;
-      });
-    }, );
-  }
 
-
-  handleImageError(event: any, imageAlt:string) {
-    const imgElement = event.target as HTMLImageElement
-    imgElement.src = 'assets/images/details_placeholder_image.jpg';
-    imgElement.alt = `${imageAlt} details_placeholder_image.jpg`;
+      this.inquiryVisit_dialogRef.afterClosed()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((result) => {
+          if (result?.success) {
+            // Handle success
+          }
+        });
+    });
   }
 
   getValidPrice(desksPrice: number | null | undefined, flexiblePrice: number | null | undefined): number | null {
-    const validDesks = typeof desksPrice === 'number' && desksPrice > 0 ? desksPrice : null;
-    const validFlexible = typeof flexiblePrice === 'number' && flexiblePrice > 0 ? flexiblePrice : null;
-  
-    if (validDesks !== null && validFlexible !== null) {
-      return Math.min(validDesks, validFlexible);
-    }
-  
-    return validDesks !== null ? validDesks : validFlexible !== null ? validFlexible : null;
-  }  
+    if (this.isPriceValid(desksPrice)) return desksPrice;
+    if (this.isPriceValid(flexiblePrice)) return flexiblePrice;
+    return null;
+  }
 
   isPriceValid(price: number | null | undefined): boolean {
-    return typeof price === 'number' && price > 0;
+    return price !== null && price !== undefined && price > 0;
   }
-  
-  
 
+  trackByImage(index: number, image: string): string {
+    return image;
+  }
 }
