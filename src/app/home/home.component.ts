@@ -435,6 +435,7 @@ export class HomeComponent implements OnDestroy {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.initializeComponent();
+      this.homeJsonLd();
     }
   }
 
@@ -646,7 +647,7 @@ export class HomeComponent implements OnDestroy {
       } else {
         url = `in/coworking-space/` + `${(this.city).replace(' ', '-').toLowerCase() + '/' + this?.filteredPlaces.map(place => place.split(',')[0].trim()).join('-')}`;
       }
-    }else if(this.spaceType == 'coworking café/restaurant'){
+    } else if (this.spaceType == 'coworking café/restaurant') {
       url = `in/coworking-cafe-restaurant/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
     } else {
       url = `in/${this.spaceType}/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
@@ -654,7 +655,7 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([this.formatUrl(url)]);
   }
 
-  navigateToCity(city:any,locationValue:any){
+  navigateToCity(city: any, locationValue: any) {
     let url = "";
     url = `in/coworking/` + `${(city).replace(' ', '-').toLowerCase()}`;
     localStorage.setItem("location", locationValue)
@@ -664,7 +665,7 @@ export class HomeComponent implements OnDestroy {
   formatUrl(value: string): string {
     return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
   }
-  
+
   onNearmeClicked() {
     this.spaceService.getCityInfo(this.user_lat, this.user_long).subscribe(
       (response) => {
@@ -734,7 +735,7 @@ export class HomeComponent implements OnDestroy {
 
   loadZohoScript2() {
     this.cleanupZohoScript();
-  
+
     setTimeout(() => {
       window['$zoho'] = window['$zoho'] || {};
       window['$zoho'].salesiq = {
@@ -810,4 +811,41 @@ export class HomeComponent implements OnDestroy {
   trackByLogo(index: number, item: any): string {
     return item.src;
   }
+
+  homeJsonLd(): void {
+    const jsonLdId = 'json-ld-home';
+  
+    if (isPlatformBrowser(this.platformId)) {
+      const existingScript = document.getElementById(jsonLdId);
+      if (existingScript) {
+        existingScript.remove();
+      }
+  
+      const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Flexo",
+        "url": "https://www.flexospaces.com",
+        "logo": "https://www.flexospaces.com/assets/images/logo.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-9513392400",
+          "contactType": "Customer Service",
+          "areaServed": "IN",
+          "availableLanguage": ["English"]
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/flexospaces",
+          "https://twitter.com/flexospaces",
+          "https://www.instagram.com/flexospaces"
+        ]
+      };
+  
+      const script = document.createElement('script');
+      script.id = jsonLdId;
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(jsonLd);
+      document.head.appendChild(script);
+    }
+  }  
 }
