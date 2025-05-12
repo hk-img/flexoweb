@@ -1,24 +1,26 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, ElementRef, Inject, NgZone, PLATFORM_ID, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, Inject, NgZone, PLATFORM_ID, ViewChild, ViewContainerRef, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { ToastrService } from 'ngx-toastr';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { GlobalVariables } from '../global/global-variables';
 import { SpaceService } from '../services/space.service';
 declare var google: any;
 declare let localStorage: any;
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy {
+  private destroy$ = new Subject<void>();
   public workspace_type;
   public isMobile = false;
   public s3_base_url =
@@ -62,8 +64,6 @@ export class HomeComponent {
 
   intervalId: any;
   hostWebUrl: any = environment.HOST_WEBLINK;
-
-
 
   @ViewChild('slickReviewsModal', { static: false })
   slickReviewsModal: SlickCarouselComponent;
@@ -135,53 +135,6 @@ export class HomeComponent {
   control = new FormControl('');
   filteredPlaces: any;
 
-  // @ViewChild('slickTestimonialModal', { static: false })
-  // slickTestimonialModal: SlickCarouselComponent;
-
-  // public testimonialConfig = {
-  //   slidesToShow: 3, 
-  //   arrows: true,
-  //   prevArrow: '<button class="slick-prev">></button>',
-  //   nextArrow: '<button class="slick-next"><</button>',
-  //   variableHeight: false,
-  //   autoplay: true,
-  //   autoplaySpeed: 3000, 
-  //   dots: false,
-  //   swipeToSlide: true,
-  //   infinite: true,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1167, 
-  //       settings: {
-  //         slidesToShow: 3,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 1024, 
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 1,
-  //         arrows: true,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 768, 
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 480, 
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //   ],
-  // };
-
   @ViewChild('slickTestimonialModal', { static: false })
   slickTestimonialModal: SlickCarouselComponent;
   public testimonialConfig = {
@@ -224,7 +177,6 @@ export class HomeComponent {
       },
     ],
   };
-
 
   @ViewChild('citySlickSlider', { static: false })
   citySlickSlider: SlickCarouselComponent;
@@ -272,8 +224,6 @@ export class HomeComponent {
       },
     ],
   };
-
-
 
   @ViewChild('workSpaceSlider', { static: false })
   workSpaceSlider: SlickCarouselComponent;
@@ -457,16 +407,6 @@ export class HomeComponent {
     this.slickReviewsModal.slickPrev();
   }
 
-
-
-  // nextTestimonial() {
-  //   this.slickTestimonialModal.slickNext();
-  // }
-
-  // prevTestimonial() {
-  //   this.slickTestimonialModal.slickPrev();
-  // }
-
   constructor(
     private router: Router,
     public viewContainerRef: ViewContainerRef,
@@ -475,6 +415,7 @@ export class HomeComponent {
     private metaService: Meta,
     private ngZone: NgZone,
     private spaceService: SpaceService,
+    private cdr: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: any,
     private toastr: ToastrService
   ) {
@@ -492,52 +433,91 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-
     if (isPlatformBrowser(this.platformId)) {
-      this.startCarousel();
-      this.getCoords();
-      this.getSpacecategory();
-      if (window.innerWidth < 500) {
-        this.isMobile = true;
-      }
-      this.workspace_type = 0;
-      this.geolocate();
-
-      this.filteredPlaces = this.control.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value || '')),
-      );
-
-      this.filteredPlaces.subscribe((data:any)=>{
-
-      });
+      this.initializeComponent();
     }
   }
 
+  private initializeComponent(): void {
+    this.startCarousel();
+    this.getCoords();
+    this.getSpacecategory();
+    this.checkMobileView();
+    this.initializeWorkspace();
+    this.initializeGeolocation();
+    this.initializeAutocomplete();
+  }
+
+  private checkMobileView(): void {
+    if (window.innerWidth < 500) {
+      this.isMobile = true;
+      this.cdr.markForCheck();
+    }
+  }
+
+  private initializeWorkspace(): void {
+    this.workspace_type = 0;
+    this.initializeFilteredPlaces();
+  }
+
+  private initializeFilteredPlaces(): void {
+    this.filteredPlaces = this.control.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+      takeUntil(this.destroy$)
+    );
+
+    this.filteredPlaces.subscribe((data: any) => {
+      this.cdr.markForCheck();
+    });
+  }
+
+  private initializeGeolocation(): void {
+    this.geolocate();
+  }
+
+  private initializeAutocomplete(): void {
+    // Initialize autocomplete if needed
+  }
+
   ngOnDestroy(): void {
-    clearInterval(this.intervalId); // Cleanup on component destroy
+    this.destroy$.next();
+    this.destroy$.complete();
+    clearInterval(this.intervalId);
+    this.cleanupZohoScript();
+  }
+
+  private cleanupZohoScript(): void {
+    const existingScript = document.getElementById("zsiqscript");
+    if (existingScript) {
+      existingScript.remove();
+    }
   }
 
   startCarousel(): void {
     this.intervalId = setInterval(() => {
-      // Step 1: Trigger text fade-out
-      this.isTextFadingOut = true;
+      this.ngZone.run(() => {
+        this.isTextFadingOut = true;
 
-      // Step 2: Wait for textDelay before updating text
-      setTimeout(() => {
-        this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
-        this.isTextFadingOut = false;
-      }, this.textDelay);
+        setTimeout(() => {
+          this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
+          this.isTextFadingOut = false;
+          this.cdr.markForCheck();
+        }, this.textDelay);
 
-      // Step 3: Update image index after full duration
-      this.currentImageIndex = (this.currentImageIndex + 1) % this.backgrounds.length;
+        this.currentImageIndex = (this.currentImageIndex + 1) % this.backgrounds.length;
+        this.cdr.markForCheck();
+      });
     }, this.imageDuration);
   }
 
   getSpacecategory() {
-    this.spaceService.getSpaceCategory().subscribe((res: any) => {
-      this.spaces = res;
-    })
+    this.spaceService.getSpaceCategory()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: any) => {
+        this.spaces = res;
+        this.cdr.markForCheck();
+      });
   }
 
   getVal(event: any) {
@@ -552,7 +532,6 @@ export class HomeComponent {
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
     this.filteredPlaces = this.locations.filter(street => this._normalizeValue(street).includes(filterValue));
-
 
     return this.filteredPlaces;
   }
@@ -618,11 +597,14 @@ export class HomeComponent {
   }
 
   getAllLocation(spaceType: any) {
-    this.spaceService.getAllLocations2(spaceType).subscribe((res: any) => {
-      this.filteredPlaces = res.map((location: any) => location.label);
-      this.locationObj = res;
-      this.locations = res.map((location: any) => location.label);
-    })
+    this.spaceService.getAllLocations2(spaceType)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: any) => {
+        this.filteredPlaces = res.map((location: any) => location.label);
+        this.locationObj = res;
+        this.locations = res.map((location: any) => location.label);
+        this.cdr.markForCheck();
+      });
   }
 
   getCoords() {
@@ -653,21 +635,11 @@ export class HomeComponent {
     }
   }
 
-
   onSearchSubmit() {
     let url = '';
     this.spaceType = this.spaceType.toLowerCase();
     localStorage.setItem("location", this.getLocationObjForSearch.label)
 
-    // if ((this.spaceType == 'coworking space')) {
-    //   url = `in/${this.spaceType}/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
-
-    // } else if ((this.spaceType == 'coworking cafe/restaurant') || (this.spaceType == 'shoot studio') || (this.spaceType == 'recording studio') || (this.spaceType == 'podcast studio') || (this.spaceType == 'activity space') || (this.spaceType == 'sports turf') || (this.spaceType == 'sports venue') || (this.spaceType == 'party space') || (this.spaceType == 'banquet hall') || (this.spaceType == 'gallery') || (this.spaceType == 'classroom') || (this.spaceType == 'private cabin') || (this.spaceType == 'meeting room') || (this.spaceType == 'training room') || (this.spaceType == 'event space')) {
-    //   url = `in/${this.spaceType}/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
-
-    // } else if((this.spaceType == 'managed office' || this.spaceType == 'private office' || this.spaceType == 'shared office' || this.spaceType == 'virtual office')){
-
-    // }
     if ((this.spaceType == 'coworking space')) {
       if (this.filteredPlaces.find(place => place.trim().endsWith('(City)'))) {
         url = `in/coworking/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
@@ -679,36 +651,7 @@ export class HomeComponent {
     } else {
       url = `in/${this.spaceType}/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
     }
-    // if (is_city) {
-    // }else {
-    // url = `in/coworking-space` + '/' + city_name + '/' + location_name;
-    // }
-
-    // //url change
-    // if (city_name ==  'konkan-division' ) {
-    //   url ='/in/coworking-space/' + city_Change + '/'+ location_name;
-    // }
-
-    // let area_param = location_name.toLowerCase();
-    // let city_param = city_name.toLowerCase();
-    // if (area_param && city_param) {
-    //   area_param = area_param.replace(' ', '-');
-    //   city_param = city_param.replace(' ', '-');
-    // }
-    // let area = area_param + ',' + city_param;
-    // this.geocoder.geocode({ 'address': `${area}`, }, (results, status) => {
-    //   if (status == google.maps.GeocoderStatus.OK) {
-    //     let location = results[0].geometry.location;
-    //     // this.area_lat = location.lat();
-    //     // this.area_long = location.lng();
-    //     localStorage.setItem('area_lat', `${location.lat()}`);
-    //     localStorage.setItem('area_long', `${location.lng()}`);
-
-    //   }
-    // })
-    // setTimeout(() => {
     this.router.navigate([this.formatUrl(url)]);
-    // }, 500);
   }
 
   navigateToCity(city:any,locationValue:any){
@@ -722,7 +665,6 @@ export class HomeComponent {
     return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
   }
   
-
   onNearmeClicked() {
     this.spaceService.getCityInfo(this.user_lat, this.user_long).subscribe(
       (response) => {
@@ -737,9 +679,6 @@ export class HomeComponent {
 
   onSpaceSearch() {
     this.spaceType
-    // this.location
-
-    // this.router.navigate([url], { queryParams: query_params });
   }
 
   getCityAndLocationDetails2(address_components) {
@@ -794,11 +733,7 @@ export class HomeComponent {
   isScriptLoaded: boolean = false;
 
   loadZohoScript2() {
-
-    const existingScript = document.getElementById("zsiqscript");
-    if (existingScript) {
-      existingScript.remove();
-    }
+    this.cleanupZohoScript();
   
     setTimeout(() => {
       window['$zoho'] = window['$zoho'] || {};
@@ -828,5 +763,51 @@ export class HomeComponent {
         clearInterval(interval);
       }
     }, 100);
+  }
+
+  public companyLogos = [
+    { src: 'assets/images/client-logo/Accord-logo.webp', alt: 'Accord Logo' },
+    { src: 'assets/images/client-logo/amethyst-revised-logo.webp', alt: 'Amethyst Logo' },
+    { src: 'assets/images/client-logo/arvind-mafatlal-logo.webp', alt: 'Arvind Mafatlal Logo' },
+    { src: 'assets/images/client-logo/beerbiceps.webp', alt: 'BeerBiceps Logo' },
+    { src: 'assets/images/client-logo/bg3.webp', alt: 'BG3 Logo' },
+    { src: 'assets/images/client-logo/eicher.webp', alt: 'Eicher Logo' },
+    { src: 'assets/images/client-logo/inmobi.webp', alt: 'Inmobi Logo' },
+    { src: 'assets/images/client-logo/jtb.webp', alt: 'JTB Logo' },
+    { src: 'assets/images/client-logo/khaitan.webp', alt: 'Khaitan Logo' },
+    { src: 'assets/images/client-logo/livespace.webp', alt: 'Livespace Logo' },
+    { src: 'assets/images/client-logo/mirae-asset.webp', alt: 'Mirae Asset Logo' },
+    { src: 'assets/images/client-logo/nb.webp', alt: 'NB Logo' },
+    { src: 'assets/images/client-logo/pcr.webp', alt: 'PCR Logo' },
+    { src: 'assets/images/client-logo/pi.webp', alt: 'PI Logo' },
+    { src: 'assets/images/client-logo/prepe.webp', alt: 'Prepe Logo' },
+    { src: 'assets/images/client-logo/roche.webp', alt: 'Roche Logo' },
+    { src: 'assets/images/client-logo/scentido.webp', alt: 'Scentido Logo' },
+    { src: 'assets/images/client-logo/shop101.webp', alt: 'Shop101 Logo' },
+    { src: 'assets/images/client-logo/sterimax.webp', alt: 'Sterimax Logo' },
+    { src: 'assets/images/client-logo/Thyssenkrupp.webp', alt: 'Thyssenkrupp Logo' },
+    { src: 'assets/images/client-logo/tlc.webp', alt: 'TLC Logo' },
+    { src: 'assets/images/client-logo/triniti.webp', alt: 'Triniti Logo' }
+  ];
+
+  // TrackBy functions for ngFor optimizations
+  trackByBackground(index: number, item: string): string {
+    return item;
+  }
+
+  trackByText(index: number, item: string): string {
+    return item;
+  }
+
+  trackBySpace(index: number, item: any): string {
+    return item.spaceType;
+  }
+
+  trackByLocation(index: number, item: string): string {
+    return item;
+  }
+
+  trackByLogo(index: number, item: any): string {
+    return item.src;
   }
 }

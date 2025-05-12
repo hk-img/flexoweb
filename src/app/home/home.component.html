@@ -1,321 +1,88 @@
-
 <div class="hero hero_sec">
   <div class="backgrounds animateIMG">
-    <div class="homeInnerSwiper" *ngFor="let background of backgrounds; let i = index"
+    <div class="homeInnerSwiper" *ngFor="let background of backgrounds; let i = index; trackBy: trackByBackground"
         [ngStyle]="{'background-image': 'url(' + background + ')'}"
         [class.active]="i === currentImageIndex">
     </div>
-</div>
+  </div>
   <div class="hero-slide">
     <div class="hero-content d-flex w-100 align-items-center container">
       <div class="col-md-12 px-0 mb_hero">
-       <div class="row mb_row">
-        <div class="col-12 mb_text_content">
-          <h1 class="hero-title v2 ml-0">
-            Discover Amazing 
-            <!-- <div class="text animateIMG">
-                <span *ngFor="let text of texts; let i = index" [class.active]="i === currentIndex">
+        <div class="row mb_row">
+          <div class="col-12 mb_text_content">
+            <h1 class="hero-title v2 ml-0">
+              Discover Amazing 
+              <div class="text animateIMG">
+                <span *ngFor="let text of texts; let i = index; trackBy: trackByText" 
+                    [class.fade-out]="i === currentImageIndex && isTextFadingOut"
+                    [class.active]="i === currentTextIndex && !isTextFadingOut">
                     {{ text }}
                 </span>
-            </div> -->
-            <div class="text animateIMG">
-              <span *ngFor="let text of texts; let i = index" 
-                  [class.fade-out]="i === currentImageIndex && isTextFadingOut"
-                  [class.active]="i === currentTextIndex && !isTextFadingOut">
-                  {{ text }}
-              </span>
+              </div>
+            </h1>
           </div>
-          </h1>
-
-        </div>
-        <div class="col-lg-10 col-md-12 col-12 mt-md-4 mt-0 mb_input_box">
-          <form class="hero__form v2">
-            <div class="row align-items-center mx-0 bg_face">
-              <div class="col-lg-7 col-md-8 col-12 row m-0 hero_input_box p-0" style="justify-content: space-evenly;">
-                <div class="p-0 col-md-6 col-12 border-l-r mb-md-0 mb-3">
-                  <ng-select placeholder="What are you looking for?" (change)="getVal($event)">
-                    <ng-option *ngFor="let item of spaces" [value]="item.spaceType">
-                      {{item?.spaceType}}
-                    </ng-option>
-                  </ng-select>
-                </div>
-                <div class="col-md-6 px-md-0 px-2 mb-md-0 mb-3" style="align-self: center;">
-                  <div class="position-relative location_form">
-                    <input class="hero__form-input custom-select" type="text" name="place-event" id="key-word"
-                      (input)="onInputChange($event.target.value)" style="font-family: Poppins, FontAwesome;"
-                      placeholder="Where?" [formControl]="control" [matAutocomplete]="auto" />
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
-                      <ng-container *ngIf="filteredPlaces">
-                        <mat-option *ngFor="let val of filteredPlaces" [value]="val">
-                          {{val}}
-                        </mat-option>
-                      </ng-container>
-                      <ng-container *ngIf="!filteredPlaces.length">
-                        <mat-option>
-                          Location not found
-                        </mat-option>
-                      </ng-container>
-                    </mat-autocomplete>
+          <div class="col-lg-10 col-md-12 col-12 mt-md-4 mt-0 mb_input_box">
+            <form class="hero__form v2">
+              <div class="row align-items-center mx-0 bg_face">
+                <div class="col-lg-7 col-md-8 col-12 row m-0 hero_input_box p-0" style="justify-content: space-evenly;">
+                  <div class="p-0 col-md-6 col-12 border-l-r mb-md-0 mb-3">
+                    <ng-select placeholder="What are you looking for?" (change)="getVal($event)">
+                      <ng-option *ngFor="let item of spaces; trackBy: trackBySpace" [value]="item.spaceType">
+                        {{item?.spaceType}}
+                      </ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-md-6 px-md-0 px-2 mb-md-0 mb-3" style="align-self: center;">
+                    <div class="position-relative location_form">
+                      <input class="hero__form-input custom-select" type="text" name="place-event" id="key-word"
+                        (input)="onInputChange($event.target.value)" style="font-family: Poppins, FontAwesome;"
+                        placeholder="Where?" [formControl]="control" [matAutocomplete]="auto" />
+                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getLocationValue($event)">
+                        <ng-container *ngIf="filteredPlaces?.length">
+                          <mat-option *ngFor="let val of filteredPlaces; trackBy: trackByLocation" [value]="val">
+                            {{val}}
+                          </mat-option>
+                        </ng-container>
+                        <ng-container *ngIf="!filteredPlaces?.length">
+                          <mat-option>
+                            Location not found
+                          </mat-option>
+                        </ng-container>
+                      </mat-autocomplete>
+                    </div>
                   </div>
                 </div>
+                <div class="col-md-auto col-12 px-md-3 px-0">
+                  <a (click)="onSearchSubmit()" class="col-12 cursor-pointer text-center">Search
+                  </a>
+                </div>
               </div>
-              <div class="col-md-auto col-12 px-md-3 px-0">
-                <a (click)="onSearchSubmit()" class="col-12 cursor-pointer text-center">Search
-                </a>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-       </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="container-fluid Spaces_box section-padding">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center mb-4">
-        <h2 class="section-title v1"> Your Next Space Option Is Here.</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
-        <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
-          <div class="space_img_box position-relative">
-            <div class="img-container">
-              <img src="assets/images/desk-spaces.webp" alt="" class="img-fluid">
-            </div>
-            <div class="space_txt position-absolute">
-              <h5 class="text-white m-0">Coworking Space</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
-        <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
-          <div class="space_img_box position-relative">
-            <div class="img-container">
-              <img src="assets/images/managed-offices.webp" alt="" class="img-fluid">
-            </div>
-            <div class="space_txt position-absolute">
-              <h5 class="text-white m-0">Managed Office</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
-        <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
-          <div class="space_img_box position-relative">
-            <div class="img-container">
-              <img src="assets/images/private-office.webp" alt="" class="img-fluid">
-            </div>
-            <div class="space_txt position-absolute">
-              <h5 class="text-white m-0">Private Office</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
-        <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
-          <div class="space_img_box position-relative">
-            <div class="img-container">
-              <img src="assets/images/private-cabins.webp" alt="" class="img-fluid">
-            </div>
-            <div class="space_txt position-absolute">
-              <h5 class="text-white m-0">Private Cabin</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
-        <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
-          <div class="space_img_box position-relative">
-            <div class="img-container">
-              <img class="img-rounded" alt=""
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/activities/workshop"
-                srcset="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/activities/workshop"
-                sizes="300px" class="img-fluid">
-            </div>
-            <div class="space_txt position-absolute">
-              <h5 class="text-white m-0">Workspace</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
-        <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
-          <div class="space_img_box position-relative">
-            <div class="img-container">
-              <img src="assets/images/desk-spaces.webp" alt="" class="img-fluid">
-            </div>
-            <div class="space_txt position-absolute">
-              <h5 class="text-white m-0">Desk Space</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
-        <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
-          <div class="space_img_box position-relative">
-            <div class="img-container">
-              <img class="img-rounded" alt=""
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/activities/Meeting_tile.png"
-                srcset="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/activities/Meeting_tile.png"
-                sizes="300px" class="img-fluid">
-            </div>
-            <div class="space_txt position-absolute">
-              <h5 class="text-white m-0">Meeting Room</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-5">
-        <div style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
-          <div class="space_img_box position-relative">
-            <div class="img-container">
-              <img class="img-rounded" alt=""
-                src="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/activities/Video_shoot_tile_v2.png"
-                srcset="https://web.archive.org/web/20220301153950/https://img.peerspace.com/image/upload/c_crop,g_custom/g_auto,q_auto,f_auto,fl_progressive/w_400/homepage_images/activities/Video_shoot_tile_v2.png"
-                sizes="300px" class="img-fluid">
-            </div>
-            <div class="space_txt position-absolute">
-              <h5 class="text-white m-0">Video shoot</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div> -->
-
 
 <div class="container-fluid trusted_logos section-padding pb-0">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h2 class="section-title v1"> Trusted By Leading Companies in India</h2>
+        <h2 class="section-title v1">Trusted By Leading Companies in India</h2>
       </div>
     </div>
     <div class="col-12">
-      <ngx-slick-carousel class="carousel" #companyModal="slick-carousel" [config]="companyConfig"
-        responsive="breakpoints">
-        <div ngxSlickItem class="swiper-slide popular-item slide">
+      <ngx-slick-carousel class="carousel" #companyModal="slick-carousel" [config]="companyConfig">
+        <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let logo of companyLogos; trackBy: trackByLogo">
           <div class="">
-            <img src="assets/images/client-logo/Accord-logo.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/amethyst-revised-logo.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/arvind-mafatlal-logo.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/beerbiceps.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/bg3.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/eicher.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/inmobi.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/jtb.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/khaitan.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/livespace.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/mirae-asset.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/nb.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/pcr.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/pi.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/prepe.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/roche.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/scentido.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/shop101.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/sterimax.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/Thyssenkrupp.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/tlc.webp" />
-          </div>
-        </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
-          <div class="">
-            <img src="assets/images/client-logo/triniti.webp" />
+            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" />
           </div>
         </div>
       </ngx-slick-carousel>
     </div>
   </div>
 </div>
-
 
 <div class="container-fluid cities_sec section-padding">
   <div class="container">
@@ -740,8 +507,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-12 col-md-12 col-12">
-        <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig"
-          responsive="breakpoints">
+        <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig">
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
               <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" />
@@ -889,7 +655,7 @@
             ?</span></h2>
         <p class="text-white">We make your office-search, a hassle-less experience. With an in depth knowledge, let our
           workspace solution
-          experts find what you’re looking for.</p>
+          experts find what you're looking for.</p>
         <div class="flex_btn mt-3">
           <a href="" class="btn" style="white-space: normal;"> Claim Your Free Consultation with Zero Brokerage Offer
             Now! <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
@@ -935,7 +701,7 @@
                   <img src="assets/images/largest-coverage.svg" alt="" class="img-fluid">
                 </div>
                 <h6 class="m-0">Largest Coverage</h6>
-                <p class="text-white">Access 1800+ coworking spaces across India with Flexo’s extensive network.</p>
+                <p class="text-white">Access 1800+ coworking spaces across India with Flexo's extensive network.</p>
               </div>
 
             </div>
@@ -1403,7 +1169,7 @@
             </div>
             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Yes, Flexo specializes in finding fully furnished and customizable office spaces that align with your team’s requirements. We can also assist with fit-outs through our qualified design and build partners to create a workspace tailored to your needs.</p>
+                <p>Yes, Flexo specializes in finding fully furnished and customizable office spaces that align with your team's requirements. We can also assist with fit-outs through our qualified design and build partners to create a workspace tailored to your needs.</p>
               </div>
             </div>
           </div>
