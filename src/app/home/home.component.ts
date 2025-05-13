@@ -37,11 +37,11 @@ export class HomeComponent implements OnDestroy {
   bkc = 'assets/images/category/BKC.jpg';
   backgrounds: string[] = [
     'assets/images/coworking-spaces.webp',
-    'assets/images/managed-slider-offices.webp',
+    'assets/images/managed-offices.webp',
     'assets/images/meeting-rooms.webp',
-    'assets/images/desk-slider-spaces.webp',
-    'assets/images/private-slider-cabins.webp',
-    'assets/images/private-slider-offices.webp',
+    'assets/images/desk-spaces.webp',
+    'assets/images/private-cabins.webp',
+    'assets/images/private-offices.webp',
     'assets/images/workspaces.webp',
   ];
 
@@ -436,7 +436,6 @@ export class HomeComponent implements OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.initializeComponent();
       this.homeJsonLd();
-      this.getLoadingAttribute(0);
     }
   }
 
@@ -768,28 +767,28 @@ export class HomeComponent implements OnDestroy {
   }
 
   public companyLogos = [
-    { src: 'assets/images/client-logo/Accord-logo.webp', alt: 'Accord Logo', title: 'Accord', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/amethyst-revised-logo.webp', alt: 'Amethyst Logo', title: 'Amethyst', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/arvind-mafatlal-logo.webp', alt: 'Arvind Mafatlal Logo', title: 'Arvind Mafatlal', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/beerbiceps.webp', alt: 'BeerBiceps Logo', title: 'BeerBiceps', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/bg3.webp', alt: 'BG3 Logo', title: 'BG3', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/eicher.webp', alt: 'Eicher Logo', title: 'Eicher', height: '50', width: '50' },
-    { src: 'assets/images/client-logo/inmobi.webp', alt: 'Inmobi Logo', title: 'Inmobi', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/jtb.webp', alt: 'JTB Logo', title: 'JTB', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/khaitan.webp', alt: 'Khaitan Logo', title: 'Khaitan', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/livespace.webp', alt: 'Livespace Logo', title: 'Livespace', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/mirae-asset.webp', alt: 'Mirae Asset Logo', title: 'Mirae Asset', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/nb.webp', alt: 'NB Logo', title: 'NB', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/pcr.webp', alt: 'PCR Logo', title: 'PCR', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/pi.webp', alt: 'PI Logo', title: 'PI', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/prepe.webp', alt: 'Prepe Logo', title: 'Prepe', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/roche.webp', alt: 'Roche Logo', title: 'Roche', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/scentido.webp', alt: 'Scentido Logo', title: 'Scentido', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/shop101.webp', alt: 'Shop101 Logo', title: 'Shop101', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/sterimax.webp', alt: 'Sterimax Logo', title: 'Sterimax', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/Thyssenkrupp.webp', alt: 'Thyssenkrupp Logo', title: 'Thyssenkrupp', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/tlc.webp', alt: 'TLC Logo', title: 'TLC', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/triniti.webp', alt: 'Triniti Logo', title: 'Triniti', height: '50px', width: '50px' },
+    { src: 'assets/images/client-logo/Accord-logo.webp', alt: 'Accord Logo' },
+    { src: 'assets/images/client-logo/amethyst-revised-logo.webp', alt: 'Amethyst Logo' },
+    { src: 'assets/images/client-logo/arvind-mafatlal-logo.webp', alt: 'Arvind Mafatlal Logo' },
+    { src: 'assets/images/client-logo/beerbiceps.webp', alt: 'BeerBiceps Logo' },
+    { src: 'assets/images/client-logo/bg3.webp', alt: 'BG3 Logo' },
+    { src: 'assets/images/client-logo/eicher.webp', alt: 'Eicher Logo' },
+    { src: 'assets/images/client-logo/inmobi.webp', alt: 'Inmobi Logo' },
+    { src: 'assets/images/client-logo/jtb.webp', alt: 'JTB Logo' },
+    { src: 'assets/images/client-logo/khaitan.webp', alt: 'Khaitan Logo' },
+    { src: 'assets/images/client-logo/livespace.webp', alt: 'Livespace Logo' },
+    { src: 'assets/images/client-logo/mirae-asset.webp', alt: 'Mirae Asset Logo' },
+    { src: 'assets/images/client-logo/nb.webp', alt: 'NB Logo' },
+    { src: 'assets/images/client-logo/pcr.webp', alt: 'PCR Logo' },
+    { src: 'assets/images/client-logo/pi.webp', alt: 'PI Logo' },
+    { src: 'assets/images/client-logo/prepe.webp', alt: 'Prepe Logo' },
+    { src: 'assets/images/client-logo/roche.webp', alt: 'Roche Logo' },
+    { src: 'assets/images/client-logo/scentido.webp', alt: 'Scentido Logo' },
+    { src: 'assets/images/client-logo/shop101.webp', alt: 'Shop101 Logo' },
+    { src: 'assets/images/client-logo/sterimax.webp', alt: 'Sterimax Logo' },
+    { src: 'assets/images/client-logo/Thyssenkrupp.webp', alt: 'Thyssenkrupp Logo' },
+    { src: 'assets/images/client-logo/tlc.webp', alt: 'TLC Logo' },
+    { src: 'assets/images/client-logo/triniti.webp', alt: 'Triniti Logo' }
   ];
 
   // TrackBy functions for ngFor optimizations
@@ -849,8 +848,4 @@ export class HomeComponent implements OnDestroy {
       document.head.appendChild(script);
     }
   }  
-
-  getLoadingAttribute(index: number): string {
-    return index === 0 ? 'eager' : 'lazy';
-  }
 }
