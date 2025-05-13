@@ -436,6 +436,7 @@ export class HomeComponent implements OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.initializeComponent();
       this.homeJsonLd();
+      this.getLoadingAttribute(0);
     }
   }
 
