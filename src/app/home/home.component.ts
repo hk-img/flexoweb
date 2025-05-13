@@ -37,11 +37,11 @@ export class HomeComponent implements OnDestroy {
   bkc = 'assets/images/category/BKC.jpg';
   backgrounds: string[] = [
     'assets/images/coworking-spaces.webp',
-    'assets/images/managed-offices.webp',
+    'assets/images/managed-slider-offices.webp',
     'assets/images/meeting-rooms.webp',
-    'assets/images/desk-spaces.webp',
-    'assets/images/private-cabins.webp',
-    'assets/images/private-offices.webp',
+    'assets/images/desk-slider-spaces.webp',
+    'assets/images/private-slider-cabins.webp',
+    'assets/images/private-slider-offices.webp',
     'assets/images/workspaces.webp',
   ];
 
