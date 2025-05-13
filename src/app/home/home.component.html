@@ -1,8 +1,8 @@
 <div class="hero hero_sec">
   <div class="backgrounds animateIMG">
     <div class="homeInnerSwiper" *ngFor="let background of backgrounds; let i = index; trackBy: trackByBackground"
-        [ngStyle]="{'background-image': 'url(' + background + ')'}"
         [class.active]="i === currentImageIndex">
+        <img src="{{background}}" alt="{{background}}" class="img-fluid w-100 h-100" style="object-fit: cover; object-position: center;"/>
     </div>
   </div>
   <div class="hero-slide">
