@@ -772,7 +772,7 @@ export class HomeComponent implements OnDestroy {
     { src: 'assets/images/client-logo/arvind-mafatlal-logo.webp', alt: 'Arvind Mafatlal Logo', title: 'Arvind Mafatlal', height: '50px', width: '50px' },
     { src: 'assets/images/client-logo/beerbiceps.webp', alt: 'BeerBiceps Logo', title: 'BeerBiceps', height: '50px', width: '50px' },
     { src: 'assets/images/client-logo/bg3.webp', alt: 'BG3 Logo', title: 'BG3', height: '50px', width: '50px' },
-    { src: 'assets/images/client-logo/eicher.webp', alt: 'Eicher Logo', title: 'Eicher', height: '50px', width: '50px' },
+    { src: 'assets/images/client-logo/eicher.webp', alt: 'Eicher Logo', title: 'Eicher', height: '50', width: '50' },
     { src: 'assets/images/client-logo/inmobi.webp', alt: 'Inmobi Logo', title: 'Inmobi', height: '50px', width: '50px' },
     { src: 'assets/images/client-logo/jtb.webp', alt: 'JTB Logo', title: 'JTB', height: '50px', width: '50px' },
     { src: 'assets/images/client-logo/khaitan.webp', alt: 'Khaitan Logo', title: 'Khaitan', height: '50px', width: '50px' },
