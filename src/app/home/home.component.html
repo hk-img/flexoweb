@@ -76,7 +76,7 @@
       <ngx-slick-carousel class="carousel" #companyModal="slick-carousel" [config]="companyConfig">
         <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let logo of companyLogos; trackBy: trackByLogo">
           <div class="">
-            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" />
+            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" fetchpriority="low" />
           </div>
         </div>
       </ngx-slick-carousel>
@@ -597,8 +597,8 @@
       </div>
       <div class="col-lg-6 col-md-12 col-12 mt-lg-0 mt-md-4 mt-4">
         <div class="workspace_img">
-          <img src="assets/images/find-work-space-1.jpg"
-            style="height: 544px; border-radius: 7px;object-fit: cover;" alt="" class="w-100 img-fluid">
+          <img src="assets/images/find-work-space-1.webp"
+            style="height: 544px; border-radius: 7px;object-fit: cover;" alt="" width="auto" height="544" class="w-100 img-fluid">
         </div>
       </div>
     </div>
@@ -672,7 +672,7 @@
             <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/share-your-requirements.svg" alt="" class="img-fluid">
+                  <img src="assets/images/share-your-requirements.svg" class="img-fluid" alt="Requirements Icon" width="auto" height="55">
                 </div>
                 <h6 class="m-0">Tell Us Your Needs</h6>
                 <p class="text-white">Share your requirements, and a dedicated workspace advisor will handle the rest.
@@ -685,7 +685,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/fast-service.svg" alt="" class="img-fluid">
+                  <img src="assets/images/fast-service.svg" class="img-fluid" alt="Service Icon" width="auto" height="55" >
                 </div>
                 <h6 class="m-0">Fast & Efficient Service</h6>
                 <p class="text-white">Experience a quick turnaround time and a smooth process from search to move-in.
@@ -698,7 +698,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/largest-coverage.svg" alt="" class="img-fluid">
+                  <img src="assets/images/largest-coverage.svg" class="img-fluid" alt="Coverage Icon" width="auto" height="55" >
                 </div>
                 <h6 class="m-0">Largest Coverage</h6>
                 <p class="text-white">Access 1800+ coworking spaces across India with Flexo's extensive network.</p>
@@ -710,7 +710,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/dedicated-advisor.svg" alt="" class="img-fluid">
+                  <img src="assets/images/dedicated-advisor.svg" class="img-fluid" alt="Experts Icon" width="auto" height="55" >
                 </div>
                 <h6 class="m-0">Dedicated Workspace Experts</h6>
                 <p class="text-white">Get personalized,  support from experts for shortlisting, negotiating and finalizing your perfect office.</p>
@@ -825,7 +825,7 @@
                 <div class="work-process-content v1 p-4 h-100 d-flex flex-column">
                   <div class="d-flex align-items-center mb-2">
                     <div class="process-icon v1" style="flex-shrink: 0;">
-                      <img [src]="'assets/images/testimonials/' + testimonial.image" />
+                      <img [src]="'assets/images/testimonials/' + testimonial.image" loading="lazy" fetchpriority="low" width="76" height="76"/>
                       <!-- <span>{{testimonial.id}}</span> -->
                     </div>
                     <div class="pl-3">
