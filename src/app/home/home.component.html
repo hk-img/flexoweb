@@ -76,7 +76,7 @@
       <ngx-slick-carousel class="carousel" #companyModal="slick-carousel" [config]="companyConfig">
         <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let logo of companyLogos; trackBy: trackByLogo">
           <div class="">
-            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" fetchpriority="low" />
+            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" fetchpriority="low" width="145" height="145" alt="Company Logo"/>
           </div>
         </div>
       </ngx-slick-carousel>
@@ -98,10 +98,9 @@
           <div class="city-img-box city_main_img position-relative">
             <img
               src="assets/images/city-slide-images/Mumbai.webp"
-              class="w-100 img-fluid" />
+              class="w-100 img-fluid" alt="Mumbai" width="372" height="405" />
             <div class="city_txt">
-   
-              <h3 class="text-white m-0">Mumbai</h3>
+             <h3 class="text-white m-0">Mumbai</h3>
             </div>
           </div>
         </a>
@@ -116,7 +115,7 @@
                   <div class="city-img-box position-relative">
                     <img
                       src="assets/images/city-slide-images/Bengaluru.webp"
-                      class="w-100 img-fluid" />
+                      class="w-100 img-fluid" alt="Bengaluru" />
                     <div class="city_txt">        
                       <h3 class="text-white m-0">Bengaluru</h3>
                     </div>
