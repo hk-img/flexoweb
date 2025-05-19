@@ -42,9 +42,9 @@
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "sourceMap": false,
+            "optimization": true,
+            "namedChunks": false
           },
           "configurations": {
             "production": {
@@ -124,8 +124,8 @@
             "outputPath": "dist/flexo-aggregation-website/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
-            "sourceMap": true,
-            "optimization": false,
+            "sourceMap": false,
+            "optimization": true,
             "buildOptimizer": false
           },
           "configurations": {
