@@ -41,9 +41,9 @@
             ],
             "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": true,
-            "sourceMap": false,
-            "optimization": true,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
             "namedChunks": true
           },
           "configurations": {
@@ -125,8 +125,8 @@
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "sourceMap": true,
-            "optimization": true,
-            "buildOptimizer": true
+            "optimization": false,
+            "buildOptimizer": false
           },
           "configurations": {
             "production": {
