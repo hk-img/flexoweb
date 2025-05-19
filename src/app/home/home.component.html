@@ -1,8 +1,8 @@
 <div class="hero hero_sec">
   <div class="backgrounds animateIMG">
     <div class="homeInnerSwiper" *ngFor="let background of backgrounds; let i = index; trackBy: trackByBackground"
+        [ngStyle]="{'background-image': 'url(' + background + ')'}"
         [class.active]="i === currentImageIndex">
-        <img src="{{background}}" alt="{{background}}" class="img-fluid w-100 h-100" style="object-fit: cover; object-position: center;"/>
     </div>
   </div>
   <div class="hero-slide">
@@ -22,7 +22,7 @@
             </h1>
           </div>
           <div class="col-lg-10 col-md-12 col-12 mt-md-4 mt-0 mb_input_box">
-            <form class="hero__form v2" (ngSubmit)="onSearchSubmit()">
+            <form class="hero__form v2">
               <div class="row align-items-center mx-0 bg_face">
                 <div class="col-lg-7 col-md-8 col-12 row m-0 hero_input_box p-0" style="justify-content: space-evenly;">
                   <div class="p-0 col-md-6 col-12 border-l-r mb-md-0 mb-3">
@@ -76,7 +76,7 @@
       <ngx-slick-carousel class="carousel" #companyModal="slick-carousel" [config]="companyConfig">
         <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let logo of companyLogos; trackBy: trackByLogo">
           <div class="">
-            <img [src]="logo.src" [alt]="logo.alt" width="145" height="145" loading="lazy" />
+            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" />
           </div>
         </div>
       </ngx-slick-carousel>
@@ -97,9 +97,8 @@
         <a style="cursor: pointer;" (click)="navigateToCity('Mumbai','Mumbai, maharashtra, India (City)')">
           <div class="city-img-box city_main_img position-relative">
             <img
-              width="405" height="372"
               src="assets/images/city-slide-images/Mumbai.webp"
-              class="w-100 h-auto img-fluid" />
+              class="w-100 img-fluid" />
             <div class="city_txt">
    
               <h3 class="text-white m-0">Mumbai</h3>
@@ -116,7 +115,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Bangalore','Bangalore (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Bengaluru.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">        
@@ -129,7 +127,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Hyderabad','Hyderabad (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Hyderabad.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -147,7 +144,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Pune','Pune (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Pune.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -161,7 +157,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Delhi','Delhi (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Delhi.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -179,7 +174,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Gurgaon','Gurgaon (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Gurgaon.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -193,7 +187,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Noida','Noida (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Noida.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -211,7 +204,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Chennai','Chennai (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Chennai.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -225,7 +217,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Ahmedabad','Ahmedabad (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Ahmedabad.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -243,7 +234,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Jaipur','Jaipur (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Jaipur.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -257,7 +247,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Coimbatore','Coimbatore (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Coimbatore.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -276,7 +265,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Kochi','Kochi (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Kochi.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -290,7 +278,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Indore','Indore (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Indore.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -308,7 +295,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Lucknow','Lucknow (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Lucknow.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -322,7 +308,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Chandigarh','Chandigarh (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Chandigarh.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -340,7 +325,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Goa','Goa (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Goa.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -354,7 +338,6 @@
                 <a style="cursor: pointer;" (click)="navigateToCity('Surat','Surat (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      width="250" height="200"
                       src="assets/images/city-slide-images/Surat.webp"
                       class="w-100 img-fluid" />
                     <div class="city_txt">
@@ -386,8 +369,7 @@
         [config]="workSpaceConfig" responsive="breakpoints">
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/private-cabins.webp" 
-            width="268" height="400" class="img-fluid w-100" alt="">
+            <img src="assets/images/private-cabins.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -412,7 +394,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/private-offices.webp" width="268" height="400" class="img-fluid w-100" alt="">
+            <img src="assets/images/private-offices.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -437,7 +419,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/managed-offices.webp" width="268" height="400" class="img-fluid w-100" alt="">
+            <img src="assets/images/managed-offices.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -462,7 +444,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/built-to-suit.webp" width="268" height="400" class="img-fluid w-100" alt="">
+            <img src="assets/images/built-to-suit.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -487,7 +469,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets//images/desk-spaces.webp" width="268" height="400" class="img-fluid w-100" alt="">
+            <img src="assets//images/desk-spaces.webp" class="img-fluid w-100" alt="">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -528,50 +510,50 @@
         <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig">
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-1.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-2.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/brand-logo-2.webp" class="w-100 img-fluid" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-3.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/brand-logo-3.webp" class="w-100 img-fluid" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-4.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/brand-logo-4.webp" class="w-100 img-fluid" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-5.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/brand-logo-5.webp" class="w-100 img-fluid" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-6.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/brand-logo-6.webp" class="w-100 img-fluid" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-7.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/brand-logo-7.webp" class="w-100 img-fluid" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-8.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/brand-logo-8.webp" class="w-100 img-fluid" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/CoWrksLogo2022.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/CoWrksLogo2022.webp" class="w-100 img-fluid" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/efc-logo-1.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/efc-logo-1.webp" class="w-100 img-fluid" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/IncuspazeLogo.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/IncuspazeLogo.webp" class="w-100 img-fluid" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/Tablespace-New-Logo.webp" width="150" height="40" class="w-100 img-fluid" />
+              <img src="assets/images/brand-logo/Tablespace-New-Logo.webp" class="w-100 img-fluid" />
             </div>
           </div>
         </ngx-slick-carousel>
@@ -615,7 +597,7 @@
       </div>
       <div class="col-lg-6 col-md-12 col-12 mt-lg-0 mt-md-4 mt-4">
         <div class="workspace_img">
-          <img src="assets/images/find-work-space-1.webp"
+          <img src="assets/images/find-work-space-1.jpg"
             style="height: 544px; border-radius: 7px;object-fit: cover;" alt="" class="w-100 img-fluid">
         </div>
       </div>
@@ -690,7 +672,7 @@
             <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/share-your-requirements.svg" width="72" height="55" alt="" class="img-fluid">
+                  <img src="assets/images/share-your-requirements.svg" alt="" class="img-fluid">
                 </div>
                 <h6 class="m-0">Tell Us Your Needs</h6>
                 <p class="text-white">Share your requirements, and a dedicated workspace advisor will handle the rest.
@@ -843,7 +825,7 @@
                 <div class="work-process-content v1 p-4 h-100 d-flex flex-column">
                   <div class="d-flex align-items-center mb-2">
                     <div class="process-icon v1" style="flex-shrink: 0;">
-                      <img [src]="'assets/images/' + testimonial.image" style="height: auto;width: auto;" />
+                      <img [src]="'assets/images/testimonials/' + testimonial.image" />
                       <!-- <span>{{testimonial.id}}</span> -->
                     </div>
                     <div class="pl-3">
