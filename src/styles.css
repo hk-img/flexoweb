@@ -7786,11 +7786,20 @@ new css */
   white-space: normal;
 }
 
-.earn_sec {
+/* .earn_sec {
   background-image: url("./assets/images/ready-to-move.webp");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
+  aspect-ratio: 1024 / 259;
+  display: flex;
+  flex-direction: column;
+} */
+
+.earn_sec {
   position: relative;
   overflow: hidden;
   justify-content: center;
@@ -7807,8 +7816,12 @@ new css */
   height: 100%;
   top: 0;
   left: 0;
+  z-index:1;
 }
-
+.earn_sec .earn-content-sec{
+  position:relative;
+  z-index:99;
+}
 /* end */
 
 @keyframes cluster-animation {
