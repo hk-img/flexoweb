@@ -26,9 +26,9 @@
               <div class="row align-items-center mx-0 bg_face">
                 <div class="col-lg-7 col-md-8 col-12 row m-0 hero_input_box p-0" style="justify-content: space-evenly;">
                   <div class="p-0 col-md-6 col-12 border-l-r mb-md-0 mb-3">
-                    <ng-select placeholder="What are you looking for?" (change)="getVal($event)">
+                    <ng-select placeholder="What are you looking for?" aria-label="Search" (change)="getVal($event)">
                       <ng-option *ngFor="let item of spaces; trackBy: trackBySpace" [value]="item.spaceType">
-                        {{item?.spaceType}}
+                          {{item?.spaceType}}
                       </ng-option>
                     </ng-select>
                   </div>
@@ -53,8 +53,8 @@
                   </div>
                 </div>
                 <div class="col-md-auto col-12 px-md-3 px-0">
-                  <a (click)="onSearchSubmit()" class="col-12 cursor-pointer text-center">Search
-                  </a>
+                  <span (click)="onSearchSubmit()" class="col-12 cursor-pointer text-center">Search
+                  </span>
                 </div>
               </div>
             </form>
@@ -76,7 +76,7 @@
       <ngx-slick-carousel class="carousel" #companyModal="slick-carousel" [config]="companyConfig">
         <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let logo of companyLogos; trackBy: trackByLogo">
           <div class="">
-            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" fetchpriority="low" width="145" height="145" alt="Company Logo"/>
+            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" fetchpriority="low" width="145" height="145" alt="Company Logo" title="Company Logo"/>
           </div>
         </div>
       </ngx-slick-carousel>
@@ -94,16 +94,16 @@
     </div>
     <div class="row h-100">
       <div class="col-lg-4 col-md-5 col-12 px-md-1 mb-md-0 mb-1">
-        <a style="cursor: pointer;" (click)="navigateToCity('Mumbai','Mumbai, maharashtra, India (City)')">
-          <div class="city-img-box city_main_img position-relative">
-            <img
-              src="assets/images/city-slide-images/Mumbai.webp"
-              class="w-100 img-fluid" alt="Mumbai" title="Mumbai" width="372" height="405" />
-            <div class="city_txt">
-             <h3 class="text-white m-0">Mumbai</h3>
+          <div style="cursor: pointer;" (click)="navigateToCity('Mumbai','Mumbai, maharashtra, India (City)')">
+            <div class="city-img-box city_main_img position-relative">
+              <img
+                src="assets/images/city-slide-images1/Mumbai.webp"
+                class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Mumbai" title="Mumbai" width="372" height="405" />
+                <div class="city_txt">
+                <h3 class="text-white m-0">Mumbai</h3>
+                </div>
             </div>
           </div>
-        </a>
       </div>
       <div class="col-lg-8 col-md-7 col-12 px-md-0">
         <ngx-slick-carousel class="carousel city_carousel px-0" #citySlickSlider="slick-carousel" [config]="cityConfig"
@@ -111,148 +111,140 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Bangalore','Bangalore (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Bangalore','Bangalore (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Bengaluru.webp"
-                      class="w-100 img-fluid" alt="Bengaluru" title="Bengaluru" width="372" height="405" />
+                      src="assets/images/city-slide-images1/Bengaluru.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Bengaluru" title="Bengaluru" width="372" height="405" />
                     <div class="city_txt">        
                       <h3 class="text-white m-0">Bengaluru</h3>
                     </div>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Hyderabad','Hyderabad (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Hyderabad','Hyderabad (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Hyderabad.webp"
-                      class="w-100 img-fluid" alt="Hyderabad" title="Hyderabad" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Hyderabad</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Hyderabad.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Hyderabad" title="Hyderabad" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Hyderabad</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Pune','Pune (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Pune','Pune (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Pune.webp"
-                      class="w-100 img-fluid" alt="Pune" title="Pune" width="372" height="405"/>
+                      src="assets/images/city-slide-images1/Pune.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Pune" title="Pune" width="372" height="405"/>
                       <div class="city_txt">
                         <h3 class="text-white m-0">Pune</h3>
                       </div>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Delhi','Delhi (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Delhi','Delhi (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Delhi.webp"
-                      class="w-100 img-fluid" alt="Delhi" title="Delhi" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Delhi</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Delhi.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Delhi" title="Delhi" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Delhi</h3>
+                      </div>
                   </div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
-            <div class="row">
-              <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Gurgaon','Gurgaon (City)')">
-                  <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Gurgaon.webp"
-                      class="w-100 img-fluid" alt="Gurgaon" title="Gurgaon" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Gurgaon</h3>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Noida','Noida (City)')">
-                  <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Noida.webp"
-                      class="w-100 img-fluid" alt="Noida" title="Noida" width="372" height="405" />
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Noida</h3>
-                    </div>
-                  </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Chennai','Chennai (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Gurgaon','Gurgaon (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Chennai.webp"
-                      class="w-100 img-fluid" alt="Chennai" title="Chennai" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Chennai</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Gurgaon.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Gurgaon" title="Gurgaon" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Gurgaon</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Ahmedabad','Ahmedabad (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Noida','Noida (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Ahmedabad.webp"
-                      class="w-100 img-fluid" alt="Ahmedabad" title="Ahmedabad" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Ahmedabad</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Noida.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Noida" title="Noida" width="372" height="405" />
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Noida</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Jaipur','Jaipur (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Chennai','Chennai (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Jaipur.webp"
-                      class="w-100 img-fluid" alt="Jaipur" title="Jaipur" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Jaipur</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Chennai.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Chennai" title="Chennai" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Chennai</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Coimbatore','Coimbatore (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Ahmedabad','Ahmedabad (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Coimbatore.webp"
-                      class="w-100 img-fluid" alt="Coimbatore" title="Coimbatore" width="372" height="405" />
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Coimbatore</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Ahmedabad.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Ahmedabad" title="Ahmedabad" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Ahmedabad</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div ngxSlickItem class="swiper-slide popular-item slide">
+            <div class="row">
+              <div class="col-12 mb-1 px-2">
+                <div style="cursor: pointer;" (click)="navigateToCity('Jaipur','Jaipur (City)')">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="assets/images/city-slide-images1/Jaipur.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Jaipur" title="Jaipur" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Jaipur</h3>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mb-1 px-2">
+                <div style="cursor: pointer;" (click)="navigateToCity('Coimbatore','Coimbatore (City)')">
+                  <div class="city-img-box position-relative">
+                    <img
+                      src="assets/images/city-slide-images1/Coimbatore.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Coimbatore" title="Coimbatore" width="372" height="405" />
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Coimbatore</h3>
+                      </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -260,90 +252,84 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Kochi','Kochi (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Kochi','Kochi (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Kochi.webp"
-                      class="w-100 img-fluid" alt="Kochi" title="Kochi" width="372" height="405" />
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Kochi</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Kochi.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Kochi" title="Kochi" width="372" height="405" />
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Kochi</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Indore','Indore (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Indore','Indore (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Indore.webp"
-                      class="w-100 img-fluid" alt="Indore" title="Indore" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Indore</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Indore.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Indore" title="Indore" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Indore</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Lucknow','Lucknow (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Lucknow','Lucknow (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Lucknow.webp"
-                      class="w-100 img-fluid" alt="Lucknow" title="Lucknow" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Lucknow</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Lucknow.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Lucknow" title="Lucknow" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Lucknow</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Chandigarh','Chandigarh (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Chandigarh','Chandigarh (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Chandigarh.webp"
-                      class="w-100 img-fluid" alt="Chandigarh" title="Chandigarh" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Chandigarh</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Chandigarh.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Chandigarh" title="Chandigarh" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Chandigarh</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Goa','Goa (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Goa','Goa (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Goa.webp"
-                      class="w-100 img-fluid" alt="Goa" title="Goa" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Goa</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Goa.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Goa" title="Goa" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Goa</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" (click)="navigateToCity('Surat','Surat (City)')">
+                <div style="cursor: pointer;" (click)="navigateToCity('Surat','Surat (City)')">
                   <div class="city-img-box position-relative">
                     <img
-                      src="assets/images/city-slide-images/Surat.webp"
-                      class="w-100 img-fluid" alt="Surat" title="Surat" width="372" height="405"/>
-                    <div class="city_txt">
-           
-                      <h3 class="text-white m-0">Surat</h3>
-                    </div>
+                      src="assets/images/city-slide-images1/Surat.webp"
+                      class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Surat" title="Surat" width="372" height="405"/>
+                      <div class="city_txt">
+                        <h3 class="text-white m-0">Surat</h3>
+                      </div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -367,11 +353,11 @@
         [config]="workSpaceConfig" responsive="breakpoints">
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/workspace-img/private-cabins.webp" class="img-fluid w-100" alt="Private Cabins" title="Private Cabins" width="268" height="400">
+            <img src="assets/images/workspace-img/private-cabins.webp" class="img-fluid w-100" loading="lazy" fetchpriority="low" alt="Private Cabins" title="Private Cabins" width="268" height="400">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
-                <h5 class="m-0 text-white">Private Cabins</h5>
+                <h3 class="m-0 text-white">Private Cabins</h3>
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
@@ -392,11 +378,11 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/workspace-img/private-offices.webp" class="img-fluid w-100" alt="Private Offices" title="Private Offices" width="268" height="400">
+            <img src="assets/images/workspace-img/private-offices.webp" class="img-fluid w-100" loading="lazy" fetchpriority="low" alt="Private Offices" title="Private Offices" width="268" height="400">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
-                <h5 class="m-0 text-white">Private Offices</h5>
+                <h3 class="m-0 text-white">Private Offices</h3>
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
@@ -417,11 +403,11 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/workspace-img/managed-offices.webp" class="img-fluid w-100" alt="Managed Offices" title="Managed Offices" width="268" height="400">
+            <img src="assets/images/workspace-img/managed-offices.webp" class="img-fluid w-100" loading="lazy" fetchpriority="low" alt="Managed Offices" title="Managed Offices" width="268" height="400">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
-                <h5 class="m-0 text-white">Managed Offices</h5>
+                <h3 class="m-0 text-white">Managed Offices</h3>
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
@@ -442,11 +428,11 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/workspace-img/built-to-suit.webp" class="img-fluid w-100" alt="Built to Suit" title="Built to Suit" width="268" height="400">
+            <img src="assets/images/workspace-img/built-to-suit.webp" class="img-fluid w-100" loading="lazy" fetchpriority="low" alt="Built to Suit" title="Built to Suit" width="268" height="400">
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
-                <h5 class="m-0 text-white">Built to Suit</h5>
+                <h3 class="m-0 text-white">Built to Suit</h3>
               </div>
               <div class="workspace_txt d-flex align-items-center justify-content-between pt-1">
                 <div class="working-space-cal-single-txt-price-amount">
@@ -467,7 +453,7 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets//images/workspace-img/desk-spaces.webp" class="img-fluid w-100" alt="Desk spaces" title="Desk spaces" width="268" height="400">
+            <img src="assets//images/workspace-img/desk-spaces.webp" class="img-fluid w-100" loading="lazy" fetchpriority="low" alt="Desk spaces" title="Desk spaces" width="268" height="400">
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
                 <h5 class="m-0 text-white">Desk spaces</h5>
@@ -507,50 +493,50 @@
         <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig">
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" alt="Brand Logo1" title="Brand Logo1" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo1" title="Brand Logo1" width="auto" height="40"/>
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-2.webp" class="w-100 img-fluid" alt="Brand Logo2" title="Brand Logo2" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/brand-logo-2.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo2" title="Brand Logo2" width="auto" height="40"/>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-3.webp" class="w-100 img-fluid" alt="Brand Logo3" title="Brand Logo3" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/brand-logo-3.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo3" title="Brand Logo3" width="auto" height="40"/>
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-4.webp" class="w-100 img-fluid" alt="Brand Logo4" title="Brand Logo4" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/brand-logo-4.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo4" title="Brand Logo4" width="auto" height="40"/>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-5.webp" class="w-100 img-fluid" alt="Brand Logo5" title="Brand Logo5" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/brand-logo-5.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo5" title="Brand Logo5" width="auto" height="40"/>
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-6.webp" class="w-100 img-fluid" alt="Brand Logo6" title="Brand Logo6" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/brand-logo-6.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo6" title="Brand Logo6" width="auto" height="40"/>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-7.webp" class="w-100 img-fluid" alt="Brand Logo7" title="Brand Logo7" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/brand-logo-7.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo7" title="Brand Logo7" width="auto" height="40"/>
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-8.webp" class="w-100 img-fluid" alt="Brand Logo8" title="Brand Logo8" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/brand-logo-8.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo8" title="Brand Logo8" width="auto" height="40"/>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/CoWrksLogo2022.webp" class="w-100 img-fluid" alt="Brand Logo9" title="Brand Logo9" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/CoWrksLogo2022.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo9" title="Brand Logo9" width="auto" height="40"/>
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/efc-logo-1.webp" class="w-100 img-fluid" alt="Brand Logo10" title="Brand Logo10" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/efc-logo-1.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo10" title="Brand Logo10" width="auto" height="40"/>
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/IncuspazeLogo.webp" class="w-100 img-fluid" alt="Brand Logo11" title="Brand Logo11" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/IncuspazeLogo.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo11" title="Brand Logo11" width="auto" height="40"/>
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/Tablespace-New-Logo.webp" class="w-100 img-fluid" alt="Brand Logo12" title="Brand Logo12" width="auto" height="40"/>
+              <img src="assets/images/brand-logo/Tablespace-New-Logo.webp" class="w-100 img-fluid" loading="lazy" fetchpriority="low" alt="Brand Logo12" title="Brand Logo12" width="auto" height="40"/>
             </div>
           </div>
         </ngx-slick-carousel>
@@ -595,7 +581,7 @@
       <div class="col-lg-6 col-md-12 col-12 mt-lg-0 mt-md-4 mt-4">
         <div class="workspace_img">
           <img src="assets/images/find-work-space-1.webp"
-            style="height: 544px; border-radius: 7px;object-fit: cover;" alt="" width="auto" height="544" class="w-100 img-fluid">
+            style="height: 544px; border-radius: 7px;object-fit: cover;" loading="lazy" fetchpriority="low" alt="Workspace" title="Workspace" width="auto" height="544" class="w-100 img-fluid">
         </div>
       </div>
     </div>
@@ -616,25 +602,25 @@
           <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4">
             <div class="count_box text-center">
               <h2 class="main_color custom-lh mb-1">1800+</h2>
-              <h5 class="custom-lh m-0">Partner Spaces</h5>
+              <h6 class="custom-lh m-0">Partner Spaces</h6>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-4">
             <div class="count_box text-center">
               <h2 class="main_color custom-lh mb-1">1000+</h2>
-              <h5 class="custom-lh m-0">Clients Served</h5>
+              <h6 class="custom-lh m-0">Clients Served</h6>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 col-6">
             <div class="count_box text-center">
               <h2 class="main_color custom-lh mb-1">20+</h2>
-              <h5 class="custom-lh m-0">Cities Across India</h5>
+              <h6 class="custom-lh m-0">Cities Across India</h6>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 col-6">
             <div class="count_box text-center">
               <h2 class="main_color custom-lh mb-1">25 million+</h2>
-              <h5 class=" custom-lh  m-0">Sqft of Office Space Options</h5>
+              <h6 class=" custom-lh  m-0">Sqft of Office Space Options</h6>
             </div>
           </div>
         </div>
@@ -669,7 +655,7 @@
             <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/share-your-requirements.svg" class="img-fluid" alt="Requirements Icon" width="auto" height="55">
+                  <img src="assets/images/share-your-requirements.svg" class="img-fluid" loading="lazy" fetchpriority="low" alt="Requirements Icon" title="Requirements Icon" width="auto" height="55">
                 </div>
                 <h6 class="m-0">Tell Us Your Needs</h6>
                 <p class="text-white">Share your requirements, and a dedicated workspace advisor will handle the rest.
@@ -682,7 +668,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/fast-service.svg" class="img-fluid" alt="Service Icon" width="auto" height="55" >
+                  <img src="assets/images/fast-service.svg" class="img-fluid" loading="lazy" fetchpriority="low" alt="Service Icon" title="Service Icon" width="auto" height="55" >
                 </div>
                 <h6 class="m-0">Fast & Efficient Service</h6>
                 <p class="text-white">Experience a quick turnaround time and a smooth process from search to move-in.
@@ -695,7 +681,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/largest-coverage.svg" class="img-fluid" alt="Coverage Icon" width="auto" height="55" >
+                  <img src="assets/images/largest-coverage.svg" class="img-fluid" loading="lazy" fetchpriority="low" alt="Coverage Icon" title="Coverage Icon" width="auto" height="55" >
                 </div>
                 <h6 class="m-0">Largest Coverage</h6>
                 <p class="text-white">Access 1800+ coworking spaces across India with Flexo's extensive network.</p>
@@ -707,7 +693,7 @@
               <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/dedicated-advisor.svg" class="img-fluid" alt="Experts Icon" width="auto" height="55" >
+                  <img src="assets/images/dedicated-advisor.svg" class="img-fluid" loading="lazy" fetchpriority="low" alt="Experts Icon" title="Experts Icon" width="auto" height="55" >
                 </div>
                 <h6 class="m-0">Dedicated Workspace Experts</h6>
                 <p class="text-white">Get personalized,  support from experts for shortlisting, negotiating and finalizing your perfect office.</p>
@@ -733,28 +719,28 @@
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
           <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-          <h5 class="mb-0">Space shortlisting </h5>
+          <h6 class="mb-0">Space shortlisting </h6>
           <p>We find the perfect office that suits your needs and budget.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
           <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-          <h5 class="mb-0">Personalized Tours </h5>
+          <h6 class="mb-0">Personalized Tours </h6>
           <p>Visit spaces that match your criteria—saving you time and effort.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
           <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-          <h5 class="mb-0">Smart Price Negotiation </h5>
+          <h6 class="mb-0">Smart Price Negotiation </h6>
           <p>We secure the best deal, so you can focus on growing your business.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
           <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-          <h5 class="mb-0">Seamless Contract Handling</h5>
+          <h6 class="mb-0">Seamless Contract Handling</h6>
           <p>From paperwork to move in, we make it effortless.</p>
         </div>
       </div>
@@ -821,15 +807,15 @@
                 <div class="work-process-content v1 p-4 h-100 d-flex flex-column">
                   <div class="d-flex align-items-center mb-2">
                     <div class="process-icon v1" style="flex-shrink: 0;">
-                      <img [src]="'assets/images/testimonials/' + testimonial.image" loading="lazy" fetchpriority="low" width="76" height="76"/>
+                      <img [src]="'assets/images/testimonials/' + testimonial.image" loading="lazy" fetchpriority="low" width="76" height="76" alt="Testimonial Image" title="Testimonial Image"/>
                       <!-- <span>{{testimonial.id}}</span> -->
                     </div>
                     <div class="pl-3">
-                      <h5 class="title mb-0">
+                      <h6 class="title mb-0">
                         {{ testimonial.name }}<br /><span style="font-size: 15px">{{
                           testimonial.designation
                           }}</span>
-                      </h5>
+                      </h6>
                       <span style="font-size: 12px;color: #cd854f;font-weight: bold;">{{
                         testimonial.companyName
                         }}</span>
@@ -1015,7 +1001,7 @@
             <div class="card-header" id="headingOne">
               <button class="card_btn d-flex align-items-center btn w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2 mb-0">What is Flexo? </h5>
               </button>
             </div>
@@ -1031,7 +1017,7 @@
             <div class="card-header" id="headingTwo">
               <button class="card_btn d-flex align-items-center btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2 mb-0">How does Flexo help me find office spaces?</h5>
                 <div>
                   <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
@@ -1053,7 +1039,7 @@
             <div class="card-header" id="headingThree">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2  mb-0">
                   Does Flexo have coworking spaces of its own?
                 </h5>
@@ -1077,7 +1063,7 @@
             <div class="card-header" id="headingFour">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2  mb-0">
                   What types of spaces are listed on Flexo?
                 </h5>
@@ -1101,7 +1087,7 @@
             <div class="card-header" id="headingFive">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2  mb-0">
                   How does Flexo ensure the quality of its listed spaces?
                 </h5>
@@ -1125,7 +1111,7 @@
             <div class="card-header" id="headingSix">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2  mb-0">
                   Does Flexo manage spaces directly?
                 </h5>
@@ -1149,7 +1135,7 @@
             <div class="card-header" id="headingSeven">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2  mb-0">
                   Can Flexo help me customize my office space?
                 </h5>
@@ -1173,7 +1159,7 @@
             <div class="card-header" id="headingEight">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2  mb-0">
                   How do I list my space on Flexo?
                 </h5>
@@ -1197,7 +1183,7 @@
             <div class="card-header" id="headingNine">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2  mb-0">
                   What makes Flexo different from other platforms?
                 </h5>
@@ -1221,7 +1207,7 @@
             <div class="card-header" id="headingTen">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" loading="lazy" fetchpriority="low" alt="Icon" title="Icon" width="15" height="15">
                 <h5 class="pl-2  mb-0">
                   How do I contact Flexo for assistance?
                 </h5>
