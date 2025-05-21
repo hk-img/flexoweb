@@ -156,8 +156,10 @@ export function loadGoogleMaps(): () => Promise<void> {
               providers: [
                 {
                   id: GoogleLoginProvider.PROVIDER_ID,
-                  // provider: new GoogleLoginProvider('260639831318-gf3qtjrekfpc6dhvf95gfual9e2anv97.apps.googleusercontent.com'),
-                  provider: new GoogleLoginProvider(environment.clientId),
+                  provider: new GoogleLoginProvider(environment.clientId, {
+                    oneTapEnabled: false,
+                    prompt: 'select_account'
+                  }),
                 },
               ],
             } as SocialAuthServiceConfig,
