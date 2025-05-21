@@ -65,7 +65,6 @@
                 },
                 "fonts": true
               },
-              "extractCss": true,
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
