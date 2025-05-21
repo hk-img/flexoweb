@@ -294,7 +294,7 @@ mark {
 	object-fit: cover
 }
 
-.work-space-option .workspace_carousel .workspace_box .working-space-cal-single-txt-price-amount h6 {
+.work-space-option .workspace_carousel .workspace_box .working-space-cal-single-txt-price-amount span {
 	font-size: 12px;
 	font-weight: 700;
 	color: #b2b2b2
@@ -372,9 +372,13 @@ mark {
 	border-radius: 7px 7px 0
 }
 
-.why_choose .whychos_box h6,
-.workspace_steps .space_list .list_items h6 {
-	color: #f76900
+.why_choose .whychos_box h6{
+	color: #f76900;
+}
+
+.workspace_steps .space_list .list_items h3 {
+	color: #f76900;
+	font-size:16px;
 }
 
 .workspace_steps .space_list .list_items .space_count {
