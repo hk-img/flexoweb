@@ -37,8 +37,12 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "src/custom-js/custom.js"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src"]
+            },
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -68,6 +72,9 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": ["src"]
+              },
               "budgets": [
                 {
                   "type": "initial",
