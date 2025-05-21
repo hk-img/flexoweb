@@ -31,7 +31,7 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/style.css",
+              "src/styles.css",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss"
             ],
@@ -39,9 +39,6 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/slick-carousel/slick/slick.min.js"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": ["src"]
-            },
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -65,10 +62,6 @@
                 },
                 "fonts": true
               },
-              "stylePreprocessorOptions": {
-                "includePaths": ["src"]
-              },
-              "extractCss": true,
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
@@ -120,7 +113,7 @@
               "src/assets",
               "src/sitemap.xml"
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         },
