@@ -7758,6 +7758,9 @@ new css */
 .faq_sec .card .card-header .rotate-icon {
   transition: all 500ms;
 }
+.faq_sec .card .card-header h3{
+  font-size:16px;
+}
 
 .faq_sec .card .card-header .card_btn.collapsed {
   box-shadow: none !important;
