@@ -39,9 +39,6 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/slick-carousel/slick/slick.min.js"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": ["src"]
-            },
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -116,7 +113,7 @@
               "src/assets",
               "src/sitemap.xml"
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         },
