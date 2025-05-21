@@ -142,11 +142,13 @@ export class LoginDialog implements OnInit {
         this.socialUser = user;
         if (this.loginCount == 1) {
           this.loginByGoogle(this.socialUser);
-        } else {
         }
       } else {
-        // this.toastr.error('error while login with google')
+        // this.toastr.error('Error while logging in with Google. Please try again.');
       }
+    }, (error) => {
+      console.error('Google Sign-In Error:', error);
+      // this.toastr.error('Error while logging in with Google. Please try again.');
     });
 
     this.countryCodes = this.spaceService.countryCodes;

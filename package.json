@@ -55,6 +55,7 @@
     "ngx-intl-tel-input": "^3.2.0",
     "ngx-intl-tel-input-gg": "^1.0.12",
     "ngx-lib-phone-input": "^0.0.12",
+    "ngx-quicklink": "^0.4.7",
     "ngx-slick-carousel": "^17.0.0",
     "ngx-toastr": "^18.0.0",
     "node-fetch": "^2.6.11",
