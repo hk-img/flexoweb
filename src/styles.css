@@ -7763,7 +7763,7 @@ new css */
   box-shadow: none !important;
 }
 .faq_sec .card .card-header .card_btn:not(.collapsed) .rotate-icon {
-  transform: rotate(90deg);
+  transform: rotate(45deg);
 }
 
 .faq_sec .card {
@@ -9528,9 +9528,9 @@ section.parallax-section .bg1 {
   font-weight: 500;
 }
 
-.list-author-widget-contacts li span {
+/* .list-author-widget-contacts li span {
   min-width: 80px;
-}
+} */
 
 .list-author-widget-contacts li span i {
   margin-right: 7px;
@@ -9678,6 +9678,17 @@ section.parallax-section .bg1 {
   top: 25px;
   color: #f76900;
   left: 20px;
+}
+.custom-form .form_icon {
+  padding-right: 12px;
+  position: absolute;
+  top: 14px;
+  color: #f76900;
+  left: 20px;
+}
+
+.custom-form.contact_form input {
+  float: none !important;
 }
 
 .main-register .custom-form input[type="text"],

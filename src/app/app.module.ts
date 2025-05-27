@@ -51,7 +51,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import { ShimmerLoadingComponent } from './shared/component/shimmer-loading/shimmer-loading.component';
 import { ThankyopopupComponent } from './thankyopopup/thankyopopup.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { IconModule } from './shared/icon/icon.module';
+import { IconComponent } from './shared/icon/icon.component';
 
 
 export const MY_FORMATS = {
@@ -92,7 +92,7 @@ export function loadGoogleMaps(): () => Promise<void> {
 // SocialLoginModule,
 // GoogleSigninButtonModule,
 @NgModule({
-  declarations: [AppComponent,FilterDialog,ThankyopopupComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
+  declarations: [IconComponent,AppComponent,FilterDialog,ThankyopopupComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
@@ -122,7 +122,6 @@ export function loadGoogleMaps(): () => Promise<void> {
     NgxIntlTelInputModule,
     NgxJsonLdModule,
     SharedModule,
-    IconModule,
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
       scrollPositionRestoration: 'enabled'
