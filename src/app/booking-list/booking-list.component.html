@@ -36,7 +36,8 @@
                         <option value="{{data?.workSpaceName}}" *ngFor="let data of workSpace">{{data?.workSpaceName}}
                         </option>
                     </select>
-                    <select [(ngModel)]="bookingStatus" (ngModelChange)="getBookingList();" placeholder="Space Status" class="booking-list-filter-single w-100 mt-md-0 mt-3 " >
+                    <select [(ngModel)]="bookingStatus" (ngModelChange)="getBookingList();" placeholder="Space Status"
+                        class="booking-list-filter-single w-100 mt-md-0 mt-3 ">
                         <option value="" selected> Select Booking Status </option>
                         <option value="confirmed">Confirmed</option>
                         <option value="pending_Host_Confirmation">Pending Host Confirmation</option>
@@ -54,7 +55,8 @@
                     <div class="booking-all-list-single-img">
                         <h5>{{linkName}}</h5>
                         <a target="_blank" [href]=" webDomain + 'details/' + data?.linkName ">
-                            <img src="{{data?.images[0] ?? 'assets/images/details_placeholder_image.jpg' }} " alt="">
+                            <img src="{{data?.images[0] ?? 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp' }} "
+                                alt="">
                         </a>
                         <div class="booking-all-list-single-img-tag">
                             <p>{{data?.spaceType}}</p>
@@ -64,21 +66,25 @@
                         <div class="booking-all-list-single-cont-od">
                             <h4>{{data?.spaceName}}</h4>
                             <p class="booking-all-list-single-cont-location">
-                                <img src="assets/images/location-icon-orng.png" alt="">
+                                <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp"
+                                    alt="">
                                 <span>{{data?.location_name}} </span>
                             </p>
                             <div class="booking-list-single-info  booking-list-single-about-info ">
                                 <!-- <div class=" booking-list-single-info-single">
-                                   <img src="assets/images/user-icon-orng.png" alt="">
+                                   <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp" alt="">
                                     <p>{{data?.howManyPeopleInYourSpace || 1}} people</p>
                                 </div> -->
                                 <div *ngIf="data?.spaceType != 'Coworking Space'"
                                     class=" booking-list-single-info-single">
-                                    <img src="assets/images/clock-icon-orng.png" alt="">
-                                    <p>{{(data.minimum_hours == 0 || data.minimum_hours == null) ? 2 : data.minimum_hours/60}} hrs min</p>
+                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/clock-icon-orng.webp"
+                                        alt="">
+                                    <p>{{(data.minimum_hours == 0 || data.minimum_hours == null) ? 2 :
+                                        data.minimum_hours/60}} hrs min</p>
                                 </div>
                                 <div class="booking-list-single-info-single">
-                                    <img src="assets/images/scale-orng.png" alt="" class="sq-ft-icon">
+                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/scale-orng.webp"
+                                        alt="" class="sq-ft-icon">
                                     <p>{{data?.spacesqft}} sqft</p>
                                 </div>
                             </div>
@@ -88,7 +94,8 @@
                         <div class="booking-all-list-single-cont-bd">
                             <div class="booking-list-single-info booking-list-single-date-info ">
                                 <div class="booking-list-single-info-single">
-                                    <img src="assets/images/date-icon-o.png" alt="" class="date-icon">
+                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/date-icon-o.webp"
+                                        alt="" class="date-icon">
                                     <p>{{data?.startDate | date : 'dd-MM-YYYY'}}</p>
                                 </div>
                                 <div class="watch-time booking-list-single-info-single">
@@ -106,22 +113,26 @@
                                 </div>
                                 <div class="booking-list-single-info-single booking-confirm"
                                     *ngIf="(data?.bookingStatus=='confirmed' || data?.bookingStatus=='confirm') && data?.paymentSuccess==1">
-                                    <img src="assets/images/bc-con.png" alt="" class="bc-icon">
+                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-con.webp"
+                                        alt="" class="bc-icon">
                                     <p>Confirmed</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-cancel"
                                     *ngIf="data?.bookingStatus=='cancelled'">
-                                    <img src="assets/images/bc-c.png" alt="" class="bc-icon">
+                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-c.webp"
+                                        alt="" class="bc-icon">
                                     <p>Canceled</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-cancel"
                                     *ngIf="data?.bookingStatus=='rejected'">
-                                    <img src="assets/images/bc-c.png" alt="" class="bc-icon">
+                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-c.webp"
+                                        alt="" class="bc-icon">
                                     <p>Rejected</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-waiting"
                                     *ngIf="(data?.bookingStatus=='pending' || (data?.bookingStatus=='confirmed' && data?.paymentSuccess==0))">
-                                    <img src="assets/images/bc-w.png" alt="" class="bc-icon">
+                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-w.webp"
+                                        alt="" class="bc-icon">
                                     <p *ngIf="data?.bookingStatus=='confirmed' && data?.paymentSuccess==0">Pending
                                         Payment</p>
                                     <p *ngIf="data?.bookingStatus=='pending' && data?.isInstant=='0'">Pending Host

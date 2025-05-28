@@ -4,7 +4,8 @@
             <div class="booking-details-info">
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'confirmed'">
                     <div class="booking-details-confirmation-img">
-                        <img src="assets/images/tick-white.png" alt="" class="">
+                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/tick-white.webp" alt=""
+                            class="">
                     </div>
                     <div class="booking-details-confirmation-cont">
                         <h4>Booking {{bookingDetail?.bookingStatus}} !</h4>
@@ -13,7 +14,8 @@
                 </div>
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'rejected'">
                     <div class="mr-2">
-                        <img src="assets/images/bc-c.png" alt="" class="" style="border-radius: 50%;height: 43px;">
+                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-c.webp" alt="" class=""
+                            style="border-radius: 50%;height: 43px;">
                     </div>
                     <div class="booking-details-confirmation-cont">
                         <h4 style="color:red !important">Booking {{bookingDetail?.bookingStatus}} !</h4>
@@ -22,7 +24,8 @@
                 </div>
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'cancel'">
                     <div class="mr-2">
-                        <img src="assets/images/bc-c.png" alt="" class="" style="border-radius: 50%;height: 43px;">
+                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-c.webp" alt="" class=""
+                            style="border-radius: 50%;height: 43px;">
                     </div>
                     <div class="booking-details-confirmation-cont">
                         <h4 style="color:red !important">Booking {{bookingDetail?.bookingStatus}} !</h4>
@@ -31,40 +34,52 @@
                 </div>
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'pending'">
                     <div class="col">
-                    <span class="booking-details-confirmation-img" style="padding: 0 !important; background: #fff !important;">
-                        <img src="assets/images/pending-icon.webp" alt="" class="">
-                    </span>
+                        <span class="booking-details-confirmation-img"
+                            style="padding: 0 !important; background: #fff !important;">
+                            <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/pending-icon.webp"
+                                alt="" class="">
+                        </span>
                     </div>
                     <div class="booking-details-confirmation-cont">
                         <h4 class="text-dark">Request Sent. Pending Host Confirmation!</h4>
-                        <p style="text-align:justify;line-height:1.2">Your booking request has been sent to the host. Once the host accepts your booking request, you will receive a payment link via email. If your requested date and time cannot be accommodated, you will be promptly notified.</p>
+                        <p style="text-align:justify;line-height:1.2">Your booking request has been sent to the host.
+                            Once the host accepts your booking request, you will receive a payment link via email. If
+                            your requested date and time cannot be accommodated, you will be promptly notified.</p>
                     </div>
                 </div>
 
                 <div class="booking-all-list-single">
                     <div class="booking-all-list-single-img-cont" style="width: 80%;">
                         <div class="booking-all-list-single-img">
-                            <img style="min-width: 165px;" src="{{bookingDetail?.images[0] ?? 'assets/images/details_placeholder_image.jpg'}}" alt="">
+                            <img style="min-width: 165px;"
+                                src="{{bookingDetail?.images[0] ?? 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'}}"
+                                alt="">
                         </div>
                         <div class="booking-all-list-single-cont">
                             <div class="booking-all-list-single-cont-od">
                                 <h2>{{bookingDetail?.spaceName}}</h2>
                                 <p class="booking-id"> Booking ID : <span> {{bookingDetail?.bookingId}} </span></p>
                                 <p class="booking-all-list-single-cont-location">
-                                    <img src="assets/images/location-icon-orng.png" alt="">
+                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp"
+                                        alt="">
                                     <span>{{bookingDetail?.location_name}} </span>
                                 </p>
                                 <div class="booking-list-single-info  booking-list-single-about-info ">
                                     <div class=" booking-list-single-info-single">
-                                        <img src="assets/images/user-icon-orng.png" alt="">
+                                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp"
+                                            alt="">
                                         <p>{{bookingDetail?.howManyPeopleInYourSpace || 0}} people</p>
                                     </div>
-                                    <div class=" booking-list-single-info-single" *ngIf="bookingDetail?.spaceType !='Coworking Space'">
-                                        <img src="assets/images/clock-icon-orng.png" alt="">
-                                        <p>{{(bookingDetail.minimum_hours == 0 || bookingDetail.minimum_hours == null) ? 2 : bookingDetail.minimum_hours/60}} hrs min</p>
+                                    <div class=" booking-list-single-info-single"
+                                        *ngIf="bookingDetail?.spaceType !='Coworking Space'">
+                                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/clock-icon-orng.webp"
+                                            alt="">
+                                        <p>{{(bookingDetail.minimum_hours == 0 || bookingDetail.minimum_hours == null) ?
+                                            2 : bookingDetail.minimum_hours/60}} hrs min</p>
                                     </div>
                                     <div class="booking-list-single-info-single">
-                                        <img src="assets/images/scale-orng.png" alt="" class="sq-ft-icon">
+                                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/scale-orng.webp"
+                                            alt="" class="sq-ft-icon">
                                         <p>{{bookingDetail?.spacesqft}} sqft</p>
                                     </div>
                                 </div>
@@ -74,10 +89,13 @@
                         </div>
                     </div>
                     <div class="booking-all-list-single-btn" *ngIf="bookingDetail?.bookingStatus == 'confirmed'">
-                        <button type="button" (click)="openAddReviewDialog(bookingDetail?.spaceId)" class="custum-btn outline-orng-btn"> Leave
+                        <button type="button" (click)="openAddReviewDialog(bookingDetail?.spaceId)"
+                            class="custum-btn outline-orng-btn"> Leave
                             a Review </button>
-                        <button *ngIf="bookingDetail?.bookingStatus == 'confirmed'" (click)="getUserInvoiceByBookingId(bookingDetail?.id)" type="button" class="custum-btn blu-btn "> <i
-                                class="fa fa-cloud-download" aria-hidden="true"></i> Invoice </button>
+                        <button *ngIf="bookingDetail?.bookingStatus == 'confirmed'"
+                            (click)="getUserInvoiceByBookingId(bookingDetail?.id)" type="button"
+                            class="custum-btn blu-btn "> <i class="fa fa-cloud-download" aria-hidden="true"></i> Invoice
+                        </button>
 
                     </div>
                 </div>
@@ -87,23 +105,25 @@
                     <p class="booking-details-booking-cat">Space Category : <span> {{bookingDetail?.spaceType}} </span>
                     </p>
                 </div>
-                <div class=" booking-details-booking-information-single" *ngIf="bookingDetail?.spaceType == 'Coworking Space'">
-                      <div class="d-flex align-items-center">
+                <div class=" booking-details-booking-information-single"
+                    *ngIf="bookingDetail?.spaceType == 'Coworking Space'">
+                    <div class="d-flex align-items-center">
                         <p>No of Days:</p>
                         <div class="ml-2 col-3">
                             <p style="font-weight: 600; color: #000000;">{{bookingDetail?.ofDays}}</p>
                         </div>
-                      </div>
+                    </div>
                 </div>
-                <div class="booking-details-booking-information mt-3 align-items-center" *ngIf="bookingDetail?.spaceType == 'Coworking Space' && formattedDates.length > 0">
+                <div class="booking-details-booking-information mt-3 align-items-center"
+                    *ngIf="bookingDetail?.spaceType == 'Coworking Space' && formattedDates.length > 0">
                     <p>Date:</p>
                     <div class="ml-2" *ngFor="let bookings of formattedDates">
-                    <div class="booking-details-booking-information-single">
-                        <div class="booking-details-booking-information-single-cont">
-                            <p>{{bookings}}</p>
+                        <div class="booking-details-booking-information-single">
+                            <div class="booking-details-booking-information-single-cont">
+                                <p>{{bookings}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- <div class="booking-details-booking-information-single">
+                        <!-- <div class="booking-details-booking-information-single">
                         <p>Arrival Time</p>
                         <div class="booking-details-booking-information-single-cont">
                             <p>{{(bookingDetail?.estimateArrivalTime).includes(':') ?
@@ -111,27 +131,28 @@
                             </p>
                         </div>
                     </div> -->
-                    <!-- <div class="booking-details-booking-information-single">
+                        <!-- <div class="booking-details-booking-information-single">
                         <p>No of Days</p>
                         <div class="booking-details-booking-information-single-cont">
                             <p>{{bookingDetail?.ofDays}}</p>
                         </div>
                     </div> -->
-                    <!-- <div class="booking-details-booking-information-single">
+                        <!-- <div class="booking-details-booking-information-single">
                         <p>No of Guest</p>
                         <div class="booking-details-booking-information-single-cont">
                             <p>{{bookingDetail?.noOfGuest || 1}}</p>
                         </div>
                     </div> -->
-                    <!-- <div class="booking-details-booking-information-single">
+                        <!-- <div class="booking-details-booking-information-single">
                         <p>Quantity</p>
                         <div class="booking-details-booking-information-single-cont">
                             <p>1</p>
                         </div>
                     </div> -->
+                    </div>
                 </div>
-                </div>
-                <div class="booking-details-booking-information" style="display:block" *ngIf="bookingDetail?.spaceType !== 'Coworking Space' && bookingPeriod && bookingPeriod.length > 0">
+                <div class="booking-details-booking-information" style="display:block"
+                    *ngIf="bookingDetail?.spaceType !== 'Coworking Space' && bookingPeriod && bookingPeriod.length > 0">
                     <div class="row py-2 m-0" *ngFor="let bookings of bookingPeriod">
                         <div class="col-lg-3 col-md-auto col-6 mb-md-0 mb-4 booking-details-booking-information-single">
                             <p>Date</p>
@@ -235,13 +256,16 @@
                             </div>
                             <div class="booking-details-payment-info-amount ">
                                 <p>{{formatTimestamp(paymentDetail?.created_at,'date')}}</p>
-                                <p class="booking-details-payment-info-amount-time">{{formatTimestamp(paymentDetail?.created_at,'time')}}</p>
+                                <p class="booking-details-payment-info-amount-time">
+                                    {{formatTimestamp(paymentDetail?.created_at,'time')}}</p>
                             </div>
                         </div>
 
                     </div>
 
-                    <a  *ngIf="bookingDetail?.bookingStatus === 'confirmed' " class="w-100 d-flex justify-content-center mt-3 text-danger pointer" (click)="cancelConfirmation(bookingDetail)" > Cancel Booking </a>
+                    <a *ngIf="bookingDetail?.bookingStatus === 'confirmed' "
+                        class="w-100 d-flex justify-content-center mt-3 text-danger pointer"
+                        (click)="cancelConfirmation(bookingDetail)"> Cancel Booking </a>
                 </div>
 
 

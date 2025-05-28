@@ -100,9 +100,9 @@ export class ListWithUsComponent implements OnInit {
     slidesToScroll: 1,
     arrows: false,
     variableHeight: false,
-    autoplay: true,
-    autoplaySpeed: 1000,
-    dots: true,
+    // autoplay: true,
+    // autoplaySpeed: 1000,
+    dots: false,
     swipeToSlide: true,
     infinite: true,
     responsive: [

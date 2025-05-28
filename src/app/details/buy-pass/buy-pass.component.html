@@ -146,14 +146,17 @@
     </div>
     <div class="booking-popup-plot">
       <div class="booking-popup-plot-img">
-        <img [src]="space_details?.images[0]|| 'assets/images/add-on-img-1.jpg'" alt="">
+        <img
+          [src]="space_details?.images[0]|| 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/add-on-img-1.webp'"
+          alt="">
       </div>
       <div class="booking-popup-plot-cont">
         <h5>{{spaceName}}</h5>
         <p> <i class="fa fa-map-marker" aria-hidden="true"></i> <span> {{landmark}} </span> </p>
         <div class="booking-container hour-rate align-items-start border-0">
           <p style="font-weight: 700;">
-            <img src="assets/images/rs-icon.png" style=" height: 15px;" alt=""> {{space_details?.originalPrice}} <span>
+            <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" style=" height: 15px;"
+              alt=""> {{space_details?.originalPrice}} <span>
               /Day</span>
             <!-- <span style="font-weight: 500; padding-left: 5px;">2 hr minimum</span> -->
           </p>
@@ -185,10 +188,12 @@
       <div class="booking-popup-payment-info-details">
         <div class="booking-popup-payment-info-details-single" *ngFor="let model of model">
           <p> <span>{{model | date:'EEE MMM dd, yyyy' }}, </span> <span>Guest {{dayPassForm.get('noOfGuest').value}}
-            </span> x <span><img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""> {{originalPrice}}</span>
+            </span> x <span><img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp"
+                style=" height: 12px;" alt=""> {{originalPrice}}</span>
           </p>
           <h6> {{dayPassForm.get('noOfGuest').value * originalPrice | number: '0.2-2'}} <img
-              src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" style=" height: 12px;"
+              alt=""></h6>
         </div>
       </div>
       <!-- <div class="booking-popup-payment-info-deposit">
@@ -198,19 +203,22 @@
       <div class="booking-popup-payment-info-total">
         <p> Subtotal </p>
         <h6>{{dayPassForm.get('noOfGuest').value * originalPrice * model.length | number: '0.2-2' }} <img
-            src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" style=" height: 12px;" alt="">
+        </h6>
       </div>
       <div class="booking-popup-payment-info-total">
         <p> GST(18%) </p>
         <h6>{{(dayPassForm.get('noOfGuest').value * originalPrice * model.length)>0 ?
           (dayPassForm.get('noOfGuest').value * originalPrice * model.length)*0.18: 0 | number: '0.2-2'}} <img
-            src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h6>
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" style=" height: 12px;" alt="">
+        </h6>
       </div>
       <div class="booking-popup-payment-info-pay">
         <h5> Payable Now </h5>
         <h5>{{(dayPassForm.get('noOfGuest').value * originalPrice * model.length)+((dayPassForm.get('noOfGuest').value *
           originalPrice * model.length)>0 ? (dayPassForm.get('noOfGuest').value * originalPrice * model.length)*0.18: 0)
-          | number: '0.2-2'}} <img src="assets/images/rs-icon.png" style=" height: 12px;" alt=""></h5>
+          | number: '0.2-2'}} <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp"
+            style=" height: 12px;" alt=""></h5>
       </div>
     </div>
     <!-- <div class="booking-popup-payment-contrnt">
@@ -220,7 +228,7 @@
             currency.</p>
         <p>Prices on the next page will be converted into US dollars.</p>
     </div> -->
-</div>
+  </div>
 </div>
 
 <div class="modal" id="updateModal">

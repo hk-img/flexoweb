@@ -51,6 +51,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import { ShimmerLoadingComponent } from './shared/component/shimmer-loading/shimmer-loading.component';
 import { ThankyopopupComponent } from './thankyopopup/thankyopopup.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { IconComponent } from './shared/icon/icon.component';
 
 
 export const MY_FORMATS = {
@@ -91,43 +92,43 @@ export function loadGoogleMaps(): () => Promise<void> {
 // SocialLoginModule,
 // GoogleSigninButtonModule,
 @NgModule({
-  declarations: [AppComponent,FilterDialog,ThankyopopupComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
+  declarations: [IconComponent,AppComponent,FilterDialog,ThankyopopupComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     GoogleSigninButtonModule,
-        GoogleMapsModule,
-        SocialLoginModule,
-        MatInputModule,
-        MatProgressBarModule,
-        FormsModule,
-        MatRadioModule,
-        ShimmerLoadingComponent,
-        MatButtonModule,
-        MatListModule,
-        MatIconModule,
-        MaterialModule,
-        MatDialogModule,
-        MatStepperModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot({
-          maxOpened: 1,
-          timeOut: 3000,
-        }),
-        SlickCarouselModule,
-        ListItemModule,
-        NgxIntlTelInputModule,
-        NgxJsonLdModule,
-        SharedModule,
-        RouterModule.forRoot(routes, {
-            initialNavigation: 'enabledBlocking',
-            scrollPositionRestoration: 'enabled'
-        }),
-        NgSelectModule,
+    GoogleMapsModule,
+    SocialLoginModule,
+    MatInputModule,
+    MatProgressBarModule,
+    FormsModule,
+    MatRadioModule,
+    ShimmerLoadingComponent,
+    MatButtonModule,
+    MatListModule,
+    MatIconModule,
+    MaterialModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      timeOut: 3000,
+    }),
+    SlickCarouselModule,
+    ListItemModule,
+    NgxIntlTelInputModule,
+    NgxJsonLdModule,
+    SharedModule,
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking',
+      scrollPositionRestoration: 'enabled'
+    }),
+    NgSelectModule,
     NgxSliderModule,
-    ],
+  ],
     providers: [
       {
         provide: APP_INITIALIZER,

@@ -55,11 +55,7 @@
       </div>
       <div class="login-register-input-other-grp">
 
-        <asl-google-signin-button 
-          type="standard" 
-          theme="filled_blue" 
-          text="signin_with"
-          data-size="large">
+        <asl-google-signin-button type="standard" theme="filled_blue" text="signin_with" data-size="large">
         </asl-google-signin-button>
         <!-- <span> Google
         <span 
@@ -67,12 +63,14 @@
           </span></span> -->
         <span *ngIf="selectedLoginType==LoginTypeEnum.Mobile"
           (click)="destroyLibrary();onLibraryCheck();handleLoginMethod(LoginTypeEnum.Email)"
-          class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/mail-icon.png" alt> <span>
+          class="outline-btn login-register-input-other-grp-btn"> <img
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/mail-icon.webp" alt> <span>
             Mail
           </span></span>
         <span *ngIf="selectedLoginType==LoginTypeEnum.Email"
           (click)="onLibraryCheck();handleLoginMethod(LoginTypeEnum.Mobile)"
-          class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/call-ph.png" alt> <span>
+          class="outline-btn login-register-input-other-grp-btn"> <img
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/call-ph.webp" alt> <span>
             Mobile
           </span></span>
 
@@ -137,7 +135,8 @@
   </div>
   <div class="login-register-input">
     <div class="otp-success" *ngIf="!this.socialUser?.email">
-      <img src="assets/images/tick.png" alt *ngIf="!this.socialUser?.email">
+      <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/tick.webp" alt
+        *ngIf="!this.socialUser?.email">
       <h5 *ngIf="!this.socialUser?.email">OTP Verified Successfully</h5>
     </div>
     <form [formGroup]="userEmailRegisterForm" class="w-auto" style="width:auto;">
@@ -241,7 +240,7 @@
   </div>
   <div class="login-register-input">
     <!-- <div class="otp-success">
-      <img src="../../assets/images/tick.png" alt>
+      <img src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/tick.webp" alt>
       <h5>OTP Verified Successfully</h5>
     </div> -->
     <form [formGroup]="userCreatePassForm">
@@ -323,17 +322,17 @@
           <div class="login-register-input-other-grp">
             <span (click)="googleLogin()"
               class="outline-btn login-register-input-other-grp-btn"> <img
-                src="../../assets/images/google-icon.png" alt> <span> Google
+                src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/google-icon.webp" alt> <span> Google
               </span></span>
             <span *ngIf="selectedLoginType==LoginTypeEnum.Mobile"
               (click)="handleLoginMethod(LoginTypeEnum.Email)"
               class="outline-btn login-register-input-other-grp-btn"> <img
-                src="../../assets/images/mail-icon.png" alt> <span> Mail
+                src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/mail-icon.webp" alt> <span> Mail
               </span></span>
             <span *ngIf="selectedLoginType==LoginTypeEnum.Email"
               (click)="handleLoginMethod(LoginTypeEnum.Mobile)"
               class="outline-btn login-register-input-other-grp-btn"> <img
-                src="../../assets/images/call-ph.png" alt> <span> Mobile
+                src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/call-ph.webp" alt> <span> Mobile
               </span></span>
     
           </div>
@@ -386,24 +385,21 @@
         <div class="login-register-input-other-grp">
           <!-- <span (click)="googleLogin()"
         class="outline-btn login-register-input-other-grp-btn"> <img
-          src="../../assets/images/google-icon.png" alt> <span> Google
+          src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/google-icon.webp" alt> <span> Google
         </span></span> -->
           <!-- <span 
         class="outline-btn login-register-input-other-grp-btn"><asl-google-signin-button></asl-google-signin-button> <span> Google
         </span></span> -->
 
-          <asl-google-signin-button 
-            type="standard" 
-            theme="filled_blue" 
-            text="signin_with"
-            data-size="large">
+          <asl-google-signin-button type="standard" theme="filled_blue" text="signin_with" data-size="large">
           </asl-google-signin-button>
 
 
 
 
           <span *ngIf="loginType==LoginTypeEnum.Mobile" (click)="loginType=LoginTypeEnum.Email"
-            class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/mail-icon.png" alt> <span>
+            class="outline-btn login-register-input-other-grp-btn"> <img
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/mail-icon.webp" alt> <span>
               Mail
             </span></span>
 

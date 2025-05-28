@@ -48,6 +48,7 @@ import { CityListingComponent } from './city-listing.component';
         SharedModule,
         NgxIntlTelInputModule,
         NgSelectModule,
+        NgSelectModule,
         MatProgressSpinnerModule,
         SlickCarouselModule
     ],

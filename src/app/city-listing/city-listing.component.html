@@ -39,8 +39,9 @@
             </div>
           </div>
           <div style="text-align: center;" *ngIf="!spaces_list.length && !recommended_spaces.length && !isloader">
-            <!-- <img style="width: 10%;" src="../../assets/images/not-found.jpg" alt=""> -->
-            <img style="width: 10%;" src="assets/images/preloader.gif" alt="..." />
+            <!-- <img style="width: 10%;" src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/not-found.webp" alt=""> -->
+            <img style="width: 10%;" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/preloader.gif"
+              alt="..." />
             <h3 style="font-size: 16px !important;color: #897777 !important;">Finding the best options for you. Stay
               tuned!</h3>
           </div>
@@ -135,7 +136,8 @@
                       <div *ngIf="!selected_marker_window?.images?.length" ngxSlickItem
                         class="swiper-slide single-listing-slider slide">
                         <a style="cursor: pointer;">
-                          <img src="assets/images/details_placeholder_image.jpg" />
+                          <img
+                            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp" />
                         </a>
                       </div>
                     </ng-container>
@@ -181,7 +183,8 @@
                   <div class="d-flex mt-2" style="gap:30px;align-items: baseline;">
                     <div *ngIf="mapType === 'shortterm' || mapType === 'longterm'">
                       <div class="m-0">
-                        <img src="assets/images/rs-icon.png" class="rs_icon" alt="">
+                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp"
+                          class="rs_icon" alt="">
                         <span class="price-value">{{selected_marker_window?.originalPrice}}</span>
                         <span> / {{mapType === 'shortterm' ? 'hour' : 'month' }}</span>
                       </div>
@@ -196,7 +199,8 @@
                   </div>
                   <div *ngIf="mapType === 'coworking'">
                     <div class="m-0">
-                      <img src="assets/images/rs-icon.png" class="rs_icon" alt="">
+                      <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" class="rs_icon"
+                        alt="">
                       <span *ngIf="selected_marker_window.flexible_desk_price !== null"
                         class="price-value">{{selected_marker_window?.privatecabin_price >
                         selected_marker_window.flexible_desk_price ? selected_marker_window.flexible_desk_price:

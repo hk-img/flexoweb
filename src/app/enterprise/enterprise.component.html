@@ -2,8 +2,9 @@
 <br>
 <div class="enterprise-container">
   <div class="position-relative">
-    <img *ngIf="!isMobile" class="header-image" src="assets/images/enterprise_banner.jpg" width="100%">
-    <img *ngIf="isMobile" class="header-image" src="assets/images/enterprise_banner_mobile.jpg" width="100%">
+    <img *ngIf="!isMobile" fetchpriority="high" loading="eager" decoding="auto" class="header-image w-100 h-100"
+      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/enterprise_banner.webp" width="1526" height="509"
+      alt="get the ideal workspace setup for large team" title="get the ideal workspace setup for large team" />
     <a class="large-btn" style="font-size: 20px;padding: 10px;"
       href="https://docs.google.com/forms/d/e/1FAIpQLScCNsY3akGSEpVwWDb-KyhlZ0dYdlvbs1IxiHHXlOZNvPrVJQ/viewform?usp=sf_link">ENQUIRE
       NOW</a>
@@ -22,31 +23,38 @@
   </p> -->
   <div class="flex-container">
     <div class="flex-images">
-      <img src="assets/images/our_experts_can_help_you_with.jpg" alt="">
+      <img fetchpriority="low" loading="lazy"
+        src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/our_experts_can_help_you_with.webp" width="680"
+        height="453" alt="Our Office Space Experts Help you with" title="Our Office Space Experts Help you with" />
     </div>
     <div class="mt-md-0 mt-4">
       <p class="sub-heading">Our Office Space Experts Help you with</p><br>
       <ul>
         <li>
-          &#8226; Customized spaces for small and large teams
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Customized
+          spaces for small and large teams
         </li>
         <li>
-          &#8226; Distributed workspaces for the new normal
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Distributed workspaces for the
+          new
+          normal
         </li>
         <li>
-          &#8226; Hub and spoke workplace strategy
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Hub and spoke workplace
+          strategy
         </li>
         <li>
-          &#8226; Branded and bespoke workspaces
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Branded and bespoke workspaces
         </li>
         <li>
-          &#8226; Well-equipped and managed spaces
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Well-equipped and managed
+          spaces
         </li>
         <li>
-          &#8226; Plug-and-play setups
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Plug-and-play setups
         </li>
         <li>
-          &#8226; Touchdown offices
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Touchdown offices
         </li>
       </ul>
     </div>
@@ -56,60 +64,69 @@
       <p class="sub-heading">Why go with FLEXO™?</p><br>
       <ul>
         <li>
-          &#8226; Free, fast and easy
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Free, fast and easy
         </li>
         <li>
-          &#8226; Wide range of office spaces to choose from
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Wide range of office spaces to
+          choose from
         </li>
         <li>
-          &#8226; One stop shop for customized workspace requirements
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> One stop shop for customized
+          workspace requirements
         </li>
         <li>
-          &#8226; Specialist in flexible office spaces
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Specialist in flexible office
+          spaces
         </li>
         <li>
-          &#8226; Unbiased expert advice
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Unbiased expert advice
         </li>
         <li>
-          &#8226; Give back to society and the environment. Learn more about Flexo’s <a class="static-page-links"
-            routerLink="/joy-of-giving">Joy
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Give back to society and the
+          environment. Learn more about Flexo’s <a class="static-page-links" routerLink="/joy-of-giving">Joy
             Of
             Giving initiative here</a>.
         </li>
       </ul>
     </div>
     <div class="flex-images">
-      <img src="assets/images/why_go_with_flexo.jpg" alt="">
+      <img fetchpriority="low" loading="lazy"
+        src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/why_go_with_flexo.webp" width="657" height="438"
+        alt="Why go with FLEXO™?" title="Why go with FLEXO™?" />
     </div>
 
   </div><br>
   <div class="flex-container">
     <div class="flex-images">
-      <img src="assets/images/benifits_of_ distributed_offices.jpg" alt="">
+      <img fetchpriority="low" loading="lazy"
+        src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/benifits_of_ distributed_offices.webp"
+        width="680" height="453" alt="Benefits of Distributed Workspaces" title="Benefits of Distributed Workspaces" />
     </div>
     <div class="mt-md-0 mt-4">
       <p class="sub-heading">Benefits of Distributed Workspaces</p><br>
       <ul>
         <li>
-          &#8226; Lower capex
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Lower capex
         </li>
         <li>
-          &#8226; Flexible terms
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Flexible terms
         </li>
         <li>
-          &#8226; Reduced commute for employees
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Reduced commute for employees
         </li>
         <li>
-          &#8226; Greater employee morale and retention
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Greater employee morale and
+          retention
         </li>
         <li>
-          &#8226; De-risk corporate real estate strategy
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> De-risk corporate real estate
+          strategy
         </li>
         <li>
-          &#8226; Easy-to-scale setups
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Easy-to-scale setups
         </li>
         <li>
-          &#8226; Business continuity planning
+          <span> <app-icon name="smallDot" class="text-secondary w-2"></app-icon></span> Business continuity planning
         </li>
       </ul>
     </div>

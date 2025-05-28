@@ -1,8 +1,8 @@
 <!-- <br>
 <div class="static-page-container">
   <div>
-    <img *ngIf="!isMobile" class="static-header-image" src="assets/images/list_with_us_banner.jpg" width="100%">
-    <img *ngIf="isMobile" class="static-header-image" src="assets/images/list_with_us_banner_mobile.jpg" width="100%">
+    <img *ngIf="!isMobile" class="static-header-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/list_with_us_banner.jpg" width="100%">
+    <img *ngIf="isMobile" class="static-header-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/list_with_us_banner_mobile.jpg" width="100%">
     <a class="large-btn" style="font-size: 20px;padding: 10px;"
       href="https://docs.google.com/forms/d/e/1FAIpQLScCNsY3akGSEpVwWDb-KyhlZ0dYdlvbs1IxiHHXlOZNvPrVJQ/viewform?usp=sf_link">Let's
       Get Started</a>
@@ -58,18 +58,29 @@
   <p><a class="static-page-links" routerLink="/joy-of-giving">List Your Space With Us Today</a>.</p>
 </div> -->
 
-<div class="container-fluid top_list_img position-relative">
-  <!-- <img  class="static-header-image" src="assets/images/list_with_us_banner.webp" width="100%"> -->
+<div
+  class="container-fluid top_list_img position-relative ection-padding d-flex align-items-center justify-content-center">
+  <img fetchpriority="high" loading="eager" decoding="auto"
+    class="static-header-image inset-0 position-absolute h-100 w-100 object-fit-cover"
+    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/list_with_us_banner.webp" width="1526" height="484"
+    alt="List Your Space and Grow Your Earnings" title="List Your Space and Grow Your Earnings" />
   <div class="container d-flex justify-content-end">
-    <div class="row justify-content-end w-100">
-      <div class="col-lg-6 col-md-6 col-12">
+    <div class="row justify-content-end">
+      <div class="col-lg-10 col-md-10 col-12">
         <div class="list_content d-flex flex-column align-items-start">
           <h1 class="text-white fw-bold"> List Your Space and Grow Your Earnings</h1>
-          <ul class="pl-lg-5 pl-md-4 pl-4 list_top text-start">
-            <li class="mb-md-3 mb-2"><a href="" class="text-white"> Get Qualified Leads and Bookings </a></li>
-            <li class="mb-md-3 mb-2"><a href="" class="text-white"> Maximise Occupancy Levels and Revenue </a></li>
-            <li class="mb-md-3 mb-2"><a href="" class="text-white"> Increase Visibility and Reach </a></li>
-            <li class=""><a href="" class="text-white"> Turn Unused Space Into Profit</a></li>
+          <ul class="pl-lg-3 pl-md-3 pl-2 list_top text-start">
+            <li class="mb-md-3 mb-2 d-flex align-items-center text-white">
+              <span class="pr-2"><app-icon name="check" class="w-6 text-white"></app-icon></span> Get Qualified Leads
+              and Bookings
+            </li>
+            <li class="mb-md-3 mb-2 d-flex align-items-center g-2 text-white"><span class="pr-2"><app-icon name="check"
+                  class="w-6 text-white"></app-icon></span> Maximise Occupancy Levels and Revenue
+            </li>
+            <li class="mb-md-3 mb-2 d-flex align-items-center g-2 text-white"><span class="pr-2"><app-icon name="check"
+                  class="w-6 text-white"></app-icon></span> Increase Visibility and Reach</li>
+            <li class="d-flex align-items-center g-2 text-white"><span class="pr-2"><app-icon name="check"
+                  class="w-6 text-white"></app-icon></span> Turn Unused Space Into Profit</li>
           </ul>
           <div class="mt-4 pl-lg-3 pl-md-2 pl-2">
             <a class="large-btn" target="_blank" href="{{hostWebUrl}}/auth/login">Let's
@@ -85,9 +96,10 @@
     <div class="row align-items-center">
       <div class="col-lg-7 col-md-7 col-12">
         <div class="share_img position-relative">
-          <img
-            src="assets/images/list-us.webp"
-            alt="" class="img-fluid w-100">
+          <img loading="lazy" fetchpriority="low"
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/list-us.webp"
+            alt="Join India's Premier Space Marketplace!" title="Join India's Premier Space Marketplace!" width="717"
+            height="403" class="img-fluid w-100">
 
           <!-- <div class="share_img_txt">
             <h6 class="mb-0">Ben Seidel</h6>
@@ -97,8 +109,12 @@
       </div>
       <div class="col-lg-5 col-md-5 col-12 mt-md-0 mt-4">
         <div class="share_content p-3">
-          <h3 class="section-title mb-0" style="font-size: 24px !important;">Join India's Premier Space Marketplace!</h3>
-          <p>Join hundreds of hosts with 1,800+ listings from 20+ cities across India and start monetizing your space today. Whether you have a coworking space, office for lease, meeting room, studio, event venue or activity space, Flexo helps you connect with businesses and professionals actively looking for the perfect workspace.</p>
+          <h3 class="section-title mb-0" style="font-size: 24px !important;">Join India's Premier Space Marketplace!
+          </h3>
+          <p>Join hundreds of hosts with 1,800+ listings from 20+ cities across India and start monetizing your space
+            today. Whether you have a coworking space, office for lease, meeting room, studio, event venue or activity
+            space, Flexo helps you connect with businesses and professionals actively looking for the perfect workspace.
+          </p>
         </div>
       </div>
     </div>
@@ -145,7 +161,8 @@
             <span>02</span>
           </div>
           <h5 class="mb-0">Set Your Preferences</h5>
-          <p>Choose how you want to rent your space and set your pricing. Offer hourly, daily, or long-term leases based on what works best for your business.</p>
+          <p>Choose how you want to rent your space and set your pricing. Offer hourly, daily, or long-term leases based
+            on what works best for your business.</p>
         </div>
       </div>
       <div class="col-lg-4 col-md-4 col-12">
@@ -154,7 +171,8 @@
             <span>03</span>
           </div>
           <h5 class="mb-0">Start Earning</h5>
-          <p>Go live on the platform, receive inquiries and bookings, and effortlessly manage everything from your dashboard.</p>
+          <p>Go live on the platform, receive inquiries and bookings, and effortlessly manage everything from your
+            dashboard.</p>
         </div>
       </div>
     </div>
@@ -168,7 +186,8 @@
     <div class="row">
       <div class="col-12 text-center mb-4">
         <h2 class="section-title v1">What Types of Spaces Can You List?</h2>
-        <p>From vibrant coworking spaces, sleek offices to creative studios, every space has a home on Flexo. We bring together diverse spaces for work, creativity, activities, and collaboration—all in one marketplace.</p>
+        <p>From vibrant coworking spaces, sleek offices to creative studios, every space has a home on Flexo. We bring
+          together diverse spaces for work, creativity, activities, and collaboration—all in one marketplace.</p>
       </div>
     </div>
     <div class="col-12 mt-3">
@@ -177,9 +196,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img
-                src="assets/images/Coworking.webp"
-                alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Coworking.webp" alt="Coworking Spaces"
+                title="Coworking Spaces" width="278" height="209" class="img-fluid" />
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Coworking Spaces</h5>
@@ -190,9 +209,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img
-                src="assets/images/Studio-Space.webp"
-                alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Studio-Space.webp" alt="Studios"
+                title="Studios" width="278" height="209" class="img-fluid" />
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Studios</h5>
@@ -203,9 +222,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img
-                src="assets/images/Meeting-Room.webp"
-                alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Meeting-Room.webp" alt="Meeting Rooms"
+                title="Meeting Rooms" width="278" height="209" class="img-fluid" />
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Meeting Rooms</h5>
@@ -216,9 +235,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img
-                src="assets/images/Event-Space.webp"
-                alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Event-Space.webp" alt="Event Spaces"
+                title="Event Spaces" width="278" height="209" class="img-fluid" />
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Event Spaces</h5>
@@ -229,9 +248,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img
-                src="assets/images/Office-Space.webp"
-                alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Office-Space.webp" alt="Office Spaces"
+                title="Office Spaces" width="278" height="209" class="img-fluid">
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Office Spaces</h5>
@@ -242,9 +261,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img
-                src="assets/images/Activity-Space.webp"
-                alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Activity-Space.webp"
+                alt="Activity Spaces" title="Activity Spaces" width="278" height="209" class="img-fluid">
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Activity Spaces</h5>
@@ -255,9 +274,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img
-                src="assets/images/And-much-more.webp"
-                alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/And-much-more.webp" alt="Unique Spaces"
+                title="Unique Spaces" width="278" height="209" class="img-fluid">
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Unique Spaces</h5>
@@ -339,22 +358,29 @@
     <div class="col-12 mt-3 px-0">
       <ngx-slick-carousel class="carousel success-carousel" #successSlider="slick-carousel" [config]="successConfig"
         responsive="breakpoints">
-        <div ngxSlickItem class="swiper-slide popular-item slide">
+        <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
-            <div class="row align-items-center">
-              <div class="col-lg-5 col-md-5 col-12">
+            <div class="row align-items-center h-100">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img
-                    src="assets/images/Rushad-Ghaswala-WeWork.webp"
-                    class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Rushad-Ghaswala-WeWork.webp"
+                    alt="Rushad Ghaswala" title="Rushad Ghaswala" width="400" height="400" class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
                 <div class="success_content">
                   <div class="quote_mark_iocn mb-4">
-                    <img src="assets/images/quote_mark.svg" alt="" class="img-fluid">
+                    <app-icon name="quoteMark" class="w-14 text-gray-400"></app-icon>
                   </div>
-                  <p class="success_txt mb-4">Our experience with Flexo has been nothing short of outstanding. The team’s professionalism, efficiency, and dedication have made a significant impact on our operations. What stands out the most is how seamlessly they coordinate with us for site visits, deal closures, and specific client requirements. Their proactive communication and attention to detail ensure that every lead is handled with care, and every opportunity is maximized.The level of collaboration and support we receive from Flexo is unmatched. Their team is always accessible, responsive, and ready to adapt to our needs, making the entire workflow incredibly efficient. I would recommend Flexo to any space operator looking for a reliable, results-driven partner in the industry.
+                  <p class="success_txt mb-4">Our experience with Flexo has been nothing short of outstanding. The
+                    team’s professionalism, efficiency, and dedication have made a significant impact on our operations.
+                    What stands out the most is how seamlessly they coordinate with us for site visits, deal closures,
+                    and specific client requirements. Their proactive communication and attention to detail ensure that
+                    every lead is handled with care, and every opportunity is maximized.The level of collaboration and
+                    support we receive from Flexo is unmatched. Their team is always accessible, responsive, and ready
+                    to adapt to our needs, making the entire workflow incredibly efficient. I would recommend Flexo to
+                    any space operator looking for a reliable, results-driven partner in the industry.
                   </p>
                   <h5 class="mb-1">Rushad Ghaswala</h5>
                   <p>WeWork India, Senior Lead - Sales Transactions</p>
@@ -363,22 +389,26 @@
             </div>
           </div>
         </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
+        <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
-            <div class="row align-items-center">
-              <div class="col-lg-5 col-md-5 col-12">
+            <div class="row align-items-center h-100">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img
-                    src="assets/images/Manas-Eszi.webp"
-                    class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Manas-Eszi.webp" alt="Manas Eszi"
+                    title="Manas Eszi" width="400" height="400" class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
                 <div class="success_content">
                   <div class="quote_mark_iocn mb-4">
-                    <img src="assets/images/quote_mark.svg" alt="" class="img-fluid">
+                    <app-icon name="quoteMark" class="w-14 text-gray-400"></app-icon>
                   </div>
-                  <p class="success_txt mb-4">Working with Flexo has been a great experience. Their team is incredibly professional and helpful throughout the process from site visits to deal closures. Flexo stands out for its transparency and in-depth industry knowledge make them a valuable platform for coworking operators and clients alike. We highly recommend Flexo to other space operators and hosts, as they have helped us achieve many successful closures.</p>
+                  <p class="success_txt mb-4">Working with Flexo has been a great experience. Their team is incredibly
+                    professional and helpful throughout the process from site visits to deal closures. Flexo stands out
+                    for its transparency and in-depth industry knowledge make them a valuable platform for coworking
+                    operators and clients alike. We highly recommend Flexo to other space operators and hosts, as they
+                    have helped us achieve many successful closures.</p>
                   <h5 class="mb-1">Manas Dhanghakar</h5>
                   <p>EsziWorkN, Community and Facility Manager</p>
                 </div>
@@ -386,22 +416,27 @@
             </div>
           </div>
         </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
+        <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
-            <div class="row align-items-center">
-              <div class="col-lg-5 col-md-5 col-12">
+            <div class="row align-items-center h-100">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img
-                    src="assets/images/Amandeep-EFC.webp"
-                    class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Amandeep-EFC.webp"
+                    alt="Amandeep EFC" title="Amandeep EFC" width="400" height="400" class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
                 <div class="success_content">
                   <div class="quote_mark_iocn mb-4">
-                    <img src="assets/images/quote_mark.svg" alt="" class="img-fluid">
+                    <app-icon name="quoteMark" class="w-14 text-gray-400"></app-icon>
                   </div>
-                  <p class="success_txt mb-4">Working with Flexo has been an amazing experience. The team is a great asset, providing valuable support and ensuring a smooth process. Flexo has played a crucial role in helping us close deals at key locations like BKC and Kurla Centrium. What sets them apart is their ability to bring serious clients who are well-informed and decisive, leading to faster closures. Their transparency, professionalism, and industry expertise make them a trusted partner. We highly recommend Flexo to other space operators looking for a reliable and results-driven platform.</p>
+                  <p class="success_txt mb-4">Working with Flexo has been an amazing experience. The team is a great
+                    asset, providing valuable support and ensuring a smooth process. Flexo has played a crucial role in
+                    helping us close deals at key locations like BKC and Kurla Centrium. What sets them apart is their
+                    ability to bring serious clients who are well-informed and decisive, leading to faster closures.
+                    Their transparency, professionalism, and industry expertise make them a trusted partner. We highly
+                    recommend Flexo to other space operators looking for a reliable and results-driven platform.</p>
                   <h5 class="mb-1">Amandeep Manaktala</h5>
                   <p>EFC Limited, Sr. Sales Manager</p>
                 </div>
@@ -409,22 +444,32 @@
             </div>
           </div>
         </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
+        <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
-            <div class="row align-items-center">
-              <div class="col-lg-5 col-md-5 col-12">
+            <div class="row align-items-center h-100">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img
-                    src="assets/images/Sudhanshu-Sprint.webp"
-                    class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Sudhanshu-Sprint.webp"
+                    alt="Sudhanshu Sprint" title="Sudhanshu Sprint" width="400" height="400" class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
                 <div class="success_content">
                   <div class="quote_mark_iocn mb-4">
-                    <img src="assets/images/quote_mark.svg" alt="" class="img-fluid">
+                    <app-icon name="quoteMark" class="w-14 text-gray-400"></app-icon>
                   </div>
-                  <p class="success_txt mb-4">Working with Flexo has been an excellent experience. The platform is efficient and user-friendly, making it easy to connect with potential clients and manage inquiries seamlessly. Flexo has significantly helped in generating quality leads and successfully closing deals for our office spaces. The leads we receive through Flexo are well-targeted and relevant, which has streamlined our leasing process and improved our conversion rate. What sets Flexo apart from other platforms is the personalized support and prompt communication we receive from their team. They have been incredibly helpful, always responsive, and proactive in ensuring smooth coordination and timely updates. Their dedication and professionalism make a real difference. I would highly recommend Flexo to other space operators. Their platform, combined with the attentive support from team members, makes them a valuable partner in maximizing occupancy and growing your business.</p>
+                  <p class="success_txt mb-4">Working with Flexo has been an excellent experience. The platform is
+                    efficient and user-friendly, making it easy to connect with potential clients and manage inquiries
+                    seamlessly. Flexo has significantly helped in generating quality leads and successfully closing
+                    deals for our office spaces. The leads we receive through Flexo are well-targeted and relevant,
+                    which has streamlined our leasing process and improved our conversion rate. What sets Flexo apart
+                    from other platforms is the personalized support and prompt communication we receive from their
+                    team. They have been incredibly helpful, always responsive, and proactive in ensuring smooth
+                    coordination and timely updates. Their dedication and professionalism make a real difference. I
+                    would highly recommend Flexo to other space operators. Their platform, combined with the attentive
+                    support from team members, makes them a valuable partner in maximizing occupancy and growing your
+                    business.</p>
                   <h5 class="mb-1">Sudhanshu Agrawal</h5>
                   <p>Sprint Coworking, Sales Manager</p>
                 </div>
@@ -432,22 +477,34 @@
             </div>
           </div>
         </div>
-        <div ngxSlickItem class="swiper-slide popular-item slide">
+        <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
-            <div class="row align-items-center">
-              <div class="col-lg-5 col-md-5 col-12">
+            <div class="row align-items-center h-100">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img
-                    src="assets/images/Ganesh-OfficeBing.webp"
-                    class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Ganesh-OfficeBing.webp"
+                    alt="Ganesh OfficeBing" title="Ganesh OfficeBing" width="400" height="400"
+                    class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
                 <div class="success_content">
                   <div class="quote_mark_iocn mb-4">
-                    <img src="assets/images/quote_mark.svg" alt="" class="img-fluid">
+                    <app-icon name="quoteMark" class="w-14 text-gray-400"></app-icon>
                   </div>
-                  <p class="success_txt mb-4">Working with Flexo has been an excellent experience. The platform is efficient and user-friendly, making it easy to connect with potential clients and manage inquiries seamlessly. Flexo has significantly helped in generating quality leads and successfully closing deals for our office spaces. The leads we receive through Flexo are well-targeted and relevant, which has streamlined our leasing process and improved our conversion rate. What sets Flexo apart from other platforms is the personalized support and prompt communication we receive from their team. They have been incredibly helpful, always responsive, and proactive in ensuring smooth coordination and timely updates. Their dedication and professionalism make a real difference. I would highly recommend Flexo to other space operators. Their platform, combined with the attentive support from team members, makes them a valuable partner in maximizing occupancy and growing your business. Flexo has proven to be a reliable and results-driven partner, and we highly recommend them to other space operators looking to maximize occupancy and grow their business.</p>
+                  <p class="success_txt mb-4">Working with Flexo has been an excellent experience. The platform is
+                    efficient and user-friendly, making it easy to connect with potential clients and manage inquiries
+                    seamlessly. Flexo has significantly helped in generating quality leads and successfully closing
+                    deals for our office spaces. The leads we receive through Flexo are well-targeted and relevant,
+                    which has streamlined our leasing process and improved our conversion rate. What sets Flexo apart
+                    from other platforms is the personalized support and prompt communication we receive from their
+                    team. They have been incredibly helpful, always responsive, and proactive in ensuring smooth
+                    coordination and timely updates. Their dedication and professionalism make a real difference. I
+                    would highly recommend Flexo to other space operators. Their platform, combined with the attentive
+                    support from team members, makes them a valuable partner in maximizing occupancy and growing your
+                    business. Flexo has proven to be a reliable and results-driven partner, and we highly recommend them
+                    to other space operators looking to maximize occupancy and grow their business.</p>
                   <h5 class="mb-1">Ganesh Ghodekar</h5>
                   <p>Office Bing, Area Sales Manager</p>
                 </div>
@@ -462,7 +519,10 @@
 
 
 
-  <div class="container-fluid earn_sec section-padding">
+  <div class="container-fluid earn_sec section-padding d-flex align-items-center justify-content-center">
+    <img fetchpriority="low" loading="lazy" class="inset-0 earn_bg_img position-absolute h-100 w-100 object-cover"
+      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/ready-to-move.webp" width="1526" height="400"
+      alt="Ready to Earn with Flexo?" title="Ready to Earn with Flexo?" />
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 text-center py-3">
@@ -479,7 +539,7 @@
 
 
 
-  <div class="container-fluid faq_sec section-padding">
+  <div class="container-fluid faq_sec list_faq section-padding">
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-4">
@@ -492,32 +552,24 @@
           <div class="accordion" id="accordionExample">
             <div class="card card_acord" *ngFor="let faq of faqs; let i = index">
               <div class="card-header" [id]="'heading' + i">
-                <button
-                  class="card_btn d-flex align-items-center btn w-100 text-left"
-                  type="button"
-                  data-toggle="collapse"
-                  [attr.data-target]="'#collapse' + i"
-                  [attr.aria-controls]="'collapse' + i"
-                  aria-expanded="false"
-                >
-                  <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="" />
+                <button class="card_btn d-flex align-items-center btn w-100 text-left" type="button"
+                  data-toggle="collapse" [attr.data-target]="'#collapse' + i" [attr.aria-controls]="'collapse' + i"
+                  aria-expanded="false">
+                  <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
+
                   <h5 class="pl-2 mb-0">{{ faq.question }}</h5>
                 </button>
               </div>
-          
-              <div
-                [id]="'collapse' + i"
-                class="collapse"
-                [attr.aria-labelledby]="'heading' + i"
-                data-parent="#accordionExample"
-              >
+
+              <div [id]="'collapse' + i" class="collapse" [ngClass]="{ 'show': i === 0 }"
+                [attr.aria-labelledby]="'heading' + i" data-parent="#accordionExample">
                 <div class="card-body">
                   {{ faq.answer }}
                 </div>
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>

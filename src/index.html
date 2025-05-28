@@ -9,35 +9,28 @@
   <meta name="description"
     content="Flexo™ is your one stop shop for coworking spaces and shared offices. Use our free service to find your perfect office now. We are flexible office space experts. " />
   <base href="/" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">  
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Plugins CSS -->
   <link rel="preload" href="assets/css/plugin.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <!-- style CSS -->
   <!--color switcher css-->
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> -->
-  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> -->
-  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
   <!-- Whatsapp float button -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-  <a href="tel:+91 95133 92400" class="call_icon" aria-label="Call Flexospaces">
-    <i class="fa fa-phone" style="line-height: 0;"></i>
-    <span class="call_icon_tooltip">+91 95133 92400</span>
-  </a>
 
-  <a href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0"
-    class="float whatsapp_icons" target="_blank" aria-label="Chat with us on WhatsApp">
-    <i class="fa fa-whatsapp" style="line-height: 0;"></i>
-  </a>
 
   <!-- Google Tag Manager -->
   <!-- <script>
@@ -72,6 +65,30 @@
       <img src="assets/images/preloader.gif" alt="..." />
     </div>
   </app-root>
+  <object data="/assets/icons/sprite.svg" type="image/svg+xml" style="display: none;"></object>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('assets/icons/sprite.svg')
+        .then(response => response.text())
+        .then(svgContent => {
+          const div = document.createElement('div');
+          div.style.display = 'none';
+          div.innerHTML = svgContent;
+          document.body.appendChild(div);
+          console.log('SVG sprite loaded successfully');
+        })
+        .catch(error => {
+          console.error('Error loading SVG sprite:', error);
+        });
+    });
+  </script>
+
+
+  <!-- Inlined SVG sprite for icons -->
+  <!-- src/assets/sprite.svg -->
+
+
 </body>
 
 <script src="assets/js/plugin.js"></script>
@@ -114,7 +131,7 @@
 <!-- End Facebook Pixel Code -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <!-- <script src="https://www.googletagmanager.com/gtag/js?id=G-9XYDZLZEMH" defer></script> -->
-<!-- <script>
+<script>
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
@@ -139,6 +156,6 @@
   s.src = "https://salesiq.zoho.in/widget";
   t = d.getElementsByTagName("script")[0];
   t.parentNode.insertBefore(s, t);
-</script> -->
+</script>
 
 </html>

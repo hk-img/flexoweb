@@ -18,6 +18,12 @@ body {
 .custom-lh {
   line-height: 1.3;
 }
+.inset-0 {
+  inset: 0;
+}
+.object-cover {
+  object-fit: cover;
+}
 
 /*-----------------------------------------------------------
     Theme Name: listagram
@@ -7758,17 +7764,14 @@ new css */
 .faq_sec .card .card-header .rotate-icon {
   transition: all 500ms;
 }
-.faq_sec .card .card-header h3{
-  font-size:16px;
-}
 
 .faq_sec .card .card-header .card_btn.collapsed {
   box-shadow: none !important;
 }
-.faq_sec .card .card-header .card_btn:not(.collapsed) .rotate-icon {
-  transform: rotate(90deg);
-}
 
+.faq_sec .card .card-header .card_btn:not(.collapsed) .rotate-icon {
+  transform: rotate(45deg);
+}
 .faq_sec .card {
   box-shadow: none;
   border-radius: 0 !important;
@@ -7789,42 +7792,27 @@ new css */
   white-space: normal;
 }
 
-/* .earn_sec {
-  background-image: url("./assets/images/ready-to-move.webp");
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: relative;
-  overflow: hidden;
-  justify-content: center;
-  aspect-ratio: 1024 / 259;
-  display: flex;
-  flex-direction: column;
-} */
-
 .earn_sec {
   position: relative;
   overflow: hidden;
-  justify-content: center;
-  aspect-ratio: 1024 / 259;
-  display: flex;
-  flex-direction: column;
+  padding: 50px 0;
+  height: 400px;
+}
+
+.earn_sec .earn_bg_img {
+  z-index: -1;
 }
 
 .earn_sec::before {
   position: absolute;
   content: "";
-  background: #00000061;
+  background: #00000075;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  z-index:1;
 }
-.earn_sec .earn-content-sec{
-  position:relative;
-  z-index:99;
-}
+
 /* end */
 
 @keyframes cluster-animation {
@@ -9544,9 +9532,9 @@ section.parallax-section .bg1 {
   font-weight: 500;
 }
 
-.list-author-widget-contacts li span {
+/* .list-author-widget-contacts li span {
   min-width: 80px;
-}
+} */
 
 .list-author-widget-contacts li span i {
   margin-right: 7px;
@@ -9694,6 +9682,17 @@ section.parallax-section .bg1 {
   top: 25px;
   color: #f76900;
   left: 20px;
+}
+.custom-form .form_icon {
+  padding-right: 12px;
+  position: absolute;
+  top: 14px;
+  color: #f76900;
+  left: 20px;
+}
+
+.custom-form.contact_form input {
+  float: none !important;
 }
 
 .main-register .custom-form input[type="text"],
@@ -11394,6 +11393,10 @@ h4 {
     border: 1px solid #000 !important;
     border-radius: 15px;
     height: 52px;
+  }
+
+  .earn_sec {
+    height: 100%;
   }
 }
 
