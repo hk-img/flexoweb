@@ -30,19 +30,19 @@ export class HomeComponent implements OnDestroy {
   public autocomplete: google.maps.places.Autocomplete;
   public geolocation: { lat: any; lng: any };
   public testimonials = GlobalVariables.testimonials;
-  andheriEast = 'assets/images/category/Andheri-East.jpg';
-  lowerParel = 'assets/images/category/LowerParel.jpg';
-  powai = 'assets/images/category/Powai.jpg';
-  thane = 'assets/images/category/Thane.jpg';
-  bkc = 'assets/images/category/BKC.jpg';
+  andheriEast = 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/Andheri-East.webp';
+  lowerParel = 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/LowerParel.webp';
+  powai = 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/Powai.webp';
+  thane = 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/Thane.webp';
+  bkc = 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/BKC.webp';
   backgrounds: string[] = [
-    'assets/images/coworking-spaces.webp',
-    'assets/images/managed-offices.webp',
-    'assets/images/meeting-rooms.webp',
-    'assets/images/desk-spaces.webp',
-    'assets/images/private-cabins.webp',
-    'assets/images/private-offices.webp',
-    'assets/images/workspaces.webp',
+    'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/coworking-spaces.webp',
+    'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/managed-offices.webp',
+    'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/meeting-rooms.webp',
+    'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/desk-spaces.webp',
+    'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/private-cabins.webp',
+    'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/private-offices.webp',
+    'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/workspaces.webp',
   ];
 
   texts: string[] = [
@@ -767,28 +767,28 @@ export class HomeComponent implements OnDestroy {
   }
 
   public companyLogos = [
-    { src: 'assets/images/client-logo/Accord-logo.webp', alt: 'Accord Logo' },
-    { src: 'assets/images/client-logo/amethyst-revised-logo.webp', alt: 'Amethyst Logo' },
-    { src: 'assets/images/client-logo/arvind-mafatlal-logo.webp', alt: 'Arvind Mafatlal Logo' },
-    { src: 'assets/images/client-logo/beerbiceps.webp', alt: 'BeerBiceps Logo' },
-    { src: 'assets/images/client-logo/bg3.webp', alt: 'BG3 Logo' },
-    { src: 'assets/images/client-logo/eicher.webp', alt: 'Eicher Logo' },
-    { src: 'assets/images/client-logo/inmobi.webp', alt: 'Inmobi Logo' },
-    { src: 'assets/images/client-logo/jtb.webp', alt: 'JTB Logo' },
-    { src: 'assets/images/client-logo/khaitan.webp', alt: 'Khaitan Logo' },
-    { src: 'assets/images/client-logo/livespace.webp', alt: 'Livespace Logo' },
-    { src: 'assets/images/client-logo/mirae-asset.webp', alt: 'Mirae Asset Logo' },
-    { src: 'assets/images/client-logo/nb.webp', alt: 'NB Logo' },
-    { src: 'assets/images/client-logo/pcr.webp', alt: 'PCR Logo' },
-    { src: 'assets/images/client-logo/pi.webp', alt: 'PI Logo' },
-    { src: 'assets/images/client-logo/prepe.webp', alt: 'Prepe Logo' },
-    { src: 'assets/images/client-logo/roche.webp', alt: 'Roche Logo' },
-    { src: 'assets/images/client-logo/scentido.webp', alt: 'Scentido Logo' },
-    { src: 'assets/images/client-logo/shop101.webp', alt: 'Shop101 Logo' },
-    { src: 'assets/images/client-logo/sterimax.webp', alt: 'Sterimax Logo' },
-    { src: 'assets/images/client-logo/Thyssenkrupp.webp', alt: 'Thyssenkrupp Logo' },
-    { src: 'assets/images/client-logo/tlc.webp', alt: 'TLC Logo' },
-    { src: 'assets/images/client-logo/triniti.webp', alt: 'Triniti Logo' }
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/Accord-logo.webp', alt: 'Accord Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/amethyst-revised-logo.webp', alt: 'Amethyst Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/arvind-mafatlal-logo.webp', alt: 'Arvind Mafatlal Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/beerbiceps.webp', alt: 'BeerBiceps Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/bg3.webp', alt: 'BG3 Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/eicher.webp', alt: 'Eicher Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/inmobi.webp', alt: 'Inmobi Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/jtb.webp', alt: 'JTB Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/khaitan.webp', alt: 'Khaitan Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/livespace.webp', alt: 'Livespace Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/mirae-asset.webp', alt: 'Mirae Asset Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/nb.webp', alt: 'NB Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/pcr.webp', alt: 'PCR Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/pi.webp', alt: 'PI Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/prepe.webp', alt: 'Prepe Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/roche.webp', alt: 'Roche Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/scentido.webp', alt: 'Scentido Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/shop101.webp', alt: 'Shop101 Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/sterimax.webp', alt: 'Sterimax Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/Thyssenkrupp.webp', alt: 'Thyssenkrupp Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/tlc.webp', alt: 'TLC Logo' },
+    { src: 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/client-logo/triniti.webp', alt: 'Triniti Logo' }
   ];
 
   // TrackBy functions for ngFor optimizations

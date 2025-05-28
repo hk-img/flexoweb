@@ -1,8 +1,8 @@
 <!-- <br>
 <div class="static-page-container">
   <div>
-    <img *ngIf="!isMobile" class="static-header-image" src="assets/images/list_with_us_banner.jpg" width="100%">
-    <img *ngIf="isMobile" class="static-header-image" src="assets/images/list_with_us_banner_mobile.jpg" width="100%">
+    <img *ngIf="!isMobile" class="static-header-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/list_with_us_banner.jpg" width="100%">
+    <img *ngIf="isMobile" class="static-header-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/list_with_us_banner_mobile.jpg" width="100%">
     <a class="large-btn" style="font-size: 20px;padding: 10px;"
       href="https://docs.google.com/forms/d/e/1FAIpQLScCNsY3akGSEpVwWDb-KyhlZ0dYdlvbs1IxiHHXlOZNvPrVJQ/viewform?usp=sf_link">Let's
       Get Started</a>
@@ -58,14 +58,18 @@
   <p><a class="static-page-links" routerLink="/joy-of-giving">List Your Space With Us Today</a>.</p>
 </div> -->
 
-<div class="container-fluid top_list_img position-relative">
-  <!-- <img  class="static-header-image" src="assets/images/list_with_us_banner.webp" width="100%"> -->
+<div
+  class="container-fluid top_list_img position-relative ection-padding d-flex align-items-center justify-content-center">
+  <img fetchpriority="high" loading="eager" decoding="auto"
+    class="static-header-image inset-0 position-absolute h-100 w-100 object-fit-cover"
+    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/list_with_us_banner.webp" width="1526" height="484"
+    alt="List Your Space and Grow Your Earnings" title="List Your Space and Grow Your Earnings" />
   <div class="container d-flex justify-content-end">
-    <div class="row justify-content-end w-100">
-      <div class="col-lg-6 col-md-6 col-12">
+    <div class="row justify-content-end">
+      <div class="col-lg-10 col-md-10 col-12">
         <div class="list_content d-flex flex-column align-items-start">
           <h1 class="text-white fw-bold"> List Your Space and Grow Your Earnings</h1>
-          <ul class="pl-lg-3 pl-md-3 pl-3 list_top text-start">
+          <ul class="pl-lg-3 pl-md-3 pl-2 list_top text-start">
             <li class="mb-md-3 mb-2 d-flex align-items-center text-white">
               <span class="pr-2"><app-icon name="check" class="w-6 text-white"></app-icon></span> Get Qualified Leads
               and Bookings
@@ -92,7 +96,10 @@
     <div class="row align-items-center">
       <div class="col-lg-7 col-md-7 col-12">
         <div class="share_img position-relative">
-          <img src="assets/images/list-us.webp" alt="" class="img-fluid w-100">
+          <img loading="lazy" fetchpriority="low"
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/list-us.webp"
+            alt="Join India's Premier Space Marketplace!" title="Join India's Premier Space Marketplace!" width="717"
+            height="403" class="img-fluid w-100">
 
           <!-- <div class="share_img_txt">
             <h6 class="mb-0">Ben Seidel</h6>
@@ -189,7 +196,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img src="assets/images/Coworking.webp" alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Coworking.webp" alt="Coworking Spaces"
+                title="Coworking Spaces" width="278" height="209" class="img-fluid" />
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Coworking Spaces</h5>
@@ -200,7 +209,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img src="assets/images/Studio-Space.webp" alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Studio-Space.webp" alt="Studios"
+                title="Studios" width="278" height="209" class="img-fluid" />
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Studios</h5>
@@ -211,7 +222,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img src="assets/images/Meeting-Room.webp" alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Meeting-Room.webp" alt="Meeting Rooms"
+                title="Meeting Rooms" width="278" height="209" class="img-fluid" />
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Meeting Rooms</h5>
@@ -222,7 +235,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img src="assets/images/Event-Space.webp" alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Event-Space.webp" alt="Event Spaces"
+                title="Event Spaces" width="278" height="209" class="img-fluid" />
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Event Spaces</h5>
@@ -233,7 +248,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img src="assets/images/Office-Space.webp" alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Office-Space.webp" alt="Office Spaces"
+                title="Office Spaces" width="278" height="209" class="img-fluid">
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Office Spaces</h5>
@@ -244,7 +261,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img src="assets/images/Activity-Space.webp" alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Activity-Space.webp"
+                alt="Activity Spaces" title="Activity Spaces" width="278" height="209" class="img-fluid">
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Activity Spaces</h5>
@@ -255,7 +274,9 @@
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="spce_list_box">
             <div>
-              <img src="assets/images/And-much-more.webp" alt="" class="img-fluid">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/And-much-more.webp" alt="Unique Spaces"
+                title="Unique Spaces" width="278" height="209" class="img-fluid">
             </div>
             <div class="space_list_content text-center p-3">
               <h5 class="mb-0">Unique Spaces</h5>
@@ -340,9 +361,11 @@
         <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
             <div class="row align-items-center h-100">
-              <div class="col-lg-5 col-md-5 col-12">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img src="assets/images/Rushad-Ghaswala-WeWork.webp" class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Rushad-Ghaswala-WeWork.webp"
+                    alt="Rushad Ghaswala" title="Rushad Ghaswala" width="400" height="400" class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
@@ -369,9 +392,11 @@
         <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
             <div class="row align-items-center h-100">
-              <div class="col-lg-5 col-md-5 col-12">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img src="assets/images/Manas-Eszi.webp" class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Manas-Eszi.webp" alt="Manas Eszi"
+                    title="Manas Eszi" width="400" height="400" class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
@@ -394,9 +419,11 @@
         <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
             <div class="row align-items-center h-100">
-              <div class="col-lg-5 col-md-5 col-12">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img src="assets/images/Amandeep-EFC.webp" class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Amandeep-EFC.webp"
+                    alt="Amandeep EFC" title="Amandeep EFC" width="400" height="400" class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
@@ -420,9 +447,11 @@
         <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
             <div class="row align-items-center h-100">
-              <div class="col-lg-5 col-md-5 col-12">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img src="assets/images/Sudhanshu-Sprint.webp" class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Sudhanshu-Sprint.webp"
+                    alt="Sudhanshu Sprint" title="Sudhanshu Sprint" width="400" height="400" class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
@@ -451,9 +480,12 @@
         <div ngxSlickItem class="swiper-slide popular-item slide h-100">
           <div class="success_box p-4 my-2">
             <div class="row align-items-center h-100">
-              <div class="col-lg-5 col-md-5 col-12">
+              <div class="col-lg-4 col-md-5 col-12">
                 <div class="success_img">
-                  <img src="assets/images/Ganesh-OfficeBing.webp" class="img-fluid " alt="">
+                  <img loading="lazy" fetchpriority="low"
+                    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/Ganesh-OfficeBing.webp"
+                    alt="Ganesh OfficeBing" title="Ganesh OfficeBing" width="400" height="400"
+                    class="img-fluid w-100" />
                 </div>
               </div>
               <div class="col-lg-7 col-md-7 col-12 mt-md-0 mt-3">
@@ -487,7 +519,10 @@
 
 
 
-  <div class="container-fluid earn_sec section-padding">
+  <div class="container-fluid earn_sec section-padding d-flex align-items-center justify-content-center">
+    <img fetchpriority="low" loading="lazy" class="inset-0 earn_bg_img position-absolute h-100 w-100 object-cover"
+      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/ready-to-move.webp" width="1526" height="400"
+      alt="Ready to Earn with Flexo?" title="Ready to Earn with Flexo?" />
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 text-center py-3">
@@ -504,7 +539,7 @@
 
 
 
-  <div class="container-fluid faq_sec section-padding">
+  <div class="container-fluid faq_sec list_faq section-padding">
     <div class="container">
       <div class="row">
         <div class="col-12 text-center mb-4">
@@ -526,8 +561,8 @@
                 </button>
               </div>
 
-              <div [id]="'collapse' + i" class="collapse" [attr.aria-labelledby]="'heading' + i"
-                data-parent="#accordionExample">
+              <div [id]="'collapse' + i" class="collapse" [ngClass]="{ 'show': i === 0 }"
+                [attr.aria-labelledby]="'heading' + i" data-parent="#accordionExample">
                 <div class="card-body">
                   {{ faq.answer }}
                 </div>

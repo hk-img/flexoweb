@@ -8,16 +8,11 @@
 }
 
 .top_list_img {
-  background-image: url("../../assets/images/list_with_us_banner.webp");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 510px;
-  padding: 30px 0;
+  padding: 50px 0;
+  overflow: hidden;
+}
+.top_list_img .static-header-image {
+  object-fit: cover;
 }
 
 .top_list_img .list_content .list_top li {
@@ -281,7 +276,8 @@ li {
   border-radius: 5px;
 }
 .succes_story_sec .success_box .success_img img {
-  height: 450px;
+  height: 400px;
+  object-fit: cover;
 }
 
 .succes_story_sec .success_box .success_content .success_txt {
@@ -310,6 +306,13 @@ li {
     top: 2px;
     font-size: 16px;
     color: #fff;
+  }
+  .top_list_img .list_content .list_top li {
+    font-size: 16px;
+  }
+  .succes_story_sec .success_box .success_img img {
+    height: auto;
+    object-fit: cover;
   }
 }
 

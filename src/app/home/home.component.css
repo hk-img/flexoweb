@@ -391,13 +391,11 @@ mark {
 }
 
 .why_choose {
-  background-image: url("../../assets/images/why-choose-flexo.webp");
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100%;
-  position: relative;
+  padding: 50px 0;
+  overflow: hidden;
+}
+.why_choose .whyChooseImg {
+  z-index: -1;
 }
 .why_choose::before {
   background: #00000066;

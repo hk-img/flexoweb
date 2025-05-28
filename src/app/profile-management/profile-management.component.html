@@ -10,15 +10,15 @@
 					<div class="profile-pic">
 						<div>
 							<div class="profile-pic-img position-relative">
-								<img [src]="profileImage ? profileImage : 'assets/images/user_image.png' "
+								<img [src]="profileImage ? profileImage : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user_image.webp' "
 									alt="profile_image">
 								<span class="loader position-absolute" *ngIf="loader"></span>
 								<div class="profile-pic-change-icon">
 									<div *ngIf="isLoading">
 										<input id="fileInput" type="file" (change)="onFileSelected($event)"
-											formControlName="image" accept="image/jpeg, image/png"
+											formControlName="image" accept="image/jpeg, image/webp"
 											style="display: none;">
-										<label for="fileInput" accept="image/jpeg, image/png" class="fa fa-camera"
+										<label for="fileInput" accept="image/jpeg, image/webp" class="fa fa-camera"
 											aria-hidden="true"> </label>
 									</div>
 								</div>
@@ -31,7 +31,7 @@
 							<p class="text-danger">File size exceeds 1 MB. Please select a smaller file.</p>
 						</div>
 						<!-- <div class="error-message">
-							<p class="text-danger">Please upload image in JPG or PNG format, up to 1 MB.</p>
+							<p class="text-danger">Please upload image in JPG or webp format, up to 1 MB.</p>
 						</div> -->
 
 
@@ -45,7 +45,7 @@
 											<span>Choose File</span>
 										</label>
 										<input id="fileInput" type="file" (change)="onFileSelected($event)"
-											formControlName="image" accept="image/jpeg, image/png"
+											formControlName="image" accept="image/jpeg, image/webp"
 											style="display: none;">
 									</div>
 								</div>
@@ -98,23 +98,30 @@
 								<div class="pm-single">
 									<div class="form-group">
 										<p style="margin-bottom: 4px;">Mobile<span class="text-danger">*</span></p>
-								<div class="input-group input-group-lg">
-									<span class="input-group-text form-control" style="flex-grow: .5;" id="basic-addon3">
-										<ng-select #select (change)="onCountryCodeChange($event)"  formControlName="phone_code" [searchable]="false">
-											<ng-template ng-header-tmp>
-												<input style="width: 100%; line-height: 24px" type="text" (input)="select.filter($event.target.value)" />
-											</ng-template>
-											<ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}" alt="" width="20px"> {{list.dialcode}} &nbsp; {{list.name}} </ng-option>
-										</ng-select>
-									</span>
-									<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" formControlName="mobile">
-								  </div>
-								</div>
+										<div class="input-group input-group-lg">
+											<span class="input-group-text form-control" style="flex-grow: .5;"
+												id="basic-addon3">
+												<ng-select #select (change)="onCountryCodeChange($event)"
+													formControlName="phone_code" [searchable]="false">
+													<ng-template ng-header-tmp>
+														<input style="width: 100%; line-height: 24px" type="text"
+															(input)="select.filter($event.target.value)" />
+													</ng-template>
+													<ng-option *ngFor="let list of countryCodes"
+														[value]="list.dialcode"><img src="{{list.flag}}" alt=""
+															width="20px"> {{list.dialcode}} &nbsp; {{list.name}}
+													</ng-option>
+												</ng-select>
+											</span>
+											<input type="text" class="form-control" id="basic-url"
+												aria-describedby="basic-addon3 basic-addon4" formControlName="mobile">
+										</div>
+									</div>
 								</div>
 							</div>
 
 
-<!-- 
+							<!-- 
 							<div class="col-md-6">
 								<div class="pm-single">
 									<div class="form-group">
@@ -195,10 +202,11 @@
 										<p>Country</p>
 										<div class="dropdown-border">
 											<ng-select (change)="onCountryChange($event)" formControlName="country_id"
-											class="drop_down">
-											<ng-option *ngFor="let count of countryList" [value]="count.id">{{count.country_name}} </ng-option>
-										</ng-select>
-									</div>
+												class="drop_down">
+												<ng-option *ngFor="let count of countryList"
+													[value]="count.id">{{count.country_name}} </ng-option>
+											</ng-select>
+										</div>
 
 										<!-- <div *ngIf="profileForm.get('country_id')?.invalid && (profileForm.get('country_id')?.dirty || profileForm.get('country_id')?.touched)"
 									class="text-danger">
@@ -214,10 +222,11 @@
 									<div class="pm-single">
 										<p>State</p>
 										<div class="dropdown-border">
-										<ng-select (change)="onStateChange($event)" class="drop_down"
-											formControlName="state_id" >
-											<ng-option *ngFor="let state of stateList" [value]="state.id">{{state.name}} </ng-option>
-										</ng-select>
+											<ng-select (change)="onStateChange($event)" class="drop_down"
+												formControlName="state_id">
+												<ng-option *ngFor="let state of stateList"
+													[value]="state.id">{{state.name}} </ng-option>
+											</ng-select>
 										</div>
 									</div>
 								</div>
@@ -227,11 +236,12 @@
 									<div class="pm-single">
 										<p>City</p>
 										<div class="dropdown-border">
-										<ng-select formControlName="city_id" (change)="onCityChange($event)"
-											 class="drop_down">
-											<ng-option *ngFor="let city of cityList" [value]="city.id">{{city.name}} </ng-option>
-										</ng-select>
-</div>
+											<ng-select formControlName="city_id" (change)="onCityChange($event)"
+												class="drop_down">
+												<ng-option *ngFor="let city of cityList" [value]="city.id">{{city.name}}
+												</ng-option>
+											</ng-select>
+										</div>
 										<!-- <div *ngIf="profileForm.get('city_id')?.invalid && (profileForm.get('city_id')?.dirty || profileForm.get('city_id')?.touched)"
 									class="text-danger">
 									<div *ngIf="profileForm.get('city_id')?.errors">
@@ -370,7 +380,7 @@
 										<span>Choose File</span>
 									</label>
 									<input id="fileInput" type="file" (change)="onFileSelected($event)"
-										formControlName="image" accept="image/jpeg, image/png"
+										formControlName="image" accept="image/jpeg, image/webp"
 										style="display: none;">
 								</div>
 							</div>
@@ -569,7 +579,7 @@
 										<span>Choose File</span>
 									</label>
 									<input id="fileInput" type="file" (change)="onFileSelected($event)"
-										formControlName="image" accept="image/jpeg, image/png"
+										formControlName="image" accept="image/jpeg, image/webp"
 										style="display: none;">
 								</div>
 							</div>
