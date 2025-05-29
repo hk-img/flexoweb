@@ -13,7 +13,6 @@ import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { IconComponent } from '../../icon/icon.component';
 
 @NgModule({
   imports: [
@@ -32,7 +31,7 @@ import { IconComponent } from '../../icon/icon.component';
     MatRadioModule,
     NgSelectModule
   ],
-  declarations: [IconComponent,FilterItemComponent],
-  exports: [IconComponent,FilterItemComponent],
+  declarations: [FilterItemComponent],
+  exports: [FilterItemComponent],
 })
 export class FilterItemModule {}

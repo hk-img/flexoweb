@@ -47,7 +47,7 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-    declarations: [],
+    declarations: [ProfileManagementComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -64,6 +64,7 @@ export const MY_FORMATS = {
         NgxIntlTelInputModule,
         ListItemModule,
         NgSelectModule,
+        FilterItemModule,
         SharedModule,
         RouterModule.forChild(routes),
         MatDatepickerModule,

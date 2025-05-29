@@ -42,6 +42,7 @@ const routes: Routes = [
         MatSelectModule,
         MatSlideToggleModule,
         ListItemModule,
+        FilterItemModule,
         SharedModule,
     ],
     providers: []

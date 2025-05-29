@@ -10,7 +10,7 @@
             class="booking-all-list-single-img cursor-pointer">
             <img
               [src]="(spaceDetails?.images[0])|| 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'"
-              [alt]="spaceDetails.actual_name" [title]="spaceDetails.actual_name" (error)="handleImageError($event)" />
+              [alt]="spaceDetails.actual_name" (error)="handleImageError($event)" />
             <div class="booking-all-list-single-img-tag">
               <p>{{spaceDetails?.spaceType}}</p>
             </div>
