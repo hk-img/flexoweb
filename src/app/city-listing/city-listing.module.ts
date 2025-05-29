@@ -24,10 +24,9 @@ import { ShimmerLoadingComponent } from '../shared/component/shimmer-loading/shi
 import { SharedModule } from '../shared/shared/shared.module';
 import { CityListingRoutingModule } from './city-listing-routing.module';
 import { CityListingComponent } from './city-listing.component';
-import { IconComponent } from '../shared/icon/icon.component';
 
 @NgModule({
-    declarations: [IconComponent,CityListingComponent, LoginDialog],
+    declarations: [CityListingComponent, LoginDialog],
     imports: [
         NgSelectModule,
         CommonModule,

@@ -25,7 +25,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { IconComponent } from '../shared/icon/icon.component';
 
 const routes:Routes = [
     {
@@ -48,7 +47,7 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-    declarations: [IconComponent,ProfileManagementComponent],
+    declarations: [ProfileManagementComponent],
     imports: [
         CommonModule,
         FormsModule,
