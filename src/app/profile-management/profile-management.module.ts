@@ -47,7 +47,6 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-    declarations: [ProfileManagementComponent],
     declarations: [],
     imports: [
         CommonModule,
