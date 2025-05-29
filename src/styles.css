@@ -11280,30 +11280,13 @@ h4 {
   .Spaces_box .space_img_box img {
     height: 150px !important;
   }
-  .city_carousel .slick-next {
-    right: 8px !important;
+ .slick-next {
+    right: -13px !important;
   }
-  .city_carousel .slick-prev {
+ .slick-prev {
     left: -13px !important;
   }
-  .work-space-option .slick-next {
-    right: 8px !important;
-  }
-  .work-space-option .slick-prev {
-    left: -13px !important;
-  }
-  .cowrking_brands .slick-next {
-    right: 8px !important;
-  }
-  .cowrking_brands .slick-prev {
-    left: -13px !important;
-  }
-  .work-process .slick-next {
-    right: 29px !important;
-  }
-  .work-process .slick-prev {
-    left: 3px !important;
-  }
+  
   .workspace_steps .space_list .list_items .space_count {
     position: static !important;
     margin-bottom: 10px;
@@ -11791,10 +11774,19 @@ h4 {
   cursor: pointer;
 }
 
+
+.slick-prev::before {
+  display: none !important;
+}
+
+.slick-next::before {
+  display: none !important;
+}
+
 /* .gmnoprint {
   top: 150px !important;
 } */
-.city_carousel .slick-prev:before {
+/* .city_carousel .slick-prev:before {
   content: "\f053";
   font-family: "FONTAWESOME";
 }
@@ -11849,42 +11841,34 @@ h4 {
 }
 .cowrking_brands .slick-next {
   right: 0;
-}
+} */
 
-.slick-prev::before,
-.slick-next::before {
-  font-size: 20px !important;
+.slick-next {
+  right: 0;
+  z-index: 99 !important;
+}
+.slick-prev,
+.slick-next {
+  font-size: 29px !important;
   line-height: 1;
   color: #d0c2c2 !important;
   opacity: 1 !important;
-  border: 2px solid #d0c2c2;
-  border-radius: 50%;
-  padding: 8px;
-  background: #fff;
-  transition: all 500ms;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid #d0c2c2 !important;
+  border-radius: 50% !important;
+  padding: 8px !important;
+  background: #fff !important;
+  transition: all 500ms !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 999 !important;
 }
-.slick-prev:hover:before,
-.slick-next:hover:before {
-  border: 2px solid #f76900;
+
+.slick-prev:hover, .slick-next:hover {
+  border: 2px solid #f76900 !important;
   color: #f76900 !important;
-}
-
-.city_carousel .slick-prev {
-  left: -22px;
-}
-.city_carousel .slick-next {
-  right: 0px;
-}
-
-.slick-prev,
-.slick-next {
-  transform: translate(0, -112%) !important;
-  z-index: 99;
 }
 
 @media (min-width: 1400px) {

@@ -15,6 +15,10 @@ svg {
   color: #17a2b8 !important;
 }
 
+.text-dark {
+  color: #000;
+}
+
 .text-yellow {
   color: #ffc600;
 }
@@ -70,16 +74,19 @@ svg {
   width: 48px !important;
   height: 48px !important;
 }
+
 .w-14 {
   width: 55px !important;
   height: 55px !important;
 }
 
-/* Add color classes */
 .text-gray-700 {
   color: #374151 !important;
 }
 
+.text-green-600 {
+  color: #05ac34;
+}
 .text-orange-400 {
   color: #f76900 !important;
 }
