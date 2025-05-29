@@ -9,7 +9,8 @@
         <div ngxSlickItem class="swiper-slide single-listing-slider slide"
           *ngFor="let image of spaceDetails.images; trackBy: trackByImage">
           <a style="cursor: pointer;">
-            <img [src]="image" (error)="onImageError($event,spaceDetails.imageAlt)"
+            <img [src]="image" (error)="onImageError($event,spaceDetails.imageAlt)" width="399" height="320"
+              title="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
               alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}" />
           </a>
         </div>
@@ -17,7 +18,8 @@
       <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
         <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide">
           <a style="cursor: pointer;">
-            <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp" />
+            <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
+              alt="detail image" title="detail image" width="399" height="320" />
           </a>
         </div>
       </ng-container>

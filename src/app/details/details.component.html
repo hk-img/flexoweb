@@ -16,13 +16,14 @@
                   allowfullscreen></iframe>
               </div>
             </div>
-            <img (error)="onImageError($event,space_details?.imageAlt)"
+            <img (error)="onImageError($event,space_details?.imageAlt)" width="763" height="509"
               *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined" [src]="
           space_details?.images[0]
           ? 
           space_details?.images[0]
-          : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
-          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
+          : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'"
+              alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
           </div>
         </div>
       </div>
@@ -34,8 +35,9 @@
                 ? 
                   space_details?.images[space_details?.youtube_url ? 0 : 1]
                 : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
-            "
-              alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}" />
+            " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+              width="380" height="253" />
           </div>
           <div class="gallery-banner">
             <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
@@ -43,8 +45,9 @@
                 ? 
                   space_details?.images[space_details?.youtube_url ? 2 : 3]
                 : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
-            "
-              alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}" />
+            " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}"
+              width="380" height="253" />
           </div>
         </div>
         <div class="gallery-one-third" (click)="openImagesDialog()">
@@ -54,16 +57,18 @@
                 ? 
                   space_details?.images[space_details?.youtube_url ? 1 : 2]
                 : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
-            "
-              alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}" />
+            " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}"
+              width="380" height="253" />
           </div>
           <div class="gallery-banner">
             <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
               space_details?.images[space_details?.youtube_url ? 3 : 4]
                 ? 
                   space_details?.images[space_details?.youtube_url ? 3 : 4] : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
-            "
-              alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}" />
+            " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}"
+              width="380" height="253" />
           </div>
         </div>
       </div>
@@ -97,8 +102,9 @@
           ? 
           space_details?.images[0]
           : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
-          "
-            alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
+          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}"
+            title="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}"
+            width="763" height="509" />
         </div>
       </div>
     </div>
@@ -110,7 +116,9 @@
                 space_details?.images[space_details?.youtube_url ? 0 : 1]
               : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
-          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}" />
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+          width="380" height="253" />
       </div>
       <div class="gallery-banner">
         <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
@@ -119,7 +127,9 @@
                 space_details?.images[space_details?.youtube_url ? 2 : 3]
               : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
-          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}" />
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}"
+          width="380" height="253" />
       </div>
     </div>
     <div class="gallery-one-third" (click)="openImagesDialog()">
@@ -130,7 +140,9 @@
                 space_details?.images[space_details?.youtube_url ? 1 : 2]
               : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
-          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}" />
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}"
+          width="380" height="253" />
       </div>
       <div class="gallery-banner">
         <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
@@ -138,7 +150,9 @@
               ? 
                 space_details?.images[space_details?.youtube_url ? 3 : 4] : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
-          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}" />
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}"
+          width="380" height="253" />
       </div>
     </div>
   </div>

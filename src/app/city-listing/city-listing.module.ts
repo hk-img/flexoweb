@@ -17,7 +17,6 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { DetailsComponent } from '../details/details.component';
 import { InquiryComponent } from '../details/inquiry/inquiry.component';
-import { LoginDialog } from '../login/login-dialog.component';
 import { FilterItemModule } from '../shared/component/filter-item/filter-item.module';
 import { ListItemModule } from '../shared/component/list-item/list-item.module';
 import { ShimmerLoadingComponent } from '../shared/component/shimmer-loading/shimmer-loading.component';
@@ -26,7 +25,7 @@ import { CityListingRoutingModule } from './city-listing-routing.module';
 import { CityListingComponent } from './city-listing.component';
 
 @NgModule({
-    declarations: [CityListingComponent, LoginDialog],
+    declarations: [CityListingComponent],
     imports: [
         NgSelectModule,
         CommonModule,

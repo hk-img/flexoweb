@@ -11,15 +11,16 @@
 						<div>
 							<div class="profile-pic-img position-relative">
 								<img [src]="profileImage ? profileImage : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user_image.webp' "
-									alt="profile_image">
+									alt="profile_image" title="profile_image" width="150" height="150">
 								<span class="loader position-absolute" *ngIf="loader"></span>
 								<div class="profile-pic-change-icon">
 									<div *ngIf="isLoading">
 										<input id="fileInput" type="file" (change)="onFileSelected($event)"
 											formControlName="image" accept="image/jpeg, image/webp"
 											style="display: none;">
-										<label for="fileInput" accept="image/jpeg, image/webp" class="fa fa-camera"
-											aria-hidden="true"> </label>
+										<label for="fileInput" accept="image/jpeg, image/webp">
+											<app-icon name="camera" class="w-3 text-white"></app-icon>
+										</label>
 									</div>
 								</div>
 							</div>
@@ -108,8 +109,9 @@
 															(input)="select.filter($event.target.value)" />
 													</ng-template>
 													<ng-option *ngFor="let list of countryCodes"
-														[value]="list.dialcode"><img src="{{list.flag}}" alt=""
-															width="20px"> {{list.dialcode}} &nbsp; {{list.name}}
+														[value]="list.dialcode"><img src="{{list.flag}}"
+															[alt]="list.name" [title]="list.name" width="20"
+															height="13"> {{list.dialcode}} &nbsp; {{list.name}}
 													</ng-option>
 												</ng-select>
 											</span>
@@ -160,6 +162,7 @@
 										<mat-error
 											*ngIf="profileDetailForm['controls']['email']?.errors?.required">Email is
 											required.</mat-error>
+										<app-icon name="lock" class="w-2 email_lock"></app-icon>
 									</mat-form-field>
 								</div>
 							</div>
