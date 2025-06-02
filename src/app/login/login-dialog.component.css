@@ -666,7 +666,7 @@ span.timer {
 ::ng-deep .ng-value {
   font-size: 12px;
 }
-::ng-deep .ng-dropdown-panel {
+::ng-deep .cdk-overlay-pane .ng-dropdown-panel {
   text-align: left;
   width: auto !important;
 }

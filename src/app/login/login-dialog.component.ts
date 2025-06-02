@@ -1290,17 +1290,24 @@ export class LoginDialog implements OnInit {
  hidePassword1 = true;
   hidePassword2 = true;
   hidePassword3 = true;
+  isPasswordVisible: boolean = false;
  togglePasswordVisibility(passwordId: string, iconId: string) {
   if (isPlatformBrowser(this.platformId)) {
     const passwordElement = document.getElementById(passwordId) as HTMLInputElement;
       const iconElement = document.getElementById(iconId);
 
+      this.isPasswordVisible = !this.isPasswordVisible;
+  const input = document.getElementById('password1') as HTMLInputElement;
+  if (input) {
+    input.type = this.isPasswordVisible ? 'text' : 'password';
+  }
+
       if (passwordElement.type === 'password') {
         passwordElement.type = 'text';
-        iconElement?.classList.replace('fa-eye', 'fa-eye-slash');
+        iconElement?.classList.replace('eye', 'eyeSlash');
       } else {
         passwordElement.type = 'password';
-        iconElement?.classList.replace('fa-eye-slash', 'fa-eye');
+        iconElement?.classList.replace('eyeSlash', 'eye');
       }
     }
   }
