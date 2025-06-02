@@ -1,8 +1,9 @@
 <br>
 <div class="static-page-container">
   <div>
-    <img *ngIf="!isMobile" class="static-header-image" src="assets/images/joy_of_giving_banner_pc.jpg" width="100%">
-    <img *ngIf="isMobile" class="static-header-image" src="assets/images/joy_of_giving_banner_mobile.jpg" width="100%">
+    <img *ngIf="!isMobile" fetchpriority="high" loading="eager" decoding="auto"
+      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/joy_of_giving_banner_pc.webp"
+      class="static-header-image h-100 w-100" width="1526" height="509" alt="joy of giving" title="joy of giving" />
   </div>
   <h2>Joy of Giving</h2>
   <p>
@@ -24,7 +25,9 @@
   <!-- <h3>How we Give Back</h3> -->
   <br>
   <div class="static-page-flex-container">
-    <img src="assets/images/joy_of_giving_helping_farmers.jpg" alt="">
+    <img fetchpriority="low" loading="lazy"
+      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/joy_of_giving_helping_farmers.webp" width="700"
+      height="467" alt="Helping Farmers and Rural Communities" title="Helping Farmers and Rural Communities" />
     <div class="mt-md-0 mt-4">
       <p class="static-page-sub-heading">Helping Farmers and Rural Communities</p><br>
       <p>
@@ -42,10 +45,14 @@
         and mitigates global warming.
       </p>
     </div>
-    <img src="assets/images/joy_of_giving_planting.jpg" alt="">
+    <img fetchpriority="low" loading="lazy"
+      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/joy_of_giving_planting.webp" width="700"
+      height="467" alt="Towards Sustainability" title="Towards Sustainability" />
   </div><br>
   <div class="static-page-flex-container">
-    <img src="assets/images/joy_of_giving_environment.jpg" alt="">
+    <img fetchpriority="low" loading="lazy"
+      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/joy_of_giving_environment.webp" width="700"
+      height="467" alt="Environment as a Stakeholder" title="Environment as a Stakeholder" />
     <div class="mt-md-0 mt-4">
       <p class="static-page-sub-heading">Environment as a Stakeholder
       </p><br>

@@ -1,77 +1,82 @@
 <div class="listing-details-slider swiper-container">
   <div class="swiper-wrapper" *ngIf="isMobile">
-   <div class="position-relative">
-    <div class="gallery-half position-relative" (click)="openImagesDialog()">
-      <div *ngIf="space_details !== undefined">
-        <div class="gallery-banner">
-          <div *ngIf="ribbon" class="ribbon-label-details" [style.backgroundColor]="ribbon_color">
-            {{ribbon}}
-          </div>
-          <div *ngIf="space_details?.youtube_url !== undefined ">
-            <div *ngIf="space_details?.youtube_url !== '' && space_details?.youtube_url !== null"
-              class="responsive-container">
-              <iframe class="responsive-iframe" [src]="space_details?.youtube_url" title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+    <div class="position-relative">
+      <div class="gallery-half position-relative" (click)="openImagesDialog()">
+        <div *ngIf="space_details !== undefined">
+          <div class="gallery-banner">
+            <div *ngIf="ribbon" class="ribbon-label-details" [style.backgroundColor]="ribbon_color">
+              {{ribbon}}
             </div>
-          </div>
-          <img (error)="onImageError($event,space_details?.imageAlt)"
-            *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined" [src]="
+            <div *ngIf="space_details?.youtube_url !== undefined ">
+              <div *ngIf="space_details?.youtube_url !== '' && space_details?.youtube_url !== null"
+                class="responsive-container">
+                <iframe class="responsive-iframe" [src]="space_details?.youtube_url" title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+              </div>
+            </div>
+            <img fetchpriority="high" loading="eager" decoding="async"
+              (error)="onImageError($event,space_details?.imageAlt)" width="763" height="509"
+              *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined" [src]="
           space_details?.images[0]
           ? 
           space_details?.images[0]
-          : 'assets/images/details_placeholder_image.jpg'
-          "
-            alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
+          : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
+          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="gallry_side_img ">
-      <div class="gallery-one-third" (click)="openImagesDialog()">
-        <div class="gallery-banner">
-          <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+      <div class="gallry_side_img ">
+        <div class="gallery-one-third" (click)="openImagesDialog()">
+          <div class="gallery-banner">
+            <img loading="lazy" fetchpriority="low" (error)="onImageError($event,space_details?.imageAlt)" [src]="
               space_details?.images[space_details?.youtube_url ? 0 : 1]
                 ? 
                   space_details?.images[space_details?.youtube_url ? 0 : 1]
-                : 'assets/images/details_placeholder_image.jpg'
-            "
-            alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}" />
-        </div>
-        <div class="gallery-banner">
-          <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+                : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
+            " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+              width="380" height="253" />
+          </div>
+          <div class="gallery-banner">
+            <img loading="lazy" fetchpriority="low" (error)="onImageError($event,space_details?.imageAlt)" [src]="
               space_details?.images[space_details?.youtube_url ? 2 : 3]
                 ? 
                   space_details?.images[space_details?.youtube_url ? 2 : 3]
-                : 'assets/images/details_placeholder_image.jpg'
-            "
-            alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}" />
+                : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
+            " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+              width="380" height="253" />
+          </div>
         </div>
-      </div>
-      <div class="gallery-one-third" (click)="openImagesDialog()">
-        <div class="gallery-banner">
-          <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+        <div class="gallery-one-third" (click)="openImagesDialog()">
+          <div class="gallery-banner">
+            <img loading="lazy" fetchpriority="low" (error)="onImageError($event,space_details?.imageAlt)" [src]="
               space_details?.images[space_details?.youtube_url ? 1 : 2]
                 ? 
                   space_details?.images[space_details?.youtube_url ? 1 : 2]
-                : 'assets/images/details_placeholder_image.jpg'
-            "
-            alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}" />
-        </div>
-        <div class="gallery-banner">
-          <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+                : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
+            " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+              width="380" height="253" />
+          </div>
+          <div class="gallery-banner">
+            <img loading="lazy" fetchpriority="low" (error)="onImageError($event,space_details?.imageAlt)" [src]="
               space_details?.images[space_details?.youtube_url ? 3 : 4]
                 ? 
-                  space_details?.images[space_details?.youtube_url ? 3 : 4] : 'assets/images/details_placeholder_image.jpg'
-            "
-            alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}" />
+                  space_details?.images[space_details?.youtube_url ? 3 : 4] : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
+            " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+              width="380" height="253" />
+          </div>
         </div>
       </div>
+      <button class="btn btn-white-view-more" (click)="openImagesDialog()" type="button">
+        View More
+      </button>
     </div>
-    <button class="btn btn-white-view-more" (click)="openImagesDialog()" type="button">
-      View More
-    </button>
-   </div>
   </div>
   <div class="gallery" *ngIf="!isMobile">
     <button class="btn btn-white-view-more" (click)="openImagesDialog()" type="button">
@@ -92,54 +97,63 @@
                 allowfullscreen></iframe>
             </div>
           </div>
-          <img (error)="onImageError($event,space_details?.imageAlt)"
+          <img fetchpriority="high" loading="eager" decoding="auto"
+            (error)="onImageError($event,space_details?.imageAlt)" width="763" height="509"
             *ngIf="space_details?.youtube_url == '' || space_details?.youtube_url === undefined" [src]="
           space_details?.images[0]
           ? 
           space_details?.images[0]
-          : 'assets/images/details_placeholder_image.jpg'
-          "
-            alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
+          : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
+          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}"
+            title="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
         </div>
       </div>
     </div>
     <div class="gallery-one-third" (click)="openImagesDialog()">
-      <div class="gallery-banner">
+      <div loading="lazy" fetchpriority="low" class="gallery-banner">
         <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 0 : 1]
               ? 
                 space_details?.images[space_details?.youtube_url ? 0 : 1]
-              : 'assets/images/details_placeholder_image.jpg'
+              : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
-          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}" />
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+          width="380" height="253" />
       </div>
       <div class="gallery-banner">
-        <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+        <img loading="lazy" fetchpriority="low" (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 2 : 3]
               ? 
                 space_details?.images[space_details?.youtube_url ? 2 : 3]
-              : 'assets/images/details_placeholder_image.jpg'
+              : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
-          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}" />
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+          width="380" height="253" />
       </div>
     </div>
     <div class="gallery-one-third" (click)="openImagesDialog()">
       <div class="gallery-banner">
-        <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+        <img loading="lazy" fetchpriority="low" (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 1 : 2]
               ? 
                 space_details?.images[space_details?.youtube_url ? 1 : 2]
-              : 'assets/images/details_placeholder_image.jpg'
+              : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
-          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}" />
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+          width="380" height="253" />
       </div>
       <div class="gallery-banner">
-        <img (error)="onImageError($event,space_details?.imageAlt)" [src]="
+        <img loading="lazy" fetchpriority="low" (error)="onImageError($event,space_details?.imageAlt)" [src]="
             space_details?.images[space_details?.youtube_url ? 3 : 4]
               ? 
-                space_details?.images[space_details?.youtube_url ? 3 : 4] : 'assets/images/details_placeholder_image.jpg'
+                space_details?.images[space_details?.youtube_url ? 3 : 4] : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
-          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}" />
+          alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+          width="380" height="253" />
       </div>
     </div>
   </div>
@@ -149,28 +163,31 @@
      (click)="shortList(); is_shortlisted = (is_shortlisted == false) ? true : false"><i class="icofont-heart"></i></span> -->
       <a (click)="updateShortList()" class="btn" [style.color]="is_shortlisted ? '#F76900' : '#F76900'">
         <!-- <i class="ion-favorite on-image-icon"></i> -->
-        <i [ngClass]="is_shortlisted ? 'fa fa-heart color-on-heart' : 'fa fa-heart-o'" aria-hidden="true"></i>
+        <!-- <i [ngClass]="is_shortlisted ? 'fa fa-heart color-on-heart' : 'fa fa-heart-o'" aria-hidden="true"></i> -->
+        <app-icon name="heartTransparent" class="w-3 text-dark"></app-icon>
+
       </a>
     </div>
     <div class="share-btn">
-      <a class="btn"><i class="ion-android-share-alt" style="bottom: 3px"></i></a>
+      <a class="btn d-flex align-items-center jusity-content-center"><app-icon name="share"
+          class="w-3 text-dark"></app-icon></a>
       <ul class="social-share">
         <li class="bg-fb" (click)="openFacebook()">
-          <a class="share-button"><i class="ion-social-facebook"></i></a>
+          <a class="share-button"><app-icon name="facebook" class="w-2 text-dark"></app-icon></a>
         </li>
         <li class="bg-tt" (click)="openLinkedIn()">
-          <a class="share-button"><i class="ion-social-linkedin"></i></a>
+          <a class="share-button"><app-icon name="linkedin2" class="w-2 text-dark"></app-icon></a>
         </li>
         <li class="bg-ig" (click)="openWhatsapp()">
-          <a class="share-button"><i class="ion-social-whatsapp"></i></a>
+          <a class="share-button"><app-icon name="whatsapp" class="w-3 text-dark"></app-icon></a>
         </li>
         <li
           style=" background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);"
           (click)="openInstagram()">
-          <a class="share-button"><i class="ion-social-instagram"></i></a>
+          <a class="share-button"><app-icon name="instagram" class="w-2 text-dark"></app-icon></a>
         </li>
         <li style="background: white;" (click)="copyLink()">
-          <a class="share-button"><i class="ion-ios-copy"></i></a>
+          <a class="share-button"><app-icon name="copy" class="w-2 text-dark"></app-icon></a>
         </li>
       </ul>
     </div>
@@ -194,12 +211,14 @@
                   align-items: center;
                   margin-bottom: 13px;
                 " (click)="goBack()">
-                <i class="material-icons" style="
+                <!-- <i class="material-icons" style="
                     color: gray !important;
                     font-size: 17px;
                     position: relative;
                     right: 2px;
-                  ">keyboard_arrow_left</i><span style="text-decoration: underline">Go back</span>
+                  ">keyboard_arrow_left</i> -->
+                <app-icon name="leftArrow" class="w-1 text-gray-400"></app-icon>
+                <span style="text-decoration: underline">Go back</span>
               </p>
 
               <div class="bredcrumb_sec">
@@ -207,48 +226,100 @@
                   <ol class="breadcrumb bg-white p-0 mb-0">
                     <!-- <li class="breadcrumb-item"><a routerLink="/">Home</a></li> -->
                     <!-- <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/coworking/{{this.city_param?.toLowerCase()}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li> -->
-                    <li *ngIf="spaceType == 'coworking café restaurant'" && spaceType != 'event space' style="text-transform: capitalize;" class="breadcrumb-item"><a [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase()]">
-                      {{ space_details?.spaceType }} in {{ space_details?.contact_city_name }}
-                    </a></li>
+                    <li *ngIf="spaceType == 'coworking café restaurant'" && spaceType !='event space'
+                      style="text-transform: capitalize;" class="breadcrumb-item"><a
+                        [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase()]">
+                        {{ space_details?.spaceType }} in {{ space_details?.contact_city_name }}
+                      </a></li>
                     <!-- breadcrump for event space -->
-                    <li *ngIf="spaceType == 'event space'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/event-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'event space'" style="text-transform: capitalize;" class="breadcrumb-item">
+                      <a routerLink="/in/event-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a>
+                    </li>
                     <!-- breadcrump for virtual office -->
-                    <li *ngIf="spaceType == 'virtual office'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/virtual-office/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'virtual office'" style="text-transform: capitalize;"
+                      class="breadcrumb-item"><a
+                        routerLink="/in/virtual-office/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- breadcrump for private office -->
-                    <li *ngIf="spaceType == 'private office'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/private-office/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'private office'" style="text-transform: capitalize;"
+                      class="breadcrumb-item"><a
+                        routerLink="/in/private-office/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- breadcrump for party space -->
-                    <li *ngIf="spaceType == 'party space'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/party-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'party space'" style="text-transform: capitalize;" class="breadcrumb-item">
+                      <a routerLink="/in/party-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a>
+                    </li>
                     <!-- breadcrump for coworking space -->
-                    <li *ngIf="spaceType == 'coworking space'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/coworking/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'coworking space'" style="text-transform: capitalize;"
+                      class="breadcrumb-item"><a
+                        routerLink="/in/coworking/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- breadcrump for shoot studio -->
-                    <li *ngIf="spaceType == 'shoot studio'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/shoot-studio/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'shoot studio'" style="text-transform: capitalize;" class="breadcrumb-item">
+                      <a routerLink="/in/shoot-studio/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a>
+                    </li>
                     <!-- breadcrump for recording studio -->
-                    <li *ngIf="spaceType == 'recording studio'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/recording-studio/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'recording studio'" style="text-transform: capitalize;"
+                      class="breadcrumb-item"><a
+                        routerLink="/in/recording-studio/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- breadcrump for activity space -->
-                    <li *ngIf="spaceType == 'activity space'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/activity-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'activity space'" style="text-transform: capitalize;"
+                      class="breadcrumb-item"><a
+                        routerLink="/in/activity-space/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- breadcrump for sports turf -->
-                    <li *ngIf="spaceType == 'sports turf'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/sports-turf/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'sports turf'" style="text-transform: capitalize;" class="breadcrumb-item">
+                      <a routerLink="/in/sports-turf/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a>
+                    </li>
                     <!-- breadcrump for sports venue -->
-                    <li *ngIf="spaceType == 'sports venue'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/sports-venue/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'sports venue'" style="text-transform: capitalize;" class="breadcrumb-item">
+                      <a routerLink="/in/sports-venue/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a>
+                    </li>
                     <!-- breadcrump for banquet hall -->
-                    <li *ngIf="spaceType == 'banquet hall'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/banquet-hall/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'banquet hall'" style="text-transform: capitalize;" class="breadcrumb-item">
+                      <a routerLink="/in/banquet-hall/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a>
+                    </li>
                     <!-- breadcrump for gallery -->
-                    <li *ngIf="spaceType == 'gallery'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/gallery/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'gallery'" style="text-transform: capitalize;" class="breadcrumb-item"><a
+                        routerLink="/in/gallery/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- breadcrump for classroom -->
-                    <li *ngIf="spaceType == 'classroom'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/classroom/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'classroom'" style="text-transform: capitalize;" class="breadcrumb-item"><a
+                        routerLink="/in/classroom/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- breadcrump for private cabin -->
-                    <li *ngIf="spaceType == 'private cabin'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/private-cabin/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'private cabin'" style="text-transform: capitalize;"
+                      class="breadcrumb-item"><a
+                        routerLink="/in/private-cabin/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- breadcrump for meeting room -->
-                    <li *ngIf="spaceType == 'meeting room'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/meeting-room/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'meeting room'" style="text-transform: capitalize;" class="breadcrumb-item">
+                      <a routerLink="/in/meeting-room/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a>
+                    </li>
                     <!-- breadcrump for training room -->
-                    <li *ngIf="spaceType == 'training room'" style="text-transform: capitalize;" class="breadcrumb-item"><a routerLink="/in/training-room/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}} in {{space_details?.contact_city_name}}</a></li>
+                    <li *ngIf="spaceType == 'training room'" style="text-transform: capitalize;"
+                      class="breadcrumb-item"><a
+                        routerLink="/in/training-room/{{formatUrl(this.city_param?.toLowerCase())}}">{{space_details?.spaceType}}
+                        in {{space_details?.contact_city_name}}</a></li>
                     <!-- <li style="text-transform: capitalize;" class="breadcrumb-item " aria-current="page"><a
                         routerLink="/in/spaces/{{space_details?.contact_city_name}}">{{
                         space_details?.contact_city_name}}</a></li> -->
-                    <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a routerLink="/in/{{this.spaceType?.replace(' ', '-')}}/{{this.city_param?.toLowerCase()}}/{{formatUrl(space_details?.location_name?.replace(' ', '-')?.toLowerCase())}}">{{
+                    <li *ngIf="spaceType != 'coworking café restaurant'" style="text-transform: capitalize;"
+                      class="breadcrumb-item" aria-current="page"><a
+                        routerLink="/in/{{this.spaceType?.replace(' ', '-')}}/{{this.city_param?.toLowerCase()}}/{{formatUrl(space_details?.location_name?.replace(' ', '-')?.toLowerCase())}}">{{
                         space_details?.location_name}}</a>
                     </li>
-                    <li *ngIf="spaceType == 'coworking café restaurant'" style="text-transform: capitalize;" class="breadcrumb-item" aria-current="page"><a [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase(), formatUrl(space_details?.location_name?.replace(' ', '-')?.toLowerCase())]">{{
+                    <li *ngIf="spaceType == 'coworking café restaurant'" style="text-transform: capitalize;"
+                      class="breadcrumb-item" aria-current="page"><a
+                        [routerLink]="['/in', formatUrl(spaceType), city_param?.toLowerCase(), formatUrl(space_details?.location_name?.replace(' ', '-')?.toLowerCase())]">{{
                         space_details?.location_name}}</a>
                     </li>
                     <!-- <li style="text-transform: capitalize;" *ngIf="isLongterm || isShortterm" class="breadcrumb-item"
@@ -269,8 +340,8 @@
                 {{ space_details?.actual_name }} {{ space_details?.location_name }}
               </h1>
 
-              <p style="text-transform: capitalize;">
-                <i class="ion-ios-location"></i>
+              <p class="d-flex align-items-center" style="text-transform: capitalize;">
+                <span><app-icon name="location2" class="w-4 text-orange-400" /></span>
                 {{ space_details?.location_name }}
                 <!-- mumbai -->
               </p>
@@ -310,29 +381,34 @@
                             <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 1, 'fa-star-half-o': space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1, 'fa-star-o': space_details?.ratingsAvg <= 0}"
                               aria-hidden="true"></i>
+                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                           </li>
                           <li class>
                             <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 2, 'fa-star-half-o': space_details?.ratingsAvg > 1 && space_details?.ratingsAvg < 2, 'fa-star-o': space_details?.ratingsAvg <= 1}"
                               aria-hidden="true"></i>
+                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                           </li>
                           <li class>
                             <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 3, 'fa-star-half-o': space_details?.ratingsAvg > 2 && space_details?.ratingsAvg < 3, 'fa-star-o': space_details?.ratingsAvg <= 2}"
                               aria-hidden="true"></i>
+                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                           </li>
                           <li class>
                             <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 4, 'fa-star-half-o': space_details?.ratingsAvg > 3 && space_details?.ratingsAvg < 4, 'fa-star-o': space_details?.ratingsAvg <= 3}"
                               aria-hidden="true"></i>
+                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                           </li>
                           <li class>
                             <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 5, 'fa-star-half-o': space_details?.ratingsAvg > 4 && space_details?.ratingsAvg < 5, 'fa-star-o': space_details?.ratingsAvg <= 4}"
                               aria-hidden="true"></i>
+                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                           </li>
                         </ul>
-  
+
                         <div class="rating-number">
                           <p> {{space_details?.ratingsAvg || 0}} </p>
                         </div>
@@ -349,19 +425,19 @@
                     </div>
                     <div class="d-flex align-items-center gap-2 reviewInnerClass">
                       <div class="total-viewer rating-info-single" *ngIf="!isLongterm">
-                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        <app-icon name="user2" class="w-2 text-gray-400"></app-icon>
                         <p>{{space_details?.howManyPeopleInYourSpace}} people</p>
                       </div>
                       <div class="total-viewer rating-info-single" *ngIf="isLongterm">
-                        <i class="fa fa-building-o" aria-hidden="true"></i>
+                        <app-icon name="building" class="w-2 text-gray-400"></app-icon>
                         <p>{{space_details?.spaceStatus || 'N/A'}}</p>
                       </div>
                       <div class="watch-time rating-info-single" *ngIf="isShortterm">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <app-icon name="clock" class="w-2 text-gray-400"></app-icon>
                         <p>{{space_details?.minimum_hours/60}} hrs min</p>
                       </div>
                       <div class="sq-ft rating-info-single">
-                        <img src="assets/images/scale.svg" alt class="sq-ft-icon">
+                        <app-icon name="scaleRuler" class="w-2 text-gray-400"></app-icon>
                         <p>{{space_details?.spacesqft}} sqft</p>
                       </div>
                     </div>
@@ -371,6 +447,7 @@
                       <i (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('upvote');" class="fa"
                         [ngClass]="{'fa-thumbs-up orange-color': existingUpVote == 1, 'fa-thumbs-o-up black-color': existingUpVote != 1 }"
                         [class.disabled]="isLoading" aria-hidden="true"></i>
+                      <!-- <app-icon name="thumbUp" class="w-2 text-dark"></app-icon> -->
                       <span *ngIf="space_details?.upvote > 0">{{space_details?.upvote}}</span>
                       <span *ngIf="space_details?.upvote <= 0">0</span>
                     </a>
@@ -381,6 +458,7 @@
                         [ngClass]="existingDownVote == 1 ? 'fa fa-thumbs-down orange-color':'fa fa-thumbs-o-down'"
                         [ariaDisabled]="isLoading" aria-hidden="true">
                       </i>
+                      <!-- <app-icon name="thumbDown" class="w-2 text-dark"></app-icon> -->
                       <!-- <span>{{space_details?.downvote}}</span> -->
                     </a>
                   </div>
@@ -449,7 +527,7 @@
                   </mat-panel-description> -->
                     <div class="over-view-drop-heading">
                       <div class="over-view-drop-heading-logo-grp">
-                        <img src="assets/images/parking-icon.png" alt class="over-view-drop-heading-icon">
+                        <app-icon name="parking" class="w-7 text-orange-400"></app-icon>
                         <h2 class="fs-18 m-0"> Parking</h2>
                       </div>
                     </div>
@@ -481,7 +559,7 @@
 
                     <div class="over-view-drop-heading">
                       <div class="over-view-drop-heading-logo-grp">
-                        <img src="assets/images/lighting-icon.png" alt class="over-view-drop-heading-icon">
+                        <app-icon name="sun" class="w-7 text-orange-400"></app-icon>
                         <h2 class="fs-18 m-0"> Lighting</h2>
                       </div>
                     </div>
@@ -499,7 +577,7 @@
 
                     <div class="over-view-drop-heading">
                       <div class="over-view-drop-heading-logo-grp">
-                        <img src="assets/images/sound-icon.png" alt class="over-view-drop-heading-icon">
+                        <app-icon name="sound" class="w-7 text-orange-400"></app-icon>
                         <h2 class="fs-18 m-0"> Sound</h2>
                       </div>
                     </div>
@@ -517,7 +595,7 @@
 
                     <div class="over-view-drop-heading">
                       <div class="over-view-drop-heading-logo-grp">
-                        <img src="assets/images/host-rule-icon.png" alt class="over-view-drop-heading-icon">
+                        <app-icon name="fileMinus" class="w-7 text-orange-400"></app-icon>
                         <h2 class="fs-18 m-0"> Host rules</h2>
                       </div>
                     </div>
@@ -602,12 +680,13 @@
                         <div style="
                           display: flex;
                         ">
-                          <i class="icon-rupee"></i>
-                          <h2 style="font-size: 18px">
-                            <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
+                          <h2 class="mb-0 d-flex" style="font-size: 18px">
+                            <app-icon name="rupee" class="w-3 text-orange-400"></app-icon> {{
                             space_details[resource.column_name]|| '' }}
                           </h2>
-                          <small><span *ngIf="resource?.id !== 5 && resource?.id !== 6 && resource?.id !== 7">/seat</span>/{{resource?.id == 6 || resource?.id == 7? "hour": "month"}}</small>
+                          <small><span
+                              *ngIf="resource?.id !== 5 && resource?.id !== 6 && resource?.id !== 7">/seat</span>/{{resource?.id
+                            == 6 || resource?.id == 7? "hour": "month"}}</small>
                         </div>
                       </div>
 
@@ -634,9 +713,8 @@
                           /* gap: 2px; */
                           align-items: baseline;
                         ">
-                          <i class="icon-rupee"></i>
-                          <h2 style="font-size: 18px">
-                            <img style="height: 15px;" src="assets/images/rs-icon.png" alt=""> {{
+                          <h2 class="mb-0 d-flex" style="font-size: 18px">
+                            <app-icon name="rupee" class="w-3 text-orange-400"></app-icon> {{
                             space_details[resource.column_name]|| '' }}
                           </h2>
                           <small>/seat/{{
@@ -668,8 +746,8 @@
             <div class="commute-details" style="justify-content: flex-end">
               <div class="commute-details-item">
                 <div class="commute-label">
-                  <i class="material-icons">subway</i>
-                  <h3>Metro</h3>
+                  <app-icon name="metro" class="w-4 text-gray-400"></app-icon>
+                  <h3 class="pt-1">Metro</h3>
                 </div>
                 <div class="commute-value">
                   <h3>{{ space_details?.near_by_metro || "NA" }}</h3>
@@ -684,8 +762,8 @@
               </div>
               <div class="commute-details-item">
                 <div class="commute-label">
-                  <i class="material-icons">train</i>
-                  <h3>Railway</h3>
+                  <app-icon name="train" class="w-4 text-gray-400"></app-icon>
+                  <h3 class="pt-1">Railway</h3>
                 </div>
                 <div class="commute-value">
                   <h3>{{ space_details?.near_by_railway_name || "NA" }}</h3>
@@ -705,7 +783,9 @@
           <div id="timings" class="list-details-section" id="Business" *ngIf="!isLongterm">
             <h2 class="fs-20">Business Hours</h2>
             <div class="business-hour-subtitle" *ngIf="space_details?.has_247_access">
-              <img src="assets/images/business-hour-subtitle-icon.png" alt class="business-hour-subtitle-icon">
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/business-hour-subtitle-icon.webp"
+                alt="24x7" title="24x7 " class="business-hour-subtitle-icon" width="40" height="40" />
               <h3 class="operational">This space is operational <span> 24x7 </span></h3>
             </div>
             <ul class="business-hours">
@@ -822,19 +902,24 @@
               <div class="add-ons-all list-details-section-content-c">
                 <div class="add-ons-single" *ngFor="let item of serviceArray">
                   <!-- <div class="add-ons-single-img" *ngIf="item?.serviceName == 'Professional Photographer'">
-                    <img src="assets/images/add-on-img-1.jpg" alt>
+                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/add-on-img-1.webp" alt>
                   </div>
                   <div class="add-ons-single-img" *ngIf="item?.serviceName == 'Photography Equipment'">
-                    <img src="assets/images/camera.png" alt>
+                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/camera.webp" alt>
                   </div>
                   <div class="add-ons-single-img" *ngIf="item?.serviceName == 'Speaker'">
-                    <img src="assets/images/speaker.png" alt>
+                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/speaker.webp" alt>
                   </div> -->
                   <div class="add-ons-single-text">
                     <h3 class="add-ons-single-text-heading fs-16">
                       {{item?.serviceName}}</h3>
-                    <p> <img src="assets/images/rupee-icon.png" alt class="rupee-icon"> <span>
-                        {{item?.servicePrice}}/{{item?.servicePriceType}} </span></p>
+                    <p>
+                      <!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rupee-icon.webp" alt
+                        class="rupee-icon"> -->
+                      <app-icon name="rupee" class="w-4 text-gray-400"></app-icon>
+                      <span>
+                        {{item?.servicePrice}}/{{item?.servicePriceType}} </span>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -867,8 +952,8 @@
               <div class="review-section-heading">
                 <h2 class="fs-20 m-0">Reviews & Ratings <span *ngIf="reviews?.length > 0">({{reviews?.length}})</span>
                 </h2>
-                <a (click)="openAddReviewDialog()" class="custum-btn outline-orng-btn"> <i class="fa fa-pencil"
-                    aria-hidden="true"></i> Leave a Review</a>
+                <a (click)="openAddReviewDialog()" class="custum-btn outline-orng-btn"> <app-icon name="pencil"
+                    class="w-3 text-white"></app-icon> Leave a Review</a>
               </div>
               <div class="row align-items-center mx-0" *ngIf="space_details?.ratingsAvg?.length > 0">
                 <ul class="product-rating-c d-flex">
@@ -876,26 +961,31 @@
                     <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 1, 'fa-star-half-o': space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1, 'fa-star-o': space_details?.ratingsAvg <= 0}"
                       aria-hidden="true"></i>
+                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                   </li>
                   <li class style="color: #F76900; margin-right: 5px;">
                     <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 2, 'fa-star-half-o': space_details?.ratingsAvg > 1 && space_details?.ratingsAvg < 2, 'fa-star-o': space_details?.ratingsAvg <= 1}"
                       aria-hidden="true"></i>
+                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                   </li>
                   <li class style="color: #F76900; margin-right: 5px;">
                     <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 3, 'fa-star-half-o': space_details?.ratingsAvg > 2 && space_details?.ratingsAvg < 3, 'fa-star-o': space_details?.ratingsAvg <= 2}"
                       aria-hidden="true"></i>
+                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                   </li>
                   <li class style="color: #F76900; margin-right: 5px;">
                     <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 4, 'fa-star-half-o': space_details?.ratingsAvg > 3 && space_details?.ratingsAvg < 4, 'fa-star-o': space_details?.ratingsAvg <= 3}"
                       aria-hidden="true"></i>
+                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                   </li>
                   <li class style="color: #F76900; margin-right: 5px;">
                     <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 5, 'fa-star-half-o': space_details?.ratingsAvg > 4 && space_details?.ratingsAvg < 5, 'fa-star-o': space_details?.ratingsAvg <= 4}"
                       aria-hidden="true"></i>
+                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
                   </li>
                 </ul>
 
@@ -906,7 +996,9 @@
 
               <div class="review-section-single" *ngFor="let srrl of spaceRatingReviewList">
                 <div class="review-section-single-img">
-                  <img [src]="srrl?.profile_image ? srrl?.profile_image : 'assets/images/user_image.png'" alt>
+                  <img loading="lazy" fetchpriority="low"
+                    [src]="srrl?.profile_image ? srrl?.profile_image : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user_image.webp'"
+                    alt="user profile" title="user profile" width="200" height="200" />
                 </div>
                 <div class="review-section-single-cont">
                   <h5 style="text-transform: capitalize;">{{srrl?.userName}}</h5>
@@ -914,23 +1006,29 @@
                     <ul class="product-rating-c">
                       <li class>
                         <i [ngClass]="srrl?.rating>=1?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
                       </li>
                       <li class>
                         <i [ngClass]="srrl?.rating>=2?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
                       </li>
                       <li class>
                         <i [ngClass]="srrl?.rating>=3?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
                       </li>
                       <li class>
                         <i [ngClass]="srrl?.rating>=4?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
                       </li>
                       <li class>
                         <i [ngClass]="srrl?.rating>=5?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
+                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
                       </li>
                     </ul>
+
                     <ul class="book-again" *ngIf="srrl?.book_again == 1">
                       <li>
-                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <app-icon name="checkTic" class="w-2 text-gray-400"></app-icon>
                       </li>
                       <li>
                         Yes I would book again
@@ -945,7 +1043,7 @@
                 </div>
                 <!-- <div class="review-section-single" >
                     <div class="review-section-single-img">
-                        <img src="assets/images/add-on-img-1.jpg" alt="">
+                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/add-on-img-1.webp" alt="">
                     </div>
                     <div class="review-section-single-cont">
                        <h5>Madison G.</h5>
@@ -983,7 +1081,7 @@
                 </div>
                 <div class="review-section-single" >
                     <div class="review-section-single-img">
-                        <img src="assets/images/add-on-img-1.jpg" alt="">
+                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/add-on-img-1.webp" alt="">
                     </div>
                     <div class="review-section-single-cont">
                        <h5>Madison G.</h5>
@@ -1042,8 +1140,6 @@
             <!--Similar Listing ends-->
           </div>
         </div>
-
-
       </div>
       <div class="col-lg-4 col-md-12 order-lg-1 order-md-0 order-0">
         <div class="listing-sidebar" style="position: sticky; top:90px;">
@@ -1052,33 +1148,45 @@
             <div class="book-btn text-center">
               <a routerLink="/contact-form" [queryParams]="{space_id: space_details?.id}"> Enquire Now</a>
             </div> -->
-
             <div class="bookinng-sec-c">
               <div class="booking-container hour-rate" *ngIf="isShortterm">
                 <!-- <p>Prices starting from</p> -->
                 <h2>
-                  <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="45px" fill="none"
+                  <!-- <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="45px" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_iconCarrier">
                       <path
                         d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
                         fill="#fed42d"></path>
                     </g>
-                  </svg> <img src="assets/images/rs-icon.png" alt=""> {{space_details?.originalPrice}} <span> /
+                  </svg> -->
+                  <app-icon *ngIf="space_details?.isInstant == 1" name="boltFull"
+                    class="w-2 text-yellow-400"></app-icon>
+                  <!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" alt=""> -->
+                  <app-icon name="rupee" class="w-3 text-orange-400"></app-icon>
+                  {{space_details?.originalPrice}} <span> /
                     hr</span>
                 </h2>
                 <p class=""> {{space_details?.minimum_hours/60}} hrs minimum</p>
               </div>
               <div class="booking-container hour-rate" *ngIf="isLongterm">
                 <p>Monthly rental</p>
-                <h2><img src="assets/images/rs-icon.png" alt="">{{space_details?.originalPrice}}</h2>
-                <span class="font-weight-normal pl-1" style="font-size: 12px;"> <img src="assets/images/rs-icon.png"
-                    style="width: 8px;" alt=""> {{ space_details?.originalPrice / space_details?.spacesqft |
+                <h2>
+                  <!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" alt=""> -->
+                  <app-icon name="rupee" class="w-3 text-orange-400"></app-icon>
+                  {{space_details?.originalPrice}}
+                </h2>
+                <span class="font-weight-normal pl-1" style="font-size: 12px;">
+                  <!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" style="width: 8px;"
+                    alt=""> -->
+                  <app-icon name="rupee" class="w-2 text-orange-400"></app-icon>
+                  {{ space_details?.originalPrice / space_details?.spacesqft |
                   number:'1.0-0' }}/Sqft
                   <span class="font-weight-bold text-gray mb-1 mt-1" style="font-size: 11px;"
                     *ngIf="space_details?.negociable_price">(Negotiable)</span>
                 </span>
-                <p class="" style="font-size: 13px !important;margin-top: 5px !important;"><b>Carpet Area:</b> {{ space_details?.spacesqft | number:'1.0-0' }} sq. ft. | <b>{{space_details?.spaceStatus}}</b></p>
+                <p class="" style="font-size: 13px !important;margin-top: 5px !important;"><b>Carpet Area:</b> {{
+                  space_details?.spacesqft | number:'1.0-0' }} sq. ft. | <b>{{space_details?.spaceStatus}}</b></p>
               </div>
               <div class="booking-container">
                 <h2 class="booking-heading text-center fs-20" *ngIf="!isShortterm">Interested in this space?</h2>
@@ -1086,7 +1194,7 @@
                 <ul *ngIf="isCoworking" class="row g-3 align-items-center">
                   <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon me-2">
-                      <img src="assets/images/tick.svg" alt="Tick Icon" class="img-fluid" />
+                      <app-icon name="checkRound" class="w-5 text-orange-400"></app-icon>
                     </span>
                     <p class="booking-text mb-0">
                       Zero Brokerage
@@ -1094,7 +1202,7 @@
                   </li>
                   <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon me-2">
-                      <img src="assets/images/tick.svg" alt="Tick Icon" class="img-fluid" />
+                      <app-icon name="checkRound" class="w-5 text-orange-400"></app-icon>
                     </span>
                     <p class="booking-text mb-0">
                       Best Deals
@@ -1102,7 +1210,7 @@
                   </li>
                   <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon me-2">
-                      <img src="assets/images/tick.svg" alt="Tick Icon" class="img-fluid" />
+                      <app-icon name="checkRound" class="w-5 text-orange-400"></app-icon>
                     </span>
                     <p class="booking-text mb-0">
                       1000+ Clients Served
@@ -1110,7 +1218,7 @@
                   </li>
                   <li class="col-6 col-md-6 d-flex align-items-center">
                     <span class="booking-icon me-2">
-                      <img src="assets/images/tick.svg" alt="Tick Icon" class="img-fluid" />
+                      <app-icon name="checkRound" class="w-5 text-orange-400"></app-icon>
                     </span>
                     <p class="booking-text mb-0">
                       Expert Advisors
@@ -1121,68 +1229,62 @@
 
                 <ul *ngIf="isLongterm" class="row g-3 align-items-center">
                   <li class="col-6 col-md-6 d-flex align-items-center">
-                    <span class="booking-icon">
-                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <span class="booking-icon me-2">
+                      <app-icon name="checkRound" class="w-5 text-orange-400"></app-icon>
+                    </span>
                     <p class="booking-text">
                       1000+ Clients Served
                     </p>
                   </li>
                   <li class="col-6 col-md-6 d-flex align-items-center">
-                    <span class="booking-icon">
-                      <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                      <path fill="#000000"
-                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
-                    </svg> -->
-                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <span class="booking-icon me-2">
+                      <app-icon name="checkRound" class="w-5 text-orange-400"></app-icon>
+                    </span>
                     <p class="booking-text">
                       Expert Advisors
                     </p>
                   </li>
                   <li class="col-6 col-md-6 d-flex align-items-center">
-                    <span class="booking-icon">
-                      <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                      <path fill="#000000"
-                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
-                    </svg> -->
-                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <span class="booking-icon me-2">
+                      <app-icon name="checkRound" class="w-5 text-orange-400"></app-icon>
+                    </span>
                     <p class="booking-text">
                       End-to-End Support
                     </p>
                   </li>
                   <li class="col-6 col-md-6 d-flex align-items-center">
-                    <span class="booking-icon">
-                      <!-- <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                      <path fill="#000000"
-                        d="M14,10V4.5L19.5,10M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V9L15,3H5Z" />
-                    </svg> -->
-                      <img src="assets/images/tick.svg" alt /> </span>&nbsp;
+                    <span class="booking-icon me-2">
+                      <app-icon name="checkRound" class="w-5 text-orange-400"></app-icon>
+                    </span>
                     <p class="booking-text">
                       Best Deals
                     </p>
                   </li>
                 </ul>
-
                 <div class="btn-grp-c mt-0">
                   <!-- <div class="book-btn text-center" style="margin-top: 30px">
                           <a routerLink="/contact-form" [queryParams]="{ space_id: space_details?.id }">
                             GET A QUOTE</a>
                         </div> -->
                   <div *ngIf="isShortterm">
-                    <a *ngIf="space_details?.isInstant == 0 && !isMobile" (click)="openRequestBookPopup()" class="custum-btn d-none d-sm-block">
+                    <a *ngIf="space_details?.isInstant == 0 && !isMobile" (click)="openRequestBookPopup()"
+                      class="custum-btn d-none d-sm-block">
                       REQUEST TO BOOK</a>
-                    <a *ngIf="space_details?.isInstant == 1 && !isMobile" (click)="openRequestBookPopup()" class="custum-btn d-none d-sm-block">
+                    <a *ngIf="space_details?.isInstant == 1 && !isMobile" (click)="openRequestBookPopup()"
+                      class="custum-btn d-none d-sm-block">
                       BOOK NOW</a>
                     <div class="mt-4" *ngIf="space_details?.isInstant == 1">
                       <div>
                         <span class="mb-2">
-                          <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="35px" fill="none"
+                          <!-- <svg *ngIf="space_details?.isInstant == 1" viewBox="0 0 24 24" height="35px" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_iconCarrier">
                               <path
                                 d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
                                 fill="#fed42d"></path>
                             </g>
-                          </svg>
+                          </svg> -->
+                          <app-icon name="boltFull" class="w-8 text-yellow-400"></app-icon>
                           <span class>Instant Book</span>
                         </span>
 
@@ -1269,7 +1371,9 @@
     <div class="row" style="margin-top: 60px">
       <div class="col-lg-12">
         <div class="similar-listing-title" id="similar-listing-title">
-          <h2 style="font-size: 24px;">Nearby <span *ngIf="spaceType != 'coworking space'">{{spaceType | titlecase}}</span> <span *ngIf="spaceType == 'coworking space'">{{spaceType.split(" ")[0] | titlecase}}</span> Spaces</h2>
+          <h2 style="font-size: 24px;">Nearby <span *ngIf="spaceType != 'coworking space'">{{spaceType |
+              titlecase}}</span> <span *ngIf="spaceType == 'coworking space'">{{spaceType.split(" ")[0] |
+              titlecase}}</span> Spaces</h2>
         </div>
         <!-- <div class="swiper-container similar-list-wrap">
         <div class="swiper-wrapper"> -->
@@ -1303,10 +1407,12 @@
         <!-- </div>
       </div> -->
         <div class="slider-btn v3 similar-next" (click)="next1()">
-          <i class="ion-arrow-right-c"></i>
+          <!-- <i class="ion-arrow-right-c"></i> -->
+          <app-icon name="chevronRight" class="w-3"></app-icon>
         </div>
         <div class="slider-btn v3 similar-prev" (click)="prev1()">
-          <i class="ion-arrow-left-c"></i>
+          <!-- <i class="ion-arrow-left-c"></i> -->
+          <app-icon name="chevronLeft" class="w-3"></app-icon>
         </div>
       </div>
     </div>
@@ -1355,7 +1461,7 @@
             <div class="row reviewed-main-div"
               *ngFor="let srrl of spaceRatingReviewList"
               [ngStyle]="{'background-color': srrl.currentUser === true ? '#fdf5e6' : ''}">
-              <div class="col-md-1"><img src="assets/images/user.png"
+              <div class="col-md-1"><img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user.webp"
                   style="width: 100% !important;" /></div>
               <div class="col-md-2">
                 <h6>{{srrl.userName}}</h6>
@@ -1422,43 +1528,45 @@
           REQUEST TO BOOK</a>
         <a *ngIf="space_details?.isInstant == 1" (click)="openRequestBookPopup()" class="custum-btn">
           BOOK NOW</a>
-    </div>
+      </div>
     </div>
   </ul>
 </div>
-<div class="mobile_btm_bar py-3 px-3 " *ngIf="['coworking space', 'managed office', 'private office', 'shared office', 'virtual office'].includes(spaceType)">
+<div class="mobile_btm_bar py-3 px-3 "
+  *ngIf="['coworking space', 'managed office', 'private office', 'shared office', 'virtual office'].includes(spaceType)">
   <ul class="p-0 m-0 socail_btn_list">
     <div class="row justify-content-around">
       <div class="col-3">
         <li>
-         <a class="" (click)="openInquiryPopUp()" style="color: #ffffff;">
-           <svg class="svgIconBottom" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="48px" width="48px" xmlns="http://www.w3.org/2000/svg"><path d="M644.7 669.2a7.92 7.92 0 0 0-6.5-3.3H594c-6.5 0-10.3 7.4-6.5 12.7l73.8 102.1c3.2 4.4 9.7 4.4 12.9 0l114.2-158c3.8-5.3 0-12.7-6.5-12.7h-44.3c-2.6 0-5 1.2-6.5 3.3l-63.5 87.8-22.9-31.9zM688 306v-48c0-4.4-3.6-8-8-8H296c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8zm-392 88c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H296zm184 458H208V148h560v296c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V108c0-17.7-14.3-32-32-32H168c-17.7 0-32 14.3-32 32v784c0 17.7 14.3 32 32 32h312c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm402.6-320.8l-192-66.7c-.9-.3-1.7-.4-2.6-.4s-1.8.1-2.6.4l-192 66.7a7.96 7.96 0 0 0-5.4 7.5v251.1c0 2.5 1.1 4.8 3.1 6.3l192 150.2c1.4 1.1 3.2 1.7 4.9 1.7s3.5-.6 4.9-1.7l192-150.2c1.9-1.5 3.1-3.8 3.1-6.3V538.7c0-3.4-2.2-6.4-5.4-7.5zM826 763.7L688 871.6 550 763.7V577l138-48 138 48v186.7z"></path></svg>
-           <div>QUOTES</div>
-        </a> 
-       </li>
-      </div>
-      <div class="col-3">
-        <li>
-          <a class="" style="color: #ffffff;"  href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0">
-            <svg class="svgIconBottom" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="45px" width="45px" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
-            <div>WHATSAPP</div>
-         </a> 
+          <a class="" (click)="openInquiryPopUp()" style="color: #ffffff;">
+            <app-icon name="fileProtector" class="w-4 text-gray-400"></app-icon>
+            <div>QUOTES</div>
+          </a>
         </li>
       </div>
       <div class="col-3">
         <li>
-          <a class="" style="color: #ffffff;" href="" >
-            <svg class="svgIconBottom" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="45px" width="45px" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-linejoin="round" stroke-width="32" d="M408 64H104a56.16 56.16 0 0 0-56 56v192a56.16 56.16 0 0 0 56 56h40v80l93.72-78.14a8 8 0 0 1 5.13-1.86H408a56.16 56.16 0 0 0 56-56V120a56.16 56.16 0 0 0-56-56z"></path><circle cx="160" cy="216" r="32"></circle><circle cx="256" cy="216" r="32"></circle><circle cx="352" cy="216" r="32"></circle></svg>
+          <a class="" style="color: #ffffff;"
+            href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0">
+            <app-icon name="whatsapp" class="w-5 text-gray-400"></app-icon>
+            <div>WHATSAPP</div>
+          </a>
+        </li>
+      </div>
+      <div class="col-3">
+        <li>
+          <a class="" style="color: #ffffff;" href="">
+            <app-icon name="chat" class="w-5 text-gray-400"></app-icon>
             <div>CHAT</div>
-         </a> 
+          </a>
         </li>
       </div>
       <div class="col-3">
         <li>
           <a class="" style="color: #ffffff;" href="tel:+91 95133 92400">
-            <svg class="svgIconBottom" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="42px" width="42px" xmlns="http://www.w3.org/2000/svg"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <app-icon name="phoneCall" class="w-5 text-gray-400"></app-icon>
             <div>CALL</div>
-         </a> 
+          </a>
         </li>
       </div>
     </div>

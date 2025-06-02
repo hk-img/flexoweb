@@ -1,9 +1,10 @@
 <div class="login-register" *ngIf="userAction=='register' && !otpReceived && !showUserRegister && !createPassword">
   <div class="login-register-header">
     <h2>Register/Create an <span> Account </span></h2>
-    <button (click)="closeDialog(null)" type="button" class="btn-close">
+    <!-- <button (click)="closeDialog(null)" type="button" class="btn-close">
       <i class="fa fa-times" aria-hidden="true"></i>
-    </button>
+    </button> -->
+    <app-icon (click)="closeDialog(null)" name="close" class="w-3 text-dark btn-close"></app-icon>
   </div>
   <div class="login-register-input
   ">
@@ -20,8 +21,9 @@
                     <input style="width: 100%; line-height: 24px" type="text"
                       (input)="select.filter($event.target.value)" />
                   </ng-template>
-                  <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}" alt=""
-                      width="20px"> {{list.dialcode}} &nbsp; {{list.name}} </ng-option>
+                  <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}"
+                      [alt]="list.name" [title]="list.name" width="20" height="13" /> {{list.dialcode}} &nbsp;
+                    {{list.name}} </ng-option>
                 </ng-select>
               </span>
               <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4"
@@ -55,20 +57,23 @@
       </div>
       <div class="login-register-input-other-grp">
 
-        <asl-google-signin-button type="standard" theme="filled_blue" text="signup_with"
-          data-size="large"></asl-google-signin-button>
+        <asl-google-signin-button type="standard" theme="filled_blue" text="signin_with" data-size="large">
+        </asl-google-signin-button>
         <!-- <span> Google
         <span 
           class="outline-btn login-register-input-other-grp-btn">
           </span></span> -->
         <span *ngIf="selectedLoginType==LoginTypeEnum.Mobile"
           (click)="destroyLibrary();onLibraryCheck();handleLoginMethod(LoginTypeEnum.Email)"
-          class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/mail-icon.png" alt> <span>
+          class="outline-btn login-register-input-other-grp-btn"> <app-icon name="mail"
+            class="w-3 text-dark"></app-icon> <span class="pl-1">
             Mail
           </span></span>
         <span *ngIf="selectedLoginType==LoginTypeEnum.Email"
           (click)="onLibraryCheck();handleLoginMethod(LoginTypeEnum.Mobile)"
-          class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/call-ph.png" alt> <span>
+          class="outline-btn login-register-input-other-grp-btn"> <app-icon name="call"
+            class="w-3 text-dark"></app-icon>
+          <span class="pl-1">
             Mobile
           </span></span>
 
@@ -85,9 +90,7 @@
 <div class="login-register" *ngIf="otpReceived">
   <div class="login-register-header">
     <h2>Register/Create an <span> Account </span></h2>
-    <button type="button" (click)="closeDialog(null)" class="btn-close">
-      <i class="fa fa-times" aria-hidden="true"></i>
-    </button>
+    <app-icon (click)="closeDialog(null)" name="close" class="w-3 text-dark btn-close"></app-icon>
   </div>
   <div class="login-register-input">
     <div class="otp-heading">
@@ -114,7 +117,7 @@
         enter otp</mat-error>
     </form>
     <div class="login-register-inutp-other-btn otp-resend">
-      <p>Didn’t receive the OTP</p>
+      <p>Didn't receive the OTP</p>
       <button [ngClass]="isLoading || counter!=0 ?'disabled like-1':''" type="button" (click)="resendOtp()"
         class="otp-resend-btn mr-2"> Resend OTP</button>
       <span class="timer" *ngIf="counter!=0">in {{transform(counter)}} Sec</span>
@@ -127,14 +130,12 @@
 <div class="login-register" *ngIf="showUserRegister">
   <div class="login-register-header">
     <h2>Register/Create an <span> Account </span></h2>
-    <button type="button" (click)="closeDialog(null)" class="btn-close">
-      <i class="fa fa-times" aria-hidden="true"></i>
-    </button>
+    <app-icon (click)="closeDialog(null)" name="close" class="w-3 text-dark btn-close"></app-icon>
   </div>
   <div class="login-register-input">
     <div class="otp-success" *ngIf="!this.socialUser?.email">
-      <img src="assets/images/tick.png" alt *ngIf="!this.socialUser?.email">
-      <h5 *ngIf="!this.socialUser?.email">OTP Verified Successfully</h5>
+      <app-icon name="checkFill" class="w-7 text-green-600" *ngIf="!this.socialUser?.email"></app-icon>
+      <h5 class="pl-1" *ngIf="!this.socialUser?.email">OTP Verified Successfully</h5>
     </div>
     <form [formGroup]="userEmailRegisterForm" class="w-auto" style="width:auto;">
       <div class="login-register-all-input-group">
@@ -192,8 +193,9 @@
                       <input style="width: 100%; line-height: 24px" type="text"
                         (input)="select.filter($event.target.value)" />
                     </ng-template>
-                    <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}" alt=""
-                        width="20px"> {{list.dialcode}} &nbsp; {{list.name}} </ng-option>
+                    <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}"
+                        [alt]="list.name" [title]="list.name" width="20" height="13" /> {{list.dialcode}} &nbsp;
+                      {{list.name}} </ng-option>
                   </ng-select>
                 </span>
                 <!-- <input type="text" placeholder="Mobile" class="form-control mobile-input" id="basic-url" aria-describedby="basic-addon3 basic-addon4"
@@ -231,13 +233,11 @@
 <div class="login-register" *ngIf="createPassword">
   <div class="login-register-header">
     <h2>Register/Create an <span> Account </span></h2>
-    <button type="button" (click)="closeDialog(null)" class="btn-close">
-      <i class="fa fa-times" aria-hidden="true"></i>
-    </button>
+    <app-icon (click)="closeDialog(null)" name="close" class="w-3 text-dark btn-close"></app-icon>
   </div>
   <div class="login-register-input">
     <!-- <div class="otp-success">
-      <img src="../../assets/images/tick.png" alt>
+      <img src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/tick.webp" alt>
       <h5>OTP Verified Successfully</h5>
     </div> -->
     <form [formGroup]="userCreatePassForm">
@@ -277,17 +277,15 @@
   <div class="login-register-header">
     <h2>{{isForgotPass|| emailOtpForgotReceived?'Forgot Password':(resetPasswordForLogin?'Reset Password':'Login')}}
     </h2>
-    <button (click)="closeDialog(null)" type="button" class="btn-close">
-      <i class="fa fa-times" aria-hidden="true"></i>
-    </button>
+    <app-icon (click)="closeDialog(null)" name="close" class="w-3 text-dark btn-close"></app-icon>
   </div>
   <div class="login-register-input">
     <form [formGroup]="emailForm"
       *ngIf="!isForgotPass && !emailOtpForgotReceived && !resetPasswordForLogin && loginType==LoginTypeEnum.Email && !loginOtpReceived"
       class="w-100">
       <div class="login-register-input-single">
-        <a (click)="onLibraryCheck();loginType=LoginTypeEnum.Mobile" class="back-btn"> <i class="fa fa-chevron-left"
-            aria-hidden="true"></i> <span> Back </span> </a>
+        <a (click)="onLibraryCheck();loginType=LoginTypeEnum.Mobile" class="back-btn d-flex"> <app-icon name="leftArrow"
+            class="w-2 text-orange-400"></app-icon> <span> Back </span> </a>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" placeholder="Enter Email">
@@ -302,8 +300,16 @@
           <mat-label>Password</mat-label>
           <input matInput [type]="hidePassword1 ? 'password' : 'text'" id="password1" formControlName="password"
             placeholder="Enter Password">
-          <i class="fa fa-eye fa_eye_input" id="togglePassword1"
-            (click)="togglePasswordVisibility('password1', 'togglePassword1')" aria-hidden="true"></i>
+          <!-- <i class="fa fa-eye fa_eye_input" id="togglePassword1"
+            (click)="togglePasswordVisibility('password1', 'togglePassword1')" aria-hidden="true"></i> -->
+          <app-icon id="togglePassword1" (click)="togglePasswordVisibility('password1', 'togglePassword1')"
+            [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
+          </app-icon>
+          
+          <app-icon *ngIf="!isPasswordVisible" id="togglePassword1" (click)="togglePasswordVisibility('password2', 'togglePassword2')"
+            [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
+          </app-icon>
+
           <mat-error *ngIf="emailFormControl['password']?.errors?.required">Password is required.</mat-error>
         </mat-form-field>
       </div>
@@ -319,17 +325,17 @@
           <div class="login-register-input-other-grp">
             <span (click)="googleLogin()"
               class="outline-btn login-register-input-other-grp-btn"> <img
-                src="../../assets/images/google-icon.png" alt> <span> Google
+                src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/google-icon.webp" alt> <span> Google
               </span></span>
             <span *ngIf="selectedLoginType==LoginTypeEnum.Mobile"
               (click)="handleLoginMethod(LoginTypeEnum.Email)"
               class="outline-btn login-register-input-other-grp-btn"> <img
-                src="../../assets/images/mail-icon.png" alt> <span> Mail
+                src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/mail-icon.webp" alt> <span> Mail
               </span></span>
             <span *ngIf="selectedLoginType==LoginTypeEnum.Email"
               (click)="handleLoginMethod(LoginTypeEnum.Mobile)"
               class="outline-btn login-register-input-other-grp-btn"> <img
-                src="../../assets/images/call-ph.png" alt> <span> Mobile
+                src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/call-ph.webp" alt> <span> Mobile
               </span></span>
     
           </div>
@@ -357,8 +363,9 @@
                     <input style="width: 100%; line-height: 24px" type="text"
                       (input)="select.filter($event.target.value)" />
                   </ng-template>
-                  <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}" alt=""
-                      width="20px"> {{list.dialcode}} &nbsp; {{list.name}} </ng-option>
+                  <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}"
+                      [alt]="list.name" [title]="list.name" width="20" height="13" /> {{list.dialcode}} &nbsp;
+                    {{list.name}} </ng-option>
                 </ng-select>
               </span>
               <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4"
@@ -382,20 +389,22 @@
         <div class="login-register-input-other-grp">
           <!-- <span (click)="googleLogin()"
         class="outline-btn login-register-input-other-grp-btn"> <img
-          src="../../assets/images/google-icon.png" alt> <span> Google
+          src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/google-icon.webp" alt> <span> Google
         </span></span> -->
           <!-- <span 
         class="outline-btn login-register-input-other-grp-btn"><asl-google-signin-button></asl-google-signin-button> <span> Google
         </span></span> -->
 
-          <asl-google-signin-button type="standard" theme="filled_blue" text="signin_with"
-            data-size="large"></asl-google-signin-button>
+          <asl-google-signin-button type="standard" theme="filled_blue" text="signin_with" data-size="large">
+          </asl-google-signin-button>
 
 
 
 
           <span *ngIf="loginType==LoginTypeEnum.Mobile" (click)="loginType=LoginTypeEnum.Email"
-            class="outline-btn login-register-input-other-grp-btn"> <img src="assets/images/mail-icon.png" alt> <span>
+            class="outline-btn login-register-input-other-grp-btn"> <app-icon name="mail"
+              class="w-3 text-dark"></app-icon>
+            <span class="pl-1">
               Mail
             </span></span>
 
@@ -442,7 +451,7 @@
             enter otp</mat-error>
         </form>
         <div class="login-register-inutp-other-btn otp-resend">
-          <p>Didn’t receive the OTP</p>
+          <p>Didn't receive the OTP</p>
           <button [ngClass]="isLoading|| counter!=0 ?'disabled like-1':''" type="button" (click)="sendMobileLoginOTP()"
             class="otp-resend-btn"> Resend OTP</button>
           <span class="timer" *ngIf="counter!=0">in {{transform(counter)}} Sec</span>
@@ -455,8 +464,8 @@
 
 
     <form [formGroup]="forgotEmailOtpForm" *ngIf="isForgotPass" class="w-100">
-      <a (click)="onLibraryCheck();isForgotPass=false" class="back-btn"> <i class="fa fa-chevron-left"
-          aria-hidden="true"></i> <span> Back </span> </a>
+      <a (click)="onLibraryCheck();isForgotPass=false" class="back-btn d-flex">
+        <app-icon name="leftArrow" class="w-2 text-orange-400"></app-icon> <span> Back </span> </a>
       <div class="login-register-input-single">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Email</mat-label>
@@ -495,7 +504,7 @@
           enter Valid otp</mat-error>
       </form>
       <div class="login-register-inutp-other-btn otp-resend">
-        <p>Didn’t receive the OTP</p>
+        <p>Didn't receive the OTP</p>
         <button [ngClass]="isLoading || counter!=0 ?'disabled like-1':''" type="button" (click)="sendForgotEmailOTP()"
           class="otp-resend-btn"> Resend OTP</button>
         <span *ngIf="counter!=0">in {{counter}} Second </span>
@@ -512,8 +521,10 @@
             <mat-label>New Password</mat-label>
             <input [type]="hidePassword2 ? 'password' : 'text'" id="password2" matInput type="input" name="NewPassworde"
               formControlName="newPassword" placeholder="New Password">
-            <i id="togglePassword2" class="fa fa-eye fa_eye_input"
-              (click)="togglePasswordVisibility('password2', 'togglePassword2')" aria-hidden="true"></i>
+            <!-- <i id="togglePassword2" class="fa fa-eye fa_eye_input"
+              (click)="togglePasswordVisibility('password2', 'togglePassword2')" aria-hidden="true"></i> -->
+            <app-icon id="togglePassword2" (click)="togglePasswordVisibility('password2', 'togglePassword2')" name="eye"
+              class="w-2 fa_eye_input"></app-icon>
           </mat-form-field>
           <mat-error
             *ngIf="resetPasswordFormControls['newPassword']?.errors?.required && resetPasswordFormControls['newPassword']?.touched">Please
@@ -524,8 +535,10 @@
             <mat-label>Confirm Password</mat-label>
             <input [type]="hidePassword1 ? 'password3' : 'text'" id="password3" matInput type="input"
               name="confirm Password" formControlName="confirmPassword" placeholder="confirmPassword">
-            <i id="togglePassword3" class="fa fa-eye fa_eye_input"
-              (click)="togglePasswordVisibility('password3', 'togglePassword3')" aria-hidden="true"></i>
+            <!-- <i id="togglePassword3" class="fa fa-eye fa_eye_input"
+              (click)="togglePasswordVisibility('password3', 'togglePassword3')" aria-hidden="true"></i> -->
+            <app-icon id="togglePassword3" (click)="togglePasswordVisibility('password3', 'togglePassword3')" name="eye"
+              class="w-2 fa_eye_input"></app-icon>
           </mat-form-field>
           <mat-error
             *ngIf="resetPasswordFormControls['confirmPassword']?.errors?.required&& resetPasswordFormControls.confirmPassword?.touched">Please

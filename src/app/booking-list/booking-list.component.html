@@ -36,7 +36,8 @@
                         <option value="{{data?.workSpaceName}}" *ngFor="let data of workSpace">{{data?.workSpaceName}}
                         </option>
                     </select>
-                    <select [(ngModel)]="bookingStatus" (ngModelChange)="getBookingList();" placeholder="Space Status" class="booking-list-filter-single w-100 mt-md-0 mt-3 " >
+                    <select [(ngModel)]="bookingStatus" (ngModelChange)="getBookingList();" placeholder="Space Status"
+                        class="booking-list-filter-single w-100 mt-md-0 mt-3 ">
                         <option value="" selected> Select Booking Status </option>
                         <option value="confirmed">Confirmed</option>
                         <option value="pending_Host_Confirmation">Pending Host Confirmation</option>
@@ -54,7 +55,9 @@
                     <div class="booking-all-list-single-img">
                         <h5>{{linkName}}</h5>
                         <a target="_blank" [href]=" webDomain + 'details/' + data?.linkName ">
-                            <img src="{{data?.images[0] ?? 'assets/images/details_placeholder_image.jpg' }} " alt="">
+                            <img loading="lazy" fetchpriority="low"
+                                src="{{data?.images[0] ?? 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp' }} "
+                                [alt]="data?.spaceName" [title]="data?.spaceName" width="200" height="150" />
                         </a>
                         <div class="booking-all-list-single-img-tag">
                             <p>{{data?.spaceType}}</p>
@@ -64,22 +67,23 @@
                         <div class="booking-all-list-single-cont-od">
                             <h4>{{data?.spaceName}}</h4>
                             <p class="booking-all-list-single-cont-location">
-                                <img src="assets/images/location-icon-orng.png" alt="">
+                                <app-icon name="location2" class="w-4 text-orange-400"></app-icon>
                                 <span>{{data?.location_name}} </span>
                             </p>
                             <div class="booking-list-single-info  booking-list-single-about-info ">
                                 <!-- <div class=" booking-list-single-info-single">
-                                   <img src="assets/images/user-icon-orng.png" alt="">
+                                   <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp" alt="">
                                     <p>{{data?.howManyPeopleInYourSpace || 1}} people</p>
                                 </div> -->
                                 <div *ngIf="data?.spaceType != 'Coworking Space'"
                                     class=" booking-list-single-info-single">
-                                    <img src="assets/images/clock-icon-orng.png" alt="">
-                                    <p>{{(data.minimum_hours == 0 || data.minimum_hours == null) ? 2 : data.minimum_hours/60}} hrs min</p>
+                                    <app-icon name="clock" class="w-3 text-orange-400"></app-icon>
+                                    <p class="pl-1">{{(data.minimum_hours == 0 || data.minimum_hours == null) ? 2 :
+                                        data.minimum_hours/60}} hrs min</p>
                                 </div>
                                 <div class="booking-list-single-info-single">
-                                    <img src="assets/images/scale-orng.png" alt="" class="sq-ft-icon">
-                                    <p>{{data?.spacesqft}} sqft</p>
+                                    <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
+                                    <p class="pl-1">{{data?.spacesqft}} sqft</p>
                                 </div>
                             </div>
 
@@ -88,8 +92,8 @@
                         <div class="booking-all-list-single-cont-bd">
                             <div class="booking-list-single-info booking-list-single-date-info ">
                                 <div class="booking-list-single-info-single">
-                                    <img src="assets/images/date-icon-o.png" alt="" class="date-icon">
-                                    <p>{{data?.startDate | date : 'dd-MM-YYYY'}}</p>
+                                    <app-icon name="calender" class="w-3 text-orange-400"></app-icon>
+                                    <p class="pl-1">{{data?.startDate | date : 'dd-MM-YYYY'}}</p>
                                 </div>
                                 <div class="watch-time booking-list-single-info-single">
                                     <p> <span> {{data?.ofDays|| data?.dayCount}}</span> Days</p>
@@ -106,22 +110,22 @@
                                 </div>
                                 <div class="booking-list-single-info-single booking-confirm"
                                     *ngIf="(data?.bookingStatus=='confirmed' || data?.bookingStatus=='confirm') && data?.paymentSuccess==1">
-                                    <img src="assets/images/bc-con.png" alt="" class="bc-icon">
-                                    <p>Confirmed</p>
+                                    <app-icon name="checkFill" class="w-5 text-green-600"></app-icon>
+                                    <p class="pl-1">Confirmed</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-cancel"
                                     *ngIf="data?.bookingStatus=='cancelled'">
-                                    <img src="assets/images/bc-c.png" alt="" class="bc-icon">
+                                    <app-icon name="cancel" class="w-5 text-red-600"></app-icon>
                                     <p>Canceled</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-cancel"
                                     *ngIf="data?.bookingStatus=='rejected'">
-                                    <img src="assets/images/bc-c.png" alt="" class="bc-icon">
+                                    <app-icon name="cancel" class="w-5 text-red-600"></app-icon>
                                     <p>Rejected</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-waiting"
                                     *ngIf="(data?.bookingStatus=='pending' || (data?.bookingStatus=='confirmed' && data?.paymentSuccess==0))">
-                                    <img src="assets/images/bc-w.png" alt="" class="bc-icon">
+                                    <app-icon name="warning" class="w-5 text-blue-600"></app-icon>
                                     <p *ngIf="data?.bookingStatus=='confirmed' && data?.paymentSuccess==0">Pending
                                         Payment</p>
                                     <p *ngIf="data?.bookingStatus=='pending' && data?.isInstant=='0'">Pending Host
@@ -139,11 +143,11 @@
                         type="button" class="custum-btn outline-orng-btn"> Leave a Review </button>
                     <button style="background: #fff  !important; color: #000e54 !important;"
                         *ngIf="data?.bookingStatus == 'confirmed'" (click)="getUserInvoiceByBookingId(data?.id)"
-                        type="button" class="custum-btn blu-btn "> <i class="fa fa-cloud-download"
-                            aria-hidden="true"></i> Invoice </button>
+                        type="button" class="custum-btn blu-btn "> <app-icon name="cloudDownload"
+                            class="w-4 text-blue-800"></app-icon> Invoice </button>
                     <button style="background: #2c864f; border: none !important;" type="button"
-                        routerLink="/booking-Detail/{{data?.id}}" class="custum-btn boking_btn">Booking Details <i
-                            class="fa fa-chevron-right" aria-hidden="true"></i> </button>
+                        routerLink="/booking-Detail/{{data?.id}}" class="custum-btn boking_btn">Booking Details
+                        <app-icon name="rightArrow" class="w-3 text-white"></app-icon> </button>
                 </div>
             </div>
             <div class="work-space-review-heading">

@@ -1,3 +1,13 @@
+<a class="call_icon">
+  <app-icon name="call" class="w-3 text-white"></app-icon>
+  <span class="call_icon_tooltip">+91 95133 92400</span>
+</a>
+
+<a href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0"
+  class="float whatsapp_icons" target="_blank">
+  <app-icon name="whatsapp" class="w-6 text-white"></app-icon>
+</a>
+
 <div class="page-wrapper">
   <!--header starts-->
   <header class="header transparent scroll-hide">
@@ -7,8 +17,9 @@
         <div class="site-navbar">
           <div class="row align-items-center">
             <div class="col-md-2 col-6">
-              <a class="navbar-brand" routerLink="/"><img src="assets/images/logo.png" alt="logo"
-                  class="img-fluid logo-top" /></a>
+              <a class="navbar-brand" routerLink="/"><img loading="lazy" fetchpriority="low"
+                  src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/logo.webp" width="130" height="37"
+                  alt="logo" title="logo" class="img-fluid logo-top" /></a>
             </div>
             <div class="col-md-10 col-6">
               <nav class="site-navigation float-right">
@@ -31,18 +42,14 @@
                   </li>
                   <li class="has-no-children" style="cursor: pointer;" (click)="openLoginDialog()"
                     *ngIf="!isLoggedIn && !userDetails?.firstName">
-                    <a class="login_btn"><svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                        viewBox="0 0 1024 1024" height="22px" width="22px" xmlns="http://www.w3.org/2000/svg">
-                        <defs></defs>
-                        <path
-                          d="M521.7 82c-152.5-.4-286.7 78.5-363.4 197.7-3.4 5.3.4 12.3 6.7 12.3h70.3c4.8 0 9.3-2.1 12.3-5.8 7-8.5 14.5-16.7 22.4-24.5 32.6-32.5 70.5-58.1 112.7-75.9 43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 32.6 32.5 58.1 70.4 76 112.5C865.7 417.8 875 464.1 875 512c0 47.9-9.4 94.2-27.8 137.8-17.8 42.1-43.4 80-76 112.5s-70.5 58.1-112.7 75.9A352.8 352.8 0 0 1 520.6 866c-47.9 0-94.3-9.4-137.9-27.8A353.84 353.84 0 0 1 270 762.3c-7.9-7.9-15.3-16.1-22.4-24.5-3-3.7-7.6-5.8-12.3-5.8H165c-6.3 0-10.2 7-6.7 12.3C234.9 863.2 368.5 942 520.6 942c236.2 0 428-190.1 430.4-425.6C953.4 277.1 761.3 82.6 521.7 82zM395.02 624v-76h-314c-4.4 0-8-3.6-8-8v-56c0-4.4 3.6-8 8-8h314v-76c0-6.7 7.8-10.5 13-6.3l141.9 112a8 8 0 0 1 0 12.6l-141.9 112c-5.2 4.1-13 .4-13-6.3z">
-                        </path>
-                      </svg> <span class="pl-1">Sign In</span></a>
+                    <a class="login_btn"><app-icon name="logIn" class="text-orange-400 w-5"></app-icon> <span
+                        class="pl-1">Sign In</span></a>
                   </li>
                   <li class="has-no-children" style="cursor: pointer;" *ngIf="isLoggedIn || userDetails?.firstName">
                     <div class="dropdown">
                       <button class="li-drp-btn" data-toggle="dropdown" type="button" aria-expanded="true"
-                        (click)="onMenueOpenClose()" [title]="userDetails?.name"> <i class="ion-person"></i> </button>
+                        (click)="onMenueOpenClose()" [title]="userDetails?.name"> <app-icon name="user"
+                          class="w-2 text-white"></app-icon> </button>
                       <ul id="myDropdown" class="dropdown-menu userInfoMenu" data-toggle="collapse"
                         aria-expanded="false" data-target="#bs-example-navbar-collapse-2" style="width: 250px;">
                         <li *ngFor="let sbl of sideBarList" data-toggle="collapse" aria-expanded="true">
@@ -56,36 +63,17 @@
 
               </nav>
               <div class="d-lg-none sm-right mobile-nav-icons d-flex align-items-center" style="gap:15px">
-                <li> <a href="tel:+91 95133 92400" class="mobile-bar"><span class=""><svg stroke="currentColor"
-                        fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="20px" width="20px"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M426.666 330.667a250.385 250.385 0 0 1-75.729-11.729c-7.469-2.136-16-1.073-21.332 5.333l-46.939 46.928c-60.802-30.928-109.864-80-140.802-140.803l46.939-46.927c5.332-5.333 7.462-13.864 5.332-21.333-8.537-24.531-12.802-50.136-12.802-76.803C181.333 73.604 171.734 64 160 64H85.333C73.599 64 64 73.604 64 85.333 64 285.864 226.136 448 426.666 448c11.73 0 21.334-9.604 21.334-21.333V352c0-11.729-9.604-21.333-21.334-21.333z">
-                        </path>
-                      </svg></span>
+                <li> <a href="tel:+91 95133 92400" class="mobile-bar"><span class=""><app-icon name="call"
+                        class="w-3 text-dark"></app-icon></span>
                   </a></li>
-                <li><a routerLink="/list-with-us" class="mobile-bar"><span class=""><svg stroke="currentColor"
-                        fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20px" width="20px"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill="none" d="M0 0h24v24H0z"></path>
-                        <path
-                          d="M15 11.68V11L8 6l-7 5v10h5v-6h4v6h1.68c-.43-.91-.68-1.92-.68-3 0-2.79 1.64-5.19 4-6.32zM23 13.11V3H10v1.97l7 5v1.11c.33-.05.66-.08 1-.08 1.96 0 3.73.81 5 2.11zM17 7h2v2h-2V7z">
-                        </path>
-                        <path
-                          d="M23 18c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5 5-2.24 5-5zm-5.5 3v-2.5H15v-1h2.5V15h1v2.5H21v1h-2.5V21h-1z">
-                        </path>
-                      </svg></span>
+                <li><a routerLink="/list-with-us" class="mobile-bar"><span class=""><app-icon name="homePlus"
+                        class="w-5 text-dark"></app-icon></span>
                   </a></li>
                 <li class="has-no-children" style="cursor: pointer;" *ngIf="isLoggedIn || userDetails?.firstName">
                   <div class="dropdown">
                     <button class="bg-transparent border-0 p-0 mobile-bar" data-toggle="dropdown" type="button"
                       aria-expanded="true" (click)="onMenueOpenClose2()" [title]="userDetails?.name"> <span
-                        class=""><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
-                          height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z">
-                          </path>
-                        </svg></span> </button>
+                        class=""><app-icon name="user" class="w-3 text-dark"></app-icon></span> </button>
                     <ul id="myDropdown2" class="dropdown-menu userInfoMenu" data-toggle="collapse" aria-expanded="false"
                       data-target="#bs-example-navbar-collapse-2" style="width: 250px;">
                       <li *ngFor="let sbl of sideBarList" data-toggle="collapse" aria-expanded="true">
@@ -96,7 +84,7 @@
                   </div>
                 </li>
                 <a *ngIf="!isLoggedIn || !userDetails?.firstName" class="" (click)="openLoginDialog()">
-                  <span class="fa-solid fa-right-to-bracket" style="color:#000"></span>
+                  <app-icon name="logOut" class="w-6 text-dark"></app-icon>
                 </a>
               </div>
               <!-- <div class="add-list float-right">
@@ -352,16 +340,20 @@
               </ul> -->
               <ul class="social-buttons style2">
                 <li>
-                  <a href="https://www.facebook.com/flexospaces/"><i class="ion-social-facebook"></i></a>
+                  <a href="https://www.facebook.com/flexospaces/"><app-icon name="facebook"
+                      class="w-5 text-orange-400"></app-icon></a>
                 </li>
                 <li>
-                  <a href="https://twitter.com/flexospaces"><i class="ion-social-twitter"></i></a>
+                  <a href="https://twitter.com/flexospaces"><app-icon name="twitter"
+                      class="w-5 text-orange-400"></app-icon></a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com/company/flexospaces/"><i class="ion-social-linkedin"></i></a>
+                  <a href="https://www.linkedin.com/company/flexospaces/"><app-icon name="linkedin"
+                      class="w-5 text-orange-400"></app-icon></a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/flexospaces/"><i class="ion-social-instagram"></i></a>
+                  <a href="https://www.instagram.com/flexospaces/"><app-icon name="instagram"
+                      class="w-5 text-orange-400"></app-icon></a>
                 </li>
               </ul>
             </div>
@@ -374,15 +366,17 @@
         <div class="row align-items-center">
           <!-- <div class="col-md-6">
             <div class="payment-method">
-              <img src="assets/images/payment/payment-1.png" alt="...">
-              <img src="assets/images/payment/payment-2.png" alt="...">
-              <img src="assets/images/payment/payment-3.png" alt="...">
+              <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/payment/payment-1.webp" alt="...">
+              <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/payment/payment-2.webp" alt="...">
+              <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/payment/payment-3.webp" alt="...">
             </div>
           </div> -->
           <div class="col-lg-6 col-md-6">
             <div class="footer-logo">
               <a routerLink="/">
-                <img src="assets/images/logo.png" alt="logo" /></a>
+                <img loading="lazy" fetchpriority="low"
+                  src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/logo.webp" alt="footer logo"
+                  title="footer logo" width="115" height="33" /></a>
             </div>
           </div>
           <div class="col-md-6 text-right sm-left">

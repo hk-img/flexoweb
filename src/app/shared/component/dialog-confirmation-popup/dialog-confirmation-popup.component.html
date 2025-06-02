@@ -1,5 +1,6 @@
 <div class="f-w-mdl">
-  <img *ngIf="data.title !== 'Cancel Booking' && !data.price"   src="assets/images/un-fab-icon.png" alt="">
+  <img *ngIf="data.title !== 'Cancel Booking' && !data.price"
+    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/un-fab-icon.webp" alt="">
   <h4>{{data.title}}</h4>
   <p *ngIf="data.title === 'Cancel Booking' ">{{data.message}}</p>
   <div *ngIf="data.price">
@@ -19,7 +20,8 @@
     </table>
   </div>
   <div *ngIf="data.title === 'Cancel Booking' || data.price " class="btn-grp-c">
-    <button mat-button mat-dialog-close cdkFocusInitial class=" custum-btn outline-orng-btn" (click)="confirmed()" >Ok</button>
+    <button mat-button mat-dialog-close cdkFocusInitial class=" custum-btn outline-orng-btn"
+      (click)="confirmed()">Ok</button>
     <button mat-button mat-dialog-close class=" custum-btn">Cancel</button>
   </div>
   <div *ngIf="data.title !== 'Cancel Booking' && !data.price  " class="btn-grp-c">

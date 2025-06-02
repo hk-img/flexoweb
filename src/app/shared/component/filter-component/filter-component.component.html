@@ -1,19 +1,22 @@
-
 <div class="position-relative">
     <div class="detail-container row align-items-center">
         <p class="col-2 pe-0">Filters</p>
-        <div  class="book-btn col-md-3 col-4 text-center">
+        <div class="book-btn col-md-3 col-4 text-center">
             <button class="btn filter_btn w-100 text-white p-2" (click)="filters()">Apply</button>
         </div>
         <div class="book-btn col-md-3 col-4 text-center">
             <button class="btn filter_btn w-100 text-white p-2" (click)="clearFilters()">Clear</button>
         </div>
-        <i  class="col-md-4 col-2 text-right cross material-icons" style="cursor: pointer;" (click)="closeDialog(null)">
+        <!-- <i class="col-md-4 col-2 text-right cross material-icons" (click)="closeDialog(null)">
             close
-        </i>
+        </i> -->
+        <span (click)="closeDialog(null)" class="col-md-4 col-2 text-right cross" style="cursor: pointer;">
+            <app-icon name="close" class="w-4 text-dark"></app-icon>
+        </span>
+
     </div>
     <hr>
-    
+
     <div class="form-container position-relative">
         <div>
             <p class="text-head">Price</p>
@@ -28,9 +31,10 @@
         <hr>
         <h4 class="mb-3">Sort By:</h4>
         <div>
-            <mat-radio-group class="filter_radio d-flex align-items-center" style="gap:12px;flex-wrap: wrap;" aria-label="Select an option" (change)="radioChange($event)" [(ngModel)]="priceRange">
-                <mat-radio-button value="review">Rating High to Low </mat-radio-button> 
-                <mat-radio-button value="high_to_low">Price High to Low</mat-radio-button> 
+            <mat-radio-group class="filter_radio d-flex align-items-center" style="gap:12px;flex-wrap: wrap;"
+                aria-label="Select an option" (change)="radioChange($event)" [(ngModel)]="priceRange">
+                <mat-radio-button value="review">Rating High to Low </mat-radio-button>
+                <mat-radio-button value="high_to_low">Price High to Low</mat-radio-button>
                 <mat-radio-button value="low_to_high">Price Low to High</mat-radio-button>
             </mat-radio-group>
         </div>

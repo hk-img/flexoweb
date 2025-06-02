@@ -1,52 +1,57 @@
 <div class="booking-list scheduled-visits-c">
 	<div class="container">
-	  <div class="booking-list-hrader-filters">
-		<h2>Booking inquiries</h2>
-	  </div>
-	  <div class="booking-all-list" *ngFor="let item of bookingRequestInquiriesList">
-		<div class="booking-all-list-single">  
-		  <div class="booking-all-list-single-img-cont">
-			<a [href]=" webDomain + 'coworking-space/' + item?.linkName " class="booking-all-list-single-img" target="_blank" >            
-				<img (error)="handleImageError($event)" src="{{item?.images[0]}}" alt="">
-				<div class="booking-all-list-single-img-tag">
-					<p>{{item?.spaceType}}</p>
+		<div class="booking-list-hrader-filters">
+			<h2>Booking inquiries</h2>
+		</div>
+		<div class="booking-all-list" *ngFor="let item of bookingRequestInquiriesList">
+			<div class="booking-all-list-single">
+				<div class="booking-all-list-single-img-cont">
+					<a [href]=" webDomain + 'coworking-space/' + item?.linkName " class="booking-all-list-single-img"
+						target="_blank">
+						<img (error)="handleImageError($event)" src="{{item?.images[0]}}" alt="">
+						<div class="booking-all-list-single-img-tag">
+							<p>{{item?.spaceType}}</p>
+						</div>
+					</a>
+					<div class="booking-all-list-single-cont">
+						<div class="booking-all-list-single-cont-od">
+							<h4> {{item?.spaceName}} </h4>
+							<p class="booking-all-list-single-cont-location">
+								<img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp"
+									alt="">
+								<span>{{item?.location_name}} </span>
+							</p>
+							<div class="booking-list-single-info  booking-list-single-about-info ">
+								<div class=" booking-list-single-info-single">
+									<img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp"
+										alt="">
+									<p>{{item?.userName}}</p>
+								</div>
+								<div class=" booking-list-single-info-single">
+									<img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/mail-icon-o.webp"
+										alt="">
+									<p>{{item?.userEmail}}</p>
+								</div>
+								<div class="booking-list-single-info-single">
+									<img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/call-ph-o.webp"
+										alt="" class="sq-ft-icon">
+									<p>{{item?.userMobile}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="booking-all-list-single-cont-bd" *ngIf="item?.spaceType == 'Coworking Space'">
+							<div class="booking-list-single-info booking-list-single-date-info ">
+								<div class="booking-list-single-info-single">
+									<p> {{item?.coworkingSpaceType ? item?.coworkingSpaceType : 'N/A'}} </p>
+								</div>
+								<div class="booking-list-single-info-single">
+									<p> {{item?.inquirySpaceCapacity}} seats </p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</a>
-			<div class="booking-all-list-single-cont">
-				<div class="booking-all-list-single-cont-od">
-					<h4> {{item?.spaceName}} </h4>
-					<p class="booking-all-list-single-cont-location" > 
-						<img src="assets/images/location-icon-orng.png" alt="">
-						<span>{{item?.location_name}} </span> 
-					</p>
-					<div class="booking-list-single-info  booking-list-single-about-info ">                           
-						<div class=" booking-list-single-info-single">
-						  <img src="assets/images/user-icon-orng.png" alt="">
-							<p>{{item?.userName}}</p>
-						</div>
-						<div class=" booking-list-single-info-single">
-							<img src="assets/images/mail-icon-o.png" alt="">
-							<p>{{item?.userEmail}}</p>
-						</div>
-						<div class="booking-list-single-info-single">
-						  <img src="assets/images/call-ph-o.png" alt="" class="sq-ft-icon">
-							<p>{{item?.userMobile}}</p>
-						</div>
-					</div>  
-				</div>
-				<div class="booking-all-list-single-cont-bd" *ngIf="item?.spaceType == 'Coworking Space'">
-					<div class="booking-list-single-info booking-list-single-date-info ">                           
-						<div class="booking-list-single-info-single">							
-							<p> {{item?.coworkingSpaceType ? item?.coworkingSpaceType : 'N/A'}} </p>
-						</div>
-						<div class="booking-list-single-info-single">						
-						  <p> {{item?.inquirySpaceCapacity}} seats </p>
-					  </div>					  
-					</div>                 
-				</div> 
 			</div>
-		  </div>  
-		</div> 		
-	  </div>
+		</div>
 	</div>
-  </div>
+</div>

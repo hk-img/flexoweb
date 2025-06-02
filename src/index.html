@@ -3,15 +3,16 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>
-    One Stop Shop For Coworking Spaces | Flexible and Shared Offices
-  </title>
+  <title>Find Coworking & Office Spaces Across India | Flexo</title>
   <meta name="description"
-    content="Flexo™ is your one stop shop for coworking spaces and shared offices. Use our free service to find your perfect office now. We are flexible office space experts. " />
+    content="Discover top coworking spaces, managed offices, and commercial properties. Find your perfect office with Flexo. Trusted by leading companies - Flexo" />
   <base href="/" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,18 +28,10 @@
   <!-- Whatsapp float button -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-  <a class="call_icon">
-    <i class="fa fa-phone" style="line-height: 0;"></i>
-    <span class="call_icon_tooltip">+91 95133 92400</span>
-  </a>
 
-  <a href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0"
-    class="float whatsapp_icons" target="_blank">
-    <i class="fa fa-whatsapp" style="line-height: 0;"></i>
-  </a>
 
   <!-- Google Tag Manager -->
-  <script>
+  <!-- <script>
     (function (w, d, s, l, i) {
       w[l] = w[l] || [];
       w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -49,7 +42,7 @@
       j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
       f.parentNode.insertBefore(j, f);
     })(window, document, "script", "dataLayer", "GTM-P4RBCKQ");
-  </script>
+  </script> -->
   <!-- End Google Tag Manager -->
   <!-- for -->
 </head>
@@ -63,23 +56,47 @@
 <body>
   <app-root>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4RBCKQ" height="0" width="0"
-        style="display: none; visibility: hidden"></iframe></noscript>
+    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4RBCKQ" height="0" width="0"
+        style="display: none; visibility: hidden"></iframe></noscript> -->
     <!-- End Google Tag Manager (noscript) -->
     <div class="preloader">
       <img src="assets/images/preloader.gif" alt="..." />
     </div>
   </app-root>
+  <object data="/assets/icons/sprite.svg" type="image/svg+xml" style="display: none;"></object>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('assets/icons/sprite.svg')
+        .then(response => response.text())
+        .then(svgContent => {
+          const div = document.createElement('div');
+          div.style.display = 'none';
+          div.innerHTML = svgContent;
+          document.body.appendChild(div);
+          console.log('SVG sprite loaded successfully');
+        })
+        .catch(error => {
+          console.error('Error loading SVG sprite:', error);
+        });
+    });
+  </script>
+
+
+  <!-- Inlined SVG sprite for icons -->
+  <!-- src/assets/sprite.svg -->
+
+
 </body>
 
 <script src="assets/js/plugin.js"></script>
 
-<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+<!-- <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" /> -->
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
 <script src="assets/js/main.js"></script>
 <!-- Facebook Pixel Code -->
-<script>
+<!-- <script>
   !(function (f, b, e, v, n, t, s) {
     if (f.fbq) return;
     n = f.fbq = function () {
@@ -107,7 +124,7 @@
   fbq("track", "PageView");
 </script>
 <noscript><img height="1" width="1" style="display: none"
-    src="https://www.facebook.com/tr?id=422551122103116&ev=PageView&noscript=1" /></noscript>
+    src="https://www.facebook.com/tr?id=422551122103116&ev=PageView&noscript=1" /></noscript> -->
 
 <!-- End Facebook Pixel Code -->
 <!-- Global site tag (gtag.js) - Google Analytics -->

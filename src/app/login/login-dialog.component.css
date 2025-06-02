@@ -64,7 +64,7 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: 80%;
+  /* width: 80%; */
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -321,7 +321,7 @@
 
 @media only screen and (max-width: 1799px) {
   .login-register .login-register-input {
-    padding: 35px 0;
+    padding: 35px;
   }
 
   .login-register .login-register-input .login-register-inutp-other {
@@ -579,7 +579,7 @@ span.timer {
 ::ng-deep .ng-select .ng-select-container {
   border-radius: 4px;
   border: 1px solid #ddd;
-  min-height: 49px;
+  /* min-height: 49px; */
   height: 49px;
   align-items: center;
 }
@@ -666,9 +666,9 @@ span.timer {
 ::ng-deep .ng-value {
   font-size: 12px;
 }
-::ng-deep .ng-dropdown-panel {
+::ng-deep .cdk-overlay-pane .ng-dropdown-panel {
   text-align: left;
-  width: 33rem !important;
+  width: auto !important;
 }
 
 .input-group-lg > .form-control,

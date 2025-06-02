@@ -1,8 +1,10 @@
 <div class="hero hero_sec">
   <div class="backgrounds animateIMG">
     <div class="homeInnerSwiper" *ngFor="let background of backgrounds; let i = index; trackBy: trackByBackground"
-        [ngStyle]="{'background-image': 'url(' + background + ')'}"
-        [class.active]="i === currentImageIndex">
+      [class.active]="i === currentImageIndex">
+      <img [attr.fetchpriority]="i === 0 ? 'high' : 'low'" [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+        [attr.decoding]="i === 0 ? 'auto' : null" [src]="background" alt="Slide Image" title="Slide Image"
+        class="h-100 w-100" width="1526" height="613" />
     </div>
   </div>
   <div class="hero-slide">
@@ -11,12 +13,12 @@
         <div class="row mb_row">
           <div class="col-12 mb_text_content">
             <h1 class="hero-title v2 ml-0">
-              Discover Amazing 
+              Discover Amazing
               <div class="text animateIMG">
-                <span *ngFor="let text of texts; let i = index; trackBy: trackByText" 
-                    [class.fade-out]="i === currentImageIndex && isTextFadingOut"
-                    [class.active]="i === currentTextIndex && !isTextFadingOut">
-                    {{ text }}
+                <span *ngFor="let text of texts; let i = index; trackBy: trackByText"
+                  [class.fade-out]="i === currentImageIndex && isTextFadingOut"
+                  [class.active]="i === currentTextIndex && !isTextFadingOut">
+                  {{ text }}
                 </span>
               </div>
             </h1>
@@ -74,9 +76,11 @@
     </div>
     <div class="col-12">
       <ngx-slick-carousel class="carousel" #companyModal="slick-carousel" [config]="companyConfig">
-        <div ngxSlickItem class="swiper-slide popular-item slide" *ngFor="let logo of companyLogos; trackBy: trackByLogo">
+        <div ngxSlickItem class="swiper-slide popular-item slide"
+          *ngFor="let logo of companyLogos; trackBy: trackByLogo">
           <div class="">
-            <img [src]="logo.src" [alt]="logo.alt" loading="lazy" />
+            <img loading="lazy" fetchpriority="low" [src]="logo.src" width="145" height="145" [alt]="logo.alt"
+              [title]="logo.alt" class="ratio-1x1" />
           </div>
         </div>
       </ngx-slick-carousel>
@@ -96,11 +100,10 @@
       <div class="col-lg-4 col-md-5 col-12 px-md-1 mb-md-0 mb-1">
         <a style="cursor: pointer;" (click)="navigateToCity('Mumbai','Mumbai, maharashtra, India (City)')">
           <div class="city-img-box city_main_img position-relative">
-            <img
-              src="assets/images/city-slide-images/Mumbai.webp"
-              class="w-100 img-fluid" />
+            <img loading="lazy" fetchpriority="low"
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Mumbai.webp"
+              class="w-100 img-fluid" width="419" height="405" alt="Mumbai" title="Mumbai" />
             <div class="city_txt">
-   
               <h3 class="text-white m-0">Mumbai</h3>
             </div>
           </div>
@@ -114,10 +117,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Bangalore','Bangalore (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Bengaluru.webp"
-                      class="w-100 img-fluid" />
-                    <div class="city_txt">        
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Bengaluru.webp"
+                      width="281" height="200" class="w-100 img-fluid" alt="Bengaluru" title="Bengaluru" />
+                    <div class="city_txt">
                       <h3 class="text-white m-0">Bengaluru</h3>
                     </div>
                   </div>
@@ -126,11 +129,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Hyderabad','Hyderabad (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Hyderabad.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Hyderabad.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Hyderabad" title="Hyderabad" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Hyderabad</h3>
                     </div>
                   </div>
@@ -143,11 +145,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Pune','Pune (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Pune.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Pune.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Pune" title="Pune" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Pune</h3>
                     </div>
                   </div>
@@ -156,11 +157,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Delhi','Delhi (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Delhi.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Delhi.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Delhi" title="Delhi" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Delhi</h3>
                     </div>
                   </div>
@@ -173,11 +173,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Gurgaon','Gurgaon (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Gurgaon.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Gurgaon.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Gurgaon" title="Gurgaon" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Gurgaon</h3>
                     </div>
                   </div>
@@ -186,11 +185,11 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Noida','Noida (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Noida.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Noida.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Noida" title="Noida" />
                     <div class="city_txt">
-           
+
                       <h3 class="text-white m-0">Noida</h3>
                     </div>
                   </div>
@@ -203,11 +202,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Chennai','Chennai (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Chennai.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Chennai.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Chennai" title="Chennai" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Chennai</h3>
                     </div>
                   </div>
@@ -216,11 +214,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Ahmedabad','Ahmedabad (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Ahmedabad.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Ahmedabad.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Ahmedabad" title="Ahmedabad" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Ahmedabad</h3>
                     </div>
                   </div>
@@ -233,11 +230,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Jaipur','Jaipur (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Jaipur.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Jaipur.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Jaipur" title="Jaipur" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Jaipur</h3>
                     </div>
                   </div>
@@ -246,11 +242,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Coimbatore','Coimbatore (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Coimbatore.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Coimbatore.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Coimbatore" title="Coimbatore" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Coimbatore</h3>
                     </div>
                   </div>
@@ -264,11 +259,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Kochi','Kochi (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Kochi.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Kochi.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Kochi" title="Kochi" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Kochi</h3>
                     </div>
                   </div>
@@ -277,11 +271,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Indore','Indore (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Indore.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Indore.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Indore" title="Indore" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Indore</h3>
                     </div>
                   </div>
@@ -294,11 +287,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Lucknow','Lucknow (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Lucknow.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Lucknow.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Lucknow" title="Lucknow" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Lucknow</h3>
                     </div>
                   </div>
@@ -307,11 +299,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Chandigarh','Chandigarh (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Chandigarh.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Chandigarh.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Chandigarh" title="Chandigarh" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Chandigarh</h3>
                     </div>
                   </div>
@@ -324,11 +315,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Goa','Goa (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Goa.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Goa.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Goa" title="Goa" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Goa</h3>
                     </div>
                   </div>
@@ -337,11 +327,10 @@
               <div class="col-12 mb-1 px-2">
                 <a style="cursor: pointer;" (click)="navigateToCity('Surat','Surat (City)')">
                   <div class="city-img-box position-relative">
-                    <img
-                      src="assets/images/city-slide-images/Surat.webp"
-                      class="w-100 img-fluid" />
+                    <img loading="lazy" fetchpriority="low"
+                      src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Surat.webp"
+                      class="w-100 img-fluid" width="281" height="200" alt="Surat" title="Surat" />
                     <div class="city_txt">
-           
                       <h3 class="text-white m-0">Surat</h3>
                     </div>
                   </div>
@@ -351,7 +340,6 @@
           </div>
         </ngx-slick-carousel>
       </div>
-
     </div>
   </div>
 </div>
@@ -369,8 +357,9 @@
         [config]="workSpaceConfig" responsive="breakpoints">
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/private-cabins.webp" class="img-fluid w-100" alt="">
-
+            <img loading="lazy" fetchpriority="low"
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/private-cabins.webp"
+              class="img-fluid w-100" alt="private cabins" title="private cabins" width="303" height="400" />
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
                 <h5 class="m-0 text-white">Private Cabins</h5>
@@ -381,12 +370,7 @@
                   <p class="text-white">3 to 50</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
-                  Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                      height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                      </path>
-                    </svg></span>
+                  Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
             </div>
@@ -394,7 +378,9 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/private-offices.webp" class="img-fluid w-100" alt="">
+            <img loading="lazy" fetchpriority="low"
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/private-offices.webp"
+              class="img-fluid w-100" alt="Private Offices" title="Private Offices" width="303" height="400" />
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -406,12 +392,7 @@
                   <p class="text-white">15 to 500</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
-                  Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                      height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                      </path>
-                    </svg></span>
+                  Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
             </div>
@@ -419,7 +400,9 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/managed-offices.webp" class="img-fluid w-100" alt="">
+            <img loading="lazy" fetchpriority="low"
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/managed-offices.webp"
+              class="img-fluid w-100" alt="Managed Offices" title="Managed Offices" width="303" height="400" />
 
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
@@ -431,12 +414,7 @@
                   <p class="text-white">25 to 1000+</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
-                  Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                      height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                      </path>
-                    </svg></span>
+                  Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
             </div>
@@ -444,8 +422,9 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets/images/built-to-suit.webp" class="img-fluid w-100" alt="">
-
+            <img loading="lazy" fetchpriority="low"
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/built-to-suit.webp"
+              class="img-fluid w-100" alt="Built to Suit" title="Built to Suit" width="303" height="400" />
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
                 <h5 class="m-0 text-white">Built to Suit</h5>
@@ -456,12 +435,7 @@
                   <p class="text-white">25 to 1000+</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
-                  Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                      height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                      </path>
-                    </svg></span>
+                  Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
             </div>
@@ -469,8 +443,9 @@
         </div>
         <div ngxSlickItem class="swiper-slide popular-item slide">
           <div class="workspace_box position-relative">
-            <img src="assets//images/desk-spaces.webp" class="img-fluid w-100" alt="">
-
+            <img loading="lazy" fetchpriority="low"
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/desk-spaces.webp" class="img-fluid w-100"
+              alt="Desk spaces" title="Desk spaces" width="303" height="400" />
             <div class="workSpace_content">
               <div class="work_space_head pb-1">
                 <h5 class="m-0 text-white">Desk spaces</h5>
@@ -481,12 +456,7 @@
                   <p class="text-white">1 to 50</p>
                 </div>
                 <a href="javascript:void(0);" class="btn_flex">
-                  Explore <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                      height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                      </path>
-                    </svg></span>
+                  Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
             </div>
@@ -510,50 +480,74 @@
         <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig">
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-1.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-1.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="WeWork logo" title="WeWork logo" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-2.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-2.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="awfis logo" title="awfis logo" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-3.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-3.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="springBoard logo" title="springBoard logo" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-4.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-4.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="smartWork logo" title="smartWork logo" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-5.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-5.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="indiqube logo" title="indiqube logo" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-6.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-6.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="regus logo" title="regus logo" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/brand-logo-7.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-7.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="behive logo" title="behive logo" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/brand-logo-8.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-8.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="coworking logo" title="coworking logo" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/CoWrksLogo2022.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/CoWrksLogo2022.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="coworks logo" title="coworks logo" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/efc-logo-1.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/efc-logo-1.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="efc logo" title="efc logo" />
             </div>
           </div>
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
-              <img src="assets/images/brand-logo/IncuspazeLogo.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/IncuspazeLogo.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="incuspaze logo" title="incuspaze logo" />
             </div>
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center mt-2">
-              <img src="assets/images/brand-logo/Tablespace-New-Logo.webp" class="w-100 img-fluid" />
+              <img loading="lazy" fetchpriority="low"
+                src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/Tablespace-New-Logo.webp"
+                class="w-100 img-fluid" width="185" height="40" alt="tableSpace logo" title="tableSpace logo" />
             </div>
           </div>
         </ngx-slick-carousel>
@@ -573,7 +567,7 @@
           <div class="list_items position-relative px-4 py-3 mb-2">
             <div><span class="space_count">1</span></div>
             <h6 class="m-0">Share Your Requirements</h6>
-            <p>Tell us your needs and a dedicated  advisor will handle the rest.</p>
+            <p>Tell us your needs and a dedicated advisor will handle the rest.</p>
           </div>
           <div class="list_items position-relative px-4 py-3 mb-2">
             <div><span class="space_count">2</span></div>
@@ -597,8 +591,10 @@
       </div>
       <div class="col-lg-6 col-md-12 col-12 mt-lg-0 mt-md-4 mt-4">
         <div class="workspace_img">
-          <img src="assets/images/find-work-space-1.jpg"
-            style="height: 544px; border-radius: 7px;object-fit: cover;" alt="" class="w-100 img-fluid">
+          <img loading="lazy" fetchpriority="low"
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/find-work-space-1.webp"
+            style="height: 544px; border-radius: 7px;object-fit: cover;" alt="Your Perfect Workspace"
+            title="Your Perfect Workspace" class="w-100 img-fluid" width="610" height="544" />
         </div>
       </div>
     </div>
@@ -647,7 +643,10 @@
 </div>
 
 
-<div class="container-fluid why_choose section-padding">
+<div class="container-fluid why_choose section-padding position-relative">
+  <img fetchpriority="low" loading="lazy" class="inset-0 whyChooseImg position-absolute h-100 w-100 object-cover"
+    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/why-choose-flexo.webp" width="1526" height="539"
+    alt="Why choose Flexo ?" title="Why choose Flexo ?" />
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-12 col-12">
@@ -658,12 +657,8 @@
           experts find what you're looking for.</p>
         <div class="flex_btn mt-3">
           <a href="" class="btn" style="white-space: normal;"> Claim Your Free Consultation with Zero Brokerage Offer
-            Now! <span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z">
-                </path>
-              </svg></span></a>
+            Now! <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
+          </a>
         </div>
       </div>
       <div class="col-lg-6 col-md-12 col-12 mt-lg-0 mt-md-4 mt-4">
@@ -672,7 +667,7 @@
             <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/share-your-requirements.svg" alt="" class="img-fluid">
+                  <app-icon name="shareYourRequirements" class="w-14 text-white"></app-icon>
                 </div>
                 <h6 class="m-0">Tell Us Your Needs</h6>
                 <p class="text-white">Share your requirements, and a dedicated workspace advisor will handle the rest.
@@ -682,10 +677,10 @@
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-12 mb-4">
-              <div class="choose_sec h-100">
+            <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/fast-service.svg" alt="" class="img-fluid">
+                  <app-icon name="fastService" class="w-14 text-white"></app-icon>
                 </div>
                 <h6 class="m-0">Fast & Efficient Service</h6>
                 <p class="text-white">Experience a quick turnaround time and a smooth process from search to move-in.
@@ -695,10 +690,10 @@
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-12 mb-4">
-              <div class="choose_sec h-100">
+            <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/largest-coverage.svg" alt="" class="img-fluid">
+                  <app-icon name="largestCoverage" class="w-14 text-white"></app-icon>
                 </div>
                 <h6 class="m-0">Largest Coverage</h6>
                 <p class="text-white">Access 1800+ coworking spaces across India with Flexo's extensive network.</p>
@@ -707,13 +702,14 @@
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-12 mb-4">
-              <div class="choose_sec h-100">
+            <div class="choose_sec h-100">
               <div class="whychos_box text-center position-relative p-4">
                 <div class="choose_icon mb-2">
-                  <img src="assets/images/dedicated-advisor.svg" alt="" class="img-fluid">
+                  <app-icon name="dedicatedAdvisor" class="w-14 text-white"></app-icon>
                 </div>
                 <h6 class="m-0">Dedicated Workspace Experts</h6>
-                <p class="text-white">Get personalized,  support from experts for shortlisting, negotiating and finalizing your perfect office.</p>
+                <p class="text-white">Get personalized, support from experts for shortlisting, negotiating and
+                  finalizing your perfect office.</p>
               </div>
 
             </div>
@@ -729,35 +725,36 @@
     <div class="row">
       <div class="col-12 text-center mb-4">
         <h2 class="section-title v1">Your Office Search, Simplified By Experts</h2>
-        <p style="font-size: 18px;">With over 1,000 businesses and professionals helped, we bring unmatched expertise and personalized service to
+        <p style="font-size: 18px;">With over 1,000 businesses and professionals helped, we bring unmatched expertise
+          and personalized service to
           every client.</p>
       </div>
     </div>
     <div class="row mt-4">
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
-          <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+          <div class="team_icon position-absolute"> <app-icon name="check" class="w-4 text-orange-400"></app-icon></div>
           <h5 class="mb-0">Space shortlisting </h5>
           <p>We find the perfect office that suits your needs and budget.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
-          <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+          <div class="team_icon position-absolute"> <app-icon name="check" class="w-4 text-orange-400"></app-icon></div>
           <h5 class="mb-0">Personalized Tours </h5>
           <p>Visit spaces that match your criteria—saving you time and effort.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
-          <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+          <div class="team_icon position-absolute"> <app-icon name="check" class="w-4 text-orange-400"></app-icon></div>
           <h5 class="mb-0">Smart Price Negotiation </h5>
           <p>We secure the best deal, so you can focus on growing your business.</p>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="team_box position-relative px-4 py-2 bg-white">
-          <div class="team_icon position-absolute"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+          <div class="team_icon position-absolute"> <app-icon name="check" class="w-4 text-orange-400"></app-icon></div>
           <h5 class="mb-0">Seamless Contract Handling</h5>
           <p>From paperwork to move in, we make it effortless.</p>
         </div>
@@ -776,7 +773,7 @@
       <!-- <div class="col-md-4">
         <div class="work-process-content v1 text-center">
           <div class="process-icon v1">
-            <img src="assets/images/others/1.png" alt="...">
+            <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/others/1.png" alt="...">
             <span>1</span>
           </div>
           <h4 class="title">Explore The City</h4>
@@ -789,7 +786,7 @@
       <div class="col-md-4">
         <div class="work-process-content v1 text-center">
           <div class="process-icon v1">
-            <img src="assets/images/others/2.png" alt="...">
+            <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/others/2.png" alt="...">
 
             <span>2</span>
 
@@ -804,7 +801,7 @@
       <div class="col-md-4">
         <div class="work-process-content v1 text-center">
           <div class="process-icon v1">
-            <img src="assets/images/others/3.png" alt="...">
+            <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/others/3.png" alt="...">
 
             <span>3</span>
           </div>
@@ -825,7 +822,9 @@
                 <div class="work-process-content v1 p-4 h-100 d-flex flex-column">
                   <div class="d-flex align-items-center mb-2">
                     <div class="process-icon v1" style="flex-shrink: 0;">
-                      <img [src]="'assets/images/testimonials/' + testimonial.image" />
+                      <img loading="lazy" fetchpriority="low"
+                        [src]="'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/' + testimonial.image"
+                        width="71" height="94" [alt]="testimonial.name" [title]="testimonial.name" />
                       <!-- <span>{{testimonial.id}}</span> -->
                     </div>
                     <div class="pl-3">
@@ -838,26 +837,26 @@
                         testimonial.companyName
                         }}</span>
                       <ul class="product-rating text-left">
-                        <li><i class="ion-android-star"></i></li>
-                        <li><i class="ion-android-star"></i></li>
-                        <li><i class="ion-android-star"></i></li>
-                        <li><i class="ion-android-star"></i></li>
-                        <li><i class="ion-android-star"></i></li>
+                        <li><app-icon name="star" class="w-3 text-yellow"></app-icon></li>
+                        <li><app-icon name="star" class="w-3 text-yellow"></app-icon></li>
+                        <li><app-icon name="star" class="w-3 text-yellow"></app-icon></li>
+                        <li><app-icon name="star" class="w-3 text-yellow"></app-icon></li>
+                        <li><app-icon name="star" class="w-3 text-yellow"></app-icon></li>
                       </ul>
                     </div>
                   </div>
                   <p class="info">
                     {{ testimonial.content }}
                   </p>
-                  <div class="quote_icon position-absolute">
-                    <i class="fa fa-quote-right" aria-hidden="true"></i>
+                  <div class="quote_icon position-absolute" style="opacity: 0.4;">
+                    <app-icon name="quots" class="w-9 text-orange-400"></app-icon>
                   </div>
                 </div>
               </div>
             </ngx-slick-carousel>
           </div>
         </div>
-    
+
       </div>
     </div>
   </div>
@@ -869,8 +868,8 @@
 <div class="popular-catagory pad-bot-10" style="margin-top: 40px">
   <div class="container">
     <div class="row">
-      <img class="how-can-help-img web" src="assets/images/how-can-flexo-web.jpg" />
-      <img class="how-can-help-img mobile" src="assets/images/how-can-flexo-mobile.jpg" />
+      <img class="how-can-help-img web" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/how-can-flexo-web.jpg" />
+      <img class="how-can-help-img mobile" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/how-can-flexo-mobile.jpg" />
       <div class="col-md-8 offset-md-2 text-center">
         <h2 class="section-title v1">What is Flexo</h2>
       </div>
@@ -899,7 +898,7 @@
               responsive="breakpoints">
               <div ngxSlickItem class="swiper-slide popular-item slide">
                 <div class="single-place">
-                  <img class="single-place-image" src="assets/images/category/Andheri-East.jpg" alt="place-image" />
+                  <img class="single-place-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/Andheri-East.jpg" alt="place-image" />
                   <div class="single-place-content">
                     <h2 class="single-place-title">
                       <a routerLink="/in/spaces/Mumbai/Andheri-East">Andheri East</a>
@@ -915,7 +914,7 @@
               </div>
               <div ngxSlickItem class="swiper-slide popular-item slide">
                 <div class="single-place">
-                  <img class="single-place-image" src="assets/images/category/LowerParel.jpg" alt="place-image" />
+                  <img class="single-place-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/LowerParel.jpg" alt="place-image" />
                   <div class="single-place-content">
                     <h2 class="single-place-title">
                       <a routerLink="/in/spaces/Mumbai/Lower-Parel">Lower Parel</a>
@@ -930,7 +929,7 @@
               </div>
               <div ngxSlickItem class="swiper-slide popular-item slide">
                 <div class="single-place">
-                  <img class="single-place-image" src="assets/images/category/Powai.jpg" alt="place-image" />
+                  <img class="single-place-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/Powai.jpg" alt="place-image" />
                   <div class="single-place-content">
                     <h2 class="single-place-title">
                       <a routerLink="/in/spaces/Mumbai/Powai">Powai</a>
@@ -946,7 +945,7 @@
               </div>
               <div ngxSlickItem class="swiper-slide popular-item slide">
                 <div class="single-place">
-                  <img class="single-place-image" src="assets/images/category/Thane.jpg" alt="place-image" />
+                  <img class="single-place-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/Thane.jpg" alt="place-image" />
                   <div class="single-place-content">
                     <h2 class="single-place-title">
                       <a routerLink="/in/spaces/Mumbai/Thane">Thane</a>
@@ -962,7 +961,7 @@
               </div>
               <div ngxSlickItem class="swiper-slide popular-item slide">
                 <div class="single-place">
-                  <img class="single-place-image" src="assets/images/category/BKC.jpg" alt="place-image" />
+                  <img class="single-place-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/BKC.jpg" alt="place-image" />
                   <div class="single-place-content">
                     <h2 class="single-place-title">
                       <a routerLink="/in/spaces/Mumbai/Bandra-Kurla-Complex">Bandra Kurla Complex</a>
@@ -990,22 +989,27 @@
   </div>
 </div> -->
 
-<div class="container-fluid earn_sec section-padding">
+<div class="container-fluid earn_sec section-padding d-flex align-items-center justify-content-center">
+  <img fetchpriority="low" loading="lazy" class="inset-0 earn_bg_img position-absolute h-100 w-100 object-cover"
+    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/ready-to-move.webp" width="1526" height="400"
+    alt="Get Tailored Office Space Solutions for Your Business Needs"
+    title="Get Tailored Office Space Solutions for Your Business Needs" />
   <div class="container">
     <div class="row justify-content-center">
-       <div class="col-12 text-center py-3">
+      <div class="col-12 text-center py-3">
         <h2 class="text-white mb-2">Get Tailored Office Space Solutions for Your Business Needs</h2>
-        <p style="font-size: 18px;" class="text-white">Our workspace experts will get in touch to help you with your requirements.</p>
-         <div class="get_btn text-center mt-4">
-           <button routerLink="/contact" type="button" class="btn custum-btn">Request Callback</button>
-         </div>
+        <p style="font-size: 18px;" class="text-white">Our workspace experts will get in touch to help you with your
+          requirements.</p>
+        <div class="get_btn text-center mt-4">
+          <button routerLink="/contact" type="button" class="btn custum-btn">Request Callback</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 
-<div class="container-fluid faq_sec section-padding">
+<div class="container-fluid faq_sec home_faq section-padding">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-4">
@@ -1019,15 +1023,16 @@
             <div class="card-header" id="headingOne">
               <button class="card_btn d-flex align-items-center btn w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2 mb-0">What is Flexo? </h5>
               </button>
             </div>
-
-
             <div id="collapseOne" class="collapsed show" aria-labelledby="headingOne" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Flexo is a leading proptech marketplace and commercial real estate advisor specializing in offices, coworking spaces, managed offices and flexible spaces across India. We also offer multi-city office solutions and empower companies to implement hybrid and hub-and-spoke real estate strategies effectively.</p>
+                <p>Flexo is a leading proptech marketplace and commercial real estate advisor specializing in offices,
+                  coworking spaces, managed offices and flexible spaces across India. We also offer multi-city office
+                  solutions and empower companies to implement hybrid and hub-and-spoke real estate strategies
+                  effectively.</p>
               </div>
             </div>
           </div>
@@ -1035,21 +1040,14 @@
             <div class="card-header" id="headingTwo">
               <button class="card_btn d-flex align-items-center btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2 mb-0">How does Flexo help me find office spaces?</h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Flexo offers a curated selection of coworking spaces, managed offices, and long-term lease options. Our team provides expert guidance to find the perfect fit for your needs.</p>
+                <p>Flexo offers a curated selection of coworking spaces, managed offices, and long-term lease options.
+                  Our team provides expert guidance to find the perfect fit for your needs.</p>
               </div>
             </div>
           </div>
@@ -1057,23 +1055,17 @@
             <div class="card-header" id="headingThree">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2  mb-0">
                   Does Flexo have coworking spaces of its own?
                 </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
               <div class="card-body">
-                <p> Currently, Flexo does not operate coworking spaces. Flexo is an aggregator platform that connects you with trusted coworking operators offering a diverse range of workspaces tailored to your needs.</p>
+                <p> Currently, Flexo does not operate coworking spaces. Flexo is an aggregator platform that connects
+                  you with trusted coworking operators offering a diverse range of workspaces tailored to your needs.
+                </p>
               </div>
             </div>
           </div>
@@ -1081,23 +1073,16 @@
             <div class="card-header" id="headingFour">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2  mb-0">
                   What types of spaces are listed on Flexo?
                 </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Flexo features offices, coworking spaces, meeting rooms, virtual offices, podcast studios,  photo studios, production venues, and more.</p>
+                <p>Flexo features offices, coworking spaces, meeting rooms, virtual offices, podcast studios, photo
+                  studios, production venues, and more.</p>
               </div>
             </div>
           </div>
@@ -1105,23 +1090,17 @@
             <div class="card-header" id="headingFive">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2  mb-0">
                   How does Flexo ensure the quality of its listed spaces?
                 </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Flexo verifies the listed spaces and partners with trusted operators to provide high-quality, professional environments for your needs. Additionally, users can leave reviews for spaces based on their experiences. </p>
+                <p>Flexo verifies the listed spaces and partners with trusted operators to provide high-quality,
+                  professional environments for your needs. Additionally, users can leave reviews for spaces based on
+                  their experiences. </p>
               </div>
             </div>
           </div>
@@ -1129,23 +1108,17 @@
             <div class="card-header" id="headingSix">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2  mb-0">
                   Does Flexo manage spaces directly?
                 </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Currently, Flexo collaborates with trusted operators who manage long-term office spaces, such as managed offices and coworking spaces. Short-term spaces like podcast studios and photo studios are listed by verified hosts, ensuring access to high-quality, well-maintained spaces. </p>
+                <p>Currently, Flexo collaborates with trusted operators who manage long-term office spaces, such as
+                  managed offices and coworking spaces. Short-term spaces like podcast studios and photo studios are
+                  listed by verified hosts, ensuring access to high-quality, well-maintained spaces. </p>
               </div>
             </div>
           </div>
@@ -1153,23 +1126,17 @@
             <div class="card-header" id="headingSeven">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2  mb-0">
                   Can Flexo help me customize my office space?
                 </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Yes, Flexo specializes in finding fully furnished and customizable office spaces that align with your team's requirements. We can also assist with fit-outs through our qualified design and build partners to create a workspace tailored to your needs.</p>
+                <p>Yes, Flexo specializes in finding fully furnished and customizable office spaces that align with your
+                  team's requirements. We can also assist with fit-outs through our qualified design and build partners
+                  to create a workspace tailored to your needs.</p>
               </div>
             </div>
           </div>
@@ -1177,23 +1144,16 @@
             <div class="card-header" id="headingEight">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2  mb-0">
                   How do I list my space on Flexo?
                 </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Listing your space is easy! Visit our "List Your Space" page, fill out the required details and submit your space. Your space will go live after our team reviews and approves your listing.</p>
+                <p>Listing your space is easy! Visit our "List Your Space" page, fill out the required details and
+                  submit your space. Your space will go live after our team reviews and approves your listing.</p>
               </div>
             </div>
           </div>
@@ -1201,23 +1161,17 @@
             <div class="card-header" id="headingNine">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2  mb-0">
                   What makes Flexo different from other platforms?
                 </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
               <div class="card-body">
-                <p>Flexo stands out by offering tailored solutions, expert guidance, and a diverse selection of office spaces, coworking spaces, and flexible short-term spaces. Our deep expertise in the commercial real estate market ensures a seamless and personalized experience for every client.  </p>
+                <p>Flexo stands out by offering tailored solutions, expert guidance, and a diverse selection of office
+                  spaces, coworking spaces, and flexible short-term spaces. Our deep expertise in the commercial real
+                  estate market ensures a seamless and personalized experience for every client. </p>
               </div>
             </div>
           </div>
@@ -1225,23 +1179,16 @@
             <div class="card-header" id="headingTen">
               <button class="card_btn d-flex align-items-center  btn collapsed w-100 text-left" type="button"
                 data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                <img src="assets/images/right-icon.webp" class="img-fluid rotate-icon" alt="">
+                <app-icon name="rightArrow" class="w-2 text-orange-400 rotate-icon"></app-icon>
                 <h5 class="pl-2  mb-0">
                   How do I contact Flexo for assistance?
                 </h5>
-                <div>
-                  <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 32 32" height="30px" width="30px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M 16 4 C 11.671875 4 8 7.054688 8 11 L 8 14 L 14 14 L 14 11 C 14 10.851563 14.089844 10.636719 14.4375 10.40625 C 14.785156 10.175781 15.351563 10 16 10 C 16.652344 10 17.21875 10.175781 17.5625 10.40625 C 17.90625 10.636719 18 10.835938 18 11 C 18 11.578125 17.8125 11.980469 17.4375 12.4375 C 17.0625 12.894531 16.480469 13.367188 15.84375 13.90625 C 14.566406 14.988281 13 16.496094 13 19 L 13 20 L 19 20 L 19 19 C 19 18.660156 19.125 18.421875 19.5 18.03125 C 19.875 17.640625 20.496094 17.179688 21.15625 16.625 C 22.476563 15.515625 24 13.816406 24 11 C 24 7.089844 20.335938 4 16 4 Z M 16 6 C 19.394531 6 22 8.367188 22 11 C 22 13.144531 21.023438 14.101563 19.84375 15.09375 C 19.253906 15.589844 18.625 16.074219 18.0625 16.65625 C 17.714844 17.015625 17.445313 17.484375 17.25 18 L 15.3125 18 C 15.625 16.988281 16.234375 16.21875 17.15625 15.4375 C 17.769531 14.921875 18.4375 14.382813 19 13.6875 C 19.5625 12.992188 20 12.082031 20 11 C 20 10.039063 19.429688 9.242188 18.6875 8.75 C 17.945313 8.257813 17.003906 8 16 8 C 14.992188 8 14.050781 8.257813 13.3125 8.75 C 12.574219 9.242188 12 10.042969 12 11 L 12 12 L 10 12 L 10 11 C 10 8.316406 12.597656 6 16 6 Z M 13 22 L 13 28 L 19 28 L 19 22 Z M 15 24 L 17 24 L 17 26 L 15 26 Z">
-                    </path>
-                  </svg>
-                </div>
               </button>
             </div>
             <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
               <div class="card-body">
-                <p>You can reach out to us via email at hello@flexospaces.com. Our team is here to help with all your inquiries. </p>
+                <p>You can reach out to us via email at hello@flexospaces.com. Our team is here to help with all your
+                  inquiries. </p>
               </div>
             </div>
           </div>
@@ -1254,14 +1201,16 @@
 <div class="container-fluid become_host section-padding">
   <div class="container">
     <div class="row justify-content-center">
-       <div class="col-12 text-center py-3">
+      <div class="col-12 text-center py-3">
         <h2 class="text-white mb-2">List Your Space and Earn with Flexo</h2>
-        <p class="text-white" style="font-size: 18px;">Showcase your space, set your pricing, and start receiving leads and bookings effortlessly.</p>
-         <div class="get_btn text-center mt-4">
-            <a target="_blank" href="{{hostWebUrl}}/auth/register">
-              <button type="button" class="btn custum-btn" style="border-radius: 6px;font-size: 15px;">Become a host</button>
-            </a>
-          </div>
+        <p class="text-white" style="font-size: 18px;">Showcase your space, set your pricing, and start receiving leads
+          and bookings effortlessly.</p>
+        <div class="get_btn text-center mt-4">
+          <a target="_blank" href="{{hostWebUrl}}/auth/register">
+            <button type="button" class="btn custum-btn" style="border-radius: 6px;font-size: 15px;">Become a
+              host</button>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1276,12 +1225,7 @@
         <div class="modal-header">
           <h5 class="modal-title m-0 text-white" id="exampleModalLabel">Where is your Location?</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <svg stroke="currentColor" fill="#fff" stroke-width="0" viewBox="0 0 512 512" height="30px" width="30px"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z">
-              </path>
-            </svg>
+            <app-icon name="close" class="w-7"></app-icon>
           </button>
         </div>
         <div class="modal-body">

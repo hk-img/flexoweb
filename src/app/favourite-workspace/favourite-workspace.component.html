@@ -4,75 +4,73 @@
       <h2>Favorite workspaces</h2>
     </div>
     <div class="booking-all-list">
-      <div class="booking-all-list-single" *ngFor="let spaceDetails of shortListReviewListOffset; let i = index">  
+      <div class="booking-all-list-single" *ngFor="let spaceDetails of shortListReviewListOffset; let i = index">
         <div class="booking-all-list-single-img-cont">
-          <a target="_blank" (click)="onSpaceNameClicked(spaceDetails)" class="booking-all-list-single-img cursor-pointer">            
-                <img
-                [src]="(spaceDetails?.images[0])|| 'assets/images/details_placeholder_image.jpg'"
-                [alt]="spaceDetails.actual_name" (error)="handleImageError($event)"
-            />
-              <div class="booking-all-list-single-img-tag">
-                  <p>{{spaceDetails?.spaceType}}</p>
-              </div>
+          <a target="_blank" (click)="onSpaceNameClicked(spaceDetails)"
+            class="booking-all-list-single-img cursor-pointer">
+            <img loading="lazy" fetchpriority="low"
+              [src]="(spaceDetails?.images[0])|| 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'"
+              [alt]="spaceDetails.actual_name" [title]="spaceDetails.actual_name" (error)="handleImageError($event)"
+              width="200" height="150" />
+            <div class="booking-all-list-single-img-tag">
+              <p>{{spaceDetails?.spaceType}}</p>
+            </div>
           </a>
           <div class="booking-all-list-single-cont">
-              <div class="booking-all-list-single-cont-od">
-                <div class="booking-all-list-single-cont-od-heading">
-                  <h4 class="cursor-pointer" (click)="onSpaceNameClicked(spaceDetails)"> {{ spaceDetails.actual_name }} </h4>
-                  <div class="save-btn-c">
-                    <a
-                      class="btn save-btn-custom"
-                      style="color: #F76900"
-                      (click)="onRemoveFavourite(spaceDetails)"
-                      ><i class="ion-heart"></i>
-                    </a>
-                  </div>
-                </div>                 
-
-                  <p class="booking-all-list-single-cont-location" > 
-                      <img src="assets/images/location-icon-orng.png" alt="">
-                      <span> {{ spaceDetails.location_name }} </span> 
-                  </p>
-                  <div class="booking-list-single-info  booking-list-single-about-info ">                           
-                      <div class=" booking-list-single-info-single" *ngIf="!spaceDetails?.isLongterm">
-                        <img src="assets/images/user-icon-orng.png" alt="">
-                          <p>{{spaceDetails?.howManyPeopleInYourSpace}} people</p>
-                      </div>
-                      <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.isLongterm">
-                        <img src="assets/images/user-icon-orng.png" alt="">
-                          <p>{{spaceDetails?.spaceStatus}}</p>
-                      </div>
-                      <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.isShortterm">
-                          <img src="assets/images/clock-icon-orng.png" alt="">
-                          <p>2 hr min</p>
-                      </div>
-                      <div class="booking-list-single-info-single">
-                        <img src="assets/images/scale-orng.png" alt="" class="sq-ft-icon">
-                          <p>{{spaceDetails?.spacesqft}} sqft</p>
-                      </div>
-                  </div>
-
+            <div class="booking-all-list-single-cont-od">
+              <div class="booking-all-list-single-cont-od-heading">
+                <h4 class="cursor-pointer" (click)="onSpaceNameClicked(spaceDetails)"> {{ spaceDetails.actual_name }}
+                </h4>
+                <div class="save-btn-c">
+                  <a class="btn save-btn-custom" style="color: #F76900"
+                    (click)="onRemoveFavourite(spaceDetails)"><app-icon name="heart"
+                      class="w-4 text-orange-400"></app-icon>
+                  </a>
+                </div>
               </div>
 
-              <div class="description-all">
-                  <div class="description-single">
-                    <p> {{ spaceDetails.about.length > 260 && !is_see_more_visible[i] ? spaceDetails.about.slice(0, 260) + '...' : spaceDetails.about }} </p>
-                  </div>
-                  <a *ngIf="!is_see_more_visible[i] && spaceDetails.about.length > 260"
-                    (click)="toggleSeeMore($event, i, true)"
-                    class="read-more-btn">Read More</a>
-                  <div class="description-single">
-                    <p *ngIf="is_see_more_visible[i]">{{ spaceDetails.about }}</p>
-                  </div>
-                  <a *ngIf="is_see_more_visible[i]"
-                  (click)="toggleSeeMore($event, i, false)"
-                  class="read-more-btn" >See Less</a
-                >
+              <p class="booking-all-list-single-cont-location">
+                <app-icon name="location2" class="w-3 text-orange-400"></app-icon>
+                <span> {{ spaceDetails.location_name }} </span>
+              </p>
+              <div class="booking-list-single-info  booking-list-single-about-info ">
+                <div class=" booking-list-single-info-single" *ngIf="!spaceDetails?.isLongterm">
+                  <app-icon name="userHalf" class="w-3 text-orange-400"></app-icon>
+                  <p class="pl-1">{{spaceDetails?.howManyPeopleInYourSpace}} people</p>
+                </div>
+                <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.isLongterm">
+                  <app-icon name="userHalf" class="w-3 text-orange-400"></app-icon>
+                  <p>{{spaceDetails?.spaceStatus}}</p>
+                </div>
+                <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.isShortterm">
+                  <app-icon name="clock" class="w-3 text-orange-400"></app-icon>
+                  <p class="pl-1">2 hr min</p>
+                </div>
+                <div class="booking-list-single-info-single">
+                  <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
+                  <p>{{spaceDetails?.spacesqft}} sqft</p>
+                </div>
               </div>
+
+            </div>
+
+            <div class="description-all">
+              <div class="description-single">
+                <p> {{ spaceDetails.about.length > 260 && !is_see_more_visible[i] ? spaceDetails.about.slice(0, 260) +
+                  '...' : spaceDetails.about }} </p>
+              </div>
+              <a *ngIf="!is_see_more_visible[i] && spaceDetails.about.length > 260"
+                (click)="toggleSeeMore($event, i, true)" class="read-more-btn">Read More</a>
+              <div class="description-single">
+                <p *ngIf="is_see_more_visible[i]">{{ spaceDetails.about }}</p>
+              </div>
+              <a *ngIf="is_see_more_visible[i]" (click)="toggleSeeMore($event, i, false)" class="read-more-btn">See
+                Less</a>
+            </div>
           </div>
-          
-        </div>  
-      </div> 
+
+        </div>
+      </div>
       <div class="work-space-review-heading">
         <h3 *ngIf="shortListReviewListOffset.length == 0">Favorite Workspaces not found..</h3>
       </div>
@@ -94,7 +92,7 @@
               <div class="trending-img">
                
                 <img
-                        [src]="(spaceDetails?.images[0])|| 'assets/images/details_placeholder_image.jpg'"
+                        [src]="(spaceDetails?.images[0])|| 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'"
                         [alt]="spaceDetails.actual_name"
                     />
                 <div class="shortlist-share-container">

@@ -1,107 +1,107 @@
-<div class="review-popup" >
-    <div class="review-popup-header">
-      <h2>Write a review</h2>
-      <button type="button" (click)="closeDialog(null)" class="btn-close">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </button>
-    </div>
-    <div class="review-popup-content">
-      <form [formGroup]="reviewForm">
+<div class="review-popup">
+  <div class="review-popup-header">
+    <h2>Write a review</h2>
+    <button type="button" (click)="closeDialog(null)" class="btn-close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="review-popup-content">
+    <form [formGroup]="reviewForm">
       <div class="review-popup-rating">
         <div class="review-popup-rating-single">
-            <input formControlName="rating" value="5" type="radio" id="review-rating" >
-            <label for="review-rating">
-              <ul class="product-rating-c">
-                <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-            </ul>
-              <!-- <span> Great</span> -->
-          </label>
-        </div>
-        <div class="review-popup-rating-single">
-          <input formControlName="rating" value="4" type="radio" id="review-rating-2" >
-          <label for="review-rating-2">
+          <input formControlName="rating" value="5" type="radio" id="review-rating">
+          <label for="review-rating">
             <ul class="product-rating-c">
               <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-              </li>
-              <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-              </li>
-              <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-              </li>
-              <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-              </li>
-              <li class="">
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
-              </li>
-          </ul>
-            <!-- <span> Good </span> -->
-          </label>
-        </div>
-        <div class="review-popup-rating-single">
-          <input formControlName="rating" value="3" type="radio" id="review-rating-3" >
-          <label for="review-rating-3">
-            <ul class="product-rating-c">
-              <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-              </li>
-              <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
               </li>
               <li class="">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </li>
               <li class="">
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
               </li>
               <li class="">
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
               </li>
-          </ul>
-            <!-- <span> Okay </span> -->
+              <li class="">
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </li>
+            </ul>
+            <!-- <span> Great</span> -->
           </label>
         </div>
         <div class="review-popup-rating-single">
-          <input formControlName="rating" value="2" type="radio" id="review-rating-4" >
-          <label for="review-rating-4">
+          <input formControlName="rating" value="4" type="radio" id="review-rating-2">
+          <label for="review-rating-2">
             <ul class="product-rating-c">
               <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
               </li>
               <li class="">
-                  <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </li>
+              <li class="">
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </li>
+              <li class="">
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </li>
+              <li class="">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </li>
+            </ul>
+            <!-- <span> Good </span> -->
+          </label>
+        </div>
+        <div class="review-popup-rating-single">
+          <input formControlName="rating" value="3" type="radio" id="review-rating-3">
+          <label for="review-rating-3">
+            <ul class="product-rating-c">
+              <li class="">
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </li>
+              <li class="">
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </li>
+              <li class="">
+                <i class="fa fa-star" aria-hidden="true"></i>
               </li>
               <li class="">
                 <i class="fa fa-star-o" aria-hidden="true"></i>
               </li>
               <li class="">
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </li>
+            </ul>
+            <!-- <span> Okay </span> -->
+          </label>
+        </div>
+        <div class="review-popup-rating-single">
+          <input formControlName="rating" value="2" type="radio" id="review-rating-4">
+          <label for="review-rating-4">
+            <ul class="product-rating-c">
+              <li class="">
+                <i class="fa fa-star" aria-hidden="true"></i>
               </li>
               <li class="">
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
               </li>
-          </ul>
+              <li class="">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </li>
+              <li class="">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </li>
+              <li class="">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </li>
+            </ul>
             <!-- <span> Bad </span> -->
           </label>
         </div>
         <div class="review-popup-rating-single">
-          <input formControlName="rating" value="1" type="radio" id="review-rating-5" >
+          <input formControlName="rating" value="1" type="radio" id="review-rating-5">
           <label for="review-rating-5">
             <ul class="product-rating-c">
               <li class="">
@@ -119,7 +119,7 @@
               <li class="">
                 <i class="fa fa-star-o" aria-hidden="true"></i>
               </li>
-          </ul>
+            </ul>
             <!-- <span> Terrible </span> -->
           </label>
         </div>
@@ -132,12 +132,14 @@
       </div>
       <div class="form-check mb-4">
         <input checked (change)="onCheckChange($event)" type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label text-dark" style="font-weight: 500;" for="exampleCheck1">Yes I would book again.</label>
+        <label class="form-check-label text-dark" style="font-weight: 500;" for="exampleCheck1">Yes I would book
+          again.</label>
       </div>
     </form>
-       <div class="review-popup-grp-btn">
-          <button type="button" (click)="closeDialog(null)" class="outline-orng-btn custum-btn"> Not Now </button>
-          <button type="button" (click)="onSumbit()" class="custum-btn" [class.disabled]="isLoading" > Submit review  </button>
-       </div>
+    <div class="review-popup-grp-btn">
+      <button type="button" (click)="closeDialog(null)" class="outline-orng-btn custum-btn"> Not Now </button>
+      <button type="button" (click)="onSumbit()" class="custum-btn" [class.disabled]="isLoading"> Submit review
+      </button>
     </div>
   </div>
+</div>
