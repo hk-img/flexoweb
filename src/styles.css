@@ -1104,7 +1104,7 @@ ul.list-inline li {
 .pointer {
   cursor: pointer;
 }
-.slider-btn.v1 i {
+.slider-btn.v1 svg {
   line-height: 33px;
   font-size: 16px;
   color: rgba(168, 163, 163, 0.9);
@@ -6027,16 +6027,22 @@ ul.listing-features {
 }
 
 .zsiq_theme1.zsiq_floatmain {
-  width: 45px;
-  max-height: 58px;
-  height: 60px !important;
+  width: auto !important;
+  max-height: unset !important;
+  height: auto !important;
+}
+.zsiq_theme1 .siqicon::before {
+  font-size: 20px !important;
+}
+.zsiq_theme1 .zsiq_user {
+  height: auto !important;
 }
 .zsiq_theme1 .zsiq_flt_rel {
   position: relative;
   padding: 0;
-  width: 45px;
+  width: 45px !important;
   border-radius: 60px;
-  height: 45px;
+  height: 45px !important;
   font-size: 14px;
   background-color: #328a59;
   display: flex;
@@ -9174,7 +9180,7 @@ a.rate-review:hover {
 }
 
 .shortlist-share-container .btn {
-  border-radius: 29px;
+  border-radius: 50%;
   font-size: 16px;
   background: #ece8e8;
   width: 34px;
@@ -10007,6 +10013,7 @@ section.parallax-section .bg1 {
   background: transparent;
   font-size: 14px;
   color: #000;
+  cursor: pointer;
 }
 .btn-close i {
   color: #000;
@@ -10071,10 +10078,12 @@ section.parallax-section .bg1 {
 .dialogClass-l {
   width: 600px;
 }
-
-.dialogClass-l mat-dialog-container {
-  padding: 0;
+.dialogClass-l {
+  width: 600px !important;
 }
+/* .dialogClass {
+  width: 600px !important;
+} */
 
 .dialogClass-l mat-dialog-container form {
   width: 100%;
@@ -10546,12 +10555,8 @@ h4 {
   margin: 0;
 }
 
-.f-w-mdl img {
-  width: 50px;
-  height: 80px;
-  object-fit: contain;
+.f-w-mdl .checkIocn {
   margin: 30px auto 20px;
-  display: table;
 }
 
 .inquiry_form .mat-form-field-infix {
@@ -11280,13 +11285,13 @@ h4 {
   .Spaces_box .space_img_box img {
     height: 150px !important;
   }
- .slick-next {
+  .slick-next {
     right: -13px !important;
   }
- .slick-prev {
+  .slick-prev {
     left: -13px !important;
   }
-  
+
   .workspace_steps .space_list .list_items .space_count {
     position: static !important;
     margin-bottom: 10px;
@@ -11774,7 +11779,6 @@ h4 {
   cursor: pointer;
 }
 
-
 .slick-prev::before {
   display: none !important;
 }
@@ -11866,7 +11870,8 @@ h4 {
   z-index: 999 !important;
 }
 
-.slick-prev:hover, .slick-next:hover {
+.slick-prev:hover,
+.slick-next:hover {
   border: 2px solid #f76900 !important;
   color: #f76900 !important;
 }

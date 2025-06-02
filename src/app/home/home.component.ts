@@ -231,7 +231,7 @@ export class HomeComponent implements OnDestroy {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
-    pprevArrow: '<button class="slick-prev"><</button>',
+    prevArrow: '<button class="slick-prev"><</button>',
     nextArrow: '<button class="slick-next">></button>',
     variableHeight: false,
     autoplay: false,

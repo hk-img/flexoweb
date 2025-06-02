@@ -8,9 +8,10 @@
         <div class="booking-all-list-single-img-cont">
           <a target="_blank" (click)="onSpaceNameClicked(spaceDetails)"
             class="booking-all-list-single-img cursor-pointer">
-            <img
+            <img loading="lazy" fetchpriority="low"
               [src]="(spaceDetails?.images[0])|| 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'"
-              [alt]="spaceDetails.actual_name" [title]="spaceDetails.actual_name" (error)="handleImageError($event)" />
+              [alt]="spaceDetails.actual_name" [title]="spaceDetails.actual_name" (error)="handleImageError($event)"
+              width="200" height="150" />
             <div class="booking-all-list-single-img-tag">
               <p>{{spaceDetails?.spaceType}}</p>
             </div>
@@ -21,32 +22,32 @@
                 <h4 class="cursor-pointer" (click)="onSpaceNameClicked(spaceDetails)"> {{ spaceDetails.actual_name }}
                 </h4>
                 <div class="save-btn-c">
-                  <a class="btn save-btn-custom" style="color: #F76900" (click)="onRemoveFavourite(spaceDetails)"><i
-                      class="ion-heart"></i>
+                  <a class="btn save-btn-custom" style="color: #F76900"
+                    (click)="onRemoveFavourite(spaceDetails)"><app-icon name="heart"
+                      class="w-4 text-orange-400"></app-icon>
                   </a>
                 </div>
               </div>
 
               <p class="booking-all-list-single-cont-location">
-                <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp" alt="">
+                <app-icon name="location2" class="w-3 text-orange-400"></app-icon>
                 <span> {{ spaceDetails.location_name }} </span>
               </p>
               <div class="booking-list-single-info  booking-list-single-about-info ">
                 <div class=" booking-list-single-info-single" *ngIf="!spaceDetails?.isLongterm">
-                  <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp" alt="">
-                  <p>{{spaceDetails?.howManyPeopleInYourSpace}} people</p>
+                  <app-icon name="userHalf" class="w-3 text-orange-400"></app-icon>
+                  <p class="pl-1">{{spaceDetails?.howManyPeopleInYourSpace}} people</p>
                 </div>
                 <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.isLongterm">
-                  <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp" alt="">
+                  <app-icon name="userHalf" class="w-3 text-orange-400"></app-icon>
                   <p>{{spaceDetails?.spaceStatus}}</p>
                 </div>
                 <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.isShortterm">
-                  <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/clock-icon-orng.webp" alt="">
-                  <p>2 hr min</p>
+                  <app-icon name="clock" class="w-3 text-orange-400"></app-icon>
+                  <p class="pl-1">2 hr min</p>
                 </div>
                 <div class="booking-list-single-info-single">
-                  <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/scale-orng.webp" alt=""
-                    class="sq-ft-icon">
+                  <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
                   <p>{{spaceDetails?.spacesqft}} sqft</p>
                 </div>
               </div>

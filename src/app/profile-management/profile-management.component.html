@@ -109,7 +109,9 @@
 															(input)="select.filter($event.target.value)" />
 													</ng-template>
 													<ng-option *ngFor="let list of countryCodes"
-														[value]="list.dialcode"><img src="{{list.flag}}" [alt]="list.name" [title]="list.name" width="20" height="13"> {{list.dialcode}} &nbsp; {{list.name}}
+														[value]="list.dialcode"><img src="{{list.flag}}"
+															[alt]="list.name" [title]="list.name" width="20"
+															height="13"> {{list.dialcode}} &nbsp; {{list.name}}
 													</ng-option>
 												</ng-select>
 											</span>
@@ -160,8 +162,9 @@
 										<mat-error
 											*ngIf="profileDetailForm['controls']['email']?.errors?.required">Email is
 											required.</mat-error>
+										<app-icon name="lock" class="w-2 email_lock"></app-icon>
 									</mat-form-field>
-									<app-icon name="lock" class="w-2 email_lock"></app-icon>
+
 								</div>
 							</div>
 							<div class="col-md-6">

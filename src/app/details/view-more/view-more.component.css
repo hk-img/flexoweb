@@ -15,7 +15,8 @@
   padding-left: 5px;
 }
 
-.prev-slide.slick-disabled, .next-slide.slick-disabled {
+.prev-slide.slick-disabled,
+.next-slide.slick-disabled {
   pointer-events: none;
   opacity: 0.2;
 }
@@ -31,4 +32,12 @@
 .image-container {
   width: 760px;
   overflow: hidden;
+}
+
+.slider-btn.popular-next svg {
+  color: rgba(168, 163, 163, 0.9);
+}
+
+.slider-btn.popular-next:hover svg {
+  color: #f76900;
 }

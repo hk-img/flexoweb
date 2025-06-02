@@ -4,8 +4,7 @@
             <div class="booking-details-info">
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'confirmed'">
                     <div class="booking-details-confirmation-img">
-                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/tick-white.webp" alt=""
-                            class="">
+                        <app-icon name="checkTic" class="w-3 text-white"></app-icon>
                     </div>
                     <div class="booking-details-confirmation-cont">
                         <h4>Booking {{bookingDetail?.bookingStatus}} !</h4>
@@ -14,18 +13,17 @@
                 </div>
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'rejected'">
                     <div class="mr-2">
-                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-c.webp" alt="" class=""
-                            style="border-radius: 50%;height: 43px;">
+                        <app-icon name="closeRoundFill" class="w-12 text-red-600"></app-icon>
                     </div>
                     <div class="booking-details-confirmation-cont">
                         <h4 style="color:red !important">Booking {{bookingDetail?.bookingStatus}} !</h4>
                         <p>Your request to update booking has been declined.</p>
                     </div>
                 </div>
+
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'cancel'">
                     <div class="mr-2">
-                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-c.webp" alt="" class=""
-                            style="border-radius: 50%;height: 43px;">
+                        <app-icon name="closeRoundFill" class="w-12 text-red-600"></app-icon>
                     </div>
                     <div class="booking-details-confirmation-cont">
                         <h4 style="color:red !important">Booking {{bookingDetail?.bookingStatus}} !</h4>
@@ -34,10 +32,8 @@
                 </div>
                 <div class="booking-details-confirmation" *ngIf="bookingDetail?.bookingStatus == 'pending'">
                     <div class="col">
-                        <span class="booking-details-confirmation-img"
-                            style="padding: 0 !important; background: #fff !important;">
-                            <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/pending-icon.webp"
-                                alt="" class="">
+                        <span class="booking-details-confirmation-img">
+                            <app-icon name="clockFill" class="w-12 text-orange-400"></app-icon>
                         </span>
                     </div>
                     <div class="booking-details-confirmation-cont">
@@ -53,34 +49,32 @@
                         <div class="booking-all-list-single-img">
                             <img style="min-width: 165px;"
                                 src="{{bookingDetail?.images[0] ?? 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'}}"
-                                alt="">
+                                width="336" height="224" [alt]="bookingDetail?.spaceName"
+                                [title]="bookingDetail?.spaceName">
                         </div>
                         <div class="booking-all-list-single-cont">
                             <div class="booking-all-list-single-cont-od">
                                 <h2>{{bookingDetail?.spaceName}}</h2>
                                 <p class="booking-id"> Booking ID : <span> {{bookingDetail?.bookingId}} </span></p>
                                 <p class="booking-all-list-single-cont-location">
-                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp"
-                                        alt="">
+                                    <app-icon name="location2" class="w-3 text-orange-400"></app-icon>
                                     <span>{{bookingDetail?.location_name}} </span>
                                 </p>
                                 <div class="booking-list-single-info  booking-list-single-about-info ">
                                     <div class=" booking-list-single-info-single">
-                                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp"
-                                            alt="">
+                                        <app-icon name="userHalf" class="w-3 text-orange-400"></app-icon>
                                         <p>{{bookingDetail?.howManyPeopleInYourSpace || 0}} people</p>
                                     </div>
                                     <div class=" booking-list-single-info-single"
                                         *ngIf="bookingDetail?.spaceType !='Coworking Space'">
-                                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/clock-icon-orng.webp"
-                                            alt="">
-                                        <p>{{(bookingDetail.minimum_hours == 0 || bookingDetail.minimum_hours == null) ?
+                                        <app-icon name="clock" class="w-3 text-orange-400"></app-icon>
+                                        <p class="pl-1">{{(bookingDetail.minimum_hours == 0 ||
+                                            bookingDetail.minimum_hours == null) ?
                                             2 : bookingDetail.minimum_hours/60}} hrs min</p>
                                     </div>
                                     <div class="booking-list-single-info-single">
-                                        <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/scale-orng.webp"
-                                            alt="" class="sq-ft-icon">
-                                        <p>{{bookingDetail?.spacesqft}} sqft</p>
+                                        <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
+                                        <p class="pl-1">{{bookingDetail?.spacesqft}} sqft</p>
                                     </div>
                                 </div>
 
@@ -88,13 +82,15 @@
 
                         </div>
                     </div>
+
                     <div class="booking-all-list-single-btn" *ngIf="bookingDetail?.bookingStatus == 'confirmed'">
                         <button type="button" (click)="openAddReviewDialog(bookingDetail?.spaceId)"
                             class="custum-btn outline-orng-btn"> Leave
                             a Review </button>
                         <button *ngIf="bookingDetail?.bookingStatus == 'confirmed'"
                             (click)="getUserInvoiceByBookingId(bookingDetail?.id)" type="button"
-                            class="custum-btn blu-btn "> <i class="fa fa-cloud-download" aria-hidden="true"></i> Invoice
+                            class="custum-btn blu-btn "> <app-icon name="cloudDownload"
+                                class="w-3 text-white"></app-icon> Invoice
                         </button>
 
                     </div>
@@ -273,12 +269,12 @@
                     <p>Need assistance with your booking? Contact us Monday through Saturday, 10 AM to 6:30 PM.</p>
                     <div class="assistance-contact">
                         <div class="assistance-contact-single">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <app-icon name="call" class="w-2 text-dark"></app-icon>
                             <p>+91-9513392400</p>
                         </div>
                         <div class="assistance-contact-single">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <p>support&#64;flexospaces.com </p>
+                            <app-icon name="mail" class="w-3 text-dark"></app-icon>
+                            <p class="pl-1">support&#64;flexospaces.com </p>
                         </div>
                     </div>
                 </div>

@@ -77,8 +77,9 @@
           </div>
           <div class="row desktop-button-fixed-container col-lg-7 col-md-12" *ngIf="!isMobile">
             <div class="col-md-7 desktop_content_btm">
-              <span><i class="ion-checkmark"></i>&nbsp;Our service is
-                <strong>FREE</strong></span><span><i class="ion-checkmark"></i>&nbsp;We help you secure the
+              <span><app-icon name="checkTic" class="w-2 text-dark"></app-icon>&nbsp;Our service is
+                <strong>FREE</strong></span><span><app-icon name="checkTic" class="w-2 text-dark"></app-icon>&nbsp;We
+                help you secure the
                 <strong>best deal</strong></span>
             </div>
             <div class="col-md-5 desk_btn">
@@ -96,7 +97,8 @@
             </map-marker>
             <map-info-window>
               <div class="marker_info" id="marker_info">
-                <img [src]="selected_marker_window?.map_image_url" alt="" />
+                <img [src]="selected_marker_window?.map_image_url" [alt]="selected_marker_window?.name"
+                  [title]="selected_marker_window?.name" />
                 <span>
                   <h3>
                     <a [href]="selected_marker_window?.url" target="_blank">{{
@@ -115,12 +117,12 @@
     <div class="find-office-container">
       <div>
         <p class="booking-text">
-          <i class="ion-checkmark"></i>&nbsp;Our service is <span>FREE</span>.
+          <app-icon name="checkTic" class="w-2 text-dark"></app-icon>&nbsp;Our service is <span>FREE</span>.
         </p>
       </div>
       <div>
         <p class="booking-text">
-          <i class="ion-checkmark"></i>&nbsp;We help you secure the
+          <app-icon name="checkTic" class="w-2 text-dark"></app-icon>&nbsp;We help you secure the
           <span>best deals</span>.
         </p>
       </div>

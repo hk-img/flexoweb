@@ -7,9 +7,13 @@
         <div class="book-btn col-md-3 col-4 text-center">
             <button class="btn filter_btn w-100 text-white p-2" (click)="clearFilters()">Clear</button>
         </div>
-        <i class="col-md-4 col-2 text-right cross material-icons" style="cursor: pointer;" (click)="closeDialog(null)">
+        <!-- <i class="col-md-4 col-2 text-right cross material-icons" (click)="closeDialog(null)">
             close
-        </i>
+        </i> -->
+        <span (click)="closeDialog(null)" class="col-md-4 col-2 text-right cross" style="cursor: pointer;">
+            <app-icon name="close" class="w-4 text-dark"></app-icon>
+        </span>
+
     </div>
     <hr>
 

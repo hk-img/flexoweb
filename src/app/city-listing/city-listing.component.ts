@@ -1001,7 +1001,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     let config = new MatDialogConfig();
     config.viewContainerRef = this.login_viewContainerRef;
     config.panelClass = 'dialogClass';
-    config.minWidth = '380px';
+    config.width = '600px';
 
     this.login_dialogRef = this.login_dialog.open(LoginDialog, config);
     this.login_dialogRef.componentInstance.ref = this.login_dialogRef;

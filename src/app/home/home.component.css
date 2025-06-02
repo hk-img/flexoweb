@@ -531,6 +531,14 @@ mark {
   transition: opacity 1s ease-in-out;
 }
 
+.hero__form .ng-dropdown-panel {
+  width: 100% !important;
+}
+
+.hero__form .cdk-overlay-pane {
+  width: 100% !important;
+}
+
 .animateIMG.text span {
   position: absolute;
   opacity: 0;

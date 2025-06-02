@@ -55,8 +55,9 @@
                     <div class="booking-all-list-single-img">
                         <h5>{{linkName}}</h5>
                         <a target="_blank" [href]=" webDomain + 'details/' + data?.linkName ">
-                            <img src="{{data?.images[0] ?? 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp' }} "
-                                alt="">
+                            <img loading="lazy" fetchpriority="low"
+                                src="{{data?.images[0] ?? 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp' }} "
+                                [alt]="data?.spaceName" [title]="data?.spaceName" width="200" height="150" />
                         </a>
                         <div class="booking-all-list-single-img-tag">
                             <p>{{data?.spaceType}}</p>
@@ -66,8 +67,7 @@
                         <div class="booking-all-list-single-cont-od">
                             <h4>{{data?.spaceName}}</h4>
                             <p class="booking-all-list-single-cont-location">
-                                <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp"
-                                    alt="">
+                                <app-icon name="location2" class="w-4 text-orange-400"></app-icon>
                                 <span>{{data?.location_name}} </span>
                             </p>
                             <div class="booking-list-single-info  booking-list-single-about-info ">
@@ -77,15 +77,13 @@
                                 </div> -->
                                 <div *ngIf="data?.spaceType != 'Coworking Space'"
                                     class=" booking-list-single-info-single">
-                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/clock-icon-orng.webp"
-                                        alt="">
-                                    <p>{{(data.minimum_hours == 0 || data.minimum_hours == null) ? 2 :
+                                    <app-icon name="clock" class="w-3 text-orange-400"></app-icon>
+                                    <p class="pl-1">{{(data.minimum_hours == 0 || data.minimum_hours == null) ? 2 :
                                         data.minimum_hours/60}} hrs min</p>
                                 </div>
                                 <div class="booking-list-single-info-single">
-                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/scale-orng.webp"
-                                        alt="" class="sq-ft-icon">
-                                    <p>{{data?.spacesqft}} sqft</p>
+                                    <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
+                                    <p class="pl-1">{{data?.spacesqft}} sqft</p>
                                 </div>
                             </div>
 
@@ -94,9 +92,8 @@
                         <div class="booking-all-list-single-cont-bd">
                             <div class="booking-list-single-info booking-list-single-date-info ">
                                 <div class="booking-list-single-info-single">
-                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/date-icon-o.webp"
-                                        alt="" class="date-icon">
-                                    <p>{{data?.startDate | date : 'dd-MM-YYYY'}}</p>
+                                    <app-icon name="calender" class="w-3 text-orange-400"></app-icon>
+                                    <p class="pl-1">{{data?.startDate | date : 'dd-MM-YYYY'}}</p>
                                 </div>
                                 <div class="watch-time booking-list-single-info-single">
                                     <p> <span> {{data?.ofDays|| data?.dayCount}}</span> Days</p>
@@ -113,26 +110,22 @@
                                 </div>
                                 <div class="booking-list-single-info-single booking-confirm"
                                     *ngIf="(data?.bookingStatus=='confirmed' || data?.bookingStatus=='confirm') && data?.paymentSuccess==1">
-                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-con.webp"
-                                        alt="" class="bc-icon">
-                                    <p>Confirmed</p>
+                                    <app-icon name="checkFill" class="w-5 text-green-600"></app-icon>
+                                    <p class="pl-1">Confirmed</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-cancel"
                                     *ngIf="data?.bookingStatus=='cancelled'">
-                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-c.webp"
-                                        alt="" class="bc-icon">
+                                    <app-icon name="cancel" class="w-5 text-red-600"></app-icon>
                                     <p>Canceled</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-cancel"
                                     *ngIf="data?.bookingStatus=='rejected'">
-                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-c.webp"
-                                        alt="" class="bc-icon">
+                                    <app-icon name="cancel" class="w-5 text-red-600"></app-icon>
                                     <p>Rejected</p>
                                 </div>
                                 <div class="booking-list-single-info-single booking-waiting"
                                     *ngIf="(data?.bookingStatus=='pending' || (data?.bookingStatus=='confirmed' && data?.paymentSuccess==0))">
-                                    <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/bc-w.webp"
-                                        alt="" class="bc-icon">
+                                    <app-icon name="warning" class="w-5 text-blue-600"></app-icon>
                                     <p *ngIf="data?.bookingStatus=='confirmed' && data?.paymentSuccess==0">Pending
                                         Payment</p>
                                     <p *ngIf="data?.bookingStatus=='pending' && data?.isInstant=='0'">Pending Host
@@ -150,11 +143,11 @@
                         type="button" class="custum-btn outline-orng-btn"> Leave a Review </button>
                     <button style="background: #fff  !important; color: #000e54 !important;"
                         *ngIf="data?.bookingStatus == 'confirmed'" (click)="getUserInvoiceByBookingId(data?.id)"
-                        type="button" class="custum-btn blu-btn "> <i class="fa fa-cloud-download"
-                            aria-hidden="true"></i> Invoice </button>
+                        type="button" class="custum-btn blu-btn "> <app-icon name="cloudDownload"
+                            class="w-4 text-blue-800"></app-icon> Invoice </button>
                     <button style="background: #2c864f; border: none !important;" type="button"
-                        routerLink="/booking-Detail/{{data?.id}}" class="custum-btn boking_btn">Booking Details <i
-                            class="fa fa-chevron-right" aria-hidden="true"></i> </button>
+                        routerLink="/booking-Detail/{{data?.id}}" class="custum-btn boking_btn">Booking Details
+                        <app-icon name="rightArrow" class="w-3 text-white"></app-icon> </button>
                 </div>
             </div>
             <div class="work-space-review-heading">
