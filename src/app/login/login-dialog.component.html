@@ -303,7 +303,11 @@
           <!-- <i class="fa fa-eye fa_eye_input" id="togglePassword1"
             (click)="togglePasswordVisibility('password1', 'togglePassword1')" aria-hidden="true"></i> -->
           <app-icon id="togglePassword1" (click)="togglePasswordVisibility('password1', 'togglePassword1')"
-            [name]="isPasswordVisible ? 'eye-slash' : 'eye'" class="w-2 fa_eye_input">
+            [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
+          </app-icon>
+          
+          <app-icon *ngIf="!isPasswordVisible" id="togglePassword1" (click)="togglePasswordVisibility('password2', 'togglePassword2')"
+            [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
           </app-icon>
 
           <mat-error *ngIf="emailFormControl['password']?.errors?.required">Password is required.</mat-error>
