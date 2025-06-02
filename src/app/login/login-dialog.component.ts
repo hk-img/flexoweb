@@ -50,7 +50,7 @@ declare const gapi: any;
   styleUrls: ['./login-dialog.component.css'],
 })
 export class LoginDialog implements OnInit {
-  value= false;
+  value = false;
   // yad variables start
   public isLoading: boolean = false;
   userAction: 'register' | 'login' | 'forgotPass' | 'resetPass' = 'register';
@@ -111,14 +111,14 @@ export class LoginDialog implements OnInit {
   socialUserFirstName: any;
   socialUserLastName: any;
   telInputInstance: any;
-  initialDialCode:any = "+91"
+  initialDialCode: any = "+91"
   selectedCountryData: any;
   iti2: import("intl-tel-input").Iti;
   iti: import("intl-tel-input").Iti;
   iti3: import("intl-tel-input").Iti;
-  countryCodes:any;
-	selectedIndex: any = 75;
-	placeholder: string = '';
+  countryCodes: any;
+  selectedIndex: any = 75;
+  placeholder: string = '';
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
@@ -155,15 +155,15 @@ export class LoginDialog implements OnInit {
   }
 
   onCountryCodeChange(country: any) {
-		this.selectedIndex = this.countryCodes.findIndex((code:any) => code?.dialcode === country);
-		this.updatePlaceholder();
-	}
-	
-	updatePlaceholder() {
-		if (this.selectedIndex) {
-			this.placeholder = Array.from({ length: this.countryCodes?.this.selectedIndex['number-of-digits-in-number'] }, (_, i) => i ).join('');
-		}
-	}
+    this.selectedIndex = this.countryCodes.findIndex((code: any) => code?.dialcode === country);
+    this.updatePlaceholder();
+  }
+
+  updatePlaceholder() {
+    if (this.selectedIndex) {
+      this.placeholder = Array.from({ length: this.countryCodes?.this.selectedIndex['number-of-digits-in-number'] }, (_, i) => i).join('');
+    }
+  }
 
   ngAfterViewInit(): void {
     this.initializeIntlTelInput();
@@ -179,60 +179,60 @@ export class LoginDialog implements OnInit {
 
   private initializeIntlTelInput(): void {
     if (isPlatformBrowser(this.platformId)) {
-    const input = document.querySelector("#tel") as HTMLInputElement;
+      const input = document.querySelector("#tel") as HTMLInputElement;
 
-    if (input && !this.itiInitialized) {
-      this.iti = intlTelInput(input, {
-        initialCountry: "auto",
-        geoIpLookup: function(success, failure) {
-          fetch('https://ipinfo.io')
-            .then(response => response.json())
-            .then(data => success(data.country))
-            .catch(() => success('IN'));
-        },
-        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
-      });
+      if (input && !this.itiInitialized) {
+        this.iti = intlTelInput(input, {
+          initialCountry: "auto",
+          geoIpLookup: function (success, failure) {
+            fetch('https://ipinfo.io')
+              .then(response => response.json())
+              .then(data => success(data.country))
+              .catch(() => success('IN'));
+          },
+          utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+        });
 
-      input.addEventListener("countrychange", () => this.onCountryChange2(this.iti));
-      this.itiInitialized = true;
+        input.addEventListener("countrychange", () => this.onCountryChange2(this.iti));
+        this.itiInitialized = true;
+      }
+
+      const input2 = document.querySelector("#tel2") as HTMLInputElement;
+
+      if (input2 && !this.iti2Initialized) {
+        this.iti2 = intlTelInput(input2, {
+          initialCountry: "auto",
+          geoIpLookup: function (success, failure) {
+            fetch('https://ipinfo.io')
+              .then(response => response.json())
+              .then(data => success(data.country))
+              .catch(() => success('IN'));
+          },
+          utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+        });
+
+        input2.addEventListener("countrychange", () => this.onCountryChange2(this.iti2));
+        this.iti2Initialized = true;
+      }
+
+      const input3 = document.querySelector("#tel3") as HTMLInputElement;
+
+      if (input3 && !this.iti3Initialized) {
+        this.iti3 = intlTelInput(input3, {
+          initialCountry: "auto",
+          geoIpLookup: function (success, failure) {
+            fetch('https://ipinfo.io')
+              .then(response => response.json())
+              .then(data => success(data.country))
+              .catch(() => success('IN'));
+          },
+          utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+        });
+
+        input3.addEventListener("countrychange", () => this.onCountryChange2(this.iti3));
+        this.iti3Initialized = true;
+      }
     }
-
-    const input2 = document.querySelector("#tel2") as HTMLInputElement;
-
-    if (input2 && !this.iti2Initialized) {
-      this.iti2 = intlTelInput(input2, {
-        initialCountry: "auto",
-        geoIpLookup: function(success, failure) {
-          fetch('https://ipinfo.io')
-            .then(response => response.json())
-            .then(data => success(data.country))
-            .catch(() => success('IN'));
-        },
-        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
-      });
-
-      input2.addEventListener("countrychange", () => this.onCountryChange2(this.iti2));
-      this.iti2Initialized = true;
-    }
-    
-    const input3 = document.querySelector("#tel3") as HTMLInputElement;
-
-    if (input3 && !this.iti3Initialized) {
-      this.iti3 = intlTelInput(input3, {
-        initialCountry: "auto",
-        geoIpLookup: function(success, failure) {
-          fetch('https://ipinfo.io')
-            .then(response => response.json())
-            .then(data => success(data.country))
-            .catch(() => success('IN'));
-        },
-        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
-      });
-
-      input3.addEventListener("countrychange", () => this.onCountryChange2(this.iti3));
-      this.iti3Initialized = true;
-    }
-  }
   }
 
   private destroyIntlTelInput(): void {
@@ -263,37 +263,37 @@ export class LoginDialog implements OnInit {
     this.initializeIntlTelInput();
   }
 
-  destroyLibrary(){
+  destroyLibrary() {
     this.iti?.destroy();
   }
 
   onCountryChange2(iti: any) {
     alert("aa")
     this.selectedCountryData = iti.getSelectedCountryData();
-    this.mobileLoginForm.patchValue({"phone_code":this.selectedCountryData?.dialCode});
-    this.mobileNumberForm.patchValue({"phone_code":this.selectedCountryData?.dialCode});
+    this.mobileLoginForm.patchValue({ "phone_code": this.selectedCountryData?.dialCode });
+    this.mobileNumberForm.patchValue({ "phone_code": this.selectedCountryData?.dialCode });
   }
 
   startCounter() {
     this.counter = 30
     this.countDown = timer(0, this.tick)
-    .pipe(take(this.counter))
-    .subscribe(() => {
-      --this.counter;
-      if (this.counter == 0) {
-        this.countDown.unsubscribe();
-      }
-    });
+      .pipe(take(this.counter))
+      .subscribe(() => {
+        --this.counter;
+        if (this.counter == 0) {
+          this.countDown.unsubscribe();
+        }
+      });
   }
 
   loginByGoogle(user: any) {
     this.selectedLoginType = LoginTypeEnum.Google;
     this.socialUserFirstName = user.firstName;
     this.socialUserLastName = user.lastName;
-    this.userEmailRegisterForm.patchValue({"firstName": this.socialUserFirstName, "lastName": this.socialUserLastName})
+    this.userEmailRegisterForm.patchValue({ "firstName": this.socialUserFirstName, "lastName": this.socialUserLastName })
     let data = {
       email: user?.email,
-      picture:user?.photoUrl,
+      picture: user?.photoUrl,
       id: user?.id,
     };
     let authToken = localStorage.getItem('authToken');
@@ -303,7 +303,7 @@ export class LoginDialog implements OnInit {
         .subscribe((res: any) => {
           this.socialAuthService.signOut();
           if (res?.existsEmail) {
-            if (res?.userdata?.status=== "De-Active"){
+            if (res?.userdata?.status === "De-Active") {
               this.toastr.error(res.msg || 'Your Acount is not Activated. Please contact to Administator.');
               this.closeDialog(true);
             } else {
@@ -326,7 +326,7 @@ export class LoginDialog implements OnInit {
               .get('mobile')
               ?.setValidators([
                 Validators.required,
-          
+
               ]);
             this.userEmailRegisterForm.get('mobile').updateValueAndValidity();
           }
@@ -420,7 +420,7 @@ export class LoginDialog implements OnInit {
 
     // forgot password otp form
     this.forgotPasswordOtpForm = this.fb.group({
-      otp: ['', [Validators.required,  Validators.pattern('[0-9]{10}$')]],
+      otp: ['', [Validators.required, Validators.pattern('[0-9]{10}$')]],
       password: ['', [Validators.required]],
       confirmPassword: [''],
     });
@@ -490,9 +490,9 @@ export class LoginDialog implements OnInit {
     // email register form
     this.userEmailRegisterForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern('^[A-za-z]+$')]],
-      lastName: ['', [Validators.required,Validators.pattern('^[A-za-z]+$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[A-za-z]+$')]],
       mobile: [
-        '',Validators.required
+        '', Validators.required
       ],
       phone_code: ['+91', Validators.required],
       // password: ['', [Validators.required]],
@@ -516,7 +516,7 @@ export class LoginDialog implements OnInit {
       }
       this.isLoading = true;
       this.loginRegisterService
-        .sendMobileOTP(this.mobileNumberForm.value.mobile,this.mobileNumberForm.value.phone_code)
+        .sendMobileOTP(this.mobileNumberForm.value.mobile, this.mobileNumberForm.value.phone_code)
         .subscribe(
           (res: any) => {
             if (res.success) {
@@ -526,22 +526,22 @@ export class LoginDialog implements OnInit {
                 this.toastr.success(res.message);
               } else {
                 this.otpReceived = true;
-              this.counter = 30;
-              this.startCounter();
-              this.newUser = res?.user?.newUser || res?.newUser;
-              this.existingUser = res?.user?.existingUser;
-              if (res?.user) {
-                localStorage.setItem('userDetails', JSON.stringify(res?.user));
-                localStorage.setItem('authToken', res?.user?.accessToken|| '');
-                this.userService.userDetails.next(res?.user);
-                this.userDetail = JSON.parse(
-                  localStorage.getItem('userDetails')
-                );
-              }
-              this.toastr.success(res.message || 'OTP sent successfully!');
+                this.counter = 30;
+                this.startCounter();
+                this.newUser = res?.user?.newUser || res?.newUser;
+                this.existingUser = res?.user?.existingUser;
+                if (res?.user) {
+                  localStorage.setItem('userDetails', JSON.stringify(res?.user));
+                  localStorage.setItem('authToken', res?.user?.accessToken || '');
+                  this.userService.userDetails.next(res?.user);
+                  this.userDetail = JSON.parse(
+                    localStorage.getItem('userDetails')
+                  );
+                }
+                this.toastr.success(res.message || 'OTP sent successfully!');
 
               }
-              
+
             } else {
               this.isLoading = false;
               this.toastr.error(
@@ -564,7 +564,7 @@ export class LoginDialog implements OnInit {
           .sendEmailOTP(this.mobileNumberForm.value.email)
           .subscribe(
             (res: any) => {
-              if(res?.success==false){
+              if (res?.success == false) {
                 this.toastr.error(res.message);
                 this.isLoading = false;
               }
@@ -572,7 +572,7 @@ export class LoginDialog implements OnInit {
               if (res.message == 'OTP SENT SUCCESSFULLY') {
                 this.otpReceived = true;
                 this.counter = 30;
-              this.startCounter();
+                this.startCounter();
                 this.newUser = res?.user?.newUser;
                 this.existingUser = res?.user?.existingUser;
                 if (res?.user) {
@@ -593,7 +593,7 @@ export class LoginDialog implements OnInit {
                 this.isLoading = false;
                 this.toastr.success('User already registred please login');
                 this.userAction = 'login';
-                this.loginType=LoginTypeEnum.Email
+                this.loginType = LoginTypeEnum.Email
               }
             },
             (e) => {
@@ -698,9 +698,9 @@ export class LoginDialog implements OnInit {
       this.loginRegisterService.loginByEmail(payload).subscribe(
         (res: any) => {
           if (res['success'] === true) {
-            
+
             if (res?.User.existsEmail) {
-              if (res?.User?.status=== "De-Active"){
+              if (res?.User?.status === "De-Active") {
                 this.toastr.error('Your Acount is not Activated. Please contact to Administator.');
                 this.closeDialog(true);
               } else {
@@ -783,14 +783,14 @@ export class LoginDialog implements OnInit {
 
 
       this.mobileNumberForm
-                  .get('mobile')
-                  ?.setValidators([
-                    Validators.required,
-                    Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
-                  ]);
-                this.mobileNumberForm
-                  .get('mobile')
-                  .updateValueAndValidity();
+        .get('mobile')
+        ?.setValidators([
+          Validators.required,
+          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
+        ]);
+      this.mobileNumberForm
+        .get('mobile')
+        .updateValueAndValidity();
     }
   }
 
@@ -828,30 +828,30 @@ export class LoginDialog implements OnInit {
 
   public verifyOtp() {
 
-    if(this.selectedLoginType=='Mobile'){
+    if (this.selectedLoginType == 'Mobile') {
 
       this.verifyMobileRegisterOTP();
 
-    }else if(this.selectedLoginType=='Email'){
+    } else if (this.selectedLoginType == 'Email') {
 
-        this.verifyEmailRegisterOTP();
-    }else{
+      this.verifyEmailRegisterOTP();
+    } else {
 
-      this.toastr.error("Invalid registration type",'Error');
+      this.toastr.error("Invalid registration type", 'Error');
     }
 
   }
 
-  verifyMobileRegisterOTP(){
-    if(this.otpForm.valid){
+  verifyMobileRegisterOTP() {
+    if (this.otpForm.valid) {
       let otp = this.otpForm.value.otp1 + this.otpForm.value.otp2 + this.otpForm.value.otp3 + this.otpForm.value.otp4;
       this.isLoading = true;
-      this.loginRegisterService.verifyregisterOTP(this.mobileNumberForm.value.mobile,otp).subscribe((res:any)=>{
-        if(res['success'] === true){
+      this.loginRegisterService.verifyregisterOTP(this.mobileNumberForm.value.mobile, otp).subscribe((res: any) => {
+        if (res['success'] === true) {
           this.isLoading = false;
           this.toastr.success(res.message || 'OTP verified successfully!');
           this.otpReceived = true;
-          this.userEmailRegisterForm.patchValue({"mobile":res.mobile})
+          this.userEmailRegisterForm.patchValue({ "mobile": res.mobile })
           this.showEmailUserRegister = true;
           this.showUserRegister = true;
           this.otpReceived = false;
@@ -863,21 +863,21 @@ export class LoginDialog implements OnInit {
             .get('mobile')
             ?.setValidators([
               Validators.required,
-            
+
             ]);
           this.userEmailRegisterForm
             .get('mobile')
             .updateValueAndValidity();
 
-        }else{
+        } else {
           this.isLoading = false;
           this.toastr.error(res.message || 'Some error occurred while login!');
         }
-      },(err)=>{
+      }, (err) => {
         this.isLoading = false;
-              this.toastr.error(
-                err.error.message || 'Some error occurred otp verification!'
-              );
+        this.toastr.error(
+          err.error.message || 'Some error occurred otp verification!'
+        );
       })
     }
   }
@@ -915,7 +915,7 @@ export class LoginDialog implements OnInit {
                   .get('mobile')
                   ?.setValidators([
                     Validators.required,
-                    
+
                   ]);
                 this.userEmailRegisterForm
                   .get('mobile')
@@ -1093,10 +1093,10 @@ export class LoginDialog implements OnInit {
       }
     );
   }
-// need flow change in this
+  // need flow change in this
   public registerUser(): void {
     if (this.showEmailUserRegister) {
-      
+
       const formValue = this.userEmailRegisterForm.getRawValue();
       let payload = {
         firstName: formValue.firstName,
@@ -1106,28 +1106,28 @@ export class LoginDialog implements OnInit {
           (this.userDetail?.mobile) ||
           (this.mobileLoginForm.get('mobile').value),
         phone_code:
-        formValue.mobile?.phone_code ||
+          formValue.mobile?.phone_code ||
           this.mobileLoginForm.value.phone_code ||
           this.mobileNumberForm.value.phone_code || '+91',
         email:
           formValue.email || this.userDetail?.email || this.socialUser?.email,
         companyName: formValue.companyName,
-      }; 
-      
+      };
+
       if (this.userEmailRegisterForm.get('mobile').value == '') {
         this.mobileLoginForm.markAllAsTouched();
         // return;
       }
-      
+
       let registerType;
-      if(this.selectedLoginType=='Email'){
-        registerType=this.mobileNumberForm.value.email;
-      }else if(this.selectedLoginType=='Google'){
-        registerType=this.socialUser?.email;
-      }else if(this.selectedLoginType=='Mobile'){
-        registerType= this.mobileNumberForm.value.mobile || this.mobileLoginForm.get('mobile').value;
-      } 
- 
+      if (this.selectedLoginType == 'Email') {
+        registerType = this.mobileNumberForm.value.email;
+      } else if (this.selectedLoginType == 'Google') {
+        registerType = this.socialUser?.email;
+      } else if (this.selectedLoginType == 'Mobile') {
+        registerType = this.mobileNumberForm.value.mobile || this.mobileLoginForm.get('mobile').value;
+      }
+
       this.isLoading = true;
       this.loginRegisterService
         .registerEmail(registerType, payload, this.selectedLoginType)
@@ -1143,8 +1143,8 @@ export class LoginDialog implements OnInit {
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('authToken', res?.result?.accessToken);
                 this.closeDialog(true);
-              }else {
-                
+              } else {
+
                 this.isLoading = false;
                 this.toastr.success(res.message || 'User Register successfully!');
                 this.showUserRegister = false;
@@ -1173,7 +1173,7 @@ export class LoginDialog implements OnInit {
       };
       this.isLoading = true;
       this.loginRegisterService.registerEmail(this, payload).subscribe(
-        (res: any) => { 
+        (res: any) => {
           if (res['success'] === true) {
             this.isLoading = false;
             this.showUserRegister = true;
@@ -1259,7 +1259,7 @@ export class LoginDialog implements OnInit {
           } else if (!result.success) {
             this.toastr.error(
               result.message ||
-                'Some error occured while check email is exists!'
+              'Some error occured while check email is exists!'
             );
             return false;
           }
@@ -1270,37 +1270,45 @@ export class LoginDialog implements OnInit {
       }
     );
   }
-  
-  onDigitInput(event, data?,data2?){
+
+  onDigitInput(event, data?, data2?) {
 
     let element;
     if (event.code !== 'Backspace')
-         element = event.srcElement.nextElementSibling;
- 
-     if (event.code === 'Backspace')
-         element = event.srcElement.previousElementSibling;
- 
-     if(element == null)
-         return;
-     else
-         element.focus();
- }
+      element = event.srcElement.nextElementSibling;
+
+    if (event.code === 'Backspace')
+      element = event.srcElement.previousElementSibling;
+
+    if (element == null)
+      return;
+    else
+      element.focus();
+  }
 
 
- hidePassword1 = true;
+  hidePassword1 = true;
   hidePassword2 = true;
   hidePassword3 = true;
- togglePasswordVisibility(passwordId: string, iconId: string) {
-  if (isPlatformBrowser(this.platformId)) {
-    const passwordElement = document.getElementById(passwordId) as HTMLInputElement;
-      const iconElement = document.getElementById(iconId);
+  isPasswordVisible: boolean = false;
+  togglePasswordVisibility(passwordId: string, iconId: string) {
+    if (isPlatformBrowser(this.platformId)) {
 
-      if (passwordElement.type === 'password') {
-        passwordElement.type = 'text';
-        iconElement?.classList.replace('fa-eye', 'fa-eye-slash');
-      } else {
-        passwordElement.type = 'password';
-        iconElement?.classList.replace('fa-eye-slash', 'fa-eye');
+      this.isPasswordVisible = !this.isPasswordVisible;
+      const input = document.getElementById('password1') as HTMLInputElement;
+      if (input) {
+        input.type = this.isPasswordVisible ? 'text' : 'password';
+      }
+    }
+  }
+  
+  togglePasswordVisibility2(passwordId: string, iconId: string) {
+    if (isPlatformBrowser(this.platformId)) {
+
+      this.isPasswordVisible = !this.isPasswordVisible;
+      const input = document.getElementById('password2') as HTMLInputElement;
+      if (input) {
+        input.type = this.isPasswordVisible ? 'text' : 'password';
       }
     }
   }
@@ -1341,7 +1349,7 @@ export class LoginDialog implements OnInit {
     }
   }
 
-  forgotPasswordOtpVerify() {}
+  forgotPasswordOtpVerify() { }
 
   verifyForgotOtp() {
     if (this.forgotOtpForm.valid) {
@@ -1421,8 +1429,8 @@ export class LoginDialog implements OnInit {
     }
     this.isLoading = true;
     this.loginRegisterService
-      .LoginWithMobile(this.mobileLoginForm.value.mobile,this.mobileLoginForm.value.phone_code)
-      .subscribe((res:any) => {
+      .LoginWithMobile(this.mobileLoginForm.value.mobile, this.mobileLoginForm.value.phone_code)
+      .subscribe((res: any) => {
         if (res.success === true) {
           if (!res?.existingUser) {
             this.userAction = 'login';
@@ -1446,7 +1454,7 @@ export class LoginDialog implements OnInit {
             // }
 
           } else {
-            
+
             this.counter = 30;
             this.startCounter();
             this.isLoading = false;
@@ -1480,7 +1488,7 @@ export class LoginDialog implements OnInit {
           this.loginOtpReceived = false;
           if (res.user.newUser) {
             localStorage.setItem('userDetails', JSON.stringify(res?.user));
-            res?.user?.accessToken?localStorage.setItem('authToken', res?.user?.accessToken):'';
+            res?.user?.accessToken ? localStorage.setItem('authToken', res?.user?.accessToken) : '';
             this.showUserRegister = true;
             this.showEmailUserRegister = true;
             this.userAction = 'register';
@@ -1494,8 +1502,8 @@ export class LoginDialog implements OnInit {
           } else {
             this.dialogRef.close(true);
             if (res?.user) {
-              
-              if (res?.user?.status=== "De-Active"){
+
+              if (res?.user?.status === "De-Active") {
                 this.toastr.error(res.msg || 'Your Acount is not Activated. Please contact to Administator.');
               } else {
                 localStorage.setItem('userDetails', JSON.stringify(res?.user));
