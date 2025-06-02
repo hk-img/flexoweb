@@ -1104,7 +1104,7 @@ ul.list-inline li {
 .pointer {
   cursor: pointer;
 }
-.slider-btn.v1 i {
+.slider-btn.v1 svg {
   line-height: 33px;
   font-size: 16px;
   color: rgba(168, 163, 163, 0.9);
@@ -6027,16 +6027,22 @@ ul.listing-features {
 }
 
 .zsiq_theme1.zsiq_floatmain {
-  width: 45px;
-  max-height: 58px;
-  height: 60px !important;
+  width: auto !important;
+  max-height: unset !important;
+  height: auto !important;
+}
+.zsiq_theme1 .siqicon::before {
+  font-size: 20px !important;
+}
+.zsiq_theme1 .zsiq_user {
+  height: auto !important;
 }
 .zsiq_theme1 .zsiq_flt_rel {
   position: relative;
   padding: 0;
-  width: 45px;
+  width: 45px !important;
   border-radius: 60px;
-  height: 45px;
+  height: 45px !important;
   font-size: 14px;
   background-color: #328a59;
   display: flex;
@@ -9174,7 +9180,7 @@ a.rate-review:hover {
 }
 
 .shortlist-share-container .btn {
-  border-radius: 29px;
+  border-radius: 50%;
   font-size: 16px;
   background: #ece8e8;
   width: 34px;
@@ -10007,6 +10013,7 @@ section.parallax-section .bg1 {
   background: transparent;
   font-size: 14px;
   color: #000;
+  cursor: pointer;
 }
 .btn-close i {
   color: #000;
@@ -10071,10 +10078,12 @@ section.parallax-section .bg1 {
 .dialogClass-l {
   width: 600px;
 }
-
-.dialogClass-l mat-dialog-container {
-  padding: 0;
+.dialogClass-l {
+  width: 600px !important;
 }
+/* .dialogClass {
+  width: 600px !important;
+} */
 
 .dialogClass-l mat-dialog-container form {
   width: 100%;
@@ -10546,12 +10555,8 @@ h4 {
   margin: 0;
 }
 
-.f-w-mdl img {
-  width: 50px;
-  height: 80px;
-  object-fit: contain;
+.f-w-mdl .checkIocn {
   margin: 30px auto 20px;
-  display: table;
 }
 
 .inquiry_form .mat-form-field-infix {
@@ -11280,30 +11285,13 @@ h4 {
   .Spaces_box .space_img_box img {
     height: 150px !important;
   }
-  .city_carousel .slick-next {
-    right: 8px !important;
+  .slick-next {
+    right: -13px !important;
   }
-  .city_carousel .slick-prev {
+  .slick-prev {
     left: -13px !important;
   }
-  .work-space-option .slick-next {
-    right: 8px !important;
-  }
-  .work-space-option .slick-prev {
-    left: -13px !important;
-  }
-  .cowrking_brands .slick-next {
-    right: 8px !important;
-  }
-  .cowrking_brands .slick-prev {
-    left: -13px !important;
-  }
-  .work-process .slick-next {
-    right: 29px !important;
-  }
-  .work-process .slick-prev {
-    left: 3px !important;
-  }
+
   .workspace_steps .space_list .list_items .space_count {
     position: static !important;
     margin-bottom: 10px;
@@ -11791,10 +11779,18 @@ h4 {
   cursor: pointer;
 }
 
+.slick-prev::before {
+  display: none !important;
+}
+
+.slick-next::before {
+  display: none !important;
+}
+
 /* .gmnoprint {
   top: 150px !important;
 } */
-.city_carousel .slick-prev:before {
+/* .city_carousel .slick-prev:before {
   content: "\f053";
   font-family: "FONTAWESOME";
 }
@@ -11849,42 +11845,35 @@ h4 {
 }
 .cowrking_brands .slick-next {
   right: 0;
-}
+} */
 
-.slick-prev::before,
-.slick-next::before {
-  font-size: 20px !important;
+.slick-next {
+  right: 0;
+  z-index: 99 !important;
+}
+.slick-prev,
+.slick-next {
+  font-size: 29px !important;
   line-height: 1;
   color: #d0c2c2 !important;
   opacity: 1 !important;
-  border: 2px solid #d0c2c2;
-  border-radius: 50%;
-  padding: 8px;
-  background: #fff;
-  transition: all 500ms;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid #d0c2c2 !important;
+  border-radius: 50% !important;
+  padding: 8px !important;
+  background: #fff !important;
+  transition: all 500ms !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 999 !important;
 }
-.slick-prev:hover:before,
-.slick-next:hover:before {
-  border: 2px solid #f76900;
+
+.slick-prev:hover,
+.slick-next:hover {
+  border: 2px solid #f76900 !important;
   color: #f76900 !important;
-}
-
-.city_carousel .slick-prev {
-  left: -22px;
-}
-.city_carousel .slick-next {
-  right: 0px;
-}
-
-.slick-prev,
-.slick-next {
-  transform: translate(0, -112%) !important;
-  z-index: 99;
 }
 
 @media (min-width: 1400px) {

@@ -13,13 +13,19 @@
         <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
           responsive="breakpoints">
           <div ngxSlickItem class="swiper-slide single-listing-slider slide" *ngFor="let element of images">
-            <img (error)="onImageError($event,imageAlt)" width="750px" [src]="element" alt="{{imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}">
+            <img loading="lazy" fetchpriority="low" (error)="onImageError($event,imageAlt)" width="750" width="500"
+              [src]="element" alt="{{imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}"
+              class="w-100 img-fluid" />
           </div>
         </ngx-slick-carousel>
       </div>
     </div>
   </div>
 
-  <div class="slider-btn v1 popular-next style2" (click)="next()"><i class="ion-arrow-right-c"></i></div>
-  <div class="slider-btn v1 popular-prev style2" (click)="prev()"><i class="ion-arrow-left-c"></i></div>
+  <div class="slider-btn v1 popular-next style2 d-flex align-items-center justify-content-center" (click)="next()">
+    <app-icon name="rightLongArrow" class="w-6"></app-icon>
+  </div>
+  <div class="slider-btn v1 popular-prev style2 d-flex align-items-center justify-content-center" (click)="prev()">
+    <app-icon name="leftLongArrow" class="w-6"></app-icon>
+  </div>
 </div>

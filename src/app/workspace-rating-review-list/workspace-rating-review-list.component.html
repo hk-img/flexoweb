@@ -62,16 +62,16 @@
       <div class="review-section-single" *ngFor="let item of spaceRatingReviewList">
         <div class="review-section-single-img">
           <a target="_blank" [href]=" webDomain + 'details/' + item?.linkName ">
-            <img (error)="handleImageError($event)"
+            <img loading="lazy" fetchpriority="low" (error)="handleImageError($event)"
               [src]="(item?.base_url+'/'+item?.images[0]) || 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'"
-              alt="">
+              [alt]="item?.spacename" [title]="item?.spacename" width="180" height="150" />
           </a>
           <div class="booking-all-list-single-img-tag">
             <p>{{item?.spaceType}}</p>
           </div>
         </div>
         <div class="review-section-single-cont">
-          <h4>{{item?.spacename}}</h4>
+          <h4 class="mb-0">{{item?.spacename}}</h4>
           <div class="book-again-star">
 
             <div class="rating-star-number">
@@ -80,26 +80,31 @@
                   <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 1, 'fa-star-half-o': item?.rating > 0 && item?.rating < 1, 'fa-star-o': item?.rating <= 0}"
                     aria-hidden="true"></i>
+                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
                 </li>
                 <li class>
                   <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 2, 'fa-star-half-o': item?.rating > 1 && item?.rating < 2, 'fa-star-o': item?.rating <= 1}"
                     aria-hidden="true"></i>
+                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
                 </li>
                 <li class>
                   <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 3, 'fa-star-half-o': item?.rating > 2 && item?.rating < 3, 'fa-star-o': item?.rating <= 2}"
                     aria-hidden="true"></i>
+                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
                 </li>
                 <li class>
                   <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 4, 'fa-star-half-o': item?.rating > 3 && item?.rating < 4, 'fa-star-o': item?.rating <= 3}"
                     aria-hidden="true"></i>
+                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
                 </li>
                 <li class>
                   <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 5, 'fa-star-half-o': item?.rating > 4 && item?.rating < 5, 'fa-star-o': item?.rating <= 4}"
                     aria-hidden="true"></i>
+                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
                 </li>
               </ul>
               <div class="start-count">
@@ -110,7 +115,8 @@
 
             <ul class="book-again">
               <li>
-                <i class="fa fa-check" aria-hidden="true"></i>
+                <!-- <i class="fa fa-check" aria-hidden="true"></i> -->
+                <app-icon name="checkTic" class="text-orange-400 w-3"></app-icon>
               </li>
               <li>
                 Yes I would book again
