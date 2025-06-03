@@ -94,10 +94,9 @@ div.scrollmenu {
   margin-bottom: 15px;
 }
 
-div.scrollmenu a {
+div.scrollmenu button {
   display: inline-block;
   text-align: center;
-
   background-color: #fff;
   margin-right: 6px;
   cursor: pointer;
@@ -114,7 +113,7 @@ div.scrollmenu a {
   text-overflow: ellipsis;
 }
 
-div.scrollmenu a:hover {
+div.scrollmenu button:hover {
   background: #e9e9ff;
   border-color: #7d9dd9;
   color: #4343e8;

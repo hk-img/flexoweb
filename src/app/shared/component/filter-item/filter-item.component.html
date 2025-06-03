@@ -17,8 +17,9 @@
   <h1 class="heading" *ngIf="find_near_me == 1">{{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' :
     selectedValues.length ? 'Coworking Space' : selectedRadio }}s Near Me</h1>
   <div class="scrollmenu" *ngIf="show">
-    <a *ngFor="let space of nearByLocationsList" (click)="openNearByList(space)"
-      [ngClass]="space?.location_name.toLowerCase() === nearByLocation && 'selected' ">{{ space?.location_name }} </a>
+    <button type="button" *ngFor="let space of nearByLocationsList" (click)="openNearByList(space)"
+      [ngClass]="space?.location_name.toLowerCase() === nearByLocation && 'selected' ">{{ space?.location_name }}
+    </button>
   </div>
   <div class="row mb_filter_row" style="flex-wrap: nowrap; align-items: baseline">
     <div class="col-lg-8 col-md-12 col-sm-12">

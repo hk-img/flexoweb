@@ -1,10 +1,10 @@
-<a class="call_icon">
+<a class="call_icon" href="tel:+91 95133 92400" aria-label="call us">
   <app-icon name="call" class="w-3 text-white"></app-icon>
   <span class="call_icon_tooltip">+91 95133 92400</span>
 </a>
 
 <a href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0"
-  class="float whatsapp_icons" target="_blank">
+  class="float whatsapp_icons" target="_blank" aria-label="Chat with us on WhatsApp">
   <app-icon name="whatsapp" class="w-6 text-white"></app-icon>
 </a>
 
@@ -42,8 +42,8 @@
                   </li>
                   <li class="has-no-children" style="cursor: pointer;" (click)="openLoginDialog()"
                     *ngIf="!isLoggedIn && !userDetails?.firstName">
-                    <a class="login_btn"><app-icon name="logIn" class="text-orange-400 w-5"></app-icon> <span
-                        class="pl-1">Sign In</span></a>
+                    <button type="button" class="login_btn"><app-icon name="logIn"
+                        class="text-orange-400 w-5"></app-icon> <span class="pl-1">Sign In</span></button>
                   </li>
                   <li class="has-no-children" style="cursor: pointer;" *ngIf="isLoggedIn || userDetails?.firstName">
                     <div class="dropdown">
@@ -147,27 +147,27 @@
               <ul class="list">
                 <li>
                   <a class="link-hov style2" routerLink="/enterprise">
-                    <h4>Enterprise Solutions</h4>
+                    <div class="footer_links">Enterprise Solutions</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/joy-of-giving">
-                    <h4>Joy Of Giving</h4>
+                    <div class="footer_links">Joy Of Giving</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/list-with-us">
-                    <h4>List With Us</h4>
+                    <div class="footer_links">List With Us</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/enterprise">
-                    <h4>Flexo For Enterprises</h4>
+                    <div class="footer_links">Flexo For Enterprises</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/contact">
-                    <h4>Contact Us</h4>
+                    <div class="footer_links">Contact Us</div>
                   </a>
                 </li>
               </ul>
@@ -178,57 +178,57 @@
               <ul class="list">
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/mumbai">
-                    <h4>Coworking Space in Mumbai</h4>
+                    <div class="footer_links">Coworking Space in Mumbai</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/pune">
-                    <h4>Coworking Space in Pune</h4>
+                    <div class="footer_links">Coworking Space in Pune</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/bengaluru">
-                    <h4>Coworking Space in Bangalore</h4>
+                    <div class="footer_links">Coworking Space in Bangalore</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/hyderabad">
-                    <h4>Coworking Space in Hyderabad</h4>
+                    <div class="footer_links">Coworking Space in Hyderabad</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/new-delhi">
-                    <h4>Coworking Space in Delhi</h4>
+                    <div class="footer_links">Coworking Space in Delhi</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/navi-mumbai">
-                    <h4>Coworking Spaces in Navi Mumbai</h4>
+                    <div class="footer_links">Coworking Spaces in Navi Mumbai</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/panaji">
-                    <h4>Coworking Space in Panaji Goa</h4>
+                    <div class="footer_links">Coworking Space in Panaji Goa</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/vadodara">
-                    <h4>Coworking Space in Vadodara</h4>
+                    <div class="footer_links">Coworking Space in Vadodara</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking-space/mumbai/lower-parel">
-                    <h4>Coworking Space in Lower Parel</h4>
+                    <div class="footer_links">Coworking Space in Lower Parel</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking-space/mumbai/bandra-kurla-complex">
-                    <h4>Coworking Space in BKC</h4>
+                    <div class="footer_links">Coworking Space in BKC</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking-space/mumbai/andheri-east">
-                    <h4>Coworking Space in Andheri</h4>
+                    <div class="footer_links">Coworking Space in Andheri</div>
                   </a>
                 </li>
 
@@ -241,57 +241,57 @@
               <ul class="list">
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/ahmedabad">
-                    <h4>Coworking Space in Ahmedabad</h4>
+                    <div class="footer_links">Coworking Space in Ahmedabad</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/chandigarh">
-                    <h4>Coworking Space in Chandigarh</h4>
+                    <div class="footer_links">Coworking Space in Chandigarh</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/noida">
-                    <h4>Coworking Space in Noida</h4>
+                    <div class="footer_links">Coworking Space in Noida</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/gurgaon">
-                    <h4>Coworking Space in Gurgaon</h4>
+                    <div class="footer_links">Coworking Space in Gurgaon</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/indore">
-                    <h4>Coworking Space in Indore</h4>
+                    <div class="footer_links">Coworking Space in Indore</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/chennai">
-                    <h4>Coworking Space in Chennai</h4>
+                    <div class="footer_links">Coworking Space in Chennai</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/kochi">
-                    <h4>Coworking Space in Kochi</h4>
+                    <div class="footer_links">Coworking Space in Kochi</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/lucknow">
-                    <h4>Coworking Space in Lucknow</h4>
+                    <div class="footer_links">Coworking Space in Lucknow</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/surat">
-                    <h4>Coworking Space in Surat</h4>
+                    <div class="footer_links">Coworking Space in Surat</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/kolkata">
-                    <h4>Coworking Space in Kolkata</h4>
+                    <div class="footer_links">Coworking Space in Kolkata</div>
                   </a>
                 </li>
                 <li>
                   <a class="link-hov style2" routerLink="/in/coworking/coimbatore">
-                    <h4>Coworking Space in Coimbatore</h4>
+                    <div class="footer_links">Coworking Space in Coimbatore</div>
                   </a>
                 </li>
               </ul>
@@ -300,7 +300,7 @@
 
           <div class="col-lg-3 col-md-12">
             <div class="footer-content nav mt-lg-0 mt-md-4 mt-4">
-              <h4 class="title margin-block mt-0">Follow us on</h4>
+              <h3 class="title margin-block mt-0">Follow us on</h3>
               <!-- <ul class="list footer-list"> -->
               <!-- <li>
                   <div class="contact-info">
@@ -340,19 +340,19 @@
               </ul> -->
               <ul class="social-buttons style2">
                 <li>
-                  <a href="https://www.facebook.com/flexospaces/"><app-icon name="facebook"
+                  <a href="https://www.facebook.com/flexospaces/" aria-label="facebook"><app-icon name="facebook"
                       class="w-5 text-orange-400"></app-icon></a>
                 </li>
                 <li>
-                  <a href="https://twitter.com/flexospaces"><app-icon name="twitter"
+                  <a href="https://twitter.com/flexospaces" aria-label="twitter"><app-icon name="twitter"
                       class="w-5 text-orange-400"></app-icon></a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com/company/flexospaces/"><app-icon name="linkedin"
-                      class="w-5 text-orange-400"></app-icon></a>
+                  <a href="https://www.linkedin.com/company/flexospaces/" aria-label="linkedin"><app-icon
+                      name="linkedin" class="w-5 text-orange-400"></app-icon></a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/flexospaces/"><app-icon name="instagram"
+                  <a href="https://www.instagram.com/flexospaces/" aria-label="instagram"><app-icon name="instagram"
                       class="w-5 text-orange-400"></app-icon></a>
                 </li>
               </ul>
