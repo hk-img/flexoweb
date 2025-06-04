@@ -512,15 +512,12 @@
                       <app-icon *ngIf="existingUpVote == 1" name="thumbUpFill"
                         (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('upvote');" [ngClass]="{
                           'fa': true,
-                          'fa-thumbs-up': true,
                           'disabled': isLoading
                         }" class="w-2 text-orange-400" aria-hidden="true">
                       </app-icon>
 
                       <app-icon *ngIf="existingUpVote != 1" name="thumbUp"
                         (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('upvote');" [ngClass]="{
-                          'fa': true,
-                          'fa-thumbs-o-up black-color': true,
                           'disabled': isLoading
                         }" class="w-2 text-dark" aria-hidden="true">
                       </app-icon>
@@ -539,15 +536,12 @@
                       <app-icon *ngIf="existingDownVote == 1" name="thumbDownFill"
                         (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('downvote');" [ngClass]="{
                           'fa': true,
-                          'fa-thumbs-down': true,
                           'disabled': isLoading
                         }" class="w-2 text-orange-400" aria-hidden="true">
                       </app-icon>
 
                       <app-icon *ngIf="existingDownVote != 1" name="thumbDown"
                         (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('downvote');" [ngClass]="{
-                          'fa': true,
-                          'fa-thumbs-o-down black-color': true,
                           'disabled': isLoading
                         }" class="w-2 text-dark" aria-hidden="true">
                       </app-icon>
