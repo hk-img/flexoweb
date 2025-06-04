@@ -727,6 +727,7 @@ section.coupon {
 }
 .mobile_btm_bar ul li {
   text-align: center;
+  line-height: normal;
 }
 .mobile_btm_bar ul li a {
   color: #fff;
@@ -734,6 +735,15 @@ section.coupon {
   font-size: 11px;
   font-weight: 500;
   line-height: normal;
+}
+.mobile_btm_bar ul li button {
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+  background: none;
 }
 
 .svgIconBottom {
@@ -10149,6 +10159,9 @@ section.parallax-section .bg1 {
 button:focus {
   outline: 0px dotted !important;
   outline: 0px auto -webkit-focus-ring-color !important;
+}
+button {
+  cursor: pointer;
 }
 
 :focus-visible {

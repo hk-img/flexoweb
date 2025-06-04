@@ -150,10 +150,12 @@
       </div>
       <div class="booking-popup-plot-cont">
         <h5>{{spaceName}}</h5>
-        <p> <i class="fa fa-map-marker" aria-hidden="true"></i> <span> {{landmark}} </span> </p>
+        <p class="d-flex"> <app-icon name="location2" class="w-3 text-orange-400"></app-icon> <span class="pl-1">
+            {{landmark}} </span>
+        </p>
         <div class="booking-container hour-rate align-items-start border-0">
           <p style="font-weight: 700;">
-            <app-icon name="rupee" class="w-3 text-orange-400"></app-icon>{{space_details?.originalPrice}}<span>
+            <app-icon name="rupee" class="w-2 text-orange-400"></app-icon>{{space_details?.originalPrice}}<span>
               /Day</span>
             <!-- <span style="font-weight: 500; padding-left: 5px;">2 hr minimum</span> -->
           </p>
@@ -180,7 +182,7 @@
     </div>
     <div class="booking-popup-payment-info">
       <div class="booking-popup-payment-info-date">
-        <h5> <i class="fa fa-calendar-o" aria-hidden="true"></i> <span>Booking Summary</span></h5>
+        <h5> <app-icon name="calender" class="w-3"></app-icon> <span class="pl-1">Booking Summary</span></h5>
       </div>
       <div class="booking-popup-payment-info-details">
         <div class="booking-popup-payment-info-details-single" *ngFor="let model of model">
@@ -188,7 +190,7 @@
             </span> x <span> <app-icon name="rupee" class="w-3 text-orange-400"></app-icon> {{originalPrice}}</span>
           </p>
           <h6> {{dayPassForm.get('noOfGuest').value * originalPrice | number: '0.2-2'}} <app-icon name="rupee"
-              class="w-3 text-orange-400"></app-icon></h6>
+              class="w-2 text-orange-400"></app-icon></h6>
         </div>
       </div>
       <!-- <div class="booking-popup-payment-info-deposit">
@@ -198,14 +200,14 @@
       <div class="booking-popup-payment-info-total">
         <p> Subtotal </p>
         <h6>{{dayPassForm.get('noOfGuest').value * originalPrice * model.length | number: '0.2-2' }} <app-icon
-            name="rupee" class="w-3 text-orange-400"></app-icon>
+            name="rupee" class="w-2 text-orange-400"></app-icon>
         </h6>
       </div>
       <div class="booking-popup-payment-info-total">
         <p> GST(18%) </p>
         <h6>{{(dayPassForm.get('noOfGuest').value * originalPrice * model.length)>0 ?
           (dayPassForm.get('noOfGuest').value * originalPrice * model.length)*0.18: 0 | number: '0.2-2'}} <app-icon
-            name="rupee" class="w-3 text-orange-400"></app-icon>
+            name="rupee" class="w-2 text-orange-400"></app-icon>
         </h6>
       </div>
       <div class="booking-popup-payment-info-pay">

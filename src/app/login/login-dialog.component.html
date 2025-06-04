@@ -305,8 +305,9 @@
           <app-icon id="togglePassword1" (click)="togglePasswordVisibility('password1', 'togglePassword1')"
             [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
           </app-icon>
-          
-          <app-icon *ngIf="!isPasswordVisible" id="togglePassword1" (click)="togglePasswordVisibility('password2', 'togglePassword2')"
+
+          <app-icon *ngIf="!isPasswordVisible" id="togglePassword1"
+            (click)="togglePasswordVisibility('password2', 'togglePassword2')"
             [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
           </app-icon>
 
@@ -523,8 +524,9 @@
               formControlName="newPassword" placeholder="New Password">
             <!-- <i id="togglePassword2" class="fa fa-eye fa_eye_input"
               (click)="togglePasswordVisibility('password2', 'togglePassword2')" aria-hidden="true"></i> -->
-            <app-icon id="togglePassword2" (click)="togglePasswordVisibility('password2', 'togglePassword2')" name="eye"
-              class="w-2 fa_eye_input"></app-icon>
+            <app-icon id="togglePassword2" (click)="togglePasswordVisibility('password2', 'togglePassword2')"
+              [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
+            </app-icon>
           </mat-form-field>
           <mat-error
             *ngIf="resetPasswordFormControls['newPassword']?.errors?.required && resetPasswordFormControls['newPassword']?.touched">Please
@@ -537,8 +539,9 @@
               name="confirm Password" formControlName="confirmPassword" placeholder="confirmPassword">
             <!-- <i id="togglePassword3" class="fa fa-eye fa_eye_input"
               (click)="togglePasswordVisibility('password3', 'togglePassword3')" aria-hidden="true"></i> -->
-            <app-icon id="togglePassword3" (click)="togglePasswordVisibility('password3', 'togglePassword3')" name="eye"
-              class="w-2 fa_eye_input"></app-icon>
+            <app-icon id="togglePassword3" (click)="togglePasswordVisibility('password3', 'togglePassword3')"
+              [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
+            </app-icon>
           </mat-form-field>
           <mat-error
             *ngIf="resetPasswordFormControls['confirmPassword']?.errors?.required&& resetPasswordFormControls.confirmPassword?.touched">Please

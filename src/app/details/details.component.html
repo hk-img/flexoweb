@@ -164,7 +164,11 @@
       <a (click)="updateShortList()" class="btn" [style.color]="is_shortlisted ? '#F76900' : '#F76900'">
         <!-- <i class="ion-favorite on-image-icon"></i> -->
         <!-- <i [ngClass]="is_shortlisted ? 'fa fa-heart color-on-heart' : 'fa fa-heart-o'" aria-hidden="true"></i> -->
-        <app-icon name="heartTransparent" class="w-3 text-dark"></app-icon>
+        <app-icon *ngIf="!is_shortlisted" name="heartTransparent" class="w-3 text-dark" aria-hidden="true">
+        </app-icon>
+
+        <app-icon *ngIf="is_shortlisted" name="heart" class="w-3 text-orange-400 color-on-heart" aria-hidden="true">
+        </app-icon>
 
       </a>
     </div>
@@ -378,34 +382,92 @@
                       <div class="d-flex align-items-center">
                         <ul class="product-rating-c">
                           <li class>
-                            <i style="cursor: context-menu;"
+                            <!-- <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 1, 'fa-star-half-o': space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1, 'fa-star-o': space_details?.ratingsAvg <= 0}"
-                              aria-hidden="true"></i>
-                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                              aria-hidden="true"></i> -->
+                            <app-icon *ngIf="space_details?.ratingsAvg >= 1" name="star" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1"
+                              name="halfStar" class="w-2 text-gray-400" style="cursor: context-menu;"
+                              aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
+
                           </li>
                           <li class>
-                            <i style="cursor: context-menu;"
+                            <!-- <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 2, 'fa-star-half-o': space_details?.ratingsAvg > 1 && space_details?.ratingsAvg < 2, 'fa-star-o': space_details?.ratingsAvg <= 1}"
-                              aria-hidden="true"></i>
-                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                              aria-hidden="true"></i> -->
+
+                            <app-icon *ngIf="space_details?.ratingsAvg >= 2" name="star" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 2"
+                              name="halfStar" class="w-2 text-gray-400" style="cursor: context-menu;"
+                              aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
+
                           </li>
                           <li class>
-                            <i style="cursor: context-menu;"
+                            <!-- <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 3, 'fa-star-half-o': space_details?.ratingsAvg > 2 && space_details?.ratingsAvg < 3, 'fa-star-o': space_details?.ratingsAvg <= 2}"
-                              aria-hidden="true"></i>
-                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                              aria-hidden="true"></i> -->
+                            <app-icon *ngIf="space_details?.ratingsAvg >= 3" name="star" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 3"
+                              name="halfStar" class="w-2 text-gray-400" style="cursor: context-menu;"
+                              aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
                           </li>
                           <li class>
-                            <i style="cursor: context-menu;"
+                            <!-- <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 4, 'fa-star-half-o': space_details?.ratingsAvg > 3 && space_details?.ratingsAvg < 4, 'fa-star-o': space_details?.ratingsAvg <= 3}"
-                              aria-hidden="true"></i>
-                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                              aria-hidden="true"></i> -->
+                            <app-icon *ngIf="space_details?.ratingsAvg >= 4" name="star" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 4"
+                              name="halfStar" class="w-2 text-gray-400" style="cursor: context-menu;"
+                              aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
                           </li>
                           <li class>
-                            <i style="cursor: context-menu;"
+                            <!-- <i style="cursor: context-menu;"
                               [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 5, 'fa-star-half-o': space_details?.ratingsAvg > 4 && space_details?.ratingsAvg < 5, 'fa-star-o': space_details?.ratingsAvg <= 4}"
-                              aria-hidden="true"></i>
-                            <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                              aria-hidden="true"></i> -->
+                            <app-icon *ngIf="space_details?.ratingsAvg >= 5" name="star" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 5"
+                              name="halfStar" class="w-2 text-gray-400" style="cursor: context-menu;"
+                              aria-hidden="true">
+                            </app-icon>
+
+                            <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-gray-400"
+                              style="cursor: context-menu;" aria-hidden="true">
+                            </app-icon>
                           </li>
                         </ul>
 
@@ -444,20 +506,46 @@
                   </div>
                   <div class="like-dislike-c" *ngIf="!isLongterm">
                     <a class="product-like-c">
-                      <i (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('upvote');" class="fa"
+                      <!-- <i (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('upvote');" class="fa"
                         [ngClass]="{'fa-thumbs-up orange-color': existingUpVote == 1, 'fa-thumbs-o-up black-color': existingUpVote != 1 }"
-                        [class.disabled]="isLoading" aria-hidden="true"></i>
-                      <!-- <app-icon name="thumbUp" class="w-2 text-dark"></app-icon> -->
-                      <span *ngIf="space_details?.upvote > 0">{{space_details?.upvote}}</span>
-                      <span *ngIf="space_details?.upvote <= 0">0</span>
+                        [class.disabled]="isLoading" aria-hidden="true"></i> -->
+                      <app-icon *ngIf="existingUpVote == 1" name="thumbUpFill"
+                        (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('upvote');" [ngClass]="{
+                          'fa': true,
+                          'disabled': isLoading
+                        }" class="w-2 text-orange-400" aria-hidden="true">
+                      </app-icon>
+
+                      <app-icon *ngIf="existingUpVote != 1" name="thumbUp"
+                        (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('upvote');" [ngClass]="{
+                          'disabled': isLoading
+                        }" class="w-2 text-dark" aria-hidden="true">
+                      </app-icon>
+
+                      <span class="pl-1" *ngIf="space_details?.upvote > 0">{{space_details?.upvote}}</span>
+                      <span class="pl-1" *ngIf="space_details?.upvote <= 0">0</span>
                     </a>
 
                     <a class="product-dis-like-c">
-                      <i class="fa fa-thumbs-o-down" [class.disabled]="isLoading"
+                      <!-- <i class="fa fa-thumbs-o-down" [class.disabled]="isLoading"
                         (click)="!isLoading && $event.stopPropagation();voteDevoteSite('downvote')"
                         [ngClass]="existingDownVote == 1 ? 'fa fa-thumbs-down orange-color':'fa fa-thumbs-o-down'"
                         [ariaDisabled]="isLoading" aria-hidden="true">
-                      </i>
+                      </i> -->
+
+                      <app-icon *ngIf="existingDownVote == 1" name="thumbDownFill"
+                        (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('downvote');" [ngClass]="{
+                          'fa': true,
+                          'disabled': isLoading
+                        }" class="w-2 text-orange-400" aria-hidden="true">
+                      </app-icon>
+
+                      <app-icon *ngIf="existingDownVote != 1" name="thumbDown"
+                        (click)="!isLoading && $event.stopPropagation(); voteDevoteSite('downvote');" [ngClass]="{
+                          'disabled': isLoading
+                        }" class="w-2 text-dark" aria-hidden="true">
+                      </app-icon>
+
                       <!-- <app-icon name="thumbDown" class="w-2 text-dark"></app-icon> -->
                       <!-- <span>{{space_details?.downvote}}</span> -->
                     </a>
@@ -958,34 +1046,84 @@
               <div class="row align-items-center mx-0" *ngIf="space_details?.ratingsAvg?.length > 0">
                 <ul class="product-rating-c d-flex">
                   <li class style="color: #F76900; margin-right: 5px;">
-                    <i style="cursor: context-menu;"
+                    <!-- <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 1, 'fa-star-half-o': space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1, 'fa-star-o': space_details?.ratingsAvg <= 0}"
-                      aria-hidden="true"></i>
-                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                      aria-hidden="true"></i> -->
+                    <app-icon *ngIf="space_details?.ratingsAvg >= 1" name="star" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 1" name="halfStar"
+                      class="w-2 text-yellow-600" aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
                   </li>
                   <li class style="color: #F76900; margin-right: 5px;">
-                    <i style="cursor: context-menu;"
+                    <!-- <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 2, 'fa-star-half-o': space_details?.ratingsAvg > 1 && space_details?.ratingsAvg < 2, 'fa-star-o': space_details?.ratingsAvg <= 1}"
-                      aria-hidden="true"></i>
-                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                      aria-hidden="true"></i> -->
+                    <app-icon *ngIf="space_details?.ratingsAvg >= 2" name="star" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 2" name="halfStar"
+                      class="w-2 text-yellow-600" aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
                   </li>
                   <li class style="color: #F76900; margin-right: 5px;">
-                    <i style="cursor: context-menu;"
+                    <!-- <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 3, 'fa-star-half-o': space_details?.ratingsAvg > 2 && space_details?.ratingsAvg < 3, 'fa-star-o': space_details?.ratingsAvg <= 2}"
-                      aria-hidden="true"></i>
-                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                      aria-hidden="true"></i> -->
+                    <app-icon *ngIf="space_details?.ratingsAvg >= 3" name="star" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 3" name="halfStar"
+                      class="w-2 text-yellow-600" aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
                   </li>
                   <li class style="color: #F76900; margin-right: 5px;">
-                    <i style="cursor: context-menu;"
+                    <!-- <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 4, 'fa-star-half-o': space_details?.ratingsAvg > 3 && space_details?.ratingsAvg < 4, 'fa-star-o': space_details?.ratingsAvg <= 3}"
-                      aria-hidden="true"></i>
-                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                      aria-hidden="true"></i> -->
+                    <app-icon *ngIf="space_details?.ratingsAvg >= 4" name="star" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 4" name="halfStar"
+                      class="w-2 text-yellow-600" aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
                   </li>
                   <li class style="color: #F76900; margin-right: 5px;">
-                    <i style="cursor: context-menu;"
+                    <!-- <i style="cursor: context-menu;"
                       [ngClass]="{'fa': true, 'fa-star': space_details?.ratingsAvg >= 5, 'fa-star-half-o': space_details?.ratingsAvg > 4 && space_details?.ratingsAvg < 5, 'fa-star-o': space_details?.ratingsAvg <= 4}"
-                      aria-hidden="true"></i>
-                    <!-- <app-icon name="emptyStar" class="w-2 text-gray-400"></app-icon> -->
+                      aria-hidden="true"></i> -->
+                    <app-icon *ngIf="space_details?.ratingsAvg >= 5" name="star" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg > 0 && space_details?.ratingsAvg < 5" name="halfStar"
+                      class="w-2 text-yellow-600" aria-hidden="true">
+                    </app-icon>
+
+                    <app-icon *ngIf="space_details?.ratingsAvg <= 0" name="emptyStar" class="w-2 text-yellow-600"
+                      aria-hidden="true">
+                    </app-icon>
                   </li>
                 </ul>
 
@@ -1005,24 +1143,34 @@
                   <div class="book-again-star">
                     <ul class="product-rating-c">
                       <li class>
-                        <i [ngClass]="srrl?.rating>=1?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
-                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
+                        <!-- <i [ngClass]="srrl?.rating>=1?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i> -->
+                        <app-icon [name]="srrl?.rating >= 1 ? 'star' : 'emptyStar'" class="w-2 text-yellow-600"
+                          aria-hidden="true">
+                        </app-icon>
                       </li>
                       <li class>
-                        <i [ngClass]="srrl?.rating>=2?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
-                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
+                        <!-- <i [ngClass]="srrl?.rating>=2?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i> -->
+                        <app-icon [name]="srrl?.rating >= 2 ? 'star' : 'emptyStar'" class="w-2 text-yellow-600"
+                          aria-hidden="true">
+                        </app-icon>
                       </li>
                       <li class>
-                        <i [ngClass]="srrl?.rating>=3?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
-                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
+                        <!-- <i [ngClass]="srrl?.rating>=3?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i> -->
+                        <app-icon [name]="srrl?.rating >= 3 ? 'star' : 'emptyStar'" class="w-2 text-yellow-600"
+                          aria-hidden="true">
+                        </app-icon>
                       </li>
                       <li class>
-                        <i [ngClass]="srrl?.rating>=4?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
-                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
+                        <!-- <i [ngClass]="srrl?.rating>=4?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i> -->
+                        <app-icon [name]="srrl?.rating >= 4 ? 'star' : 'emptyStar'" class="w-2 text-yellow-600"
+                          aria-hidden="true">
+                        </app-icon>
                       </li>
                       <li class>
-                        <i [ngClass]="srrl?.rating>=5?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i>
-                        <!-- <app-icon name="star" class="w-2 text-gray-400"></app-icon> -->
+                        <!-- <i [ngClass]="srrl?.rating>=5?'fa fa-star':'fa fa-star-o'" aria-hidden="true"></i> -->
+                        <app-icon [name]="srrl?.rating >= 5 ? 'star' : 'emptyStar'" class="w-2 text-yellow-600"
+                          aria-hidden="true">
+                        </app-icon>
                       </li>
                     </ul>
 
@@ -1163,7 +1311,7 @@
                   <app-icon *ngIf="space_details?.isInstant == 1" name="boltFull"
                     class="w-2 text-yellow-400"></app-icon>
                   <!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/rs-icon.webp" alt=""> -->
-                  <app-icon name="rupee" class="w-3 text-orange-400"></app-icon>
+                  <app-icon name="rupee" class="w-5 text-orange-400"></app-icon>
                   {{space_details?.originalPrice}} <span> /
                     hr</span>
                 </h2>
@@ -1538,34 +1686,35 @@
     <div class="row justify-content-around">
       <div class="col-3">
         <li>
-          <a class="" (click)="openInquiryPopUp()" style="color: #ffffff;">
-            <app-icon name="fileProtector" class="w-4 text-gray-400"></app-icon>
-            <div>QUOTES</div>
+          <button type="button" class="" (click)="openInquiryPopUp()" style="color: #ffffff;" aria-label="QUOTES">
+            <app-icon name="fileProtector" class="w-5"></app-icon>
+            <div class="pt-2">QUOTES</div>
+          </button>
+        </li>
+      </div>
+      <div class="col-3">
+        <li>
+          <a style="color: #ffffff;"
+            href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0"
+            aria-label="WHATSAPP">
+            <app-icon name="whatsapp" class="w-5"></app-icon>
+            <div class="pt-2">WHATSAPP</div>
           </a>
         </li>
       </div>
       <div class="col-3">
         <li>
-          <a class="" style="color: #ffffff;"
-            href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0">
-            <app-icon name="whatsapp" class="w-5 text-gray-400"></app-icon>
-            <div>WHATSAPP</div>
-          </a>
+          <button type="button" style="color: #ffffff;" aria-label="Chat with us">
+            <app-icon name="chat" class="w-4 text-white"></app-icon>
+            <div class="pt-2">CHAT</div>
+          </button>
         </li>
       </div>
       <div class="col-3">
         <li>
-          <a class="" style="color: #ffffff;" href="">
-            <app-icon name="chat" class="w-5 text-gray-400"></app-icon>
-            <div>CHAT</div>
-          </a>
-        </li>
-      </div>
-      <div class="col-3">
-        <li>
-          <a class="" style="color: #ffffff;" href="tel:+91 95133 92400">
-            <app-icon name="phoneCall" class="w-5 text-gray-400"></app-icon>
-            <div>CALL</div>
+          <a style="color: #ffffff;" href="tel:+91 95133 92400" aria-label="Call us">
+            <app-icon name="call" class="w-3"></app-icon>
+            <div class="pt-2">CALL</div>
           </a>
         </li>
       </div>

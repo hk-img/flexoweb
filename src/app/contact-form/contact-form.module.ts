@@ -18,6 +18,7 @@ import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/
 import { ConfirmedValidator } from '../confirmed.validator';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatLegacyProgressBarModule as MatProgressBarModule} from '@angular/material/legacy-progress-bar';
+import { SharedModule } from '../shared/shared/shared.module';
 // import { MatSnackBar } from '@angular/material/snack-bar';
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MatLegacyProgressBarModule as MatProgressBarModule} from '@angular/mater
     MatSnackBarModule,
     MatFormFieldModule,
     MatStepperModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule
   ]
 })
 export class ContactFormModule { }
