@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: "http://13.235.251.69:5401",
+  apiUrl: "https://stagingapis.flexospaces.com",
   s3_bucket_path: "worker-app",
   mapKey: "AIzaSyCOAhd885zH5TvinKCm3-rhDvgndqzoQyU",
   webDomain: "",

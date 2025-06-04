@@ -59,7 +59,9 @@
                                             (input)="select.filter($event.target.value)" />
                                     </ng-template>
                                     <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img
-                                            src="{{list.flag}}" alt="" width="20px"> {{list.dialcode}} &nbsp;
+                                            loading="lazy" fetchpriority="low" src="{{list.flag}}" [alt]="list.name"
+                                            [title]="list.name" width="20" height="20" />
+                                        {{list.dialcode}} &nbsp;
                                         {{list.name}} </ng-option>
                                 </ng-select>
                             </span>

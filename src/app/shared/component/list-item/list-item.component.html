@@ -41,26 +41,27 @@
     </a>
     <div class="shortlist-share-container">
       <div class="share-btn" style="margin-right: 10px">
-        <button type="button" class="btn d-flex align-items-center justify-content-center"
+        <button type="button" aria-label="heart" class="btn d-flex align-items-center justify-content-center"
           [style.color]="spaceDetails?.existingfavorite?.favourite ? '#F76900' : 'gray'"
           (click)="shortListItem($event,spaceDetails.id, spaceDetails.is_shortlisted)">
           <app-icon name="heart" class="w-3"></app-icon>
         </button>
       </div>
       <div class="share-btn">
-        <button type="button" style="color:gray;" class="btn d-flex align-items-center justify-content-center"><app-icon
-            name="share" class="w-3"></app-icon></button>
+        <button type="button" aria-label="share" style="color:gray;"
+          class="btn d-flex align-items-center justify-content-center"><app-icon name="share"
+            class="w-3"></app-icon></button>
         <ul class="social-share" style="top: 45px; right: -16px">
           <li class="bg-fb d-flex align-items-center justify-content-center" (click)="openFacebook()">
-            <button type="button" class="share-button"><app-icon name="facebook"
+            <button type="button" aria-label="facebook" class="share-button"><app-icon name="facebook"
                 class="w-2 text-white"></app-icon></button>
           </li>
           <li class="bg-tt d-flex align-items-center justify-content-center" (click)="openLinkedIn()">
-            <button type="button" class="share-button"><app-icon name="linkedin2"
+            <button type="button" aria-label="linkedin" class="share-button"><app-icon name="linkedin2"
                 class="w-2 text-white"></app-icon></button>
           </li>
           <li class="bg-ig d-flex align-items-center justify-content-center" (click)="openWhatsapp()">
-            <button type="button" class="share-button"><app-icon name="whatsapp"
+            <button type="button" aria-label="whatsapp" class="share-button"><app-icon name="whatsapp"
                 class="w-3 text-white"></app-icon></button>
           </li>
         </ul>
@@ -96,15 +97,15 @@
         *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) && spaceDetails.reviewCount.length > 0">
         <ul class="product-rating pr-1">
           <li *ngFor="let element of spaceDetails.rating_array">
-            <app-icon name="star" class="w-2"></app-icon>
+            <app-icon name="star" class="w-2 text-yellow-600"></app-icon>
           </li>
           <!-- <li><i class="ion-android-star"></i></li>
           <li><i class="ion-android-star"></i></li> -->
           <li *ngIf="spaceDetails.rating - spaceDetails.rating_floor != 0">
-            <app-icon name="halfStar" class="w-2"></app-icon>
+            <app-icon name="halfStar" class="w-2 text-yellow-600"></app-icon>
           </li>
           <li>
-            <app-icon name="emptyStar" class="w-2"></app-icon>
+            <app-icon name="emptyStar" class="w-2 text-yellow-600"></app-icon>
           </li>
         </ul>
         {{spaceDetails.rating}} ({{spaceDetails.reviewCount}})
@@ -114,23 +115,25 @@
           <app-icon name="user" class="w-1 text-orange-400"></app-icon> {{spaceDetails.howManyPeopleInYourSpace}}
           people
         </div>
-        <div *ngIf="type === 'longterm'" class="rate_txt">
-          <app-icon name="home" class="w-1 text-orange-400"></app-icon> {{spaceDetails.spaceStatus}}
+        <div *ngIf="type === 'longterm'" class="rate_txt d-flex">
+          <app-icon name="home" class="w-2 text-orange-400"></app-icon>
+          <span class="pl-1">{{spaceDetails.spaceStatus}}</span>
         </div>
-        <div class="rate_txt pl-1">
-          <app-icon name="scaleRuler" class="w-1 text-orange-400"></app-icon> {{spaceDetails.spacesqft}} sqft
+        <div class="rate_txt pl-2 d-flex">
+          <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
+          <span class="pl-1">{{spaceDetails.spacesqft}} sqft</span>
         </div>
       </div>
     </div>
     <div class="d-flex" style="gap:30px;align-items: baseline;">
       <div *ngIf="type === 'shortterm' || type === 'longterm'">
         <span class="accent_back">
-          <app-icon name="scaleRuler" class="w-1 text-orange-400"></app-icon>
+          <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
           <span class="price-value text-white ms-10 align-middle">{{spaceDetails?.originalPrice}} </span>
           <small> / {{type === 'shortterm' ? 'hour' : 'month' }}</small></span>
       </div>
       <div *ngIf="spaceDetails.isInstant && type === 'shortterm'">
-        <app-icon name="bolt" class="w-2 text-yellow-600"></app-icon><span class="instant_back p-1 text-dark">Instant
+        <app-icon name="bolt" class="w-3 text-yellow-600"></app-icon><span class="instant_back p-1 text-dark">Instant
           Book</span>
       </div>
       <div *ngIf="spaceDetails.spaceStatus?.toLowerCase() === 'furnished' && type === 'longterm'">
