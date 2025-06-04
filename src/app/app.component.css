@@ -18,8 +18,6 @@
   width: 100%;
 }
 
-
-
 .footer-widget #subscribe .enteremail {
   float: left;
   width: 100%;
@@ -51,7 +49,7 @@
 }
 
 .footer-widget #subscribe-button:hover i {
-  color: rgba(255, 255, 255, 1.0);
+  color: rgba(255, 255, 255, 1);
 }
 
 .subscribe-message {
@@ -72,27 +70,36 @@
 }
 
 .subscribe-message.error i {
-  color: #F00;
+  color: #f00;
 }
 
 .site-mobile-menu-body li {
   margin-bottom: 10px;
   margin-top: 10px;
 }
-.show { display: block; }
-
-
-.style2{
- & h4{
-color: #555;
-transition: 0.5s;
-position: relative;
-font-size: 14px;
-font-weight: 400;
+.show {
+  display: block;
 }
-} 
 
-.margin-block{
-margin-top: 20px;
-margin-bottom: 15px;
+.style2 {
+  & h4 {
+    color: #555;
+    transition: 0.5s;
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.footer_links {
+  color: #555;
+  transition: 0.5s;
+  position: relative;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.margin-block {
+  margin-top: 20px;
+  margin-bottom: 15px;
 }

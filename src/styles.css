@@ -149,9 +149,11 @@ h6 {
 .login_btn {
   border: 2px solid #ffe9d8;
   border-radius: 15px;
-  padding: 8px 22px;
+  font-size: 15px;
+  padding: 5px 22px;
   color: #f76900 !important;
   background: #f7690012;
+  cursor: pointer;
 }
 .call_btn {
   border: 2px solid #ffe9d8;
@@ -5241,8 +5243,12 @@ ul.icon li::before {
   border: 1px solid #000;
 }
 
-.social-share li a {
+.social-share li button {
   margin-left: 0;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .social-share li a i {
