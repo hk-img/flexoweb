@@ -67,24 +67,24 @@ export const MY_FORMATS = {
 
 
 
-export function loadGoogleMaps(){
-  // return () =>
-  //   new Promise((resolve, reject) => {
-  //     if (!document.getElementById('googleMapsScript')) {
-  //       const script = document.createElement('script');
-  //       script.id = 'googleMapsScript';
-  //       script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.mapKey}&libraries=places`;
-  //       script.async = true;
-  //       script.defer = true;
+export function loadGoogleMaps(): () => Promise<void> {
+  return () =>
+    new Promise((resolve, reject) => {
+      if (!document.getElementById('googleMapsScript')) {
+        const script = document.createElement('script');
+        script.id = 'googleMapsScript';
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.mapKey}&libraries=places`;
+        script.async = true;
+        script.defer = true;
 
-  //       script.onload = () => resolve();
-  //       script.onerror = () => reject('Google Maps API could not be loaded.');
+        script.onload = () => resolve();
+        script.onerror = () => reject('Google Maps API could not be loaded.');
 
-  //       document.head.appendChild(script);
-  //     } else {
-  //       resolve(); // Script already loaded
-  //     }
-  //   });
+        document.head.appendChild(script);
+      } else {
+        resolve(); // Script already loaded
+      }
+    });
 }
 
 
