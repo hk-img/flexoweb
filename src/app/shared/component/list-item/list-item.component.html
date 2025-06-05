@@ -8,11 +8,12 @@
       <ng-container *ngIf="spaceDetails.images?.length">
         <div ngxSlickItem class="swiper-slide single-listing-slider slide" style="cursor: pointer;"
           *ngFor="let image of spaceDetails.images; trackBy: trackByImage">
-          <img loading="eager" fetchpriority="high" decoding="auto" [src]="image"
+          <img src="../../../../assets/images/Accord-logo.webp" alt="">
+          <!-- <img loading="eager" fetchpriority="high" decoding="auto" [src]="image"
             (error)="onImageError($event,spaceDetails.imageAlt)" width="479" height="320"
             title="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
             alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
-            style="aspect-ratio: 3 / 2;" />
+            style="aspect-ratio: 3 / 2;" /> -->
         </div>
       </ng-container>
       <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">

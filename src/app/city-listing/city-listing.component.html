@@ -112,7 +112,7 @@
           </div>
         </div>
       </div>
-      <div class="explore__map-side goole_map_1 col-lg-4" [class.d-none]="!_showMap || isFaqsVisible" [@inOutAnimation]>
+      <div class="explore__map-side goole_map_1 col-lg-4" *ngIf="_showMap || isFaqsVisible" [@inOutAnimation]>
         <div id="map_right_listing" #map_section>
           <google-map height="100%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
             <map-marker #mapMarker="mapMarker" *ngFor="let marker of markersData" [position]="marker.position"
@@ -257,9 +257,9 @@
       >
     </div>
   </div> -->
-  <app-faqs [showMap]="_showMap" #faqsChild inViewport [spaceType]="spaceType" [cityName]="city_param"
+  <!-- <app-faqs [showMap]="_showMap" #faqsChild inViewport [spaceType]="spaceType" [cityName]="city_param"
     [location]="areaName" [inViewportOptions]="{ threshold: [0] }"
-    (inViewportAction)="onIntersection($event)"></app-faqs>
+    (inViewportAction)="onIntersection($event)"></app-faqs> -->
 </div>
 
 <div class="mobile_btm_bar py-3 px-3 "

@@ -89,7 +89,7 @@
           </div>
         </div>
       </div>
-      <div class="explore__map-side" [class.d-none]="!_showMap || isFaqsVisible" [@inOutAnimation]>
+      <div class="explore__map-side" *ngIf="!_showMap || isFaqsVisible" [@inOutAnimation]>
         <div id="map_right_listing" #map_section>
           <google-map height="100%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
             <map-marker #mapMarker *ngFor="let marker of markersData" [position]="marker.position"
