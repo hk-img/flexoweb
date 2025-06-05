@@ -82,7 +82,7 @@
               ]
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -93,8 +93,7 @@
             "production": {
               "browserTarget": "flexo-aggregation-website:build:production"
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -156,7 +155,7 @@
               "buildOptimizer": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": ""
         },
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
