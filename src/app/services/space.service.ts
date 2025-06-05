@@ -27,7 +27,7 @@ export class SpaceService {
   private voteDevoteEndPoint = environment.apiUrl + `/api/v1/spaces/vote`;
   
   private getSpacesByCityUrl =
-    environment.apiUrl + `/api/v1/spaces/getSpacesByCityd`;
+    environment.apiUrl + `/api/v1/spaces/getSpacesByCity`;
   private addBookingDetailsUrl =
     environment.apiUrl + '/api/v1/common/addBookingAndSendInvoice';
   private checkAvailabilityUrl =
