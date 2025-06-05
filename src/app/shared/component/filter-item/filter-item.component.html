@@ -1,20 +1,22 @@
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 
 <div *ngIf="selectedRadio" class="form-group filter-group">
-  <h1 class="heading" *ngIf="area_name == 0 && show && selectedRadio != 'Coworking Café'">
+  <h1 class="heading" style="min-height: 32px;" *ngIf="area_name == 0 && show && selectedRadio != 'Coworking Café'">
     {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' :
     selectedRadio }} in {{nearByLocation && nearByLocation + ', ' | titlecase}}{{ city_name | titlecase }}
   </h1>
-  <h1 class="heading" *ngIf="area_name == 0 && show && selectedRadio == 'Coworking Café'">
+  <h1 class="heading" style="min-height: 32px;" *ngIf="area_name == 0 && show && selectedRadio == 'Coworking Café'">
     {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' :
     selectedRadio }} {{ city_name_display | titlecase }} in {{nearByLocation && nearByLocation | titlecase}}
   </h1>
-  <h1 class="heading" *ngIf="area_name != 0 && city_name != null">
+  <h1 class="heading" style="min-height: 32px;" *ngIf="area_name != 0 && city_name != null">
     {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' :
     selectedRadio }} in {{ area_name_display | titlecase }}
     {{nearByLocation && nearByLocation + ', '}}{{ city_name_display | titlecase }}
   </h1>
-  <h1 class="heading" *ngIf="find_near_me == 1">{{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' :
+  <h1 class="heading" style="min-height: 32px;" *ngIf="find_near_me == 1">{{selectedRadio?.toLowerCase() ===
+    'co-working'
+    ? 'Coworking Space' :
     selectedValues.length ? 'Coworking Space' : selectedRadio }}s Near Me</h1>
   <div class="scrollmenu" *ngIf="show">
     <button type="button" *ngFor="let space of nearByLocationsList" (click)="openNearByList(space)"

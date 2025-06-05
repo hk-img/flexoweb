@@ -3979,6 +3979,7 @@ ul.list-inline li {
 
 .footer-content li {
   padding-bottom: 10px;
+  min-height: 40px;
 }
 
 .footer .info,
