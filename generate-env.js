@@ -22,3 +22,4 @@ export const environment = {
 
 // Write the generated environment.ts file
 fs.writeFileSync('./src/environments/environment.ts', environmentContent.trim());
+fs.writeFileSync('./src/environments/environment.prod.ts', environmentContent.trim());
