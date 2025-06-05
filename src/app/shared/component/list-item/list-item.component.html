@@ -18,10 +18,10 @@
       <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
         <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide"
           style="cursor: pointer;">
-          <img loading="eager" fetchpriority="high" decoding="auto"
+          <img loading="lazy" fetchpriority="low"
             src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
             alt="detail image" title="detail image" width="479" height="320" style="aspect-ratio: 3 / 2;" />
-          <img loading="eager" fetchpriority="high" decoding="auto"
+          <img loading="lazy" fetchpriority="low"
             src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
             alt="detail image" title="detail image" width="479" height="320" style="aspect-ratio: 3 / 2;" />
         </div>
