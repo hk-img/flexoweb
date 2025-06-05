@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "@fontsource/poppins";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/700.css";
 
 html,
 body {
@@ -9,7 +12,7 @@ body {
 
 body {
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
 }
 
 ::ng-deep .ng-dropdown-panel.ng-select-bottom {
@@ -2322,7 +2325,7 @@ ul.list-inline li {
 }
 
 .hero-events {
-  background: url("assets/images/header/slider-3.jpg");
+  /* background: url("assets/images/header/slider-3.jpg"); */
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;

@@ -47,7 +47,7 @@
                 <div class="booking-all-list-single">
                     <div class="booking-all-list-single-img-cont" style="width: 80%;">
                         <div class="booking-all-list-single-img">
-                            <img style="min-width: 165px;"
+                            <img loading="lazy" fetchpriority="low" style="min-width: 165px;"
                                 src="{{bookingDetail?.images[0] ?? 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'}}"
                                 width="336" height="224" [alt]="bookingDetail?.spaceName"
                                 [title]="bookingDetail?.spaceName">

@@ -112,7 +112,7 @@
           </div>
         </div>
       </div>
-      <div class="explore__map-side goole_map_1 col-lg-4" [class.d-none]="!_showMap || isFaqsVisible" [@inOutAnimation]>
+      <div class="explore__map-side goole_map_1 col-lg-4" *ngIf="_showMap || isFaqsVisible" [@inOutAnimation]>
         <div id="map_right_listing" #map_section>
           <google-map height="100%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
             <map-marker #mapMarker="mapMarker" *ngFor="let marker of markersData" [position]="marker.position"
