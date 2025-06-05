@@ -3,16 +3,17 @@
 </div>
 <div (click)="onSpaceNameClicked(spaceDetails)" class="cursor_pointer trending-place-item position-relative box-shadow">
   <div class="trending-img position-relative">
-    <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
+    <ngx-slick-carousel class="carousel h-auto" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
       responsive="breakpoints">
       <ng-container *ngIf="spaceDetails.images?.length">
         <div ngxSlickItem class="swiper-slide single-listing-slider slide" style="cursor: pointer;"
           *ngFor="let image of spaceDetails.images; trackBy: trackByImage">
-          <img loading="eager" fetchpriority="high" decoding="auto" [src]="image"
+          <img src="assets/images/kuchbhi.webp" alt="">
+          <!-- <img loading="eager" fetchpriority="high" decoding="auto" [src]="image"
             (error)="onImageError($event,spaceDetails.imageAlt)" width="479" height="320"
             title="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
             alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
-            style="aspect-ratio: 479/320;" />
+            style="aspect-ratio: 479/320;" /> -->
         </div>
       </ng-container>
       <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
@@ -149,7 +150,7 @@
               <p class="amountClass">
                 <ng-container *ngIf="spaceDetails?.privatecabin_price">
                   <div class="m-0 d-flex align-items-baseline">
-                    <app-icon name="rupee" class="w-2 text-gray-400 rs-icon"></app-icon>
+                    <app-icon name="rupee" class="w-2 text-orange-400 rs-icon"></app-icon>
                     <span class="price-value">{{spaceDetails?.privatecabin_price}}</span>
                     <small class="pl-1"> per seat/month</small>
                   </div>
@@ -167,7 +168,7 @@
               <p class="amountClass">
                 <ng-container *ngIf="spaceDetails.flexible_desk_price || spaceDetails.desks_price">
                   <div class="d-flex align-items-baseline">
-                    <app-icon name="rupee" class="w-2 text-gray-400 rs-icon"></app-icon>
+                    <app-icon name="rupee" class="w-2 text-orange-400 rs-icon"></app-icon>
                     <span class="price-value">
                       {{ getValidPrice(spaceDetails?.desks_price, spaceDetails?.flexible_desk_price) || 'N/A' }}
                     </span>
