@@ -1,0 +1,287 @@
+<div *ngIf="spaceDetails.ribbon_name" class="ribbon-label" [style.backgroundColor]="spaceDetails.ribbon_color">
+  {{spaceDetails.ribbon_name}}
+</div>
+<div (click)="onSpaceNameClicked(spaceDetails)" class="cursor_pointer trending-place-item position-relative box-shadow">
+  <div class="trending-img position-relative">
+    <ngx-slick-carousel class="carousel h-auto" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
+      responsive="breakpoints">
+      <ng-container *ngIf="spaceDetails.images?.length">
+        <div ngxSlickItem class="swiper-slide single-listing-slider slide" style="cursor: pointer;"
+          *ngFor="let image of spaceDetails.images; trackBy: trackByImage">
+          <img src="assets/images/kuchbhi.webp" alt="">
+          <!-- <img loading="eager" fetchpriority="high" decoding="auto" [src]="image"
+            (error)="onImageError($event,spaceDetails.imageAlt)" width="479" height="320"
+            title="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
+            alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
+            style="aspect-ratio: 479/320;" /> -->
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
+        <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide"
+          style="cursor: pointer;">
+          <img loading="lazy" fetchpriority="low"
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
+            alt="detail image" title="detail image" width="479" height="320" style="aspect-ratio: 479/320;" />
+          <img loading="lazy" fetchpriority="low"
+            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
+            alt="detail image" title="detail image" width="479" height="320" style="aspect-ratio: 479/320;" />
+        </div>
+      </ng-container>
+    </ngx-slick-carousel>
+    <a class="carousel-control-prev" style="top: 45%" (click)="prev($event)" role="button" aria-label="Previous slide"
+      data-slide="prev">
+      <span><app-icon name="chevronLeft" class="w-3 icon-color"></app-icon></span>
+      <!-- <span class="sr-only">Previous</span> -->
+      <span class="visually-hidden d-none">Previous</span>
+    </a>
+    <a class="carousel-control-next" style="top: 45%" (click)="next($event)" role="button" aria-label="Next slide"
+      data-slide="next">
+      <span><app-icon name="chevronRight" class="w-3 icon-color"></app-icon></span>
+      <!-- <span class="sr-only">Next</span> -->
+      <span class="visually-hidden d-none">Next</span>
+    </a>
+    <div class="shortlist-share-container">
+      <div class="share-btn" style="margin-right: 10px">
+        <button type="button" aria-label="heart" class="btn d-flex align-items-center justify-content-center"
+          [style.color]="spaceDetails?.existingfavorite?.favourite ? '#F76900' : 'gray'"
+          (click)="shortListItem($event,spaceDetails.id, spaceDetails.is_shortlisted)">
+          <app-icon name="heart" class="w-3"></app-icon>
+        </button>
+      </div>
+      <div class="share-btn">
+        <button type="button" aria-label="share" style="color:gray;"
+          class="btn d-flex align-items-center justify-content-center"><app-icon name="share"
+            class="w-3"></app-icon></button>
+        <ul class="social-share" style="top: 45px; right: -16px">
+          <li class="bg-fb d-flex align-items-center justify-content-center" (click)="openFacebook()">
+            <button type="button" aria-label="facebook" class="share-button"><app-icon name="facebook"
+                class="w-2 text-white"></app-icon></button>
+          </li>
+          <li class="bg-tt d-flex align-items-center justify-content-center" (click)="openLinkedIn()">
+            <button type="button" aria-label="linkedin" class="share-button"><app-icon name="linkedin2"
+                class="w-2 text-white"></app-icon></button>
+          </li>
+          <li class="bg-ig d-flex align-items-center justify-content-center" (click)="openWhatsapp()">
+            <button type="button" aria-label="whatsapp" class="share-button"><app-icon name="whatsapp"
+                class="w-3 text-white"></app-icon></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="trending-img" *ngIf="is_similar_listing">
+    <a [href]="webDomain + 'details/' + spaceDetails.link_name" target="_blank">
+      <img (error)="handleImageError($event,spaceDetails.imageAlter)"
+        [src]="aws_base_url + spaceDetails.id + '/' + spaceDetails.images[0]" 
+         alt="{{spaceDetails.imageAlter}} {{spaceDetails.images[0] | slice:(spaceDetails.images[0]?.lastIndexOf('/') + 1) }}"/></a>
+  </div> -->
+  <div class="trending-title-box">
+
+    <div class="customer-review d-flex justify-content-between mb-md-2 mb-1 align-items-end">
+      <h2 style="font-size: 18px" class="h-cursor m-0 text-truncate">
+        {{ spaceDetails.name
+        }}
+        <span style="
+            background: unset;
+            float: unset;
+            margin: unset;
+            width: unset;
+            height: unset;
+            font-size: 15px;
+          ">
+          <app-icon name="location2" class="w-2 text-orange-400"></app-icon>
+          {{spaceDetails.location_name }}, {{spaceDetails.contact_city_name}}</span>
+      </h2>
+    </div>
+    <div class="rating-summary d-flex align-items-center mb-1" style="">
+      <div class="rating-result d-flex align-items-center pr-2" style="" title="60%"
+        *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) && spaceDetails.reviewCount.length > 0">
+        <ul class="product-rating pr-1">
+          <li *ngFor="let element of spaceDetails.rating_array">
+            <app-icon name="star" class="w-2 text-yellow-600"></app-icon>
+          </li>
+          <!-- <li><i class="ion-android-star"></i></li>
+          <li><i class="ion-android-star"></i></li> -->
+          <li *ngIf="spaceDetails.rating - spaceDetails.rating_floor != 0">
+            <app-icon name="halfStar" class="w-2 text-yellow-600"></app-icon>
+          </li>
+          <li>
+            <app-icon name="emptyStar" class="w-2 text-yellow-600"></app-icon>
+          </li>
+        </ul>
+        {{spaceDetails.rating}} ({{spaceDetails.reviewCount}})
+      </div>
+      <div class="d-flex align-items-center">
+        <div *ngIf="type === 'coworking' || type === 'shortterm'  " class="pr-1 rate_txt">
+          <app-icon name="user" class="w-1 text-orange-400"></app-icon> {{spaceDetails.howManyPeopleInYourSpace}}
+          people
+        </div>
+        <div *ngIf="type === 'longterm'" class="rate_txt d-flex">
+          <app-icon name="home" class="w-2 text-orange-400"></app-icon>
+          <span class="pl-1">{{spaceDetails.spaceStatus}}</span>
+        </div>
+        <div class="rate_txt pl-2 d-flex">
+          <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
+          <span class="pl-1">{{spaceDetails.spacesqft}} sqft</span>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex" style="gap:30px;align-items: baseline;">
+      <div *ngIf="type === 'shortterm' || type === 'longterm'">
+        <span class="accent_back">
+          <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
+          <span class="price-value text-white ms-10 align-middle">{{spaceDetails?.originalPrice}} </span>
+          <small> / {{type === 'shortterm' ? 'hour' : 'month' }}</small></span>
+      </div>
+      <div *ngIf="spaceDetails.isInstant && type === 'shortterm'">
+        <app-icon name="bolt" class="w-3 text-yellow-600"></app-icon><span class="instant_back p-1 text-dark">Instant
+          Book</span>
+      </div>
+      <div *ngIf="spaceDetails.spaceStatus?.toLowerCase() === 'furnished' && type === 'longterm'">
+        <span class="status_back p-1 text-white"> {{spaceDetails.spaceStatus}}</span>
+      </div>
+    </div>
+    <div class="m-0 d-flex align-items-baseline">
+      <div *ngIf="type === 'coworking'">
+        <div class="coworkingPlaceClass">
+          <div class="inventory-label row m-0">
+            <p class="col-lg-6 col-md-6 col-6 p-0">Private Office from</p>
+            <div class="col-lg-6 col-md-6 col-6 p-0">
+              <p class="amountClass">
+                <ng-container *ngIf="spaceDetails?.privatecabin_price">
+                  <div class="m-0 d-flex align-items-baseline">
+                    <app-icon name="rupee" class="w-2 text-orange-400 rs-icon"></app-icon>
+                    <span class="price-value">{{spaceDetails?.privatecabin_price}}</span>
+                    <small class="pl-1"> per seat/month</small>
+                  </div>
+                </ng-container>
+              </p>
+              <p *ngIf="spaceDetails?.privatecabin_price == null || spaceDetails?.privatecabin_price == 0">NA</p>
+            </div>
+          </div>
+          <!-- <div class="inventory-label" >
+        <p>Private Cabins from</p>
+      </div> -->
+          <div class="inventory-label row m-0">
+            <p class="col-lg-6 col-md-6 col-6 p-0">Desks from</p>
+            <div class="col-lg-6 col-md-6 col-6 p-0">
+              <p class="amountClass">
+                <ng-container *ngIf="spaceDetails.flexible_desk_price || spaceDetails.desks_price">
+                  <div class="d-flex align-items-baseline">
+                    <app-icon name="rupee" class="w-2 text-orange-400 rs-icon"></app-icon>
+                    <span class="price-value">
+                      {{ getValidPrice(spaceDetails?.desks_price, spaceDetails?.flexible_desk_price) || 'N/A' }}
+                    </span>
+                    <small class="pl-1"> per seat/month</small>
+                  </div>
+                </ng-container>
+              </p>
+              <p *ngIf="!isPriceValid(spaceDetails?.desks_price) && !isPriceValid(spaceDetails?.flexible_desk_price)">
+                NA
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- <div *ngIf="filters?.type != null">
+      <div class="inventory-label">
+        <p>{{ filter_type_name }} from</p>
+        <p *ngIf="spaceDetails[filter_type_col_name]">
+          <span class="price-value">Rs. {{ spaceDetails[filter_type_col_name] }}</span>/{{ filters?.type == 6 ||
+          filters?.type == 7 ? "hour" : "month" }}
+        </p>
+        <p *ngIf="spaceDetails[filter_type_col_name] == null">NA</p>
+        <a *ngIf="spaceDetails[filter_type_col_name] == 0" href="/contact-form?space_id={{ spaceDetails.id }}"
+          target="_blank" class="cursor-pointer">Enquire Now</a>
+      </div>
+    </div> -->
+        <!-- <div class="inventory-label" >
+      <p>Desks from</p>
+    </div> -->
+        <!-- <p style="font-size: 13px" *ngIf = "spaceDetails.customized_space_price || spaceDetails.flexible_desk_price || spaceDetails.virtual_office_price || spaceDetails.meeting_room_price || spaceDetails.training_room_price || spaceDetails?.privatecabin_price || spaceDetails.desks_price"> -->
+        <div class="row mt-2 align-items-end">
+          <div class="description col-lg-12">
+            <p *ngIf="is_see_more_visible" class="less-content" style="font-size: 14px;color:#141414">
+              {{ spaceDetails?.about }}
+            </p>
+            <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="is_see_more_visible"
+              (click)="toggleSeeMore($event, 0)">See more</a>
+            <p class="overflow_wrap" *ngIf="!is_see_more_visible">{{ spaceDetails?.about }}</p>
+            <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="!is_see_more_visible"
+              (click)="toggleSeeMore($event, 1)">See less</a>
+          </div>
+          <div class="col-12 text-right">
+            <button class="btn btn-accent" (click)="openInquiryPopUp($event,spaceDetails)">GET QUOTE</button>
+          </div>
+        </div>
+        <!--  <div class="available-resources">
+      <div
+        [hidden]="!(!is_similar_listing && (spaceDetails.customized_space_price != null || spaceDetails.desks_price != null || spaceDetails.virtual_office_price != null || spaceDetails.meeting_room_price != null || spaceDetails.training_room_price != null))">
+        <span>Also Available:&nbsp;</span>
+        <span *ngIf="spaceDetails.customized_space_price != null">Customized Space,&nbsp;</span>
+        <span *ngIf="spaceDetails.desks_price != null">Dedicated Desk,&nbsp;</span>
+        <span *ngIf="spaceDetails.virtual_office_price != null">Virtual Office,&nbsp;</span>
+        <span *ngIf="spaceDetails.meeting_room_price != null">Meeting Room&nbsp;</span>
+        <span *ngIf="spaceDetails.training_room_price != null">Training Room/Event Space</span>
+      </div>
+    </div> -->
+        <!-- <hr style="margin-top: 5px" *ngIf="!is_similar_listing" />
+    <div class="commute-details" *ngIf="!is_similar_listing">
+      <div class="commute-details-item">
+        <div class="commute-label">
+          <i class="material-icons">subway</i>
+          <p>Metro</p>
+        </div>
+        <div class="commute-value">
+          <p>{{ spaceDetails.near_by_metro || "NA" }}</p>
+          <p>
+            {{
+            spaceDetails.metro_distance
+            ? spaceDetails?.metro_distance + " kms"
+            : "NA"
+            }}
+          </p>
+        </div>
+      </div>
+      <div class="commute-details-item">
+        <div class="commute-label">
+          <i class="material-icons">train</i>
+          <p>Railway</p>
+        </div>
+        <div class="commute-value">
+          <p>{{ spaceDetails.near_by_railway || "NA" }}</p>
+          <p>
+            {{
+            spaceDetails.railway_distance
+            ? spaceDetails?.railway_distance + " kms"
+            : "NA"
+            }}
+          </p>
+        </div>
+      </div>
+    </div> -->
+      </div>
+      <!-- <ul class="trending-address">
+        <li>
+
+
+        </li>
+        <li>
+
+
+        </li>
+      </ul> -->
+
+      <!-- <div class="trending-bottom mar-top-15 pad-bot-30">
+        <div class="trend-left float-left">
+          <span class="round-bg pink"><i class="icofont-hotel"></i></span>
+          <p><a href="#">Hotel</a></p>
+
+        </div>
+        <div class="trend-right float-right">
+          <div class="trend-open"><i class="ion-clock"></i>
+            Open <p>till 11.00pm</p>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
