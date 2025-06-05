@@ -1,6 +1,6 @@
-<div class="loader_circle">
+<!-- <div class="loader_circle">
   <span class="loader" *ngIf="isloader"></span>
-</div>
+</div> -->
 <div [ngClass]="_showMap ? 'filter-wrapper style1 mar-top-100 half-map' : 'mt-70'">
   <div class="container-fluid position-relative city_google_drop" style="z-index: 99;">
     <div class="row">
@@ -38,14 +38,14 @@
               <app-shimmer-loading [borderRadius]="'5px'" [width]="'100%'" [height]="'480px'"></app-shimmer-loading>
             </div>
           </div>
-          <div style="text-align: center;" *ngIf="!spaces_list.length && !recommended_spaces.length && !isloader">
-            <!-- <img style="width: 10%;" src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/not-found.webp" alt=""> -->
+          <!-- <div style="text-align: center;" *ngIf="!spaces_list.length && !recommended_spaces.length && !isloader">
+            <img style="width: 10%;" src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/not-found.webp" alt="">
             <img loading="lazy" fetchpriority="low" style="width: 10%;"
               src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/preloader.gif" alt="location"
               title="location" class="ratio-1x1 img-fluid" />
             <h3 style="font-size: 16px !important;color: #897777 !important;">Finding the best options for you. Stay
               tuned!</h3>
-          </div>
+          </div> -->
           <div class="tab-content" *ngIf="
               spaces_list.length
             ">
