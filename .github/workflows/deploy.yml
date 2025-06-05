@@ -56,9 +56,7 @@ jobs:
                     cd \"${{ env.DEPLOY_PATH }}\" && git pull origin \"${{ env.BRANCH }}\" && \
                     cd /home/docker && docker exec -t docker-node-projects-1 bash -c \"
                       cd app1/codebackup && npm install --legacy-peer-deps && \
-                      node generate-env.js && \
-                      npx ng run flexo-aggregation-website:server && \
-                      npx ng build --base-href=/
+                      npx npm run build:ssr
                     \"
                   "
           elif [[ "$GITHUB_REF" == "refs/heads/production" ]]; then
