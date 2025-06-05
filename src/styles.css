@@ -2306,18 +2306,18 @@ ul.list-inline li {
 }
 
 .hero__form-input {
-  border: 1px solid transparent;
+  border: 1px solid transparent !important;
   border-bottom: 1px solid #ddd;
-  margin-right: 0.625rem;
-  color: #333;
-  font-size: 0.9rem;
+  margin-right: 0.625rem  !important;
+  color: #333 !important;
+  font-size: 0.9rem !important;
   font-weight: 400;
-  background: transparent;
-  outline: none;
-  border-radius: 0px;
-  transition: all 0.2s ease-in-out;
-  margin-bottom: 0;
-  padding: 10px;
+  background: transparent !important;
+  outline: none !important;
+  border-radius: 0px !important;
+  transition: all 0.2s ease-in-out !important;
+  margin-bottom: 0 !important;
+  padding: 10px !important;
 }
 
 .hero__form-input-favourite {
