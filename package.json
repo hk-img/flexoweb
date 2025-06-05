@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "dev:ssr": "ng run flexo-aggregation-website:serve-ssr",
     "serve:ssr": "node dist/flexo-aggregation-website/server/main.js",
-    "build:ssr": "node generate-env.js && ng build --base-href=/ && ng run flexo-aggregation-website:server",
+    "build:ssr": "node generate-env.js && ng build --base-href=/ --configuration=production && ng run flexo-aggregation-website:server",
     "prerender": "ng run flexo-aggregation-website:prerender",
     "sitemap": "node sitemap-update.js"
   },
