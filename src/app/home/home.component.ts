@@ -424,11 +424,11 @@ export class HomeComponent implements OnDestroy {
     private toastr: ToastrService
   ) {
     this.titleService.setTitle(
-      `One Stop Shop For Coworking Spaces | Flexible and Shared Offices`
+      `Find Coworking & Office Spaces Across India | Flexo`
     );
     this.metaService.updateTag({
       name: 'description',
-      content: `Flexo™ is your one stop shop for coworking spaces and shared offices. Use our free service to find your perfect office now. We are flexible office space experts. `,
+      content: `Discover top coworking spaces, managed offices, and commercial properties. Find your perfect office with Flexo. Trusted by leading companies - Flexo`,
     });
     this.metaService.updateTag({
       name: 'keywords',
