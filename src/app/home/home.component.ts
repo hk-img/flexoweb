@@ -145,8 +145,8 @@ export class HomeComponent implements OnDestroy {
     prevArrow: '<button class="slick-prev"><</button>',
     nextArrow: '<button class="slick-next">></button>',
     variableHeight: false,
-    autoplay: false,
-    autoplaySpeed: 1000,
+    autoplay: true,
+    autoplaySpeed: 3000,
     dots: false,
     swipeToSlide: true,
     infinite: true,
@@ -167,12 +167,16 @@ export class HomeComponent implements OnDestroy {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
+           arrows: false,
+           dots: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
+          arrows: false,
+           dots: true,
         },
       },
     ],

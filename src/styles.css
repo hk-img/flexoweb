@@ -11225,14 +11225,14 @@ h4 {
     padding-bottom: 80px !important;
   }
   .hero_sec .hero-title {
-    font-size: 37px;
+    font-size: 34px;
     justify-content: center;
     width: 100%;
     align-items: center;
     text-align: center;
   }
   .hero_sec .animateIMG.text {
-    font-size: 33px;
+    font-size: 30px !important;
   }
   .hero_sec {
     height: calc(100dvh - 50px) !important;
