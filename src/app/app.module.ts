@@ -129,11 +129,6 @@ export function loadGoogleMaps(): () => Promise<void> {
     NgxSliderModule,
   ],
     providers: [
-      {
-        provide: APP_INITIALIZER,
-        useFactory: loadGoogleMaps,
-        multi: true,
-      },
         DatePipe,
         {
             provide: MatDialogRef,
