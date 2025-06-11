@@ -6,22 +6,6 @@
   background-color: #f76900;
 }
 
-.min-heightclass {
-  min-height: 168.33px;
-}
-
-.mainHeights{
-  min-height: 2007.21px !important;
-}
-
-.heightadjust{
-  min-height: 48px;
-}
-
-.mainheight{
-  min-height: 1774.88px;
-}
-
 .loader_circle {
   position: absolute;
   display: flex;

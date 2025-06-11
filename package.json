@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "dev:ssr": "ng run flexo-aggregation-website:serve-ssr",
     "serve:ssr": "node dist/flexo-aggregation-website/server/main.js",
-    "build:ssr": "node generate-env.js && ng build --configuration=production && ng run flexo-aggregation-website:server",
+    "build:ssr": "node generate-env.js && ng build && ng run flexo-aggregation-website:server:production",
     "prerender": "ng run flexo-aggregation-website:prerender",
     "sitemap": "node sitemap-update.js"
   },
@@ -31,7 +31,6 @@
     "@angular/platform-browser-dynamic": "^16.2.12",
     "@angular/platform-server": "^16.2.12",
     "@angular/router": "^16.2.12",
-    "@fontsource/poppins": "^5.2.6",
     "@ng-select/ng-select": "^11.2.0",
     "@nguniversal/express-engine": "^16.2.0",
     "@ngx-lite/json-ld": "^0.6.4",
