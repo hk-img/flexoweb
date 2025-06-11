@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IconModule } from '../../shared/icon/icon.module';
 
 import { BuyPassComponent } from './buy-pass.component';
 
@@ -8,7 +9,8 @@ describe('BuyPassComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BuyPassComponent]
+      declarations: [BuyPassComponent],
+      imports: [IconModule]
     });
     fixture = TestBed.createComponent(BuyPassComponent);
     component = fixture.componentInstance;
