@@ -8,7 +8,7 @@ import { SpaceService } from 'src/app/services/space.service';
   templateUrl: './view-more-reviews.component.html',
   styleUrls: ['./view-more-reviews.component.css'],
 })
-export class ViewMoreReviews implements OnInit {
+export class ViewMoreReviewsComponent implements OnInit {
   public space_name;
   public space_id;
   public spaceRatingReviewList = [];
