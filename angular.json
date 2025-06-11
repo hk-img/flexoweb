@@ -108,6 +108,7 @@
               "src/sitemap.xml"
             ],
             "styles": [
+              "src/styles.css"
             ],
             "scripts": []
           }
