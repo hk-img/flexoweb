@@ -11,7 +11,7 @@
 }
 
 .slide img {
-  object-fit: cover;
+  height: 320px;
 }
 
 .ribbon-label {
