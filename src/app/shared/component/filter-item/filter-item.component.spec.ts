@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IconModule } from '../../icon/icon.module';
 
 import { FilterItemComponent } from './filter-item.component';
 
@@ -8,7 +9,8 @@ describe('FilterItemComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [FilterItemComponent]
+      declarations: [FilterItemComponent],
+      imports: [IconModule]
     })
       .compileComponents();
   }));

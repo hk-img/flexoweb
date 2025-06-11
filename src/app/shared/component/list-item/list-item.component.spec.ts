@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IconModule } from '../../icon/icon.module';
 
 import { ListItemComponent } from './list-item.component';
 
@@ -8,7 +9,8 @@ describe('ListItemComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListItemComponent ]
+      declarations: [ ListItemComponent ],
+      imports: [IconModule]
     })
     .compileComponents();
   }));

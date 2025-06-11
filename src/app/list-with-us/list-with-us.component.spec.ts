@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IconModule } from '../shared/icon/icon.module';
 
 import { ListWithUsComponent } from './list-with-us.component';
 
@@ -8,7 +9,8 @@ describe('ListWithUsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListWithUsComponent ]
+      declarations: [ ListWithUsComponent ],
+      imports: [IconModule]
     })
     .compileComponents();
   }));
