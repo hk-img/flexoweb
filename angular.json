@@ -30,14 +30,8 @@
               }
             ],
             "styles": [
-              "src/custom-theme.scss",
-              "src/styles.css",
-              "node_modules/slick-carousel/slick/slick.scss",
-              "node_modules/slick-carousel/slick/slick-theme.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -114,7 +108,6 @@
               "src/sitemap.xml"
             ],
             "styles": [
-              "src/styles.css"
             ],
             "scripts": []
           }
