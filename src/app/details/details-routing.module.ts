@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DetailsComponent } from './details.component';
-import { ViewMoreReviews } from './view-more-reviews/view-more-reviews.component';
+import { ViewMoreReviewsComponent } from './view-more-reviews/view-more-reviews.component';
 
 const routes: Routes = [
-  { path: 'view-more-review/:space-name', component: ViewMoreReviews },
+  { path: 'view-more-review/:space-name', component: ViewMoreReviewsComponent },
   { path: ':spaceType/:spaceName', component: DetailsComponent },
   { path: ':spaceType/:cityName/:location/:spaceId', component: DetailsComponent },
 ];
