@@ -133,7 +133,7 @@ export class HomeComponent implements OnDestroy {
   };
   locations: string[] = [];
   control = new FormControl('');
-  filteredPlaces: any;
+  filteredPlaces: string[] = [];
 
   @ViewChild('slickTestimonialModal', { static: false })
   slickTestimonialModal: SlickCarouselComponent;
@@ -462,15 +462,16 @@ export class HomeComponent implements OnDestroy {
   }
 
   private initializeFilteredPlaces(): void {
-    this.filteredPlaces = this.control.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-      takeUntil(this.destroy$)
-    );
-
-    this.filteredPlaces.subscribe((data: any) => {
-      this.cdr.markForCheck();
-    });
+    this.control.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value || '')),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((data: string[]) => {
+        this.filteredPlaces = data;
+        this.cdr.markForCheck();
+      });
   }
 
   private initializeGeolocation(): void {
