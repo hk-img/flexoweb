@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { SpaceService } from 'src/app/services/space.service';
 
@@ -9,7 +8,7 @@ import { SpaceService } from 'src/app/services/space.service';
   templateUrl: './view-more-reviews.component.html',
   styleUrls: ['./view-more-reviews.component.css'],
 })
-export class ViewMoreReviews implements OnInit {
+export class ViewMoreReviewsComponent implements OnInit {
   public space_name;
   public space_id;
   public spaceRatingReviewList = [];
@@ -87,15 +86,15 @@ export class ViewMoreReviews implements OnInit {
   }
 
   async ratingReviewBySpaceId() {
-    const result: any = await firstValueFrom(
-      this.spaceService.getSpaceRatingReviewDetailsWithSortPagination(
+    const result: any = await this.spaceService
+      .getSpaceRatingReviewDetailsWithSortPagination(
         this.space_id,
         this.sortBy,
         this.page,
         this.pageSize,
         this.starBy
       )
-    );
+      .toPromise();
     this.spaceRatingReviewList = [];
     if (result.data.success) {
       let reviews = result.data.reviews ? result.data.reviews : [];
