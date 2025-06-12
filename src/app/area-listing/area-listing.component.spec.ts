@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IconModule } from '../shared/icon/icon.module';
 
 import { AreaListingComponent } from './area-listing.component';
 
@@ -8,7 +9,8 @@ describe('AreaListingComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AreaListingComponent ]
+      declarations: [ AreaListingComponent ],
+      imports: [IconModule]
     })
     .compileComponents();
   }));

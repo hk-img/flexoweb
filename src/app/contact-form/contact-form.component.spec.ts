@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IconModule } from '../shared/icon/icon.module';
 
 import { ContactFormComponent } from './contact-form.component';
 
@@ -8,7 +9,8 @@ describe('ContactFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactFormComponent ]
+      declarations: [ ContactFormComponent ],
+      imports: [IconModule]
     })
     .compileComponents();
   }));
