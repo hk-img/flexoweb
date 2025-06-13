@@ -1,7 +1,10 @@
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 
 <div *ngIf="selectedRadio" class="form-group filter-group">
-  <h1 class="heading" *ngIf="area_name == 0 && show && selectedRadio != 'Coworking Café'">
+  <h1 class="heading" *ngIf="area_name == 0 && show && selectedRadio != 'Co-working'">
+    {{selectedRadio }} in {{nearByLocation && nearByLocation + ', ' | titlecase}}{{ city_name | titlecase }}
+  </h1>
+  <h1 class="heading" *ngIf="area_name == 0 && show && selectedRadio == 'Co-working'">
     {{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' : selectedValues.length ? 'Coworking Space' :
     selectedRadio }} in {{nearByLocation && nearByLocation + ', ' | titlecase}}{{ city_name | titlecase }}
   </h1>

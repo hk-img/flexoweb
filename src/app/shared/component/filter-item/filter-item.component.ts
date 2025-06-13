@@ -317,7 +317,11 @@ export class FilterItemComponent implements OnInit {
     } else if ([
       'managed office', 'private office', 'shared office', 'virtual office'
     ].includes(spaceType)) {
-      url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
+      if(location_name){
+        url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}/${location_name}`;
+      }else{
+        url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`
+      }
     } else if(['coworking café/restaurant'].includes(spaceType)){
       url = `in/coworking-cafe-restaurant/${location?.replace(' ', '-')?.toLowerCase()}`
     }
