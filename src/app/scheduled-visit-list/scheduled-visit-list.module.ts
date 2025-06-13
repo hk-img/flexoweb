@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterDialog } from '../shared/component/filter-component/filter-dialog.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ScheduledVisitListComponent } from './scheduled-visit-list.component';
+import { SharedModule } from '../shared/shared/shared.module'
 
 const routes: Routes = [
   { path: '', component: ScheduledVisitListComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         RouterModule.forChild(routes),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
     providers: []
 })

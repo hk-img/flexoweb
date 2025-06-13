@@ -35,12 +35,22 @@
       </p> -->
       <!-- <ng-template matStepLabel>Fill out Space type</ng-template> -->
       <p class="back-arrow">
-        <i [hidden]="location_name || city_name || space_id" (click)="
+        <!-- <i [hidden]="location_name || city_name || space_id" (click)="
             page1 = true;
             page2 = false;
             page3 = false;
             height_neccessary = false
-          " class="material-icons">keyboard_arrow_left</i><span>Great choice! Just give us a few details so we can
+          " class="material-icons">keyboard_arrow_left</i> -->
+        <app-icon name="chevronLeft" class="text-gray-400 w-3" [hidden]="location_name || city_name || space_id"
+          (click)="
+            page1 = true;
+            page2 = false;
+            page3 = false;
+            height_neccessary = false
+          ">
+        </app-icon>
+
+        <span>Great choice! Just give us a few details so we can
           better assist
           you.</span>
       </p>
@@ -70,7 +80,9 @@
       <p class="back-arrow" (click)="
           page1 = false; page2 = true; page3 = false; height_neccessary = true
         ">
-        <i class="material-icons">keyboard_arrow_left</i>
+        <!-- <i class="material-icons">keyboard_arrow_left</i> -->
+        <app-icon name="chevronLeft" class="text-gray-400 w-3"></app-icon>
+
       </p>
       <p class="form-header">For how many people?</p>
       <div>

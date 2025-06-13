@@ -44,34 +44,39 @@
             <div class="booking-all-list-single-cont-od">
               <h4> {{ spaceDetails.spaceNameLocation }}</h4>
               <p class="booking-all-list-single-cont-location">
-                <img fetchpriority="low" loading="lazy"
+                <!-- <img fetchpriority="low" loading="lazy"
                   src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp"
-                  alt="location" title="location" class="ratio-1x1" />
+                  alt="location" title="location" class="ratio-1x1" /> -->
+                <app-icon name="location2" class="w-3 text-orange-400"></app-icon>
                 <span>{{spaceDetails?.spaceLocationName}} </span>
               </p>
               <div class="booking-list-single-info  booking-list-single-about-info ">
                 <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.visitSpaceType != 'longTerm'">
-                  <img fetchpriority="low" loading="lazy"
+                  <!-- <img fetchpriority="low" loading="lazy"
                     src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp" alt="user"
-                    title="user" class="ratio-1x1" />
+                    title="user" class="ratio-1x1" /> -->
+                  <app-icon name="userHalf" class="w-3 text-orange-400"></app-icon>
                   <p>{{spaceDetails?.howManyPeopleInYourSpace || 1}} people</p>
                 </div>
                 <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.visitSpaceType == 'longTerm'">
-                  <img fetchpriority="low" loading="lazy"
+                  <!-- <img fetchpriority="low" loading="lazy"
                     src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp" alt="user"
-                    title="user" class="ratio-1x1" />
+                    title="user" class="ratio-1x1" /> -->
+                  <app-icon name="userHalf" class="w-3 text-orange-400"></app-icon>
                   <p>{{spaceDetails?.spaceStatus || 'N/A'}}</p>
                 </div>
                 <div class=" booking-list-single-info-single" *ngIf="spaceDetails?.visitSpaceType == 'shortTerm'">
-                  <img fetchpriority="low" loading="lazy"
+                  <!-- <img fetchpriority="low" loading="lazy"
                     src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/clock-icon-orng.webp" alt="clock"
-                    title="clock" class="ratio-1x1" />
+                    title="clock" class="ratio-1x1" /> -->
+                  <app-icon name="clock" class="w-3 text-orange-400"></app-icon>
                   <p>2 hr min</p>
                 </div>
                 <div class="booking-list-single-info-single">
-                  <img fetchpriority="low" loading="lazy"
+                  <!-- <img fetchpriority="low" loading="lazy"
                     src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/scale-orng.webp" alt="scale"
-                    title="scale" class="ratio-1x1 sq-ft-icon" />
+                    title="scale" class="ratio-1x1 sq-ft-icon" /> -->
+                  <app-icon name="scaleRuler" class="w-3 text-orange-400"></app-icon>
                   <p>{{spaceDetails?.spaceSquareFt}} sqft</p>
                 </div>
               </div>
@@ -84,15 +89,17 @@
             <div class="booking-all-list-single-cont-bd">
               <div class="booking-list-single-info booking-list-single-date-info ">
                 <div class="booking-list-single-info-single">
-                  <img fetchpriority="low" loading="lazy"
+                  <!-- <img fetchpriority="low" loading="lazy"
                     src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/date-icon-o.webp"
-                    class="date-icon ratio-1x1" alt="date" title="date" />
+                    class="date-icon ratio-1x1" alt="date" title="date" /> -->
+                  <app-icon name="calender" class="w-3 text-orange-400"></app-icon>
                   <p> {{ spaceDetails.visitDateTime | date : "dd-MM-yyyy"}} </p>
                 </div>
                 <div class="booking-list-single-info-single">
-                  <img fetchpriority="low" loading="lazy"
+                  <!-- <img fetchpriority="low" loading="lazy"
                     src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/clock-icon-orng.webp" alt=""
-                    class="date-icon ratio-1x1" alt="clock" title="clock" />
+                    class="date-icon ratio-1x1" alt="clock" title="clock" /> -->
+                  <app-icon name="clock" class="w-3 text-orange-400"></app-icon>
                   <p> {{ spaceDetails.visitDateTime | date : "hh:mm a" | lowercase }} </p>
                 </div>
                 <div *ngIf="spaceDetails?.visitSpaceType == 'coworking'" class="booking-list-single-info-single"

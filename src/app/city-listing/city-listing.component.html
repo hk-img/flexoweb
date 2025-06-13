@@ -40,9 +40,9 @@
           </div>
           <div style="text-align: center;" *ngIf="!spaces_list.length && !recommended_spaces.length && !isloader">
             <!-- <img style="width: 10%;" src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/not-found.webp" alt=""> -->
-            <img loading="lazy" fetchpriority="low" style="width: 10%;"
+            <img loading="lazy" fetchpriority="low" style="width: 10%;aspect-ratio: 153/166;"
               src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/preloader.gif" alt="location"
-              title="location" class="ratio-1x1 img-fluid" />
+              title="location" class="img-fluid" width="153" height="166" />
             <h3 style="font-size: 16px !important;color: #897777 !important;">Finding the best options for you. Stay
               tuned!</h3>
           </div>
@@ -133,7 +133,7 @@
                         class="swiper-slide single-listing-slider slide" style="cursor: pointer;">
                         <img loading="eager" fetchpriority="high" [src]="image" (error)="handleImageError($event)"
                           width="479" height="320" [alt]="selected_marker_window?.name"
-                          [title]="selected_marker_window?.name" />
+                          [title]="selected_marker_window?.name" style="aspect-ratio: 479/320;" />
                       </div>
                     </ng-container>
                     <ng-container *ngFor="let repeat of getArray(selected_marker_window?.images?.length)">
@@ -141,7 +141,8 @@
                         class="swiper-slide single-listing-slider slide" style="cursor: pointer;">
                         <img loading="eager" fetchpriority="high"
                           src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
-                          width="479" height="320" alt="detail image" title="detail image" />
+                          width="479" height="320" alt="detail image" title="detail image"
+                          style="aspect-ratio: 479/320;" />
                       </div>
                     </ng-container>
                   </ngx-slick-carousel>

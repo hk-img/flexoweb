@@ -8,7 +8,8 @@
 				<div class="booking-all-list-single-img-cont">
 					<a [href]=" webDomain + 'coworking-space/' + item?.linkName " class="booking-all-list-single-img"
 						target="_blank">
-						<img (error)="handleImageError($event)" src="{{item?.images[0]}}" alt="">
+						<img fetchpriority="low" loading="lazy" (error)="handleImageError($event)"
+							src="{{item?.images[0]}}" [alt]="item?.spaceType" [title]="item?.spaceType" />
 						<div class="booking-all-list-single-img-tag">
 							<p>{{item?.spaceType}}</p>
 						</div>
@@ -17,24 +18,28 @@
 						<div class="booking-all-list-single-cont-od">
 							<h4> {{item?.spaceName}} </h4>
 							<p class="booking-all-list-single-cont-location">
-								<img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp"
-									alt="">
+								<!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/location-icon-orng.webp"
+									alt=""> -->
+								<app-icon name="location2" class="w-3 text-orange-400"></app-icon>
 								<span>{{item?.location_name}} </span>
 							</p>
 							<div class="booking-list-single-info  booking-list-single-about-info ">
 								<div class=" booking-list-single-info-single">
-									<img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp"
-										alt="">
+									<!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user-icon-orng.webp"
+										alt=""> -->
+									<app-icon name="userHalf" class="w-3 text-orange-400"></app-icon>
 									<p>{{item?.userName}}</p>
 								</div>
 								<div class=" booking-list-single-info-single">
-									<img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/mail-icon-o.webp"
-										alt="">
+									<!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/mail-icon-o.webp"
+										alt=""> -->
+									<app-icon name="mail" class="w-3 text-orange-400"></app-icon>
 									<p>{{item?.userEmail}}</p>
 								</div>
 								<div class="booking-list-single-info-single">
-									<img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/call-ph-o.webp"
-										alt="" class="sq-ft-icon">
+									<!-- <img src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/call-ph-o.webp"
+										alt="" class="sq-ft-icon"> -->
+									<app-icon name="call" class="w-3 text-orange-400"></app-icon>
 									<p>{{item?.userMobile}}</p>
 								</div>
 							</div>

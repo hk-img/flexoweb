@@ -11,7 +11,8 @@
 						<div>
 							<div class="profile-pic-img position-relative">
 								<img [src]="profileImage ? profileImage : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/user_image.webp' "
-									alt="profile_image" title="profile_image" width="150" height="150">
+									alt="profile_image" title="profile_image" width="150" height="150"
+									style="aspect-ratio: 1/1">
 								<span class="loader position-absolute" *ngIf="loader"></span>
 								<div class="profile-pic-change-icon">
 									<div *ngIf="isLoading">
