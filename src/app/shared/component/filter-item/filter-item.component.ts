@@ -313,7 +313,11 @@ export class FilterItemComponent implements OnInit {
       'sports turf', 'sports venue', 'party space', 'banquet hall', 'gallery',
       'classroom', 'private cabin', 'meeting room', 'training room', 'event space'
     ].includes(spaceType)) {
-      url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
+      if(location_name){
+        url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}/${location_name}`;
+      }else{
+        url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
+      }
     } else if ([
       'managed office', 'private office', 'shared office', 'virtual office'
     ].includes(spaceType)) {
