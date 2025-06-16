@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IconModule } from '../../shared/icon/icon.module';
 
 import { CoWorkingVisitScheduleComponent } from './co-working-visit-schedule.component';
 
@@ -8,7 +9,8 @@ describe('CoWorkingVisitScheduleComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CoWorkingVisitScheduleComponent]
+      declarations: [CoWorkingVisitScheduleComponent],
+      imports: [IconModule]
     });
     fixture = TestBed.createComponent(CoWorkingVisitScheduleComponent);
     component = fixture.componentInstance;
