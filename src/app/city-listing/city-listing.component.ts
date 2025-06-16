@@ -352,7 +352,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.staticValue = segments2[inIndex + 1];
         if (this.staticValue == 'coworking-space' || this.staticValue == 'coworking') {
           this.staticValue = "Coworking"
-        }else if(this.staticValue == 'coworking-cafe-restaurant' || this.staticValue == 'shoot-studio' || this.staticValue == 'recording-studio' || this.staticValue == 'podcast-studio' || this.staticValue == 'activity-space' || this.staticValue == 'sports-turf' || this.staticValue == 'sports-venue' || this.staticValue == 'party-space' || this.staticValue == 'banquet-hall' || this.staticValue == 'gallery' || this.staticValue == 'classroom' || this.staticValue == 'private-cabin' || this.staticValue == 'meeting-room' || this.staticValue == 'training-room' || this.staticValue == 'event-space'){
+        } else if (this.staticValue == 'coworking-cafe-restaurant' || this.staticValue == 'shoot-studio' || this.staticValue == 'recording-studio' || this.staticValue == 'podcast-studio' || this.staticValue == 'activity-space' || this.staticValue == 'sports-turf' || this.staticValue == 'sports-venue' || this.staticValue == 'party-space' || this.staticValue == 'banquet-hall' || this.staticValue == 'gallery' || this.staticValue == 'classroom' || this.staticValue == 'private-cabin' || this.staticValue == 'meeting-room' || this.staticValue == 'training-room' || this.staticValue == 'event-space') {
           this.staticValue = 'Shortterm';
         } else {
           this.staticValue = 'Longterm';
@@ -438,7 +438,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
 
-  updatefaqsJsonLd(res:any){
+  updatefaqsJsonLd(res: any) {
     const jsonLdId = 'json-ld-faqs';
     if (isPlatformBrowser(this.platformId)) {
       const existingScript = document.getElementById(jsonLdId);
@@ -449,7 +449,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": res.map((faq:any) => ({
+      "mainEntity": res.map((faq: any) => ({
         "@type": "Question",
         "name": faq.question,
         "acceptedAnswer": {
@@ -524,10 +524,13 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     imgElement.alt = 'Failed to Load Image';
   }
 
-
+  isFilterVisible = true;
   ngAfterViewInit(): void {
     // this.initAutocomplete();
     if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        this.isFilterVisible = true;
+      }, 300);
       // this.geocoder = new google.maps.Geocoder();
       // this.geocode();
     }
@@ -635,15 +638,15 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             if (this.areaName && response.length) {
               let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
               let matchedLocation = response?.find(
-                (val:any) => val.location_name.toLowerCase() === this.areaName
+                (val: any) => val.location_name.toLowerCase() === this.areaName
               );
-              
+
               if (matchedLocation) {
                 this.location_latitude = matchedLocation.lat;
                 this.location_longitude = matchedLocation.longi;
-              
+
                 console.log("Latitude:", this.location_latitude);
-                console.log("Longitude:",this.location_longitude);
+                console.log("Longitude:", this.location_longitude);
               }
               if (!isExist) {
                 this.router.navigate(['/error'])
@@ -678,8 +681,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 } else {
                   this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
                 }
-              }else{
-                  this.router.navigate(['/error'])
+              } else {
+                this.router.navigate(['/error'])
               }
               this.recommended_spaces = Object.assign([], res.recommended_spaces);
               this.space_count = res.space_count;
@@ -710,7 +713,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   if (this.type === 'coworking') {
                     if (element.flexible_desk_price === null || element.flexible_desk_price === 0) {
                       price = element.privatecabin_price
-                    } else if(element.privatecabin_price === null || element.privatecabin_price === 0){
+                    } else if (element.privatecabin_price === null || element.privatecabin_price === 0) {
                       price = element.flexible_desk_price
                     } else {
                       price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
@@ -813,9 +816,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.space_count = res.space_count;
           if (this.spaces_list.length) {
             this.page_end =
-            this.space_count < this.page_size * this.page
-            ? this.space_count
-            : this.page_size * this.page;
+              this.space_count < this.page_size * this.page
+                ? this.space_count
+                : this.page_size * this.page;
             const rawPages = this.space_count / this.page_size;
             const decimalPart = rawPages - Math.floor(rawPages);
             this.total_pages = decimalPart > 0 ? Math.floor(rawPages) + 1 : Math.floor(rawPages);
@@ -1124,7 +1127,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
       const allFaqs = [...this.shortQuestions, ...this.briefQuestions];
       console.log(allFaqs)
-  
+
       this.updatefaqsJsonLd(allFaqs);
     });
   }
