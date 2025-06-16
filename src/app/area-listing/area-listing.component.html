@@ -97,8 +97,8 @@
             </map-marker>
             <map-info-window>
               <div class="marker_info" id="marker_info">
-                <img loading="lazy" fetchpriority="low" [src]="selected_marker_window?.map_image_url"
-                  [alt]="selected_marker_window?.name" [title]="selected_marker_window?.name" />
+                <img [src]="selected_marker_window?.map_image_url" [alt]="selected_marker_window?.name"
+                  [title]="selected_marker_window?.name" />
                 <span>
                   <h3>
                     <a [href]="selected_marker_window?.url" target="_blank">{{

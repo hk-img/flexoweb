@@ -6,7 +6,6 @@ import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy
 import { FilterDialog } from '../shared/component/filter-component/filter-dialog.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BookingRequestInquiriesListComponent } from './booking-request-inquiries-list.component';
-import { SharedModule } from '../shared/shared/shared.module';
 
 const routes: Routes = [
   { path: '', component: BookingRequestInquiriesListComponent },
@@ -19,8 +18,7 @@ const routes: Routes = [
         FormsModule,
         RouterModule.forChild(routes),
         ReactiveFormsModule,
-        MatTableModule,
-        SharedModule
+        MatTableModule
     ],
     providers: []
 })

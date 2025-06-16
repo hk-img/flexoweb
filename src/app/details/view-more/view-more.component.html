@@ -15,7 +15,7 @@
           <div ngxSlickItem class="swiper-slide single-listing-slider slide" *ngFor="let element of images">
             <img loading="lazy" fetchpriority="low" (error)="onImageError($event,imageAlt)" width="750" width="500"
               [src]="element" alt="{{imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}"
-              title="{{imageAlt}} {{element | slice:(element?.lastIndexOf('/') + 1) }}" class="w-100 img-fluid" />
+              class="w-100 img-fluid" />
           </div>
         </ngx-slick-carousel>
       </div>

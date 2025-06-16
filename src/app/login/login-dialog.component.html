@@ -21,9 +21,8 @@
                     <input style="width: 100%; line-height: 24px" type="text"
                       (input)="select.filter($event.target.value)" />
                   </ng-template>
-                  <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img fetchpriority="low"
-                      loading="lazy" src="{{list.flag}}" [alt]="list.name" [title]="list.name" width="20" height="13" />
-                    {{list.dialcode}} &nbsp;
+                  <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}"
+                      [alt]="list.name" [title]="list.name" width="20" height="13" /> {{list.dialcode}} &nbsp;
                     {{list.name}} </ng-option>
                 </ng-select>
               </span>
@@ -194,9 +193,8 @@
                       <input style="width: 100%; line-height: 24px" type="text"
                         (input)="select.filter($event.target.value)" />
                     </ng-template>
-                    <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img fetchpriority="low"
-                        loading="lazy" src="{{list.flag}}" [alt]="list.name" [title]="list.name" width="20"
-                        height="13" /> {{list.dialcode}} &nbsp;
+                    <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img src="{{list.flag}}"
+                        [alt]="list.name" [title]="list.name" width="20" height="13" /> {{list.dialcode}} &nbsp;
                       {{list.name}} </ng-option>
                   </ng-select>
                 </span>
@@ -307,9 +305,8 @@
           <app-icon id="togglePassword1" (click)="togglePasswordVisibility('password1', 'togglePassword1')"
             [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
           </app-icon>
-
-          <app-icon *ngIf="!isPasswordVisible" id="togglePassword1"
-            (click)="togglePasswordVisibility('password2', 'togglePassword2')"
+          
+          <app-icon *ngIf="!isPasswordVisible" id="togglePassword1" (click)="togglePasswordVisibility('password2', 'togglePassword2')"
             [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
           </app-icon>
 
@@ -526,9 +523,8 @@
               formControlName="newPassword" placeholder="New Password">
             <!-- <i id="togglePassword2" class="fa fa-eye fa_eye_input"
               (click)="togglePasswordVisibility('password2', 'togglePassword2')" aria-hidden="true"></i> -->
-            <app-icon id="togglePassword2" (click)="togglePasswordVisibility('password2', 'togglePassword2')"
-              [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
-            </app-icon>
+            <app-icon id="togglePassword2" (click)="togglePasswordVisibility('password2', 'togglePassword2')" name="eye"
+              class="w-2 fa_eye_input"></app-icon>
           </mat-form-field>
           <mat-error
             *ngIf="resetPasswordFormControls['newPassword']?.errors?.required && resetPasswordFormControls['newPassword']?.touched">Please
@@ -541,9 +537,8 @@
               name="confirm Password" formControlName="confirmPassword" placeholder="confirmPassword">
             <!-- <i id="togglePassword3" class="fa fa-eye fa_eye_input"
               (click)="togglePasswordVisibility('password3', 'togglePassword3')" aria-hidden="true"></i> -->
-            <app-icon id="togglePassword3" (click)="togglePasswordVisibility('password3', 'togglePassword3')"
-              [name]="isPasswordVisible ? 'eyeSlash' : 'eye'" class="w-2 fa_eye_input">
-            </app-icon>
+            <app-icon id="togglePassword3" (click)="togglePasswordVisibility('password3', 'togglePassword3')" name="eye"
+              class="w-2 fa_eye_input"></app-icon>
           </mat-form-field>
           <mat-error
             *ngIf="resetPasswordFormControls['confirmPassword']?.errors?.required&& resetPasswordFormControls.confirmPassword?.touched">Please

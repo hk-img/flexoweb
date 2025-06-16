@@ -133,7 +133,7 @@ export class HomeComponent implements OnDestroy {
   };
   locations: string[] = [];
   control = new FormControl('');
-  filteredPlaces: string[] = [];
+  filteredPlaces: any;
 
   @ViewChild('slickTestimonialModal', { static: false })
   slickTestimonialModal: SlickCarouselComponent;
@@ -145,8 +145,8 @@ export class HomeComponent implements OnDestroy {
     prevArrow: '<button class="slick-prev"><</button>',
     nextArrow: '<button class="slick-next">></button>',
     variableHeight: false,
-    autoplay: false,
-    autoplaySpeed: 1000,
+    autoplay: true,
+    autoplaySpeed: 3000,
     dots: false,
     swipeToSlide: true,
     infinite: true,
@@ -167,8 +167,8 @@ export class HomeComponent implements OnDestroy {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
-          arrows: false,
-          dots: true,
+           arrows: false,
+           dots: true,
         },
       },
       {
@@ -176,7 +176,7 @@ export class HomeComponent implements OnDestroy {
         settings: {
           slidesToShow: 1,
           arrows: false,
-          dots: true,
+           dots: true,
         },
       },
     ],
@@ -424,11 +424,11 @@ export class HomeComponent implements OnDestroy {
     private toastr: ToastrService
   ) {
     this.titleService.setTitle(
-      `One Stop Shop For Coworking Spaces | Flexible and Shared Offices`
+      `Find Coworking & Office Spaces Across India | Flexo`
     );
     this.metaService.updateTag({
       name: 'description',
-      content: `Flexo™ is your one stop shop for coworking spaces and shared offices. Use our free service to find your perfect office now. We are flexible office space experts. `,
+      content: `Discover top coworking spaces, managed offices, and commercial properties. Find your perfect office with Flexo. Trusted by leading companies - Flexo`,
     });
     this.metaService.updateTag({
       name: 'keywords',
@@ -466,16 +466,15 @@ export class HomeComponent implements OnDestroy {
   }
 
   private initializeFilteredPlaces(): void {
-    this.control.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value || '')),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((data: string[]) => {
-        this.filteredPlaces = data;
-        this.cdr.markForCheck();
-      });
+    this.filteredPlaces = this.control.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+      takeUntil(this.destroy$)
+    );
+
+    this.filteredPlaces.subscribe((data: any) => {
+      this.cdr.markForCheck();
+    });
   }
 
   private initializeGeolocation(): void {
@@ -646,16 +645,19 @@ export class HomeComponent implements OnDestroy {
     this.spaceType = this.spaceType.toLowerCase();
     localStorage.setItem("location", this.getLocationObjForSearch.label)
 
-    if ((this.spaceType == 'coworking space')) {
-      if (this.filteredPlaces.find(place => place.trim().endsWith('(City)'))) {
-        url = `in/coworking/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
-      } else {
-        url = `in/coworking-space/` + `${(this.city).replace(' ', '-').toLowerCase() + '/' + this?.filteredPlaces.map(place => place.split(',')[0].trim()).join('-')}`;
-      }
-    } else if (this.spaceType == 'coworking café/restaurant') {
-      url = `in/coworking-cafe-restaurant/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
+    let isCityLevel = this.filteredPlaces.find(place => place.trim().endsWith('(City)'));
+
+    let citySlug = this.city.replace(/\s+/g, '-').toLowerCase();
+    let spaceTypeSlug = this.spaceType.toLowerCase().replace(/\s+/g, '-').replace('/', '-');
+
+    if (isCityLevel) {
+      url = `in/${spaceTypeSlug}/${citySlug}`;
     } else {
-      url = `in/${this.spaceType}/` + `${(this.city).replace(' ', '-').toLowerCase()}`;
+      let placesSlug = this.filteredPlaces
+        .map(place => place.split(',')[0].trim())
+        .join('-');
+
+      url = `in/${spaceTypeSlug}/${citySlug}/${placesSlug}`;
     }
     this.router.navigate([this.formatUrl(url)]);
   }
@@ -824,13 +826,13 @@ export class HomeComponent implements OnDestroy {
 
   homeJsonLd(): void {
     const jsonLdId = 'json-ld-home';
-  
+
     if (isPlatformBrowser(this.platformId)) {
       const existingScript = document.getElementById(jsonLdId);
       if (existingScript) {
         existingScript.remove();
       }
-  
+
       const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -850,12 +852,12 @@ export class HomeComponent implements OnDestroy {
           "https://www.instagram.com/flexospaces"
         ]
       };
-  
+
       const script = document.createElement('script');
       script.id = jsonLdId;
       script.type = 'application/ld+json';
       script.textContent = JSON.stringify(jsonLd);
       document.head.appendChild(script);
     }
-  }  
+  }
 }
