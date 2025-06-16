@@ -1,9 +1,6 @@
 <div class="f-w-mdl">
-  <!-- <img *ngIf="data.title !== 'Cancel Booking' && !data.price"
-    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/un-fab-icon.webp" alt=""> -->
-  <span class="text-center">
-    <app-icon name="danger" class="w-40 text-orange-400"></app-icon>
-  </span>
+  <img *ngIf="data.title !== 'Cancel Booking' && !data.price"
+    src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/un-fab-icon.webp" alt="">
   <h4>{{data.title}}</h4>
   <p *ngIf="data.title === 'Cancel Booking' ">{{data.message}}</p>
   <div *ngIf="data.price">

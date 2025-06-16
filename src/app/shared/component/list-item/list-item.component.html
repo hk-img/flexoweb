@@ -6,63 +6,57 @@
     <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
       responsive="breakpoints">
       <ng-container *ngIf="spaceDetails.images?.length">
-        <div ngxSlickItem class="swiper-slide single-listing-slider slide" style="cursor: pointer;"
+        <div ngxSlickItem class="swiper-slide single-listing-slider slide"
           *ngFor="let image of spaceDetails.images; trackBy: trackByImage">
-          <img loading="eager" fetchpriority="high" decoding="auto" [src]="image"
-            (error)="onImageError($event,spaceDetails.imageAlt)" width="479" height="320"
-            title="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
-            alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
-            style="aspect-ratio: 3 / 2;" />
+          <a style="cursor: pointer;">
+            <img loading="lazy" fetchpriority="low" [src]="image" (error)="onImageError($event,spaceDetails.imageAlt)"
+              width="399" height="320"
+              title="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
+              alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}" />
+          </a>
         </div>
       </ng-container>
       <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
-        <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide"
-          style="cursor: pointer;">
-          <img loading="eager" fetchpriority="high" decoding="auto"
-            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
-            alt="detail image" title="detail image" width="479" height="320" style="aspect-ratio: 3 / 2;" />
-          <img loading="eager" fetchpriority="high" decoding="auto"
-            src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
-            alt="detail image" title="detail image" width="479" height="320" style="aspect-ratio: 3 / 2;" />
+        <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide">
+          <a style="cursor: pointer;">
+            <img loading="lazy" fetchpriority="low"
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
+              alt="detail image" title="detail image" width="399" height="320" />
+            <img loading="lazy" fetchpriority="low"
+              src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp"
+              alt="detail image" title="detail image" width="399" height="320" />
+          </a>
         </div>
       </ng-container>
     </ngx-slick-carousel>
-    <a class="carousel-control-prev" style="top: 45%" (click)="prev($event)" role="button" aria-label="Previous slide"
-      data-slide="prev">
+    <a class="carousel-control-prev" style="top: 45%" (click)="prev($event)" role="button" data-slide="prev">
       <span><app-icon name="chevronLeft" class="w-3 icon-color"></app-icon></span>
       <!-- <span class="sr-only">Previous</span> -->
-      <span class="visually-hidden d-none">Previous</span>
     </a>
-    <a class="carousel-control-next" style="top: 45%" (click)="next($event)" role="button" aria-label="Next slide"
-      data-slide="next">
+    <a class="carousel-control-next" style="top: 45%" (click)="next($event)" role="button" data-slide="next">
       <span><app-icon name="chevronRight" class="w-3 icon-color"></app-icon></span>
       <!-- <span class="sr-only">Next</span> -->
-      <span class="visually-hidden d-none">Next</span>
     </a>
     <div class="shortlist-share-container">
       <div class="share-btn" style="margin-right: 10px">
-        <button type="button" aria-label="heart" class="btn d-flex align-items-center justify-content-center"
+        <a class="btn d-flex align-items-center justify-content-center"
           [style.color]="spaceDetails?.existingfavorite?.favourite ? '#F76900' : 'gray'"
           (click)="shortListItem($event,spaceDetails.id, spaceDetails.is_shortlisted)">
           <app-icon name="heart" class="w-3"></app-icon>
-        </button>
+        </a>
       </div>
       <div class="share-btn">
-        <button type="button" aria-label="share" style="color:gray;"
-          class="btn d-flex align-items-center justify-content-center"><app-icon name="share"
-            class="w-3"></app-icon></button>
+        <a class="btn d-flex align-items-center justify-content-center"><app-icon name="share"
+            class="w-3"></app-icon></a>
         <ul class="social-share" style="top: 45px; right: -16px">
           <li class="bg-fb d-flex align-items-center justify-content-center" (click)="openFacebook()">
-            <button type="button" aria-label="facebook" class="share-button"><app-icon name="facebook"
-                class="w-2 text-white"></app-icon></button>
+            <a class="share-button"><app-icon name="facebook" class="w-2 text-white"></app-icon></a>
           </li>
           <li class="bg-tt d-flex align-items-center justify-content-center" (click)="openLinkedIn()">
-            <button type="button" aria-label="linkedin" class="share-button"><app-icon name="linkedin2"
-                class="w-2 text-white"></app-icon></button>
+            <a class="share-button"><app-icon name="linkedin2" class="w-2 text-white"></app-icon></a>
           </li>
           <li class="bg-ig d-flex align-items-center justify-content-center" (click)="openWhatsapp()">
-            <button type="button" aria-label="whatsapp" class="share-button"><app-icon name="whatsapp"
-                class="w-3 text-white"></app-icon></button>
+            <a class="share-button"><app-icon name="whatsapp" class="w-3 text-white"></app-icon></a>
           </li>
         </ul>
       </div>
@@ -77,7 +71,7 @@
   <div class="trending-title-box">
 
     <div class="customer-review d-flex justify-content-between mb-md-2 mb-1 align-items-end">
-      <h2 style="font-size: 18px" class="h-cursor m-0 text-truncate">
+      <h3 style="font-size: 18px" class="h-cursor m-0 text-truncate">
         {{ spaceDetails.name
         }}
         <span style="
@@ -90,22 +84,22 @@
           ">
           <app-icon name="location2" class="w-2 text-orange-400"></app-icon>
           {{spaceDetails.location_name }}, {{spaceDetails.contact_city_name}}</span>
-      </h2>
+      </h3>
     </div>
     <div class="rating-summary d-flex align-items-center mb-1" style="">
       <div class="rating-result d-flex align-items-center pr-2" style="" title="60%"
         *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) && spaceDetails.reviewCount.length > 0">
         <ul class="product-rating pr-1">
           <li *ngFor="let element of spaceDetails.rating_array">
-            <app-icon name="star" class="w-2 text-yellow-600"></app-icon>
+            <app-icon name="star" class="w-2"></app-icon>
           </li>
           <!-- <li><i class="ion-android-star"></i></li>
           <li><i class="ion-android-star"></i></li> -->
           <li *ngIf="spaceDetails.rating - spaceDetails.rating_floor != 0">
-            <app-icon name="halfStar" class="w-2 text-yellow-600"></app-icon>
+            <app-icon name="halfStar" class="w-2"></app-icon>
           </li>
           <li>
-            <app-icon name="emptyStar" class="w-2 text-yellow-600"></app-icon>
+            <app-icon name="emptyStar" class="w-2"></app-icon>
           </li>
         </ul>
         {{spaceDetails.rating}} ({{spaceDetails.reviewCount}})
@@ -115,25 +109,23 @@
           <app-icon name="user" class="w-1 text-orange-400"></app-icon> {{spaceDetails.howManyPeopleInYourSpace}}
           people
         </div>
-        <div *ngIf="type === 'longterm'" class="rate_txt d-flex">
-          <app-icon name="home" class="w-2 text-orange-400"></app-icon>
-          <span class="pl-1">{{spaceDetails.spaceStatus}}</span>
+        <div *ngIf="type === 'longterm'" class="rate_txt">
+          <app-icon name="home" class="w-1 text-orange-400"></app-icon> {{spaceDetails.spaceStatus}}
         </div>
-        <div class="rate_txt pl-2 d-flex">
-          <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
-          <span class="pl-1">{{spaceDetails.spacesqft}} sqft</span>
+        <div class="rate_txt pl-1">
+          <app-icon name="scaleRuler" class="w-1 text-orange-400"></app-icon> {{spaceDetails.spacesqft}} sqft
         </div>
       </div>
     </div>
     <div class="d-flex" style="gap:30px;align-items: baseline;">
       <div *ngIf="type === 'shortterm' || type === 'longterm'">
         <span class="accent_back">
-          <app-icon name="scaleRuler" class="w-2 text-orange-400"></app-icon>
+          <app-icon name="scaleRuler" class="w-1 text-orange-400"></app-icon>
           <span class="price-value text-white ms-10 align-middle">{{spaceDetails?.originalPrice}} </span>
           <small> / {{type === 'shortterm' ? 'hour' : 'month' }}</small></span>
       </div>
       <div *ngIf="spaceDetails.isInstant && type === 'shortterm'">
-        <app-icon name="bolt" class="w-3 text-yellow-600"></app-icon><span class="instant_back p-1 text-dark">Instant
+        <app-icon name="bolt" class="w-2 text-yellow-600"></app-icon><span class="instant_back p-1 text-dark">Instant
           Book</span>
       </div>
       <div *ngIf="spaceDetails.spaceStatus?.toLowerCase() === 'furnished' && type === 'longterm'">

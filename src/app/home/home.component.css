@@ -501,7 +501,6 @@ mark {
   padding-bottom: 57px;
   position: relative;
   z-index: 1;
-  min-height: 124px;
 }
 
 .homeInnerSwiper {
@@ -562,24 +561,16 @@ mark {
 }
 
 .become_host {
+  background-image: url("../../assets/images/become-a-host.webp");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
-  padding: 50px 0;
-  height: 400px;
-}
-
-.become_host .become_host_bg_img {
-  z-index: -1;
-}
-
-.become_host::before {
-  position: absolute;
-  content: "";
-  background: #00000075;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  justify-content: center;
+  aspect-ratio: 1024 / 259;
+  display: flex;
+  flex-direction: column;
 }
 
 .become_host::before {
