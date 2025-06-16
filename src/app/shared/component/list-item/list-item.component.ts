@@ -118,8 +118,8 @@ export class ListItemComponent implements OnInit, OnDestroy {
 
   onImageError(event: Event, imageAlt: string): void {
     const target = event.target as HTMLImageElement;
-    target.src = 'assets/images/details_placeholder_image.jpg';
-    target.alt = `${imageAlt} details_placeholder_image.jpg`;
+    target.src = 'assets/images/details_placeholder_image.webp';
+    target.alt = `${imageAlt} details_placeholder_image.webp`;
   }
 
   next(evt: Event): void {
