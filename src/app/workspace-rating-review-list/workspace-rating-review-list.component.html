@@ -77,34 +77,75 @@
             <div class="rating-star-number">
               <ul class="product-rating-c">
                 <li class>
-                  <i style="cursor: context-menu;"
+                  <!-- <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 1, 'fa-star-half-o': item?.rating > 0 && item?.rating < 1, 'fa-star-o': item?.rating <= 0}"
-                    aria-hidden="true"></i>
-                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
+                    aria-hidden="true"></i> -->
+                  <app-icon *ngIf="item?.rating >= 1" name="star" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating > 0 && item?.rating < 1" name="halfStar" class="w-2 text-yellow-600"
+                    aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating <= 0" name="emptyStar" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
+
                 </li>
                 <li class>
-                  <i style="cursor: context-menu;"
+                  <!-- <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 2, 'fa-star-half-o': item?.rating > 1 && item?.rating < 2, 'fa-star-o': item?.rating <= 1}"
-                    aria-hidden="true"></i>
-                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
+                    aria-hidden="true"></i> -->
+                  <app-icon *ngIf="item?.rating >= 2" name="star" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating > 0 && item?.rating < 2" name="halfStar" class="w-2 text-yellow-600"
+                    aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating <= 0" name="emptyStar" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
                 </li>
                 <li class>
-                  <i style="cursor: context-menu;"
+                  <!-- <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 3, 'fa-star-half-o': item?.rating > 2 && item?.rating < 3, 'fa-star-o': item?.rating <= 2}"
-                    aria-hidden="true"></i>
-                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
+                    aria-hidden="true"></i> -->
+                  <app-icon *ngIf="item?.rating >= 3" name="star" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating > 0 && item?.rating < 3" name="halfStar" class="w-2 text-yellow-600"
+                    aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating <= 0" name="emptyStar" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
                 </li>
                 <li class>
-                  <i style="cursor: context-menu;"
+                  <!-- <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 4, 'fa-star-half-o': item?.rating > 3 && item?.rating < 4, 'fa-star-o': item?.rating <= 3}"
-                    aria-hidden="true"></i>
-                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
+                    aria-hidden="true"></i> -->
+                  <app-icon *ngIf="item?.rating >= 4" name="star" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating > 0 && item?.rating < 4" name="halfStar" class="w-2 text-yellow-600"
+                    aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating <= 0" name="emptyStar" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
                 </li>
                 <li class>
-                  <i style="cursor: context-menu;"
+                  <!-- <i style="cursor: context-menu;"
                     [ngClass]="{'fa': true, 'fa-star': item?.rating >= 5, 'fa-star-half-o': item?.rating > 4 && item?.rating < 5, 'fa-star-o': item?.rating <= 4}"
-                    aria-hidden="true"></i>
-                  <!-- <app-icon name="star" class="text-orange-400 w-4"></app-icon> -->
+                    aria-hidden="true"></i> -->
+                  <app-icon *ngIf="item?.rating >= 5" name="star" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating > 0 && item?.rating < 5" name="halfStar" class="w-2 text-yellow-600"
+                    aria-hidden="true">
+                  </app-icon>
+
+                  <app-icon *ngIf="item?.rating <= 0" name="emptyStar" class="w-2 text-yellow-600" aria-hidden="true">
+                  </app-icon>
                 </li>
               </ul>
               <div class="start-count">

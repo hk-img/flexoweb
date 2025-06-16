@@ -706,11 +706,12 @@
               <h2 class="fs-20">Amenities</h2>
               <ul class="listing-features" *ngIf="!isMobile">
                 <li *ngFor="let element of space_details?.facilities">
-                  <span class="d-inline-block mr-1 font-size-md">
-                    <i class="material-icons" style="font-size: 16px">{{
+                  <span class="d-flex align-items-center mr-1 font-size-md" style="gap:4px;">
+                    <!-- <i class="material-icons" style="font-size: 16px">{{
                       facilities[element.id]
-                      }}</i>
-                    <h3 style="font-size: 15px">{{ element.name }}</h3>
+                      }}</i> -->
+                    <app-icon [name]="facilities[element.id]" class="text-orange-400 w-3"></app-icon>
+                    <h3 class="m-0" style="font-size: 15px">{{ element.name }}</h3>
                   </span>
                   <!-- <span class="text-dark mr-5">
                   </span> -->
@@ -719,10 +720,11 @@
               <div *ngIf="isMobile">
                 <ul class="listing-features" *ngIf="space_details?.facilities.length <= 3">
                   <li *ngFor="let element of space_details?.facilities">
-                    <span class="d-inline-block mr-1 font-size-md">
-                      <i class="material-icons" style="font-size: 16px">{{
+                    <span class="d-flex align-items-center mr-1 font-size-md" style="gap:4px;">
+                      <!-- <i class="material-icons" style="font-size: 16px">{{
                         facilities[element.id]
-                        }}</i>
+                        }}</i> -->
+                      <app-icon [name]="facilities[element.id]" class="text-orange-400 w-3"></app-icon>
                     </span>
                     <span class="text-dark mr-5">
                       {{ element.name }}
@@ -731,10 +733,11 @@
                 </ul>
                 <ul class="listing-features" *ngIf="space_details?.facilities.length > 3">
                   <li *ngFor="let element of show_less_facilities">
-                    <span class="d-inline-block mr-1 font-size-md">
-                      <i class="material-icons" style="font-size: 16px">{{
+                    <span class="d-flex align-items-center mr-1 font-size-md" style="gap:4px;">
+                      <!-- <i class="material-icons" style="font-size: 16px">{{
                         facilities[element.id]
-                        }}</i>
+                        }}</i> -->
+                      <app-icon [name]="facilities[element.id]" class="text-orange-400 w-3"></app-icon>
                     </span>
                     <span class="text-dark mr-5">
                       {{ element.name }}

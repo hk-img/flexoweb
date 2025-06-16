@@ -106,6 +106,10 @@ svg {
   height: 75px !important;
 }
 
+.w-40 {
+  width: 140px;
+  height: 140px;
+}
 .text-gray-400 {
   color: #7f7f7f !important;
 }

@@ -167,12 +167,16 @@ export class HomeComponent implements OnDestroy {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
+          arrows: false,
+          dots: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
+          arrows: false,
+          dots: true,
         },
       },
     ],
