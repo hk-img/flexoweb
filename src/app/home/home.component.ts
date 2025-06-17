@@ -651,12 +651,11 @@ export class HomeComponent implements OnDestroy {
     let spaceTypeSlug = this.spaceType.toLowerCase().replace(/\s+/g, '-').replace('/', '-');
 
     if (isCityLevel) {
-      url = `in/${spaceTypeSlug}/${citySlug}`;
+      url = `in/coworking/${citySlug}`;
     } else {
       let placesSlug = this.filteredPlaces
         .map(place => place.split(',')[0].trim())
         .join('-');
-
       url = `in/${spaceTypeSlug}/${citySlug}/${placesSlug}`;
     }
     this.router.navigate([this.formatUrl(url)]);
