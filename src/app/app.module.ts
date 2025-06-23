@@ -36,7 +36,7 @@ import { AppGlobals } from './services/app-globals';
 import { MemberService } from './services/member.service';
 import { SpaceService } from './services/space.service';
 import { DialogConfirmationPopUp } from './shared/component/dialog-confirmation-popup/dialog-confirmation-popup.component';
-import { FilterDialog } from './shared/component/filter-component/filter-dialog.component';
+import { FilterDialogModule } from './shared/component/filter-component/filter-dialog.module';
 import { ListItemModule } from './shared/component/list-item/list-item.module';
 import { SharedModule } from './shared/shared/shared.module';
 
@@ -93,7 +93,7 @@ export function loadGoogleMaps(): () => Promise<void> {
 // SocialLoginModule,
 // GoogleSigninButtonModule,
 @NgModule({
-  declarations: [AppComponent,FilterDialog, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
+  declarations: [AppComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
@@ -135,6 +135,7 @@ export function loadGoogleMaps(): () => Promise<void> {
     }),
     NgSelectModule,
     NgxSliderModule,
+    FilterDialogModule,
   ],
     providers: [
       {
