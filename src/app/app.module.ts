@@ -22,6 +22,7 @@ import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
 
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -121,9 +122,11 @@ export function loadGoogleMaps(): () => Promise<void> {
     NgxIntlTelInputModule,
     NgxJsonLdModule,
     SharedModule,
+    QuicklinkModule,
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
-      scrollPositionRestoration: 'enabled'
+      scrollPositionRestoration: 'enabled',
+      preloadingStrategy: QuicklinkStrategy
     }),
     NgSelectModule,
     NgxSliderModule,
