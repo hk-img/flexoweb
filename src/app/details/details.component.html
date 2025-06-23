@@ -739,10 +739,15 @@
 
           <div id="location" class="list-details-section">
             <h2 class="location-section fs-20">Location</h2>
-            <google-map height="400px" width="100%" [zoom]="15" [center]="marker?.position">
-              <!-- <map-circle [center]="marker?.position" [radius]="circleRadius1" [options]="circleOptions1"></map-circle> -->
-              <map-circle [center]="marker?.position" [radius]="circleRadius2" [options]="circleOptions2"></map-circle>
-            </google-map><br />
+            @defer (on viewport) {
+              <google-map height="400px" width="100%" [zoom]="15" [center]="marker?.position">
+                <!-- <map-circle [center]="marker?.position" [radius]="circleRadius1" [options]="circleOptions1"></map-circle> -->
+                <map-circle [center]="marker?.position" [radius]="circleRadius2" [options]="circleOptions2"></map-circle>
+              </google-map>
+            } @placeholder {
+              <div style="height:400px;width:100%;background:#f0f0f0"></div>
+            }
+            <br />
             <div class="commute-details" style="justify-content: flex-end">
               <div class="commute-details-item">
                 <div class="commute-label">
