@@ -20,6 +20,7 @@ import { LoginDialog } from '../login/login-dialog.component';
 import { WorkspaceRatingReviewComponent } from '../workspace-rating-review/workspace-rating-review.component';
 import { ListItemModule } from '../shared/component/list-item/list-item.module';
 import { SharedModule } from '../shared/shared/shared.module';
+import { ThankyopopupModule } from '../thankyopopup/thankyopopup.module';
 import { DetailsRoutingModule } from './details-routing.module';
 import { DetailsComponent } from './details.component';
 import { ViewMoreDialog } from './view-more/view-more.component';
@@ -63,6 +64,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
         CdkAccordionModule,
         MatExpansionModule,
         SharedModule,
+        ThankyopopupModule,
         RouterModule,
         NgxJsonLdModule,
         MatDatepickerModule,
