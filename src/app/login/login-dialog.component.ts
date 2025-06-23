@@ -25,7 +25,6 @@ import {
   SocialAuthService,
   SocialUser,
 } from '@abacritt/angularx-social-login';
-import intlTelInput from 'intl-tel-input';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { timer } from 'rxjs/internal/observable/timer';
 import { take } from 'rxjs/operators';
@@ -179,59 +178,61 @@ export class LoginDialog implements OnInit {
 
   private initializeIntlTelInput(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const input = document.querySelector("#tel") as HTMLInputElement;
+      import('intl-tel-input').then(({ default: intlTelInput }) => {
+        const input = document.querySelector("#tel") as HTMLInputElement;
 
-      if (input && !this.itiInitialized) {
-        this.iti = intlTelInput(input, {
-          initialCountry: "auto",
-          geoIpLookup: function (success, failure) {
-            fetch('https://ipinfo.io')
-              .then(response => response.json())
-              .then(data => success(data.country))
-              .catch(() => success('IN'));
-          },
-          utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
-        });
+        if (input && !this.itiInitialized) {
+          this.iti = intlTelInput(input, {
+            initialCountry: "auto",
+            geoIpLookup: function (success, failure) {
+              fetch('https://ipinfo.io')
+                .then(response => response.json())
+                .then(data => success(data.country))
+                .catch(() => success('IN'));
+            },
+            utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+          });
 
-        input.addEventListener("countrychange", () => this.onCountryChange2(this.iti));
-        this.itiInitialized = true;
-      }
+          input.addEventListener("countrychange", () => this.onCountryChange2(this.iti));
+          this.itiInitialized = true;
+        }
 
-      const input2 = document.querySelector("#tel2") as HTMLInputElement;
+        const input2 = document.querySelector("#tel2") as HTMLInputElement;
 
-      if (input2 && !this.iti2Initialized) {
-        this.iti2 = intlTelInput(input2, {
-          initialCountry: "auto",
-          geoIpLookup: function (success, failure) {
-            fetch('https://ipinfo.io')
-              .then(response => response.json())
-              .then(data => success(data.country))
-              .catch(() => success('IN'));
-          },
-          utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
-        });
+        if (input2 && !this.iti2Initialized) {
+          this.iti2 = intlTelInput(input2, {
+            initialCountry: "auto",
+            geoIpLookup: function (success, failure) {
+              fetch('https://ipinfo.io')
+                .then(response => response.json())
+                .then(data => success(data.country))
+                .catch(() => success('IN'));
+            },
+            utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+          });
 
-        input2.addEventListener("countrychange", () => this.onCountryChange2(this.iti2));
-        this.iti2Initialized = true;
-      }
+          input2.addEventListener("countrychange", () => this.onCountryChange2(this.iti2));
+          this.iti2Initialized = true;
+        }
 
-      const input3 = document.querySelector("#tel3") as HTMLInputElement;
+        const input3 = document.querySelector("#tel3") as HTMLInputElement;
 
-      if (input3 && !this.iti3Initialized) {
-        this.iti3 = intlTelInput(input3, {
-          initialCountry: "auto",
-          geoIpLookup: function (success, failure) {
-            fetch('https://ipinfo.io')
-              .then(response => response.json())
-              .then(data => success(data.country))
-              .catch(() => success('IN'));
-          },
-          utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
-        });
+        if (input3 && !this.iti3Initialized) {
+          this.iti3 = intlTelInput(input3, {
+            initialCountry: "auto",
+            geoIpLookup: function (success, failure) {
+              fetch('https://ipinfo.io')
+                .then(response => response.json())
+                .then(data => success(data.country))
+                .catch(() => success('IN'));
+            },
+            utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+          });
 
-        input3.addEventListener("countrychange", () => this.onCountryChange2(this.iti3));
-        this.iti3Initialized = true;
-      }
+          input3.addEventListener("countrychange", () => this.onCountryChange2(this.iti3));
+          this.iti3Initialized = true;
+        }
+      });
     }
   }
 
