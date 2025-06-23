@@ -47,6 +47,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { environment } from 'src/environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpRequestInterceptor } from './login/tokanInterceptor';
 import { PaymentsComponent } from './payments/payments.component';
 import { ShimmerLoadingComponent } from './shared/component/shimmer-loading/shimmer-loading.component';
@@ -127,6 +128,9 @@ export function loadGoogleMaps(): () => Promise<void> {
       initialNavigation: 'enabledBlocking',
       scrollPositionRestoration: 'enabled',
       preloadingStrategy: QuicklinkStrategy
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
     }),
     NgSelectModule,
     NgxSliderModule,
