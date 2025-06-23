@@ -4,13 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "node generate-env.js && ng serve",
-    "build": "node generate-env.js && ng build",
+    "build": "node generate-env.js && ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:ssr": "ng run flexo-aggregation-website:serve-ssr",
     "serve:ssr": "node dist/flexo-aggregation-website/server/main.js",
-    "build:ssr": "node generate-env.js && ng build && ng run flexo-aggregation-website:server:production",
+    "build:ssr": "node generate-env.js && ng build --configuration=production && ng run flexo-aggregation-website:server:production",
     "prerender": "ng run flexo-aggregation-website:prerender",
     "sitemap": "node sitemap-update.js"
   },
