@@ -14,7 +14,7 @@ import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
 import { ListItemModule } from '../shared/component/list-item/list-item.module';
-import { FilterDialog } from '../shared/component/filter-component/filter-dialog.component';
+import { FilterDialogModule } from '../shared/component/filter-component/filter-dialog.module';
 import { FilterItemModule } from '../shared/component/filter-item/filter-item.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { SharedModule } from '../shared/shared/shared.module';
@@ -37,6 +37,7 @@ import { ShimmerLoadingComponent } from '../shared/component/shimmer-loading/shi
         MatDialogModule,
         MatSnackBarModule,
         MatFormFieldModule,
+        FilterDialogModule,
         ListItemModule,
         SlickCarouselModule,
         SharedModule,
