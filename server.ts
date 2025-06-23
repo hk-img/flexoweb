@@ -1,47 +1,22 @@
+
 import 'zone.js/node';
 
-import { ngExpressEngine } from '@nguniversal/express-engine';
-import * as express from 'express';
-import * as rateLimit from 'express-rate-limit';
-import { join } from 'path';
-import 'reflect-metadata';
-
 import { APP_BASE_HREF } from '@angular/common';
-import { enableProdMode } from '@angular/core';
-import { existsSync } from 'fs';
-import { AppServerModule } from './src/main.server';
-
-import 'localstorage-polyfill';
-import { environment } from 'src/environments/environment';
-const fs = require('fs');
-const path = require('path');
-const googleMapsClient = require('@google/maps').createClient({
-  key: environment.mapKey,
-});
+import { CommonEngine } from '@angular/ssr';
+import * as express from 'express';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import bootstrap from './src/main.server';
 
 // The Express app is exported so that it can be used by serverless Functions.
-export function app() {
-  enableProdMode();
+export function app(): express.Express {
   const server = express();
-  const distFolder = join(__dirname, process.env.DIST_FOLDER || '../browser');
-
+  const distFolder = join(process.cwd(), 'dist/flexo-aggregation-website/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
-    ? 'index.original.html'
-    : 'index';
-  const limiter = rateLimit({
-    windowMs: 10000,
-    max: 200,
-    message: `Too many requests from this IP, please try again`,
-  });
-  server.use(limiter);
+    ? join(distFolder, 'index.original.html')
+    : join(distFolder, 'index.html');
 
-  // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
-  server.engine(
-    'html',
-    ngExpressEngine({
-      bootstrap: AppServerModule,
-    })
-  );
+  const commonEngine = new CommonEngine();
 
   server.set('view engine', 'html');
   server.set('views', distFolder);
@@ -49,49 +24,34 @@ export function app() {
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
-  server.get(
-    '*.*',
-    express.static(distFolder, {
-      maxAge: '1y',
-    })
-  );
+  server.get('*.*', express.static(distFolder, {
+    maxAge: '1y'
+  }));
 
-  // All regular routes use the Universal engine
+  // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
-    try {
-      res.render(indexHtml, {
-        req,
-        providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }],
-      });
-    } catch (error) {
-      console.error('Error rendering page:', error);
-      res.status(500).send('An error occurred while rendering the page.');
-    }
-  });
+    const { protocol, originalUrl, baseUrl, headers } = req;
 
+    commonEngine
+      .render({
+        bootstrap,
+        documentFilePath: indexHtml,
+        url: `${protocol}://${headers.host}${originalUrl}`,
+        publicPath: distFolder,
+        providers: [
+          { provide: APP_BASE_HREF, useValue: baseUrl },],
+      })
+      .then((html) => res.send(html))
+      .catch((err) => next(err));
+  });
 
   return server;
 }
 
-function run() {
-  const port =  4400;
+function run(): void {
+  const port = process.env['PORT'] || 4000;
 
   // Start up the Node server
-
-  try {
-    const domino = require('domino');
-    const templateA = fs.readFileSync(path.join('dist/flexo-aggregation-website/browser', 'index.html')).toString();
-    const win = domino.createWindow(templateA);
-    global['window'] = win;
-    global['document'] = win.document;
-    global['navigator'] = win.navigator;
-    global['google'] = googleMapsClient;
-    global['localStorage'] = localStorage;
-  } catch (error) {
-    console.error('Error initializing globals:', error);
-  }
-
-  // global['Geocoder'] = googleMapsClient;
   const server = app();
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
@@ -103,10 +63,9 @@ function run() {
 // The below code is to ensure that the server is run only when not requiring the bundle.
 declare const __non_webpack_require__: NodeRequire;
 const mainModule = __non_webpack_require__.main;
-const moduleFilename = (mainModule && mainModule.filename) || '';
+const moduleFilename = mainModule && mainModule.filename || '';
 if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
   run();
 }
 
-export * from './src/main.server';
-
+export default bootstrap;
