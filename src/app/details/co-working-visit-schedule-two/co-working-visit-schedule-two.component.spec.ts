@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MaterialModule } from '../../material.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared/shared.module';
 
 import { CoWorkingVisitScheduleTwoComponent } from './co-working-visit-schedule-two.component';
 
@@ -8,6 +12,7 @@ describe('CoWorkingVisitScheduleTwoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [MaterialModule, SlickCarouselModule, ReactiveFormsModule, FormsModule, SharedModule],
       declarations: [CoWorkingVisitScheduleTwoComponent]
     });
     fixture = TestBed.createComponent(CoWorkingVisitScheduleTwoComponent);
