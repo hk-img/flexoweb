@@ -10,7 +10,7 @@ import { ProfileManagementService } from 'src/app/profile-management/profile-man
 import { SpaceService } from 'src/app/services/space.service';
 import { ThankyopopupComponent } from 'src/app/thankyopopup/thankyopopup.component';
 import { environment } from 'src/environments/environment';
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-buy-pass',
@@ -21,9 +21,9 @@ export class BuyPassComponent {
   @ViewChild('picker', { static: true }) _picker: MatDatepicker<Date>;
   public dateClass = (date: Date) => {
     if (this._findDate(date) !== -1) {
-      return [ 'selected' ];
+      return ['selected'];
     }
-    return [ ];
+    return [];
   }
   public spaceId: any;
   public init = new Date();
@@ -36,7 +36,7 @@ export class BuyPassComponent {
   originalPrice: any;
   noOfGuest: any;
   ofDays: any;
-  valGstPanForm: boolean=true;
+  valGstPanForm: boolean = true;
   totalHours: any;
   bookingPrice: any
   startDate: any = new Date();
@@ -65,7 +65,7 @@ export class BuyPassComponent {
   billingAddress2: any;
   billingMsg: string;
   startTime: any;
-  endTime: any; 
+  endTime: any;
   filteredStartTimes = [];
   selectedDay: any;
   currentDay: string;
@@ -79,12 +79,12 @@ export class BuyPassComponent {
     private spaceService: SpaceService,
     private toastr: ToastrService,
     private datePipe: DatePipe,
-    private profileService:ProfileManagementService,
+    private profileService: ProfileManagementService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
 
-    
+
     this.minDate = new Date();
 
     let user = localStorage.getItem('userDetails') || ''
@@ -118,7 +118,7 @@ export class BuyPassComponent {
     this.ref.close(options);
   }
   ngOnInit(): void {
-    
+
     this.dayPassForm = this.fb.group({
       firstName: [
         this.user?.firstName,
@@ -146,8 +146,8 @@ export class BuyPassComponent {
       // [Validators.required]],
 
     });
-    if(this.userDetail && (this.userDetail?.billingAddress=='' || this.userDetail?.billingAddress==null)){
-      this.valGstPanForm=false;
+    if (this.userDetail && (this.userDetail?.billingAddress == '' || this.userDetail?.billingAddress == null)) {
+      this.valGstPanForm = false;
       // this.GSTnumber=this.userDetail?.gstNumber;
       // this.PANnumber=this.userDetail?.panNumber;
       this.billingAddress = this.userDetail?.billingAddress;
@@ -155,7 +155,7 @@ export class BuyPassComponent {
     this.selectedDate = this.minDate;
     const now = new Date();
     this.currentDay = now.toLocaleDateString('en-GB', { weekday: 'long' });
-    if(Object.keys(this.data)?.length){
+    if (Object.keys(this.data)?.length) {
       this.getSpaceDetails();
     }
   }
@@ -191,7 +191,7 @@ export class BuyPassComponent {
   ];
   getSpaceDetails() {
     this.spaceService
-      .getSpaceDetails(this.data.country,this.data.city,this.data.spaceType,this.data.spaceId)
+      .getSpaceDetails(this.data.country, this.data.city, this.data.spaceType, this.data.spaceId)
       .then((res) => {
         this.space_details = res.data
         this.spaceName = res.data.actual_name
@@ -244,7 +244,7 @@ export class BuyPassComponent {
     if (event.value) {
       const date = event.value;
       const index = this._findDate(date);
-     
+
       if (index === -1) {
         this.model.push(date);
 
@@ -254,11 +254,11 @@ export class BuyPassComponent {
           const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
           const day = String(date.getUTCDate()).padStart(2, '0');
           return `${year}-${month}-${day}`;
-      });
+        });
         this.dayPassForm.patchValue({
           startDate: transformedArray
         })
-        
+
       } else {
         this.model.splice(index, 1);
       }
@@ -268,7 +268,7 @@ export class BuyPassComponent {
 
       if (!this.CLOSE_ON_SELECTED) {
         const closeFn = this._picker.close;
-        this._picker.close = () => {};
+        this._picker.close = () => { };
 
         // Check if _picker['_popupComponentRef'] and _picker['_popupComponentRef'].instance exist
         if (this._picker['_popupComponentRef'] && this._picker['_popupComponentRef'].instance) {
@@ -285,17 +285,17 @@ export class BuyPassComponent {
     }
   }
 
-  popupOpen(category,title1): void {
+  popupOpen(category, title1): void {
     let payload = {
-        component: "favourite-workspace",
-        title: title1,
-        onCategory:category,
-        message: 'Are you sure you want to Unfavourite this workspace?'
+      component: "favourite-workspace",
+      title: title1,
+      onCategory: category,
+      message: 'Are you sure you want to Unfavourite this workspace?'
     }
-    this.dialog.open(ThankyopopupComponent, { data: payload ,width: '500px'});
+    this.dialog.open(ThankyopopupComponent, { data: payload, width: '500px' });
   }
   onSumbit() {
-    if(!this.valGstPanForm){
+    if (!this.valGstPanForm) {
       $("#updateModal").show();
       return false;
     }
@@ -318,7 +318,7 @@ export class BuyPassComponent {
       estimateArrivalTime: formValue.estimateArrivalTime,
       noOfGuest: formValue.noOfGuest,
       message: formValue.message,
-      spaceLocation:this.location_name
+      spaceLocation: this.location_name
     };
     this.isLoading = true
     this.spaceService.userDayPassCoworking(this.data.spaceId, payload).subscribe(
@@ -351,7 +351,7 @@ export class BuyPassComponent {
             this.spaceService.completeCoworkingPayment(resData).subscribe((bookingRes: any) => {
 
               if (bookingRes?.success) {
-                this.popupOpen('coworking','Booking complete');
+                this.popupOpen('coworking', 'Booking complete');
                 // this.toastr.success('Booking complete');
                 // this.toastr.success('Booking complete');
                 setTimeout(() => {
@@ -395,32 +395,32 @@ export class BuyPassComponent {
     );
   }
 
-  closepopup(){
+  closepopup() {
     $("#updateModal").hide();
   }
   onDateChange(event: any) {
     this.selectedDate = event.value;
-  this.selectedDay = moment(this.selectedDate).format('dddd');
+    this.selectedDay = moment(this.selectedDate).format('dddd');
 
-    if(this.selectedDay === 'Monday'){
+    if (this.selectedDay === 'Monday') {
       this.startTime = localStorage.getItem("mondayOpenTime");
       this.endTime = localStorage.getItem("mondayCloseTime");
-    }else if(this.selectedDay === 'Tuesday'){
+    } else if (this.selectedDay === 'Tuesday') {
       this.startTime = localStorage.getItem("tuesdayOpenTime");
       this.endTime = localStorage.getItem("tuesdayCloseTime");
-    }else if(this.selectedDay === 'Wednesday'){
+    } else if (this.selectedDay === 'Wednesday') {
       this.startTime = localStorage.getItem("wednesdayOpenTime");
       this.endTime = localStorage.getItem("wednesdayCloseTime");
-    }else if(this.selectedDay === 'Thursday'){
+    } else if (this.selectedDay === 'Thursday') {
       this.startTime = localStorage.getItem("thursdayOpenTime");
       this.endTime = localStorage.getItem("thursdayCloseTime");
-    }else if(this.selectedDay === 'Friday'){
+    } else if (this.selectedDay === 'Friday') {
       this.startTime = localStorage.getItem("fridayOpenTime");
       this.endTime = localStorage.getItem("fridayCloseTime");
-    }else if(this.selectedDay === 'Saturday'){
+    } else if (this.selectedDay === 'Saturday') {
       this.startTime = localStorage.getItem("saturdayOpenTime");
       this.endTime = localStorage.getItem("saturdayCloseTime");
-    }else if(this.selectedDay === 'Sunday'){
+    } else if (this.selectedDay === 'Sunday') {
       this.startTime = localStorage.getItem("sundayOpenTime");
       this.endTime = localStorage.getItem("sundayCloseTime");
     }
@@ -428,7 +428,6 @@ export class BuyPassComponent {
   }
 
   dateFilter = (d: Date | null): boolean => {
-    // Retrieve closed days from local storage and parse as boolean
     const mondayClosed = localStorage.getItem('mondayClosed') === 'true';
     const tuesdayClosed = localStorage.getItem('tuesdayClosed') === 'true';
     const wednesdayClosed = localStorage.getItem('wednesdayClosed') === 'true';
@@ -437,13 +436,21 @@ export class BuyPassComponent {
     const saturdayClosed = localStorage.getItem('saturdayClosed') === 'true';
     const sundayClosed = localStorage.getItem('sundayClosed') === 'true';
 
+    const holidays = JSON.parse(localStorage.getItem('holidays')) || [];
+
+    const holidayClosed = holidays.map((holiday: any) => {
+      const date = new Date(holiday.date);
+      return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+    });
+    const formattedDate = this.datePipe.transform(d, 'yyyy-MM-dd') || '';
+    const isHoliday = holidayClosed.includes(formattedDate);
+
     const date = d ? new Date(d) : null;
     if (!date || isNaN(date.getTime())) {
       return true;
     }
 
     const day = date.getDay();
-    // Disable days based on the closed days from local storage
     return !(
       (mondayClosed && day === 1) ||
       (tuesdayClosed && day === 2) ||
@@ -451,11 +458,11 @@ export class BuyPassComponent {
       (thursdayClosed && day === 4) ||
       (fridayClosed && day === 5) ||
       (saturdayClosed && day === 6) ||
-      (sundayClosed && day === 0)
+      (sundayClosed && day === 0) ||
+      isHoliday
     );
-  }
+  };
   onInput() {
-    // Trigger change detection to update the view
     this.cd.detectChanges();
   }
 
@@ -463,52 +470,52 @@ export class BuyPassComponent {
     return this.dayPassForm.controls;
   }
 
-  chkValidateGstPanForm(event: any, fieldType){ 
-    this.panErrorMsg='';
+  chkValidateGstPanForm(event: any, fieldType) {
+    this.panErrorMsg = '';
     // this.gstErrorMsg='';
-    this.billingMsg='';
+    this.billingMsg = '';
     // if(fieldType=='GSTnumber'){
-      
+
     //   this.GSTnumber = event.target.value;
     //   alert(this.GSTnumber)
     // }
- 
+
     // if(fieldType=='PANnumber'){
-      
+
     //   this.PANnumber = event.target.value;
     // }
- 
-    if(fieldType == "billingAddress"){
+
+    if (fieldType == "billingAddress") {
       this.billingAddress = event.target.value;
     }
 
-    if(fieldType == "billingAddress2"){
+    if (fieldType == "billingAddress2") {
       this.billingAddress2 = event.target.value;
     }
- 
+
     // if (this.GSTnumber === undefined || !/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$/.test(this.GSTnumber)) {
     //   this.gstErrorMsg = 'Please enter a valid GST number';
     // } else 
-    
+
     // if (this.PANnumber === undefined || !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(this.PANnumber)) {
     //   this.panErrorMsg = 'Please enter a valid PAN number';
     // }else 
-    
-    if(this.billingAddress === undefined || this.billingAddress == ""){
+
+    if (this.billingAddress === undefined || this.billingAddress == "") {
       this.billingMsg = 'Please enter billing address';
     } else {
       this.valGstPanForm = true;
     }
-    
+
   }
 
-  submitGstAndPan(){
- 
-    if(this.valGstPanForm){
+  submitGstAndPan() {
+
+    if (this.valGstPanForm) {
       this.profileService.fetchProfiledata().subscribe((result: any) => {
         if (result.success) {
           this.userDetail = result.data;
-  
+
           let profileData = {
             email: this.userDetail?.email,
             mobile: this.userDetail?.mobile,
@@ -522,10 +529,10 @@ export class BuyPassComponent {
             panNumber: this.PANnumber,
             gstNumber: this.GSTnumber,
           }
-          
-  
+
+
           this.profileService.updateProfileDetails(this.userDetail?.id, profileData).subscribe((result: any) => {
-            if(result.success){
+            if (result.success) {
               localStorage.setItem('userDetails', JSON.stringify(result?.user))
               this.toastr.success(result.message || 'Profile details updated successfully!');
               $("#updateModal").hide();
@@ -536,16 +543,16 @@ export class BuyPassComponent {
             this.toastr.error('Some error occurred while update profile!')
             console.error(error);
           })
-  
+
         }
       })
-    }else{
+    } else {
       this.toastr.error('Please enter correct details.')
     }
 
   }
 
-  closeModal(){
+  closeModal() {
     $("#updateModal").hide();
   }
 
@@ -557,7 +564,7 @@ export class BuyPassComponent {
     const selectedDate = new Date(this.dayPassForm.value.startDate);
     const currentHours = currentDate.getHours();
     const currentMinutes = currentDate.getMinutes();
-    
+
     let totalMinut = currentHours * 60;
     if (!isNaN(currentMinutes)) {
       totalMinut += currentMinutes;
