@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: "http://192.168.1.50:5401",
+  apiUrl: "http://13.235.251.69:5401",
   s3_bucket_path: "worker-app",
   mapKey: "AIzaSyCOAhd885zH5TvinKCm3-rhDvgndqzoQyU",
   webDomain: "",
