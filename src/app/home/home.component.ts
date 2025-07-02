@@ -650,13 +650,16 @@ export class HomeComponent implements OnDestroy {
     let citySlug = this.city.replace(/\s+/g, '-').toLowerCase();
     let spaceTypeSlug = this.spaceType.toLowerCase().replace(/\s+/g, '-').replace('/', '-');
 
+    if(spaceTypeSlug == 'coworking-space'){
+      spaceTypeSlug = 'coworking'
+    }
+
     if (isCityLevel) {
       url = `in/${spaceTypeSlug}/${citySlug}`;
     } else {
       let placesSlug = this.filteredPlaces
         .map(place => place.split(',')[0].trim())
         .join('-');
-
       url = `in/${spaceTypeSlug}/${citySlug}/${placesSlug}`;
     }
     this.router.navigate([this.formatUrl(url)]);

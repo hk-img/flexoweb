@@ -796,6 +796,7 @@ export class DetailsComponent implements OnInit {
     this.spaceService
       .getSpaceDetails(country, city, spaceType, spaceId)
       .then((res) => {
+        console.log(res);
         if (!res.success) {
           this.router.navigate(['/error']);
         }
@@ -897,6 +898,10 @@ export class DetailsComponent implements OnInit {
             this.sanitizer.bypassSecurityTrustResourceUrl(
               this.space_details?.youtube_url
             ))
+        }
+
+        if(res.hostHolidays){
+          localStorage.setItem("holidays", JSON.stringify(res.hostHolidays));
         }
 
         if (this.workingTimeValue) {

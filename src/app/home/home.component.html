@@ -894,9 +894,8 @@
       <div class="col-md-12">
         <div class="swiper-container popular-place-wrap v2">
           <div class="swiper-wrapper">
-            @defer (on viewport) {
-              <ngx-slick-carousel class="carousel" #slickReviewsModal="slick-carousel" [config]="reviewsConfig"
-                responsive="breakpoints">
+            <ngx-slick-carousel class="carousel" #slickReviewsModal="slick-carousel" [config]="reviewsConfig"
+              responsive="breakpoints">
               <div ngxSlickItem class="swiper-slide popular-item slide">
                 <div class="single-place">
                   <img class="single-place-image" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/category/Andheri-East.jpg" alt="place-image" />
@@ -977,9 +976,6 @@
                 </div>
               </div>
             </ngx-slick-carousel>
-            } @placeholder {
-              <div style="height:200px;width:100%;background:#f0f0f0"></div>
-            }
           </div>
         </div>
         <div class="slider-btn v1 popular-next style2" (click)="next()">
@@ -1191,7 +1187,7 @@
             </div>
             <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
               <div class="card-body">
-                <p>You can reach out to us via email at hello&#64;flexospaces.com. Our team is here to help with all your
+                <p>You can reach out to us via email at hello@flexospaces.com. Our team is here to help with all your
                   inquiries. </p>
               </div>
             </div>

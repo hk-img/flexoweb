@@ -22,7 +22,6 @@ import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
 
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,7 +35,7 @@ import { AppGlobals } from './services/app-globals';
 import { MemberService } from './services/member.service';
 import { SpaceService } from './services/space.service';
 import { DialogConfirmationPopUp } from './shared/component/dialog-confirmation-popup/dialog-confirmation-popup.component';
-import { FilterDialogModule } from './shared/component/filter-component/filter-dialog.module';
+import { FilterDialog } from './shared/component/filter-component/filter-dialog.component';
 import { ListItemModule } from './shared/component/list-item/list-item.module';
 import { SharedModule } from './shared/shared/shared.module';
 
@@ -47,11 +46,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { environment } from 'src/environments/environment';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpRequestInterceptor } from './login/tokanInterceptor';
 import { PaymentsComponent } from './payments/payments.component';
 import { ShimmerLoadingComponent } from './shared/component/shimmer-loading/shimmer-loading.component';
-import { ThankyopopupModule } from './thankyopopup/thankyopopup.module';
+import { ThankyopopupComponent } from './thankyopopup/thankyopopup.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 
@@ -93,7 +91,7 @@ export function loadGoogleMaps(): () => Promise<void> {
 // SocialLoginModule,
 // GoogleSigninButtonModule,
 @NgModule({
-  declarations: [AppComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
+  declarations: [AppComponent,FilterDialog,ThankyopopupComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
@@ -123,19 +121,12 @@ export function loadGoogleMaps(): () => Promise<void> {
     NgxIntlTelInputModule,
     NgxJsonLdModule,
     SharedModule,
-    ThankyopopupModule,
-    QuicklinkModule,
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
-      scrollPositionRestoration: 'enabled',
-      preloadingStrategy: QuicklinkStrategy
-    }),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      scrollPositionRestoration: 'enabled'
     }),
     NgSelectModule,
     NgxSliderModule,
-    FilterDialogModule,
   ],
     providers: [
       {

@@ -6,6 +6,7 @@ import {
   MatLegacyDialogRef as MatDialogRef
 } from '@angular/material/legacy-dialog';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import intlTelInput from 'intl-tel-input';
 import { CountryISO } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
 import { SpaceService } from 'src/app/services/space.service';
@@ -38,7 +39,7 @@ export class InquiryComponent {
   isOpen: boolean = true;
   userId: any;
   public ref: any;
-  iti: import('intl-tel-input').Iti;
+  iti: any = intlTelInput;
   CountryISO = CountryISO;
   selectedCountryData: any;
   dialCode: any;
@@ -116,9 +117,6 @@ export class InquiryComponent {
   ngOnInit(): void {
     this.formData.spaceType = this.data.name ?? "";
     if (isPlatformBrowser(this.platformId)) {
-      import('intl-tel-input').then(({ default: intlTelInput }) => {
-        this.iti = intlTelInput as any;
-      });
       this.isCoworkings = sessionStorage.getItem('isCoworking');
       this.valueForListingPage = localStorage.getItem('staticValue');
     }

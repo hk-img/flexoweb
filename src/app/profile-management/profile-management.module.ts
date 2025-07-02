@@ -14,7 +14,7 @@ import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ListItemModule } from '../shared/component/list-item/list-item.module';
 import { FilterItemModule } from '../shared/component/filter-item/filter-item.module';
-import { FilterDialogModule } from '../shared/component/filter-component/filter-dialog.module';
+import { FilterDialog } from '../shared/component/filter-component/filter-dialog.component';
 import { SharedModule } from '../shared/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../services/auth.guard';
@@ -64,7 +64,6 @@ export const MY_FORMATS = {
         NgxIntlTelInputModule,
         ListItemModule,
         NgSelectModule,
-        FilterDialogModule,
         FilterItemModule,
         SharedModule,
         RouterModule.forChild(routes),
