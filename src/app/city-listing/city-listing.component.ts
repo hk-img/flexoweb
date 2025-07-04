@@ -364,7 +364,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     if (window.innerWidth < 700) {
       this.isMobile = true;
     }
-    // this.getSpacesByCity();
+    this.getSpacesByCity();
     // this.geocode();
     this.spaceService.filteredSpaces$.subscribe(
       (message) => {
