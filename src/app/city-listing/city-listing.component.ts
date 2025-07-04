@@ -248,7 +248,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     //   "Day Pass"
     // ];
     // sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
-    // this.removeLoaction()
+    this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
       if (this.spaceType == 'coworking cafe restaurant') {
