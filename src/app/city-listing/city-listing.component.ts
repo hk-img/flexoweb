@@ -237,7 +237,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.loadZohoScript2();
+    this.loadZohoScript2();
     this.getAllQuestions();
     // const selectedValues = [
     //   "Private Office",
