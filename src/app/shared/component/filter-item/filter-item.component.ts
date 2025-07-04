@@ -158,7 +158,7 @@ export class FilterItemComponent implements OnInit {
         this.nearByLocation = this.getOriginalUrlParam(params['area']);
       }
     });
-    // this.getSpaces();
+    this.getSpaces();
     if (this.cityName) {
       this.getNearByLocations()
     }
