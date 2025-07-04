@@ -141,8 +141,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.shortlists = user_details.shortlists;
     });
 
-    this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
-    this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
+    // this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
+    // this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
   }
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
@@ -240,83 +240,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.loadZohoScript2();
-      this.getAllQuestions();
-      const selectedValues = [
-        "Private Office",
-        "Managed Office",
-        "Dedicated Desk",
-        "Flexible Desk",
-        "Virtual Office",
-        "Day Pass"
-      ];
-      sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
-      this.removeLoaction()
-      this.route.params.subscribe((params: ParamMap) => {
-        this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
-        if (this.spaceType == 'coworking cafe restaurant') {
-          this.spaceType = 'Coworking Café/Restaurant';
-        }
-        if (this?.spaceType == 'coworking cafe restaurant') {
-          this.city_param = this.getOriginalUrlParam(params['area']);
-        } else {
-          this.city_param = this.getOriginalUrlParam(params['city']);
-        }
-        this.areaName = this.getOriginalUrlParam(params['area'])
-
-        this.titleService.setTitle('Demo testing | FLEXO');
-
-        // const titleCase = (str) => str.replace(/\b\S/g, (t) => t.toUpperCase());
-
-        // const fullPath = this.route.snapshot.url.map(segment => segment.path).join('/');
-        // const segments = fullPath.split('/');
-        // this.spaceType = segments[segments.indexOf('coworking') + 1];
-
-        const url = window.location.href;  // Get the full URL
-        const segments2 = url.split('/');
-
-        // Find 'in' in the URL and extract the next static segment ('longTerm')
-        const inIndex = segments2.indexOf('in');
-        if (inIndex !== -1 && segments2.length > inIndex + 1) {
-          this.staticValue = segments2[inIndex + 1];
-          if (this.staticValue == 'coworking-space' || this.staticValue == 'coworking') {
-            this.staticValue = "Coworking"
-          } else if (this.staticValue == 'coworking-cafe-restaurant' || this.staticValue == 'shoot-studio' || this.staticValue == 'recording-studio' || this.staticValue == 'podcast-studio' || this.staticValue == 'activity-space' || this.staticValue == 'sports-turf' || this.staticValue == 'sports-venue' || this.staticValue == 'party-space' || this.staticValue == 'banquet-hall' || this.staticValue == 'gallery' || this.staticValue == 'classroom' || this.staticValue == 'private-cabin' || this.staticValue == 'meeting-room' || this.staticValue == 'training-room' || this.staticValue == 'event-space') {
-            this.staticValue = 'Shortterm';
-          } else {
-            this.staticValue = 'Longterm';
-          }
-          if (isPlatformBrowser(this.platformId)) {
-            localStorage.setItem('staticValue', this.staticValue);
-          }
-        }
-      });
-
-      this.zoom = 12;
-      if (window.innerWidth < 700) {
-        this.isMobile = true;
-      }
-      this.getSpacesByCity();
-      // this.geocode();
-      this.spaceService.filteredSpaces$.subscribe(
-        (message) => {
-          this.recommended_spaces = []
-          this.spaces_list = []
-          this.recommended_spaces = message
-        }
-      );
-      if (isPlatformBrowser(this.platformId)) {
-        if (localStorage.getItem('userDetails')) {
-          this.isCoworking = sessionStorage.getItem('isCoworking')
-          const userDetail = localStorage.getItem('userDetails');
-          const userDetailObj = JSON.parse(userDetail);
-          this.userId = userDetailObj.id
-        } else {
-          this.userId = 0
-        }
-      }
-    }
     this.titleService.setTitle(`Coworking Spaces in | Flexo`);
   }
 
