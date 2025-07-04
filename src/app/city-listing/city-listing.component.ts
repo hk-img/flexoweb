@@ -237,9 +237,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.loadZohoScript2();
-    this.getAllQuestions();
-    this.removeLoaction()
+    // this.loadZohoScript2();
+    // this.getAllQuestions();
+    // this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
       if (this.spaceType == 'coworking cafe restaurant') {
@@ -355,7 +355,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     if (window.innerWidth < 700) {
       this.isMobile = true;
     }
-    this.getSpacesByCity();
+    // this.getSpacesByCity();
     // this.geocode();
     this.spaceService.filteredSpaces$.subscribe(
       (message) => {
