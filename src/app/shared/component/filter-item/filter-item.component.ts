@@ -658,9 +658,9 @@ export class FilterItemComponent implements OnInit {
       this.selectedValues = this.selectedValues.filter(val => val !== item.spaceType);
     }
     if (isPlatformBrowser(this.platformId)) {
-      sessionStorage.setItem('selectedValues', JSON.stringify(this.selectedValues));
+    sessionStorage.setItem('selectedValues', JSON.stringify(this.selectedValues));
     }
-    // this.cityListing.getSpacesByCity();
+    this.cityListing.getSpacesByCity();
     const coWorkingList = this.spaces.find(p => p.spaceType === 'Co-working');
     if (coWorkingList) {
       const allSubpartsSelected = coWorkingList.subpart.every(sub => sub.selected);
