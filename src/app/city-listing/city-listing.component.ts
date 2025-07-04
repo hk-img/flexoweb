@@ -45,6 +45,9 @@ declare var $zoho: any;
   providers: [TitleCasePipe]
 })
 export class CityListingComponent implements OnInit {
+  constructor(private titleService: Title){
+    this.titleService.setTitle('Flexo Demo - City Listing');
+  }
   ngOnInit(): void {
   }
 
