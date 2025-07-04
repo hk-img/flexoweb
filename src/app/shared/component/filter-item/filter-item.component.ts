@@ -119,14 +119,14 @@ export class FilterItemComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.lat = localStorage.getItem('lat');
-    this.long = localStorage.getItem('long');
+    // this.lat = localStorage.getItem('lat');
+    // this.long = localStorage.getItem('long');
     this.getCoords();
-    localStorage.setItem("city_name", this.city_name);
-    this.city_name_display = this.city_name?.charAt(0)?.toUpperCase() + this.city_name?.slice(1);
-    this.area_name_display = this.area_name.charAt(0).toUpperCase() + this.area_name?.slice(1);
-    this.city_name_display = this.city_name_display?.replace(/-/g, ' ');
-    this.area_name_display = this.area_name_display?.replace(/-/g, ' ');
+    // localStorage.setItem("city_name", this.city_name);
+    // this.city_name_display = this.city_name?.charAt(0)?.toUpperCase() + this.city_name?.slice(1);
+    // this.area_name_display = this.area_name.charAt(0).toUpperCase() + this.area_name?.slice(1);
+    // this.city_name_display = this.city_name_display?.replace(/-/g, ' ');
+    // this.area_name_display = this.area_name_display?.replace(/-/g, ' ');
 
     if (window.innerWidth < 700) {
       this.isMobile = true;
