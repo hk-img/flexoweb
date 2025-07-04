@@ -141,6 +141,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.shortlists = user_details.shortlists;
     });
 
+    this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
+    this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
   }
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
@@ -248,7 +250,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       "Virtual Office",
       "Day Pass"
     ];
-    // sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+    sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
     this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
@@ -376,7 +378,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     );
     if (isPlatformBrowser(this.platformId)) {
       if (localStorage.getItem('userDetails')) {
-        // this.isCoworking = sessionStorage.getItem('isCoworking')
+        this.isCoworking = sessionStorage.getItem('isCoworking')
         const userDetail = localStorage.getItem('userDetails');
         const userDetailObj = JSON.parse(userDetail);
         this.userId = userDetailObj.id
@@ -475,7 +477,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
   openInquiryPopUp() {
     if (isPlatformBrowser(this.platformId)) {
-      // this.isCoworking = sessionStorage.getItem('isCoworking');
+      this.isCoworking = sessionStorage.getItem('isCoworking');
     }
     let config = new MatDialogConfig();
     config.viewContainerRef = this.inquiryVisit_viewContainerRef;
@@ -603,7 +605,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
 
       let city_name = this.city_param;
-      const subpart = "";
+      const subpart = sessionStorage.getItem('selectedValues');
       if (subpart == null) {
       }
       let typeObj = [

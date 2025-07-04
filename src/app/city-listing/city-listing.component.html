@@ -11,11 +11,6 @@
         </filter-item>
         <div class="row pad-bot-10 align-items-center">
           <div class="col-lg-12 col-sm-12 col-12">
-            <div class="item-element res-box text-right xs-left" *ngIf="shimming">
-              <div style="float: center">
-                <app-shimmer-loading [borderRadius]="'5px'" [width]="'35%'" [height]="'30px'"></app-shimmer-loading>
-              </div>
-            </div>
             <div class="item-element res-box text-right xs-left" *ngIf="spaces_list.length">
               <p *ngIf="page_start !== page_end">
                 Showing
@@ -58,9 +53,9 @@
                     (mouseover)="onHoverSpace(element.id)" (mouseleave)="onLeaveSpace(element.id)">
                   </app-list-item>
                 </div>
-              </div>
-            </div>
-            <!--pagination starts-->
+           </app-list-item>
+                </div>
+arts-->
             <div class="post-nav nav-res pad-bot-80">
               <div class="row">
                 <div class="col-md-8 offset-md-2 col-xs-12">
