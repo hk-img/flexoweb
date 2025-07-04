@@ -524,12 +524,16 @@ export class FilterItemComponent implements OnInit {
 
   openLocation() {
     this.open_location = this.open_location ? false : true;
-    sessionStorage.setItem('open_location', this.open_location.toString());
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('open_location', this.open_location.toString());
+    }
   }
 
   openSpaceType() {
     this.open_spaceType = this.open_spaceType ? false : true;
-    sessionStorage.setItem('open_spaceType', this.open_spaceType.toString());
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('open_spaceType', this.open_spaceType.toString());
+    }
   }
 
   showHideMap() {
@@ -653,7 +657,9 @@ export class FilterItemComponent implements OnInit {
     } else {
       this.selectedValues = this.selectedValues.filter(val => val !== item.spaceType);
     }
-    sessionStorage.setItem('selectedValues', JSON.stringify(this.selectedValues));
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('selectedValues', JSON.stringify(this.selectedValues));
+    }
     this.cityListing.getSpacesByCity();
     const coWorkingList = this.spaces.find(p => p.spaceType === 'Co-working');
     if (coWorkingList) {
