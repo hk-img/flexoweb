@@ -306,7 +306,7 @@ export class FilterItemComponent implements OnInit {
       return;
     }
     if (spaceType === 'coworking space' && !location_name) {
-      url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
+      url = `in/coworking/${location?.replace(' ', '-')?.toLowerCase()}`;
     } else if (spaceType === 'coworking space' && location_name) {
       url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}/${location_name}`;
     } else if (['shoot studio', 'recording studio', 'podcast studio', 'activity space',
