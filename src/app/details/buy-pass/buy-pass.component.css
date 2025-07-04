@@ -221,3 +221,10 @@
 .mat-chip-list-wrapper {
   height: 50px !important;
 }
+
+.holiday-title {
+  font-size: 12px;
+  color: #f44336; /* Holiday title color */
+  margin-top: 5px;
+  text-align: center;
+}
