@@ -237,17 +237,17 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.loadZohoScript2();
+    // this.loadZohoScript2();
     this.getAllQuestions();
-    // const selectedValues = [
-    //   "Private Office",
-    //   "Managed Office",
-    //   "Dedicated Desk",
-    //   "Flexible Desk",
-    //   "Virtual Office",
-    //   "Day Pass"
-    // ];
-    // sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+    const selectedValues = [
+      "Private Office",
+      "Managed Office",
+      "Dedicated Desk",
+      "Flexible Desk",
+      "Virtual Office",
+      "Day Pass"
+    ];
+    sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
     this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
@@ -373,16 +373,16 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.recommended_spaces = message
       }
     );
-    // if (isPlatformBrowser(this.platformId)) {
-    //   if (localStorage.getItem('userDetails')) {
-    //     this.isCoworking = sessionStorage.getItem('isCoworking')
-    //     const userDetail = localStorage.getItem('userDetails');
-    //     const userDetailObj = JSON.parse(userDetail);
-    //     this.userId = userDetailObj.id
-    //   } else {
-    //     this.userId = 0
-    //   }
-    // }
+    if (isPlatformBrowser(this.platformId)) {
+      if (localStorage.getItem('userDetails')) {
+        this.isCoworking = sessionStorage.getItem('isCoworking')
+        const userDetail = localStorage.getItem('userDetails');
+        const userDetailObj = JSON.parse(userDetail);
+        this.userId = userDetailObj.id
+      } else {
+        this.userId = 0
+      }
+    }
   }
 
 
