@@ -72,8 +72,7 @@
 
     <div class="customer-review d-flex justify-content-between mb-md-2 mb-1 align-items-end">
       <h3 style="font-size: 18px" class="h-cursor m-0 text-truncate">
-        {{ spaceDetails.name
-        }}
+        {{ spaceDetails.name }} {{spaceDetails?.spaceTitle}}
         <span style="
             background: unset;
             float: unset;
@@ -120,8 +119,8 @@
     <div class="d-flex" style="gap:30px;align-items: baseline;">
       <div *ngIf="type === 'shortterm' || type === 'longterm'">
         <span class="accent_back">
-          <app-icon name="scaleRuler" class="w-1 text-orange-400"></app-icon>
-          <span class="price-value text-white ms-10 align-middle">{{spaceDetails?.originalPrice}} </span>
+          <app-icon name="rupee" class="w-2 text-white"></app-icon>
+          <span class="price-value text-white ml-10 align-middle">{{spaceDetails?.originalPrice}} </span>
           <small> / {{type === 'shortterm' ? 'hour' : 'month' }}</small></span>
       </div>
       <div *ngIf="spaceDetails.isInstant && type === 'shortterm'">
@@ -250,6 +249,18 @@
         </div>
       </div>
     </div> -->
+      </div>
+      <div class="row mt-2 align-items-end" *ngIf="type == 'longterm'">
+        <div class="description col-lg-12">
+          <p *ngIf="is_see_more_visible" class="less-content" style="font-size: 14px;color:#141414">
+            {{ spaceDetails?.about }}
+          </p>
+          <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="is_see_more_visible"
+            (click)="toggleSeeMore($event, 0)">See more</a>
+          <p class="overflow_wrap" *ngIf="!is_see_more_visible">{{ spaceDetails?.about }}</p>
+          <a style="font-size: 12px; font-weight: 600; cursor: pointer" *ngIf="!is_see_more_visible"
+            (click)="toggleSeeMore($event, 1)">See less</a>
+        </div>
       </div>
       <!-- <ul class="trending-address">
         <li>
