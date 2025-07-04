@@ -153,14 +153,16 @@ openLoginDialog() {
 }
 
 private initialSubscribers(): void {
-  this.userService.loginUserDetails.subscribe((user: any) => {
-    // this.userDetails = user;
-    this.userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-  });
-  this.userService.isLoggedIn.subscribe((result: any) => {
-    // this.isLoggedIn = result;
-    this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-  });
+  if (isPlatformBrowser(this.platformId)) {
+    this.userService.loginUserDetails.subscribe((user: any) => {
+      // this.userDetails = user;
+      this.userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+    });
+    this.userService.isLoggedIn.subscribe((result: any) => {
+      // this.isLoggedIn = result;
+      this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+    });
+  }
 }
 
 payment() {

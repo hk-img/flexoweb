@@ -119,30 +119,31 @@ export class InquiryComponent {
     if (isPlatformBrowser(this.platformId)) {
       this.isCoworkings = sessionStorage.getItem('isCoworking');
       this.valueForListingPage = localStorage.getItem('staticValue');
+
+
+      const url = window.location.href;  // Get the full URL
+      const segments2 = url.split('/');
+
+      // Find 'in' in the URL and extract the next static segment ('longTerm')
+      // const inIndex = segments2.indexOf('in');
+      // if (inIndex !== -1 && segments2.length > inIndex + 1) {
+      //   this.staticValue = segments2[inIndex + 1];
+      // }
+
+      if (localStorage.getItem('userDetails')) {
+        this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
+        this.formData.firstName = this.userDetail?.firstName;
+        this.formData.lastName = this.userDetail?.lastName;
+        this.formData.userEmail = this.userDetail?.email;
+        this.formData.userMobile = this.userDetail?.mobile?.replace(" ", "");
+        this.formData.phone = this.userDetail?.mobile;
+        this.formData.phone_code = String(`+${this.userDetail?.phone_code}`);
+        this.dialCode = this.userDetail?.phone_code;
+      } else {
+        this.formData.phone_code = '+91'
+      }
+      this.countryCodes = this.service.countryCodes;
     }
-
-    const url = window.location.href;  // Get the full URL
-    const segments2 = url.split('/');
-
-    // Find 'in' in the URL and extract the next static segment ('longTerm')
-    // const inIndex = segments2.indexOf('in');
-    // if (inIndex !== -1 && segments2.length > inIndex + 1) {
-    //   this.staticValue = segments2[inIndex + 1];
-    // }
-
-    if (localStorage.getItem('userDetails')) {
-      this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
-      this.formData.firstName = this.userDetail?.firstName;
-      this.formData.lastName = this.userDetail?.lastName;
-      this.formData.userEmail = this.userDetail?.email;
-      this.formData.userMobile = this.userDetail?.mobile?.replace(" ", "");
-      this.formData.phone = this.userDetail?.mobile;
-      this.formData.phone_code = String(`+${this.userDetail?.phone_code}`);
-      this.dialCode = this.userDetail?.phone_code;
-    } else {
-      this.formData.phone_code = '+91'
-    }
-    this.countryCodes = this.service.countryCodes;
   }
 
   onCountryCodeChange(country: any) {
@@ -187,47 +188,48 @@ export class InquiryComponent {
         this.profileDetailForm.value.type = 'Longterm';
         formData.city = [this.city_name]
       }
-    }
-    if (this.city_name) {
-      formData.city = [this.city_name]
-    }
-    if (this.formData.firstName || this.formData.lastName || this.formData.userEmail) {
-      formData.firstName = this.formData.firstName
-      formData.lastName = this.formData.lastName
-      formData.userEmail = this.formData.userEmail
-    } else {
-      this.profileDetailForm.value.firstName = this.userDetail?.firstName
-      this.profileDetailForm.value.lastName = this.userDetail?.lastName
-      this.profileDetailForm.value.userEmail = this.userDetail?.email
-    }
-    if (this.profileDetailForm.form.status == 'VALID') {
-      if (localStorage.getItem('userDetails')) {
-        this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
-        formData.userId = this.userDetail?.id;
-      } else {
-        formData.userId = 0;
+
+      if (this.city_name) {
+        formData.city = [this.city_name]
+      }
+      if (this.formData.firstName || this.formData.lastName || this.formData.userEmail) {
         formData.firstName = this.formData.firstName
         formData.lastName = this.formData.lastName
         formData.userEmail = this.formData.userEmail
+      } else {
+        this.profileDetailForm.value.firstName = this.userDetail?.firstName
+        this.profileDetailForm.value.lastName = this.userDetail?.lastName
+        this.profileDetailForm.value.userEmail = this.userDetail?.email
       }
-      if (this.space_id) {
-        formData.spaceId = this.space_id;
-      }
-      formData.spaceId = this.data.spaceId
-      this.service.inquiryBooking(formData).subscribe((data: any) => {
-        if (data?.result?.success) {
-          this.popupOpen("inquirenow", `${data?.result?.message}. Our team will get back to you shortly.`);
-          // this.toastr.success(data?.result?.message)
-          this.detailPage.inquiryVisit_dialogRef.close();
+      if (this.profileDetailForm.form.status == 'VALID') {
+        if (localStorage.getItem('userDetails')) {
+          this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
+          formData.userId = this.userDetail?.id;
         } else {
-          this.toastr.error(data?.result?.message)
+          formData.userId = 0;
+          formData.firstName = this.formData.firstName
+          formData.lastName = this.formData.lastName
+          formData.userEmail = this.formData.userEmail
         }
-      }, error => {
-        this.toastr.error(error?.error?.message)
-      })
-    }
-    else {
-      this.profileDetailForm.form.markAllAsTouched();
+        if (this.space_id) {
+          formData.spaceId = this.space_id;
+        }
+        formData.spaceId = this.data.spaceId
+        this.service.inquiryBooking(formData).subscribe((data: any) => {
+          if (data?.result?.success) {
+            this.popupOpen("inquirenow", `${data?.result?.message}. Our team will get back to you shortly.`);
+            // this.toastr.success(data?.result?.message)
+            this.detailPage.inquiryVisit_dialogRef.close();
+          } else {
+            this.toastr.error(data?.result?.message)
+          }
+        }, error => {
+          this.toastr.error(error?.error?.message)
+        })
+      }
+      else {
+        this.profileDetailForm.form.markAllAsTouched();
+      }
     }
   }
 

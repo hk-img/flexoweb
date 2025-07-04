@@ -405,68 +405,72 @@ export class BuyPassComponent {
     $("#updateModal").hide();
   }
   onDateChange(event: any) {
-    this.selectedDate = event.value;
-    this.selectedDay = moment(this.selectedDate).format('dddd');
+    if (isPlatformBrowser(this.platformId)) {
+      this.selectedDate = event.value;
+      this.selectedDay = moment(this.selectedDate).format('dddd');
 
-    if (this.selectedDay === 'Monday') {
-      this.startTime = localStorage.getItem("mondayOpenTime");
-      this.endTime = localStorage.getItem("mondayCloseTime");
-    } else if (this.selectedDay === 'Tuesday') {
-      this.startTime = localStorage.getItem("tuesdayOpenTime");
-      this.endTime = localStorage.getItem("tuesdayCloseTime");
-    } else if (this.selectedDay === 'Wednesday') {
-      this.startTime = localStorage.getItem("wednesdayOpenTime");
-      this.endTime = localStorage.getItem("wednesdayCloseTime");
-    } else if (this.selectedDay === 'Thursday') {
-      this.startTime = localStorage.getItem("thursdayOpenTime");
-      this.endTime = localStorage.getItem("thursdayCloseTime");
-    } else if (this.selectedDay === 'Friday') {
-      this.startTime = localStorage.getItem("fridayOpenTime");
-      this.endTime = localStorage.getItem("fridayCloseTime");
-    } else if (this.selectedDay === 'Saturday') {
-      this.startTime = localStorage.getItem("saturdayOpenTime");
-      this.endTime = localStorage.getItem("saturdayCloseTime");
-    } else if (this.selectedDay === 'Sunday') {
-      this.startTime = localStorage.getItem("sundayOpenTime");
-      this.endTime = localStorage.getItem("sundayCloseTime");
+      if (this.selectedDay === 'Monday') {
+        this.startTime = localStorage.getItem("mondayOpenTime");
+        this.endTime = localStorage.getItem("mondayCloseTime");
+      } else if (this.selectedDay === 'Tuesday') {
+        this.startTime = localStorage.getItem("tuesdayOpenTime");
+        this.endTime = localStorage.getItem("tuesdayCloseTime");
+      } else if (this.selectedDay === 'Wednesday') {
+        this.startTime = localStorage.getItem("wednesdayOpenTime");
+        this.endTime = localStorage.getItem("wednesdayCloseTime");
+      } else if (this.selectedDay === 'Thursday') {
+        this.startTime = localStorage.getItem("thursdayOpenTime");
+        this.endTime = localStorage.getItem("thursdayCloseTime");
+      } else if (this.selectedDay === 'Friday') {
+        this.startTime = localStorage.getItem("fridayOpenTime");
+        this.endTime = localStorage.getItem("fridayCloseTime");
+      } else if (this.selectedDay === 'Saturday') {
+        this.startTime = localStorage.getItem("saturdayOpenTime");
+        this.endTime = localStorage.getItem("saturdayCloseTime");
+      } else if (this.selectedDay === 'Sunday') {
+        this.startTime = localStorage.getItem("sundayOpenTime");
+        this.endTime = localStorage.getItem("sundayCloseTime");
+      }
+      this.filteredStartTimes = this.getFilteredStartTimes();
     }
-    this.filteredStartTimes = this.getFilteredStartTimes();
   }
 
   dateFilter = (d: Date | null): boolean => {
-    const mondayClosed = localStorage.getItem('mondayClosed') === 'true';
-    const tuesdayClosed = localStorage.getItem('tuesdayClosed') === 'true';
-    const wednesdayClosed = localStorage.getItem('wednesdayClosed') === 'true';
-    const thursdayClosed = localStorage.getItem('thursdayClosed') === 'true';
-    const fridayClosed = localStorage.getItem('fridayClosed') === 'true';
-    const saturdayClosed = localStorage.getItem('saturdayClosed') === 'true';
-    const sundayClosed = localStorage.getItem('sundayClosed') === 'true';
+    if (isPlatformBrowser(this.platformId)) {
+      const mondayClosed = localStorage.getItem('mondayClosed') === 'true';
+      const tuesdayClosed = localStorage.getItem('tuesdayClosed') === 'true';
+      const wednesdayClosed = localStorage.getItem('wednesdayClosed') === 'true';
+      const thursdayClosed = localStorage.getItem('thursdayClosed') === 'true';
+      const fridayClosed = localStorage.getItem('fridayClosed') === 'true';
+      const saturdayClosed = localStorage.getItem('saturdayClosed') === 'true';
+      const sundayClosed = localStorage.getItem('sundayClosed') === 'true';
 
-    const holidays = JSON.parse(localStorage.getItem('holidays')) || [];
+      const holidays = JSON.parse(localStorage.getItem('holidays')) || [];
 
-    const holidayClosed = holidays.map((holiday: any) => {
-      const date = new Date(holiday.date);
-      return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
-    });
-    const formattedDate = this.datePipe.transform(d, 'yyyy-MM-dd') || '';
-    const isHoliday = holidayClosed.includes(formattedDate);
+      const holidayClosed = holidays.map((holiday: any) => {
+        const date = new Date(holiday.date);
+        return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+      });
+      const formattedDate = this.datePipe.transform(d, 'yyyy-MM-dd') || '';
+      const isHoliday = holidayClosed.includes(formattedDate);
 
-    const date = d ? new Date(d) : null;
-    if (!date || isNaN(date.getTime())) {
-      return true;
+      const date = d ? new Date(d) : null;
+      if (!date || isNaN(date.getTime())) {
+        return true;
+      }
+
+      const day = date.getDay();
+      return !(
+        (mondayClosed && day === 1) ||
+        (tuesdayClosed && day === 2) ||
+        (wednesdayClosed && day === 3) ||
+        (thursdayClosed && day === 4) ||
+        (fridayClosed && day === 5) ||
+        (saturdayClosed && day === 6) ||
+        (sundayClosed && day === 0) ||
+        isHoliday
+      );
     }
-
-    const day = date.getDay();
-    return !(
-      (mondayClosed && day === 1) ||
-      (tuesdayClosed && day === 2) ||
-      (wednesdayClosed && day === 3) ||
-      (thursdayClosed && day === 4) ||
-      (fridayClosed && day === 5) ||
-      (saturdayClosed && day === 6) ||
-      (sundayClosed && day === 0) ||
-      isHoliday
-    );
   };
   onInput() {
     this.cd.detectChanges();
@@ -539,7 +543,9 @@ export class BuyPassComponent {
 
           this.profileService.updateProfileDetails(this.userDetail?.id, profileData).subscribe((result: any) => {
             if (result.success) {
-              localStorage.setItem('userDetails', JSON.stringify(result?.user))
+              if (isPlatformBrowser(this.platformId)) {
+                localStorage.setItem('userDetails', JSON.stringify(result?.user))
+              }
               this.toastr.success(result.message || 'Profile details updated successfully!');
               $("#updateModal").hide();
             } else {

@@ -209,19 +209,19 @@ export class DetailsComponent implements OnInit {
     infinite: true,
     responsive: [
       {
-        breakpoint: 1200, 
+        breakpoint: 1200,
         settings: {
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 900, 
+        breakpoint: 900,
         settings: {
           slidesToShow: 1,
         },
       },
       {
-        breakpoint: 600, 
+        breakpoint: 600,
         settings: {
           slidesToShow: 1,
           dots: true,
@@ -229,7 +229,7 @@ export class DetailsComponent implements OnInit {
         },
       },
       {
-        breakpoint: 480, 
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           dots: true,
@@ -237,7 +237,7 @@ export class DetailsComponent implements OnInit {
         },
       },
     ],
-    
+
   };
 
   public similarRatingReviewConfig = {
@@ -388,7 +388,7 @@ export class DetailsComponent implements OnInit {
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
         this.space_id = this.spaceName?.match(/(\d+)$/)?.[0];
         this.getShortDetails(this.space_id)
-      }else if(this.spaceType == 'coworking café restaurant'){
+      } else if (this.spaceType == 'coworking café restaurant') {
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
         this.space_id = params.spaceName?.match(/\d+$/)?.[0];
         this.getShortDetails(this.space_id)
@@ -418,7 +418,7 @@ export class DetailsComponent implements OnInit {
 
   formatUrl(value: string): string {
     return value ? value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-') : '';
-  }  
+  }
   updateJsonLd(
     spaceType: string,
     imageUrl: string,
@@ -435,12 +435,12 @@ export class DetailsComponent implements OnInit {
       }
     }
 
-    if(priceMax === "none"){
+    if (priceMax === "none") {
       var offer = "Offer"
-    }else{
+    } else {
       var offer = "AggregateOffer"
     }
-  
+
     const jsonLd: any = {
       "@context": "https://schema.org/",
       "@type": "Product",
@@ -459,7 +459,7 @@ export class DetailsComponent implements OnInit {
         "itemCondition": "https://schema.org/NewCondition"
       }
     };
-  
+
     // Handle priceMin and priceMax
     if (priceMax === "none") {
       jsonLd.offers.price = priceMin;
@@ -467,20 +467,20 @@ export class DetailsComponent implements OnInit {
       jsonLd.offers.lowPrice = priceMin;
       jsonLd.offers.highPrice = priceMax;
     }
-  
+
     if (isPlatformBrowser(this.platformId)) {
       const jsonLdScript = document.createElement('script');
       jsonLdScript.id = jsonLdId;
       jsonLdScript.type = 'application/ld+json';
       jsonLdScript.text = JSON.stringify(jsonLd);
-  
+
       document.head.appendChild(jsonLdScript);
     }
   }
-  
 
 
-  onImageError(event: Event, imageAlt:string) {
+
+  onImageError(event: Event, imageAlt: string) {
     const target = event.target as HTMLImageElement;
     target.src = 'assets/images/details_placeholder_image.jpg';
     target.alt = `${imageAlt} details_placeholder_image.jpg`;
@@ -639,12 +639,12 @@ export class DetailsComponent implements OnInit {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-  
+
         this.toastr.success('Link copied to clipboard', 'Success');
       }
     }
   }
-  
+
 
   updateShortList() {
     if (isPlatformBrowser(this.platformId)) {
@@ -793,321 +793,326 @@ export class DetailsComponent implements OnInit {
   }
 
   getSpaceDetails(country: any, city: any, spaceType: any, spaceId: any) {
-    this.spaceService
-      .getSpaceDetails(country, city, spaceType, spaceId)
-      .then((res) => {
-        console.log(res);
-        if (!res.success) {
-          this.router.navigate(['/error']);
-        }
-        const data = res.data
-        const actual_name = data.actual_name?.toLowerCase()
-        const buildingName = data.buildingName?.toLowerCase()
-        const location_name = data.location_name?.toLowerCase()
-        const spaceType = data.spaceType?.toLowerCase()
-        if (
-          spaceType === 'coworking space' ||
-          spaceType === 'coworking cafe/restaurant' ||
-          spaceType === 'shoot studio' ||
-          spaceType === 'recording studio' ||
-          spaceType === 'podcast studio' ||
-          spaceType === 'activity space' ||
-          spaceType === 'sports turf' ||
-          spaceType === 'sports venue' ||
-          spaceType === 'party space' ||
-          spaceType === 'banquet hall' ||
-          spaceType === 'gallery' ||
-          spaceType === 'classroom' ||
-          spaceType === 'private cabin' ||
-          spaceType === 'meeting room' ||
-          spaceType === 'training room' ||
-          spaceType === 'event space'
-        ) {
-          data.imageAlt = `${actual_name} ${location_name} ${spaceType}`
-          for (let i = 0; i < data.similar_spaces.length; i++) {
-            data.similar_spaces[i].imageAlter = `${actual_name} ${location_name} ${spaceType}`;
+    if (isPlatformBrowser(this.platformId)) {
+      this.spaceService
+        .getSpaceDetails(country, city, spaceType, spaceId)
+        .then((res) => {
+          console.log(res);
+          if (!res.success) {
+            this.router.navigate(['/error']);
           }
-        } else {
-          data.imageAlt = `${buildingName} ${location_name} ${spaceType}`
-          for (let i = 0; i < data.similar_spaces.length; i++) {
-          data.similar_spaces[i].imageAlter = `${buildingName} ${location_name} ${spaceType}`
-          }
-        }
-        this.space_details = Object.assign({}, data);
-        const type = this.getType(spaceType)
-        const spaceStatus = this.space_details?.spaceStatus === "Furnished" ? "furnished" : "unfurnished"
-        const cityName = this.space_details?.contact_city_name;
-        this.city_param = this.space_details?.contact_city_name;
-        const min = this.space_details?.originalPrice
-        const imageUrl = this.space_details?.images.length ? this.space_details.images[0] : ''
-        if (type === 'coworking') {
-          const minPrice = this.space_details.flexible_desk_price
-          const maxPrice = this.space_details.privatecabin_price;
-          this.updateJsonLd(spaceType, imageUrl, `Book your workspace at ${actual_name}, a fully furnished coworking space in ${location_name}, ${cityName}. With flexible membership plans, premium facilities, and a collaborative environment, it's the perfect place for freelancers, startups, and teams.`, minPrice, maxPrice, location_name)
-        } else if (type === 'shortterm') {
-          this.updateJsonLd(spaceType, imageUrl, `Reserve this ${spaceType} at, located in ${location_name}, ${cityName}. Available by the hour, this space offers top-notch amenities, flexible bookings, and a professional setup perfect for your next project, event or activity.`, min, "none", location_name)
-        } else {
-          this.updateJsonLd(spaceType, imageUrl, `Rent your ${spaceType}, at ${location_name}, ${cityName}. This ${spaceStatus} office is listed at Rs. ${min}/month. Get in touch with Flexo now to schedule your visit`, min, "none", location_name)
-        }
-
-        this.ribbon = this.space_details.ribbon;
-        this.ribbon_color = this.space_details.ribbon_color;
-
-        this.marker = {
-          position: {
-            lat: this.space_details.latitude,
-            lng: this.space_details.longitude,
-          },
-          title: this.space_details.name,
-          options: { draggable: false, icon: 'assets/images/marker1.svg' },
-          url: `https://www.google.com/maps/search/?api=1&query=${this.space_details.latitude},${this.space_details.longitude}`,
-        };
-
-        this.parkingOptionsValue = this.space_details?.parkingOptionsValue;
-
-        this.isShortterm = this.space_details.isShortterm;
-        if (isPlatformBrowser(this.platformId)) {
-        sessionStorage.setItem('isShortterm', JSON.stringify(this.isShortterm));
-        }
-
-        this.isCoworking = this.space_details.isCoworking;
-        if (isPlatformBrowser(this.platformId)) {
-        sessionStorage.setItem('isCoworking', JSON.stringify(this.isCoworking));
-        }
-
-        this.isLongterm = this.space_details.isLongterm;
-        if (isPlatformBrowser(this.platformId)) {
-        sessionStorage.setItem('isLongterm', JSON.stringify(this.isLongterm));
-        }
-
-        this.is_shortlisted = res?.existingfavorite?.favourite ?? false;
-
-        this.workingTimeValue = this.space_details?.working_time;
-
-        localStorage.setItem("spaceDetail", JSON.stringify(this.space_details));
-
-        this.serviceArray = this.space_details?.spaceServiceDetailsArray;
-        this.ratingReviewBySpaceId();
-
-        this.existingUpVote = res?.existingVote?.upvote ?? {};
-        this.existingDownVote = res?.existingVote?.downvote ?? {};
-        this.userGivenReview = res?.existingReview ? true : false;
-
-        if (this.space_details?.youtube_url) {
-          (this.space_details.youtube_url =
-            this.sanitizer.bypassSecurityTrustResourceUrl(
-              this.space_details?.youtube_url
-            ))
-        }
-
-        if(res.hostHolidays){
-          localStorage.setItem("holidays", JSON.stringify(res.hostHolidays));
-        }
-
-        if (this.workingTimeValue) {
-          this.workingTime = this.workingTimeValue;
-
-          if (this.workingTime[0]?.openingTime && this.workingTime[0]?.closingTime) {
-            this.mon_opening_time = this.convert24to12(this.workingTime[0].openingTime);
-            this.mon_closing_time = this.convert24to12(this.workingTime[0].closingTime);
-          }
-
-          if (this.workingTime[1]?.openingTime && this.workingTime[1]?.closingTime) {
-            this.tue_opening_time = this.convert24to12(this.workingTime[1].openingTime);
-            this.tue_closing_time = this.convert24to12(this.workingTime[1].closingTime);
-          }
-
-          if (this.workingTime[2]?.openingTime && this.workingTime[2]?.closingTime) {
-            this.wed_opening_time = this.convert24to12(this.workingTime[2].openingTime);
-            this.wed_closing_time = this.convert24to12(this.workingTime[2].closingTime);
-          }
-
-          if (this.workingTime[3]?.openingTime && this.workingTime[3]?.closingTime) {
-            this.thu_opening_time = this.convert24to12(this.workingTime[3].openingTime);
-            this.thu_closing_time = this.convert24to12(this.workingTime[3].closingTime);
-          }
-
-          if (this.workingTime[4]?.openingTime && this.workingTime[4]?.closingTime) {
-            this.fri_opening_time = this.convert24to12(this.workingTime[4].openingTime);
-            this.fri_closing_time = this.convert24to12(this.workingTime[4].closingTime);
-          }
-
-          if (this.workingTime[5]?.openingTime && this.workingTime[5]?.closingTime) {
-            this.sat_opening_time = this.convert24to12(this.workingTime[5].openingTime);
-            this.sat_closing_time = this.convert24to12(this.workingTime[5].closingTime);
-          }
-
-          if (this.workingTime[6]?.openingTime && this.workingTime[6]?.closingTime) {
-            this.sun_opening_time = this.convert24to12(this.workingTime[6].openingTime);
-            this.sun_closing_time = this.convert24to12(this.workingTime[6].closingTime);
-          }
-
-          if (this.workingTime[0]?.day == "Monday") {
-            var mondayClosed = this.workingTime[0]?.isClosed;
-            localStorage.setItem("mondayClosed", mondayClosed);
-
-            if (!mondayClosed || mondayClosed) {
-              var mondayOpenTime = this.workingTime[0]?.openingTime;
-              var mondayCloseTime = this.workingTime[0]?.closingTime;
-              localStorage.setItem("mondayOpenTime", mondayOpenTime);
-              localStorage.setItem("mondayCloseTime", mondayCloseTime);
+          const data = res.data
+          const actual_name = data.actual_name?.toLowerCase()
+          const buildingName = data.buildingName?.toLowerCase()
+          const location_name = data.location_name?.toLowerCase()
+          const spaceType = data.spaceType?.toLowerCase()
+          if (
+            spaceType === 'coworking space' ||
+            spaceType === 'coworking cafe/restaurant' ||
+            spaceType === 'shoot studio' ||
+            spaceType === 'recording studio' ||
+            spaceType === 'podcast studio' ||
+            spaceType === 'activity space' ||
+            spaceType === 'sports turf' ||
+            spaceType === 'sports venue' ||
+            spaceType === 'party space' ||
+            spaceType === 'banquet hall' ||
+            spaceType === 'gallery' ||
+            spaceType === 'classroom' ||
+            spaceType === 'private cabin' ||
+            spaceType === 'meeting room' ||
+            spaceType === 'training room' ||
+            spaceType === 'event space'
+          ) {
+            data.imageAlt = `${actual_name} ${location_name} ${spaceType}`
+            for (let i = 0; i < data.similar_spaces.length; i++) {
+              data.similar_spaces[i].imageAlter = `${actual_name} ${location_name} ${spaceType}`;
+            }
+          } else {
+            data.imageAlt = `${buildingName} ${location_name} ${spaceType}`
+            for (let i = 0; i < data.similar_spaces.length; i++) {
+              data.similar_spaces[i].imageAlter = `${buildingName} ${location_name} ${spaceType}`
             }
           }
-
-          if (this.workingTime[1]?.day == "Tuesday") {
-            var tuesdayClosed = this.workingTime[1]?.isClosed;
-            localStorage.setItem("tuesdayClosed", tuesdayClosed);
-
-            if (!tuesdayClosed || tuesdayClosed) {
-              var tuesdayOpenTime = this.workingTime[1]?.openingTime;
-              var tuesdayCloseTime = this.workingTime[1]?.closingTime;
-              localStorage.setItem("tuesdayOpenTime", tuesdayOpenTime);
-              localStorage.setItem("tuesdayCloseTime", tuesdayCloseTime);
-            }
+          this.space_details = Object.assign({}, data);
+          const type = this.getType(spaceType)
+          const spaceStatus = this.space_details?.spaceStatus === "Furnished" ? "furnished" : "unfurnished"
+          const cityName = this.space_details?.contact_city_name;
+          this.city_param = this.space_details?.contact_city_name;
+          const min = this.space_details?.originalPrice
+          const imageUrl = this.space_details?.images.length ? this.space_details.images[0] : ''
+          if (type === 'coworking') {
+            const minPrice = this.space_details.flexible_desk_price
+            const maxPrice = this.space_details.privatecabin_price;
+            this.updateJsonLd(spaceType, imageUrl, `Book your workspace at ${actual_name}, a fully furnished coworking space in ${location_name}, ${cityName}. With flexible membership plans, premium facilities, and a collaborative environment, it's the perfect place for freelancers, startups, and teams.`, minPrice, maxPrice, location_name)
+          } else if (type === 'shortterm') {
+            this.updateJsonLd(spaceType, imageUrl, `Reserve this ${spaceType} at, located in ${location_name}, ${cityName}. Available by the hour, this space offers top-notch amenities, flexible bookings, and a professional setup perfect for your next project, event or activity.`, min, "none", location_name)
+          } else {
+            this.updateJsonLd(spaceType, imageUrl, `Rent your ${spaceType}, at ${location_name}, ${cityName}. This ${spaceStatus} office is listed at Rs. ${min}/month. Get in touch with Flexo now to schedule your visit`, min, "none", location_name)
           }
 
-          if (this.workingTime[2]?.day == "Wednesday") {
-            var wednesdayClosed = this.workingTime[2]?.isClosed;
-            localStorage.setItem("wednesdayClosed", wednesdayClosed);
+          this.ribbon = this.space_details.ribbon;
+          this.ribbon_color = this.space_details.ribbon_color;
 
-            if (!wednesdayClosed || wednesdayClosed) {
-              var wednesdayOpenTime = this.workingTime[2]?.openingTime;
-              var wednesdayCloseTime = this.workingTime[2]?.closingTime;
-              localStorage.setItem("wednesdayOpenTime", wednesdayOpenTime);
-              localStorage.setItem("wednesdayCloseTime", wednesdayCloseTime);
-            }
-          }
-
-          if (this.workingTime[3]?.day == "Thursday") {
-            var thursdayClosed = this.workingTime[3]?.isClosed;
-            localStorage.setItem("thursdayClosed", thursdayClosed);
-
-            if (!thursdayClosed || thursdayClosed) {
-              var thursdayOpenTime = this.workingTime[3]?.openingTime;
-              var thursdayCloseTime = this.workingTime[3]?.closingTime;
-              localStorage.setItem("thursdayOpenTime", thursdayOpenTime);
-              localStorage.setItem("thursdayCloseTime", thursdayCloseTime);
-            }
-
-          }
-
-          if (this.workingTime[4]?.day == "Friday") {
-            var fridayClosed = this.workingTime[4]?.isClosed;
-            localStorage.setItem("fridayClosed", fridayClosed);
-
-            if (fridayClosed || !fridayClosed) {
-              var fridayOpenTime = this.workingTime[4]?.openingTime;
-              var fridayCloseTime = this.workingTime[4]?.closingTime;
-              localStorage.setItem("fridayOpenTime", fridayOpenTime);
-              localStorage.setItem("fridayCloseTime", fridayCloseTime);
-            }
-          }
-
-          if (this.workingTime[5]?.day == "Saturday") {
-            var saturdayClosed = this.workingTime[5]?.isClosed;
-            localStorage.setItem("saturdayClosed", saturdayClosed);
-
-            if (!saturdayClosed || saturdayClosed) {
-              var saturdayOpenTime = this.workingTime[5]?.openingTime;
-              var saturdayCloseTime = this.workingTime[5]?.closingTime;
-              localStorage.setItem("saturdayOpenTime", saturdayOpenTime);
-              localStorage.setItem("saturdayCloseTime", saturdayCloseTime);
-            }
-          }
-
-          if (this.workingTime[6]?.day == "Sunday") {
-            var sundayClosed = this.workingTime[6]?.isClosed;
-            localStorage.setItem("sundayClosed", sundayClosed);
-
-            if (!sundayClosed || sundayClosed) {
-              var sundayOpenTime = this.workingTime[6]?.openingTime;
-              var sundayCloseTime = this.workingTime[6]?.closingTime;
-              localStorage.setItem("sundayOpenTime", sundayOpenTime);
-              localStorage.setItem("sundayCloseTime", sundayCloseTime);
-            }
-          }
-        }
-
-        //   make link
-        var name = this.space_details.actual_name.replace(/ /g, '-');
-        var location = this.space_details.location_name.replace(/ /g, '-');
-        var link =
-          'https://www.flexospaces.com/coworking-space/' +
-          name +
-          '-' +
-          location +
-          '-' +
-          this.space_details.id;
-        // this.viewMoreRatingReview = `coworking-space/view-more-review/${name.toLowerCase()}-${location.toLowerCase()}-${this.space_details.id}`;
-        this.viewMoreRatingReview = `/view-more-review`;
-        this.schema = {
-          '@context': 'http://schema.org',
-          '@type': 'CoWorking Spaces',
-          name: `${this.space_details.actual_name +
-            ' ' +
-            this.space_details.location_name
-            }`,
-          telephone: `Call +91 95133 92400`,
-          url: `${link}`,
-          // image: `${this.aws_base_url +
-          //   this.space_details?.id +
-          //   '/' +
-          //   this.space_details?.images[0]
-          //   }`,
-          address: {
-            '@type': 'Address',
-            location: `${this.space_details.location_name}`,
-          },
-          openingHoursSpecification: {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: {
-              '@type': 'DayOfWeek',
-              name: `${this.space_details.days_open_string}`,
+          this.marker = {
+            position: {
+              lat: this.space_details.latitude,
+              lng: this.space_details.longitude,
             },
-            opens: {
-              'Mon - Fri': `${this.space_details.mon_friday_opening_time}`,
-              Sat: `${this.space_details.saturday_opening_time}`,
-            },
-            close: {
-              'Mon - Fri': `${this.space_details.mon_friday_closing_time}`,
-              Sat: `${this.space_details.saturday_closing_time}`,
-            },
-          },
-          offers: {
-            '@type': 'AggregateOffer',
-            price: `Rs. ${this.space_details.privatecabin_price}`,
-          },
-        };
+            title: this.space_details.name,
+            options: { draggable: false, icon: 'assets/images/marker1.svg' },
+            url: `https://www.google.com/maps/search/?api=1&query=${this.space_details.latitude},${this.space_details.longitude}`,
+          };
 
-        this.space_details.name = `${this.space_details.actual_name} ${this.space_details.location_name}`;
-        if (this.space_details.facilities.length > 3) {
-          this.show_less_facilities = this.space_details.facilities.slice(0, 3);
-        }
-        this.space_details.similar_spaces.forEach((element) => {
-          element.rating_array = [];
-          element.empty_star_array = [];
-          element.rating_floor = Math.floor(element.rating);
-          element.empty_rating_stars = 5 - element.rating;
-          for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
-            element.empty_star_array.push(k);
-          }
-          for (let r = 0; r < Math.floor(element.rating); r++) {
-            element.rating_array.push(r);
-          }
-        });
-        this.rating_floor = Math.floor(this.space_details.rating);
-        this.empty_rating_stars = 5 - this.space_details.rating;
-        for (let k = 0; k < Math.floor(this.empty_rating_stars); k++) {
-          this.empty_star_array.push(k);
-        }
-        /* for (let r = 0; r < Math.floor(this.space_details.rating); r++) {
-          this.rating_array.push(r);
-        } */
-        // this.is_shortlisted =
-        //   this.shortlists.indexOf(this.space_details.id) > -1 ? true : false;
+          this.parkingOptionsValue = this.space_details?.parkingOptionsValue;
 
-      })
-      .catch((error) => { });
+          this.isShortterm = this.space_details.isShortterm;
+          if (isPlatformBrowser(this.platformId)) {
+            sessionStorage.setItem('isShortterm', JSON.stringify(this.isShortterm));
+          }
+
+          this.isCoworking = this.space_details.isCoworking;
+          if (isPlatformBrowser(this.platformId)) {
+            sessionStorage.setItem('isCoworking', JSON.stringify(this.isCoworking));
+          }
+
+          this.isLongterm = this.space_details.isLongterm;
+          if (isPlatformBrowser(this.platformId)) {
+            sessionStorage.setItem('isLongterm', JSON.stringify(this.isLongterm));
+          }
+
+          this.is_shortlisted = res?.existingfavorite?.favourite ?? false;
+
+          this.workingTimeValue = this.space_details?.working_time;
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem("spaceDetail", JSON.stringify(this.space_details));
+          }
+
+          this.serviceArray = this.space_details?.spaceServiceDetailsArray;
+          this.ratingReviewBySpaceId();
+
+          this.existingUpVote = res?.existingVote?.upvote ?? {};
+          this.existingDownVote = res?.existingVote?.downvote ?? {};
+          this.userGivenReview = res?.existingReview ? true : false;
+
+          if (this.space_details?.youtube_url) {
+            (this.space_details.youtube_url =
+              this.sanitizer.bypassSecurityTrustResourceUrl(
+                this.space_details?.youtube_url
+              ))
+          }
+
+          if (isPlatformBrowser(this.platformId)) {
+            if (res.hostHolidays) {
+              localStorage.setItem("holidays", JSON.stringify(res.hostHolidays));
+            }
+          }
+
+          if (this.workingTimeValue) {
+            this.workingTime = this.workingTimeValue;
+
+            if (this.workingTime[0]?.openingTime && this.workingTime[0]?.closingTime) {
+              this.mon_opening_time = this.convert24to12(this.workingTime[0].openingTime);
+              this.mon_closing_time = this.convert24to12(this.workingTime[0].closingTime);
+            }
+
+            if (this.workingTime[1]?.openingTime && this.workingTime[1]?.closingTime) {
+              this.tue_opening_time = this.convert24to12(this.workingTime[1].openingTime);
+              this.tue_closing_time = this.convert24to12(this.workingTime[1].closingTime);
+            }
+
+            if (this.workingTime[2]?.openingTime && this.workingTime[2]?.closingTime) {
+              this.wed_opening_time = this.convert24to12(this.workingTime[2].openingTime);
+              this.wed_closing_time = this.convert24to12(this.workingTime[2].closingTime);
+            }
+
+            if (this.workingTime[3]?.openingTime && this.workingTime[3]?.closingTime) {
+              this.thu_opening_time = this.convert24to12(this.workingTime[3].openingTime);
+              this.thu_closing_time = this.convert24to12(this.workingTime[3].closingTime);
+            }
+
+            if (this.workingTime[4]?.openingTime && this.workingTime[4]?.closingTime) {
+              this.fri_opening_time = this.convert24to12(this.workingTime[4].openingTime);
+              this.fri_closing_time = this.convert24to12(this.workingTime[4].closingTime);
+            }
+
+            if (this.workingTime[5]?.openingTime && this.workingTime[5]?.closingTime) {
+              this.sat_opening_time = this.convert24to12(this.workingTime[5].openingTime);
+              this.sat_closing_time = this.convert24to12(this.workingTime[5].closingTime);
+            }
+
+            if (this.workingTime[6]?.openingTime && this.workingTime[6]?.closingTime) {
+              this.sun_opening_time = this.convert24to12(this.workingTime[6].openingTime);
+              this.sun_closing_time = this.convert24to12(this.workingTime[6].closingTime);
+            }
+
+            if (this.workingTime[0]?.day == "Monday") {
+              var mondayClosed = this.workingTime[0]?.isClosed;
+              localStorage.setItem("mondayClosed", mondayClosed);
+
+              if (!mondayClosed || mondayClosed) {
+                var mondayOpenTime = this.workingTime[0]?.openingTime;
+                var mondayCloseTime = this.workingTime[0]?.closingTime;
+                localStorage.setItem("mondayOpenTime", mondayOpenTime);
+                localStorage.setItem("mondayCloseTime", mondayCloseTime);
+              }
+            }
+
+            if (this.workingTime[1]?.day == "Tuesday") {
+              var tuesdayClosed = this.workingTime[1]?.isClosed;
+              localStorage.setItem("tuesdayClosed", tuesdayClosed);
+
+              if (!tuesdayClosed || tuesdayClosed) {
+                var tuesdayOpenTime = this.workingTime[1]?.openingTime;
+                var tuesdayCloseTime = this.workingTime[1]?.closingTime;
+                localStorage.setItem("tuesdayOpenTime", tuesdayOpenTime);
+                localStorage.setItem("tuesdayCloseTime", tuesdayCloseTime);
+              }
+            }
+
+            if (this.workingTime[2]?.day == "Wednesday") {
+              var wednesdayClosed = this.workingTime[2]?.isClosed;
+              localStorage.setItem("wednesdayClosed", wednesdayClosed);
+
+              if (!wednesdayClosed || wednesdayClosed) {
+                var wednesdayOpenTime = this.workingTime[2]?.openingTime;
+                var wednesdayCloseTime = this.workingTime[2]?.closingTime;
+                localStorage.setItem("wednesdayOpenTime", wednesdayOpenTime);
+                localStorage.setItem("wednesdayCloseTime", wednesdayCloseTime);
+              }
+            }
+
+            if (this.workingTime[3]?.day == "Thursday") {
+              var thursdayClosed = this.workingTime[3]?.isClosed;
+              localStorage.setItem("thursdayClosed", thursdayClosed);
+
+              if (!thursdayClosed || thursdayClosed) {
+                var thursdayOpenTime = this.workingTime[3]?.openingTime;
+                var thursdayCloseTime = this.workingTime[3]?.closingTime;
+                localStorage.setItem("thursdayOpenTime", thursdayOpenTime);
+                localStorage.setItem("thursdayCloseTime", thursdayCloseTime);
+              }
+
+            }
+
+            if (this.workingTime[4]?.day == "Friday") {
+              var fridayClosed = this.workingTime[4]?.isClosed;
+              localStorage.setItem("fridayClosed", fridayClosed);
+
+              if (fridayClosed || !fridayClosed) {
+                var fridayOpenTime = this.workingTime[4]?.openingTime;
+                var fridayCloseTime = this.workingTime[4]?.closingTime;
+                localStorage.setItem("fridayOpenTime", fridayOpenTime);
+                localStorage.setItem("fridayCloseTime", fridayCloseTime);
+              }
+            }
+
+            if (this.workingTime[5]?.day == "Saturday") {
+              var saturdayClosed = this.workingTime[5]?.isClosed;
+              localStorage.setItem("saturdayClosed", saturdayClosed);
+
+              if (!saturdayClosed || saturdayClosed) {
+                var saturdayOpenTime = this.workingTime[5]?.openingTime;
+                var saturdayCloseTime = this.workingTime[5]?.closingTime;
+                localStorage.setItem("saturdayOpenTime", saturdayOpenTime);
+                localStorage.setItem("saturdayCloseTime", saturdayCloseTime);
+              }
+            }
+
+            if (this.workingTime[6]?.day == "Sunday") {
+              var sundayClosed = this.workingTime[6]?.isClosed;
+              localStorage.setItem("sundayClosed", sundayClosed);
+
+              if (!sundayClosed || sundayClosed) {
+                var sundayOpenTime = this.workingTime[6]?.openingTime;
+                var sundayCloseTime = this.workingTime[6]?.closingTime;
+                localStorage.setItem("sundayOpenTime", sundayOpenTime);
+                localStorage.setItem("sundayCloseTime", sundayCloseTime);
+              }
+            }
+          }
+
+          //   make link
+          var name = this.space_details.actual_name.replace(/ /g, '-');
+          var location = this.space_details.location_name.replace(/ /g, '-');
+          var link =
+            'https://www.flexospaces.com/coworking-space/' +
+            name +
+            '-' +
+            location +
+            '-' +
+            this.space_details.id;
+          // this.viewMoreRatingReview = `coworking-space/view-more-review/${name.toLowerCase()}-${location.toLowerCase()}-${this.space_details.id}`;
+          this.viewMoreRatingReview = `/view-more-review`;
+          this.schema = {
+            '@context': 'http://schema.org',
+            '@type': 'CoWorking Spaces',
+            name: `${this.space_details.actual_name +
+              ' ' +
+              this.space_details.location_name
+              }`,
+            telephone: `Call +91 95133 92400`,
+            url: `${link}`,
+            // image: `${this.aws_base_url +
+            //   this.space_details?.id +
+            //   '/' +
+            //   this.space_details?.images[0]
+            //   }`,
+            address: {
+              '@type': 'Address',
+              location: `${this.space_details.location_name}`,
+            },
+            openingHoursSpecification: {
+              '@type': 'OpeningHoursSpecification',
+              dayOfWeek: {
+                '@type': 'DayOfWeek',
+                name: `${this.space_details.days_open_string}`,
+              },
+              opens: {
+                'Mon - Fri': `${this.space_details.mon_friday_opening_time}`,
+                Sat: `${this.space_details.saturday_opening_time}`,
+              },
+              close: {
+                'Mon - Fri': `${this.space_details.mon_friday_closing_time}`,
+                Sat: `${this.space_details.saturday_closing_time}`,
+              },
+            },
+            offers: {
+              '@type': 'AggregateOffer',
+              price: `Rs. ${this.space_details.privatecabin_price}`,
+            },
+          };
+
+          this.space_details.name = `${this.space_details.actual_name} ${this.space_details.location_name}`;
+          if (this.space_details.facilities.length > 3) {
+            this.show_less_facilities = this.space_details.facilities.slice(0, 3);
+          }
+          this.space_details.similar_spaces.forEach((element) => {
+            element.rating_array = [];
+            element.empty_star_array = [];
+            element.rating_floor = Math.floor(element.rating);
+            element.empty_rating_stars = 5 - element.rating;
+            for (let k = 0; k < Math.floor(element.empty_rating_stars); k++) {
+              element.empty_star_array.push(k);
+            }
+            for (let r = 0; r < Math.floor(element.rating); r++) {
+              element.rating_array.push(r);
+            }
+          });
+          this.rating_floor = Math.floor(this.space_details.rating);
+          this.empty_rating_stars = 5 - this.space_details.rating;
+          for (let k = 0; k < Math.floor(this.empty_rating_stars); k++) {
+            this.empty_star_array.push(k);
+          }
+          /* for (let r = 0; r < Math.floor(this.space_details.rating); r++) {
+            this.rating_array.push(r);
+          } */
+          // this.is_shortlisted =
+          //   this.shortlists.indexOf(this.space_details.id) > -1 ? true : false;
+
+        })
+        .catch((error) => { });
+    }
   }
 
   get parkingOptionsString(): string {
@@ -1136,92 +1141,94 @@ export class DetailsComponent implements OnInit {
 
   ratingOffset = 0;
   ratingReviewBySpaceId() {
-    let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    this.spaceService
-      .getSpaceRatingReviewDetails(this.space_id)
-      .subscribe((result: any) => {
-        this.spaceRatingReviewList = [];
-        if (result.data.success) {
-          let reviewsData = result.data.reviews ? result.data.reviews : [];
+    if (isPlatformBrowser(this.platformId)) {
+      let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+      this.spaceService
+        .getSpaceRatingReviewDetails(this.space_id)
+        .subscribe((result: any) => {
+          this.spaceRatingReviewList = [];
+          if (result.data.success) {
+            let reviewsData = result.data.reviews ? result.data.reviews : [];
 
-          // Sorting the array based on user ID
-          if (userDetails != null && userDetails.id) {
-            reviewsData.sort((a, b) => {
-              if (a.userId === userDetails.id && b.userId !== userDetails.id) {
-                return -1; // Move objects with user ID 10 to the beginning
-              } else if (a.userId !== userDetails.id && b.userId === userDetails.id) {
-                return 1; // Move objects with user ID 10 to the end
-              } else {
-                return 0; // Maintain order for other objects
-              }
-            });
+            // Sorting the array based on user ID
+            if (userDetails != null && userDetails.id) {
+              reviewsData.sort((a, b) => {
+                if (a.userId === userDetails.id && b.userId !== userDetails.id) {
+                  return -1; // Move objects with user ID 10 to the beginning
+                } else if (a.userId !== userDetails.id && b.userId === userDetails.id) {
+                  return 1; // Move objects with user ID 10 to the end
+                } else {
+                  return 0; // Maintain order for other objects
+                }
+              });
+            }
+
+            this.reviews = reviewsData;
+
+            this.spaceRatingReviewList = this.reviews.slice(this.ratingOffset, 5);
+            this.ratingOffset += 5;
+            // let countFiveStar = 0;
+            // let countFourStar = 0;
+            // let countThreeStar = 0;
+            // let countTwoStar = 0;
+            // let countOneStar = 0;
+            // let loginUserRatingArr = [];
+            // let spaceRatingReviewsLength = 5;
+            // Start Sorting array based on review date
+            // reviews = reviews.sort(
+            //   (a, b) =>
+            //     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            // );
+            // End Sorting array based on review date
+            // for (let i = 0; i < reviews.length; i++) {
+            //   reviews[i].currentUser = false;
+            //   if (userDetails != null && userDetails.id == reviews[i].userId) {
+            //     this.userSpaceRating = {
+            //       ratingId: reviews[i].ratingId ? reviews[i].ratingId : null,
+            //       spaceId: reviews[i].spaceId,
+            //       rating: reviews[i].rating,
+            //       review: reviews[i].Review,
+            //     };
+            //     spaceRatingReviewsLength = spaceRatingReviewsLength - 1;
+            //     reviews[i].currentUser = true;
+            //     loginUserRatingArr.push(reviews[i]);
+            //   }
+
+            //   if (reviews[i].rating > 4 && reviews[i].rating <= 5) {
+            //     countFiveStar = countFiveStar + 1;
+            //   } else if (reviews[i].rating > 3 && reviews[i].rating <= 4) {
+            //     countFourStar = countFourStar + 1;
+            //   } else if (reviews[i].rating > 2 && reviews[i].rating <= 3) {
+            //     countThreeStar = countThreeStar + 1;
+            //   } else if (reviews[i].rating > 1 && reviews[i].rating <= 2) {
+            //     countTwoStar = countTwoStar + 1;
+            //   } else {
+            //     countOneStar = countOneStar + 1;
+            //   }
+            //   if (this.spaceRatingReviewList.length < spaceRatingReviewsLength) {
+            //     if (userDetails != null && userDetails.id == reviews[i].userId) {
+            //     } else {
+            //       this.spaceRatingReviewList.push(reviews[i]);
+            //     }
+            //   }
+            // }
+
+            // if (loginUserRatingArr.length > 0) {
+            //   let newSpaceRatingReviewList = loginUserRatingArr.concat(
+            //     this.spaceRatingReviewList
+            //   );
+            //   this.spaceRatingReviewList = newSpaceRatingReviewList;
+            // }
+            // if (this.ratingBreakDown.length > 0) {
+            //   this.ratingBreakDown[0].value = countFiveStar;
+            //   this.ratingBreakDown[1].value = countFourStar;
+            //   this.ratingBreakDown[2].value = countThreeStar;
+            //   this.ratingBreakDown[3].value = countTwoStar;
+            //   this.ratingBreakDown[4].value = countOneStar;
+            // }
           }
-
-          this.reviews = reviewsData;
-
-          this.spaceRatingReviewList = this.reviews.slice(this.ratingOffset, 5);
-          this.ratingOffset += 5;
-          // let countFiveStar = 0;
-          // let countFourStar = 0;
-          // let countThreeStar = 0;
-          // let countTwoStar = 0;
-          // let countOneStar = 0;
-          // let loginUserRatingArr = [];
-          // let spaceRatingReviewsLength = 5;
-          // Start Sorting array based on review date
-          // reviews = reviews.sort(
-          //   (a, b) =>
-          //     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          // );
-          // End Sorting array based on review date
-          // for (let i = 0; i < reviews.length; i++) {
-          //   reviews[i].currentUser = false;
-          //   if (userDetails != null && userDetails.id == reviews[i].userId) {
-          //     this.userSpaceRating = {
-          //       ratingId: reviews[i].ratingId ? reviews[i].ratingId : null,
-          //       spaceId: reviews[i].spaceId,
-          //       rating: reviews[i].rating,
-          //       review: reviews[i].Review,
-          //     };
-          //     spaceRatingReviewsLength = spaceRatingReviewsLength - 1;
-          //     reviews[i].currentUser = true;
-          //     loginUserRatingArr.push(reviews[i]);
-          //   }
-
-          //   if (reviews[i].rating > 4 && reviews[i].rating <= 5) {
-          //     countFiveStar = countFiveStar + 1;
-          //   } else if (reviews[i].rating > 3 && reviews[i].rating <= 4) {
-          //     countFourStar = countFourStar + 1;
-          //   } else if (reviews[i].rating > 2 && reviews[i].rating <= 3) {
-          //     countThreeStar = countThreeStar + 1;
-          //   } else if (reviews[i].rating > 1 && reviews[i].rating <= 2) {
-          //     countTwoStar = countTwoStar + 1;
-          //   } else {
-          //     countOneStar = countOneStar + 1;
-          //   }
-          //   if (this.spaceRatingReviewList.length < spaceRatingReviewsLength) {
-          //     if (userDetails != null && userDetails.id == reviews[i].userId) {
-          //     } else {
-          //       this.spaceRatingReviewList.push(reviews[i]);
-          //     }
-          //   }
-          // }
-
-          // if (loginUserRatingArr.length > 0) {
-          //   let newSpaceRatingReviewList = loginUserRatingArr.concat(
-          //     this.spaceRatingReviewList
-          //   );
-          //   this.spaceRatingReviewList = newSpaceRatingReviewList;
-          // }
-          // if (this.ratingBreakDown.length > 0) {
-          //   this.ratingBreakDown[0].value = countFiveStar;
-          //   this.ratingBreakDown[1].value = countFourStar;
-          //   this.ratingBreakDown[2].value = countThreeStar;
-          //   this.ratingBreakDown[3].value = countTwoStar;
-          //   this.ratingBreakDown[4].value = countOneStar;
-          // }
-        }
-      });
+        });
+    }
   }
 
   nextReviewList() {
@@ -1300,163 +1307,172 @@ export class DetailsComponent implements OnInit {
   }
 
   openLoginDialog() {
-    let config = new MatDialogConfig();
-    config.viewContainerRef = this.login_viewContainerRef;
-    config.panelClass = 'dialogClass-l';
-    // config.height = '520px';
-    // config.width = '60%';
+    if (isPlatformBrowser(this.platformId)) {
+      let config = new MatDialogConfig();
+      config.viewContainerRef = this.login_viewContainerRef;
+      config.panelClass = 'dialogClass-l';
+      // config.height = '520px';
+      // config.width = '60%';
 
-    this.login_dialogRef = this.login_dialog.open(LoginDialog, config);
-    this.login_dialogRef.componentInstance.ref = this.login_dialogRef;
-    this.login_dialogRef.componentInstance.flag = 1;
-    // this.login_dialogRef.componentInstance.selected_teamcabin = teamcabin_obj;
-    // this.login_dialogRef.componentInstance.action_type = action_type;
-    this.login_dialogRef.afterClosed().subscribe((result) => {
-      if ((result && result.success) || result) {
-        // window.location.reload();
+      this.login_dialogRef = this.login_dialog.open(LoginDialog, config);
+      this.login_dialogRef.componentInstance.ref = this.login_dialogRef;
+      this.login_dialogRef.componentInstance.flag = 1;
+      // this.login_dialogRef.componentInstance.selected_teamcabin = teamcabin_obj;
+      // this.login_dialogRef.componentInstance.action_type = action_type;
+      this.login_dialogRef.afterClosed().subscribe((result) => {
+        if ((result && result.success) || result) {
+          // window.location.reload();
 
-        let condition = localStorage.getItem('afterLogin');
+          let condition = localStorage.getItem('afterLogin');
 
-        if (condition == '1') {
-          this.openRequestBookPopup();
-        } else if (condition == '2') {
-          this.openRequetBuyPassPopup();
-        } else if (condition == '3') {
-          this.openScheduleVisitPopup();
-        } else if (condition == '4') {
-          this.openScheduleVisitIsCoworkingPopup();
-        } else if (condition == '5') {
-          this.openScheduleVisitIsCoworkingPopupTwo();
-        } else if (condition == '6') {
-          this.openAddReviewDialog();
-        } else if (condition == '7') {
-          let vote = localStorage.getItem('vote');
-          this.voteDevoteSite(vote);
-        } else if (condition == '8') {
-          this.updateShortList();
-        } else if (condition == '9') {
-          this.onRatingReview();
-        } else if (condition == '10') {
-          window.location.reload();
-          this.addRemoveFavorite(this.space_id);
+          if (condition == '1') {
+            this.openRequestBookPopup();
+          } else if (condition == '2') {
+            this.openRequetBuyPassPopup();
+          } else if (condition == '3') {
+            this.openScheduleVisitPopup();
+          } else if (condition == '4') {
+            this.openScheduleVisitIsCoworkingPopup();
+          } else if (condition == '5') {
+            this.openScheduleVisitIsCoworkingPopupTwo();
+          } else if (condition == '6') {
+            this.openAddReviewDialog();
+          } else if (condition == '7') {
+            let vote = localStorage.getItem('vote');
+            this.voteDevoteSite(vote);
+          } else if (condition == '8') {
+            this.updateShortList();
+          } else if (condition == '9') {
+            this.onRatingReview();
+          } else if (condition == '10') {
+            window.location.reload();
+            this.addRemoveFavorite(this.space_id);
+          }
         }
-      }
-      this.login_dialogRef = null;
-    });
+        this.login_dialogRef = null;
+      });
+    }
   }
   openRequestBookPopup() {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    if (isLoggedIn || userDetails?.accessToken) {
-      let config = new MatDialogConfig();
-      config.viewContainerRef = this.requestBooking_viewContainerRef;
-      config.panelClass = 'dialogClass-c';
-      config.width = '100%';
-      config.data = {
-        spaceId: this.space_id,
-      };
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+      if (isLoggedIn || userDetails?.accessToken) {
+        let config = new MatDialogConfig();
+        config.viewContainerRef = this.requestBooking_viewContainerRef;
+        config.panelClass = 'dialogClass-c';
+        config.width = '100%';
+        config.data = {
+          spaceId: this.space_id,
+        };
 
-      // Ensure that this.requestBooking_dialogRef is properly initialized
-      // after calling this.requestBooking_dialog.open()
-      this.requestBooking_dialogRef = this.requestBooking_dialog.open(
-        RequestBookingComponent,
-        config
-      );
+        // Ensure that this.requestBooking_dialogRef is properly initialized
+        // after calling this.requestBooking_dialog.open()
+        this.requestBooking_dialogRef = this.requestBooking_dialog.open(
+          RequestBookingComponent,
+          config
+        );
 
-      // Make sure to check if this.requestBooking_dialogRef is not undefined
-      // before accessing its properties or methods
-      if (this.requestBooking_dialogRef) {
-        this.requestBooking_dialogRef.componentInstance.ref =
-          this.requestBooking_dialogRef;
-        this.requestBooking_dialogRef.componentInstance.flag = 1;
+        // Make sure to check if this.requestBooking_dialogRef is not undefined
+        // before accessing its properties or methods
+        if (this.requestBooking_dialogRef) {
+          this.requestBooking_dialogRef.componentInstance.ref =
+            this.requestBooking_dialogRef;
+          this.requestBooking_dialogRef.componentInstance.flag = 1;
 
-        // Ensure proper handling of the afterClosed() subscription
-        this.requestBooking_dialogRef.afterClosed().subscribe((result) => {
-          if ((result && result.success) || result) {
-            window.location.reload();
-            localStorage.removeItem('afterLogin');
-          }
-          this.requestBooking_dialogRef = null;
-        });
+          // Ensure proper handling of the afterClosed() subscription
+          this.requestBooking_dialogRef.afterClosed().subscribe((result) => {
+            if ((result && result.success) || result) {
+              window.location.reload();
+              localStorage.removeItem('afterLogin');
+            }
+            this.requestBooking_dialogRef = null;
+          });
+        }
+      } else {
+        this.openLoginDialog();
+        localStorage.setItem('afterLogin', '1');
       }
-    } else {
-      this.openLoginDialog();
-      localStorage.setItem('afterLogin', '1');
     }
   }
   openRequetBuyPassPopup() {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    let authToken = localStorage.getItem('authToken') || '';
-    if (isLoggedIn || userDetails?.accessToken || authToken) {
-      let config = new MatDialogConfig();
-      config.viewContainerRef = this.buyPass_viewContainerRef;
-      config.panelClass = 'dialogClass-c';
-      config.width = '100%';
-      config.data = {
-        spaceId: this.space_id,
-        country: this.country,
-        city: this.city,
-        spaceType: this.spaceType
-      };
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+      let authToken = localStorage.getItem('authToken') || '';
+      if (isLoggedIn || userDetails?.accessToken || authToken) {
+        let config = new MatDialogConfig();
+        config.viewContainerRef = this.buyPass_viewContainerRef;
+        config.panelClass = 'dialogClass-c';
+        config.width = '100%';
+        config.data = {
+          spaceId: this.space_id,
+          country: this.country,
+          city: this.city,
+          spaceType: this.spaceType
+        };
 
-      // Ensure that this.requestBooking_dialogRef is properly initialized
-      // after calling this.requestBooking_dialog.open()
-      this.buyPass_dialogRef = this.buyPass_dialog.open(
-        BuyPassComponent,
-        config
-      );
+        // Ensure that this.requestBooking_dialogRef is properly initialized
+        // after calling this.requestBooking_dialog.open()
+        this.buyPass_dialogRef = this.buyPass_dialog.open(
+          BuyPassComponent,
+          config
+        );
 
-      // Make sure to check if this.buyPass_dialogRef is not undefined
-      // before accessing its properties or methods
-      if (this.buyPass_dialogRef) {
-        this.buyPass_dialogRef.componentInstance.ref = this.buyPass_dialogRef;
-        this.buyPass_dialogRef.componentInstance.flag = 1;
+        // Make sure to check if this.buyPass_dialogRef is not undefined
+        // before accessing its properties or methods
+        if (this.buyPass_dialogRef) {
+          this.buyPass_dialogRef.componentInstance.ref = this.buyPass_dialogRef;
+          this.buyPass_dialogRef.componentInstance.flag = 1;
 
-        // Ensure proper handling of the afterClosed() subscription
-        this.buyPass_dialogRef.afterClosed().subscribe((result) => {
+          // Ensure proper handling of the afterClosed() subscription
+          this.buyPass_dialogRef.afterClosed().subscribe((result) => {
+            if (result && result.success) {
+              window.location.reload();
+              localStorage.removeItem('afterLogin');
+            }
+            this.buyPass_dialogRef = null;
+          });
+        }
+      } else {
+        this.openLoginDialog();
+        localStorage.setItem('afterLogin', '2');
+      }
+    }
+  }
+
+  openScheduleVisitPopup() {
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+      let authToken = localStorage.getItem('authToken') || '';
+      if (isLoggedIn || userDetails?.accessToken || authToken) {
+        let config = new MatDialogConfig();
+        config.viewContainerRef = this.scheduleVisit_viewContainerRef;
+        config.panelClass = 'visit-scdule-mod';
+        // config.width = '550px';
+        config.data = {
+          spaceId: this.space_id,
+        };
+
+        this.scheduleVisit_dialogRef = this.buyPass_dialog.open(
+          ScheduleVisitComponent,
+          config
+        );
+        this.scheduleVisit_dialogRef.componentInstance.ref =
+          this.scheduleVisit_dialogRef;
+        this.scheduleVisit_dialogRef.componentInstance.flag = 1;
+        this.scheduleVisit_dialogRef.afterClosed().subscribe((result) => {
           if (result && result.success) {
             window.location.reload();
             localStorage.removeItem('afterLogin');
           }
-          this.buyPass_dialogRef = null;
+          this.scheduleVisit_dialogRef = null;
         });
+      } else {
+        this.openLoginDialog();
+        localStorage.setItem('afterLogin', '3');
       }
-    } else {
-      this.openLoginDialog();
-      localStorage.setItem('afterLogin', '2');
-    }
-  }
-  openScheduleVisitPopup() {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    let authToken = localStorage.getItem('authToken') || '';
-    if (isLoggedIn || userDetails?.accessToken || authToken) {
-      let config = new MatDialogConfig();
-      config.viewContainerRef = this.scheduleVisit_viewContainerRef;
-      config.panelClass = 'visit-scdule-mod';
-      // config.width = '550px';
-      config.data = {
-        spaceId: this.space_id,
-      };
-
-      this.scheduleVisit_dialogRef = this.buyPass_dialog.open(
-        ScheduleVisitComponent,
-        config
-      );
-      this.scheduleVisit_dialogRef.componentInstance.ref =
-        this.scheduleVisit_dialogRef;
-      this.scheduleVisit_dialogRef.componentInstance.flag = 1;
-      this.scheduleVisit_dialogRef.afterClosed().subscribe((result) => {
-        if (result && result.success) {
-          window.location.reload();
-          localStorage.removeItem('afterLogin');
-        }
-        this.scheduleVisit_dialogRef = null;
-      });
-    } else {
-      this.openLoginDialog();
-      localStorage.setItem('afterLogin', '3');
     }
   }
 
@@ -1665,20 +1681,20 @@ export class DetailsComponent implements OnInit {
         return;
       }
 
-    const script = document.createElement('script');
-    script.id = scriptId;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.mapKey}&callback=initMap&libraries=places`;
-    script.defer = true;
-    script.async = true;
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.mapKey}&callback=initMap&libraries=places`;
+      script.defer = true;
+      script.async = true;
 
-    // Append the script to the head
-    document.head.appendChild(script);
+      // Append the script to the head
+      document.head.appendChild(script);
 
-    // Define the initMap function
-    (window as any).initMap = () => {
-      this.initializeMap();
-    };
-  }
+      // Define the initMap function
+      (window as any).initMap = () => {
+        this.initializeMap();
+      };
+    }
   }
 
   initializeMap(): void {
@@ -1697,87 +1713,91 @@ export class DetailsComponent implements OnInit {
 
 
   openAddReviewDialog() {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    if (isLoggedIn || userDetails?.accessToken) {
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+      if (isLoggedIn || userDetails?.accessToken) {
 
-      // check user is given review or not
-      if (userDetails != null && userDetails.id) {
+        // check user is given review or not
+        if (userDetails != null && userDetails.id) {
 
-        if (this.userGivenReview) {
-          this.toastr.error('You have already given review for this space.', 'Error', { timeOut: 10000 });
-          return false;
-        }
-      }
-
-      let config = new MatDialogConfig();
-      config.viewContainerRef = this.requestBooking_viewContainerRef;
-      config.panelClass = 'dialogClass-l';
-      // config.width = '100%';
-      config.data = {
-        spaceId: this.space_id,
-      };
-
-      // Ensure that this.requestBooking_dialogRef is properly initialized
-      // after calling this.requestBooking_dialog.open()
-      this.addReview_dialogRef = this.addReview_dialog.open(
-        AddReviewDialogComponent,
-        config
-      );
-
-      // Make sure to check if this.requestBooking_dialogRef is not undefined
-      // before accessing its properties or methods
-      if (this.addReview_dialogRef) {
-        this.addReview_dialogRef.componentInstance.ref =
-          this.addReview_dialogRef;
-        this.addReview_dialogRef.componentInstance.flag = 1;
-
-        // Ensure proper handling of the afterClosed() subscription
-        this.addReview_dialogRef.afterClosed().subscribe((result) => {
-          if ((result && result.success) || result) {
-            window.location.reload();
-            localStorage.removeItem('afterLogin');
+          if (this.userGivenReview) {
+            this.toastr.error('You have already given review for this space.', 'Error', { timeOut: 10000 });
+            return false;
           }
-          this.addReview_dialogRef = null;
-        });
+        }
+
+        let config = new MatDialogConfig();
+        config.viewContainerRef = this.requestBooking_viewContainerRef;
+        config.panelClass = 'dialogClass-l';
+        // config.width = '100%';
+        config.data = {
+          spaceId: this.space_id,
+        };
+
+        // Ensure that this.requestBooking_dialogRef is properly initialized
+        // after calling this.requestBooking_dialog.open()
+        this.addReview_dialogRef = this.addReview_dialog.open(
+          AddReviewDialogComponent,
+          config
+        );
+
+        // Make sure to check if this.requestBooking_dialogRef is not undefined
+        // before accessing its properties or methods
+        if (this.addReview_dialogRef) {
+          this.addReview_dialogRef.componentInstance.ref =
+            this.addReview_dialogRef;
+          this.addReview_dialogRef.componentInstance.flag = 1;
+
+          // Ensure proper handling of the afterClosed() subscription
+          this.addReview_dialogRef.afterClosed().subscribe((result) => {
+            if ((result && result.success) || result) {
+              window.location.reload();
+              localStorage.removeItem('afterLogin');
+            }
+            this.addReview_dialogRef = null;
+          });
+        }
+      } else {
+        this.openLoginDialog();
+        localStorage.setItem('afterLogin', '6');
       }
-    } else {
-      this.openLoginDialog();
-      localStorage.setItem('afterLogin', '6');
     }
   }
 
   voteDevoteSite(type: string) {
-    let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
-    let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
-    localStorage.setItem('vote', type);
+    if (isPlatformBrowser(this.platformId)) {
+      let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || null;
+      let userDetails = JSON.parse(localStorage.getItem('userDetails')) || null;
+      localStorage.setItem('vote', type);
 
-    if (isLoggedIn || userDetails?.accessToken) {
-      this.isLoading = true
-      let data = {
-        voteType: type,
-      };
-      // let dataType = type=='upvote'? 'Liked':'Disliked'
-      this.spaceService
-        .voteDevoteSpace(data, this.space_id)
-        .subscribe((res: any) => {
-          if (res?.result?.success) {
+      if (isLoggedIn || userDetails?.accessToken) {
+        this.isLoading = true
+        let data = {
+          voteType: type,
+        };
+        // let dataType = type=='upvote'? 'Liked':'Disliked'
+        this.spaceService
+          .voteDevoteSpace(data, this.space_id)
+          .subscribe((res: any) => {
+            if (res?.result?.success) {
 
-            this.space_details.downvote = res?.result?.space.downvote;
-            this.space_details.upvote = res?.result?.space.upvote;
-            // this.toastr.success(`Space ${type} successfully `)
+              this.space_details.downvote = res?.result?.space.downvote;
+              this.space_details.upvote = res?.result?.space.upvote;
+              // this.toastr.success(`Space ${type} successfully `)
 
-            this.existingUpVote = res?.result?.existingVote.upvote
-            this.existingDownVote = res?.result?.existingVote.downvote
+              this.existingUpVote = res?.result?.existingVote.upvote
+              this.existingDownVote = res?.result?.existingVote.downvote
 
-            this.isLoading = false
-          } else {
-            this.isLoading = false
-          }
-        });
-    } else {
-      this.openLoginDialog();
-      localStorage.setItem('afterLogin', '7');
+              this.isLoading = false
+            } else {
+              this.isLoading = false
+            }
+          });
+      } else {
+        this.openLoginDialog();
+        localStorage.setItem('afterLogin', '7');
+      }
     }
 
   }
