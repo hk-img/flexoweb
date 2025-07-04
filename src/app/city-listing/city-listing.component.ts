@@ -140,9 +140,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.logged_in = user_details.is_logged_in;
       this.shortlists = user_details.shortlists;
     });
-
-    this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
-    this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
   }
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
@@ -240,150 +237,152 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.loadZohoScript2();
-    this.getAllQuestions();
-    const selectedValues = [
-      "Private Office",
-      "Managed Office",
-      "Dedicated Desk",
-      "Flexible Desk",
-      "Virtual Office",
-      "Day Pass"
-    ];
-    sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
-    this.removeLoaction()
-    this.route.params.subscribe((params: ParamMap) => {
-      this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
-      if (this.spaceType == 'coworking cafe restaurant') {
-        this.spaceType = 'Coworking Café/Restaurant';
-      }
-      if (this?.spaceType == 'coworking cafe restaurant') {
-        this.city_param = this.getOriginalUrlParam(params['area']);
-      } else {
-        this.city_param = this.getOriginalUrlParam(params['city']);
-      }
-      this.areaName = this.getOriginalUrlParam(params['area'])
-      if (!this.areaName) {
-        if (this.spaceType === 'coworking space') {
-          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['city']).toUpperCase()} (${new Date().getFullYear()}) | Compare & Book`);
-          this.metaService.updateTag({
-            name: "description",
-            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['city']).toUpperCase()} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.`,
-          });
-        } else if (
-          this.spaceType === 'coworking café/restaurant' ||
-          this.spaceType === 'shoot studio' ||
-          this.spaceType === 'recording studio' ||
-          this.spaceType === 'podcast studio' ||
-          this.spaceType === 'activity space' ||
-          this.spaceType === 'sports turf' ||
-          this.spaceType === 'sports venue' ||
-          this.spaceType === 'party space' ||
-          this.spaceType === 'banquet hall' ||
-          this.spaceType === 'gallery' ||
-          this.spaceType === 'classroom' ||
-          this.spaceType === 'private cabin' ||
-          this.spaceType === 'meeting room' ||
-          this.spaceType === 'training room' ||
-          this.spaceType === 'event space'
-        ) {
-          this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city']).toUpperCase()} from Rs.20000 /hour`);
-          this.metaService.updateTag({
-            name: "description",
-            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city']).toUpperCase()} starting from Rs.20000 /hour. View images, amenities, pricing to find the best fit.Explore and book now!.`,
-          });
-        } else {
-          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['city']).toUpperCase()} | Managed Offices`);
-          this.metaService.updateTag({
-            name: "description",
-            content: `Explore offices for rent in ${this.getOriginalUrlParam(params['city']).toUpperCase()}. Choose from a wide range of furnished, unfurnished, built-to-suit and managed office options.`,
-          });
-        }
-      } else if (this.areaName) {
-        if (this.spaceType === 'coworking space') {
-          this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['area']).toUpperCase()} | Book A Shared Office`);
-          this.metaService.updateTag({
-            name: "description",
-            content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
-          });
-        } else if (
-          this.spaceType === 'coworking café/restaurant' ||
-          this.spaceType === 'shoot studio' ||
-          this.spaceType === 'recording studio' ||
-          this.spaceType === 'podcast studio' ||
-          this.spaceType === 'activity space' ||
-          this.spaceType === 'sports turf' ||
-          this.spaceType === 'sports venue' ||
-          this.spaceType === 'party space' ||
-          this.spaceType === 'banquet hall' ||
-          this.spaceType === 'gallery' ||
-          this.spaceType === 'classroom' ||
-          this.spaceType === 'private cabin' ||
-          this.spaceType === 'meeting room' ||
-          this.spaceType === 'training room' ||
-          this.spaceType === 'event space'
-        ) {
-          this.titleService.setTitle(`${this.spaceType} in ${this.getOriginalUrlParam(params['area']).toUpperCase()} | Book Now`);
-          this.metaService.updateTag({
-            name: "description",
-            content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city']).toUpperCase()} Starting from Rs.20000 /hour. Compare prices, services and amenities. Explore available options now.`,
-          });
-        } else {
-          this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}`);
-          this.metaService.updateTag({
-            name: "description",
-            content: `Find office space for rent in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}. Choose from a variety of furnished, unfurnished, and custom-built options to suit your needs.`,
-          });
-        }
-      }
-
-      // const titleCase = (str) => str.replace(/\b\S/g, (t) => t.toUpperCase());
-
-      // const fullPath = this.route.snapshot.url.map(segment => segment.path).join('/');
-      // const segments = fullPath.split('/');
-      // this.spaceType = segments[segments.indexOf('coworking') + 1];
-
-      const url = window.location.href;  // Get the full URL
-      const segments2 = url.split('/');
-
-      // Find 'in' in the URL and extract the next static segment ('longTerm')
-      const inIndex = segments2.indexOf('in');
-      if (inIndex !== -1 && segments2.length > inIndex + 1) {
-        this.staticValue = segments2[inIndex + 1];
-        if (this.staticValue == 'coworking-space' || this.staticValue == 'coworking') {
-          this.staticValue = "Coworking"
-        }else if(this.staticValue == 'coworking-cafe-restaurant' || this.staticValue == 'shoot-studio' || this.staticValue == 'recording-studio' || this.staticValue == 'podcast-studio' || this.staticValue == 'activity-space' || this.staticValue == 'sports-turf' || this.staticValue == 'sports-venue' || this.staticValue == 'party-space' || this.staticValue == 'banquet-hall' || this.staticValue == 'gallery' || this.staticValue == 'classroom' || this.staticValue == 'private-cabin' || this.staticValue == 'meeting-room' || this.staticValue == 'training-room' || this.staticValue == 'event-space'){
-          this.staticValue = 'Shortterm';
-        } else {
-          this.staticValue = 'Longterm';
-        }
-        if (isPlatformBrowser(this.platformId)) {
-          localStorage.setItem('staticValue', this.staticValue);
-        }
-      }
-    });
-
-    this.zoom = 12;
-    if (window.innerWidth < 700) {
-      this.isMobile = true;
-    }
-    this.getSpacesByCity();
-    // this.geocode();
-    this.spaceService.filteredSpaces$.subscribe(
-      (message) => {
-        this.recommended_spaces = []
-        this.spaces_list = []
-        this.recommended_spaces = message
-      }
-    );
     if (isPlatformBrowser(this.platformId)) {
-      if (localStorage.getItem('userDetails')) {
-        this.isCoworking = sessionStorage.getItem('isCoworking')
-        const userDetail = localStorage.getItem('userDetails');
-        const userDetailObj = JSON.parse(userDetail);
-        this.userId = userDetailObj.id
-      } else {
-        this.userId = 0
+      this.loadZohoScript2();
+      this.getAllQuestions();
+      const selectedValues = [
+        "Private Office",
+        "Managed Office",
+        "Dedicated Desk",
+        "Flexible Desk",
+        "Virtual Office",
+        "Day Pass"
+      ];
+      sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+      this.removeLoaction()
+      this.route.params.subscribe((params: ParamMap) => {
+        this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
+        if (this.spaceType == 'coworking cafe restaurant') {
+          this.spaceType = 'Coworking Café/Restaurant';
+        }
+        if (this?.spaceType == 'coworking cafe restaurant') {
+          this.city_param = this.getOriginalUrlParam(params['area']);
+        } else {
+          this.city_param = this.getOriginalUrlParam(params['city']);
+        }
+        this.areaName = this.getOriginalUrlParam(params['area'])
+        if (!this.areaName) {
+          if (this.spaceType === 'coworking space') {
+            this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['city']).toUpperCase()} (${new Date().getFullYear()}) | Compare & Book`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Book coworking spaces in ${this.getOriginalUrlParam(params['city']).toUpperCase()} with flexible pricing and premium amenities at prime locations. Find your shared office fast and FREE with Flexo.`,
+            });
+          } else if (
+            this.spaceType === 'coworking café/restaurant' ||
+            this.spaceType === 'shoot studio' ||
+            this.spaceType === 'recording studio' ||
+            this.spaceType === 'podcast studio' ||
+            this.spaceType === 'activity space' ||
+            this.spaceType === 'sports turf' ||
+            this.spaceType === 'sports venue' ||
+            this.spaceType === 'party space' ||
+            this.spaceType === 'banquet hall' ||
+            this.spaceType === 'gallery' ||
+            this.spaceType === 'classroom' ||
+            this.spaceType === 'private cabin' ||
+            this.spaceType === 'meeting room' ||
+            this.spaceType === 'training room' ||
+            this.spaceType === 'event space'
+          ) {
+            this.titleService.setTitle(`Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city']).toUpperCase()} from Rs.20000 /hour`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['city']).toUpperCase()} starting from Rs.20000 /hour. View images, amenities, pricing to find the best fit.Explore and book now!.`,
+            });
+          } else {
+            this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['city']).toUpperCase()} | Managed Offices`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Explore offices for rent in ${this.getOriginalUrlParam(params['city']).toUpperCase()}. Choose from a wide range of furnished, unfurnished, built-to-suit and managed office options.`,
+            });
+          }
+        } else if (this.areaName) {
+          if (this.spaceType === 'coworking space') {
+            this.titleService.setTitle(`Best Coworking Space in ${this.getOriginalUrlParam(params['area']).toUpperCase()} | Book A Shared Office`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Book coworking spaces in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}.Compare prices and amenities of coworking spaces and get quotes. Free, fast and easy! .`,
+            });
+          } else if (
+            this.spaceType === 'coworking café/restaurant' ||
+            this.spaceType === 'shoot studio' ||
+            this.spaceType === 'recording studio' ||
+            this.spaceType === 'podcast studio' ||
+            this.spaceType === 'activity space' ||
+            this.spaceType === 'sports turf' ||
+            this.spaceType === 'sports venue' ||
+            this.spaceType === 'party space' ||
+            this.spaceType === 'banquet hall' ||
+            this.spaceType === 'gallery' ||
+            this.spaceType === 'classroom' ||
+            this.spaceType === 'private cabin' ||
+            this.spaceType === 'meeting room' ||
+            this.spaceType === 'training room' ||
+            this.spaceType === 'event space'
+          ) {
+            this.titleService.setTitle(`${this.spaceType} in ${this.getOriginalUrlParam(params['area']).toUpperCase()} | Book Now`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Book ${this.spaceType} in ${this.getOriginalUrlParam(params['area'])}, ${this.getOriginalUrlParam(params['city']).toUpperCase()} Starting from Rs.20000 /hour. Compare prices, services and amenities. Explore available options now.`,
+            });
+          } else {
+            this.titleService.setTitle(`Office Space for Rent in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}`);
+            this.metaService.updateTag({
+              name: "description",
+              content: `Find office space for rent in ${this.getOriginalUrlParam(params['area']).toUpperCase()}, ${this.getOriginalUrlParam(params['city']).toUpperCase()}. Choose from a variety of furnished, unfurnished, and custom-built options to suit your needs.`,
+            });
+          }
+        }
+
+        // const titleCase = (str) => str.replace(/\b\S/g, (t) => t.toUpperCase());
+
+        // const fullPath = this.route.snapshot.url.map(segment => segment.path).join('/');
+        // const segments = fullPath.split('/');
+        // this.spaceType = segments[segments.indexOf('coworking') + 1];
+
+        const url = window.location.href;  // Get the full URL
+        const segments2 = url.split('/');
+
+        // Find 'in' in the URL and extract the next static segment ('longTerm')
+        const inIndex = segments2.indexOf('in');
+        if (inIndex !== -1 && segments2.length > inIndex + 1) {
+          this.staticValue = segments2[inIndex + 1];
+          if (this.staticValue == 'coworking-space' || this.staticValue == 'coworking') {
+            this.staticValue = "Coworking"
+          } else if (this.staticValue == 'coworking-cafe-restaurant' || this.staticValue == 'shoot-studio' || this.staticValue == 'recording-studio' || this.staticValue == 'podcast-studio' || this.staticValue == 'activity-space' || this.staticValue == 'sports-turf' || this.staticValue == 'sports-venue' || this.staticValue == 'party-space' || this.staticValue == 'banquet-hall' || this.staticValue == 'gallery' || this.staticValue == 'classroom' || this.staticValue == 'private-cabin' || this.staticValue == 'meeting-room' || this.staticValue == 'training-room' || this.staticValue == 'event-space') {
+            this.staticValue = 'Shortterm';
+          } else {
+            this.staticValue = 'Longterm';
+          }
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem('staticValue', this.staticValue);
+          }
+        }
+      });
+
+      this.zoom = 12;
+      if (window.innerWidth < 700) {
+        this.isMobile = true;
+      }
+      this.getSpacesByCity();
+      // this.geocode();
+      this.spaceService.filteredSpaces$.subscribe(
+        (message) => {
+          this.recommended_spaces = []
+          this.spaces_list = []
+          this.recommended_spaces = message
+        }
+      );
+      if (isPlatformBrowser(this.platformId)) {
+        if (localStorage.getItem('userDetails')) {
+          this.isCoworking = sessionStorage.getItem('isCoworking')
+          const userDetail = localStorage.getItem('userDetails');
+          const userDetailObj = JSON.parse(userDetail);
+          this.userId = userDetailObj.id
+        } else {
+          this.userId = 0
+        }
       }
     }
   }
@@ -438,7 +437,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
 
-  updatefaqsJsonLd(res:any){
+  updatefaqsJsonLd(res: any) {
     const jsonLdId = 'json-ld-faqs';
     if (isPlatformBrowser(this.platformId)) {
       const existingScript = document.getElementById(jsonLdId);
@@ -449,7 +448,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": res.map((faq:any) => ({
+      "mainEntity": res.map((faq: any) => ({
         "@type": "Question",
         "name": faq.question,
         "acceptedAnswer": {
@@ -635,15 +634,15 @@ export class CityListingComponent implements OnInit, AfterViewInit {
             if (this.areaName && response.length) {
               let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
               let matchedLocation = response?.find(
-                (val:any) => val.location_name.toLowerCase() === this.areaName
+                (val: any) => val.location_name.toLowerCase() === this.areaName
               );
-              
+
               if (matchedLocation) {
                 this.location_latitude = matchedLocation.lat;
                 this.location_longitude = matchedLocation.longi;
-              
+
                 console.log("Latitude:", this.location_latitude);
-                console.log("Longitude:",this.location_longitude);
+                console.log("Longitude:", this.location_longitude);
               }
               if (!isExist) {
                 this.router.navigate(['/error'])
@@ -678,8 +677,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                 } else {
                   this.updateJsonLd(spaceType, cityName, imageUrl, location_name, `Explore ${spaceType} for rent in ${location}, ${cityName} with options ranging from furnished and unfurnished offices to managed spaces. Expert advise and local knowledge make it easy to find your perfect office.`, min, max)
                 }
-              }else{
-                  this.router.navigate(['/error'])
+              } else {
+                this.router.navigate(['/error'])
               }
               this.recommended_spaces = Object.assign([], res.recommended_spaces);
               this.space_count = res.space_count;
@@ -710,7 +709,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
                   if (this.type === 'coworking') {
                     if (element.flexible_desk_price === null || element.flexible_desk_price === 0) {
                       price = element.privatecabin_price
-                    } else if(element.privatecabin_price === null || element.privatecabin_price === 0){
+                    } else if (element.privatecabin_price === null || element.privatecabin_price === 0) {
                       price = element.flexible_desk_price
                     } else {
                       price = element?.privatecabin_price > element.flexible_desk_price ? element.flexible_desk_price : element.privatecabin_price
@@ -813,9 +812,9 @@ export class CityListingComponent implements OnInit, AfterViewInit {
           this.space_count = res.space_count;
           if (this.spaces_list.length) {
             this.page_end =
-            this.space_count < this.page_size * this.page
-            ? this.space_count
-            : this.page_size * this.page;
+              this.space_count < this.page_size * this.page
+                ? this.space_count
+                : this.page_size * this.page;
             const rawPages = this.space_count / this.page_size;
             const decimalPart = rawPages - Math.floor(rawPages);
             this.total_pages = decimalPart > 0 ? Math.floor(rawPages) + 1 : Math.floor(rawPages);
@@ -1124,7 +1123,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
       const allFaqs = [...this.shortQuestions, ...this.briefQuestions];
       console.log(allFaqs)
-  
+
       this.updatefaqsJsonLd(allFaqs);
     });
   }
