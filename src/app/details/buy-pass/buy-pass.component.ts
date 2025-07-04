@@ -305,7 +305,13 @@ export class BuyPassComponent {
     // }
     const formValue = this.dayPassForm.value;
     const payload = {
-      startDate: this.model,
+      startDate: this.model.map(date => {
+        const dateObj = new Date(date);
+        const year = dateObj.getUTCFullYear();
+        const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
+        const day = String(dateObj.getUTCDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }),
       visitTime: formValue.visitTime,
       //  quantity: formValue.quantity,
       //  timeQuantity: formValue.timeQuantity,

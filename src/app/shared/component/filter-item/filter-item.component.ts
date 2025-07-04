@@ -39,7 +39,7 @@ export class FilterItemComponent implements OnInit {
   searchCoworking: string = 'coworking';
   isCoworkingInURL: boolean = false;
   type: string;
-  show=true
+  show = true
   nearByLocation: string;
   spaceType: string;
 
@@ -55,7 +55,7 @@ export class FilterItemComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: any,
     private elRef: ElementRef,
     private titleCasePipe: TitleCasePipe,
-    private snackBar : MatSnackBar,
+    private snackBar: MatSnackBar,
     private cityListing: CityListingComponent
   ) {
     if (isPlatformBrowser(this.platformId)) {
@@ -93,7 +93,7 @@ export class FilterItemComponent implements OnInit {
   location_name: any;
   cityId: any;
   location: any;
-  locationObj: any=[];
+  locationObj: any = [];
   getLocationObjForSearch: any;
   spaces = [];
   filteredSpaces: any = [];
@@ -142,7 +142,7 @@ export class FilterItemComponent implements OnInit {
         'telephone': `Call +91 95133 92400`,
         'url': `${'https://www.flexospaces.com' + this._router.url}`
       }
-    }, );
+    },);
 
     this.filteredPlaces = this.control.valueChanges.pipe(
       startWith(''),
@@ -150,7 +150,7 @@ export class FilterItemComponent implements OnInit {
     );
 
     // this.filteredPlaces.subscribe(data => console.log('Filtered places:', data));
-    
+
     this.route.params.subscribe({
       next: (params) => {
         this.cityName = this.getOriginalCityName(params['city']);
@@ -159,13 +159,13 @@ export class FilterItemComponent implements OnInit {
       }
     });
     this.getSpaces();
-    if(this.cityName){
+    if (this.cityName) {
       this.getNearByLocations()
     }
-    if(this.nearByLocation){
+    if (this.nearByLocation) {
       this.control.setValue(localStorage.getItem("areaLocation") ?? localStorage.getItem("location"))
     }
-    
+
   }
 
   staticSpaces = [{
@@ -202,30 +202,30 @@ export class FilterItemComponent implements OnInit {
         let spaceType = this.selectedRadio === 'Co-working' ? "Coworking Space" : this.selectedRadio
         this.getAllLocation(spaceType)
         // this.getNearByLocations()
-        
-        
-        
+
+
+
         this.currentUrl = this.router.url;
         this.isCoworkingInURL = this.currentUrl.includes(this.searchCoworking);
-        
+
         if (this.isCoworkingInURL) {
-          
+
           this.filteredSpaces = this.spaces
-          .filter(option => (option?.value === this.spaceType && option?.type === 'Co-working'))
-          .map(option => option.name);
+            .filter(option => (option?.value === this.spaceType && option?.type === 'Co-working'))
+            .map(option => option.name);
         } else if (this.spaceType === 'CoworkingSpace') {
           this.filteredSpaces = this.spaces
-          .filter(option => option?.type === 'Co-working')
-          .map(option => option.name);
+            .filter(option => option?.type === 'Co-working')
+            .map(option => option.name);
         } else {
           this.filteredSpaces = this.spaces
-          .filter(option => option?.value === this.spaceType)
-          .map(option => option.name);
+            .filter(option => option?.value === this.spaceType)
+            .map(option => option.name);
         }
       });
-      // this.onSelectionChange()
-    }
-    
+    // this.onSelectionChange()
+  }
+
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
     this.filteredPlaces = this.locations?.filter(street => this._normalizeValue(street).includes(filterValue));
@@ -260,30 +260,30 @@ export class FilterItemComponent implements OnInit {
   }
 
   // getLocationValue(event: any) {
-  
-    // this.show = true
-    // localStorage.setItem("areaLocation", event.option.value)
-    //   this.locationObj.filter((place: any) => {
-    //     if (place.label === this.location) {
-    //       this.getLocationObjForSearch = place;
-    //       this.lat = place.lat;
-    //       this.long = place.long;
-    //     }
-    //   })
-    
 
-    //   this.getNearByLocations(true)
-    // this.filteredSpaces = this.selectedValues.length ? this.selectedValues : [this.selectedRadio];
-    //   this.getParams();
-      
-   
-    
+  // this.show = true
+  // localStorage.setItem("areaLocation", event.option.value)
+  //   this.locationObj.filter((place: any) => {
+  //     if (place.label === this.location) {
+  //       this.getLocationObjForSearch = place;
+  //       this.lat = place.lat;
+  //       this.long = place.long;
+  //     }
+  //   })
 
-      // this.spaceService.getSpacesFilter(this.params).subscribe((res: any) => {
-        
-      //   this.spaceService.sendFilteredSpace(res.data);
-      // })
-      
+
+  //   this.getNearByLocations(true)
+  // this.filteredSpaces = this.selectedValues.length ? this.selectedValues : [this.selectedRadio];
+  //   this.getParams();
+
+
+
+
+  // this.spaceService.getSpacesFilter(this.params).subscribe((res: any) => {
+
+  //   this.spaceService.sendFilteredSpace(res.data);
+  // })
+
   // }
 
 
@@ -298,35 +298,35 @@ export class FilterItemComponent implements OnInit {
     const splitLocation = event.option.value.split(",");
     const location = splitLocation.at(-3)?.trim();
     const location_name = splitLocation.at(-4)?.trim();
-    const spaceType = this.selectedRadio === null ? 'coworking space' : this.selectedRadio === 'Co-working' ? 
-    'coworking space' : this.selectedRadio?.toLowerCase();
-    
+    const spaceType = this.selectedRadio === null ? 'coworking space' : this.selectedRadio === 'Co-working' ?
+      'coworking space' : this.selectedRadio?.toLowerCase();
+
     if (!location) {
       console.error("Location is undefined or invalid");
       return;
     }
     if (spaceType === 'coworking space' && !location_name) {
-      url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
-    }else if (spaceType === 'coworking space' && location_name){
+      url = `in/coworking/${location?.replace(' ', '-')?.toLowerCase()}`;
+    } else if (spaceType === 'coworking space' && location_name) {
       url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}/${location_name}`;
     } else if (['shoot studio', 'recording studio', 'podcast studio', 'activity space',
       'sports turf', 'sports venue', 'party space', 'banquet hall', 'gallery',
       'classroom', 'private cabin', 'meeting room', 'training room', 'event space'
     ].includes(spaceType)) {
-      if(location_name){
+      if (location_name) {
         url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}/${location_name}`;
-      }else{
+      } else {
         url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`;
       }
     } else if ([
       'managed office', 'private office', 'shared office', 'virtual office'
     ].includes(spaceType)) {
-      if(location_name){
+      if (location_name) {
         url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}/${location_name}`;
-      }else{
+      } else {
         url = `in/${spaceType}/${location?.replace(' ', '-')?.toLowerCase()}`
       }
-    } else if(['coworking café/restaurant'].includes(spaceType)){
+    } else if (['coworking café/restaurant'].includes(spaceType)) {
       url = `in/coworking-cafe-restaurant/${location?.replace(' ', '-')?.toLowerCase()}`
     }
 
@@ -339,9 +339,9 @@ export class FilterItemComponent implements OnInit {
 
 
 
-  
 
-  onSelectionChange(nearMe?:boolean) {
+
+  onSelectionChange(nearMe?: boolean) {
     this.filteredSpaces = this.selectedValues.length ? this.selectedValues : [this.selectedRadio];
     this.getParams(nearMe);
     this.spaceService.getSpacesFilter(this.params).subscribe((res: any) => {
@@ -369,7 +369,7 @@ export class FilterItemComponent implements OnInit {
     return anyItemSelected && !this.filteredSpaces.includes(item.name);
   }
 
-  getParams(nearMe?:boolean) {
+  getParams(nearMe?: boolean) {
     if ((this.selectedRadio?.toLowerCase() == 'coworking space')) {
       this.type = "coworking";
     } else if ((this.selectedRadio?.toLowerCase() == 'coworking-café') || (this.selectedRadio?.toLowerCase() == 'shoot studio') || (this.selectedRadio?.toLowerCase() == 'recording studio') || (this.selectedRadio?.toLowerCase() == 'podcast studio') || (this.selectedRadio?.toLowerCase() == 'activity space') || (this.selectedRadio?.toLowerCase() == 'sports turf') || (this.selectedRadio?.toLowerCase() == 'sports venue') || (this.selectedRadio?.toLowerCase() == 'party space') || (this.selectedRadio?.toLowerCase() == 'banquet hall') || (this.selectedRadio?.toLowerCase() == 'gallery') || (this.selectedRadio?.toLowerCase() == 'classroom') || (this.selectedRadio?.toLowerCase() == 'private cabin') || (this.selectedRadio?.toLowerCase() == 'meeting room') || (this.selectedRadio?.toLowerCase() == 'training room') || (this.selectedRadio?.toLowerCase() == 'event space')) {
@@ -380,7 +380,7 @@ export class FilterItemComponent implements OnInit {
     else {
       this.type = "coworking";
     }
-    
+
     this.params = {
       location_name: this.getLocationObjForSearch?.location_name || this.nearByLocation,
       city_name: this.getLocationObjForSearch?.city || localStorage.getItem("city_name"),
@@ -390,12 +390,12 @@ export class FilterItemComponent implements OnInit {
       customer_rating: '',
       distance: nearMe ? 10 : '',
       price_range: '',
-      city_lat: nearMe ? this.user_lat :  0,
+      city_lat: nearMe ? this.user_lat : 0,
       city_long: nearMe ? this.user_long : 0
       // city_lat: nearMe ? this.user_lat :  this.lat,
       // city_long: nearMe ? this.user_long : this.long
     }
- 
+
   }
 
   getType(spaceType: string): string {
@@ -430,8 +430,8 @@ export class FilterItemComponent implements OnInit {
 
   getNearByLocations(isLocationChange?: boolean) {
     if (this.location) {
-        var locationArray_ = this.location.split(",");
-        var location_ = locationArray_.at(-3)?.trim();
+      var locationArray_ = this.location.split(",");
+      var location_ = locationArray_.at(-3)?.trim();
     }
 
     // Mapping location to the desired format
@@ -439,12 +439,12 @@ export class FilterItemComponent implements OnInit {
 
     // Define subparts that can be selected
     const allSubParts = [
-        'Private Office',
-        'Managed Office',
-        'Dedicated Desk',
-        'Flexible Desk',
-        'Virtual Office',
-        'Day Pass'
+      'Private Office',
+      'Managed Office',
+      'Dedicated Desk',
+      'Flexible Desk',
+      'Virtual Office',
+      'Day Pass'
     ];
 
     // Filter subparts to only include those present in selectedValues
@@ -453,29 +453,29 @@ export class FilterItemComponent implements OnInit {
     // Prepare details object for the request
     const details = {
       cityId: isLocationChange ? mappedLocation : this.city_name_display,
-      spaceType: (this.selectedRadio === "Co-working" || this.selectedValues.length) 
-    ? "coworking space" 
-    : (this.selectedRadio || this.spaceType)
-}
+      spaceType: (this.selectedRadio === "Co-working" || this.selectedValues.length)
+        ? "coworking space"
+        : (this.selectedRadio || this.spaceType)
+    }
 
     // Call service to get nearby spaces
     this.spaceService.getNearBySpaces(details).subscribe(
-        (response) => {
-            this.nearByLocationsList = response.map((val) => {
-                return {
-                    ...val,
-                    city: details.cityId,
-                    type: this.type
-                }
-            });
-            // Update the city_name_display based on location change
-            this.city_name_display = isLocationChange ? this.location.split(",").at(-3)?.trim() : this.cityName;
-        },
-        ({ message }) => {
-            // Handle error (if needed)
-        }
+      (response) => {
+        this.nearByLocationsList = response.map((val) => {
+          return {
+            ...val,
+            city: details.cityId,
+            type: this.type
+          }
+        });
+        // Update the city_name_display based on location change
+        this.city_name_display = isLocationChange ? this.location.split(",").at(-3)?.trim() : this.cityName;
+      },
+      ({ message }) => {
+        // Handle error (if needed)
+      }
     );
-}
+  }
 
 
   onSearchSubmit(is_near_me_selected) {
@@ -524,12 +524,16 @@ export class FilterItemComponent implements OnInit {
 
   openLocation() {
     this.open_location = this.open_location ? false : true;
-    sessionStorage.setItem('open_location', this.open_location.toString());
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('open_location', this.open_location.toString());
+    }
   }
 
   openSpaceType() {
     this.open_spaceType = this.open_spaceType ? false : true;
-    sessionStorage.setItem('open_spaceType', this.open_spaceType.toString());
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('open_spaceType', this.open_spaceType.toString());
+    }
   }
 
   showHideMap() {
@@ -537,13 +541,13 @@ export class FilterItemComponent implements OnInit {
   }
 
   openFiltersDialog() {
-    let type = this.getType(this.router.url.split("/")[2]) 
+    let type = this.getType(this.router.url.split("/")[2])
     let config = new MatDialogConfig();
     config.viewContainerRef = this.login_viewContainerRef;
     config.panelClass = 'dialogClass';
     config.width = '100%';
     config.maxWidth = '40vw';
-    config.data = {type};
+    config.data = { type };
     if (this.isMobile) {
       config.height = '100%';
     } else {
@@ -565,7 +569,7 @@ export class FilterItemComponent implements OnInit {
         // this.filter.type = this.params?.type;
         this.filter.city_lat = localStorage.getItem("locationLat") ?? 0;
         this.filter.city_long = localStorage.getItem("locationLat") ?? 0;
-        
+
         this.params.amenities = this.filter?.amenities;
         this.params.distance = this.filter?.distance;
         // this.params.customer_rating = this.filter?.customer_rating;
@@ -594,7 +598,7 @@ export class FilterItemComponent implements OnInit {
   }
 
   onNearmeClicked() {
-    if(this.user_lat && this.user_long){
+    if (this.user_lat && this.user_long) {
       this.onSelectionChange(true)
       localStorage.setItem("locationLat", String(this.user_lat))
       localStorage.setItem("locationLong", String(this.user_long))
@@ -653,7 +657,9 @@ export class FilterItemComponent implements OnInit {
     } else {
       this.selectedValues = this.selectedValues.filter(val => val !== item.spaceType);
     }
-    sessionStorage.setItem('selectedValues', JSON.stringify(this.selectedValues));
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('selectedValues', JSON.stringify(this.selectedValues));
+    }
     this.cityListing.getSpacesByCity();
     const coWorkingList = this.spaces.find(p => p.spaceType === 'Co-working');
     if (coWorkingList) {
@@ -662,7 +668,7 @@ export class FilterItemComponent implements OnInit {
         this.selectedRadio = 'Co-working';
       }
     }
-    this.show =false
+    this.show = false
     this.control.setValue("")
     // this.onSelectionChange()
     this.getAllLocation("Coworking Space")
@@ -673,7 +679,7 @@ export class FilterItemComponent implements OnInit {
     return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
   }
 
-  openNearByList(list:any){
+  openNearByList(list: any) {
     window.open(
       `in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`,
       '_blank'
