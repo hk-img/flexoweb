@@ -140,8 +140,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.logged_in = user_details.is_logged_in;
       this.shortlists = user_details.shortlists;
     });
-    this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
-    this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
+    // this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
+    // this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
   }
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
