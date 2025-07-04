@@ -317,6 +317,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         }
       }
     }
+    this.titleService.setTitle(`Coworking Spaces in | Flexo`);
   }
 
 
