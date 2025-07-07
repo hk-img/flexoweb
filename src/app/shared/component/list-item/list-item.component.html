@@ -6,7 +6,7 @@
     <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
       responsive="breakpoints">
       <ng-container *ngIf="spaceDetails.images?.length">
-        <div ngxSlickItem class="swiper-slide single-listing-slider slide"
+        <!-- <div ngxSlickItem class="swiper-slide single-listing-slider slide"
           *ngFor="let image of spaceDetails.images; trackBy: trackByImage">
           <a style="cursor: pointer;">
             <img loading="lazy" fetchpriority="low" [src]="image" (error)="onImageError($event,spaceDetails.imageAlt)"
@@ -14,9 +14,9 @@
               title="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
               alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}" />
           </a>
-        </div>
+        </div> -->
       </ng-container>
-      <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
+      <!-- <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
         <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide">
           <a style="cursor: pointer;">
             <img loading="lazy" fetchpriority="low"
@@ -27,7 +27,7 @@
               alt="detail image" title="detail image" width="399" height="320" />
           </a>
         </div>
-      </ng-container>
+      </ng-container> -->
     </ngx-slick-carousel>
     <a class="carousel-control-prev" style="top: 45%" (click)="prev($event)" role="button" data-slide="prev">
       <span><app-icon name="chevronLeft" class="w-3 icon-color"></app-icon></span>
@@ -89,9 +89,9 @@
       <div class="rating-result d-flex align-items-center pr-2" style="" title="60%"
         *ngIf="spaceDetails.rating && (type === 'coworking' || type === 'shortterm' ) && spaceDetails.reviewCount.length > 0">
         <ul class="product-rating pr-1">
-          <li *ngFor="let element of spaceDetails.rating_array">
+          <!-- <li *ngFor="let element of spaceDetails.rating_array">
             <app-icon name="star" class="w-2"></app-icon>
-          </li>
+          </li> -->
           <!-- <li><i class="ion-android-star"></i></li>
           <li><i class="ion-android-star"></i></li> -->
           <li *ngIf="spaceDetails.rating - spaceDetails.rating_floor != 0">
