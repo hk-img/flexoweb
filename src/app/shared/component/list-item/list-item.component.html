@@ -15,7 +15,7 @@
               alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}" />
           </a>
         </div>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
         <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide">
           <a style="cursor: pointer;">
