@@ -653,7 +653,7 @@ export class HomeComponent implements OnDestroy {
       let citySlug = this.city.replace(/\s+/g, '-').toLowerCase();
       let spaceTypeSlug = this.spaceType.toLowerCase().replace(/\s+/g, '-').replace('/', '-');
 
-      if (spaceTypeSlug == 'coworking-space') {
+      if (spaceTypeSlug == 'coworking-space' && isCityLevel) {
         spaceTypeSlug = 'coworking'
       }
 
