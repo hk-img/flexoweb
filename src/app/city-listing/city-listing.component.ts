@@ -238,7 +238,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.loadZohoScript2();
       if (localStorage.getItem('userDetails')) {
         this.isCoworking = sessionStorage.getItem('isCoworking')
         const userDetail = localStorage.getItem('userDetails');
