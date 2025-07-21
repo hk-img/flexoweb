@@ -15,6 +15,7 @@ import { AuthGuard } from './services/auth.guard';
 import { _404Component } from './shared/shared/_404/_404.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { RefundPolicyComponent } from './refund-policy/refund-policy.component';
+import { HostTermConditionComponent } from 'src/host-term-condition/host-term-condition.component';
 
 export const routes: Routes = [
   {
@@ -101,6 +102,10 @@ export const routes: Routes = [
   {
     path:'refund-policy',
     component: RefundPolicyComponent
+  },
+  {
+    path:'host-terms-conditions',
+    component: HostTermConditionComponent
   },
   {
     path: 'terms-conditions',

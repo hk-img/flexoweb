@@ -94,7 +94,6 @@ export class BuyPassComponent {
     }
 
     this.dayOptions = this.dayListOptions(30);
-    this.passOptions = this.dayListOptions(1000);
 
   }
 
@@ -194,10 +193,12 @@ export class BuyPassComponent {
       .getSpaceDetails(this.data.country, this.data.city, this.data.spaceType, this.data.spaceId)
       .then((res) => {
         this.space_details = res.data
+        console.log(this.space_details)
         this.spaceName = res.data.actual_name
         this.landmark = res.data.location_name
         this.originalPrice = res.data.originalPrice
         this.location_name = res.data.location_name;
+        this.passOptions = this.dayListOptions(this.space_details.dayPassSeat ?? 1000);
       })
       .catch((error) => { });
   }

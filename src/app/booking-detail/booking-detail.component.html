@@ -110,6 +110,15 @@
                         </div>
                     </div>
                 </div>
+                <div class=" booking-details-booking-information-single my-2"
+                    *ngIf="bookingDetail?.spaceType == 'Coworking Space'">
+                    <div class="d-flex align-items-center">
+                        <p>No of Guest:</p>
+                        <div class="ml-2 col-3">
+                            <p style="font-weight: 600; color: #000000;">{{bookingDetail?.noOfGuest}}</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="booking-details-booking-information mt-3 align-items-center"
                     *ngIf="bookingDetail?.spaceType == 'Coworking Space' && formattedDates.length > 0">
                     <p>Date:</p>
@@ -259,9 +268,9 @@
 
                     </div>
 
-                    <a *ngIf="bookingDetail?.bookingStatus === 'confirmed' "
+                    <!-- <a *ngIf="bookingDetail?.bookingStatus === 'confirmed' "
                         class="w-100 d-flex justify-content-center mt-3 text-danger pointer"
-                        (click)="cancelConfirmation(bookingDetail)"> Cancel Booking </a>
+                        (click)="cancelConfirmation(bookingDetail)"> Cancel Booking </a> -->
                 </div>
 
 
