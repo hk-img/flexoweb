@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import {
   MatLegacyDialog as MatDialog,
-  MatLegacyDialogConfig as MatDialogConfig,
+  MatLegacyDialogConfig as MatDialogConfig, 
   MatLegacyDialogRef as MatDialogRef,
 } from '@angular/material/legacy-dialog';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
