@@ -71,7 +71,6 @@ export class CoWorkingVisitScheduleTwoComponent {
   }
 
   getShortDetails(spaceId: number) {
-    alert(spaceId)
     this.spaceService
       .getShortDetailsById(spaceId)
       .then((res) => {
