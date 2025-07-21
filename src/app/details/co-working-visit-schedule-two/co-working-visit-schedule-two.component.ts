@@ -71,6 +71,7 @@ export class CoWorkingVisitScheduleTwoComponent {
   }
 
   getShortDetails(spaceId: number) {
+    alert(spaceId)
     this.spaceService
       .getShortDetailsById(spaceId)
       .then((res) => {
@@ -107,7 +108,7 @@ export class CoWorkingVisitScheduleTwoComponent {
     });
     this.route.params.subscribe((params: Params) => {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
-      // this.space_id = params.spaceId;
+      this.space_id = params.spaceId;
       // alert(this.space_id)
       this.getShortDetails(this.space_id)
     });
