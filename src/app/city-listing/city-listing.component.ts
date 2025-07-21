@@ -38,6 +38,7 @@ import { AppGlobals } from '../services/app-globals';
 declare var geolocation: any;
 declare var google: any;
 declare var $zoho: any;
+
 @Component({
   selector: 'app-city-listing',
   templateUrl: './city-listing.component.html',
