@@ -62,7 +62,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   @ViewChild('faqsChild', { static: false })
   private faqsChild: ElementRef<HTMLDivElement>;
   isTestDivScrolledIntoView: boolean;
-  _showMap: boolean = false;
+  _showMap: boolean = true;
   nearBySpaces = new BehaviorSubject<any>([]);
   faqs = new BehaviorSubject([]);
   isFaqsVisible: any;

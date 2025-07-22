@@ -19,7 +19,7 @@ import { CityListingComponent } from 'src/app/city-listing/city-listing.componen
   providers: [TitleCasePipe]
 })
 export class FilterItemComponent implements OnInit {
-  _showMap: boolean = false;
+  _showMap: boolean = true;
   showCard = false;
   @Output() showMap = new EventEmitter<boolean>(false);
   @ViewChild('selectedValueDiv') selectedValueDiv: ElementRef | undefined;
