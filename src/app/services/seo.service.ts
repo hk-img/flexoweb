@@ -15,9 +15,14 @@ export class SEOService {
         return this.title.getTitle();
     }
     createLinkForCanonicalURL() {
-        let link: HTMLLinkElement = this.dom.createElement('link');
-        link.setAttribute('rel', 'canonical');
-        this.dom.head.appendChild(link);
-        link.setAttribute('href', this.dom.URL.toLowerCase());
+        let link: HTMLLinkElement = this.dom.querySelector("link[rel='canonical']");
+        if (link) {
+            link.setAttribute('href', window.location.href.toLowerCase());
+        } else {
+            link = this.dom.createElement('link');
+            link.setAttribute('rel', 'canonical');
+            link.setAttribute('href', window.location.href.toLowerCase());
+            this.dom.head.appendChild(link);
+        }
     }
 } 
