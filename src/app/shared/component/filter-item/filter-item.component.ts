@@ -679,12 +679,12 @@ export class FilterItemComponent implements OnInit {
     return value?.trim()?.toLowerCase().replace(/\s+/g, '-');
   }
 
-  openNearByList(list:any){
-    window.open(
-      `in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`,
-      '_blank'
-    );
-  }
+  // openNearByList(list:any){
+  //   window.open(
+  //     `in/${this.formatUrl(list.spaceType)}/${this.formatUrl(list.city)}/${this.formatUrl(list.location_name)}`,
+  //     '_blank'
+  //   );
+  // }
 
 
 

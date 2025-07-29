@@ -671,10 +671,10 @@ export class HomeComponent implements OnDestroy {
 
   navigateToCity(city: any, locationValue: any) {
     if (isPlatformBrowser(this.platformId)) {
-      let url = "";
-      url = `in/coworking/` + `${(city).replace(' ', '-').toLowerCase()}`;
+      // let url = "";
+      // url = `in/coworking/` + `${(city).replace(' ', '-').toLowerCase()}`;
       localStorage.setItem("location", locationValue)
-      this.router.navigate([this.formatUrl(url)]);
+      // this.router.navigate([this.formatUrl(url)]);
     }
   }
 
