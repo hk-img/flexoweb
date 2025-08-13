@@ -11334,6 +11334,7 @@ h4 {
   }
   .cdk-overlay-pane {
     max-width: 100% !important;
+    width: 100% !important;
   }
   .list-details-tab-item {
     justify-content: flex-start !important;
