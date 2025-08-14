@@ -11867,7 +11867,7 @@ h4 {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  z-index: 999 !important;
+  z-index: 99 !important;
 }
 
 .slick-prev:hover,
