@@ -10,6 +10,9 @@ import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { GlobalVariables } from '../global/global-variables';
 import { SpaceService } from '../services/space.service';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { ExploreinquiryComponent } from '../exploreinquiry/exploreinquiry.component';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef} from '@angular/material/legacy-dialog';
 declare var google: any;
 declare let localStorage: any;
 
@@ -414,6 +417,9 @@ export class HomeComponent implements OnDestroy {
   constructor(
     private router: Router,
     public viewContainerRef: ViewContainerRef,
+    public inquiryVisit_viewContainerRef: ViewContainerRef,
+    public inquiryVisit_dialogRef: MatDialogRef<any>,
+    public inquiryVisit_dialog: MatDialog,
     private titleService: Title,
     private elementRef: ElementRef,
     private metaService: Meta,
@@ -857,5 +863,37 @@ export class HomeComponent implements OnDestroy {
       script.textContent = JSON.stringify(jsonLd);
       document.head.appendChild(script);
     }
+  }
+
+  openInquiryPopUp(e: Event, spaceDetail: any): void {
+    e.stopPropagation();
+    setTimeout(() => {
+      const config = new MatDialogConfig();
+      config.viewContainerRef = this.inquiryVisit_viewContainerRef;
+      config.panelClass = 'enq-mod-c';
+      config.width = '100%';
+      config.maxWidth = '55vw';
+      config.data = {
+        spaceDetail,
+      };
+
+      this.inquiryVisit_dialogRef = this.inquiryVisit_dialog.open(
+        ExploreinquiryComponent,
+        config
+      );
+
+      this.inquiryVisit_dialogRef.componentInstance.ref =
+        this.inquiryVisit_dialogRef;
+      this.inquiryVisit_dialogRef.componentInstance.flag = 1;
+
+      this.inquiryVisit_dialogRef
+        .afterClosed()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((result) => {
+          if (result?.success) {
+            // Handle success
+          }
+        });
+    });
   }
 }

@@ -1618,6 +1618,10 @@ export class SpaceService {
   inquiryBooking(payload){
     return this.http.post(`${environment.apiUrl}/api/v1/user/inquiry`,payload);
   }
+  
+  getLocationByIP(lat:any,lng:any){
+    return this.http.get(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
+  }
  
   getAllAmenities(){
     return this.http.get(this.getAmenitiesURL);

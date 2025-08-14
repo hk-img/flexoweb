@@ -51,6 +51,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import { ShimmerLoadingComponent } from './shared/component/shimmer-loading/shimmer-loading.component';
 import { ThankyopopupComponent } from './thankyopopup/thankyopopup.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { ExploreinquiryComponent } from './exploreinquiry/exploreinquiry.component';
 
 
 export const MY_FORMATS = {
@@ -91,7 +92,7 @@ export function loadGoogleMaps(): () => Promise<void> {
 // SocialLoginModule,
 // GoogleSigninButtonModule,
 @NgModule({
-  declarations: [AppComponent,FilterDialog,ThankyopopupComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
+  declarations: [ExploreinquiryComponent,AppComponent,FilterDialog,ThankyopopupComponent, DialogConfirmationPopUp, ...navigatableComponents, PaymentsComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
