@@ -6,7 +6,7 @@
     <ngx-slick-carousel class="carousel" #slickMainCarousel="slick-carousel" [config]="mainSliderConfig"
       responsive="breakpoints">
       <ng-container *ngIf="spaceDetails.images?.length">
-        <!-- <div ngxSlickItem class="swiper-slide single-listing-slider slide"
+        <div ngxSlickItem class="swiper-slide single-listing-slider slide"
           *ngFor="let image of spaceDetails.images; trackBy: trackByImage">
           <a style="cursor: pointer;">
             <img loading="lazy" fetchpriority="low" [src]="image" (error)="onImageError($event,spaceDetails.imageAlt)"
@@ -14,7 +14,7 @@
               title="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}"
               alt="{{spaceDetails.imageAlt}} {{image | slice:(image?.lastIndexOf('/') + 1) }}" />
           </a>
-        </div> -->
+        </div>
       </ng-container>
       <!-- <ng-container *ngFor="let repeat of getArray(spaceDetails.images?.length)">
         <div *ngIf="!spaceDetails.images?.length" ngxSlickItem class="swiper-slide single-listing-slider slide">
