@@ -67,7 +67,7 @@
   </div>
 </div>
 
-<div class="container-fluid trusted_logos section-padding pb-0">
+<div class="container-fluid trusted_logos section-padding pb-0" *ngIf="trustedLeadingShimmer">
   <div class="container">
     <div class="row shimmerrow-text">
       <div class="col-12 text-center">
@@ -156,7 +156,7 @@
   </div>
 </div>
 
-<div class="container-fluid trusted_logos section-padding pb-0">
+<div class="container-fluid trusted_logos section-padding pb-0" *ngIf="!trustedLeadingShimmer">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">

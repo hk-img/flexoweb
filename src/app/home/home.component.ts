@@ -26,6 +26,7 @@ export class HomeComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
   public workspace_type;
   public isMobile = false;
+  trustedLeadingShimmer:boolean = true;
   public s3_base_url =
     'https://' +
     environment.s3_bucket_path +
@@ -446,9 +447,12 @@ export class HomeComponent implements OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.initializeComponent();
       this.homeJsonLd();
+      setTimeout(() => {
+        this.trustedLeadingShimmer = false;
+      }, 200);
     }
   }
-
+  
   private initializeComponent(): void {
     this.startCarousel();
     this.getCoords();
