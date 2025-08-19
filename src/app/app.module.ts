@@ -47,7 +47,6 @@ import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { environment } from 'src/environments/environment';
 import { HttpRequestInterceptor } from './login/tokanInterceptor';
-import { PaymentsComponent } from './payments/payments.component';
 import { ShimmerLoadingComponent } from './shared/component/shimmer-loading/shimmer-loading.component';
 import { ThankyopopupComponent } from './thankyopopup/thankyopopup.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
