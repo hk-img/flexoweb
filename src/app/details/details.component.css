@@ -1015,8 +1015,20 @@
 .imgcard-div{
   height: 250px;
 }
+.videocard-div{
+  height: 100%;
+}
 @media only screen and (min-width: 320px) and (max-width: 768px) {
   .imgcard-div{
     height: 68px;
   }
+  
+
+}
+@media only screen and (max-width: 767px){
+  .videocard-div{
+  height: 300px;
+  margin-bottom: 10px;
+}
+
 }
