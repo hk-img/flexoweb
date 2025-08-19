@@ -27,7 +27,7 @@ export class SpaceService {
   private voteDevoteEndPoint = environment.apiUrl + `/api/v1/spaces/vote`;
   
   private getSpacesByCityUrl =
-    environment.apiUrl + `/api/v1/spaces/getSpacesByCity`;
+    environment.apiUrl + `/api/v1/spaces/getSpacesByCitys`;
   private addBookingDetailsUrl =
     environment.apiUrl + '/api/v1/common/addBookingAndSendInvoice';
   private checkAvailabilityUrl =
@@ -1461,7 +1461,7 @@ export class SpaceService {
   }
   getNearBySpaces(data:any): Observable<any> {
     return this.http.post(
-      environment.apiUrl + '/api/v1/spaces/getNearBySpacesByCityId',data,
+      environment.apiUrl + '/api/v1/spaces/getNearBySpacesByCityIds',data,
       {
         headers: this.headers,
       }

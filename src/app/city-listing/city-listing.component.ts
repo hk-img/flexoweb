@@ -589,10 +589,10 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   getSpacesByCity() {
-
+    
+    this.isloader = true;
     if (isPlatformBrowser(this.platformId)) {
 
-      this.isloader = true;
 
       if (this.spaceType?.toLowerCase() == 'coworking space') {
         this.type = "coworking";
