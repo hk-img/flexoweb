@@ -27,7 +27,7 @@ export class SpaceService {
   private voteDevoteEndPoint = environment.apiUrl + `/api/v1/spaces/vote`;
   
   private getSpacesByCityUrl =
-    environment.apiUrl + `/api/v1/spaces/getSpacesByCitys`;
+    environment.apiUrl + `/api/v1/spaces/getSpacesByCity`;
   private addBookingDetailsUrl =
     environment.apiUrl + '/api/v1/common/addBookingAndSendInvoice';
   private checkAvailabilityUrl =
@@ -1415,14 +1415,11 @@ export class SpaceService {
 		}
 		
 		
-		getShortDetailsById(spaceId:number){
+		getShortDetailsById(spaceId:number) : Observable<any> {
 			return this.http
 				.get(this.shortDetailsUrl + spaceId, {
 					headers: this.headers,
 				})
-				.toPromise()
-				.then((res) => res)
-				.catch(this.handleError);
 			
 		}
 
@@ -1461,7 +1458,7 @@ export class SpaceService {
   }
   getNearBySpaces(data:any): Observable<any> {
     return this.http.post(
-      environment.apiUrl + '/api/v1/spaces/getNearBySpacesByCityIds',data,
+      environment.apiUrl + '/api/v1/spaces/getNearBySpacesByCityId',data,
       {
         headers: this.headers,
       }

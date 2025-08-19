@@ -447,9 +447,7 @@ export class HomeComponent implements OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.initializeComponent();
       this.homeJsonLd();
-      setTimeout(() => {
-        this.trustedLeadingShimmer = false;
-      }, 200);
+      this.trustedLeadingShimmer = false;
     }
   }
   

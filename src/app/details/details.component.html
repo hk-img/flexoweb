@@ -1,4 +1,4 @@
-<div class="listing-details-slider swiper-container">
+<div class="listing-details-slider swiper-container" *ngIf="!isShimmer">
   <div class="swiper-wrapper" *ngIf="isMobile">
     <div class="position-relative">
       <div class="gallery-half position-relative" (click)="openImagesDialog()">
@@ -196,7 +196,7 @@
   <div class="listing-details-prev slider-btn v4" (click)="prev()"><i class="ion-arrow-left-c"></i></div> -->
 </div>
 
-<div class="container">
+<div class="container" *ngIf="!isShimmer">
   <div class="row">
     <div class="col-md-12">
       <div class="list-details-title v2">
@@ -478,7 +478,7 @@
 </div>
 <!--Listing Details Hero ends-->
 <!--Listing Details Info starts-->
-<div class="section-padding" style="padding-top: 0px">
+<div class="section-padding" style="padding-top: 0px" *ngIf="!isShimmer">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-12 order-lg-0 order-md-1 order-1">
@@ -1520,7 +1520,7 @@
       QUOTE</a>
   </div>
 </div> -->
-<div class="mobile_btm_bar py-3 px-3 ">
+<div class="mobile_btm_bar py-3 px-3 " *ngIf="!isShimmer">
   <ul class="p-0 m-0 socail_btn_list">
     <div class="row justify-content-around">
       <div *ngIf="isShortterm">
@@ -1533,7 +1533,7 @@
   </ul>
 </div>
 <div class="mobile_btm_bar py-3 px-3 "
-  *ngIf="['coworking space', 'managed office', 'private office', 'shared office', 'virtual office'].includes(spaceType)">
+  *ngIf="['coworking space', 'managed office', 'private office', 'shared office', 'virtual office'].includes(spaceType) && !isShimmer">
   <ul class="p-0 m-0 socail_btn_list">
     <div class="row justify-content-around">
       <div class="col-3">
@@ -1574,7 +1574,7 @@
 </div>
 
 <!-- shimmerdesign -->
-<div class=" my-4">
+<div class=" my-4" *ngIf="isShimmer">
 
   <!-- Top image shimmer -->
   <div class="row">
