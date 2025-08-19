@@ -955,7 +955,7 @@
   min-height: 1em;
   vertical-align: middle;
   cursor: wait;
-  background-color: currentColor;
+  background-color: #a7a4a4;
   opacity: .5;
   border-radius: .25rem;
 }
@@ -1002,7 +1002,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    rgba(72, 71, 71, 0.2),
     transparent
   );
 }
