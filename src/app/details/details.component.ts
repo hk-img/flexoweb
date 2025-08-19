@@ -42,6 +42,7 @@ import { CoWorkingVisitScheduleComponent } from './co-working-visit-schedule/co-
 import { InquiryComponent } from './inquiry/inquiry.component';
 import { RequestBookingComponent } from './request-booking/request-booking.component';
 import { ViewMoreDialog } from './view-more/view-more.component';
+import { finalize } from 'rxjs/operators';
 declare var $: any;
 
 
@@ -329,12 +330,11 @@ export class DetailsComponent implements OnInit {
   sat_closing_time: any = '';
   sun_opening_time: any = '';
   sun_closing_time: any = '';
-
+  isShimmer: boolean = true;
 
   getShortDetails(spaceId: number) {
-    this.spaceService
-      .getShortDetailsById(spaceId)
-      .then((res) => {
+    this.isShimmer = true;
+    this.spaceService.getShortDetailsById(spaceId).pipe(finalize(() => (this.isShimmer = false))).subscribe((res) => {
         if (res.success) {
           const spaceType = res.spaceData.spaceType?.toLowerCase()
           const { actual_name, spaceTitle, location_name, contact_city_name } = res.spaceData

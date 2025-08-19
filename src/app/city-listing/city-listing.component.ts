@@ -38,6 +38,7 @@ import { AppGlobals } from '../services/app-globals';
 declare var geolocation: any;
 declare var google: any;
 declare var $zoho: any;
+
 @Component({
   selector: 'app-city-listing',
   templateUrl: './city-listing.component.html',
@@ -588,10 +589,10 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   getSpacesByCity() {
-
+    
+    this.isloader = true;
     if (isPlatformBrowser(this.platformId)) {
 
-      this.isloader = true;
 
       if (this.spaceType?.toLowerCase() == 'coworking space') {
         this.type = "coworking";

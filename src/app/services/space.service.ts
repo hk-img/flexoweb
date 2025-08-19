@@ -1415,14 +1415,11 @@ export class SpaceService {
 		}
 		
 		
-		getShortDetailsById(spaceId:number){
+		getShortDetailsById(spaceId:number) : Observable<any> {
 			return this.http
 				.get(this.shortDetailsUrl + spaceId, {
 					headers: this.headers,
 				})
-				.toPromise()
-				.then((res) => res)
-				.catch(this.handleError);
 			
 		}
 
@@ -1617,6 +1614,10 @@ export class SpaceService {
 
   inquiryBooking(payload){
     return this.http.post(`${environment.apiUrl}/api/v1/user/inquiry`,payload);
+  }
+  
+  getLocationByIP(lat:any,lng:any){
+    return this.http.get(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
   }
  
   getAllAmenities(){

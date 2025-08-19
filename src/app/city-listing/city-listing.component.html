@@ -1,6 +1,6 @@
-<div class="loader_circle">
+<!-- <div class="loader_circle">
   <span class="loader" *ngIf="isloader"></span>
-</div>
+</div> -->
 <div [ngClass]="_showMap ? 'filter-wrapper style1 mar-top-100 half-map' : 'mt-70'">
   <div class="container-fluid position-relative city_google_drop" style="z-index: 99;">
     <div class="row">
@@ -39,11 +39,1184 @@
             </div>
           </div>
           <div style="text-align: center;" *ngIf="!spaces_list.length && !recommended_spaces.length && !isloader">
-            <!-- <img style="width: 10%;" src="../../https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/not-found.webp" alt=""> -->
-            <img style="width: 10%;" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/preloader.gif"
+            <!-- <img style="width: 10%;" src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/preloader.gif"
               alt="location" title="location" class="ratio-1x1" />
             <h3 style="font-size: 16px !important;color: #897777 !important;">Finding the best options for you. Stay
-              tuned!</h3>
+              tuned!</h3> -->
+            <!-- shimmer  -->
+            <div class="row ">
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+              <div class=" col-12 col-md-6 col-lg-4">
+                <!-- Image shimmer -->
+                <div class="card-img-top placeholder-glow" style="height: 320px; background: #e0e0e0;"></div>
+
+                <div class="card-body">
+                  <!-- Title shimmer -->
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                  </h5>
+
+                  <!-- Location shimmer -->
+                  <div class="card-text d-flex justify-content-start mb-1 placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </div>
+                  <div class="card-text d-flex justify-content-start placeholder-glow">
+                    <span class="placeholder col-4"></span>
+                  </div>
+
+                  <!-- Pricing shimmer -->
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+                  <div class="row d-flex justify-content-between placeholder-glow">
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                    <div class="col-5"><span class="placeholder w-100"></span></div>
+                  </div>
+
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-11"></span>
+                  </h5>
+                  <!-- Button shimmer -->
+                  <div class="row placeholder-glow d-flex justify-content-end align-items-end">
+                    <a href="#" tabindex="-1" class="  disabled placeholder col-2"></a>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
           </div>
           <div class="tab-content" *ngIf="
               spaces_list.length
@@ -53,7 +1226,7 @@
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-12" *ngFor="let element of spaces_list"
                   [ngClass]="!_showMap ? 'col-xl-4' : 'col-xl-6'">
-                  <app-list-item [spaceDetails]="element" [isMobile]="isMobile" [filters]="filter"
+                  <app-list-item *ngIf="!isloader" [spaceDetails]="element" [isMobile]="isMobile" [filters]="filter"
                     [is_similar_listing]="false" (shortlistItemEvent)="shortList($event)"
                     (mouseover)="onHoverSpace(element.id)" (mouseleave)="onLeaveSpace(element.id)">
                   </app-list-item>

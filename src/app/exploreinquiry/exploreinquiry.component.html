@@ -1,0 +1,141 @@
+<div class="pm-all-inputs inquiry_form" id="inquiry_form">
+    <div class="info-head">
+        <h4> Get Quotes </h4>
+        <app-icon (click)="closeModal(null)" name="close" class="w-4 text-dark"></app-icon>
+    </div>
+    <p class="info-sub-head" style="font-size: 13px;"> Our workspace advisor will get in touch to help you with your
+        requirement.</p>
+    <form #profileDetailForm="ngForm" (ngSubmit)="onSubmit(profileDetailForm.value)">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pm-single">
+                    <p>First name<span class="text-danger">*</span></p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input onkeypress="return /[a-zA-Z ]/.test(event.key)" type="text" matInput
+                            placeholder="Enter First Name" name="firstName" [(ngModel)]="formData.firstName" required />
+                        <mat-error *ngIf="profileDetailForm.controls.firstName?.errors?.required">
+                            First Name is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pm-single">
+                    <p>Last name<span class="text-danger">*</span></p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input type="text" onkeypress="return /[a-zA-Z ]/.test(event.key)" matInput
+                            placeholder="Enter Last Name" [(ngModel)]="formData.lastName" required name="lastName" />
+                        <mat-error *ngIf="profileDetailForm.controls.lastName?.errors?.required">
+                            Last Name is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pm-single">
+                    <p>Email<span class="text-danger">*</span></p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input type="text" matInput pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                            placeholder="Enter Email" [(ngModel)]="formData.userEmail" required name="userEmail" />
+                        <mat-error *ngIf="profileDetailForm.controls.userEmail?.errors?.required">
+                            Email is required.
+                        </mat-error>
+                        <mat-error *ngIf="profileDetailForm.controls.userEmail?.errors?.pattern">
+                            Please enter a valid email address.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pm-single">
+                    <div class="form-group">
+                        <p style="margin-bottom: 4px;">Mobile<span class="text-danger">*</span></p>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-text form-control" style="flex-grow: .5;" id="basic-addon3">
+                                <ng-select #select (change)="onCountryCodeChange($event)" [searchable]="false"
+                                    [(ngModel)]="formData.phone_code" name="phone_code">
+                                    <ng-template ng-header-tmp>
+                                        <input style="width: 100%; line-height: 24px" type="text"
+                                            (input)="select.filter($event.target.value)" />
+                                    </ng-template>
+                                    <ng-option *ngFor="let list of countryCodes" [value]="list.dialcode"><img
+                                            src="{{list.flag}}" alt="" width="20px"> {{list.dialcode}} &nbsp;
+                                        {{list.name}} </ng-option>
+                                </ng-select>
+                            </span>
+                            <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control"
+                                id="basic-url" aria-describedby="basic-addon3 basic-addon4" name="userMobile"
+                                [attr.autocomplete]="true" #userMobile="ngModel" required
+                                [(ngModel)]="formData.userMobile" [minlength]="placeholder.length"
+                                [maxlength]="placeholder.length"
+                                [ngClass]="userMobile.invalid && (userMobile.touched || userMobile.dirty) ? 'invalid-border' : ''">
+                            <mat-error class="col-12 mat_error"
+                                *ngIf="profileDetailForm.controls.userMobile?.errors?.required && (profileDetailForm.controls.userMobile.touched || profileDetailForm.controls.userMobile.dirty)">
+                                Please enter a mobile number.
+                            </mat-error>
+                            <mat-error class="col-12 mat_error" *ngIf="userMobile.errors?.minlength">
+                                Minimum {{placeholder?.length}} digits are required.
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pm-single">
+                    <p>Space Type<span class="text-danger">*</span></p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select placeholder="Select Space Type" name="spaceType" [(ngModel)]="formData.spaceType"
+                             required>
+                            <mat-option value="Private Office">Private Office</mat-option>
+                            <mat-option value="Managed Office">Managed Office</mat-option>
+                            <mat-option value="Dedicated Desk">Dedicated Desk</mat-option>
+                            <mat-option value="Flexible Desk">Flexible Desk</mat-option>
+                            <mat-option value="Virtual Office">Virtual Office</mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="profileDetailForm.controls.spaceType?.errors?.required && isCoworkings || valueForListingPage == 'Coworking'">
+                            Space Type is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pm-single">
+                    <p>No. of Seats<span class="text-danger">*</span></p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select placeholder="Select No. of Seats" name="inquirySpaceCapacity"
+                            [(ngModel)]="formData.inquirySpaceCapacity" required>
+                            <mat-option value="1-5">1-5</mat-option>
+                            <mat-option value="6-10">6-10</mat-option>
+                            <mat-option value="11-20">11-20</mat-option>
+                            <mat-option value="21-50">21-50</mat-option>
+                            <mat-option value="51-100">51-100</mat-option>
+                            <mat-option value="100+">100+</mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="profileDetailForm.controls.inquirySpaceCapacity?.errors?.required && isCoworkings || valueForListingPage == 'Coworking'">
+                            No. of Seats is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="form-group btn-grp ">
+            <button type="submit" class="custum-btn btnSubmit">Submit</button>
+        </div>
+        <div class="step-term-condition text-center"
+            style="padding: 20px; padding-top: 0px;">
+            <hr>
+            <p style="font-size: 11px;">After you submit a workspace enquiry to us, we may share your details with
+                workspace providers, who may contact you to follow up on your enquiry." Please read our <a href=""
+                    style="font-size: 11px;"> Privacy Policy </a> for details of how we process the information.</p>
+        </div>
+        <!-- <div class="step-term-condition text-center"
+            style="padding: 20px; padding-top: 0px;">
+            <hr>
+            <p style="font-size: 11px;">After you submit a workspace enquiry to us, we may share your details with
+                workspace providers, who may contact you to follow up on your enquiry." Please read our <a href=""
+                    style="font-size: 11px;"> Privacy Policy </a> for details of how we process the information.</p>
+        </div> -->
+    </form>
+</div>
