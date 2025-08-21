@@ -754,12 +754,13 @@ export class HomeComponent implements OnDestroy {
   loadZohoScript2() {
     this.cleanupZohoScript();
 
-    const load = () => {
+    setTimeout(() => {
       window['$zoho'] = window['$zoho'] || {};
       window['$zoho'].salesiq = {
         widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
         values: {},
-        ready: function () { },
+        ready: function () {
+        },
       };
       setTimeout(() => {
         this.clickZohoChatButton();
@@ -770,13 +771,7 @@ export class HomeComponent implements OnDestroy {
       script.defer = true;
       script.src = "https://salesiq.zoho.in/widget";
       document.body.appendChild(script);
-    };
-
-    if (typeof (window as any).requestIdleCallback === 'function') {
-      (window as any).requestIdleCallback(load);
-    } else {
-      setTimeout(load, 200);
-    }
+    }, 200);
   }
 
   clickZohoChatButton() {

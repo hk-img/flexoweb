@@ -23,7 +23,7 @@ import { SharedModule } from '../shared/shared/shared.module';
 import { DetailsRoutingModule } from './details-routing.module';
 import { DetailsComponent } from './details.component';
 import { ViewMoreDialog } from './view-more/view-more.component';
-import { ViewMoreReviewsComponent } from './view-more-reviews/view-more-reviews.component'
+import { ViewMoreReviews } from './view-more-reviews/view-more-reviews.component'
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { ScheduleVisitComponent } from '../schedule-visit/schedule-visit.component';
 import { RequestBookingComponent } from './request-booking/request-booking.component';
@@ -38,7 +38,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-    declarations: [DetailsComponent, ViewMoreDialog, WorkspaceRatingReviewComponent, ScheduleVisitComponent, ViewMoreReviewsComponent, RequestBookingComponent, BuyPassComponent, CoWorkingVisitScheduleComponent, CoWorkingVisitScheduleTwoComponent, AddReviewDialogComponent, InquiryComponent],
+    declarations: [DetailsComponent, ViewMoreDialog, WorkspaceRatingReviewComponent, ScheduleVisitComponent, ViewMoreReviews, RequestBookingComponent, BuyPassComponent, CoWorkingVisitScheduleComponent, CoWorkingVisitScheduleTwoComponent, AddReviewDialogComponent, InquiryComponent],
     providers: [InquiryComponent,CoWorkingVisitScheduleComponent,DatePipe,{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },],
     imports: [
         NgSelectModule,

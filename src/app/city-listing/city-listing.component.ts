@@ -1079,17 +1079,19 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   isScriptLoaded: boolean = false;
 
   loadZohoScript2() {
+
     const existingScript = document.getElementById("zsiqscript");
     if (existingScript) {
       existingScript.remove();
     }
 
-    const load = () => {
+    setTimeout(() => {
       window['$zoho'] = window['$zoho'] || {};
       window['$zoho'].salesiq = {
         widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
         values: {},
-        ready: function () { },
+        ready: function () {
+        },
       };
       setTimeout(() => {
         if (this.spaceType != "event space" && this.spaceType != 'Coworking Café/Restaurant' && this.spaceType != 'shoot studio' && this.spaceType != 'recording studio' && this.spaceType != 'podcast studio' && this.spaceType != 'activity space' && this.spaceType != 'sports turf' && this.spaceType != 'sports venue' && this.spaceType != 'party space' && this.spaceType != 'banquet hall' && this.spaceType != 'gallery' && this.spaceType != 'classroom' && this.spaceType != 'private cabin' && this.spaceType != 'meeting room' && this.spaceType != 'training room') {
@@ -1102,13 +1104,8 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       script.defer = true;
       script.src = "https://salesiq.zoho.in/widget";
       document.body.appendChild(script);
-    };
 
-    if (typeof (window as any).requestIdleCallback === 'function') {
-      (window as any).requestIdleCallback(load);
-    } else {
-      setTimeout(load, 200);
-    }
+    }, 200);
   }
 
   clickZohoChatButton() {

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IconModule } from '../shared/icon/icon.module';
 
 import { EnterpriseComponent } from './enterprise.component';
 
@@ -9,8 +8,7 @@ describe('EnterpriseComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnterpriseComponent ],
-      imports: [IconModule]
+      declarations: [ EnterpriseComponent ]
     })
     .compileComponents();
   }));

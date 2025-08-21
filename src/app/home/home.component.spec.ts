@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IconModule } from '../shared/icon/icon.module';
 
 import { HomeComponent } from './home.component';
 
@@ -9,8 +8,7 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
-      imports: [IconModule]
+      declarations: [ HomeComponent ]
     })
     .compileComponents();
   }));

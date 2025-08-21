@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IconModule } from '../shared/icon/icon.module';
 
 import { BookingListComponent } from './booking-list.component';
 
@@ -9,8 +8,7 @@ describe('BookingListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BookingListComponent],
-      imports: [IconModule]
+      declarations: [BookingListComponent]
     });
     fixture = TestBed.createComponent(BookingListComponent);
     component = fixture.componentInstance;

@@ -1,8 +1,20 @@
 import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 import { BookingDetailComponent } from './booking-detail/booking-detail.component';
+import { BookingListComponent } from './booking-list/booking-list.component';
+import { CareersComponent } from './careers/careers.component';
+import { ContactComponent } from './contact/contact.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EnterpriseComponent } from './enterprise/enterprise.component';
 import { HomeComponent } from './home/home.component';
+import { JoyOfGivingComponent } from './joy-of-giving/joy-of-giving.component';
+import { ListWithUsComponent } from './list-with-us/list-with-us.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { AuthGuard } from './services/auth.guard';
 import { _404Component } from './shared/shared/_404/_404.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { RefundPolicyComponent } from './refund-policy/refund-policy.component';
 
 export const routes: Routes = [
   {
@@ -64,39 +76,39 @@ export const routes: Routes = [
   
   {
     path: 'about',
-    loadChildren: () => import('./about/about.module').then(m => m.AboutModule),
+    component: AboutComponent,
   },
   {
     path: 'contact',
-    loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
+    component: ContactComponent,
   },
   {
     path: 'joy-of-giving',
-    loadChildren: () => import('./joy-of-giving/joy-of-giving.module').then(m => m.JoyOfGivingModule),
+    component: JoyOfGivingComponent,
   },
   {
     path: 'careers',
-    loadChildren: () => import('./careers/careers.module').then(m => m.CareersModule),
+    component: CareersComponent,
   },
   {
     path: 'enterprise',
-    loadChildren: () => import('./enterprise/enterprise.module').then(m => m.EnterpriseModule),
+    component: EnterpriseComponent,
   },
   {
     path: 'privacy-policy',
-    loadChildren: () => import('./privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyModule),
+    component: PrivacyPolicyComponent,
   },
   {
     path:'refund-policy',
-    loadChildren: () => import('./refund-policy/refund-policy.module').then(m => m.RefundPolicyModule)
+    component: RefundPolicyComponent
   },
   {
     path: 'terms-conditions',
-    loadChildren: () => import('./terms-conditions/terms-conditions.module').then(m => m.TermsConditionsModule),
+    component: TermsConditionsComponent,
   },
   {
     path: 'list-with-us',
-    loadChildren: () => import('./list-with-us/list-with-us.module').then(m => m.ListWithUsModule),
+    component: ListWithUsComponent,
   },
 
   // {
@@ -106,17 +118,17 @@ export const routes: Routes = [
   // },
   {
     path: 'dashboard',
+    component: DashboardComponent,
     canActivate: [AuthGuard],
-    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
     path: 'booking-management',
+    component: BookingListComponent,
     canActivate: [AuthGuard],
-    loadChildren: () => import('./booking-list/booking-list.module').then(m => m.BookingListModule),
   },
   {
     path: 'payments/:id/:timestamp',
-    loadChildren: () => import('./payments/payments.module').then(m => m.PaymentsModule),
+    component: PaymentsComponent,
   },
   {
     path: 'visit-scheduling',
@@ -166,6 +178,14 @@ export const routes: Routes = [
 
 export const navigatableComponents = [
   HomeComponent,
+  BookingListComponent,
   BookingDetailComponent,
-  _404Component,
+  AboutComponent,
+  ContactComponent,
+  JoyOfGivingComponent,
+  EnterpriseComponent,
+  CareersComponent,
+  TermsConditionsComponent,
+  PrivacyPolicyComponent,
+  ListWithUsComponent,
 ];

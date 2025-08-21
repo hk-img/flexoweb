@@ -8,7 +8,7 @@ import { SpaceService } from 'src/app/services/space.service';
   templateUrl: './view-more-reviews.component.html',
   styleUrls: ['./view-more-reviews.component.css'],
 })
-export class ViewMoreReviewsComponent implements OnInit {
+export class ViewMoreReviews implements OnInit {
   public space_name;
   public space_id;
   public spaceRatingReviewList = [];
@@ -85,8 +85,8 @@ export class ViewMoreReviewsComponent implements OnInit {
     this.onLoadMoreReviews();
   }
 
-  async ratingReviewBySpaceId() {
-    const result: any = await this.spaceService
+  ratingReviewBySpaceId() {
+    this.spaceService
       .getSpaceRatingReviewDetailsWithSortPagination(
         this.space_id,
         this.sortBy,
@@ -94,25 +94,26 @@ export class ViewMoreReviewsComponent implements OnInit {
         this.pageSize,
         this.starBy
       )
-      .toPromise();
-    this.spaceRatingReviewList = [];
-    if (result.data.success) {
-      let reviews = result.data.reviews ? result.data.reviews : [];
-      this.totalReviews = result.data.totalReviews
-        ? result.data.totalReviews
-        : 0;
-      this.totalPage = Math.ceil(this.totalReviews / this.pageSize);
-      if (this.totalReviews > this.page * this.pageSize) {
-        this.disabledNext = false;
-      } else {
-        this.disabledNext = true;
-      }
+      .subscribe((result: any) => {
+        this.spaceRatingReviewList = [];
+        if (result.data.success) {
+          let reviews = result.data.reviews ? result.data.reviews : [];
+          this.totalReviews = result.data.totalReviews
+            ? result.data.totalReviews
+            : 0;
+          this.totalPage = Math.ceil(this.totalReviews / this.pageSize);
+          if (this.totalReviews > this.page * this.pageSize) {
+            this.disabledNext = false;
+          } else {
+            this.disabledNext = true;
+          }
 
-      this.spaceRatingReviewList = reviews;
-    }
+          this.spaceRatingReviewList = reviews;
+        }
+      });
   }
 
-  async onLoadMoreReviews(pageType = null) {
+  onLoadMoreReviews(pageType = null) {
     if (pageType != null) {
       if (pageType == 'next') {
         if (this.totalReviews > this.page * this.pageSize) {
@@ -130,17 +131,17 @@ export class ViewMoreReviewsComponent implements OnInit {
       if (this.page > 1) {
         this.disabledPrev = false;
       }
-      await this.ratingReviewBySpaceId();
+      this.ratingReviewBySpaceId();
     }
   }
 
-  async filterCategory(value) {
+  filterCategory(value) {
     this.sortBy = value;
-    await this.ratingReviewBySpaceId();
+    this.ratingReviewBySpaceId();
   }
-  async filterStarCategory(value) {
+  filterStarCategory(value) {
     this.starBy = value;
-    await this.ratingReviewBySpaceId();
+    this.ratingReviewBySpaceId();
   }
   showStarIcon(index: number, rating) {
     if (rating >= index + 1) {

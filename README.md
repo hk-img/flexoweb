@@ -14,10 +14,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Installing dependencies
-
-After cloning the repository, run `npm install` (or `npm ci` for automated environments) to install all dependencies. Because the `node_modules/` directory is excluded via `.gitignore`, Angular CLI commands such as `ng serve` or `npm test` will not work until the dependencies have been installed.
-
+## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
@@ -28,3 +25,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+"# flexo-india-website-front-end" 

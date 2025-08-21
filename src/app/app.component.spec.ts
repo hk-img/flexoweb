@@ -1,14 +1,12 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IconModule } from './shared/icon/icon.module';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
-        IconModule
+        RouterTestingModule
       ],
       declarations: [
         AppComponent
