@@ -1415,15 +1415,11 @@ export class SpaceService {
 		}
 		
 		
-		getShortDetailsById(spaceId:number){
+		getShortDetailsById(spaceId:number): Observable<any>{
 			return this.http
 				.get(this.shortDetailsUrl + spaceId, {
 					headers: this.headers,
 				})
-				.toPromise()
-				.then((res) => res)
-				.catch(this.handleError);
-			
 		}
 
   getAllTrending(data): Promise<any> {

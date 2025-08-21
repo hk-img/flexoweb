@@ -208,7 +208,7 @@ export class RequestBookingComponent {
   getShortDetails(spaceId: number) {
     this.spaceService
       .getShortDetailsById(spaceId)
-      .then((res) => {
+      .subscribe((res) => {
         if (res.success) {
           this.city = res.spaceData.contact_city_name
           this.country = res.spaceData.country
