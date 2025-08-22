@@ -67,7 +67,96 @@
   </div>
 </div>
 
-<div class="container-fluid trusted_logos section-padding pb-0">
+<div class="container-fluid trusted_logos section-padding pb-0" *ngIf="trustedLeadingShimmer">
+  <div class="container">
+    <div class="row shimmerrow-text">
+      <div class="col-12 text-center">
+        <h2 class="section-title v1">Trusted By Leading Companies in India</h2>
+      </div>
+    </div>
+    <div class="col-12 shimmer-row">
+      <div class="carousel shimmer-carousel">
+        <div class="logo-slides-container" id="logoContainer">
+          <!-- First set of logo shimmers -->
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <!-- Duplicate set for seamless loop -->
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide popular-item slide">
+            <div class="">
+              <div class="shimmer-logo-block"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid trusted_logos section-padding pb-0" *ngIf="!trustedLeadingShimmer">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
@@ -98,7 +187,8 @@
     </div>
     <div class="row h-100">
       <div class="col-lg-4 col-md-5 col-12 px-md-1 mb-md-0 mb-1">
-        <a style="cursor: pointer;" href="/in/coworking/{{'Mumbai'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Mumbai','Mumbai, maharashtra, India (City)')">
+        <a style="cursor: pointer;" href="/in/coworking/{{'Mumbai'.replace(' ', '-').toLowerCase()}}"
+          (click)="navigateToCity('Mumbai','Mumbai, maharashtra, India (City)')">
           <div class="city-img-box city_main_img position-relative">
             <img loading="lazy" fetchpriority="low"
               src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Mumbai.webp"
@@ -115,7 +205,8 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Bangalore'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Bangalore','Bangalore (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Bangalore'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Bangalore','Bangalore (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Bengaluru.webp"
@@ -127,7 +218,8 @@
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Hyderabad'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Hyderabad','Hyderabad (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Hyderabad'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Hyderabad','Hyderabad (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Hyderabad.webp"
@@ -143,7 +235,8 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Pune'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Pune','Pune (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Pune'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Pune','Pune (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Pune.webp"
@@ -155,7 +248,8 @@
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Delhi'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Delhi','Delhi (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Delhi'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Delhi','Delhi (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Delhi.webp"
@@ -171,7 +265,8 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Gurgaon'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Gurgaon','Gurgaon (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Gurgaon'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Gurgaon','Gurgaon (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Gurgaon.webp"
@@ -183,7 +278,8 @@
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Noida'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Noida','Noida (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Noida'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Noida','Noida (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Noida.webp"
@@ -200,7 +296,8 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Chennai'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Chennai','Chennai (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Chennai'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Chennai','Chennai (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Chennai.webp"
@@ -212,7 +309,8 @@
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Ahmedabad'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Ahmedabad','Ahmedabad (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Ahmedabad'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Ahmedabad','Ahmedabad (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Ahmedabad.webp"
@@ -228,7 +326,8 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Jaipur'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Jaipur','Jaipur (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Jaipur'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Jaipur','Jaipur (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Jaipur.webp"
@@ -240,7 +339,8 @@
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Coimbatore'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Coimbatore','Coimbatore (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Coimbatore'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Coimbatore','Coimbatore (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Coimbatore.webp"
@@ -257,7 +357,8 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Kochi'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Kochi','Kochi (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Kochi'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Kochi','Kochi (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Kochi.webp"
@@ -269,7 +370,8 @@
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Indore'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Indore','Indore (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Indore'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Indore','Indore (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Indore.webp"
@@ -285,7 +387,8 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Lucknow'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Lucknow','Lucknow (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Lucknow'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Lucknow','Lucknow (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Lucknow.webp"
@@ -297,7 +400,8 @@
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Chandigarh'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Chandigarh','Chandigarh (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Chandigarh'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Chandigarh','Chandigarh (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Chandigarh.webp"
@@ -313,7 +417,8 @@
           <div ngxSlickItem class="swiper-slide popular-item slide">
             <div class="row">
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Goa'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Goa','Goa (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Goa'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Goa','Goa (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Goa.webp"
@@ -325,7 +430,8 @@
                 </a>
               </div>
               <div class="col-12 mb-1 px-2">
-                <a style="cursor: pointer;" href="/in/coworking/{{'Surat'.replace(' ', '-').toLowerCase()}}" (click)="navigateToCity('Surat','Surat (City)')">
+                <a style="cursor: pointer;" href="/in/coworking/{{'Surat'.replace(' ', '-').toLowerCase()}}"
+                  (click)="navigateToCity('Surat','Surat (City)')">
                   <div class="city-img-box position-relative">
                     <img loading="lazy" fetchpriority="low"
                       src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/city-slide-images/Surat.webp"
@@ -369,7 +475,7 @@
                   <h6 class="m-0"> For Team Size </h6>
                   <p class="text-white">3 to 50</p>
                 </div>
-                <a href="javascript:void(0);" class="btn_flex">
+                <a (click)="openInquiryPopUp($event,'Private Office')" href="javascript:void(0);" class="btn_flex">
                   Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
@@ -391,7 +497,7 @@
                   <h6 class="m-0"> For Team Size </h6>
                   <p class="text-white">15 to 500</p>
                 </div>
-                <a href="javascript:void(0);" class="btn_flex">
+                <a (click)="openInquiryPopUp($event,'Private Office')" href="javascript:void(0);" class="btn_flex">
                   Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
@@ -413,7 +519,7 @@
                   <h6 class="m-0"> For Team Size </h6>
                   <p class="text-white">25 to 1000+</p>
                 </div>
-                <a href="javascript:void(0);" class="btn_flex">
+                <a (click)="openInquiryPopUp($event,'Managed Office')" href="javascript:void(0);" class="btn_flex">
                   Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
@@ -434,7 +540,7 @@
                   <h6 class="m-0"> For Team Size </h6>
                   <p class="text-white">25 to 1000+</p>
                 </div>
-                <a href="javascript:void(0);" class="btn_flex">
+                <a (click)="openInquiryPopUp($event,'Private Office')" href="javascript:void(0);" class="btn_flex">
                   Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
@@ -455,7 +561,7 @@
                   <h6 class="m-0"> For Team Size </h6>
                   <p class="text-white">1 to 50</p>
                 </div>
-                <a href="javascript:void(0);" class="btn_flex">
+                <a (click)="openInquiryPopUp($event,'Flexible Desk')" href="javascript:void(0);" class="btn_flex">
                   Explore <span><app-icon name="rightLongArrow" class="w-4 text-orange-400"></app-icon></span>
                 </a>
               </div>
@@ -478,7 +584,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-12 col-md-12 col-12">
         <ngx-slick-carousel class="carousel cowork_carousel" #coworkBrandSlider="slick-carousel" [config]="brandConfig">
-          <div ngxSlickItem class="swiper-slide popular-item slide">
+          <div ngxSlickItem class="swiper-slide popular-item d-block slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
               <img loading="lazy" fetchpriority="low"
                 src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-1.webp"
@@ -490,7 +596,7 @@
                 class="w-100 img-fluid" width="185" height="40" alt="awfis logo" title="awfis logo" />
             </div>
           </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
+          <div ngxSlickItem class="swiper-slide popular-item d-block slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
               <img loading="lazy" fetchpriority="low"
                 src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-3.webp"
@@ -502,7 +608,7 @@
                 class="w-100 img-fluid" width="185" height="40" alt="smartWork logo" title="smartWork logo" />
             </div>
           </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
+          <div ngxSlickItem class="swiper-slide popular-item d-block slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
               <img loading="lazy" fetchpriority="low"
                 src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-5.webp"
@@ -514,7 +620,7 @@
                 class="w-100 img-fluid" width="185" height="40" alt="regus logo" title="regus logo" />
             </div>
           </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
+          <div ngxSlickItem class="swiper-slide popular-item d-block slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
               <img loading="lazy" fetchpriority="low"
                 src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/brand-logo-7.webp"
@@ -526,7 +632,7 @@
                 class="w-100 img-fluid" width="185" height="40" alt="coworking logo" title="coworking logo" />
             </div>
           </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
+          <div ngxSlickItem class="swiper-slide popular-item d-block slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
               <img loading="lazy" fetchpriority="low"
                 src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/CoWrksLogo2022.webp"
@@ -538,7 +644,7 @@
                 class="w-100 img-fluid" width="185" height="40" alt="efc logo" title="efc logo" />
             </div>
           </div>
-          <div ngxSlickItem class="swiper-slide popular-item slide">
+          <div ngxSlickItem class="swiper-slide popular-item d-block slide">
             <div class="cowork_brand_box position-relative py-md-4 py-3 px-md-5 px-4 text-center">
               <img loading="lazy" fetchpriority="low"
                 src="https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/brand-logo/IncuspazeLogo.webp"
@@ -561,7 +667,8 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6 col-md-12 col-12">
-        <h2 class="section-title" style="font-weight: 500;" style="font-size: 27px !important;">Find and <span class="main_color">Book</span> Your Perfect Workspace
+        <h2 class="section-title" style="font-weight: 500;" style="font-size: 27px !important;">Find and <span
+            class="main_color">Book</span> Your Perfect Workspace
           in 4 Easy Steps With <span style="font-weight: bold;color: #f76900">Flexo</span></h2>
         <div class="space_list mt-3">
           <div class="list_items position-relative px-4 py-3 mb-2">
@@ -586,7 +693,7 @@
           </div>
         </div>
         <div class="mt-3">
-          <button (click)="loadZohoScript2()" class="btn btn_hover w-100">Connect with a Workspace Expert Today</button>
+          <button (click)="openInquiryPopUp($event,'connect with a workspace')" class="btn btn_hover w-100">Connect with a Workspace Expert Today</button>
         </div>
       </div>
       <div class="col-lg-6 col-md-12 col-12 mt-lg-0 mt-md-4 mt-4">

@@ -2,9 +2,11 @@
   padding-left: 12px;
   padding-right: 12px;
 }
+
 .slick-list {
   border-radius: 6px !important;
 }
+
 .work-space-option .slide {
   padding-left: 5px;
   padding-right: 5px;
@@ -41,6 +43,7 @@
 .next-slide:hover {
   background-position: -24px -53px;
 }
+
 .flex_btn .btn {
   color: #f76900;
   transition: all 500ms;
@@ -52,6 +55,7 @@
   font-size: 14px;
   border-radius: 10px;
 }
+
 .flex_btn .btn:hover {
   text-decoration: underline;
   transform: scale(1.1);
@@ -68,7 +72,6 @@
 }
 
 ::ng-deep .cdk-overlay-pane {
-  overflow: hidden;
   box-shadow:
     0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14),
@@ -82,6 +85,7 @@
   background: transparent;
   box-shadow: none;
 }
+
 .search-icon {
   position: absolute;
   margin: auto;
@@ -90,7 +94,8 @@
 }
 
 mark {
-  background-color: yellow; /* or any color you prefer */
+  background-color: yellow;
+  /* or any color you prefer */
   color: black;
   font-weight: bold;
 }
@@ -116,14 +121,17 @@ mark {
   align-items: center;
   justify-content: center;
 }
+
 ::ng-deep .hero_sec .ng-select .ng-placeholder {
   color: #000 !important;
   font-weight: 400;
 }
+
 ::ng-deep .ng-select .ng-value-label {
   color: #000 !important;
   font-weight: 400;
 }
+
 .hero_sec .hero__form-input::placeholder {
   color: #000 !important;
 }
@@ -162,6 +170,7 @@ mark {
 }
 
 @media only screen and (max-width: 900px) {
+
   /* .cursor-pointer {
     border: 1px solid darkgray;
     width: fit-content;
@@ -174,6 +183,7 @@ mark {
   .web {
     display: none;
   }
+
   .mobile {
     display: block;
   }
@@ -188,16 +198,19 @@ mark {
   border: none;
   border-radius: 5px;
 }
+
 .Spaces_box .space_img_box img {
   width: 100%;
   border-radius: 5px;
   height: 250px;
   object-fit: cover;
 }
+
 .Spaces_box .space_img_box .img-container {
   position: relative;
   overflow: hidden;
 }
+
 .Spaces_box .space_img_box .img-container::before {
   position: absolute;
   content: "";
@@ -210,6 +223,7 @@ mark {
   visibility: hidden;
   opacity: 0;
 }
+
 .Spaces_box .space_img_box:hover .img-container:before {
   visibility: visible;
   opacity: 1;
@@ -238,9 +252,11 @@ mark {
   border: 2px solid #f76900;
   box-shadow: 0 0 3px #d3d3d3;
 }
+
 .location_model .modal-header {
   background: #f76900;
 }
+
 .location_model .close {
   background-image: none !important;
   opacity: 1;
@@ -250,9 +266,11 @@ mark {
   overflow: hidden;
   border-radius: 5px;
 }
+
 .cities_sec .city-img-box.city_main_img img {
   height: 405px;
 }
+
 .cities_sec .city-img-box::before {
   position: absolute;
   content: "";
@@ -262,11 +280,13 @@ mark {
   width: 100%;
   height: 100%;
 }
+
 .cities_sec .city-img-box img {
   height: 200px;
   object-fit: cover;
   border-radius: 5px;
 }
+
 .cities_sec .city-img-box .city_txt {
   position: absolute;
   bottom: 0px;
@@ -275,9 +295,11 @@ mark {
   padding: 50px 50px 5px 10px;
   background: linear-gradient(18deg, #000000c4, transparent, transparent);
 }
+
 .cities_sec .slick-list {
   border-radius: 6px !important;
 }
+
 .work-space-option .workspace_carousel .workspace_box {
   overflow: hidden;
   height: 100%;
@@ -289,11 +311,13 @@ mark {
   height: 400px;
   object-fit: cover;
 }
+
 .work-space-option .workspace_carousel .workspace_box .working-space-cal-single-txt-price-amount h6 {
   font-size: 12px;
   font-weight: 700;
   color: #b2b2b2;
 }
+
 .work-space-option .workspace_carousel .workspace_box .working-space-cal-single-txt-price-amount p {
   font-size: 14px;
   font-weight: 700;
@@ -311,9 +335,11 @@ mark {
   width: calc(100% - 20px);
   transition: all 500ms;
 }
+
 .work-space-option .workspace_carousel .workSpace_content:hover {
   transform: translateY(-10px);
 }
+
 .work-space-option .workspace_carousel .workSpace_content .workspace_txt {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -328,6 +354,7 @@ mark {
   padding: 7px 13px;
   font-size: 13px;
 }
+
 .cowrking_brands .cowork_carousel .cowork_brand_box {
   overflow: hidden;
   background: #fafafa;
@@ -335,9 +362,11 @@ mark {
   transition: all 500ms;
   border-bottom: 3px solid #ffdbc0;
 }
+
 .cowrking_brands .cowork_carousel .cowork_brand_box:hover {
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
 }
+
 .cowrking_brands .cowork_carousel .cowork_brand_box img {
   transition: all 500ms;
   height: 40px;
@@ -362,6 +391,7 @@ mark {
   box-shadow: 0 0 3px #7a7a7a;
   border-radius: 7px 7px 0 7px;
 }
+
 .workspace_steps .space_list .list_items h6 {
   color: #f76900;
 }
@@ -394,9 +424,11 @@ mark {
   padding: 50px 0;
   overflow: hidden;
 }
+
 .why_choose .whyChooseImg {
   z-index: -1;
 }
+
 .why_choose::before {
   background: #00000066;
   position: absolute;
@@ -406,6 +438,7 @@ mark {
   width: 100%;
   height: 100%;
 }
+
 .why_choose .whychos_box {
   box-shadow: 0 0 3px #f7f7f7;
   border-radius: 6px;
@@ -415,6 +448,7 @@ mark {
   transition: all 500ms;
   height: 100%;
 }
+
 /* .why_choose .whychos_box .choose_icon img {
   height: 55px;
 } */
@@ -425,6 +459,7 @@ mark {
 .why_choose .whychos_box h6 {
   color: #f76900;
 }
+
 .why_choose .whychos_box p {
   font-size: 14px;
   line-height: 1.4;
@@ -450,12 +485,15 @@ mark {
   align-items: center;
   box-shadow: 0 0 3px #f76900;
 }
+
 ::ng-deep .ng-select .ng-select-container {
   box-shadow: none !important;
 }
+
 ::ng-deep .ng-select .ng-select-container:focus {
   box-shadow: none !important;
 }
+
 ::ng-deep .ng-select .ng-select-container:hover {
   box-shadow: none !important;
 }
@@ -515,6 +553,7 @@ mark {
   height: 100%;
   object-fit: cover;
 }
+
 .animateIMG.text {
   display: inline;
   font-size: 48px;
@@ -602,6 +641,7 @@ h1.hero-title.v2.ml-0::before {
     position: relative;
     z-index: 2;
   }
+
   .homeInnerSwiper {
     position: absolute;
     width: 100%;
@@ -612,6 +652,7 @@ h1.hero-title.v2.ml-0::before {
     transition: opacity 1s ease-in-out;
     z-index: 0;
   }
+
   .backgrounds.animateIMG::before {
     content: "";
     position: absolute;
@@ -620,6 +661,7 @@ h1.hero-title.v2.ml-0::before {
     background: linear-gradient(0deg, #3a0d00, #3a0d00, #3a0d00, transparent);
     height: 300px;
   }
+
   .animateIMG.backgrounds {
     position: absolute;
     left: 0;
@@ -629,5 +671,262 @@ h1.hero-title.v2.ml-0::before {
     display: flex;
     justify-content: center;
     align-items: start;
+  }
+}
+
+.search-bar {
+  background: white;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.search-bar ng-select,
+.search-bar .form-control {
+  border: none;
+  height: 50px;
+  padding: 0 15px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.btn-orange {
+  background-color: #f26a21;
+  color: white;
+  border-radius: 0 40px 40px 0;
+  padding: 0 25px;
+  font-weight: bold;
+}
+
+.btn-orange:hover {
+  background-color: #d95d1d;
+}
+
+.shimmerrow-textrow {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.shimmer-row {
+  flex: 0 0 100%;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.shimmer-carousel {
+  overflow: hidden;
+  position: relative;
+  margin-top: 40px;
+  padding: 20px 0;
+}
+
+.logo-slides-container {
+  display: flex;
+  animation: infiniteScroll 30s linear infinite;
+  width: calc(200%);
+}
+
+.logo-slides-container:hover {
+  animation-play-state: paused;
+}
+
+.swiper-slide {
+  flex: 0 0 auto;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popular-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shimmer-logo-block {
+  width: 145px;
+  height: 145px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(90deg,
+      #e2e8f0 0%,
+      #f1f5f9 50%,
+      #e2e8f0 100%);
+  background-size: 200% 100%;
+  animation: grayShimmer 2s ease-in-out infinite;
+}
+
+.shimmer-logo-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  animation: shimmerSweep 3s ease-in-out infinite;
+}
+
+.ratio-1x1 {
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+
+@keyframes grayShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    left: -100%;
+  }
+
+  50% {
+    left: 100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes infiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.swiper-slide:nth-child(1) .shimmer-logo-block {
+  animation-delay: 0s;
+}
+
+.swiper-slide:nth-child(2) .shimmer-logo-block {
+  animation-delay: 0.3s;
+}
+
+.swiper-slide:nth-child(3) .shimmer-logo-block {
+  animation-delay: 0.6s;
+}
+
+.swiper-slide:nth-child(4) .shimmer-logo-block {
+  animation-delay: 0.9s;
+}
+
+.swiper-slide:nth-child(5) .shimmer-logo-block {
+  animation-delay: 1.2s;
+}
+
+.swiper-slide:nth-child(6) .shimmer-logo-block {
+  animation-delay: 1.5s;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .shimmer-logo-block {
+    width: 120px;
+    height: 120px;
+  }
+
+  .swiper-slide {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .shimmer-logo-block {
+    width: 100px;
+    height: 100px;
+  }
+
+  .swiper-slide {
+    padding: 0 10px;
+  }
+}
+
+.demo-section {
+  margin-top: 60px;
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.demo-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 8px;
+  transition: all 0.3s ease;
+}
+
+.demo-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.demo-btn.secondary {
+  background: #95a5a6;
+}
+
+.demo-btn.secondary:hover {
+  background: #7f8c8d;
+}
+
+.loaded-image {
+  width: 145px;
+  height: 145px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }

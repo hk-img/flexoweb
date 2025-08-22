@@ -1,4 +1,4 @@
-<div class="listing-details-slider swiper-container">
+<div class="listing-details-slider swiper-container" *ngIf="!isShimmer">
   <div class="swiper-wrapper" *ngIf="isMobile">
     <div class="position-relative">
       <div class="gallery-half position-relative" (click)="openImagesDialog()">
@@ -23,7 +23,8 @@
           ? 
           space_details?.images[0]
           : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
-          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
+          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
           </div>
         </div>
       </div>
@@ -36,6 +37,7 @@
                   space_details?.images[space_details?.youtube_url ? 0 : 1]
                 : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
             " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
               width="380" height="253" />
           </div>
           <div class="gallery-banner">
@@ -45,6 +47,7 @@
                   space_details?.images[space_details?.youtube_url ? 2 : 3]
                 : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
             " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
               width="380" height="253" />
           </div>
         </div>
@@ -56,6 +59,7 @@
                   space_details?.images[space_details?.youtube_url ? 1 : 2]
                 : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
             " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
               width="380" height="253" />
           </div>
           <div class="gallery-banner">
@@ -64,6 +68,7 @@
                 ? 
                   space_details?.images[space_details?.youtube_url ? 3 : 4] : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
             " alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}"
+              title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
               width="380" height="253" />
           </div>
         </div>
@@ -99,7 +104,8 @@
           ? 
           space_details?.images[0]
           : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
-          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
+          " alt="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}"
+            title="{{space_details?.imageAlt}} {{space_details?.images[0] | slice:(space_details?.images[0]?.lastIndexOf('/') + 1) }}" />
         </div>
       </div>
     </div>
@@ -112,6 +118,7 @@
               : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
           alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
           width="380" height="253" />
       </div>
       <div class="gallery-banner">
@@ -122,6 +129,7 @@
               : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
           alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 2 : 3] | slice:(space_details?.images[space_details?.youtube_url ? 2 : 3]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
           width="380" height="253" />
       </div>
     </div>
@@ -134,6 +142,7 @@
               : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
           alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 1 : 2] | slice:(space_details?.images[space_details?.youtube_url ? 1 : 2]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
           width="380" height="253" />
       </div>
       <div class="gallery-banner">
@@ -143,6 +152,7 @@
                 space_details?.images[space_details?.youtube_url ? 3 : 4] : 'https://flexospaces-images.s3.ap-south-1.amazonaws.com/img/details_placeholder_image.webp'
           "
           alt="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 3 : 4] | slice:(space_details?.images[space_details?.youtube_url ? 3 : 4]?.lastIndexOf('/') + 1) }}"
+          title="{{space_details?.imageAlt}} {{space_details?.images[space_details?.youtube_url ? 0 : 1] | slice:(space_details?.images[space_details?.youtube_url ? 0 : 1]?.lastIndexOf('/') + 1) }}"
           width="380" height="253" />
       </div>
     </div>
@@ -186,7 +196,7 @@
   <div class="listing-details-prev slider-btn v4" (click)="prev()"><i class="ion-arrow-left-c"></i></div> -->
 </div>
 
-<div class="container">
+<div class="container" *ngIf="!isShimmer">
   <div class="row">
     <div class="col-md-12">
       <div class="list-details-title v2">
@@ -468,7 +478,7 @@
 </div>
 <!--Listing Details Hero ends-->
 <!--Listing Details Info starts-->
-<div class="section-padding" style="padding-top: 0px">
+<div class="section-padding" style="padding-top: 0px" *ngIf="!isShimmer">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-12 order-lg-0 order-md-1 order-1">
@@ -1286,9 +1296,9 @@
                     </div>
                   </div>
 
-                  <div class="mt-3" *ngIf="isCoworking"> 
+                  <div class="mt-3" *ngIf="isCoworking">
                     <a (click)="openInquiryPopUp()" class=" custum-btn">
-                      Get Offer</a>
+                      Get Quote</a>
                   </div>
                   <div *ngIf="isLongterm">
                     <a (click)="openInquiryPopUp()" class=" custum-btn">
@@ -1510,7 +1520,7 @@
       QUOTE</a>
   </div>
 </div> -->
-<div class="mobile_btm_bar py-3 px-3 ">
+<div class="mobile_btm_bar py-3 px-3 " *ngIf="!isShimmer">
   <ul class="p-0 m-0 socail_btn_list">
     <div class="row justify-content-around">
       <div *ngIf="isShortterm">
@@ -1523,13 +1533,13 @@
   </ul>
 </div>
 <div class="mobile_btm_bar py-3 px-3 "
-  *ngIf="['coworking space', 'managed office', 'private office', 'shared office', 'virtual office'].includes(spaceType)">
+  *ngIf="['coworking space', 'managed office', 'private office', 'shared office', 'virtual office'].includes(spaceType) && !isShimmer">
   <ul class="p-0 m-0 socail_btn_list">
     <div class="row justify-content-around">
       <div class="col-3">
         <li>
           <a class="" (click)="openInquiryPopUp()" style="color: #ffffff;">
-            <app-icon name="fileProtector" class="w-4"></app-icon>
+            <app-icon name="fileProtector" class="w-4 text-gray-400"></app-icon>
             <div>QUOTES</div>
           </a>
         </li>
@@ -1538,7 +1548,7 @@
         <li>
           <a class="" style="color: #ffffff;"
             href="https://api.whatsapp.com/send/?phone=919136153810&text=Hi&type=phone_number&app_absent=0">
-            <app-icon name="whatsapp" class="w-5"></app-icon>
+            <app-icon name="whatsapp" class="w-5 text-gray-400"></app-icon>
             <div>WHATSAPP</div>
           </a>
         </li>
@@ -1546,7 +1556,7 @@
       <div class="col-3">
         <li>
           <a class="" style="color: #ffffff;" href="">
-            <app-icon name="chat" class="w-5"></app-icon>
+            <app-icon name="chat" class="w-5 text-gray-400"></app-icon>
             <div>CHAT</div>
           </a>
         </li>
@@ -1554,13 +1564,145 @@
       <div class="col-3">
         <li>
           <a class="" style="color: #ffffff;" href="tel:+91 95133 92400">
-            <app-icon name="phoneCall" class="w-5"></app-icon>
+            <app-icon name="phoneCall" class="w-5 text-gray-400"></app-icon>
             <div>CALL</div>
           </a>
         </li>
       </div>
     </div>
   </ul>
+</div>
+
+<!-- shimmerdesign -->
+<div class=" my-4" *ngIf="isShimmer">
+ 
+  <!-- Top image shimmer -->
+  <div class="row">
+    <div class="col-md-6 col-12 px-0">
+      <div class="placeholder-glow h-100 mr-md-1 ">
+        <div class="placeholder videocard-div h-md-100 w-100 px-0"></div>
+      </div>
+    </div>
+    <div class="col-md-6 col-12 px-0 ">
+      <div class="d-flex flex-md-wrap gap-1">
+        <div class="placeholder-glow col-md-6 col-3 mb-1 px-0 ">
+          <div class="placeholder imgcard-div w-100"></div>
+        </div>
+        <div class="placeholder-glow col-md-6 col-3 px-md-1 px-md-0 px-1">
+          <div class="placeholder imgcard-div w-100"></div>
+        </div>
+        <div class="placeholder-glow col-md-6  col-3 px-md-0 px-1">
+          <div class="placeholder imgcard-div w-100"></div>
+        </div>
+        <div class="placeholder-glow col-md-6 col-3 px-md-1 px-0">
+          <div class="placeholder imgcard-div w-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+ 
+    <div class="row mt-4">
+      <!-- Left side main content -->
+      <div class="col-lg-8 col-md-12 col-12">
+        <!-- Title shimmer -->
+        <div class="placeholder-glow d-flex flex-column  ">
+          <span class="placeholder col-5"></span>
+          <span class="placeholder col-3 mt-2"></span>
+          <span class="placeholder col-2 my-2"></span>
+        </div>
+        <div class="placeholder-glow d-flex justify-content-md-between flex-column flex-md-row ">
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-2 mt-md-0 mt-2"></span>
+        </div>
+ 
+        <!-- Tabs shimmer -->
+        <div class="d-md-flex d-none gap-3 justify-content-between my-3 placeholder-glow">
+          <span class="placeholder col-2"></span>
+          <span class="placeholder col-2"></span>
+          <span class="placeholder col-2"></span>
+          <span class="placeholder col-2"></span>
+        </div>
+ 
+        <div class="col-lg-4 d-lg-none d-block col-12 mt-2 px-0">
+          <div class=" placeholder-glow px-0" style="height: 374px;">
+            <span class="placeholder col-12 h-100 px-0"></span>
+          </div>
+        </div>
+ 
+        <!-- About the Space -->
+        <div class="mt-3">
+          <span class="placeholder col-2 "></span>
+          <div class="placeholder-glow mb-3" style="height: 259px;">
+            <span class="placeholder col-12 h-100"></span>
+          </div>
+ 
+          <span class="placeholder col-2 "></span>
+          <div class="placeholder-glow mb-3" style="height: 400px;">
+            <span class="placeholder col-12 h-100"></span>
+          </div>
+          <div class="placeholder-glow">
+            <span class="placeholder mb-2 col-3"></span>
+            <div class="placeholder-glow mb-3" style="height: 140px;">
+              <span class="placeholder col-12 h-100"></span>
+            </div>
+            <div class="placeholder-glow mb-3" style="height: 140px;">
+              <span class="placeholder col-12 h-100"></span>
+            </div>
+          </div>
+ 
+          <div class="placeholder-glow">
+            <span class="placeholder mb-2 col-2"></span>
+            <div class="placeholder-glow mb-3" style="height: 400px;">
+              <span class="placeholder col-12 h-100"></span>
+            </div>
+            <div class="placeholder-glow d-flex justify-content-between ">
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-4"></span>
+            </div>
+          </div>
+ 
+          <div class="mt-4">
+            <h5 class="placeholder-glow">
+              <span class="placeholder col-4"></span>
+            </h5>
+            <div class="d-flex flex-column gap-2 placeholder-glow">
+              <span class="placeholder mb-3 col-12"></span>
+              <span class="placeholder mb-3 col-12"></span>
+              <span class="placeholder mb-3 col-12"></span>
+              <span class="placeholder mb-3 col-12"></span>
+              <span class="placeholder mb-3 col-12"></span>
+              <span class="placeholder mb-3 col-12"></span>
+              <span class="placeholder mb-3 col-12"></span>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- Cancellation Policy -->
+        <div class="mt-4">
+          <div class="placeholder-glow " style="height: 100px;">
+            <span class="placeholder h-100 col-12"></span>
+          </div>
+        </div>
+ 
+        <!-- Reviews -->
+        <div class="mt-4 d-flex gap-1 ">
+          <span class="placeholder mr-2 col-4"></span>
+          <span class="placeholder col-4"></span>
+        </div>
+        <div class="mt-3 ">
+          <span class="placeholder mr-2 col-4"></span>
+        </div>
+      </div>
+ 
+      <!-- Right side sidebar -->
+      <div class="col-lg-4 d-lg-block d-none col-md-5">
+        <div class=" p-2  placeholder-glow" style="height: 374px;">
+          <span class="placeholder mr-2 col-12 h-100"></span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!--Listing Details Info ends-->
 <!-- Scroll to top starts-->
