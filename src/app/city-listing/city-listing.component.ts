@@ -630,6 +630,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.spaceService.getNearBySpaces(details).pipe(finalize(() => { this.isloader = false })).subscribe(
           (response) => {
             if (this.areaName && response.length) {
+              window.scrollTo(0, 0);
               let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
               let matchedLocation = response?.find(
                 (val: any) => val.location_name.toLowerCase() === this.areaName
