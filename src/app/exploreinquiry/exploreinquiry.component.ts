@@ -37,6 +37,7 @@ export class ExploreinquiryComponent {
   virtual_office_price: any;
   meeting_room_price: any;
   isCoworkings: string;
+  getLongTermCities:any = [];
   userDetail: any;
   space_name: string;
   space_id: number;
@@ -58,6 +59,7 @@ export class ExploreinquiryComponent {
   city_name: any;
   spaceDetail: any;
   value: any;
+  long_term_city:any;
   workSpace = [
     { workSpaceName: 'Coworking Space', typeOfSpace: 'Coworking' },
     { workSpaceName: 'Managed Office', typeOfSpace: 'Long-Term' },
@@ -129,7 +131,7 @@ export class ExploreinquiryComponent {
     if (isPlatformBrowser(this.platformId)) {
       this.city_name = this.data?.city;
       this.formData.spaceType = this.data.spaceDetail ?? '';
-
+      this.getAllCityBySpaceType();
       if (localStorage.getItem('userDetails')) {
         this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
         this.formData.firstName = this.userDetail?.firstName;
@@ -190,15 +192,16 @@ export class ExploreinquiryComponent {
       this.profileDetailForm.value.spaceType = this.data?.name;
     }
     if (isPlatformBrowser(this.platformId)) {
+      
       if (this.valueForListingPage == 'Coworking') {
         this.profileDetailForm.value.type = 'Coworking';
       } else {
         this.profileDetailForm.value.type = 'Longterm';
-        formData.city = [this.city_name];
+        formData.city = this.long_term_city;
       }
 
       if (this.city_name) {
-        formData.city = [this.city_name];
+        formData.city = this.long_term_city;
       }
       if (
         this.formData.firstName ||
@@ -250,5 +253,12 @@ export class ExploreinquiryComponent {
         this.profileDetailForm.form.markAllAsTouched();
       }
     }
+  }
+
+  getAllCityBySpaceType(){
+    this.service.getAllSpacesCitiess("Longterm").subscribe((res: any) => {
+      this.getLongTermCities = res;
+      console.log(this.getLongTermCities)
+    })
   }
 }

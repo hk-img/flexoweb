@@ -222,6 +222,159 @@ export class AppComponent {
           if (event.url === '/in/coworking-space/navi/mumbai/cbd-belapur')
             this.router.navigate(['/in/coworking-space/navi-mumbai/cbd-belapur'])
 
+          if(event.url === '/in/coworking-space/bangalore/malleswaram')
+            this.router.navigate(['/in/coworking-space/bangalore/malleshwaram'])
+          
+          if(event.url === '/in/coworking-space/mumbai/bandra-west')
+            this.router.navigate(['/in/coworking-space/mumbai/bandra'])
+          
+          if(event.url === '/in/coworking-space/mumbai/hitec-city')
+            this.router.navigate(['/in/coworking-space/hyderabad/hitec-city'])
+          
+          if(event.url === '/in/coworking-space/new-delhi/pushp-vihar')
+            this.router.navigate(['/in/coworking-space/delhi/pushp-vihar'])
+          
+          if(event.url === '/in/coworking-space/pune/yerwada')
+            this.router.navigate(['/in/coworking-space/pune/yerawada'])
+          
+          if(event.url === '/in/coworking-space/bengaluru/richmond-town')
+            this.router.navigate(['/in/coworking-space/bangalore/richmond-town'])
+          
+          if(event.url === '/in/coworking-space/bengaluru/goregaon-east')
+            this.router.navigate(['/in/coworking-space/mumbai/goregaon-east'])
+          
+          if(event.url === '/in/coworking-space/delhi/janak-puri')
+            this.router.navigate(['/in/coworking-space/delhi/janakpuri'])
+          
+          if(event.url === '/in/coworking-space/gurugram/sector-47')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-47'])
+          
+          if(event.url === '/in/coworking-space/new delhi/kalkaji')
+            this.router.navigate(['/in/coworking-space/delhi/kalkaji'])
+          
+          if(event.url === '/in/coworking-space/new-delhi/model-town')
+            this.router.navigate(['/in/coworking-space/delhi/model-town'])
+          
+          if(event.url === '/in/coworking-space/coimbatore/race-course')
+            this.router.navigate(['/in/coworking/coimbatore'])
+          
+          if(event.url === '/in/coworking-space/mumbai/marol')
+            this.router.navigate(['/in/coworking-space/mumbai/andheri-east'])
+          
+          if(event.url === '/in/coworking-space/delhi/camp')
+            this.router.navigate(['/in/coworking-space/pune/camp'])
+          
+          if(event.url === '/in/coworking-space/pune/madhapur')
+            this.router.navigate(['/in/coworking-space/hyderabad/madhapur'])
+          
+          if(event.url === '/in/coworking-space/bangalore/deccan-gymkhana')
+            this.router.navigate(['/in/coworking-space/pune/deccan-gymkhana'])
+          
+          if(event.url === '/in/coworking-space/new delhi/saidullajab')
+            this.router.navigate(['/in/coworking-space/delhi/saidullajab'])
+
+          if(event.url === '/in/coworking-space/mumbai/andheri')
+            this.router.navigate(['/in/coworking-space/mumbai/andheri-east'])
+          
+          if(event.url === '/in/coworking-space/gurugram/phase-3')
+            this.router.navigate(['/in/coworking-space/gurgaon/dlf-phase-3'])
+          
+          if(event.url === '/in/coworking-space/gurugram/sector-61')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-61'])
+          
+          if(event.url === '/in/coworking-space/delhi/vile-parle')
+            this.router.navigate(['/in/coworking-space/mumbai/vile-parle'])
+          
+          if(event.url === '/in/coworking-space/delhi/bandra-kurla-complex')
+            this.router.navigate(['/in/coworking-space/mumbai/bandra-kurla-complex'])
+          
+          if(event.url === '/in/coworking-space/gurugram/-sector 19')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-19'])
+          
+          if(event.url === '/in/coworking-space/gurugram/dlf-cyber-city')
+            this.router.navigate(['/in/coworking-space/gurgaon/dlf-cyber-city'])
+          
+          if(event.url === '/in/coworking-space/gurugram/sector-18')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-18'])
+          
+          if(event.url === '/in/coworking-space/gurugram/-sector-19')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-19'])
+          
+          if(event.url === '/in/coworking-space/gurugram/sector-81a')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-81a'])
+          
+          if(event.url === '/in/coworking-space/gurugram/sector-65')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-65'])
+          
+          if(event.url === '/in/coworking-space/bangalore/kurla')
+            this.router.navigate(['/in/coworking-space/mumbai/kurla'])
+          
+          if(event.url === '/in/coworking-space/gurugram/-sector 18')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-18'])
+          
+          if(event.url === '/in/coworking-space/bangalore/electronics-city')
+            this.router.navigate(['/in/coworking-space/bangalore/electronic-city'])
+          
+          if(event.url === '/in/coworking-space/gurugram/sector-38')
+            this.router.navigate(['/in/coworking-space/gurgaon/sector-38'])
+          
+          if(event.url === '/in/coworking-space/gurugram/golf-course-road')
+            this.router.navigate(['/in/coworking-space/gurgaon/golf-course-road'])
+          
+          if(event.url === '/in/coworking-space/gurugram/phase-5')
+            this.router.navigate(['/in/coworking-space/gurgaon/dlf-phase-5'])
+          
+          if(event.url === '/in/coworking-space/mumbai/andheri-chakala')
+            this.router.navigate(['/in/coworking-space/mumbai/andheri-east'])
+          
+          if(event.url === '/in/coworking-space/new delhi/vasant-kunj')
+            this.router.navigate(['/in/coworking-space/delhi/vasant-kunj'])
+          
+          if(event.url === '/in/coworking-space/delhi/erandawane')
+            this.router.navigate(['/in/coworking-space/pune/erandwane'])
+          
+          if(event.url === '/in/coworking-space/bangalore/lower-parel')
+            this.router.navigate(['/in/coworking-space/mumbai/lower-parel'])
+          
+          if(event.url === '/in/coworking-space/mumbai/andheri-marol')
+            this.router.navigate(['/in/coworking-space/mumbai/andheri-east'])
+          
+          if(event.url === '/in/coworking-space/bengaluru/-bannerghatta road')
+            this.router.navigate(['/in/coworking-space/bangalore/bannerghatta-road'])
+          
+          if(event.url === '/in/coworking-space/delhi/safdarjung')
+            this.router.navigate(['/in/coworking-space/delhi/safdarjung-enclave'])
+          
+          if(event.url === '/in/coworking-space/new-delhi/safdarjung-enclave')
+            this.router.navigate(['/in/coworking-space/delhi/safdarjung-enclave'])
+          
+          if(event.url === '/in/coworking-space/bengaluru/lower-parel')
+            this.router.navigate(['/in/coworking-space/mumbai/lower-parel'])
+          
+          if(event.url === '/in/coworking-space/chennai/vadalapani')
+            this.router.navigate(['/in/coworking-space/chennai/vadapalani'])
+          
+          if(event.url === '/in/coworking-space/new delhi/defence-colony')
+            this.router.navigate(['/in/coworking-space/delhi/defence-colony'])
+          
+          if(event.url === '/in/coworking-space/gurugram/erandwane')
+            this.router.navigate(['/in/coworking-space/pune/erandwane'])
+          
+          if(event.url === '/in/coworking-space/mumbai/andheri-east-midc')
+            this.router.navigate(['/in/coworking-space/mumbai/andheri-east'])
+          
+          if(event.url === '/in/spaces/mumbai/andheri-east')
+            this.router.navigate(['/in/coworking-space/mumbai/andheri-east'])
+          
+          if(event.url === '/in/coworking-space/new-delhi/safdarjung-development area')
+            this.router.navigate(['/in/coworking-space/delhi/safdarjung-development-area'])
+          
+          if(event.url === '/in/coworking-space/new-delhi/ajmeri-gate')
+            this.router.navigate(['/in/coworking-space/delhi/ajmeri-gate'])
+          
+          if(event.url === '/in/coworking-space/hyderabad/andheri-east')
+            this.router.navigate(['/in/coworking-space/mumbai/andheri-east'])
+
           if (event.url === '/in/coworking-space/hyderabad/mind-space')
             this.router.navigate(['/in/coworking-space/hyderabad/mindspace'])
 
