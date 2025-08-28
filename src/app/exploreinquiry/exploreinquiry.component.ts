@@ -197,11 +197,11 @@ export class ExploreinquiryComponent {
         this.profileDetailForm.value.type = 'Coworking';
       } else {
         this.profileDetailForm.value.type = 'Longterm';
-        formData.city = this.long_term_city;
+        formData.city = [this.long_term_city];
       }
 
       if (this.city_name) {
-        formData.city = this.long_term_city;
+        formData.city = [this.long_term_city];
       }
       if (
         this.formData.firstName ||
