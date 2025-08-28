@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IconModule } from '../shared/icon/icon.module';
 
 import { ThankyopopupComponent } from './thankyopopup.component';
 
@@ -9,8 +8,7 @@ describe('ThankyopopupComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ThankyopopupComponent],
-      imports: [IconModule]
+      declarations: [ThankyopopupComponent]
     });
     fixture = TestBed.createComponent(ThankyopopupComponent);
     component = fixture.componentInstance;

@@ -210,19 +210,19 @@ export class DetailsComponent implements OnInit {
     infinite: true,
     responsive: [
       {
-        breakpoint: 1200, 
+        breakpoint: 1200,
         settings: {
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 900, 
+        breakpoint: 900,
         settings: {
           slidesToShow: 1,
         },
       },
       {
-        breakpoint: 600, 
+        breakpoint: 600,
         settings: {
           slidesToShow: 1,
           dots: true,
@@ -230,7 +230,7 @@ export class DetailsComponent implements OnInit {
         },
       },
       {
-        breakpoint: 480, 
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           dots: true,
@@ -238,7 +238,7 @@ export class DetailsComponent implements OnInit {
         },
       },
     ],
-    
+
   };
 
   public similarRatingReviewConfig = {
@@ -335,50 +335,50 @@ export class DetailsComponent implements OnInit {
   getShortDetails(spaceId: number) {
     this.isShimmer = true;
     this.spaceService.getShortDetailsById(spaceId).pipe(finalize(() => (this.isShimmer = false))).subscribe((res) => {
-        if (res.success) {
-          const spaceType = res.spaceData.spaceType?.toLowerCase()
-          const { actual_name, spaceTitle, location_name, contact_city_name } = res.spaceData
-          if (spaceType === 'coworking space') {
-            this.titleService.setTitle(`${actual_name} ${location_name} - ${spaceType} | Pricing - FLEXO`);
-            this.metaService.updateTag({
-              name: "description",
-              content: `Discover ${actual_name}, ${location_name}, a coworking space with modern amenities and great pricing, Get customised quotes today!`,
-            });
-          } else if (
-            spaceType === 'coworking cafe/restaurant' ||
-            spaceType === 'shoot studio' ||
-            spaceType === 'recording studio' ||
-            spaceType === 'podcast studio' ||
-            spaceType === 'activity space' ||
-            spaceType === 'sports turf' ||
-            spaceType === 'sports venue' ||
-            spaceType === 'party space' ||
-            spaceType === 'banquet hall' ||
-            spaceType === 'gallery' ||
-            spaceType === 'classroom' ||
-            spaceType === 'private cabin' ||
-            spaceType === 'meeting room' ||
-            spaceType === 'training room' ||
-            spaceType === 'event space'
-          ) {
-            this.titleService.setTitle(`${spaceTitle} at ${location_name}, ${contact_city_name}`);
-            this.metaService.updateTag({
-              name: "description",
-              content: `Book ${spaceTitle} at ${location_name}, ${contact_city_name} for Rs.2000 /hour on FLEXO. `,
-            });
-          } else {
-            this.titleService.setTitle(`${spaceType} for Rent at ${location_name}, ${contact_city_name}`);
-            this.metaService.updateTag({
-              name: "description",
-              content: `Rent ${spaceTitle} at ${location_name}, ${contact_city_name} for Rs.2000 /month`,
-            });
-          }
-          this.city = contact_city_name
-          this.country = res.spaceData.country
-          this.getSpaceDetails(this.country, this.city, spaceType, this.space_id);
+      if (res.success) {
+        const spaceType = res.spaceData.spaceType?.toLowerCase()
+        const { actual_name, spaceTitle, location_name, contact_city_name } = res.spaceData
+        if (spaceType === 'coworking space') {
+          this.titleService.setTitle(`${actual_name} ${location_name} - ${spaceType} | Pricing - FLEXO`);
+          this.metaService.updateTag({
+            name: "description",
+            content: `Discover ${actual_name}, ${location_name}, a coworking space with modern amenities and great pricing, Get customised quotes today!`,
+          });
+        } else if (
+          spaceType === 'coworking cafe/restaurant' ||
+          spaceType === 'shoot studio' ||
+          spaceType === 'recording studio' ||
+          spaceType === 'podcast studio' ||
+          spaceType === 'activity space' ||
+          spaceType === 'sports turf' ||
+          spaceType === 'sports venue' ||
+          spaceType === 'party space' ||
+          spaceType === 'banquet hall' ||
+          spaceType === 'gallery' ||
+          spaceType === 'classroom' ||
+          spaceType === 'private cabin' ||
+          spaceType === 'meeting room' ||
+          spaceType === 'training room' ||
+          spaceType === 'event space'
+        ) {
+          this.titleService.setTitle(`${spaceTitle} at ${location_name}, ${contact_city_name}`);
+          this.metaService.updateTag({
+            name: "description",
+            content: `Book ${spaceTitle} at ${location_name}, ${contact_city_name} for Rs.2000 /hour on FLEXO. `,
+          });
+        } else {
+          this.titleService.setTitle(`${spaceType} for Rent at ${location_name}, ${contact_city_name}`);
+          this.metaService.updateTag({
+            name: "description",
+            content: `Rent ${spaceTitle} at ${location_name}, ${contact_city_name} for Rs.2000 /month`,
+          });
         }
+        this.city = contact_city_name
+        this.country = res.spaceData.country
+        this.getSpaceDetails(this.country, this.city, spaceType, this.space_id);
       }
-      )
+    }
+    )
   }
 
   ngOnInit(): void {
@@ -388,7 +388,7 @@ export class DetailsComponent implements OnInit {
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
         this.space_id = this.spaceName?.match(/(\d+)$/)?.[0];
         this.getShortDetails(this.space_id)
-      }else if(this.spaceType == 'coworking café restaurant'){
+      } else if (this.spaceType == 'coworking café restaurant') {
         this.spaceName = this.getOriginalUrlParam(params.spaceName);
         this.space_id = params.spaceName?.match(/\d+$/)?.[0];
         this.getShortDetails(this.space_id)
@@ -418,7 +418,7 @@ export class DetailsComponent implements OnInit {
 
   formatUrl(value: string): string {
     return value ? value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-') : '';
-  }  
+  }
   updateJsonLd(
     spaceType: string,
     imageUrl: string,
@@ -435,12 +435,12 @@ export class DetailsComponent implements OnInit {
       }
     }
 
-    if(priceMax === "none"){
+    if (priceMax === "none") {
       var offer = "Offer"
-    }else{
+    } else {
       var offer = "AggregateOffer"
     }
-  
+
     const jsonLd: any = {
       "@context": "https://schema.org/",
       "@type": "Product",
@@ -459,7 +459,7 @@ export class DetailsComponent implements OnInit {
         "itemCondition": "https://schema.org/NewCondition"
       }
     };
-  
+
     // Handle priceMin and priceMax
     if (priceMax === "none") {
       jsonLd.offers.price = priceMin;
@@ -467,20 +467,20 @@ export class DetailsComponent implements OnInit {
       jsonLd.offers.lowPrice = priceMin;
       jsonLd.offers.highPrice = priceMax;
     }
-  
+
     if (isPlatformBrowser(this.platformId)) {
       const jsonLdScript = document.createElement('script');
       jsonLdScript.id = jsonLdId;
       jsonLdScript.type = 'application/ld+json';
       jsonLdScript.text = JSON.stringify(jsonLd);
-  
+
       document.head.appendChild(jsonLdScript);
     }
   }
-  
 
 
-  onImageError(event: Event, imageAlt:string) {
+
+  onImageError(event: Event, imageAlt: string) {
     const target = event.target as HTMLImageElement;
     target.src = 'assets/images/details_placeholder_image.jpg';
     target.alt = `${imageAlt} details_placeholder_image.jpg`;
@@ -543,88 +543,167 @@ export class DetailsComponent implements OnInit {
 
   openFacebook() {
 
-    if (isPlatformBrowser(this.platformId)) {
-      window.open(
-        'https://www.facebook.com/sharer/sharer.php?u=' +
-        window.location.origin +
-        '/coworking-space/' +
-        this.space_details.link_name.toLowerCase(),
-        'facebook-popup',
-        'height=350,width=600'
-      );
+    if (this.location != undefined) {
+      if (isPlatformBrowser(this.platformId)) {
+        window.open(
+          'https://www.facebook.com/sharer/sharer.php?u=' + window.location.origin + '/' + this.spaceType?.replace(/\s+/g, '-') + '/' + this.city_param?.toLowerCase()?.replace(/\s+/g, '-') + '/' + this.location?.toLowerCase() + '/' + this.space_id,
+          'facebook-popup',
+          'height=350,width=600'
+        );
+      }
+    } else {
+      if (isPlatformBrowser(this.platformId)) {
+        window.open(
+          'https://www.facebook.com/sharer/sharer.php?u=' + window.location.origin + '/' + this.spaceType?.replace(/\s+/g, '-') + '/' + this.space_details.link_name.toLowerCase(),
+          'facebook-popup',
+          'height=350,width=600'
+        );
+      }
     }
+
   }
 
   openLinkedIn() {
 
-    if (isPlatformBrowser(this.platformId)) {
-      window.open(
-        'https://www.linkedin.com/shareArticle?mini=true&url=' +
-        window.location.origin +
-        '/coworking-space/' +
-        this.space_details.link_name.toLowerCase() +
-        '&title=Share%Spaces',
-        'linkedin-popup',
-        'height=350,width=600'
-      );
+    if (this.location != undefined) {
+      if (isPlatformBrowser(this.platformId)) {
+        window.open(
+          'https://www.linkedin.com/shareArticle?mini=true&url=' + window.location.origin + '/' + this.spaceType?.replace(/\s+/g, '-') + '/' + this.city_param?.toLowerCase()?.replace(/\s+/g, '-') + '/' + this.location?.toLowerCase() + '/' + this.space_id +
+          '&title=Share%Spaces',
+          'linkedin-popup',
+          'height=350,width=600'
+        );
+      }
+    } else {
+      if (isPlatformBrowser(this.platformId)) {
+        window.open(
+          'https://www.linkedin.com/shareArticle?mini=true&url=' + window.location.origin + '/' + this.spaceType?.replace(/\s+/g, '-') + '/' + this.space_details.link_name.toLowerCase() +
+          '&title=Share%Spaces',
+          'linkedin-popup',
+          'height=350,width=600'
+        );
+      }
     }
+
   }
 
   openWhatsapp() {
-
-    if (isPlatformBrowser(this.platformId)) {
-      if (!this.isMobile) {
-        window.open(
-          `https://web.whatsapp.com/send?text=${window.location.origin}/coworking-space/` +
-          this.space_details.link_name.toLowerCase(),
-          'whatapp-popup',
-          'height=650,width=650'
-        );
-      } else {
-        window.open(
-          `whatsapp://send?text=${window.location.origin}/coworking-space/${this.space_details.link_name}`
-        );
+    if (this.location != undefined) {
+      if (isPlatformBrowser(this.platformId)) {
+        if (!this.isMobile) {
+          window.open(
+            `https://web.whatsapp.com/send?text=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.city_param?.toLowerCase()?.replace(/\s+/g, '-')}/${this.location?.toLowerCase()}/` +
+            this.space_id,
+            'whatapp-popup',
+            'height=650,width=650'
+          );
+        } else {
+          window.open(
+            `whatsapp://send?text=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.city_param?.toLowerCase()?.replace(/\s+/g, '-')}/${this.location?.toLowerCase()}/` +
+            this.space_id,
+          );
+        }
+      }
+    } else {
+      if (isPlatformBrowser(this.platformId)) {
+        if (!this.isMobile) {
+          window.open(
+            `https://web.whatsapp.com/send?text=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}` +
+            this.space_details.link_name.toLowerCase(),
+            'whatapp-popup',
+            'height=650,width=650'
+          );
+        } else {
+          window.open(
+            `whatsapp://send?text=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}` +
+            this.space_details.link_name.toLowerCase()
+          );
+        }
       }
     }
   }
 
+
   openInstagram() {
-    if (isPlatformBrowser(this.platformId)) {
-      if (!this.isMobile) {
-        window.open(
-          `https://www.instagram.com/?url=${window.location.origin}/coworking-space/` +
-          this.space_details.link_name.toLowerCase(),
-          'instagram-popup',
-          'height=650,width=650'
-        );
-      } else {
-        window.open(
-          `instagram://share?text=${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`
-        );
+    if (this.location != undefined) {
+      if (isPlatformBrowser(this.platformId)) {
+        if (!this.isMobile) {
+          window.open(
+            `https://www.instagram.com/?url=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.city_param?.toLowerCase()?.replace(/\s+/g, '-')}/${this.location?.toLowerCase()}/` +
+            this.space_id,
+            'instagram-popup',
+            'height=650,width=650'
+          );
+        } else {
+          window.open(
+            `instagram://share?text=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.city_param?.toLowerCase()?.replace(/\s+/g, '-')}/${this.location?.toLowerCase()}/` +
+            this.space_id
+          );
+        }
+      }
+    } else {
+      if (isPlatformBrowser(this.platformId)) {
+        if (!this.isMobile) {
+          window.open(
+            `https://www.instagram.com/?url=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}` +
+            this.space_details.link_name.toLowerCase(),
+            'instagram-popup',
+            'height=650,width=650'
+          );
+        } else {
+          window.open(
+            `instagram://share?text=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}` +
+            this.space_details.link_name.toLowerCase()
+          );
+        }
       }
     }
   }
 
   openPinterest() {
-    if (isPlatformBrowser(this.platformId)) {
-      if (!this.isMobile) {
-        window.open(
-          `https://www.pinterest.com/pin/create/button/?url=${window.location.origin}/coworking-space/` +
-          this.space_details.link_name.toLowerCase(),
-          'pinterest-popup',
-          'height=650,width=650'
-        );
-      } else {
-        window.open(
-          `pinterest://pin/create/bookmarklet/?url=${window.location.origin}/coworking-space/${this.space_details.link_name.toLowerCase()}`
-        );
+    if (this.location != undefined) {
+      if (isPlatformBrowser(this.platformId)) {
+        if (!this.isMobile) {
+          window.open(
+            `https://www.pinterest.com/pin/create/button/?url=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.city_param?.toLowerCase()?.replace(/\s+/g, '-')}/${this.location?.toLowerCase()}/` +
+            this.space_id,
+            'pinterest-popup',
+            'height=650,width=650'
+          );
+        } else {
+          window.open(
+            `pinterest://pin/create/bookmarklet/?url=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.city_param?.toLowerCase()?.replace(/\s+/g, '-')}/${this.location?.toLowerCase()}/` +
+            this.space_id
+          );
+        }
+      }
+    } else {
+      if (isPlatformBrowser(this.platformId)) {
+        if (!this.isMobile) {
+          window.open(
+            `https://www.pinterest.com/pin/create/button/?url=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}` +
+            this.space_details.link_name.toLowerCase(),
+            'pinterest-popup',
+            'height=650,width=650'
+          );
+        } else {
+          window.open(
+            `pinterest://pin/create/bookmarklet/?url=${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}` +
+            this.space_details.link_name.toLowerCase()
+          );
+        }
       }
     }
   }
 
   copyLink() {
     if (isPlatformBrowser(this.platformId)) {
-      const link = `${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}`;
+
+      if (this.location != undefined) {
+        var link = `${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.city_param?.toLowerCase()?.replace(/\s+/g, '-')}/${this.location?.toLowerCase()}/${this.space_id}`;
+      } else {
+        var link = `${window.location.origin}/${this.spaceType?.replace(/\s+/g, '-')}/${this.space_details.link_name.toLowerCase()}`;
+      }
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(link).then(() => {
@@ -639,12 +718,12 @@ export class DetailsComponent implements OnInit {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-  
+
         this.toastr.success('Link copied to clipboard', 'Success');
       }
     }
   }
-  
+
 
   updateShortList() {
     if (isPlatformBrowser(this.platformId)) {
@@ -830,7 +909,7 @@ export class DetailsComponent implements OnInit {
         } else {
           data.imageAlt = `${buildingName} ${location_name} ${spaceType}`
           for (let i = 0; i < data.similar_spaces.length; i++) {
-          data.similar_spaces[i].imageAlter = `${buildingName} ${location_name} ${spaceType}`
+            data.similar_spaces[i].imageAlter = `${buildingName} ${location_name} ${spaceType}`
           }
         }
         this.space_details = Object.assign({}, data);
@@ -867,17 +946,17 @@ export class DetailsComponent implements OnInit {
 
         this.isShortterm = this.space_details.isShortterm;
         if (isPlatformBrowser(this.platformId)) {
-        sessionStorage.setItem('isShortterm', JSON.stringify(this.isShortterm));
+          sessionStorage.setItem('isShortterm', JSON.stringify(this.isShortterm));
         }
 
         this.isCoworking = this.space_details.isCoworking;
         if (isPlatformBrowser(this.platformId)) {
-        sessionStorage.setItem('isCoworking', JSON.stringify(this.isCoworking));
+          sessionStorage.setItem('isCoworking', JSON.stringify(this.isCoworking));
         }
 
         this.isLongterm = this.space_details.isLongterm;
         if (isPlatformBrowser(this.platformId)) {
-        sessionStorage.setItem('isLongterm', JSON.stringify(this.isLongterm));
+          sessionStorage.setItem('isLongterm', JSON.stringify(this.isLongterm));
         }
 
         this.is_shortlisted = res?.existingfavorite?.favourite ?? false;
@@ -900,7 +979,7 @@ export class DetailsComponent implements OnInit {
             ))
         }
 
-        if(res.hostHolidays){
+        if (res.hostHolidays) {
           localStorage.setItem("holidays", JSON.stringify(res.hostHolidays));
         }
 
@@ -1665,20 +1744,20 @@ export class DetailsComponent implements OnInit {
         return;
       }
 
-    const script = document.createElement('script');
-    script.id = scriptId;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.mapKey}&callback=initMap&libraries=places`;
-    script.defer = true;
-    script.async = true;
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.mapKey}&callback=initMap&libraries=places`;
+      script.defer = true;
+      script.async = true;
 
-    // Append the script to the head
-    document.head.appendChild(script);
+      // Append the script to the head
+      document.head.appendChild(script);
 
-    // Define the initMap function
-    (window as any).initMap = () => {
-      this.initializeMap();
-    };
-  }
+      // Define the initMap function
+      (window as any).initMap = () => {
+        this.initializeMap();
+      };
+    }
   }
 
   initializeMap(): void {

@@ -62,7 +62,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   @ViewChild('faqsChild', { static: false })
   private faqsChild: ElementRef<HTMLDivElement>;
   isTestDivScrolledIntoView: boolean;
-  _showMap: boolean = false;
+  _showMap: boolean = true;
   nearBySpaces = new BehaviorSubject<any>([]);
   faqs = new BehaviorSubject([]);
   isFaqsVisible: any;
@@ -141,10 +141,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
       this.logged_in = user_details.is_logged_in;
       this.shortlists = user_details.shortlists;
     });
-    if (isPlatformBrowser(this.platformId)) {
-      this.open_spaceType = JSON.parse(sessionStorage.getItem('open_spaceType'));
-      this.open_location = JSON.parse(sessionStorage.getItem('open_location'));
-    }
   }
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
@@ -242,19 +238,26 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.loadZohoScript2();
-    this.getAllQuestions();
-    const selectedValues = [
-      "Private Office",
-      "Managed Office",
-      "Dedicated Desk",
-      "Flexible Desk",
-      "Virtual Office",
-      "Day Pass"
-    ];
     if (isPlatformBrowser(this.platformId)) {
+      if (localStorage.getItem('userDetails')) {
+        this.isCoworking = sessionStorage.getItem('isCoworking')
+        const userDetail = localStorage.getItem('userDetails');
+        const userDetailObj = JSON.parse(userDetail);
+        this.userId = userDetailObj.id
+      } else {
+        this.userId = 0
+      }
+      const selectedValues = [
+        "Private Office",
+        "Managed Office",
+        "Dedicated Desk",
+        "Flexible Desk",
+        "Virtual Office",
+        "Day Pass"
+      ];
       sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
     }
+    this.getAllQuestions();
     this.removeLoaction()
     this.route.params.subscribe((params: ParamMap) => {
       this.spaceType = params['spaceType'] === "coworking" ? 'coworking space' : this.getOriginalUrlParam(params['spaceType']);
@@ -380,16 +383,6 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.recommended_spaces = message
       }
     );
-    if (isPlatformBrowser(this.platformId)) {
-      if (localStorage.getItem('userDetails')) {
-        this.isCoworking = sessionStorage.getItem('isCoworking')
-        const userDetail = localStorage.getItem('userDetails');
-        const userDetailObj = JSON.parse(userDetail);
-        this.userId = userDetailObj.id
-      } else {
-        this.userId = 0
-      }
-    }
   }
 
 
@@ -589,10 +582,10 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   }
 
   getSpacesByCity() {
-    
-    this.isloader = true;
+
     if (isPlatformBrowser(this.platformId)) {
 
+      this.isloader = true;
 
       if (this.spaceType?.toLowerCase() == 'coworking space') {
         this.type = "coworking";
@@ -637,6 +630,7 @@ export class CityListingComponent implements OnInit, AfterViewInit {
         this.spaceService.getNearBySpaces(details).pipe(finalize(() => { this.isloader = false })).subscribe(
           (response) => {
             if (this.areaName && response.length) {
+              window.scrollTo(0, 0);
               let isExist = response?.some((val) => val.location_name.toLowerCase() === this.areaName)
               let matchedLocation = response?.find(
                 (val: any) => val.location_name.toLowerCase() === this.areaName
@@ -1079,35 +1073,33 @@ export class CityListingComponent implements OnInit, AfterViewInit {
   isScriptLoaded: boolean = false;
 
   loadZohoScript2() {
-    const existingScript = document.getElementById("zsiqscript");
-    if (existingScript) {
-      existingScript.remove();
-    }
+    if (isPlatformBrowser(this.platformId)) {
+      const existingScript = document.getElementById("zsiqscript");
+      if (existingScript) {
+        existingScript.remove();
+      }
 
-    const load = () => {
-      window['$zoho'] = window['$zoho'] || {};
-      window['$zoho'].salesiq = {
-        widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
-        values: {},
-        ready: function () { },
-      };
       setTimeout(() => {
-        if (this.spaceType != "event space" && this.spaceType != 'Coworking Café/Restaurant' && this.spaceType != 'shoot studio' && this.spaceType != 'recording studio' && this.spaceType != 'podcast studio' && this.spaceType != 'activity space' && this.spaceType != 'sports turf' && this.spaceType != 'sports venue' && this.spaceType != 'party space' && this.spaceType != 'banquet hall' && this.spaceType != 'gallery' && this.spaceType != 'classroom' && this.spaceType != 'private cabin' && this.spaceType != 'meeting room' && this.spaceType != 'training room') {
-          this.clickZohoChatButton();
-        }
-      }, 1000);
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.id = "zsiqscript";
-      script.defer = true;
-      script.src = "https://salesiq.zoho.in/widget";
-      document.body.appendChild(script);
-    };
+        window['$zoho'] = window['$zoho'] || {};
+        window['$zoho'].salesiq = {
+          widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
+          values: {},
+          ready: function () {
+          },
+        };
+        setTimeout(() => {
+          if (this.spaceType != "event space" && this.spaceType != 'Coworking Café/Restaurant' && this.spaceType != 'shoot studio' && this.spaceType != 'recording studio' && this.spaceType != 'podcast studio' && this.spaceType != 'activity space' && this.spaceType != 'sports turf' && this.spaceType != 'sports venue' && this.spaceType != 'party space' && this.spaceType != 'banquet hall' && this.spaceType != 'gallery' && this.spaceType != 'classroom' && this.spaceType != 'private cabin' && this.spaceType != 'meeting room' && this.spaceType != 'training room') {
+            this.clickZohoChatButton();
+          }
+        }, 1000);
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.id = "zsiqscript";
+        script.defer = true;
+        script.src = "https://salesiq.zoho.in/widget";
+        document.body.appendChild(script);
 
-    if (typeof (window as any).requestIdleCallback === 'function') {
-      (window as any).requestIdleCallback(load);
-    } else {
-      setTimeout(load, 200);
+      }, 200);
     }
   }
 

@@ -79,7 +79,7 @@
                     <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
                   </mat-chip>
                   <input [value]="resetModel" matInput [matDatepickerFilter]="dateFilter" formControlName="startDate"
-                    [min]="minDate" [readonly]="true" [matDatepicker]="picker" placeholder="Choose a date"
+                    [min]="minDate" [readonly]="true" [matDatepicker]="picker" placeholder="choose one and more dates"
                     (dateChange)="dateChanged($event)" [matChipInputFor]="chipList" hidden />
                 </mat-chip-list>
                 <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>

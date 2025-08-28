@@ -55,7 +55,7 @@ export class RequestBookingComponent {
   currentDateTime: Date = new Date(); // Get current date and time
   currentTime: string = this.currentDateTime.toTimeString().split(' ')[0];
   userDetails: any;
-  valGstPanForm: boolean=true;
+  valGstPanForm: boolean = true;
   GSTnumber: any;
   PANnumber: any;
   gstErrorMsg: string;
@@ -189,8 +189,8 @@ export class RequestBookingComponent {
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.spaceId = sessionStorage.getItem('space_id');
+      this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
     }
-    this.userDetail = JSON.parse(localStorage.getItem('userDetails') || '');
   }
 
   _window(): any {
@@ -219,14 +219,14 @@ export class RequestBookingComponent {
   }
 
   ngOnInit(): void {
-    
+
     this.route.params.subscribe((params: Params) => {
-       this.spaceType = this.getOriginalUrlParam(params.spaceType);
-        this.space_id = params.spaceId;
-      if(this.spaceType == 'Coworking Café Restaurant'){
+      this.spaceType = this.getOriginalUrlParam(params.spaceType);
+      this.space_id = params.spaceId;
+      if (this.spaceType == 'Coworking Café Restaurant') {
         this.spaceType = "Coworking Café/Restaurant";
         this.getShortDetails(params.spaceName?.match(/\d+$/)?.[0])
-      }else{
+      } else {
         this.getShortDetails(params.spaceId)
       }
     });
@@ -238,8 +238,8 @@ export class RequestBookingComponent {
     // set default booking date
     this.bookings[0].date = new Date();
 
-    if(this.userDetail && (this.userDetail?.billingAddress=='' || this.userDetail?.billingAddress==null)){
-      this.valGstPanForm=false;
+    if (this.userDetail && (this.userDetail?.billingAddress == '' || this.userDetail?.billingAddress == null)) {
+      this.valGstPanForm = false;
       // this.GSTnumber=this.userDetail?.gstNumber;
       // this.PANnumber=this.userDetail?.panNumber;
       this.billingAddress = this.userDetail?.billingAddress;
@@ -249,42 +249,42 @@ export class RequestBookingComponent {
   getOriginalUrlParam(value: string): string {
     return value.replace(/-/g, ' ')?.replace(/\b\w/g, char => char?.toUpperCase());
   }
-  
-  chkValidateGstPanForm(event: any, fieldType){ 
-    this.panErrorMsg='';
+
+  chkValidateGstPanForm(event: any, fieldType) {
+    this.panErrorMsg = '';
     // this.gstErrorMsg='';
-    this.billingMsg='';
-    if(fieldType=='GSTnumber'){
-      
+    this.billingMsg = '';
+    if (fieldType == 'GSTnumber') {
+
       this.GSTnumber = event.target.value;
     }
- 
+
     // if(fieldType=='PANnumber'){
-      
+
     //   this.PANnumber = event.target.value;
     // }
 
-    if(fieldType == "billingAddress"){
+    if (fieldType == "billingAddress") {
       this.billingAddress = event.target.value;
     }
 
-    if(fieldType == "billingAddress2"){
+    if (fieldType == "billingAddress2") {
       this.billingAddress2 = event.target.value;
     }
- 
+
     // if (this.GSTnumber === undefined || !/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$/.test(this.GSTnumber)) {
     //   this.gstErrorMsg = 'Please enter a valid GST number';
     // } else 
-    
+
     // if (this.PANnumber === undefined || !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(this.PANnumber)) {
     //   this.panErrorMsg = 'Please enter a valid PAN number';
     // }else 
-    if(this.billingAddress == ""){
+    if (this.billingAddress == "") {
       this.billingMsg = 'Please enter billing address';
     } else {
       this.valGstPanForm = true;
     }
-    
+
   }
 
   convertTo24Hour(time: string): string {
@@ -341,21 +341,22 @@ export class RequestBookingComponent {
       default:
         dayPrefix = '';
     }
+    if (isPlatformBrowser(this.platformId)) {
+      if (dayPrefix) {
+        this.startTime = localStorage.getItem(`${dayPrefix}OpenTime`);
+        this.endTime = localStorage.getItem(`${dayPrefix}CloseTime`);
 
-    if (dayPrefix) {
-      this.startTime = localStorage.getItem(`${dayPrefix}OpenTime`);
-      this.endTime = localStorage.getItem(`${dayPrefix}CloseTime`);
+        this.generateTimeSlots(this.startTime, this.endTime);
 
-      this.generateTimeSlots(this.startTime, this.endTime);
-
-      if (!this.startTime || !this.endTime) {
-        this.toastr.warning(`No time available for ${this.selectedDay}. Please choose another day.`
-          , 'Warning',{
+        if (!this.startTime || !this.endTime) {
+          this.toastr.warning(`No time available for ${this.selectedDay}. Please choose another day.`
+            , 'Warning', {
             timeOut: 100
           }
-        );
-      } else {
-        this.filteredStartTimes = this.getFilteredStartTimes();
+          );
+        } else {
+          this.filteredStartTimes = this.getFilteredStartTimes();
+        }
       }
     }
   }
@@ -371,11 +372,11 @@ export class RequestBookingComponent {
     // Convert times from 12-hour to 24-hour format
     const [startHour, startMinute] = this.convertTo24Hour2(startTime);
     const [endHour, endMinute] = this.convertTo24Hour2(endTime);
-    
+
     const start = startHour * 60 + startMinute; // Total minutes from midnight
     const end = endHour * 60 + endMinute;       // Total minutes from midnight
 
-  
+
     for (let timeInMinutes = start; timeInMinutes <= end; timeInMinutes += 30) {
       const hour = Math.floor(timeInMinutes / 60);
       const minute = timeInMinutes % 60;
@@ -390,13 +391,13 @@ export class RequestBookingComponent {
 
     if (this.endTime == '00:00') {
       this.endTimes = this.startTimes;
-    } else{
+    } else {
       for (let timeInMinutes = 30; timeInMinutes <= end; timeInMinutes += 30) {
         const hour = Math.floor(timeInMinutes / 60);
         const minute = timeInMinutes % 60;
         const time = this.formatTime(hour, minute);
         const time24Format = this.formatTime24Hour(hour, minute);
-  
+
         this.endTimes.push({
           value: time24Format,  // 24-hour format
           viewValue: time       // 12-hour format with AM/PM
@@ -405,41 +406,41 @@ export class RequestBookingComponent {
 
     }
   }
-  
+
   convertTo24Hour2(time: string): [number, number] {
     const [timePart, period] = time.split(' ');
     const [hour, minute] = timePart.split(':').map(Number);
     let hour24 = hour;
-    
+
     if (period === 'PM' && hour !== 12) {
       hour24 += 12;
     } else if (period === 'AM' && hour === 12) {
       hour24 = 0;
     }
-    
+
     return [hour24, minute];
   }
-  
+
   formatTime(hour: number, minute: number): string {
     const period = hour >= 12 ? 'PM' : 'AM';
     const formattedHour = hour % 12 || 12;  // Convert 0 to 12 for midnight and handle PM times
     const formattedMinute = minute === 0 ? '00' : minute.toString();
     return `${formattedHour}:${formattedMinute} ${period}`;
   }
-  
+
   formatTime24Hour(hour: number, minute: number): string {
     const formattedHour = hour < 10 ? `0${hour}` : hour.toString();
     const formattedMinute = minute === 0 ? '00' : minute.toString();
     return `${formattedHour}:${formattedMinute}`;
   }
 
-  submitGstAndPan(){
- 
-    if(this.valGstPanForm){
+  submitGstAndPan() {
+
+    if (this.valGstPanForm) {
       this.profileService.fetchProfiledata().subscribe((result: any) => {
         if (result.success) {
           this.userDetails = result.data;
-  
+
           let profileData = {
             email: this.userDetails?.email,
             mobile: this.userDetails?.mobile,
@@ -449,14 +450,14 @@ export class RequestBookingComponent {
             dateOfBirth: this.userDetails?.dateOfBirth,
             companyName: this.userDetails?.companyName,
             billingAddress: this.billingAddress,
-            billingAddress2:this.billingAddress2,
+            billingAddress2: this.billingAddress2,
             panNumber: this.PANnumber,
             gstNumber: this.GSTnumber,
           }
-          
-  
+
+
           this.profileService.updateProfileDetails(this.userDetails?.id, profileData).subscribe((result: any) => {
-            if(result.success){
+            if (result.success) {
               localStorage.setItem('userDetails', JSON.stringify(result?.user))
               this.toastr.success(result.message || 'Profile details updated successfully!');
               $("#updateModal").hide();
@@ -466,47 +467,50 @@ export class RequestBookingComponent {
           }, (error) => {
             this.toastr.error('Some error occurred while update profile!')
           })
-  
+
         }
       })
-    }else{
+    } else {
       this.toastr.error('Please enter correct details.')
     }
 
   }
 
   dateFilter = (d: Date | null): boolean => {
-    // Retrieve closed days from local storage and parse as boolean
-    const mondayClosed = localStorage.getItem('mondayClosed') === 'true';
-    const tuesdayClosed = localStorage.getItem('tuesdayClosed') === 'true';
-    const wednesdayClosed = localStorage.getItem('wednesdayClosed') === 'true';
-    const thursdayClosed = localStorage.getItem('thursdayClosed') === 'true';
-    const fridayClosed = localStorage.getItem('fridayClosed') === 'true';
-    const saturdayClosed = localStorage.getItem('saturdayClosed') === 'true';
-    const sundayClosed = localStorage.getItem('sundayClosed') === 'true';
+    if (isPlatformBrowser(this.platformId)) {
+      // Retrieve closed days from local storage and parse as boolean
+      const mondayClosed = localStorage.getItem('mondayClosed') === 'true';
+      const tuesdayClosed = localStorage.getItem('tuesdayClosed') === 'true';
+      const wednesdayClosed = localStorage.getItem('wednesdayClosed') === 'true';
+      const thursdayClosed = localStorage.getItem('thursdayClosed') === 'true';
+      const fridayClosed = localStorage.getItem('fridayClosed') === 'true';
+      const saturdayClosed = localStorage.getItem('saturdayClosed') === 'true';
+      const sundayClosed = localStorage.getItem('sundayClosed') === 'true';
 
-    const date = d ? new Date(d) : null;
-    if (!date || isNaN(date.getTime())) {
-      return true;
+      const date = d ? new Date(d) : null;
+      if (!date || isNaN(date.getTime())) {
+        return true;
+      }
+
+      const day = date.getDay();
+      // Disable days based on the closed days from local storage
+      return !(
+        (mondayClosed && day === 1) ||
+        (tuesdayClosed && day === 2) ||
+        (wednesdayClosed && day === 3) ||
+        (thursdayClosed && day === 4) ||
+        (fridayClosed && day === 5) ||
+        (saturdayClosed && day === 6) ||
+        (sundayClosed && day === 0)
+      );
     }
-
-    const day = date.getDay();
-    // Disable days based on the closed days from local storage
-    return !(
-      (mondayClosed && day === 1) ||
-      (tuesdayClosed && day === 2) ||
-      (wednesdayClosed && day === 3) ||
-      (thursdayClosed && day === 4) ||
-      (fridayClosed && day === 5) ||
-      (saturdayClosed && day === 6) ||
-      (sundayClosed && day === 0)
-    );
   }
 
-  getSpaceDetails(country:any, city:any, spaceType:any, spaceId:any) {
+  getSpaceDetails(country: any, city: any, spaceType: any, spaceId: any) {
     this.spaceService
-      .getSpaceDetails(country, city, spaceType,spaceId)
-      .then((res) => {``
+      .getSpaceDetails(country, city, spaceType, spaceId)
+      .then((res) => {
+        ``
         this.space_details = res.data;
         this.spaceName = this.space_details.actual_name;
         this.landmark = this.space_details.location_name;
@@ -515,7 +519,7 @@ export class RequestBookingComponent {
           this.space_details.originalPrice ||
           this.space_details?.flexible_desk_price;
       })
-      .catch((error) => {});
+      .catch((error) => { });
   }
 
   convertMinutesToHours(minutes: number): string {
@@ -597,23 +601,23 @@ export class RequestBookingComponent {
 
   popupOpen(isinstant): void {
     let payload = {
-        component: "favourite-workspace",
-        isinstant:isinstant,
-        message: 'Are you sure you want to Unfavourite this workspace?'
+      component: "favourite-workspace",
+      isinstant: isinstant,
+      message: 'Are you sure you want to Unfavourite this workspace?'
     }
-    this.dialog.open(ThankyopopupComponent, { data: payload ,width: '500px'});
+    this.dialog.open(ThankyopopupComponent, { data: payload, width: '500px' });
   }
 
   onSumbit() {
     this.isFormSubmitted = true
     if (this.isFormValid() && this.totalHours > 0) {
 
-      if(!this.valGstPanForm){
+      if (!this.valGstPanForm) {
         $("#updateModal").show();
         return false;
       }
       const payload = {
-        spaceLocation:this.landmark,
+        spaceLocation: this.landmark,
         bookingPeriods: this.bookings.map((booking) => {
 
           const timeParts1 = booking.startTime.split(':'); // Split the time string by '.'
@@ -701,9 +705,9 @@ export class RequestBookingComponent {
                       this.popupOpen(this.space_details?.isInstant);
                       // this.toastr.success('Booking complete');
                       // setTimeout(() => {
-                        this.router.navigate(['/booking-Detail', bookingRes?.bookingId])
-                        this.closeDialog(null);
-                        this.isLoading = false;
+                      this.router.navigate(['/booking-Detail', bookingRes?.bookingId])
+                      this.closeDialog(null);
+                      this.isLoading = false;
                       // }, 3000);
                     } else {
                       this.toastr.error(bookingRes?.message)
@@ -733,9 +737,9 @@ export class RequestBookingComponent {
                 //   'Request for booking sent successfully awaiting confirmation from host!'
                 // );
                 // setTimeout(() => {
-                  this.router.navigate(['/booking-Detail', response?.bookingRecord?.id])
-                  this.closeDialog(null);
-                  this.isLoading = false;
+                this.router.navigate(['/booking-Detail', response?.bookingRecord?.id])
+                this.closeDialog(null);
+                this.isLoading = false;
                 // }, 3000);
               }
             } else {
@@ -749,7 +753,7 @@ export class RequestBookingComponent {
             // this.toastr.error('Some error occurred while visit schedule!');
           }
         );
-    }else {
+    } else {
       this.toastr.error('Please enter correct details');
     }
   }
@@ -767,7 +771,7 @@ export class RequestBookingComponent {
       );
       this.bookings[index].endTime = null;
     }
-    
+
   }
 
   endTimeChanged(index: number) {
@@ -775,7 +779,7 @@ export class RequestBookingComponent {
     const startTime = parseFloat(booking.startTime);
     const endTime = parseFloat(booking.endTime);
 
-    
+
     // if (endTime && endTime - startTime < 0) {
     //   this.toastr.error(
     //     'End time must be greater than start time.'
@@ -788,12 +792,12 @@ export class RequestBookingComponent {
     //   );
     //   this.bookings[index].endTime = null; // Reset end time
     // }
-    
+
     this.calculateTotalHours(index);
-    
+
   }
-  
-  dateChanged(index: number, value:any) {
+
+  dateChanged(index: number, value: any) {
     if (index === 0) {
       // Only update selectedDate if it's the first array of index
       this.selectedDate = value._d;
@@ -814,7 +818,7 @@ export class RequestBookingComponent {
     }
   }
 
-  closeModal(){
+  closeModal() {
     $("#updateModal").hide();
   }
 
@@ -938,41 +942,41 @@ export class RequestBookingComponent {
     this.totalHours = 0;
 
     this.bookings.forEach((booking, i) => {
-        if (booking.startTime && booking.endTime) {
-            const [startHour, startMinute] = booking.startTime.split(":").map(Number);
-            const [endHour, endMinute] = booking.endTime.split(":").map(Number)
+      if (booking.startTime && booking.endTime) {
+        const [startHour, startMinute] = booking.startTime.split(":").map(Number);
+        const [endHour, endMinute] = booking.endTime.split(":").map(Number)
 
-            const startTotalMinutes = startHour * 60 + (isNaN(startMinute) ? 0 : startMinute);
-            const endTotalMinutes = endHour * 60 + (isNaN(endMinute) ? 0 : endMinute);
+        const startTotalMinutes = startHour * 60 + (isNaN(startMinute) ? 0 : startMinute);
+        const endTotalMinutes = endHour * 60 + (isNaN(endMinute) ? 0 : endMinute);
 
-            let timeDifferenceInMinutes;
+        let timeDifferenceInMinutes;
 
-            if (startTotalMinutes === endTotalMinutes) {
-              if (booking.startTime == '00:00' && booking.endTime == '00:00') {
-                  timeDifferenceInMinutes = 24 * 60; // 24 hours
-              } else if (booking.startTime === booking.endTime) {
-                timeDifferenceInMinutes = 0;
-                this.bookings[index].endTime = null;
-              }
-            } else if (booking.startTime > booking.endTime) {
-                timeDifferenceInMinutes = 24 * 60 - (startTotalMinutes - endTotalMinutes);
-              
-            } else {
-                timeDifferenceInMinutes = endTotalMinutes - startTotalMinutes;
-            }
+        if (startTotalMinutes === endTotalMinutes) {
+          if (booking.startTime == '00:00' && booking.endTime == '00:00') {
+            timeDifferenceInMinutes = 24 * 60; // 24 hours
+          } else if (booking.startTime === booking.endTime) {
+            timeDifferenceInMinutes = 0;
+            this.bookings[index].endTime = null;
+          }
+        } else if (booking.startTime > booking.endTime) {
+          timeDifferenceInMinutes = 24 * 60 - (startTotalMinutes - endTotalMinutes);
 
-            this.bookings[i].duration = timeDifferenceInMinutes / 60;
-            this.totalHours += timeDifferenceInMinutes / 60;
-
-            if (this.bookings[i].duration < this.minimumHours) {
-                console.error(`Booking ${i} duration is less than the minimum required hours.`);
-                this.toastr.error(
-                    `Time difference must be at least ${this.minimumHours} hours.`
-                );
-                this.bookings[i].duration = null;
-                this.totalHours -= timeDifferenceInMinutes / 60;
-            }
+        } else {
+          timeDifferenceInMinutes = endTotalMinutes - startTotalMinutes;
         }
+
+        this.bookings[i].duration = timeDifferenceInMinutes / 60;
+        this.totalHours += timeDifferenceInMinutes / 60;
+
+        if (this.bookings[i].duration < this.minimumHours) {
+          console.error(`Booking ${i} duration is less than the minimum required hours.`);
+          this.toastr.error(
+            `Time difference must be at least ${this.minimumHours} hours.`
+          );
+          this.bookings[i].duration = null;
+          this.totalHours -= timeDifferenceInMinutes / 60;
+        }
+      }
     });
 
     this.totalHours = Math.ceil(this.totalHours * 2) / 2;

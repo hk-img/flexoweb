@@ -82,6 +82,21 @@
             </div>
             <div class="col-md-6">
                 <div class="pm-single">
+                    <p>City<span class="text-danger">*</span></p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select placeholder="Select City" name="city" [(ngModel)]="long_term_city"
+                             required>
+                            <mat-option value="{{city?.name}}" *ngFor="let city of getLongTermCities">{{city?.name}}</mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="long_term_city?.errors?.required">
+                            City is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- <div class="col-md-6">
+                <div class="pm-single">
                     <p>Space Type<span class="text-danger">*</span></p>
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-select placeholder="Select Space Type" name="spaceType" [(ngModel)]="formData.spaceType"
@@ -98,7 +113,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
+            </div> -->
             <div class="col-md-6">
                 <div class="pm-single">
                     <p>No. of Seats<span class="text-danger">*</span></p>

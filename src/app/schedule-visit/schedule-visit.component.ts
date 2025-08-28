@@ -22,8 +22,8 @@ export class ScheduleVisitComponent implements OnInit {
   public visitId: any;
   public typeOfSpaceList: any = GlobalVariables.resource_types;
   public isUpdating: boolean = false;
-  isShortterm:boolean;
-  isCoworking:boolean;
+  isShortterm: boolean;
+  isCoworking: boolean;
   isLongterm: boolean;
   public date = new Date();
   startTime: any;
@@ -44,27 +44,27 @@ export class ScheduleVisitComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.spaceId = sessionStorage.getItem('space_id');
       this.isShortterm = JSON.parse(sessionStorage.getItem('isShortterm'));
-      
+
       this.isCoworking = JSON.parse(sessionStorage.getItem('isCoworking'));
-    this.isLongterm = JSON.parse(sessionStorage.getItem('isLongterm'));
+      this.isLongterm = JSON.parse(sessionStorage.getItem('isLongterm'));
     }
   }
   startTimes = [
-    {value: '10:00', viewValue: '10:00 AM'},
-    {value: '10:30', viewValue: '10:30 AM'},
-    {value: '11:00', viewValue: '11:00 AM'},
-    {value: '11:30', viewValue: '11:30 AM'},
-    {value: '12:00', viewValue: '12:00 PM'},
-    {value: '12:30', viewValue: '12:30 PM'},
-    {value: '13:00', viewValue: '1:00 PM'},
-    {value: '13:30', viewValue: '1:30 PM'},
-    {value: '14:00', viewValue: '2:00 PM'},
-    {value: '14:30', viewValue: '2:30 PM'},
-    {value: '15:00', viewValue: '3:00 PM'},
-    {value: '15:30', viewValue: '3:30 PM'},
-    {value: '16:00', viewValue: '4:00 PM'},
-    {value: '16:30', viewValue: '4:30 PM'},
-    {value: '17:00', viewValue: '5:00 PM'},
+    { value: '10:00', viewValue: '10:00 AM' },
+    { value: '10:30', viewValue: '10:30 AM' },
+    { value: '11:00', viewValue: '11:00 AM' },
+    { value: '11:30', viewValue: '11:30 AM' },
+    { value: '12:00', viewValue: '12:00 PM' },
+    { value: '12:30', viewValue: '12:30 PM' },
+    { value: '13:00', viewValue: '1:00 PM' },
+    { value: '13:30', viewValue: '1:30 PM' },
+    { value: '14:00', viewValue: '2:00 PM' },
+    { value: '14:30', viewValue: '2:30 PM' },
+    { value: '15:00', viewValue: '3:00 PM' },
+    { value: '15:30', viewValue: '3:30 PM' },
+    { value: '16:00', viewValue: '4:00 PM' },
+    { value: '16:30', viewValue: '4:30 PM' },
+    { value: '17:00', viewValue: '5:00 PM' },
     { value: '17:30', viewValue: '5:30 PM' },
     { value: '18:00', viewValue: '6:00 PM' },
     { value: '18:30', viewValue: '6:30 PM' },
@@ -85,9 +85,9 @@ export class ScheduleVisitComponent implements OnInit {
         "",
         [Validators.required],
       ],
-      visitTime:["",
-      [Validators.required]]
-     
+      visitTime: ["",
+        [Validators.required]]
+
     });
     if (this.data != null) {
       this.spaceId = this.data.spaceId;
@@ -113,32 +113,34 @@ export class ScheduleVisitComponent implements OnInit {
   }
 
   onDateChange(event: any) {
-    const selectedDate = event.value;
-    this.selectedDay = moment(selectedDate).format('dddd');
+    if (isPlatformBrowser(this.platformId)) {
+      const selectedDate = event.value;
+      this.selectedDay = moment(selectedDate).format('dddd');
 
-    if(this.selectedDay === 'Monday'){
-      this.startTime = localStorage.getItem("mondayOpenTime");
-      this.endTime = localStorage.getItem("mondayCloseTime");
-    }else if(this.selectedDay === 'Tuesday'){
-      this.startTime = localStorage.getItem("tuesdayOpenTime");
-      this.endTime = localStorage.getItem("tuesdayCloseTime");
-    }else if(this.selectedDay === 'Wednesday'){
-      this.startTime = localStorage.getItem("wednesdayOpenTime");
-      this.endTime = localStorage.getItem("wednesdayCloseTime");
-    }else if(this.selectedDay === 'Thursday'){
-      this.startTime = localStorage.getItem("thursdayOpenTime");
-      this.endTime = localStorage.getItem("thursdayCloseTime");
-    }else if(this.selectedDay === 'Friday'){
-      this.startTime = localStorage.getItem("fridayOpenTime");
-      this.endTime = localStorage.getItem("fridayCloseTime");
-    }else if(this.selectedDay === 'Saturday'){
-      this.startTime = localStorage.getItem("saturdayOpenTime");
-      this.endTime = localStorage.getItem("saturdayCloseTime");
-    }else if(this.selectedDay === 'Sunday'){
-      this.startTime = localStorage.getItem("sundayOpenTime");
-      this.endTime = localStorage.getItem("sundayCloseTime");
+      if (this.selectedDay === 'Monday') {
+        this.startTime = localStorage.getItem("mondayOpenTime");
+        this.endTime = localStorage.getItem("mondayCloseTime");
+      } else if (this.selectedDay === 'Tuesday') {
+        this.startTime = localStorage.getItem("tuesdayOpenTime");
+        this.endTime = localStorage.getItem("tuesdayCloseTime");
+      } else if (this.selectedDay === 'Wednesday') {
+        this.startTime = localStorage.getItem("wednesdayOpenTime");
+        this.endTime = localStorage.getItem("wednesdayCloseTime");
+      } else if (this.selectedDay === 'Thursday') {
+        this.startTime = localStorage.getItem("thursdayOpenTime");
+        this.endTime = localStorage.getItem("thursdayCloseTime");
+      } else if (this.selectedDay === 'Friday') {
+        this.startTime = localStorage.getItem("fridayOpenTime");
+        this.endTime = localStorage.getItem("fridayCloseTime");
+      } else if (this.selectedDay === 'Saturday') {
+        this.startTime = localStorage.getItem("saturdayOpenTime");
+        this.endTime = localStorage.getItem("saturdayCloseTime");
+      } else if (this.selectedDay === 'Sunday') {
+        this.startTime = localStorage.getItem("sundayOpenTime");
+        this.endTime = localStorage.getItem("sundayCloseTime");
+      }
+      this.filteredStartTimes = this.getFilteredStartTimes();
     }
-    this.filteredStartTimes = this.getFilteredStartTimes();
   }
 
   convertTo24Hour(time: string): string {
@@ -191,13 +193,13 @@ export class ScheduleVisitComponent implements OnInit {
   //   );
   // }
 
-  popupOpen(title1:any): void {
+  popupOpen(title1: any): void {
     let payload = {
-        component: "favourite-workspace",
-        title: title1,
-        message: 'Are you sure you want to Unfavourite this workspace?'
+      component: "favourite-workspace",
+      title: title1,
+      message: 'Are you sure you want to Unfavourite this workspace?'
     }
-    this.dialog.open(ThankyopopupComponent, { data: payload ,width: '500px'});
+    this.dialog.open(ThankyopopupComponent, { data: payload, width: '500px' });
   }
   onSubmitScheduleVisit() {
     if (!this.scheduleVisitForm.valid) {
@@ -212,8 +214,8 @@ export class ScheduleVisitComponent implements OnInit {
       visitDate: date,
       visitTime: formValue.visitTime,
     };
-  
-    if (this.isShortterm ) {
+
+    if (this.isShortterm) {
       this.spaceService.userShortTermScheduleVisit(this.spaceId, payload).subscribe(
         (response: any) => {
           if (response.result.success) {
@@ -264,7 +266,7 @@ export class ScheduleVisitComponent implements OnInit {
     const selectedDate = new Date(this.scheduleVisitForm.value.visitDate);
     const currentHours = currentDate.getHours();
     const currentMinutes = currentDate.getMinutes();
-    
+
     let totalMinut = currentHours * 60;
     if (!isNaN(currentMinutes)) {
       totalMinut += currentMinutes;
@@ -284,7 +286,7 @@ export class ScheduleVisitComponent implements OnInit {
     return false;
 
   }
-  
+
   // onSubmitScheduleVisit(){
   //   const formValue = this.scheduleVisitForm.value;
   //      const payload = {

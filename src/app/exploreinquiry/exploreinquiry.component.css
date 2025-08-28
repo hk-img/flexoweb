@@ -3,9 +3,6 @@
   align-items: center;
   justify-content: space-between;
 }
-/* ::ng-deep .enq-mod-c{
-    width: 55% !important;
-} */
 
 ::ng-deep .enq-mod-c {
   margin: 0 12px;
@@ -58,7 +55,6 @@
 
 .form-group {
   height: 100%;
-  /* margin: 0; */
 }
 
 .input-group-text {
@@ -104,7 +100,6 @@
 }
 ::ng-deep .ng-dropdown-panel {
   text-align: left;
-  /* width:18.5rem !important; */
   width: auto !important;
 }
 

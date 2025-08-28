@@ -12,7 +12,7 @@ import { GlobalVariables } from '../global/global-variables';
 import { SpaceService } from '../services/space.service';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { ExploreinquiryComponent } from '../exploreinquiry/exploreinquiry.component';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef} from '@angular/material/legacy-dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 declare var google: any;
 declare let localStorage: any;
 
@@ -62,7 +62,6 @@ export class HomeComponent implements OnDestroy {
   currentImageIndex: number = 0;
   currentTextIndex: number = 0;
   isTextFadingOut: boolean = false;
-
   imageDuration: number = 5000; // Duration for image (in ms)
   textDelay: number = 900; // Delay for text fade in/out (in ms)
 
@@ -171,8 +170,8 @@ export class HomeComponent implements OnDestroy {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
-           arrows: false,
-           dots: true,
+          arrows: false,
+          dots: true,
         },
       },
       {
@@ -180,7 +179,7 @@ export class HomeComponent implements OnDestroy {
         settings: {
           slidesToShow: 1,
           arrows: false,
-           dots: true,
+          dots: true,
         },
       },
     ],
@@ -450,7 +449,7 @@ export class HomeComponent implements OnDestroy {
       this.trustedLeadingShimmer = false;
     }
   }
-  
+
   private initializeComponent(): void {
     this.startCarousel();
     this.getCoords();
@@ -596,17 +595,19 @@ export class HomeComponent implements OnDestroy {
   }
 
   getLocationValue(event: any) {
-    this.location = event.option.value;
+    if (isPlatformBrowser(this.platformId)) {
+      this.location = event.option.value;
 
-    this.locationObj.filter((place: any) => {
-      if (place.label === this.location) {
-        this.getLocationObjForSearch = place;
-        this.city = this.getLocationObjForSearch.city;
+      this.locationObj.filter((place: any) => {
+        if (place.label === this.location) {
+          this.getLocationObjForSearch = place;
+          this.city = this.getLocationObjForSearch.city;
 
-        localStorage.setItem('lat', this.getLocationObjForSearch.lat);
-        localStorage.setItem('long', this.getLocationObjForSearch.long);
-      }
-    })
+          localStorage.setItem('lat', this.getLocationObjForSearch.lat);
+          localStorage.setItem('long', this.getLocationObjForSearch.long);
+        }
+      })
+    }
   }
 
   getAllLocation(spaceType: any) {
@@ -649,35 +650,39 @@ export class HomeComponent implements OnDestroy {
   }
 
   onSearchSubmit() {
-    let url = '';
-    this.spaceType = this.spaceType.toLowerCase();
-    localStorage.setItem("location", this.getLocationObjForSearch.label)
+    if (isPlatformBrowser(this.platformId)) {
+      let url = '';
+      this.spaceType = this.spaceType.toLowerCase();
+      localStorage.setItem("location", this.getLocationObjForSearch.label)
 
-    let isCityLevel = this.filteredPlaces.find(place => place.trim().endsWith('(City)'));
+      let isCityLevel = this.filteredPlaces.find(place => place.trim().endsWith('(City)'));
 
-    let citySlug = this.city.replace(/\s+/g, '-').toLowerCase();
-    let spaceTypeSlug = this.spaceType.toLowerCase().replace(/\s+/g, '-').replace('/', '-');
+      let citySlug = this.city.replace(/\s+/g, '-').toLowerCase();
+      let spaceTypeSlug = this.spaceType.toLowerCase().replace(/\s+/g, '-').replace('/', '-');
 
-    if(spaceTypeSlug == 'coworking-space'){
-      spaceTypeSlug = 'coworking'
+      if (spaceTypeSlug == 'coworking-space' && isCityLevel) {
+        spaceTypeSlug = 'coworking'
+      }
+
+      if (isCityLevel) {
+        url = `in/${spaceTypeSlug}/${citySlug}`;
+      } else {
+        let placesSlug = this.filteredPlaces
+          .map(place => place.split(',')[0].trim())
+          .join('-');
+        url = `in/${spaceTypeSlug}/${citySlug}/${placesSlug}`;
+      }
+      this.router.navigate([this.formatUrl(url)]);
     }
-
-    if (isCityLevel) {
-      url = `in/${spaceTypeSlug}/${citySlug}`;
-    } else {
-      let placesSlug = this.filteredPlaces
-        .map(place => place.split(',')[0].trim())
-        .join('-');
-      url = `in/${spaceTypeSlug}/${citySlug}/${placesSlug}`;
-    }
-    this.router.navigate([this.formatUrl(url)]);
   }
 
   navigateToCity(city: any, locationValue: any) {
-    let url = "";
-    url = `in/coworking/` + `${(city).replace(' ', '-').toLowerCase()}`;
-    localStorage.setItem("location", locationValue)
-    this.router.navigate([this.formatUrl(url)]);
+    if (isPlatformBrowser(this.platformId)) {
+      // let url = "";
+      // url = `in/coworking/` + `${(city).replace(' ', '-').toLowerCase()}`;
+      localStorage.setItem("location", locationValue)
+      // this.router.navigate([this.formatUrl(url)]);
+    }
   }
 
   formatUrl(value: string): string {
@@ -754,12 +759,13 @@ export class HomeComponent implements OnDestroy {
   loadZohoScript2() {
     this.cleanupZohoScript();
 
-    const load = () => {
+    setTimeout(() => {
       window['$zoho'] = window['$zoho'] || {};
       window['$zoho'].salesiq = {
         widgetcode: "0fc4dfe126a900d08cd66965a527bbcfebd987ea8870090a53afd7a22440aa53",
         values: {},
-        ready: function () { },
+        ready: function () {
+        },
       };
       setTimeout(() => {
         this.clickZohoChatButton();
@@ -770,13 +776,7 @@ export class HomeComponent implements OnDestroy {
       script.defer = true;
       script.src = "https://salesiq.zoho.in/widget";
       document.body.appendChild(script);
-    };
-
-    if (typeof (window as any).requestIdleCallback === 'function') {
-      (window as any).requestIdleCallback(load);
-    } else {
-      setTimeout(load, 200);
-    }
+    }, 200);
   }
 
   clickZohoChatButton() {

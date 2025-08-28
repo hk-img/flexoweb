@@ -271,15 +271,12 @@ small {
   }
 }
 
-/* shimmercss */
-
-/* Placeholder base */
 .placeholder {
   display: inline-block;
   min-height: 1em;
   vertical-align: middle;
   cursor: wait;
-  background-color: currentColor;
+  background-color: #a7a4a4;
   opacity: .5;
   border-radius: .25rem;
 }
@@ -309,7 +306,7 @@ small {
   bottom: 0;
   left: 0;
   animation: placeholder-wave 2s linear infinite;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
 }
 
 @keyframes placeholder-wave {

@@ -20,7 +20,7 @@ export class CoWorkingVisitScheduleTwoComponent {
 
   public coWorkingSchduleVisitForm: UntypedFormGroup;
   public space_id;
-  showSchedule: boolean = false; 
+  showSchedule: boolean = false;
   isFormSubmitted: boolean = false;
   public spaceId: any;
   visitDate: any;
@@ -31,7 +31,7 @@ export class CoWorkingVisitScheduleTwoComponent {
   flexible_dek_price: any;
   virtual_office_price: any;
   meeting_room_price: any;
-  submitForm:boolean = false;
+  submitForm: boolean = false;
   space_name: string;
   city: any;
   country: any;
@@ -44,15 +44,17 @@ export class CoWorkingVisitScheduleTwoComponent {
     private toastr: ToastrService,
     private datePipe: DatePipe,
     private modal: CoWorkingVisitScheduleComponent,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {
 
     setTimeout(() => {
       if (isPlatformBrowser(this.platformId)) {
-      this.spaceId = sessionStorage.getItem('space_id');
+        this.spaceId = sessionStorage.getItem('space_id');
       }
     }, 300);
-    this.visitDate = localStorage.getItem('coWorkingVisitInfo');
+    if (isPlatformBrowser(this.platformId)) {
+      this.visitDate = localStorage.getItem('coWorkingVisitInfo');
+    }
     // this.visitTime = JSON.parse(localStorage.getItem('coWorkingVisitInfo'));
     if (this.visitDate) {
       const visitInfo = JSON.parse(this.visitDate);
@@ -96,16 +98,16 @@ export class CoWorkingVisitScheduleTwoComponent {
     this.coWorkingSchduleVisitForm = this.fb.group({
       visitDate: [this.visitDate],
       visitTime: [this.visitTime],
-        spaceType: ["",
+      spaceType: ["",
         [Validators.required]],
-        
-        howManyPeople: ["",
+
+      howManyPeople: ["",
         [Validators.required]],
 
     });
     this.route.params.subscribe((params: Params) => {
       this.spaceType = this.getOriginalUrlParam(params.spaceType);
-      // this.space_id = params.spaceId;
+      this.space_id = params.spaceId;
       // alert(this.space_id)
       this.getShortDetails(this.space_id)
     });
@@ -116,74 +118,75 @@ export class CoWorkingVisitScheduleTwoComponent {
     return value?.replace(/-/g, ' ')?.replace(/\b\w/g, char => char?.toLowerCase());
   }
 
-  popupOpen(visit,title1): void {
+  popupOpen(visit, title1): void {
     let payload = {
-        component: "favourite-workspace",
-        title: title1,
-        visit: visit,
-        message: 'Are you sure you want to Unfavourite this workspace?'
+      component: "favourite-workspace",
+      title: title1,
+      visit: visit,
+      message: 'Are you sure you want to Unfavourite this workspace?'
     }
-    this.dialog.open(ThankyopopupComponent, { data: payload ,width: '500px'});
+    this.dialog.open(ThankyopopupComponent, { data: payload, width: '500px' });
   }
 
-  
+
   submit() {
-   
-      const formValues = this.coWorkingSchduleVisitForm.value;
 
-      this.visitDate = localStorage.getItem('coWorkingVisitInfo'); 
-      if (this.visitDate) {
-        const visitInfo = JSON.parse(this.visitDate);
-        formValues.visitDate = visitInfo.visitDate;
-        formValues.visitTime = visitInfo.visitTime;
-      }else{
-        this.submitForm = true;
-      }
- 
-      if(formValues?.spaceType == ''){
-        this.submitForm = true;
-      }else if(formValues?.howManyPeople == ''){
-        this.submitForm = true;
-      }else{
-        const payload = {
-          visitDate: formValues.visitDate,
-          visitTime: formValues.visitTime,
-          spaceType: formValues.spaceType,
-          howManyPeople: formValues.howManyPeople
-  
-        };
-    
-        this.spaceService.userCoworkingVisitSchdule(this.spaceId, payload).subscribe(
-          (response: any) => {
-    
-            this.isFormSubmitted = true;
-         
-          
-    
-            if (response.result.success) {
-              this.popupOpen('coworking-visit',`${response?.result?.message}. Our team will get back to you shortly.`);
-              // this.toastr.success(
-              //   response?.result?.message
-                
-              // );
-              this.coWorkingSchduleVisitForm.reset();
-              this.closeModal1();
-              // this.closeDialog(null);
-            } else {
-              this.toastr.error(
-                response.message ||
-                'Some error occurred while equest booking!'
-              );
-            }
-          },
-          (error) => {
-            // this.toastr.error('Some error occurred while visit schedule!');
+    const formValues = this.coWorkingSchduleVisitForm.value;
+    if (isPlatformBrowser(this.platformId)) {
+      this.visitDate = localStorage.getItem('coWorkingVisitInfo');
+    }
+    if (this.visitDate) {
+      const visitInfo = JSON.parse(this.visitDate);
+      formValues.visitDate = visitInfo.visitDate;
+      formValues.visitTime = visitInfo.visitTime;
+    } else {
+      this.submitForm = true;
+    }
+
+    if (formValues?.spaceType == '') {
+      this.submitForm = true;
+    } else if (formValues?.howManyPeople == '') {
+      this.submitForm = true;
+    } else {
+      const payload = {
+        visitDate: formValues.visitDate,
+        visitTime: formValues.visitTime,
+        spaceType: formValues.spaceType,
+        howManyPeople: formValues.howManyPeople
+
+      };
+
+      this.spaceService.userCoworkingVisitSchdule(this.spaceId, payload).subscribe(
+        (response: any) => {
+
+          this.isFormSubmitted = true;
+
+
+
+          if (response.result.success) {
+            this.popupOpen('coworking-visit', `${response?.result?.message}. Our team will get back to you shortly.`);
+            // this.toastr.success(
+            //   response?.result?.message
+
+            // );
+            this.coWorkingSchduleVisitForm.reset();
+            this.closeModal1();
+            // this.closeDialog(null);
+          } else {
+            this.toastr.error(
+              response.message ||
+              'Some error occurred while equest booking!'
+            );
           }
-        );
-      }
+        },
+        (error) => {
+          // this.toastr.error('Some error occurred while visit schedule!');
+        }
+      );
+    }
   }
-  
- 
+
+
   isOpen: boolean = false;
 
   openModal1() {
@@ -193,7 +196,7 @@ export class CoWorkingVisitScheduleTwoComponent {
   closeModal1() {
     this.isOpen = false;
   }
-  
+
   openModal2() {
     this.isOpen = true;
   }
@@ -201,7 +204,7 @@ export class CoWorkingVisitScheduleTwoComponent {
   closeModal2() {
     this.isOpen = false;
   }
-  Privious(){
+  Privious() {
     this.closeModal2();
     this.modal.openModal();
   }
