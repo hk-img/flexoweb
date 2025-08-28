@@ -62,7 +62,6 @@ export class HomeComponent implements OnDestroy {
   currentImageIndex: number = 0;
   currentTextIndex: number = 0;
   isTextFadingOut: boolean = false;
-
   imageDuration: number = 5000; // Duration for image (in ms)
   textDelay: number = 900; // Delay for text fade in/out (in ms)
 
