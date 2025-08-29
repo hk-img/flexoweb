@@ -11413,7 +11413,8 @@ h4 {
   }
 
   .logo-top {
-    width: 100px;
+    width: 100px !important;
+    height: 28px !important;
   }
 
   .shortlist-share-container {
