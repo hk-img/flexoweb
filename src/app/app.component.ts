@@ -269,6 +269,75 @@ export class AppComponent {
           
           if(event.url === '/in/coworking-space/bangalore/deccan-gymkhana')
             this.router.navigate(['/in/coworking-space/pune/deccan-gymkhana'])
+
+          if(event.url === '/in/spaces/coimbatore')
+            this.router.navigate(['/in/coworking/coimbatore'])
+
+          if(event.url === '/in/spaces/bangalore')
+            this.router.navigate(['/in/coworking/bangalore'])
+
+          if(event.url === '/in/spaces/mumbai')
+            this.router.navigate(['/in/coworking/mumbai'])
+
+          if(event.url === '/in/spaces/delhi')
+            this.router.navigate(['/in/coworking/delhi'])
+
+          if(event.url === '/in/spaces/chennai')
+            this.router.navigate(['/in/coworking/chennai'])
+
+          if(event.url === '/in/spaces/noida')
+            this.router.navigate(['/in/coworking/noida'])
+
+          if(event.url === '/in/spaces/hyderabad')
+            this.router.navigate(['/in/coworking/hyderabad'])
+
+          if(event.url === '/in/spaces/haralur')
+            this.router.navigate(['/in/coworking/haralur'])
+
+          if(event.url === '/in/spaces/surat')
+            this.router.navigate(['/in/coworking/surat'])
+
+          if(event.url === '/in/spaces/ahmedabad')
+            this.router.navigate(['/in/coworking/ahmedabad'])
+
+          if(event.url === '/in/spaces/vadodara')
+            this.router.navigate(['/in/coworking/vadodara'])
+
+          if(event.url === '/in/spaces/nashik')
+            this.router.navigate(['/in/coworking/nashik'])
+
+          if(event.url === '/in/spaces/ramanathapuram')
+            this.router.navigate(['/in/coworking/ramanathapuram'])
+
+          if(event.url === '/in/spaces/pune')
+            this.router.navigate(['/in/coworking/pune'])
+
+          if(event.url === '/in/spaces/margao')
+            this.router.navigate(['/in/coworking/margao'])
+
+          if(event.url === '/in/spaces/kolkata')
+            this.router.navigate(['/in/coworking/kolkata'])
+
+          if(event.url === '/in/spaces/bengaluru')
+            this.router.navigate(['/in/coworking/bengaluru'])
+
+          if(event.url === '/in/spaces/ulhasnagar')
+            this.router.navigate(['/in/coworking/ulhasnagar'])
+
+          if(event.url === '/in/spaces/pimpri-chinchwad')
+            this.router.navigate(['/in/coworking-space/pune/pimpri-chinchwad'])
+
+          if(event.url === '/in/spaces/new%20delhi')
+            this.router.navigate(['/in/coworking/delhi'])
+
+          if(event.url === '/in/spaces/greater%20mohali')
+            this.router.navigate(['/in/coworking-space/chandigarh/mohali'])
+
+          if(event.url === '/in/spaces/mumbai/lower-parel')
+            this.router.navigate(['/in/coworking-space/mumbai/lower-parel'])
+
+          if(event.url === '/in/spaces/mumbai/bandra-kurla-complex')
+            this.router.navigate(['/in/coworking-space/mumbai/bandra-kurla-complex'])
           
           if(event.url === '/in/coworking-space/new delhi/saidullajab')
             this.router.navigate(['/in/coworking-space/delhi/saidullajab'])
