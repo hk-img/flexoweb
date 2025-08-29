@@ -20,8 +20,10 @@
   <h1 class="heading" *ngIf="find_near_me == 1">{{selectedRadio?.toLowerCase() === 'co-working' ? 'Coworking Space' :
     selectedValues.length ? 'Coworking Space' : selectedRadio }}s Near Me</h1>
   <div class="scrollmenu" *ngIf="show">
-    <a *ngFor="let space of nearByLocationsList" href="/in/{{this.formatUrl(space.spaceType)}}/{{this.formatUrl(space.city)}}/{{this.formatUrl(space.location_name)}}" target="_blank"
-      [ngClass]="space?.location_name.toLowerCase() === nearByLocation && 'selected' ">{{ space?.location_name }} </a>
+    <a *ngFor="let space of nearByLocationsList"
+      href="/in/{{this.formatUrl(space.spaceType)}}/{{this.formatUrl(space.city)}}/{{this.formatUrl(space.location_name)}}"
+      target="_blank" [ngClass]="space?.location_name.toLowerCase() === nearByLocation && 'selected' ">{{
+      space?.location_name }} </a>
   </div>
   <div class="row mb_filter_row" style="flex-wrap: nowrap; align-items: baseline">
     <div class="col-lg-8 col-md-12 col-sm-12">
@@ -30,7 +32,10 @@
           <nav role="navigation" class="primary-navigation">
             <ul>
               <li><a (click)="openSpaceType()" class="cursor-pointer" style="color: inherit">Space Type
-                  <app-icon name="arrowDropDown" class="w-4"></app-icon></a>
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="20px"
+                    width="20px" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M128 192l128 128 128-128z"></path>
+                  </svg></a>
               </li>
             </ul>
           </nav>
