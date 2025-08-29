@@ -303,6 +303,7 @@ export class DetailsComponent implements OnInit {
   public space_details;
   public marker;
   public show_less_facilities = [];
+  public dataForErrorMakingUrl:any;
   public logged_in;
   public aws_base_url;
   public is_shortlisted: boolean = true;
@@ -336,6 +337,7 @@ export class DetailsComponent implements OnInit {
     this.isShimmer = true;
     this.spaceService.getShortDetailsById(spaceId).pipe(finalize(() => (this.isShimmer = false))).subscribe((res) => {
       if (res.success) {
+        this.dataForErrorMakingUrl = res?.spaceData;
         const spaceType = res.spaceData.spaceType?.toLowerCase()
         const { actual_name, spaceTitle, location_name, contact_city_name } = res.spaceData
         if (spaceType === 'coworking space') {
@@ -875,9 +877,8 @@ export class DetailsComponent implements OnInit {
     this.spaceService
       .getSpaceDetails(country, city, spaceType, spaceId)
       .then((res) => {
-        console.log(res);
-        if (!res.success) {
-          this.router.navigate(['/error']);
+        if (!res.success && this.spaceType == "coworking space" && this.dataForErrorMakingUrl.location_name) {
+          this.router.navigateByUrl(`/in/coworking-space/${this.dataForErrorMakingUrl.contact_city_name?.toLowerCase()?.replace(/\s+/g, '-')}/${this.dataForErrorMakingUrl.location_name?.toLowerCase().replace(/\s+/g, '-')}`);
         }
         const data = res.data
         const actual_name = data.actual_name?.toLowerCase()
