@@ -63,10 +63,10 @@
 
               </nav>
               <div class="d-lg-none sm-right mobile-nav-icons d-flex align-items-center" style="gap:15px">
-                <li> <a href="tel:+91 95133 92400" class="mobile-bar"><span class=""><app-icon name="call"
+                <li> <a style="width: 24px !important;height: 24px !important;" href="tel:+91 95133 92400" class="mobile-bar"><span class=""><app-icon name="call"
                         class="w-3 text-dark" style="width: 24px !important;height: 24px !important;"></app-icon></span>
                   </a></li>
-                <li><a routerLink="/list-with-us" class="mobile-bar"><span class=""><app-icon name="homePlus"
+                <li><a style="width: 24px !important;height: 24px !important;" routerLink="/list-with-us" class="mobile-bar"><span class=""><app-icon name="homePlus"
                         class="w-5 text-dark" style="width: 24px !important;height: 24px !important;"></app-icon></span>
                   </a></li>
                 <li class="has-no-children" style="cursor: pointer;" *ngIf="isLoggedIn || userDetails?.firstName">
@@ -83,7 +83,7 @@
                     </ul>
                   </div>
                 </li>
-                <a *ngIf="!isLoggedIn || !userDetails?.firstName" class="" (click)="openLoginDialog()">
+                <a *ngIf="!isLoggedIn || !userDetails?.firstName" class="" (click)="openLoginDialog()" style="width: 24px !important;height: 24px !important;">
                   <app-icon name="logOut" class="w-6 text-dark" style="width: 24px !important;height: 24px !important;"></app-icon>
                 </a>
               </div>

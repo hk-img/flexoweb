@@ -7,6 +7,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { InViewportModule } from 'ng-in-viewport';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { IconModule } from '../../shared/icon/icon.module';
+import { _404Component } from './_404/_404.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { IconModule } from '../../shared/icon/icon.module';
     NgxJsonLdModule,
     IconModule
   ],
-  declarations: [FaqsComponent],
+  declarations: [FaqsComponent,_404Component],
   exports: [
     FaqsComponent, 
     MatIconModule, 
